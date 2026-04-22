@@ -5,7 +5,7 @@ import { ComplementaryCertificationCourse } from '../../../session-management/do
 import { CertificationCourse } from '../../domain/models/CertificationCourse.js';
 import { CertificationIssueReport } from '../../domain/models/CertificationIssueReport.js';
 
-async function save({ certificationCourse }) {
+export async function save({ certificationCourse }) {
   const knexConn = DomainTransaction.getConnection();
 
   const certificationCourseToSaveDTO = _adaptModelToDb(certificationCourse);
@@ -37,7 +37,7 @@ const _findAllChallenges = async function (certificationCourseId, knexConn) {
   return knexConn('certification-challenges').where({ courseId: certificationCourseId });
 };
 
-async function get({ id }) {
+export async function get({ id }) {
   const knexConn = DomainTransaction.getConnection();
   const certificationCourseDTO = await _findCertificationCourse(id, knexConn);
 
@@ -108,7 +108,7 @@ function _toDomain({
   });
 }
 
-async function getSessionId({ id }) {
+export async function getSessionId({ id }) {
   const knexConn = DomainTransaction.getConnection();
 
   const row = await knexConn('certification-courses').select('sessionId').where({ id }).first();
@@ -119,7 +119,7 @@ async function getSessionId({ id }) {
   return row.sessionId;
 }
 
-async function findOneCertificationCourseByUserIdAndSessionId({ userId, sessionId }) {
+export async function findOneCertificationCourseByUserIdAndSessionId({ userId, sessionId }) {
   const knexConn = DomainTransaction.getConnection();
 
   const certificationCourseDTO = await knexConn('certification-courses')
@@ -149,7 +149,7 @@ async function findOneCertificationCourseByUserIdAndSessionId({ userId, sessionI
  * @param {number} params.userId
  * @returns {Promise<Array<CertificationCourse>>}
  */
-async function findAllByUserId({ userId }) {
+export async function findAllByUserId({ userId }) {
   const knexConn = DomainTransaction.getConnection();
 
   const certificationCourses = await knexConn('certification-courses')
@@ -162,7 +162,7 @@ async function findAllByUserId({ userId }) {
   });
 }
 
-async function update({ certificationCourse }) {
+export async function update({ certificationCourse }) {
   const knexConn = DomainTransaction.getConnection();
 
   const certificationCourseData = _extractPropertiesForUpdate(certificationCourse);
@@ -178,7 +178,7 @@ async function update({ certificationCourse }) {
   return get({ id: certificationCourseData.id });
 }
 
-async function isVerificationCodeAvailable({ verificationCode }) {
+export async function isVerificationCodeAvailable({ verificationCode }) {
   const knexConn = DomainTransaction.getConnection();
 
   const exist = await knexConn('certification-courses')
@@ -192,24 +192,13 @@ async function isVerificationCodeAvailable({ verificationCode }) {
 /**
  * @returns {Promise<Array<CertificationCourse>>}
  */
-async function findCertificationCoursesBySessionId({ sessionId }) {
+export async function findCertificationCoursesBySessionId({ sessionId }) {
   const knexConn = DomainTransaction.getConnection();
 
   const certificationCoursesDTO = await knexConn('certification-courses').where({ sessionId });
 
   return certificationCoursesDTO.map((certificationCourseDTO) => _toDomain({ certificationCourseDTO }));
 }
-
-export {
-  findAllByUserId,
-  findCertificationCoursesBySessionId,
-  findOneCertificationCourseByUserIdAndSessionId,
-  get,
-  getSessionId,
-  isVerificationCodeAvailable,
-  save,
-  update,
-};
 
 function _adaptModelToDb(certificationCourse) {
   const certificationCourseDTO = certificationCourse.toDTO();
@@ -223,7 +212,6 @@ function _adaptModelToDb(certificationCourse) {
     birthCountry: certificationCourseDTO.birthCountry,
     sex: certificationCourseDTO.sex,
     externalId: certificationCourseDTO.externalId,
-    completedAt: certificationCourseDTO.completedAt,
     isPublished: certificationCourseDTO.isPublished,
     isRejectedForFraud: certificationCourseDTO.isRejectedForFraud,
     verificationCode: certificationCourseDTO.verificationCode,
@@ -253,7 +241,6 @@ function _extractPropertiesForUpdate(certificationCourse) {
     birthINSEECode: certificationCourseDTO.birthINSEECode,
     birthPostalCode: certificationCourseDTO.birthPostalCode,
     abortReason: certificationCourseDTO.abortReason,
-    completedAt: certificationCourseDTO.completedAt,
     isRejectedForFraud: certificationCourseDTO.isRejectedForFraud,
   };
 }

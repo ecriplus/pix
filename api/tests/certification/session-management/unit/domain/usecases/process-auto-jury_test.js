@@ -142,7 +142,6 @@ describe('Unit | UseCase | process-auto-jury', function () {
         const certificationCourse = domainBuilder.certification.sessionManagement.buildCertificationCourse({
           version: AlgorithmEngineVersion.V2,
           id: 4567,
-          completedAt: null,
           abortReason: ABORT_REASONS.CANDIDATE,
         });
         certificationIssueReportRepository.findByCertificationCourseId
@@ -194,7 +193,6 @@ describe('Unit | UseCase | process-auto-jury', function () {
           });
           const certificationCourse = domainBuilder.certification.sessionManagement.buildCertificationCourse({
             version: AlgorithmEngineVersion.V2,
-            completedAt: null,
             abortReason: ABORT_REASONS.CANDIDATE,
           });
           certificationIssueReportRepository.findByCertificationCourseId
@@ -252,7 +250,6 @@ describe('Unit | UseCase | process-auto-jury', function () {
           });
           const certificationCourse = domainBuilder.certification.sessionManagement.buildCertificationCourse({
             version: AlgorithmEngineVersion.V2,
-            completedAt: null,
             abortReason: ABORT_REASONS.TECHNICAL,
           });
           certificationIssueReportRepository.findByCertificationCourseId
@@ -315,7 +312,6 @@ describe('Unit | UseCase | process-auto-jury', function () {
         });
         const certificationCourse = domainBuilder.certification.sessionManagement.buildCertificationCourse({
           version: AlgorithmEngineVersion.V2,
-          completedAt: null,
           abortReason: ABORT_REASONS.CANDIDATE,
         });
         certificationIssueReportRepository.findByCertificationCourseId.resolves([]);
@@ -340,7 +336,6 @@ describe('Unit | UseCase | process-auto-jury', function () {
           userId: 123,
           certificationCourseId: 123,
           createdAt: new Date('2020-01-01T00:00:00Z'),
-          completedAt: new Date('2020-01-01T00:00:00Z'),
           endedAt: challengeNotToBeConsideredAsSkipped.createdAt,
           state: 'endedDueToFinalization',
           version: 2,

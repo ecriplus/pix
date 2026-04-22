@@ -161,18 +161,16 @@ module('Unit | Model | certification', function (hooks) {
       // given
       const juryCertificationSummary = store.createRecord('certification', {
         lastAnswerAt: null,
-        completedAt: new Date('2020-03-21'),
       });
 
       // then
       assert.strictEqual(juryCertificationSummary.lastAnswerDate, null);
     });
 
-    test('it should a formatted date when completedAt is defined', function (assert) {
+    test('it should a formatted date when lastAnswerAt is defined', function (assert) {
       // given
-      const completedAt = '2021-06-30 15:10:45';
       const lastAnswerAt = '2021-06-30 15:10:45';
-      const juryCertificationSummary = store.createRecord('certification', { completedAt, lastAnswerAt });
+      const juryCertificationSummary = store.createRecord('certification', { lastAnswerAt });
 
       // then
       const expectedFormat = intl.formatDate(new Date(lastAnswerAt), { format: 'long' });

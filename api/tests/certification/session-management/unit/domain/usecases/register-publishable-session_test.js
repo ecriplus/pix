@@ -41,7 +41,6 @@ describe('Unit | UseCase |  register-publishable-session', function () {
       status: assessmentResultStatuses.VALIDATED,
       pixScore: 120,
       createdAt: new Date(),
-      completedAt: new Date(),
       isPublished: false,
       certificationFramework: Frameworks.CORE,
       certificationIssueReports: [

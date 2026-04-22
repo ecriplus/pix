@@ -21,7 +21,6 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         userId: 123,
         certificationCourseId: 123,
         createdAt: new Date('2020-01-01'),
-        completedAt: new Date('2020-01-01'),
         state: Assessment.states.STARTED,
         version: 2,
         certificationChallenges: [],
@@ -56,13 +55,6 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
     it('should throw an ObjectValidationError when createdAt is not valid', function () {
       // when
       expect(() => new CertificationAssessment({ ...validArguments, createdAt: 'coucou' })).to.throw(
-        ObjectValidationError,
-      );
-    });
-
-    it('should throw an ObjectValidationError when completed is not valid', function () {
-      // when
-      expect(() => new CertificationAssessment({ ...validArguments, completedAt: 'ça pétille !' })).to.throw(
         ObjectValidationError,
       );
     });
@@ -157,7 +149,6 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         userId: 123,
         certificationCourseId: 123,
         createdAt: new Date('2020-01-01'),
-        completedAt: new Date('2020-01-01'),
         state: Assessment.states.STARTED,
         version: 2,
         certificationChallenges: [
@@ -189,7 +180,6 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         userId: 123,
         certificationCourseId: 123,
         createdAt: new Date('2020-01-01'),
-        completedAt: new Date('2020-01-01'),
         state: Assessment.states.STARTED,
         version: 2,
         certificationChallenges: [
@@ -219,7 +209,6 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         userId: 123,
         certificationCourseId: 123,
         createdAt: new Date('2020-01-01'),
-        completedAt: new Date('2020-01-01'),
         state: Assessment.states.STARTED,
         version: 2,
         certificationChallenges: [
@@ -251,7 +240,6 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         userId: 123,
         certificationCourseId: 123,
         createdAt: new Date('2020-01-01'),
-        completedAt: new Date('2020-01-01'),
         state: Assessment.states.STARTED,
         version: 2,
         certificationChallenges: [
@@ -281,7 +269,6 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         userId: 123,
         certificationCourseId: 123,
         createdAt: new Date('2020-01-01'),
-        completedAt: new Date('2020-01-01'),
         state: Assessment.states.STARTED,
         version: 2,
         certificationChallenges: [challengeKoToBeNeutralized],
@@ -314,7 +301,6 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         userId: 123,
         certificationCourseId: 123,
         createdAt: new Date('2020-01-01'),
-        completedAt: new Date('2020-01-01'),
         state: Assessment.states.STARTED,
         version: 2,
         certificationChallenges: [challengeSkippedToBeNeutralized],
@@ -347,7 +333,6 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         userId: 123,
         certificationCourseId: 123,
         createdAt: new Date('2020-01-01'),
-        completedAt: new Date('2020-01-01'),
         state: Assessment.states.STARTED,
         version: 2,
         certificationChallenges: [challengeNotToBeNeutralized],
@@ -375,7 +360,6 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         userId: 123,
         certificationCourseId: 123,
         createdAt: new Date('2020-01-01'),
-        completedAt: new Date('2020-01-01'),
         state: Assessment.states.STARTED,
         version: 2,
         certificationChallenges: [

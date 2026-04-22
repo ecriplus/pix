@@ -40,7 +40,6 @@ class FinalizedSession {
         !hasExaminerGlobalComment &&
         _hasNoIssueReportsWithRequiredAction(juryCertificationSummaries) &&
         _hasNoScoringError(juryCertificationSummaries) &&
-        _hasNoUnfinishedWithoutAbortReason(juryCertificationSummaries) &&
         _containsOnlyPublishableFrameworks(juryCertificationSummaries),
       publishedAt: null,
     });
@@ -68,12 +67,6 @@ function _hasNoIssueReportsWithRequiredAction(juryCertificationSummaries) {
 
 function _hasNoScoringError(juryCertificationSummaries) {
   return juryCertificationSummaries.every((summary) => !summary.hasScoringError());
-}
-
-function _hasNoUnfinishedWithoutAbortReason(juryCertificationSummaries) {
-  return juryCertificationSummaries
-    .filter((certificationSummary) => !certificationSummary.completedAt)
-    .every((unfinishedCertificationSummary) => unfinishedCertificationSummary.isFlaggedAborted);
 }
 
 function _containsOnlyPublishableFrameworks(juryCertificationSummaries) {

@@ -20,13 +20,13 @@ import { CandidateCertifiableEvent } from '../models/timeline/CandidateCertifiab
 import { CandidateCreatedEvent } from '../models/timeline/CandidateCreatedEvent.js';
 import { CandidateDoubleCertificationEligibleEvent } from '../models/timeline/CandidateDoubleCertificationEligibleEvent.js';
 import { CandidateEligibleButNotRegisteredToDoubleCertificationEvent } from '../models/timeline/CandidateEligibleButNotRegisteredToDoubleCertificationEvent.js';
-import { CandidateEndScreenEvent } from '../models/timeline/CandidateEndScreenEvent.js';
 import { CandidateNotCertifiableEvent } from '../models/timeline/CandidateNotCertifiableEvent.js';
 import { CandidateNotEligibleEvent } from '../models/timeline/CandidateNotEligibleEvent.js';
 import { CandidateReconciledEvent } from '../models/timeline/CandidateReconciledEvent.js';
 import { CandidateTimeline } from '../models/timeline/CandidateTimeline.js';
 import { CertificationEndedEvent } from '../models/timeline/CertificationEndedEvent.js';
 import { CertificationStartedEvent } from '../models/timeline/CertificationStartedEvent.js';
+import { LastAnsweredEvent } from '../models/timeline/LastAnsweredEvent.js';
 
 /**
  * @param {object} params
@@ -94,9 +94,8 @@ export const getCandidateTimeline = async ({
   });
   events.forEach((event) => timeline.addEvent(event));
 
-  if (certificationCourse.isCompleted()) {
-    timeline.addEvent(new CandidateEndScreenEvent({ when: certificationCourse._completedAt }));
-    return timeline;
+  if (certificationCourse.lastAnswerAt) {
+    timeline.addEvent(new LastAnsweredEvent({ when: certificationCourse.lastAnswerAt }));
   }
 
   const assessment = await certificationAssessmentRepository.getByCertificationCandidateId({

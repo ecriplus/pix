@@ -39,7 +39,6 @@ export default class Certification extends Model {
   @attr() birthInseeCode;
   @attr() birthPostalCode;
   @attr() createdAt;
-  @attr() completedAt;
   @attr() isRejectedForFraud;
   @attr() status;
   @attr() juryId;

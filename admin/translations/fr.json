@@ -1296,8 +1296,8 @@
         "CandidateNotCertifiableEvent": "Candidat non certifiable (Pix Coeur)",
         "CandidateNotEligibleEvent": "Candidat non éligible à la double certification",
         "CandidateReconciledEvent": "Candidat réconcilié à un compte utilisateur",
-        "CertificationEndedEvent": "Fin de la certification",
-        "CertificationStartedEvent": "Entrée en certification"
+        "CertificationStartedEvent": "Entrée en certification",
+        "LastAnswerEvent": "Dernière réponse le"
       },
       "metadata": "Metadata",
       "title": "Journal d'évènements",

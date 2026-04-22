@@ -95,7 +95,6 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
         // then
         const expectedJuryCertificationSummary =
           domainBuilder.certification.sessionManagement.buildJuryCertificationSummary({
-            completedAt: manyAsrCertification.completedAt,
             createdAt: manyAsrCertification.createdAt,
             firstName: manyAsrCertification.firstName,
             id: manyAsrCertification.id,
@@ -140,7 +139,6 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
           expect(juryCertificationSummaries[0].firstName).to.equal(manyAsrCertification.firstName);
           expect(juryCertificationSummaries[0].lastName).to.equal(manyAsrCertification.lastName);
           expect(juryCertificationSummaries[0].createdAt).to.deep.equal(manyAsrCertification.createdAt);
-          expect(juryCertificationSummaries[0].completedAt).to.deep.equal(manyAsrCertification.completedAt);
           expect(juryCertificationSummaries[0].isPublished).to.equal(manyAsrCertification.isPublished);
           expect(juryCertificationSummaries[0].lastAnswerAt).to.deep.equal(manyAsrCertification.lastAnswerAt);
         });
@@ -359,7 +357,6 @@ describe('Integration | Repository | JuryCertificationSummary', function () {
         expect(juryCertificationSummary.firstName).to.equal(manyAsrCertification.firstName);
         expect(juryCertificationSummary.lastName).to.equal(manyAsrCertification.lastName);
         expect(juryCertificationSummary.createdAt).to.deep.equal(manyAsrCertification.createdAt);
-        expect(juryCertificationSummary.completedAt).to.deep.equal(manyAsrCertification.completedAt);
         expect(juryCertificationSummary.isPublished).to.equal(manyAsrCertification.isPublished);
         expect(juryCertificationSummary.certificationFramework).to.equal(manyAsrCertification.framework);
         expect(juryCertificationSummary.certificationIssueReports).to.deep.equal([

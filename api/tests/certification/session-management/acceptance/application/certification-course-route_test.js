@@ -66,7 +66,6 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
           verificationCode: 'ABCD123',
           createdAt: new Date('2019-12-21T15:44:38Z'),
-          completedAt: new Date('2017-12-21T15:48:38Z'),
           sex: 'F',
           candidate: candidate.id,
           versionId,
@@ -464,7 +463,6 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         attributes: {
           'abort-reason': null,
           'certification-course-id': certificationCourse.id,
-          'completed-at': certificationCourse.completedAt,
           'last-answer-at': certificationCourse.lastAnswerAt,
           'created-at': certificationCourse.createdAt,
           'ended-at': null,
@@ -574,7 +572,6 @@ describe('Certification | Session Management | Acceptance | Application | Routes
         'session-id': certificationCourseFromDB.sessionId,
         version: certificationCourseFromDB.version,
         'certification-framework': certificationCourseFromDB.framework,
-        'completed-at': certificationCourseFromDB.completedAt,
         'last-answer-at': certificationCourseFromDB.lastAnswerAt,
         'is-published': certificationCourseFromDB.isPublished,
         'assessment-id': assessmentResultFromDB.assessmentId,

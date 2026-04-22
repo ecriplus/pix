@@ -8,7 +8,6 @@ export class CertificationCourse {
     version,
     updatedAt,
     endedAt,
-    completedAt,
     abortReason,
     assessmentId,
     assessmentState,
@@ -18,7 +17,6 @@ export class CertificationCourse {
     this.version = version;
     this.updatedAt = updatedAt;
     this.endedAt = endedAt;
-    this.completedAt = completedAt;
     this.abortReason = abortReason;
     this.assessmentId = assessmentId;
     this.assessmentState = assessmentState;
@@ -27,7 +25,7 @@ export class CertificationCourse {
 
   finalize({ finalizedAt, certificationReport }) {
     this.updatedAt = finalizedAt;
-    if (certificationReport.abortReason && this.completedAt) {
+    if (certificationReport.abortReason && this.assessmentState === Assessment.states.COMPLETED) {
       this.abortReason = null;
     }
   }
@@ -41,7 +39,7 @@ export class CertificationCourse {
   }
 
   get isCompleted() {
-    return !!this.completedAt;
+    return this.assessmentState === Assessment.states.COMPLETED;
   }
 
   get isAbortReasonCandidateRelated() {

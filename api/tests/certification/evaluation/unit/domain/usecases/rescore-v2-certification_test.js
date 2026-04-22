@@ -103,7 +103,6 @@ describe('Unit | Certification | Evaluation | UseCases | rescore-v2-certificatio
           userId: 123,
           certificationCourseId: 789,
           createdAt: new Date('2020-01-01'),
-          completedAt: new Date('2020-01-01'),
           state: Assessment.states.STARTED,
           version: 2,
           certificationChallenges: [

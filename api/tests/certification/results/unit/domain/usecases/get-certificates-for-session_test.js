@@ -30,7 +30,6 @@ describe('Unit | UseCase | get-certificates-for-session', function () {
       id: 1,
       sessionId: 11,
       userId: 101,
-      completedAt: '2020-01-01',
     });
     domainBuilder.buildResultCompetenceTree({ id: 'firstResultTreeId' });
     const certificate1 = domainBuilder.buildCertificationAttestation({
@@ -44,7 +43,6 @@ describe('Unit | UseCase | get-certificates-for-session', function () {
       id: 2,
       sessionId: 11,
       userId: 102,
-      completedAt: '2020-01-01',
     });
     domainBuilder.buildResultCompetenceTree({ id: 'secondResultTreeId' });
     const certificate2 = domainBuilder.buildCertificationAttestation({
@@ -121,7 +119,6 @@ describe('Unit | UseCase | get-certificates-for-session', function () {
         id: 3,
         sessionId: 11,
         userId: 101,
-        completedAt: '2020-01-01',
       });
 
       sharedCertificationCourseRepository.findCertificationCoursesBySessionId

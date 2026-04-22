@@ -5,7 +5,7 @@ import { CertificationIssueReportCategory } from '../../../../src/certification/
 import { Frameworks } from '../../../../src/certification/shared/domain/models/Frameworks.js';
 import { buildAssessment } from './build-assessment.js';
 
-function buildCertificationCourse({
+export function buildCertificationCourse({
   id = 123,
   firstName = 'Gandhi',
   lastName = 'Matmatah',
@@ -16,7 +16,6 @@ function buildCertificationCourse({
   birthINSEECode = null,
   birthCountry = 'FRANCE',
   createdAt = new Date('2020-01-01'),
-  completedAt = new Date('2020-02-01'),
   externalId = 'externalId',
   examinerComment = 'A cassé le clavier',
   nbChallenges = 15,
@@ -36,6 +35,7 @@ function buildCertificationCourse({
   lang,
   framework = Frameworks.CORE,
   versionId = 20,
+  lastAnswerAt = null,
 } = {}) {
   const certificationIssueReports = [];
   if (examinerComment && examinerComment !== '') {
@@ -63,7 +63,6 @@ function buildCertificationCourse({
     birthCountry,
     sex,
     createdAt,
-    completedAt,
     externalId,
     certificationIssueReports,
     nbChallenges,
@@ -83,6 +82,7 @@ function buildCertificationCourse({
     lang,
     framework,
     versionId,
+    lastAnswerAt,
   });
 }
 
@@ -96,7 +96,6 @@ buildCertificationCourse.unpersisted = function ({
   birthINSEECode = null,
   birthCountry = 'FRANCE',
   createdAt = new Date('2020-01-01'),
-  completedAt = new Date('2020-02-01'),
   externalId = 'externalId',
   nbChallenges = 15,
   version = 1,
@@ -114,6 +113,7 @@ buildCertificationCourse.unpersisted = function ({
   versionId = 123,
   candidateId = 456,
   framework = Frameworks.CORE,
+  lastAnswerAt = null,
 } = {}) {
   return new CertificationCourse({
     firstName,
@@ -125,7 +125,6 @@ buildCertificationCourse.unpersisted = function ({
     birthCountry,
     sex,
     createdAt,
-    completedAt,
     externalId,
     certificationIssueReports: [],
     nbChallenges,
@@ -144,7 +143,6 @@ buildCertificationCourse.unpersisted = function ({
     versionId,
     candidateId,
     framework,
+    lastAnswerAt,
   });
 };
-
-export { buildCertificationCourse };

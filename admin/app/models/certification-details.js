@@ -14,7 +14,6 @@ export default class CertificationDetails extends Model {
   @attr() createdAt;
   @attr() userId;
   @attr() status;
-  @attr() completedAt;
   @attr() lastAnswerAt;
   @attr() listChallengesAndAnswers;
   version = 2;

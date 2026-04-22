@@ -74,13 +74,11 @@ describe('Certification | SessionManagement | Unit | Domain | Models | Session',
     });
 
     it('finalizes the session and the certification courses', function () {
-      const completionDate = new Date();
       const certificationCourseWithLegitAbortReason =
         domainBuilder.certification.sessionManagement.buildCertificationCourse({
           id: 1,
           updatedAt: new Date(),
           assessmentState: Assessment.states.STARTED,
-          completedAt: null,
           abortReason: 'someLegitReason',
         });
       const certificationCourseWithAbortReasonToIgnore =
@@ -88,7 +86,6 @@ describe('Certification | SessionManagement | Unit | Domain | Models | Session',
           id: 2,
           updatedAt: new Date(),
           assessmentState: Assessment.states.COMPLETED,
-          completedAt: completionDate,
           abortReason: null,
         });
       const session = domainBuilder.certification.sessionManagement.buildSession({
@@ -126,14 +123,12 @@ describe('Certification | SessionManagement | Unit | Domain | Models | Session',
               id: 1,
               updatedAt: now,
               assessmentState: Assessment.states.STARTED,
-              completedAt: null,
               abortReason: 'someLegitReason',
             }),
             domainBuilder.certification.sessionManagement.buildCertificationCourse({
               id: 2,
               updatedAt: now,
               assessmentState: Assessment.states.COMPLETED,
-              completedAt: completionDate,
               abortReason: null,
             }),
           ],

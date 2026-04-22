@@ -38,7 +38,6 @@ describe('Certification | Session-management | Unit | Application | jury-certifi
         status: 'rejected',
         isPublished: true,
         createdAt: new Date('2020-01-01'),
-        completedAt: new Date('2020-02-01'),
         pixScore: 55,
         juryId: 66,
         commentForCandidate: 'comment candidate',

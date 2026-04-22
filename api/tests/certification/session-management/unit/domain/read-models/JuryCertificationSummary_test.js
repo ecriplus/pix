@@ -1,10 +1,11 @@
+import { expect } from 'chai';
+
 import { JuryCertificationSummary } from '../../../../../../src/certification/session-management/domain/read-models/JuryCertificationSummary.js';
 import { PIX_PLUS_EDU_EXTERNAL_LEVELS } from '../../../../../../src/certification/shared/domain/constants/mesh-configuration.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
-import { expect } from '../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Domain | Models | JuryCertificationSummary', function () {
@@ -14,7 +15,6 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
       const notImpactfulIssueReport = domainBuilder.buildCertificationIssueReport.notImpactful({ resolvedAt: null });
       const data = {
         certificationIssueReports: [notImpactfulIssueReport],
-        completedAt: new Date('2020-01-01'),
         lastAnswerAt: new Date('2020-01-01'),
         createdAt: new Date('2020-01-02'),
         firstName: 'Mad',
@@ -36,7 +36,6 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
       // then
       expect(juryCertificationSummary).to.deep.equal({
         certificationIssueReports: [notImpactfulIssueReport],
-        completedAt: new Date('2020-01-01'),
         lastAnswerAt: new Date('2020-01-01'),
         createdAt: new Date('2020-01-02'),
         firstName: 'Mad',
@@ -83,7 +82,6 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
           // when
           const juryCertificationSummary = new JuryCertificationSummary({
             abortReason: 'candidate',
-            completedAt: null,
             pixScore: 456,
           });
 
@@ -97,23 +95,6 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
           // when
           const juryCertificationSummary = new JuryCertificationSummary({
             abortReason: null,
-            completedAt: null,
-            pixScore: 456,
-          });
-
-          // then
-          expect(juryCertificationSummary.isFlaggedAborted).equal(false);
-        });
-      });
-    });
-
-    context('when the certification has been scored while completed', function () {
-      context('with abort reason', function () {
-        it('should return isFlaggedAborted false', function () {
-          // when
-          const juryCertificationSummary = new JuryCertificationSummary({
-            abortReason: 'candidate',
-            completedAt: new Date(),
             pixScore: 456,
           });
 
@@ -209,18 +190,31 @@ describe('Unit | Domain | Models | JuryCertificationSummary', function () {
         // then
         expect(hasScoringError).to.be.true;
       });
+    });
 
-      context("when assessment result doesn't have a scoring error", function () {
-        it('should return false', function () {
-          // given
-          const juryCertificationSummary = new JuryCertificationSummary({ status: AssessmentResult.status.VALIDATED });
+    context('when certification has no scoring', function () {
+      it('should return true', function () {
+        // given
+        const juryCertificationSummary = new JuryCertificationSummary({ status: null });
 
-          // when
-          const hasScoringError = juryCertificationSummary.hasScoringError();
+        // when
+        const hasScoringError = juryCertificationSummary.hasScoringError();
 
-          // then
-          expect(hasScoringError).to.be.false;
-        });
+        // then
+        expect(hasScoringError).to.be.true;
+      });
+    });
+
+    context("when assessment result doesn't have a scoring error", function () {
+      it('should return false', function () {
+        // given
+        const juryCertificationSummary = new JuryCertificationSummary({ status: AssessmentResult.status.VALIDATED });
+
+        // when
+        const hasScoringError = juryCertificationSummary.hasScoringError();
+
+        // then
+        expect(hasScoringError).to.be.false;
       });
     });
   });

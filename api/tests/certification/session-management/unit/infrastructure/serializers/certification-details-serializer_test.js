@@ -11,7 +11,6 @@ describe('Certification | Session-management | Unit | Infrastructure | Serialize
         id: 123,
         userId: 456,
         createdAt: new Date('2020-01-01'),
-        completedAt: new Date('2020-03-03'),
         lastAnswerAt: new Date('2020-03-03'),
         status: Assessment.states.COMPLETED,
         totalScore: 555,
@@ -46,7 +45,6 @@ describe('Certification | Session-management | Unit | Infrastructure | Serialize
           attributes: {
             'user-id': 456,
             'created-at': new Date('2020-01-01'),
-            'completed-at': new Date('2020-03-03'),
             'last-answer-at': new Date('2020-03-03'),
             status: Assessment.states.COMPLETED,
             'total-score': 555,

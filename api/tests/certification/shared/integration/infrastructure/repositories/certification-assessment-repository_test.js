@@ -96,7 +96,6 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
     let expectedState;
     let expectedCreatedAt;
     let expectedEndedAt;
-    let expectedCompletedAt;
 
     context('when the certification assessment exists', function () {
       let firstAnswerInTime;
@@ -106,14 +105,12 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
         expectedState = Assessment.states.COMPLETED;
         expectedCreatedAt = new Date('2020-01-01T00:00:00Z');
         expectedEndedAt = new Date('2020-01-02T00:00:00Z');
-        expectedCompletedAt = new Date('2020-01-03T00:00:00Z');
 
         const dbf = databaseBuilder.factory;
         expectedUserId = dbf.buildUser().id;
         certificationCourseId = dbf.buildCertificationCourse({
           userId: expectedUserId,
           createdAt: expectedCreatedAt,
-          completedAt: expectedCompletedAt,
           endedAt: expectedEndedAt,
         }).id;
         expectedCertificationAssessmentId = dbf.buildAssessment({

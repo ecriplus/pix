@@ -29,7 +29,6 @@ export function serialize(juryCertificationSummary, meta, { translate }) {
       'algorithmVersion',
       'reachedResultKey',
       'createdAt',
-      'completedAt',
       'lastAnswerAt',
       'isPublished',
       'examinerComment',

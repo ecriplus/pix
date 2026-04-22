@@ -1,7 +1,8 @@
+import { expect } from 'chai';
+
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { CertificationCourse } from '../../../../../../src/certification/shared/domain/models/CertificationCourse.js';
 import { EntityValidationError } from '../../../../../../src/shared/domain/errors.js';
-import { expect } from '../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 import { generateChallengeList } from '../../../fixtures/challenges.js';
 
@@ -216,33 +217,6 @@ describe('Unit | Domain | Models | CertificationCourse', function () {
       expect(certificationCourse.toDTO().birthplace).to.equal(birthCity);
       expect(certificationCourse.toDTO().birthPostalCode).to.equal(birthPostalCode);
       expect(certificationCourse.toDTO().birthINSEECode).to.equal(birthINSEECode);
-    });
-  });
-
-  describe('#complete', function () {
-    it('completes the certification course', function () {
-      // given
-      const certificationCourse = domainBuilder.buildCertificationCourse({
-        completedAt: null,
-      });
-
-      // when
-      certificationCourse.complete({ now: new Date('1999-12-31') });
-
-      // then
-      expect(certificationCourse.toDTO().completedAt).to.deep.equal(new Date('1999-12-31'));
-    });
-    it('should not modify existing completedAt date', function () {
-      // given
-      const certificationCourse = domainBuilder.buildCertificationCourse({
-        completedAt: new Date('1999-12-31'),
-      });
-
-      // when
-      certificationCourse.complete({ now: new Date('2000-01-01') });
-
-      // then
-      expect(certificationCourse.toDTO().completedAt).to.deep.equal(new Date('1999-12-31'));
     });
   });
 

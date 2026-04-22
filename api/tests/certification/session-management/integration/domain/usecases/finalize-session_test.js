@@ -107,7 +107,6 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
             abortReason: null,
             version: 3,
             endedAt: null,
-            completedAt: null,
           }).id;
           databaseBuilder.factory.buildAssessment({
             id: 1,
@@ -125,7 +124,6 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
           certificationCourseIdForNotCompletedWithAbortReason = databaseBuilder.factory.buildCertificationCourse({
             sessionId,
             version: 3,
-            completedAt: null,
             endedAt: null,
             abortReason: 'candidate',
           }).id;
@@ -180,13 +178,12 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
             const certificationCourseIdToUnabort = databaseBuilder.factory.buildCertificationCourse({
               sessionId,
               endedAt: null,
-              completedAt: new Date('2022-01-01'),
               abortReason: 'technical',
               version: 3,
             }).id;
             databaseBuilder.factory.buildAssessment({
               id: 3,
-              state: Assessment.states.ENDED_BY_INVIGILATOR,
+              state: Assessment.states.COMPLETED,
               certificationCourseId: certificationCourseIdToUnabort,
               updatedAt: new Date('2021-10-29'),
             });
@@ -222,7 +219,6 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
                     assessmentId: 1,
                     assessmentState: Assessment.states.COMPLETED,
                     assessmentLatestActivityAt: new Date('2021-10-29'),
-                    completedAt: null,
                     endedAt: null,
                     updatedAt: now,
                     version: 3,
@@ -233,7 +229,6 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
                     assessmentId: 2,
                     assessmentState: Assessment.states.STARTED,
                     assessmentLatestActivityAt: new Date('2021-10-29'),
-                    completedAt: null,
                     endedAt: null,
                     updatedAt: now,
                     version: 3,
@@ -242,10 +237,9 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
                     id: certificationCourseIdToUnabort,
                     abortReason: null,
                     assessmentId: 3,
-                    assessmentState: Assessment.states.ENDED_BY_INVIGILATOR,
+                    assessmentState: Assessment.states.COMPLETED,
                     assessmentLatestActivityAt: new Date('2021-10-29'),
                     endedAt: null,
-                    completedAt: new Date('2022-01-01'),
                     updatedAt: now,
                     version: 3,
                   }),
