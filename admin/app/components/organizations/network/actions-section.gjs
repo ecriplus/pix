@@ -12,7 +12,7 @@ export default class ActionsSection extends Component {
   <template>
     <section class="page-section">
       <div class="content-text content-text--small organization-network__actions-section">
-        {{#if this.accessControl.hasAccessToAttachChildOrganizationActionsScope}}
+        {{#if this.accessControl.hasAccessToNetworkFeature}}
           <PixButtonLink
             @iconBefore="add"
             @variant="secondary"

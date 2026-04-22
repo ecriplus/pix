@@ -17,6 +17,7 @@ module('Integration | Component | organizations/network', function (hooks) {
       class AccessControlStub extends Service {
         hasAccessToOrganizationActionsScope = true;
         hasAccessToAttachChildOrganizationActionsScope = true;
+        hasAccessToNetworkFeature = true;
       }
       this.owner.register('service:access-control', AccessControlStub);
 
