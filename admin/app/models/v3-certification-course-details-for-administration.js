@@ -15,7 +15,7 @@ export default class V3CertificationCourseDetailsForAdministration extends Model
   @attr('number') certificationCourseId;
   @attr('boolean') isRejectedForFraud;
   @attr('date') createdAt;
-  @attr('date') completedAt;
+  @attr('date') completedAt; // ok
   @attr('date') endedAt;
   @attr('date') lastAnswerAt;
   @attr('string') assessmentResultStatus;

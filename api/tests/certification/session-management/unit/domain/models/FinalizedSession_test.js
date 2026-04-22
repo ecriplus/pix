@@ -1,9 +1,10 @@
+import { expect } from 'chai';
+
 import { FinalizedSession } from '../../../../../../src/certification/session-management/domain/models/FinalizedSession.js';
 import { JuryCertificationSummary } from '../../../../../../src/certification/session-management/domain/read-models/JuryCertificationSummary.js';
 import { CertificationIssueReportCategory } from '../../../../../../src/certification/shared/domain/models/CertificationIssueReportCategory.js';
 import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { status as assessmentResultStatuses } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
-import { expect } from '../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | Certification | Session-Management | Domain | Models | FinalizedSession', function () {
@@ -160,7 +161,7 @@ describe('Unit | Certification | Session-Management | Domain | Models | Finalize
       { framework: Frameworks.DROIT, isPublishable: false },
       { framework: Frameworks.PRO_SANTE, isPublishable: false },
     ].forEach(({ framework, isPublishable }) => {
-      it(`session should be ${isPublishable ? 'publishable' : 'not publishable'} for certification ${framework}}`, function () {
+      it(`session should be ${isPublishable ? 'publishable' : 'not publishable'} for certification ${framework}`, function () {
         const juryCertificationSummary = new JuryCertificationSummary({
           id: 1,
           firstName: 'firstName',

@@ -15,7 +15,6 @@ export class JuryCertificationSummary {
     algorithmVersion,
     reachedMeshIndex,
     createdAt,
-    completedAt,
     abortReason,
     isPublished,
     isEndedByInvigilator,
@@ -32,10 +31,9 @@ export class JuryCertificationSummary {
     this.pixScore = pixScore;
     this.reachedMeshIndex = reachedMeshIndex;
     this.eduV3ExternalJuryResult = eduV3ExternalJuryResult;
-    this.isFlaggedAborted = Boolean(abortReason) && !completedAt;
+    this.isFlaggedAborted = Boolean(abortReason);
     this.certificationFramework = certificationFramework;
     this.createdAt = createdAt;
-    this.completedAt = completedAt;
     this.isPublished = isPublished;
     this.certificationIssueReports = certificationIssueReports;
     this.lastAnswerAt = lastAnswerAt;
@@ -56,7 +54,7 @@ export class JuryCertificationSummary {
   }
 
   hasScoringError() {
-    return this.status === assessmentResultStatuses.ERROR;
+    return this.status === assessmentResultStatuses.ERROR || !this.hasCompletedAssessment();
   }
 
   hasCompletedAssessment() {
