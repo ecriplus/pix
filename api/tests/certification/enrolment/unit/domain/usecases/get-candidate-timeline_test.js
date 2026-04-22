@@ -8,7 +8,7 @@ import { CandidateNotEligibleEvent } from '../../../../../../src/certification/e
 import { CandidateReconciledEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CandidateReconciledEvent.js';
 import { CertificationEndedEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CertificationEndedEvent.js';
 import { CertificationStartedEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/CertificationStartedEvent.js';
-import { LastAnswerEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/LastAnswerEvent.js';
+import { LastAnsweredEvent } from '../../../../../../src/certification/enrolment/domain/models/timeline/LastAnsweredEvent.js';
 import { UserCertificationEligibility } from '../../../../../../src/certification/enrolment/domain/read-models/UserCertificationEligibility.js';
 import { getCandidateTimeline } from '../../../../../../src/certification/enrolment/domain/usecases/get-candidate-timeline.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
@@ -330,7 +330,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
           });
 
           expect(candidateTimeline.events).to.deep.includes(
-            new LastAnswerEvent({
+            new LastAnsweredEvent({
               when: certificationCourse.lastAnswerAt,
             }),
           );

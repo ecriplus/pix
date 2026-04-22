@@ -26,7 +26,7 @@ import { CandidateReconciledEvent } from '../models/timeline/CandidateReconciled
 import { CandidateTimeline } from '../models/timeline/CandidateTimeline.js';
 import { CertificationEndedEvent } from '../models/timeline/CertificationEndedEvent.js';
 import { CertificationStartedEvent } from '../models/timeline/CertificationStartedEvent.js';
-import { LastAnswerEvent } from '../models/timeline/LastAnswerEvent.js';
+import { LastAnsweredEvent } from '../models/timeline/LastAnsweredEvent.js';
 
 /**
  * @param {object} params
@@ -95,7 +95,7 @@ export const getCandidateTimeline = async ({
   events.forEach((event) => timeline.addEvent(event));
 
   if (certificationCourse.lastAnswerAt) {
-    timeline.addEvent(new LastAnswerEvent({ when: certificationCourse.lastAnswerAt }));
+    timeline.addEvent(new LastAnsweredEvent({ when: certificationCourse.lastAnswerAt }));
   }
 
   const assessment = await certificationAssessmentRepository.getByCertificationCandidateId({
