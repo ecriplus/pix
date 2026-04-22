@@ -15,40 +15,52 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | N
   });
 
   describe('GET /api/admin/networks', function () {
-    it('returns a list of networks with 200 HTTP status code', async function () {
+    it('returns a paginated list of networks with 200 HTTP status code', async function () {
       // given
-      const server = await createServer();
       const network1 = databaseBuilder.factory.buildNetwork({ name: 'Team1' });
       const network2 = databaseBuilder.factory.buildNetwork({ name: 'Team2' });
       await databaseBuilder.commit();
       const options = {
         method: 'GET',
-        url: '/api/admin/networks',
+        url: '/api/admin/networks?page[number]=1&page[size]=10',
         headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       };
-      const expectedNetworks = [
-        {
-          attributes: {
-            name: network1.name,
-          },
-          id: network1.id.toString(),
-          type: 'networks',
-        },
-        {
-          attributes: {
-            name: network2.name,
-          },
-          id: network2.id.toString(),
-          type: 'networks',
-        },
-      ];
 
       // when
       const response = await server.inject(options);
 
       // then
       expect(response.statusCode).to.equal(200);
-      expect(response.result.data).to.deep.equal(expectedNetworks);
+      expect(response.result.data).to.have.lengthOf(2);
+      expect(response.result.data[0].id).to.equal(network1.id.toString());
+      expect(response.result.data[1].id).to.equal(network2.id.toString());
+      expect(response.result.meta).to.include({
+        page: 1,
+        pageSize: 10,
+        rowCount: 2,
+        pageCount: 1,
+      });
+    });
+
+    it('returns the second page when page[number]=2 is provided', async function () {
+      // given
+      databaseBuilder.factory.buildNetwork({ name: 'Réseau 01' });
+      databaseBuilder.factory.buildNetwork({ name: 'Réseau 02' });
+      databaseBuilder.factory.buildNetwork({ name: 'Réseau 03' });
+      await databaseBuilder.commit();
+      const options = {
+        method: 'GET',
+        url: '/api/admin/networks?page[number]=2&page[size]=2',
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.data).to.have.lengthOf(1);
+      expect(response.result.meta).to.include({ page: 2, pageSize: 2, rowCount: 3, pageCount: 2 });
     });
   });
 

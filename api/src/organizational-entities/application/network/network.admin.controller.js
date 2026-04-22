@@ -2,9 +2,9 @@ import { usecases } from '../../domain/usecases/index.js';
 import * as networkSerializer from '../../infrastructure/serializers/jsonapi/network/network.serializer.js';
 
 const findAllFilteredNetworks = async function (request, h, dependencies = { networkSerializer }) {
-  const { filter } = request.query;
-  const networks = await usecases.findAllFilteredNetworks({ filter });
-  return dependencies.networkSerializer.serialize(networks);
+  const { filter, page } = request.query;
+  const { models: networks, pagination } = await usecases.findPaginatedFilteredNetworks({ filter, page });
+  return dependencies.networkSerializer.serialize(networks, pagination);
 };
 
 const getNetworkDetails = async function (request, h, dependencies = { networkSerializer }) {

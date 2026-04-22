@@ -33,6 +33,20 @@ describe('Unit | Infrastructure | Serializers | JsonApi |  Network | network-ser
       // then
       expect(json).to.deep.equal(expectedSerializedNetwork);
     });
+
+    it('converts an array of networks to JSON with pagination meta', function () {
+      // given
+      const network = domainBuilder.acquisition.buildNetwork({ id: 1, name: 'Réseau A' });
+      const meta = { page: 1, pageSize: 10, rowCount: 1, pageCount: 1 };
+
+      // when
+      const json = serializer.serialize([network], meta);
+
+      // then
+      expect(json.meta).to.deep.equal(meta);
+      expect(json.data).to.have.lengthOf(1);
+      expect(json.data[0].id).to.equal('1');
+    });
   });
 
   describe('#deserialize', function () {

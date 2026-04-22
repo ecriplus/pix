@@ -2,10 +2,11 @@ import jsonapiSerializer from 'jsonapi-serializer';
 
 const { Serializer } = jsonapiSerializer;
 
-const serialize = function (network) {
+const serialize = function (networks, meta) {
   return new Serializer('networks', {
     attributes: ['name', 'headOrganization'],
-  }).serialize(network);
+    meta,
+  }).serialize(networks);
 };
 
 const deserialize = function (json) {
