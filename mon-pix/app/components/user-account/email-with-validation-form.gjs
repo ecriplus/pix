@@ -68,15 +68,15 @@ export default class EmailWithValidationForm extends Component {
         </PixNotificationAlert>
       {{/if}}
       <div class="update-email-with-validation__action-buttons">
-        <PixButton @triggerAction={{@disableEmailEditionMode}} @variant="secondary">
-          {{t "common.actions.cancel"}}
-        </PixButton>
         <PixButton
           class="update-email-with-validation-actions__confirm-button"
           @type="submit"
           @isDisabled={{this.hasRequestedUpdate}}
         >
           {{t "pages.user-account.account-add-or-update-email-with-validation.save-button"}}
+        </PixButton>
+        <PixButton @triggerAction={{@disableEmailEditionMode}} @variant="secondary">
+          {{t "common.actions.cancel"}}
         </PixButton>
       </div>
     </form>
