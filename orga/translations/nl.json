@@ -1003,6 +1003,18 @@
       },
       "title": "Campagnes"
     },
+    "catalogue": {
+      "card": {
+        "modules-count": "{count, plural, =0 {Geen module} =1 {{count} module} other {{count} modules}}",
+        "simplified-access": "Toegang zonder account",
+        "tag": {
+          "blueprint": "Leertraject voor leerlingen",
+          "target-profile": "Leertrajecten"
+        },
+        "tubes-count": "{count, plural, =0 {Geen onderwerp} =1 {{count} onderwerp} other {{count} onderwerpen}}"
+      },
+      "title": "Overzicht van leertrajecten"
+    },
     "certifications": {
       "description": "Selecteer de klas waarvoor je de certificeringsresultaten wilt exporteren (.csv) of de certificaten wilt downloaden (.pdf).'<br>' Je kunt deze lijst filteren door de naam van de klas direct in het veld in te voeren.",
       "documentation-link": "https://cloud.pix.fr/s/APNirYfz3SRbZLz",

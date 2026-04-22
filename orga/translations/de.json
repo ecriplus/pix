@@ -1006,6 +1006,18 @@
       },
       "title": "Kampagnen"
     },
+    "catalogue": {
+      "card": {
+        "modules-count": "{count, plural, =0 {Kein Modul} =1 {{count} Modul} other {{count} Module}}",
+        "simplified-access": "Zugang ohne Konto",
+        "tag": {
+          "blueprint": "Lernpfad",
+          "target-profile": "Kurs"
+        },
+        "tubes-count": "{count, plural, =0 {Kein Thema} =1 {{count} thema} other {{count} themen}}"
+      },
+      "title": "Kurskatalog"
+    },
     "certifications": {
       "description": "Wählen Sie die Klasse aus, für die Sie die Zertifizierungsergebnisse exportieren (.csv) oder die Zertifikate herunterladen (.pdf) möchten.\n Sie können diese Liste filtern, indem Sie den Namen der Klasse direkt in das Feld eingeben.",
       "documentation-link": "https://cloud.pix.fr/s/oqnYJWHoSXz8LJk",

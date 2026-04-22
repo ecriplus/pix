@@ -1004,6 +1004,18 @@
       },
       "title": "Campagnes"
     },
+    "catalogue": {
+      "card": {
+        "modules-count": "{count, plural, =0 {Aucun module} =1 {{count} module} other {{count} modules}}",
+        "simplified-access": "Accès sans compte",
+        "tag": {
+          "blueprint": "Parcours apprenant",
+          "target-profile": "Parcours"
+        },
+        "tubes-count": "{count, plural, =0 {Aucun sujet} =1 {{count} sujet} other {{count} sujets}}"
+      },
+      "title": "Catalogue de parcours"
+    },
     "certifications": {
       "description": "Sélectionnez la classe pour laquelle vous souhaitez exporter les résultats de certification (.csv) ou télécharger les certificats (.pdf).\n Vous pouvez filtrer cette liste en renseignant le nom de la classe directement dans le champ.",
       "documentation-link": "https://cloud.pix.fr/s/oqnYJWHoSXz8LJk",

@@ -1016,6 +1016,18 @@
       },
       "title": "Campaigns"
     },
+    "catalogue": {
+      "card": {
+        "modules-count": "{count, plural, =0 {No module} =1 {{count} module} other {{count} modules}}",
+        "simplified-access": "Access without an account",
+        "tag": {
+          "blueprint": "Learning course",
+          "target-profile": "Course"
+        },
+        "tubes-count": "{count, plural, =0 {No topic} =1 {{count} topic} other {{count} topics}}"
+      },
+      "title": "Courses catalogue"
+    },
     "certifications": {
       "description": "Please select the class for which you would like to export the certification results (.csv) or download certificates (.pdf).",
       "documentation-link": "https://cloud.pix.fr/s/APNirYfz3SRbZLz",

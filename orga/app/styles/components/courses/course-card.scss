@@ -1,0 +1,16 @@
+.course-card {
+  &__tag {
+    margin: var(--pix-spacing-3x) var(--pix-spacing-3x) var(--pix-spacing-3x) 0;
+  }
+
+  &__footer::before {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    margin: auto 4px auto 4px;
+    vertical-align: middle;
+    background-color: var(--pix-neutral-500);
+    border-radius: 100%;
+    content: '';
+  }
+}
