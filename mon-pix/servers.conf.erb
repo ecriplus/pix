@@ -161,6 +161,10 @@ server {
 
   <% end %>
 
+  # Redirections pour France Travail (PIX-22413)
+  rewrite ^/campagnes/PIXRPEXP1$ <%= ENV['POLE_EMPLOI_AFTER_LOGOUT_URI'] %>campagnes/PIXRPENUM redirect;
+  rewrite ^/campagnes/PIXEMPLOI$ <%= ENV['POLE_EMPLOI_AFTER_LOGOUT_URI'] %>campagnes/PIXRPENUM redirect;
+
   add_header X-Content-Type-Options "nosniff";
   add_header X-Frame-Options "SAMEORIGIN";
   add_header X-XSS-Protection 1;
