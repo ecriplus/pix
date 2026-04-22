@@ -331,7 +331,7 @@ export default class DetailsV3 extends Component {
             <:cell>
               {{#if certificationChallenge.answeredAt}}
                 <time>
-                  {{formatTime certificationChallenge.answeredAt hour="numeric" minute="numeric" second="numeric"}}
+                  {{formatTime certificationChallenge.answeredAt format="long"}}
                 </time>
               {{else}}
                 -
