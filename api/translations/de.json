@@ -310,8 +310,9 @@
       "FIRSTNAME": "Vorname",
       "JURY_COMMENT_FOR_ORGANIZATION": "Kommentar Jury für die Organisation",
       "LASTNAME": "Name",
-      "PIX_SCORE": "Anzahl der Pix",
+      "REACHED_LEVEL": "Niveau",
       "REGISTRATION_STATUS": "Status bei der Anmeldung",
+      "SCORE": "Pix-Punktzahl",
       "SESSION_ID": "Sitzung",
       "SKILL_LABEL": "{skillIndex}",
       "STATUS": "Status"
@@ -327,7 +328,46 @@
       "COMPLEMENTARY_CERTIFICATION_NOT_DONE": "Nicht bestanden",
       "COMPLEMENTARY_CERTIFICATION_REJECTED": "Abgelehnt",
       "COMPLEMENTARY_CERTIFICATION_VALIDATED": "Freigegeben",
-      "REJECTED_AUTOMATICALLY_COMMENT": "Der Kandidat hat mehr als 50% der gestellten Fragen falsch beantwortet. Dies machte die gesamte Zertifizierung ungültig und führte daher zu einer Punktzahl von 0 Pixeln."
+      "REJECTED_AUTOMATICALLY_COMMENT": "Der Kandidat hat mehr als 50% der gestellten Fragen falsch beantwortet. Dies machte die gesamte Zertifizierung ungültig und führte daher zu einer Punktzahl von 0 Pixeln.",
+      "meshLevels": {
+        "CLEA": {
+          "0": "-",
+          "1": "Anfänger 1",
+          "2": "Anfänger 2",
+          "3": "Selbstständig 1",
+          "4": "Selbstständig 2",
+          "5": "Fortgeschritten 1",
+          "6": "Fortgeschritten 2",
+          "7": "Experte 1",
+          "8": "Experte 2"
+        },
+        "CORE": {
+          "0": "-",
+          "1": "Anfänger 1",
+          "2": "Anfänger 2",
+          "3": "Selbstständig 1",
+          "4": "Selbstständig 2",
+          "5": "Fortgeschritten 1",
+          "6": "Fortgeschritten 2",
+          "7": "Experte 1",
+          "8": "Experte 2"
+        },
+        "DROIT": {
+          "0": "Erhalten"
+        },
+        "EDU_1ER_DEGRE": {
+          "0": "Zulässig"
+        },
+        "EDU_2ND_DEGRE": {
+          "0": "Zulässig"
+        },
+        "EDU_CPE": {
+          "0": "Zulässig"
+        },
+        "PRO_SANTE": {
+          "0": "Erhalten"
+        }
+      }
     }
   },
   "common": {

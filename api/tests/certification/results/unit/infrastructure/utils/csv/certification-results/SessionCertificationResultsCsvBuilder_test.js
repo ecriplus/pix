@@ -5,7 +5,7 @@ import { getI18n } from '../../../../../../../../src/shared/infrastructure/i18n/
 import { expect } from '../../../../../../../test-helper.js';
 
 describe('Unit | infrastructure | utils | csv | certification-results | SessionCertificationResultsCsvBuilder', function () {
-  describe('#showCompetencesColumns', function () {
+  describe('#hasCoreOrCleaCertifications', function () {
     it('return true when one certif is on core framework', function () {
       const i18n = getI18n();
       const certificationResults = [
@@ -16,7 +16,7 @@ describe('Unit | infrastructure | utils | csv | certification-results | SessionC
         i18n,
         certificationResults,
       });
-      expect(sessionCertificationResultsCsvBuilder.showCompetencesColumns()).to.be.true;
+      expect(sessionCertificationResultsCsvBuilder.hasCoreOrCleaCertifications()).to.be.true;
     });
 
     it('return true when one certif is on Clea framework', function () {
@@ -29,7 +29,7 @@ describe('Unit | infrastructure | utils | csv | certification-results | SessionC
         i18n,
         certificationResults,
       });
-      expect(sessionCertificationResultsCsvBuilder.showCompetencesColumns()).to.be.true;
+      expect(sessionCertificationResultsCsvBuilder.hasCoreOrCleaCertifications()).to.be.true;
     });
 
     it('return false when none certif is on core framework', function () {
@@ -42,7 +42,7 @@ describe('Unit | infrastructure | utils | csv | certification-results | SessionC
         i18n,
         certificationResults,
       });
-      expect(sessionCertificationResultsCsvBuilder.showCompetencesColumns()).to.be.false;
+      expect(sessionCertificationResultsCsvBuilder.hasCoreOrCleaCertifications()).to.be.false;
     });
   });
 });

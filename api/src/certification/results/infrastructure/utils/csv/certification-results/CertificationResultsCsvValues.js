@@ -99,6 +99,32 @@ class CertificationResultsCsvValues {
     return status;
   }
 
+  formatReachedLevel(certificationResult) {
+    if (certificationResult.isV3 && certificationResult.isValidated()) {
+      return this.getTranslation(
+        `${I18N_VALUES_PREFIX}.meshLevels.${certificationResult.framework}.${certificationResult.reachedMeshIndex}`,
+      );
+    }
+
+    if (certificationResult.isV3 && certificationResult.isRejected()) {
+      return this.getTranslation(`${I18N_VALUES_PREFIX}.meshLevels.${certificationResult.framework}.BELOW_MINIMUM`);
+    }
+
+    return '-';
+  }
+
+  formatScore(certificationResult) {
+    if (certificationResult.isCancelled() || certificationResult.isInError()) {
+      return '-';
+    }
+
+    if (certificationResult.isRejected()) {
+      return 0;
+    }
+
+    return certificationResult.pixScore;
+  }
+
   *generateRowValues() {
     const row = {};
     let index = 0;

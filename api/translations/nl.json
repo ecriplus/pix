@@ -306,8 +306,9 @@
       "FIRSTNAME": "Voornaam",
       "JURY_COMMENT_FOR_ORGANIZATION": "Commentaar van de jury op de organisatie",
       "LASTNAME": "Naam",
-      "PIX_SCORE": "Aantal pixels",
+      "REACHED_LEVEL": "Niveau",
       "REGISTRATION_STATUS": "Registratiestatus",
+      "SCORE": "Pix-score",
       "SESSION_ID": "Sessie",
       "SKILL_LABEL": "{skillIndex}",
       "STATUS": "Status"
@@ -323,7 +324,46 @@
       "COMPLEMENTARY_CERTIFICATION_NOT_DONE": "Niet aangenomen",
       "COMPLEMENTARY_CERTIFICATION_REJECTED": "Afgewezen",
       "COMPLEMENTARY_CERTIFICATION_VALIDATED": "Gevalideerd",
-      "REJECTED_AUTOMATICALLY_COMMENT": "De kandidaat beantwoordde meer dan 50% van de vragen fout, waardoor zijn hele certificering ongeldig werd en hij een score van 0 pix kreeg."
+      "REJECTED_AUTOMATICALLY_COMMENT": "De kandidaat beantwoordde meer dan 50% van de vragen fout, waardoor zijn hele certificering ongeldig werd en hij een score van 0 pix kreeg.",
+      "meshLevels": {
+        "CLEA": {
+          "0": "-",
+          "1": "Beginner 1",
+          "2": "Beginner 2",
+          "3": "Onafhankelijk 1",
+          "4": "Onafhankelijk 2",
+          "5": "Gevorderd 1",
+          "6": "Gevorderd 2",
+          "7": "Expert 1",
+          "8": "Expert 2"
+        },
+        "CORE": {
+          "0": "-",
+          "1": "Beginner 1",
+          "2": "Beginner 2",
+          "3": "Onafhankelijk 1",
+          "4": "Onafhankelijk 2",
+          "5": "Gevorderd 1",
+          "6": "Gevorderd 2",
+          "7": "Expert 1",
+          "8": "Expert 2"
+        },
+        "DROIT": {
+          "0": "Behaald"
+        },
+        "EDU_1ER_DEGRE": {
+          "0": "Toelaatbaar"
+        },
+        "EDU_2ND_DEGRE": {
+          "0": "Toelaatbaar"
+        },
+        "EDU_CPE": {
+          "0": "Toelaatbaar"
+        },
+        "PRO_SANTE": {
+          "0": "Behaald"
+        }
+      }
     }
   },
   "common": {

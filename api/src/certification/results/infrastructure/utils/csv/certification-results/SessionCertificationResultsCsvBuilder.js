@@ -47,9 +47,11 @@ export class SessionCertificationResultsCsvBuilder {
       }),
     );
 
-    headersGenerator.next({ headerKey: 'RESULT' });
+    headersGenerator.next({ headerKey: 'REACHED_LEVEL' });
 
-    if (this.showCompetencesColumns()) {
+    if (this.hasCoreOrCleaCertifications()) {
+      headersGenerator.next({ headerKey: 'SCORE' });
+
       CertificationResultsCsvHeaders.COMPETENCE_INDEXES.forEach((skillIndex) =>
         headersGenerator.next({
           headerKey: 'SKILL_LABEL',
@@ -90,9 +92,11 @@ export class SessionCertificationResultsCsvBuilder {
         }),
       );
 
-      rowGenerator.next({ value: this.formatResult(certificationResult) });
+      rowGenerator.next({ value: this.#csvValues.formatReachedLevel(certificationResult) });
 
-      if (this.showCompetencesColumns()) {
+      if (this.hasCoreOrCleaCertifications()) {
+        rowGenerator.next({ value: this.#csvValues.formatScore(certificationResult) });
+
         CertificationResultsCsvHeaders.COMPETENCE_INDEXES.forEach((competenceIndex) =>
           rowGenerator.next({
             value: this.#csvValues.getCompetenceLevel({
@@ -112,7 +116,7 @@ export class SessionCertificationResultsCsvBuilder {
     });
   }
 
-  showCompetencesColumns() {
+  hasCoreOrCleaCertifications() {
     return this.#certificationResults.some(
       (certificationResult) => certificationResult.isCoreFramework() || certificationResult.isCleaFramework(),
     );
@@ -123,24 +127,5 @@ export class SessionCertificationResultsCsvBuilder {
       fileHeaders: this.#buildFileHeaders(),
       data: this.#buildData(),
     };
-  }
-
-  formatResult(certificationResult) {
-    if (certificationResult.isCancelled() || certificationResult.isInError()) {
-      return '-';
-    }
-    if (certificationResult.isV3) {
-      const meshKey = certificationResult.isRejected() ? 'BELOW_MINIMUM' : certificationResult.reachedMeshIndex;
-      const pixScore = certificationResult.isRejected() ? 0 : certificationResult.pixScore;
-
-      return this.translate(`certification.meshLevels.${certificationResult.framework}.${meshKey}`, {
-        pixScore,
-      });
-    }
-
-    if (certificationResult.isRejected()) {
-      return 0;
-    }
-    return certificationResult.pixScore;
   }
 }

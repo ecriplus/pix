@@ -306,8 +306,9 @@
       "FIRSTNAME": "Nombre",
       "JURY_COMMENT_FOR_ORGANIZATION": "Comentarios del jurado sobre la organización",
       "LASTNAME": "Nombre",
-      "PIX_SCORE": "Número de píxeles",
+      "REACHED_LEVEL": "Nivel",
       "REGISTRATION_STATUS": "Estado de la inscripción",
+      "SCORE": "Puntuación Pix",
       "SESSION_ID": "Sesión",
       "SKILL_LABEL": "{skillIndex}",
       "STATUS": "Estado"
@@ -323,7 +324,46 @@
       "COMPLEMENTARY_CERTIFICATION_NOT_DONE": "No aprobado",
       "COMPLEMENTARY_CERTIFICATION_REJECTED": "Rechazado",
       "COMPLEMENTARY_CERTIFICATION_VALIDATED": "Validado",
-      "REJECTED_AUTOMATICALLY_COMMENT": "El candidato respondió incorrectamente a más del 50% de las preguntas, lo que invalidó toda su certificación y le supuso una puntuación de 0 píxeles."
+      "REJECTED_AUTOMATICALLY_COMMENT": "El candidato respondió incorrectamente a más del 50% de las preguntas, lo que invalidó toda su certificación y le supuso una puntuación de 0 píxeles.",
+      "meshLevels": {
+        "CLEA": {
+          "0": "-",
+          "1": "Novato 1",
+          "2": "Novato 2",
+          "3": "Independiente 1",
+          "4": "Independiente 2",
+          "5": "Avanzado 1",
+          "6": "Avanzado 2",
+          "7": "Experto 1",
+          "8": "Experto 2"
+        },
+        "CORE": {
+          "0": "-",
+          "1": "Novato 1",
+          "2": "Novato 2",
+          "3": "Independiente 1",
+          "4": "Independiente 2",
+          "5": "Avanzado 1",
+          "6": "Avanzado 2",
+          "7": "Experto 1",
+          "8": "Experto 2"
+        },
+        "DROIT": {
+          "0": "Obtenida"
+        },
+        "EDU_1ER_DEGRE": {
+          "0": "Admisible"
+        },
+        "EDU_2ND_DEGRE": {
+          "0": "Admisible"
+        },
+        "EDU_CPE": {
+          "0": "Admisible"
+        },
+        "PRO_SANTE": {
+          "0": "Obtenida"
+        }
+      }
     }
   },
   "common": {

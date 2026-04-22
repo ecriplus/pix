@@ -53,8 +53,8 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
           const expectedFilename = '20210101_1430_resultats_session_777.csv';
           const expectedContent =
             '\uFEFF' +
-            '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Résultat";"1.1";"1.2";"1.3";"2.1";"2.2";"2.3";"2.4";"3.1";"3.2";"3.3";"3.4";"4.1";"4.2";"4.3";"5.1";"5.2";"Commentaire jury pour l’organisation";"Session";"Centre de certification";"Date de passage de la certification"\n' +
-            '123;"Lili";"Oxford";"04/01/1990";"Torreilles";"LOLORD";"Pix";"Validée";55;0;1;5;"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";0;0;"RAS";777;"CentreCertif";"01/01/2020"';
+            '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Niveau";"Score en Pix";"1.1";"1.2";"1.3";"2.1";"2.2";"2.3";"2.4";"3.1";"3.2";"3.3";"3.4";"4.1";"4.2";"4.3";"5.1";"5.2";"Commentaire jury pour l’organisation";"Session";"Centre de certification";"Date de passage de la certification"\n' +
+            '123;"Lili";"Oxford";"04/01/1990";"Torreilles";"LOLORD";"Pix";"Validée";"-";55;0;1;5;"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";0;0;"RAS";777;"CentreCertif";"01/01/2020"';
           expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
         });
 
@@ -97,8 +97,8 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
               const expectedFilename = '20210101_1430_resultats_session_777.csv';
               const expectedContent =
                 '\uFEFF' +
-                '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Résultat";"1.1";"1.2";"1.3";"2.1";"2.2";"2.3";"2.4";"3.1";"3.2";"3.3";"3.4";"4.1";"4.2";"4.3";"5.1";"5.2";"Commentaire jury pour l’organisation";"Session";"Centre de certification";"Date de passage de la certification"\n' +
-                `456;"Tom";"Cambridge";"21/05/1993";"TheMoon";"TOTODGE";"Pix";"Non obtenue";0;"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"${translate('jury.comment.REJECTED_DUE_TO_INSUFFICIENT_CORRECT_ANSWERS.organization')}";777;"CentreCertif";"02/02/2020"`;
+                '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Niveau";"Score en Pix";"1.1";"1.2";"1.3";"2.1";"2.2";"2.3";"2.4";"3.1";"3.2";"3.3";"3.4";"4.1";"4.2";"4.3";"5.1";"5.2";"Commentaire jury pour l’organisation";"Session";"Centre de certification";"Date de passage de la certification"\n' +
+                `456;"Tom";"Cambridge";"21/05/1993";"TheMoon";"TOTODGE";"Pix";"Non obtenue";"-";0;"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"${translate('jury.comment.REJECTED_DUE_TO_INSUFFICIENT_CORRECT_ANSWERS.organization')}";777;"CentreCertif";"02/02/2020"`;
               expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
             });
           });
@@ -142,8 +142,8 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
             const expectedFilename = '20210101_1430_resultats_session_777.csv';
             const expectedContent =
               '\uFEFF' +
-              '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Résultat";"1.1";"1.2";"1.3";"2.1";"2.2";"2.3";"2.4";"3.1";"3.2";"3.3";"3.4";"4.1";"4.2";"4.3";"5.1";"5.2";"Commentaire jury pour l’organisation";"Session";"Centre de certification";"Date de passage de la certification"\n' +
-              `456;"Tom";"Cambridge";"21/05/1993";"TheMoon";"TOTODGE";"Pix";"Non obtenue";0;"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"${translate('jury.comment.REJECTED_DUE_TO_LACK_OF_ANSWERS.organization')}";777;"CentreCertif";"02/02/2020"`;
+              '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Niveau";"Score en Pix";"1.1";"1.2";"1.3";"2.1";"2.2";"2.3";"2.4";"3.1";"3.2";"3.3";"3.4";"4.1";"4.2";"4.3";"5.1";"5.2";"Commentaire jury pour l’organisation";"Session";"Centre de certification";"Date de passage de la certification"\n' +
+              `456;"Tom";"Cambridge";"21/05/1993";"TheMoon";"TOTODGE";"Pix";"Non obtenue";"-";0;"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"${translate('jury.comment.REJECTED_DUE_TO_LACK_OF_ANSWERS.organization')}";777;"CentreCertif";"02/02/2020"`;
             expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
           });
         });
@@ -187,8 +187,8 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
           const expectedFilename = '20210101_1430_resultats_session_777.csv';
           const expectedContent =
             '\uFEFF' +
-            '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Résultat";"1.1";"1.2";"1.3";"2.1";"2.2";"2.3";"2.4";"3.1";"3.2";"3.3";"3.4";"4.1";"4.2";"4.3";"5.1";"5.2";"Commentaire jury pour l’organisation";"Session";"Centre de certification";"Date de passage de la certification"\n' +
-            '123;"Lili";"Oxford";"04/01/1990";"Torreilles";"LOLORD";"Pix";"Annulée";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"RAS";777;"CentreCertif";"01/01/2020"';
+            '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Niveau";"Score en Pix";"1.1";"1.2";"1.3";"2.1";"2.2";"2.3";"2.4";"3.1";"3.2";"3.3";"3.4";"4.1";"4.2";"4.3";"5.1";"5.2";"Commentaire jury pour l’organisation";"Session";"Centre de certification";"Date de passage de la certification"\n' +
+            '123;"Lili";"Oxford";"04/01/1990";"Torreilles";"LOLORD";"Pix";"Annulée";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"RAS";777;"CentreCertif";"01/01/2020"';
           expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
         });
       });
@@ -230,8 +230,8 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
           const expectedFilename = '20210101_1430_resultats_session_777.csv';
           const expectedContent =
             '\uFEFF' +
-            '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Résultat";"1.1";"1.2";"1.3";"2.1";"2.2";"2.3";"2.4";"3.1";"3.2";"3.3";"3.4";"4.1";"4.2";"4.3";"5.1";"5.2";"Commentaire jury pour l’organisation";"Session";"Centre de certification";"Date de passage de la certification"\n' +
-            '123;"Lili";"Oxford";"04/01/1990";"Torreilles";"LOLORD";"Pix";"En erreur";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"RAS";777;"CentreCertif";"01/01/2020"';
+            '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Niveau";"Score en Pix";"1.1";"1.2";"1.3";"2.1";"2.2";"2.3";"2.4";"3.1";"3.2";"3.3";"3.4";"4.1";"4.2";"4.3";"5.1";"5.2";"Commentaire jury pour l’organisation";"Session";"Centre de certification";"Date de passage de la certification"\n' +
+            '123;"Lili";"Oxford";"04/01/1990";"Torreilles";"LOLORD";"Pix";"En erreur";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"RAS";777;"CentreCertif";"01/01/2020"';
           expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
         });
       });
@@ -284,8 +284,8 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
           const expectedFilename = '20210101_1430_resultats_session_777.csv';
           const expectedContent =
             '\uFEFF' +
-            '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Certification Pix+ Bandjo Maître";"Certification Pix+ Bandjo Expert";"Résultat";"1.1";"1.2";"1.3";"2.1";"2.2";"2.3";"2.4";"3.1";"3.2";"3.3";"3.4";"4.1";"4.2";"4.3";"5.1";"5.2";"Commentaire jury pour l’organisation";"Session";"Centre de certification";"Date de passage de la certification"\n' +
-            '123;"Lili";"Oxford";"04/01/1990";"Torreilles";"LOLORD";"Pix";"Validée";"Non obtenue";"Validée";55;"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";3;0;"RAS";777;"CentreCertif";"01/01/2020"';
+            '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Certification Pix+ Bandjo Maître";"Certification Pix+ Bandjo Expert";"Niveau";"Score en Pix";"1.1";"1.2";"1.3";"2.1";"2.2";"2.3";"2.4";"3.1";"3.2";"3.3";"3.4";"4.1";"4.2";"4.3";"5.1";"5.2";"Commentaire jury pour l’organisation";"Session";"Centre de certification";"Date de passage de la certification"\n' +
+            '123;"Lili";"Oxford";"04/01/1990";"Torreilles";"LOLORD";"Pix";"Validée";"Non obtenue";"Validée";"-";55;"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";3;0;"RAS";777;"CentreCertif";"01/01/2020"';
           expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
         });
       });
@@ -325,7 +325,7 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
 
       context('CORE', function () {
         const expectedCsvHeaders =
-          '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Résultat";"1.1";"1.2";"1.3";"2.1";"2.2";"2.3";"2.4";"3.1";"3.2";"3.3";"3.4";"4.1";"4.2";"4.3";"5.1";"5.2";"Commentaire jury pour l’organisation";"Session";"Centre de certification";"Date de passage de la certification"\n';
+          '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Niveau";"Score en Pix";"1.1";"1.2";"1.3";"2.1";"2.2";"2.3";"2.4";"3.1";"3.2";"3.3";"3.4";"4.1";"4.2";"4.3";"5.1";"5.2";"Commentaire jury pour l’organisation";"Session";"Centre de certification";"Date de passage de la certification"\n';
         beforeEach(function () {
           baseCertificationData.framework = Frameworks.CORE;
         });
@@ -352,7 +352,7 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
               '\uFEFF' +
               expectedCsvHeaders +
               expectedCsvStart +
-              ';"Pix";"Annulée";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-"' +
+              ';"Pix";"Annulée";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-"' +
               expectedCsvEnd;
             expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
           });
@@ -380,7 +380,7 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
               '\uFEFF' +
               expectedCsvHeaders +
               expectedCsvStart +
-              ';"Pix";"En erreur";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-"' +
+              ';"Pix";"En erreur";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-"' +
               expectedCsvEnd;
             expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
           });
@@ -408,7 +408,7 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
               '\uFEFF' +
               expectedCsvHeaders +
               expectedCsvStart +
-              ';"Pix";"Non obtenue";"0 Pix";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-"' +
+              ';"Pix";"Non obtenue";"-";0;"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-"' +
               expectedCsvEnd;
             expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
           });
@@ -416,16 +416,16 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
 
         context('when certification is validated', function () {
           [
-            { pixScore: 1, reachedMeshIndex: 0, expectedResult: '1 Pix' },
-            { pixScore: 5, reachedMeshIndex: 1, expectedResult: 'Novice 1 (5 Pix)' },
-            { pixScore: 10, reachedMeshIndex: 2, expectedResult: 'Novice 2 (10 Pix)' },
-            { pixScore: 15, reachedMeshIndex: 3, expectedResult: 'Indépendant 1 (15 Pix)' },
-            { pixScore: 20, reachedMeshIndex: 4, expectedResult: 'Indépendant 2 (20 Pix)' },
-            { pixScore: 25, reachedMeshIndex: 5, expectedResult: 'Avancé 1 (25 Pix)' },
-            { pixScore: 30, reachedMeshIndex: 6, expectedResult: 'Avancé 2 (30 Pix)' },
-            { pixScore: 35, reachedMeshIndex: 7, expectedResult: 'Expert 1 (35 Pix)' },
-            { pixScore: 40, reachedMeshIndex: 8, expectedResult: 'Expert 2 (40 Pix)' },
-          ].forEach(({ pixScore, reachedMeshIndex, expectedResult }) => {
+            { pixScore: 1, reachedMeshIndex: 0, expectedMeshLabel: '-' },
+            { pixScore: 5, reachedMeshIndex: 1, expectedMeshLabel: 'Novice 1' },
+            { pixScore: 10, reachedMeshIndex: 2, expectedMeshLabel: 'Novice 2' },
+            { pixScore: 15, reachedMeshIndex: 3, expectedMeshLabel: 'Indépendant 1' },
+            { pixScore: 20, reachedMeshIndex: 4, expectedMeshLabel: 'Indépendant 2' },
+            { pixScore: 25, reachedMeshIndex: 5, expectedMeshLabel: 'Avancé 1' },
+            { pixScore: 30, reachedMeshIndex: 6, expectedMeshLabel: 'Avancé 2' },
+            { pixScore: 35, reachedMeshIndex: 7, expectedMeshLabel: 'Expert 1' },
+            { pixScore: 40, reachedMeshIndex: 8, expectedMeshLabel: 'Expert 2' },
+          ].forEach(({ pixScore, reachedMeshIndex, expectedMeshLabel }) => {
             it(`writes the appropriate certification in the csv when pixScore is ${pixScore} and reachedMeshIndex is ${reachedMeshIndex}}`, async function () {
               // given
               const certificationResult = domainBuilder.buildCertificationResult.validated({
@@ -447,7 +447,7 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
                 '\uFEFF' +
                 expectedCsvHeaders +
                 expectedCsvStart +
-                `;"Pix";"Validée";"${expectedResult}";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";3;0` +
+                `;"Pix";"Validée";"${expectedMeshLabel}";${pixScore};"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";3;0` +
                 expectedCsvEnd;
               expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
             });
@@ -457,7 +457,7 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
 
       context('CléA', function () {
         const expectedCsvHeaders =
-          '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Certification CléA";"Résultat";"1.1";"1.2";"1.3";"2.1";"2.2";"2.3";"2.4";"3.1";"3.2";"3.3";"3.4";"4.1";"4.2";"4.3";"5.1";"5.2";"Commentaire jury pour l’organisation";"Session";"Centre de certification";"Date de passage de la certification"\n';
+          '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Certification CléA";"Niveau";"Score en Pix";"1.1";"1.2";"1.3";"2.1";"2.2";"2.3";"2.4";"3.1";"3.2";"3.3";"3.4";"4.1";"4.2";"4.3";"5.1";"5.2";"Commentaire jury pour l’organisation";"Session";"Centre de certification";"Date de passage de la certification"\n';
         beforeEach(function () {
           baseCertificationData.framework = Frameworks.CLEA;
           baseCertificationData.complementaryCertificationCourseResults = [
@@ -487,7 +487,7 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
               '\uFEFF' +
               expectedCsvHeaders +
               expectedCsvStart +
-              ';"CléA Numérique by Pix";"Annulée";"Annulée";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-"' +
+              ';"CléA Numérique by Pix";"Annulée";"Annulée";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-"' +
               expectedCsvEnd;
             expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
           });
@@ -515,7 +515,7 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
               '\uFEFF' +
               expectedCsvHeaders +
               expectedCsvStart +
-              ';"CléA Numérique by Pix";"En erreur";"En erreur";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-"' +
+              ';"CléA Numérique by Pix";"En erreur";"En erreur";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-"' +
               expectedCsvEnd;
             expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
           });
@@ -546,7 +546,7 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
               '\uFEFF' +
               expectedCsvHeaders +
               expectedCsvStart +
-              ';"CléA Numérique by Pix";"Non obtenue";"Non obtenue";"0 Pix";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-"' +
+              ';"CléA Numérique by Pix";"Non obtenue";"Non obtenue";"-";0;"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-"' +
               expectedCsvEnd;
             expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
           });
@@ -554,16 +554,16 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
 
         context('when certification is validated', function () {
           [
-            { pixScore: 1, reachedMeshIndex: 0, expectedResult: '1 Pix' },
-            { pixScore: 5, reachedMeshIndex: 1, expectedResult: 'Novice 1 (5 Pix)' },
-            { pixScore: 10, reachedMeshIndex: 2, expectedResult: 'Novice 2 (10 Pix)' },
-            { pixScore: 15, reachedMeshIndex: 3, expectedResult: 'Indépendant 1 (15 Pix)' },
-            { pixScore: 20, reachedMeshIndex: 4, expectedResult: 'Indépendant 2 (20 Pix)' },
-            { pixScore: 25, reachedMeshIndex: 5, expectedResult: 'Avancé 1 (25 Pix)' },
-            { pixScore: 30, reachedMeshIndex: 6, expectedResult: 'Avancé 2 (30 Pix)' },
-            { pixScore: 35, reachedMeshIndex: 7, expectedResult: 'Expert 1 (35 Pix)' },
-            { pixScore: 40, reachedMeshIndex: 8, expectedResult: 'Expert 2 (40 Pix)' },
-          ].forEach(({ pixScore, reachedMeshIndex, expectedResult }) => {
+            { pixScore: 1, reachedMeshIndex: 0, expectedMeshLabel: '-' },
+            { pixScore: 5, reachedMeshIndex: 1, expectedMeshLabel: 'Novice 1' },
+            { pixScore: 10, reachedMeshIndex: 2, expectedMeshLabel: 'Novice 2' },
+            { pixScore: 15, reachedMeshIndex: 3, expectedMeshLabel: 'Indépendant 1' },
+            { pixScore: 20, reachedMeshIndex: 4, expectedMeshLabel: 'Indépendant 2' },
+            { pixScore: 25, reachedMeshIndex: 5, expectedMeshLabel: 'Avancé 1' },
+            { pixScore: 30, reachedMeshIndex: 6, expectedMeshLabel: 'Avancé 2' },
+            { pixScore: 35, reachedMeshIndex: 7, expectedMeshLabel: 'Expert 1' },
+            { pixScore: 40, reachedMeshIndex: 8, expectedMeshLabel: 'Expert 2' },
+          ].forEach(({ pixScore, reachedMeshIndex, expectedMeshLabel }) => {
             it(`writes the appropriate certification in the csv when pixScore is ${pixScore} and reachedMeshIndex is ${reachedMeshIndex}}`, async function () {
               // given
               const certificationResult = domainBuilder.buildCertificationResult.validated({
@@ -585,7 +585,7 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
                 '\uFEFF' +
                 expectedCsvHeaders +
                 expectedCsvStart +
-                `;"CléA Numérique by Pix";"Validée";"Validée";"${expectedResult}";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";3;0` +
+                `;"CléA Numérique by Pix";"Validée";"Validée";"${expectedMeshLabel}";${pixScore};"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";"-";3;0` +
                 expectedCsvEnd;
               expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
             });
@@ -595,7 +595,7 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
 
       context('Pix+ EDU', function () {
         const expectedCsvHeaders =
-          '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Résultat";"Commentaire jury pour l’organisation";"Session";"Centre de certification";"Date de passage de la certification"\n';
+          '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Niveau";"Commentaire jury pour l’organisation";"Session";"Centre de certification";"Date de passage de la certification"\n';
         beforeEach(function () {
           baseCertificationData.framework = Frameworks.EDU_1ER_DEGRE;
           baseCertificationData.pixScore = null;

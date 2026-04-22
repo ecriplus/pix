@@ -370,8 +370,9 @@
       "FIRSTNAME": "Prénom",
       "JURY_COMMENT_FOR_ORGANIZATION": "Commentaire jury pour l’organisation",
       "LASTNAME": "Nom",
+      "REACHED_LEVEL": "Niveau",
       "REGISTRATION_STATUS": "Statut à l'inscription",
-      "RESULT": "Résultat",
+      "SCORE": "Score en Pix",
       "SESSION_ID": "Session",
       "SKILL_LABEL": "{skillIndex}",
       "STATUS": "Statut",
@@ -388,7 +389,53 @@
       "COMPLEMENTARY_CERTIFICATION_NOT_DONE": "Non passée",
       "COMPLEMENTARY_CERTIFICATION_REJECTED": "Non obtenue",
       "COMPLEMENTARY_CERTIFICATION_VALIDATED": "Validée",
-      "REJECTED_AUTOMATICALLY_COMMENT": "Le candidat a répondu faux à plus de 50% des questions posées, cela a invalidé l'ensemble de sa certification, et a donc entraîné un score de 0 pix"
+      "REJECTED_AUTOMATICALLY_COMMENT": "Le candidat a répondu faux à plus de 50% des questions posées, cela a invalidé l'ensemble de sa certification, et a donc entraîné un score de 0 pix",
+      "meshLevels": {
+        "CLEA": {
+          "0": "-",
+          "1": "Novice 1",
+          "2": "Novice 2",
+          "3": "Indépendant 1",
+          "4": "Indépendant 2",
+          "5": "Avancé 1",
+          "6": "Avancé 2",
+          "7": "Expert 1",
+          "8": "Expert 2",
+          "BELOW_MINIMUM": "-"
+        },
+        "CORE": {
+          "0": "-",
+          "1": "Novice 1",
+          "2": "Novice 2",
+          "3": "Indépendant 1",
+          "4": "Indépendant 2",
+          "5": "Avancé 1",
+          "6": "Avancé 2",
+          "7": "Expert 1",
+          "8": "Expert 2",
+          "BELOW_MINIMUM": "-"
+        },
+        "DROIT": {
+          "0": "Obtenue",
+          "BELOW_MINIMUM": "Non obtenue"
+        },
+        "EDU_1ER_DEGRE": {
+          "0": "Admissible",
+          "BELOW_MINIMUM": "Non admissible"
+        },
+        "EDU_2ND_DEGRE": {
+          "0": "Admissible",
+          "BELOW_MINIMUM": "Non admissible"
+        },
+        "EDU_CPE": {
+          "0": "Admissible",
+          "BELOW_MINIMUM": "Non admissible"
+        },
+        "PRO_SANTE": {
+          "0": "Obtenue",
+          "BELOW_MINIMUM": "Non obtenue"
+        }
+      }
     }
   },
   "common": {
