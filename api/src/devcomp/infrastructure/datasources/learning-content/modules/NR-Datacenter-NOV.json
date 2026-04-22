@@ -141,21 +141,21 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Image d’un centre de données.</p>",
+                    "content": "<p>Dans un centre de données.</p>",
                     "feedback": {
                       "diagnosis": "<p>Bien vu !</p><p>Le «&nbsp;J’aime&nbsp;» part vers ce grand bâtiment appelé <strong>centre de données</strong> où sont stockées et gérées les informations. C’est là que l’action est enregistrée.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Image d’un satellite.&nbsp;</p>",
+                    "content": "<p>Dans un satellite.&nbsp;</p>",
                     "feedback": {
                       "diagnosis": "<p>Eh non !</p><p>Le «&nbsp;J’aime&nbsp;» part vers ce grand bâtiment appelé <strong>centre de données</strong> où sont stockées et gérées les informations. C’est là que l’action est enregistrée.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Image d’une box internet</p>",
+                    "content": "<p>Dans sa box internet</p>",
                     "feedback": {
                       "diagnosis": "<p>Eh non !</p><p>Le «&nbsp;J’aime&nbsp;» part vers ce grand bâtiment appelé <strong>centre de données</strong> où sont stockées et gérées les informations. C’est là que l’action est enregistrée.</p>"
                     }
