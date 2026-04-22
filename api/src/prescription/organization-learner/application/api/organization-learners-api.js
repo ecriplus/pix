@@ -1,5 +1,6 @@
 import { usecases } from '../../domain/usecases/index.js';
 import { OrganizationLearner } from './models/OrganizationLearner.js';
+import { OrganizationLearnerWithOrganization } from './read-models/OrganizationLearnerWithOrganization.js';
 
 /**
  * @module OrganizationLearnerApi
@@ -139,4 +140,9 @@ export const get = async (organizationLearnerId) => {
 export const findByUserId = async (userId) => {
   const learners = await usecases.findOrganizationLearnersByUserId({ userId });
   return learners.map((learner) => _toAPIModel(learner));
+};
+
+export const findWithOrganizationByUserId = async ({ userId }) => {
+  const learners = await usecases.findOrganizationLearnersWithOrganizationByUserId({ userId });
+  return learners.map((learner) => new OrganizationLearnerWithOrganization(learner));
 };

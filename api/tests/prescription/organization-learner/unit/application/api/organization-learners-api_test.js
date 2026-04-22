@@ -2,6 +2,7 @@ import sinon from 'sinon';
 
 import { OrganizationLearner } from '../../../../../../src/prescription/organization-learner/application/api/models/OrganizationLearner.js';
 import * as organizationLearnersApi from '../../../../../../src/prescription/organization-learner/application/api/organization-learners-api.js';
+import { OrganizationLearnerWithOrganization } from '../../../../../../src/prescription/organization-learner/application/api/read-models/OrganizationLearnerWithOrganization.js';
 import { usecases } from '../../../../../../src/prescription/organization-learner/domain/usecases/index.js';
 import { expect } from '../../../../../test-helper.js';
 
@@ -154,6 +155,40 @@ describe('Unit | API | Organization Learner', function () {
       // then
       expect(learner).to.be.instanceOf(OrganizationLearner);
       expect(learner.id).to.equal(1242);
+    });
+  });
+
+  describe('#findWithOrganizationByUserId', function () {
+    it('should return organization learners mapped to OrganizationLearnerWithOrganization DTOs', async function () {
+      // given
+      const userId = 1;
+      const organization = { id: 10, isManagingStudents: true, type: 'SCO', tags: ['tag1'] };
+      sinon.stub(usecases, 'findOrganizationLearnersWithOrganizationByUserId').resolves([
+        { organizationLearner: { id: 100 }, organization },
+        { organizationLearner: { id: 200 }, organization },
+      ]);
+
+      // when
+      const results = await organizationLearnersApi.findWithOrganizationByUserId({ userId });
+
+      // then
+      expect(usecases.findOrganizationLearnersWithOrganizationByUserId).to.have.been.calledOnceWith({ userId });
+      expect(results).to.deep.equal([
+        new OrganizationLearnerWithOrganization({ organizationLearner: { id: 100 }, organization }),
+        new OrganizationLearnerWithOrganization({ organizationLearner: { id: 200 }, organization }),
+      ]);
+    });
+
+    it('should return an empty array when no learners found', async function () {
+      // given
+      const userId = 999;
+      sinon.stub(usecases, 'findOrganizationLearnersWithOrganizationByUserId').resolves([]);
+
+      // when
+      const results = await organizationLearnersApi.findWithOrganizationByUserId({ userId });
+
+      // then
+      expect(results).to.deep.equal([]);
     });
   });
 });
