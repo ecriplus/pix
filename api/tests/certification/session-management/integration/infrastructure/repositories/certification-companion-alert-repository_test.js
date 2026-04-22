@@ -3,7 +3,8 @@ import {
   CertificationCompanionLiveAlert,
   CertificationCompanionLiveAlertStatus,
 } from '../../../../../../src/certification/shared/domain/models/CertificationCompanionLiveAlert.js';
-import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { databaseBuilder } from '../../../../../tooling/databases.js';
 
 describe('Certification | Session-management | Integration | Infrastructure | Repositories | Certification Companion Alert', function () {
   describe('#getOngoingAlert', function () {

@@ -1,5 +1,6 @@
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
-import { expect, knex } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { knex } from '../../../../tooling/databases.js';
 
 describe('Integration | Identity Access Management | Domain | UseCase | add-oidc-provider', function () {
   context('when visibility is not specified', function () {

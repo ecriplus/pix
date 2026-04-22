@@ -1,6 +1,7 @@
 import { CpfImportStatus } from '../../../../../../src/certification/session-management/domain/models/CpfImportStatus.js';
 import * as cpfExportRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/cpf-export-repository.js';
-import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { databaseBuilder } from '../../../../../tooling/databases.js';
 
 describe('Integration | Repository | Cpfexport', function () {
   describe('#findFileNamesByStatus', function () {

@@ -7,7 +7,8 @@ import { PIX_COUNT_BY_LEVEL } from '../../../../../src/shared/domain/constants.j
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { SCOPES } from '../../../../../src/shared/domain/models/BadgeDetails.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
-import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../../tooling/databases.js';
 import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Integration | Usecase | Handle Badge Acquisition', function () {

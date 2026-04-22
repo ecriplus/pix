@@ -4,7 +4,8 @@ import {
   findOrganizationLearnersToMigrate,
   MigrateLearnerFromStaticImportToGeneric,
 } from '../../../../src/prescription/scripts/migrate-learner-from-static-import-to-generic.js';
-import { databaseBuilder, expect, knex } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../tooling/databases.js';
 
 describe('Script | Prod | Migrate learner from static import to generic', function () {
   describe('context AGRI', function () {

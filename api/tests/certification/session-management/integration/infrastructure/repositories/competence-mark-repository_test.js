@@ -2,7 +2,8 @@ import _ from 'lodash';
 
 import * as competenceMarkRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/competence-mark-repository.js';
 import { CompetenceMark } from '../../../../../../src/certification/shared/domain/models/CompetenceMark.js';
-import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { databaseBuilder } from '../../../../../tooling/databases.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Certification | Session-management | Integration | Infrastructure | Repositories | competence-mark-repository', function () {

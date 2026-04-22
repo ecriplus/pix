@@ -1,5 +1,6 @@
 import { addManyStudentsToScoCertificationCenter } from '../../../scripts/data-generation/add-many-students-to-sco-certification-center.js';
-import { databaseBuilder, expect, knex } from '../../test-helper.js';
+import { expect } from '../../test-helper.js';
+import { databaseBuilder, knex } from '../../tooling/databases.js';
 
 describe('Acceptance | Scripts | add-many-students-to-sco-certification-centers.js', function () {
   const organizationId = 123;

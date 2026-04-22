@@ -1,6 +1,7 @@
 import { CombinedCourse } from '../../../../../src/quest/domain/models/CombinedCourse.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 
 describe('Integration | Quest | Domain | UseCases | find-combined-course-by-module-id-and-user-id', function () {
   it('should return a combined course', async function () {

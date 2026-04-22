@@ -1,7 +1,8 @@
 import { Badge } from '../../../../../src/evaluation/domain/models/Badge.js';
 import { updateBadge } from '../../../../../src/evaluation/domain/usecases/update-badge.js';
 import * as badgeRepository from '../../../../../src/evaluation/infrastructure/repositories/badge-repository.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | UseCases | create-badge', function () {

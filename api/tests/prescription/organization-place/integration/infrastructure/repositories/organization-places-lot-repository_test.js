@@ -8,7 +8,8 @@ import { OrganizationPlacesLotManagement } from '../../../../../../src/prescript
 import { PlacesLot } from '../../../../../../src/prescription/organization-place/domain/read-models/PlacesLot.js';
 import * as organizationPlacesLotRepository from '../../../../../../src/prescription/organization-place/infrastructure/repositories/organization-places-lot-repository.js';
 import { DeletedError, NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { databaseBuilder } from '../../../../../tooling/databases.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Repository | Organization Places Lot', function () {

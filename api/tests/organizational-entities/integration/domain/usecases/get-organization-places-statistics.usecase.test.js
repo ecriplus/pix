@@ -2,7 +2,8 @@ import dayjs from 'dayjs';
 
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 
 describe('Integration | Organizational-Entities | Domain | Use Cases | get-organization-places-statistics', function () {
   it('should get the organization places statistics', async function () {

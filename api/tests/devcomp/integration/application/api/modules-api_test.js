@@ -5,7 +5,8 @@ import { Module } from '../../../../../src/devcomp/application/api/models/Module
 import { ModuleStatus } from '../../../../../src/devcomp/application/api/models/ModuleStatus.js';
 import * as modulesApi from '../../../../../src/devcomp/application/api/modules-api.js';
 import { DomainError } from '../../../../../src/shared/domain/errors.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Devcomp | Application | Api | Modules', function () {

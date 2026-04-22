@@ -2,7 +2,8 @@ import sinon from 'sinon';
 
 import * as checkAuthorizationToAccessCombinedCourse from '../../../../../src/quest/application/usecases/check-authorization-to-access-combined-course.js';
 import { ORGANIZATION_FEATURE } from '../../../../../src/shared/domain/constants.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 
 describe('Integration | Application | Usecases | checkAuthorizationToAccessCombinedCourse', function () {
   let clock;

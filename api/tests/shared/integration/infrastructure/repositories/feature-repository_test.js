@@ -1,7 +1,8 @@
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { Feature } from '../../../../../src/shared/domain/models/Feature.js';
 import * as featureRepository from '../../../../../src/shared/infrastructure/repositories/feature-repository.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Infrastructure | Repositories | feature-repository', function () {

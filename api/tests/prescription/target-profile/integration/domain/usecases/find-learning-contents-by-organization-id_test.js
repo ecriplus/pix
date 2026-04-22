@@ -1,6 +1,7 @@
 import { usecases } from '../../../../../../src/prescription/target-profile/domain/usecases/index.js';
 import { PIX_ORIGIN } from '../../../../../../src/shared/domain/constants.js';
-import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { databaseBuilder } from '../../../../../tooling/databases.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Integration | UseCases | find-learning-contents-by-organization-id', function () {

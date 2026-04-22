@@ -7,7 +7,8 @@ import {
   REQUIREMENT_TYPES,
 } from '../../../../../src/quest/domain/models/Quest.js';
 import * as combinedCourseBluePrintRepository from '../../../../../src/quest/infrastructure/repositories/combined-course-blueprint-repository.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Quest | Integration | Repository | combined-course-blueprint', function () {

@@ -1,6 +1,7 @@
 import { OrganizationLearner } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationLearner.js';
 import * as organizationLearnerRepository from '../../../../../../src/prescription/organization-learner/infrastructure/repositories/registration-organization-learner-repository.js';
-import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { databaseBuilder } from '../../../../../tooling/databases.js';
 
 describe('Integration | Infrastructure | Repository | organization-learner-repository', function () {
   describe('#findOneByUserIdAndOrganizationId', function () {

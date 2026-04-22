@@ -1,6 +1,7 @@
 import { createServer } from '../../../../../server.js';
 import { CertificationCenterInvitation } from '../../../../../src/team/domain/models/CertificationCenterInvitation.js';
-import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../../tooling/databases.js';
 import {
   generateAuthenticatedUserRequestHeaders,
   generateInjectOptions,

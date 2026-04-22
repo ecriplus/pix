@@ -1,7 +1,8 @@
 import lodash from 'lodash';
 
 import { createServer } from '../../../../server.js';
-import { databaseBuilder, expect } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
+import { databaseBuilder } from '../../../tooling/databases.js';
 import { generateAuthenticatedUserRequestHeaders } from '../../../tooling/test-utils/http-server.js';
 
 const { map: _map } = lodash;

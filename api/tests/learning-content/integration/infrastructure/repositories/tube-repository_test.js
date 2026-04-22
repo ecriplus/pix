@@ -1,5 +1,6 @@
 import { tubeRepository } from '../../../../../src/learning-content/infrastructure/repositories/tube-repository.js';
-import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../../tooling/databases.js';
 
 describe('Learning Content | Integration | Repositories | Tube', function () {
   afterEach(async function () {

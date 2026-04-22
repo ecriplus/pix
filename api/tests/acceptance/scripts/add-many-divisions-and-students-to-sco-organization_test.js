@@ -1,5 +1,6 @@
 import { addManyDivisionsAndStudentsToScoCertificationCenter } from '../../../scripts/data-generation/add-many-divisions-and-students-to-sco-organization.js';
-import { databaseBuilder, expect, knex } from '../../test-helper.js';
+import { expect } from '../../test-helper.js';
+import { databaseBuilder, knex } from '../../tooling/databases.js';
 
 describe('Acceptance | Scripts | add-many-divisions-and-students-to-sco-organization', function () {
   const organizationId = 123;

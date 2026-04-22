@@ -8,7 +8,8 @@ import * as missionRepository from '../../../../../src/school/infrastructure/rep
 import { Challenge } from '../../../../../src/shared/domain/models/Challenge.js';
 import * as assessmentRepository from '../../../../../src/shared/infrastructure/repositories/assessment-repository.js';
 import * as challengeRepository from '../../../../../src/shared/infrastructure/repositories/challenge-repository.js';
-import { databaseBuilder, expect, knex } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../../tooling/databases.js';
 import * as learningContentBuilder from '../../../../tooling/learning-content-builder/index.js';
 
 describe('Integration | School | Usecase | get-next-challenge', function () {

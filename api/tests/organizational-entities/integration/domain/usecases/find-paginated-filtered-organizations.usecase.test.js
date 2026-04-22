@@ -1,6 +1,7 @@
 import { OrganizationForAdmin } from '../../../../../src/organizational-entities/domain/models/OrganizationForAdmin.js';
 import { usecases } from '../../../../../src/organizational-entities/domain/usecases/index.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 
 describe('Integration | Organizational Entities | Domain | UseCase | find-paginated-filtered-organizations', function () {
   it('should result organizations with filtering and pagination', async function () {

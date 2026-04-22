@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 
 import { DeleteAndAnonymisePreviousCampaignParticipationsScript } from '../../../../src/prescription/scripts/delete-and-anonymise-previous-participations.js';
-import { databaseBuilder, knex } from '../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../tooling/databases.js';
 
 describe('DeleteAndAnonymisePreviousCampaignParticipationsScript', function () {
   describe('Options', function () {

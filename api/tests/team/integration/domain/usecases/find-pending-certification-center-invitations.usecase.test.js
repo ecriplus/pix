@@ -1,6 +1,7 @@
 import { CertificationCenterInvitation } from '../../../../../src/team/domain/models/CertificationCenterInvitation.js';
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 
 describe('Integration | Team | Domain | UseCase | find-pending-certification-center-invitations', function () {
   it('should find only pending certification center invitations for a given certification center', async function () {

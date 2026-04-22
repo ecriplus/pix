@@ -3,7 +3,7 @@ import sinon from 'sinon';
 
 import { EnableRecommendationEngineFeatureForCampaignsScript } from '../../../../src/prescription/scripts/enable-recommendation-engine-feature-for-campaigns.js';
 import { CAMPAIGN_FEATURES } from '../../../../src/shared/domain/constants.js';
-import { databaseBuilder, knex } from '../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../tooling/databases.js';
 
 describe('EnableRecommendationEngineFeatureForCampaignsScript', function () {
   describe('Options', function () {

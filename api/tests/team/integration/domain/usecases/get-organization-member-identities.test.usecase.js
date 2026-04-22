@@ -1,5 +1,6 @@
 import { usecases } from '../../../../../src/team/domain/usecases/index.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 
 describe('Team | Integration | Domain | Usecases | get-organization-members', function () {
   it('returns active organization members', async function () {

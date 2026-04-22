@@ -1,5 +1,6 @@
 import { markUsersRequiringTermsOfServiceValidationForRevalidation } from '../../../scripts/mark-users-for-TermsOfService-revalidation.js';
-import { databaseBuilder, expect } from '../../test-helper.js';
+import { expect } from '../../test-helper.js';
+import { databaseBuilder } from '../../tooling/databases.js';
 
 describe('Integration | Scripts | mark-users-for-TermsOfService-revalidation_test', function () {
   describe('#markUsersRequiringTermsOfServiceValidationForRevalidation', function () {

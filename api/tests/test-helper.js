@@ -8,11 +8,7 @@ import nock from 'nock';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
-import { DatamartBuilder } from '../datamart/datamart-builder/datamart-builder.js';
-import { knex as datamartKnex } from '../datamart/knex-database-connection.js';
-import { knex as datawarehouseKnex } from '../datawarehouse/knex-database-connection.js';
-import { DatabaseBuilder } from '../db/database-builder/database-builder.js';
-import { disconnect, knex } from '../db/knex-database-connection.js';
+import { disconnect as disconnectKnex } from '../db/knex-database-connection.js';
 import * as tutorialRepository from '../src/devcomp/infrastructure/repositories/tutorial-repository.js';
 import * as missionRepository from '../src/school/infrastructure/repositories/mission-repository.js';
 import { featureToggles } from '../src/shared/infrastructure/feature-toggles/index.js';
@@ -28,6 +24,7 @@ import * as thematicRepository from '../src/shared/infrastructure/repositories/t
 import * as tubeRepository from '../src/shared/infrastructure/repositories/tube-repository.js';
 import * as customChaiHelpers from './tooling/chai-custom-helpers/index.js';
 import { jobChai } from './tooling/chai-custom-helpers/jobs/expect-job.js';
+import { databaseBuilder, datamartBuilder } from './tooling/databases.js';
 
 // Init Dayjs configuration
 dayjs.extend(localizedFormat);
@@ -37,15 +34,6 @@ chaiUse(chaiAsPromised);
 chaiUse(sinonChai);
 chaiUse(jobChai);
 Object.values(customChaiHelpers).forEach(chaiUse);
-
-// Init Database builders
-const databaseBuilder = await DatabaseBuilder.create({ knex });
-databaseBuilder.factory.learningContent.injectNock(nock); // TEMPORARY WORKAROUND
-
-// Init Datamart builders
-const datamartBuilder = await DatamartBuilder.create({
-  knex: datamartKnex,
-});
 
 /* eslint-disable mocha/no-top-level-hooks */
 before(async function () {
@@ -73,14 +61,14 @@ afterEach(async function () {
   tutorialRepository.clearCache();
   missionRepository.clearCache();
   await featureToggles.resetDefaults();
-  await datamartBuilder.clean();
   await clearMutex();
   try {
     await JobClient.instance.flushJobs();
   } catch {
     // pgBoss is not available on unit tests
   }
-  return databaseBuilder.clean();
+  await datamartBuilder.clean();
+  await databaseBuilder.clean();
 });
 
 after(async function () {
@@ -90,9 +78,9 @@ after(async function () {
   } catch {
     // pgBoss is not available on unit tests
   }
-  return await disconnect();
+  await disconnectKnex();
 });
 /* eslint-enable mocha/no-top-level-hooks */
 
 // eslint-disable-next-line mocha/no-exports
-export { databaseBuilder, datamartBuilder, datamartKnex, datawarehouseKnex, expect, knex };
+export { expect };

@@ -4,7 +4,8 @@ import {
   usecases,
 } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 
 describe('Integration | Identity Access Management | Domain | UseCases | get-ready-identity-providers', function () {
   beforeEach(async function () {

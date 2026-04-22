@@ -1,6 +1,7 @@
 import { Mission } from '../../../../../src/school/domain/models/Mission.js';
 import { usecases } from '../../../../../src/school/domain/usecases/index.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 
 describe('Integration | UseCase | getMission', function () {
   it('Should return a mission', async function () {

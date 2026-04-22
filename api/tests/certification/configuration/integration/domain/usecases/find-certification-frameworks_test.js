@@ -1,7 +1,8 @@
 import { usecases } from '../../../../../../src/certification/configuration/domain/usecases/index.js';
 import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { SCOPES } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
-import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { databaseBuilder } from '../../../../../tooling/databases.js';
 
 describe('Certification | Configuration | Integration | Domain | UseCase | find-certification-frameworks', function () {
   it('should return all frameworks with their active version start dates', async function () {

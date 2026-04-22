@@ -1,5 +1,6 @@
 import { repositories } from '../../../../../src/school/infrastructure/repositories/index.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 
 describe('Integration | Repository | organizationLearner', function () {
   describe('#getDivisionsWhichStartedMission', function () {

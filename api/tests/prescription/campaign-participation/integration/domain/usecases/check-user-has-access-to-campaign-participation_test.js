@@ -1,5 +1,6 @@
 import { usecases } from '../../../../../../src/prescription/campaign-participation/domain/usecases/index.js';
-import { databaseBuilder, expect } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { databaseBuilder } from '../../../../../tooling/databases.js';
 
 describe('Integration | UseCase | check-user-has-access-to-campaign-participation', function () {
   describe('when userId should access to a campaign participation', function () {

@@ -1,7 +1,8 @@
 import sinon from 'sinon';
 
 import { LearningContentRepository } from '../../../../../src/shared/infrastructure/repositories/learning-content-repository.js';
-import { expect, knex } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { knex } from '../../../../tooling/databases.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 const SCHEMA_NAME = 'learningcontent';

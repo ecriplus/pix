@@ -5,7 +5,8 @@ import nock from 'nock';
 
 import { createServer } from '../../../../server.js';
 import { cryptoService } from '../../../../src/shared/domain/services/crypto-service.js';
-import { databaseBuilder, expect, knex } from '../../../test-helper.js';
+import { expect } from '../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../tooling/databases.js';
 import { domainBuilder } from '../../../tooling/domain-builder/domain-builder.js';
 
 describe('Acceptance | Identity Access Management | Route | Admin | lti', function () {

@@ -1,7 +1,8 @@
 import { createPreviewAssessment } from '../../../../../src/school/domain/usecases/create-preview-assessment.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import * as assessmentRepository from '../../../../../src/shared/infrastructure/repositories/assessment-repository.js';
-import { expect, knex } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { knex } from '../../../../tooling/databases.js';
 
 describe('Integration | UseCases | create-preview-assessment', function () {
   let assessmentId;

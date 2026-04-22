@@ -6,7 +6,8 @@ import {
   getByKey,
   getDataByKey,
 } from '../../../../../src/profile/infrastructure/repositories/attestation-repository.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 
 describe('Profile | Integration | Infrastructure | Repository | Attestation', function () {
   describe('#findAll', function () {

@@ -1,5 +1,6 @@
 import * as campaignRepository from '../../../../../src/quest/infrastructure/repositories/campaign-repository.js';
-import { databaseBuilder, expect } from '../../../../test-helper.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 
 describe('Quest | Integration | Repository | campaign', function () {
   describe('#getCampaignIdsByCombinedCourseIds', function () {

@@ -1,6 +1,7 @@
 import { SwapCampaignMismatchOrganizationError } from '../../../../../../src/prescription/campaign/domain/errors.js';
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
-import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../../../tooling/databases.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Campaign | Domain | UseCase | swap-campaign-code', function () {

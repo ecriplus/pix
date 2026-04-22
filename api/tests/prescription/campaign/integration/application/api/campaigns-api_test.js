@@ -11,7 +11,8 @@ import { KnowledgeElementCollection } from '../../../../../../src/prescription/s
 import { ORGANIZATION_FEATURE } from '../../../../../../src/shared/domain/constants.js';
 import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { Membership } from '../../../../../../src/shared/domain/models/Membership.js';
-import { databaseBuilder, expect, knex } from '../../../../../test-helper.js';
+import { expect } from '../../../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../../../tooling/databases.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Application | campaign-api', function () {
