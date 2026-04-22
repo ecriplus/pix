@@ -100,7 +100,7 @@
     "stylelint": "^17.0.0",
     "stylelint-order": "^8.0.0",
     "tracked-built-ins": "^4.0.0",
-    "webpack": "5.106.1",
+    "webpack": "5.106.2",
     "xss": "^1.0.14"
   },
   "overrides": {
