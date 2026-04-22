@@ -305,7 +305,7 @@ describe('Unit | Infrastructure | Utils | Csv | CertificationResultsCsvValues', 
       expect(result).to.equal('Avancé 1');
     });
 
-    it('returns "-" when certification is V3 and rejected', function () {
+    it('returns the translated BELOW_MINIMUM level when certification is V3 and rejected', function () {
       // Given
       const certificationResult = new CertificationResult({
         version: AlgorithmEngineVersion.V3,
@@ -317,7 +317,7 @@ describe('Unit | Infrastructure | Utils | Csv | CertificationResultsCsvValues', 
       const result = new CertificationResultsCsvValues(i18n).formatReachedLevel(certificationResult);
 
       // Then
-      expect(result).to.equal('-');
+      expect(result).to.equal('Non obtenue');
     });
 
     it('returns "-" when certification is not V3', function () {

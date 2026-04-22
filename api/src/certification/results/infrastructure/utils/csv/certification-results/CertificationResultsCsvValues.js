@@ -106,6 +106,10 @@ class CertificationResultsCsvValues {
       );
     }
 
+    if (certificationResult.isV3 && certificationResult.isRejected()) {
+      return this.getTranslation(`${I18N_VALUES_PREFIX}.meshLevels.${certificationResult.framework}.BELOW_MINIMUM`);
+    }
+
     return '-';
   }
 

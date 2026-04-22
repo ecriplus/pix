@@ -673,7 +673,7 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
               '\uFEFF' +
               expectedCsvHeaders +
               expectedCsvStart +
-              ';"Pix+ Édu 1er degré";"Non obtenue";"-"' +
+              ';"Pix+ Édu 1er degré";"Non obtenue";"Non admissible"' +
               expectedCsvEnd;
             expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
           });
