@@ -1159,7 +1159,7 @@
         "label": "Vraag"
       },
       "skip-error-message": {
-        "qcm": "Selecteer ten minste twee antwoorden om te bevestigen. Zo niet, sla dan over.",
+        "qcm": "Selecteer ten minste twee antwoorden om te kunnen bevestigen. Of kies voor overslaan.",
         "qcu": "Selecteer een antwoord om te bevestigen. Sla anders over.",
         "qroc": "Vul het tekstveld in om te valideren. Sla anders over.",
         "qroc-auto-reply": "U kan op \"Bevestigen\"  klikken wanneer de proef geslaagd is. Probeer het opnieuw of kies \"Overslaan\".",
