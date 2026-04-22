@@ -21,6 +21,8 @@ export class LLMResponseHandler {
   /** @type {ReadableStream=} */
   llmResponseStream;
 
+  #finished = false;
+
   /**
    * @param {WritableStream} responseStream
    */
@@ -100,6 +102,8 @@ export class LLMResponseHandler {
   }
 
   async finish() {
+    if (this.#finished) return;
+    this.#finished = true;
     try {
       await this.responseStream.close();
     } catch (err) {
