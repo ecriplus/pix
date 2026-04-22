@@ -2,7 +2,7 @@ import Knex from 'knex';
 import QueryBuilder from 'knex/lib/query/querybuilder.js';
 import pg from 'pg';
 
-import { getInContext } from '../src/shared/infrastructure/execution-context-manager.js';
+import { getInContext, getRequestId } from '../src/shared/infrastructure/execution-context-manager.js';
 import { logger } from '../src/shared/infrastructure/utils/logger.js';
 
 const types = pg.types;
@@ -31,7 +31,10 @@ export function configureGlobalExtensions() {
   QueryBuilder.prototype.toSQL = function () {
     const ret = originalToSQL.apply(this);
     const request = getInContext('request');
-    ret.sql = `/* path:${request?.route?.path} | routeDomain:${request?.route?.realm?.plugin} */ `.concat(ret.sql);
+    ret.sql =
+      `/* path:${request?.route?.path} | routeDomain:${request?.route?.realm?.plugin} | request_id:${getRequestId()} */ `.concat(
+        ret.sql,
+      );
     return ret;
   };
 }
