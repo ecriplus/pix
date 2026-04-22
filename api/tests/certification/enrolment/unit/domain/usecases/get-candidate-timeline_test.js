@@ -156,6 +156,8 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
         placementProfileService.getPlacementProfile.resolves(placementProfile);
         certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId.resolves(certifCourse);
         certificationBadgesService.findStillValidBadgeAcquisitions.resolves([]);
+        const assessment = domainBuilder.buildCertificationAssessment();
+        certificationAssessmentRepository.getByCertificationCandidateId.resolves(assessment);
         eligibilityService.getUserCertificationEligibility.resolves(
           domainBuilder.certification.enrolment.buildUserCertificationEligibility({
             isCertifiable: true,
@@ -302,7 +304,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
     });
 
     context('certification ended', function () {
-      context('when candidate see end screen test', function () {
+      context('when candidate sees end screen test', function () {
         it('should add a lastAnswer event', async function () {
           const sessionId = 1234;
           const certificationCandidateId = 4567;
@@ -317,6 +319,9 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
             lastAnswerAt: new Date('2024-04-21T13:56:00Z'),
           });
           certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId.resolves(certificationCourse);
+
+          const assessment = domainBuilder.buildCertificationAssessment();
+          certificationAssessmentRepository.getByCertificationCandidateId.resolves(assessment);
           eligibilityService.getUserCertificationEligibility.resolves(
             domainBuilder.certification.enrolment.buildUserCertificationEligibility({
               isCertifiable: true,

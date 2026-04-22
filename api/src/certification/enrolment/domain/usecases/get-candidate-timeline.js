@@ -101,7 +101,7 @@ export const getCandidateTimeline = async ({
   const assessment = await certificationAssessmentRepository.getByCertificationCandidateId({
     certificationCandidateId,
   });
-  if (assessment?.endedAt) {
+  if (assessment.endedAt) {
     timeline.addEvent(new CertificationEndedEvent({ when: assessment.endedAt, assessmentState: assessment.state }));
   }
 
