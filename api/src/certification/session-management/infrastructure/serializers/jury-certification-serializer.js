@@ -27,7 +27,6 @@ const serialize = function (juryCertification, { translate }) {
       'birthINSEECode',
       'birthPostalCode',
       'createdAt',
-      'completedAt',
       'status',
       'isPublished',
       'isRejectedForFraud',

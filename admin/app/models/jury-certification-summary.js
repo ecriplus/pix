@@ -20,7 +20,7 @@ export default class JuryCertificationSummary extends Model {
   @attr() pixScore;
   @attr() reachedResultKey;
   @attr() createdAt;
-  @attr() completedAt;
+  @attr() completedAt; // ok
   @attr() isPublished;
   @attr() examinerComment;
   @attr() numberOfCertificationIssueReports;

@@ -22,7 +22,6 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
       const assessmentId = 78;
       const isRejectedForFraud = true;
       const createdAt = new Date('2022-02-02');
-      const completedAt = new Date('2022-02-03');
       const assessmentState = Assessment.states.ENDED_DUE_TO_FINALIZATION;
       const assessmentResultStatus = AssessmentResult.status.VALIDATED;
       const abortReason = ABORT_REASONS.CANDIDATE;
@@ -39,7 +38,6 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
         id: certificationCourseId,
         isRejectedForFraud,
         createdAt,
-        completedAt,
         abortReason,
         userId,
         sessionId,
@@ -108,7 +106,6 @@ describe('Integration | Infrastructure | Repository | v3-certification-course-de
         certificationCourseId,
         isRejectedForFraud,
         createdAt,
-        completedAt,
         assessmentState,
         assessmentResultStatus,
         abortReason,

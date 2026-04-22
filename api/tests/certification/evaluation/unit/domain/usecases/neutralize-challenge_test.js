@@ -25,7 +25,6 @@ describe('Certification | Evaluation | Unit | UseCase | neutralize-challenge', f
       userId: 123,
       certificationCourseId: 1,
       createdAt: new Date('2020-01-01'),
-      completedAt: new Date('2020-01-01'),
       state: Assessment.states.STARTED,
       version: 2,
       certificationChallenges: [
@@ -72,7 +71,6 @@ describe('Certification | Evaluation | Unit | UseCase | neutralize-challenge', f
       userId: 123,
       certificationCourseId: 1,
       createdAt: new Date('2020-01-01'),
-      completedAt: new Date('2020-01-01'),
       state: Assessment.states.STARTED,
       version: 2,
       certificationChallenges: [

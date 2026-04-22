@@ -106,7 +106,6 @@ function _selectJuryCertifications(knexConn) {
       isPublished: 'certification-courses.isPublished',
       isRejectedForFraud: 'certification-courses.isRejectedForFraud',
       createdAt: 'certification-courses.createdAt',
-      completedAt: 'certification-courses.completedAt',
       version: 'certification-courses.version',
       assessmentId: 'assessments.id',
       assessmentResultId: 'assessment-results.id',

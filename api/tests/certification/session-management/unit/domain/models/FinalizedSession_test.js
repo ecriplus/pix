@@ -169,7 +169,6 @@ describe('Unit | Certification | Session-Management | Domain | Models | Finalize
           status: assessmentResultStatuses.VALIDATED,
           pixScore: 120,
           createdAt: new Date(),
-          completedAt: new Date(),
           isPublished: false,
           certificationFramework: framework,
           certificationIssueReports: [],
@@ -289,7 +288,6 @@ function _noneWithRequiredActionNorError() {
       status: assessmentResultStatuses.VALIDATED,
       pixScore: 120,
       createdAt: new Date(),
-      completedAt: new Date(),
       isPublished: false,
       certificationFramework: Frameworks.CORE,
       certificationIssueReports: [
@@ -311,7 +309,6 @@ function _noneWithRequiredActionNorErrorButEndScreenNotSeen() {
       status: assessmentResultStatuses.VALIDATED,
       pixScore: 120,
       createdAt: new Date(),
-      completedAt: new Date(),
       isPublished: false,
       certificationFramework: Frameworks.CORE,
       certificationIssueReports: [
@@ -328,7 +325,6 @@ function _noneWithRequiredActionNorErrorButEndScreenNotSeen() {
       status: assessmentResultStatuses.VALIDATED,
       pixScore: 120,
       createdAt: new Date(),
-      completedAt: new Date(),
       isPublished: false,
       certificationFramework: Frameworks.CORE,
       certificationIssueReports: [
@@ -350,7 +346,6 @@ function _noneWithRequiredActionButSomeErrorStatus() {
       status: assessmentResultStatuses.ERROR,
       pixScore: 120,
       createdAt: new Date(),
-      completedAt: new Date(),
       isPublished: false,
       certificationFramework: Frameworks.CORE,
       certificationIssueReports: [
@@ -371,7 +366,6 @@ function _noneWithRequiredActionButSomeStartedStatus() {
       status: 'started',
       pixScore: 120,
       createdAt: new Date(),
-      completedAt: null,
       isPublished: false,
       certificationFramework: Frameworks.CORE,
       certificationIssueReports: [
@@ -392,7 +386,6 @@ function _someWithUnresolvedRequiredActionButNoErrorOrStartedStatus() {
       status: assessmentResultStatuses.VALIDATED,
       pixScore: 120,
       createdAt: new Date(),
-      completedAt: new Date(),
       isPublished: false,
       certificationFramework: Frameworks.CORE,
       certificationIssueReports: [
@@ -415,7 +408,6 @@ function _someWithResolvedRequiredActionButNoErrorOrStartedStatus() {
       status: assessmentResultStatuses.VALIDATED,
       pixScore: 120,
       createdAt: new Date(),
-      completedAt: new Date(),
       isPublished: false,
       certificationFramework: Frameworks.CORE,
       certificationIssueReports: [
@@ -438,7 +430,6 @@ function _someWhichAreUnfinishedButHaveNoAbortReason() {
       status: 'started',
       pixScore: 120,
       createdAt: new Date(),
-      completedAt: null,
       isPublished: false,
       abortReason: null,
       certificationFramework: Frameworks.CORE,
@@ -462,7 +453,6 @@ function _someWithPixPlusScopeCertification() {
       status: assessmentResultStatuses.VALIDATED,
       pixScore: 120,
       createdAt: new Date(),
-      completedAt: new Date(),
       isPublished: false,
       certificationFramework: Frameworks.CLEA,
       certificationIssueReports: [
@@ -479,7 +469,6 @@ function _someWithPixPlusScopeCertification() {
       status: assessmentResultStatuses.VALIDATED,
       pixScore: 120,
       createdAt: new Date(),
-      completedAt: new Date(),
       isPublished: false,
       certificationFramework: Frameworks.DROIT,
       certificationIssueReports: [

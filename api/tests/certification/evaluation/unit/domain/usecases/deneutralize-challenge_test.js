@@ -65,7 +65,6 @@ describe('Unit | UseCase | deneutralize-challenge', function () {
       userId: 123,
       certificationCourseId: 1,
       createdAt: new Date('2020-01-01'),
-      completedAt: new Date('2020-01-01'),
       state: Assessment.states.STARTED,
       version: 2,
       certificationChallenges: [

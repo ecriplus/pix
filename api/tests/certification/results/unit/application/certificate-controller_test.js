@@ -292,19 +292,16 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           id: 1,
           sessionId: 12,
           userId: 1,
-          completedAt: '2020-01-01',
         });
         domainBuilder.buildCertificationCourse({
           id: 2,
           sessionId: 12,
           userId: 2,
-          completedAt: '2020-01-01',
         });
         domainBuilder.buildCertificationCourse({
           id: 3,
           sessionId: 12,
           userId: 3,
-          completedAt: '2020-01-01',
         });
         const certification1 = domainBuilder.buildPrivateCertificateWithCompetenceTree({ id: 1 });
         const certification2 = domainBuilder.buildPrivateCertificateWithCompetenceTree({ id: 2 });

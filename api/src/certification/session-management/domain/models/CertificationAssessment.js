@@ -57,7 +57,7 @@ export class CertificationAssessment {
     certificationChallenges,
     certificationAnswersByDate,
     endedAt,
-  } = {}) {
+  }) {
     this.id = id;
     this.userId = userId;
     this.certificationCourseId = certificationCourseId;

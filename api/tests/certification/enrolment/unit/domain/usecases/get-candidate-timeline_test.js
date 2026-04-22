@@ -396,7 +396,7 @@ describe('Certification | Enrolment | Unit | Domain | UseCase | get-candidate-ti
               subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription()],
             }),
           );
-          const certifCourse = domainBuilder.buildCertificationCourse({ completedAt: null });
+          const certifCourse = domainBuilder.buildCertificationCourse();
           const placementProfile = domainBuilder.buildPlacementProfile();
           placementProfileService.getPlacementProfile.resolves(placementProfile);
           certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId.resolves(certifCourse);

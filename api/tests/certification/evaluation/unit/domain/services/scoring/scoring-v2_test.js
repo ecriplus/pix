@@ -261,7 +261,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
 
           certificationCourse = domainBuilder.buildCertificationCourse({
             id: certificationCourseId,
-            completedAt: null,
           });
           const savedAssessmentResult = domainBuilder.certification.evaluation.buildAssessmentResult.standard({
             id: assessmentResultId,
@@ -442,7 +441,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
           userId: 123,
           certificationCourseId: certificationCourse.getId(),
           createdAt: new Date('2020-01-01'),
-          completedAt: new Date('2020-01-01'),
           state: Assessment.states.STARTED,
           version: 2,
           certificationChallenges: [
@@ -515,7 +513,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
             userId: 123,
             certificationCourseId: 789,
             createdAt: new Date('2020-01-01'),
-            completedAt: new Date('2020-01-01'),
             state: Assessment.states.STARTED,
             version: 2,
             certificationChallenges: [
@@ -633,7 +630,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
             userId: 123,
             certificationCourseId: 789,
             createdAt: new Date('2020-01-01'),
-            completedAt: new Date('2020-01-01'),
             state: Assessment.states.STARTED,
             version: 2,
             certificationChallenges: [
@@ -705,7 +701,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
               userId: 123,
               certificationCourseId: 789,
               createdAt: new Date('2020-01-01'),
-              completedAt: new Date('2020-01-01'),
               state: Assessment.states.STARTED,
               version: 2,
               certificationChallenges: [
@@ -771,7 +766,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
               userId: 123,
               certificationCourseId: 789,
               createdAt: new Date('2020-01-01'),
-              completedAt: new Date('2020-01-01'),
               state: Assessment.states.ENDED_BY_INVIGILATOR,
               version: 2,
               certificationChallenges: [
@@ -838,7 +832,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
                 userId: 123,
                 certificationCourseId: 789,
                 createdAt: new Date('2020-01-01'),
-                completedAt: new Date('2020-01-01'),
                 state: Assessment.states.ENDED_BY_INVIGILATOR,
                 version: 2,
                 certificationChallenges: [domainBuilder.buildCertificationChallengeWithType({ isNeutralized: false })],
@@ -907,7 +900,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
         userId: 11,
         certificationCourseId: 111,
         createdAt: '2020-02-01T00:00:00Z',
-        completedAt: '2020-02-01T00:00:00Z',
         state: Assessment.states.COMPLETED,
         version: 2,
       };
@@ -1232,7 +1224,6 @@ describe('Certification | Evaluation | Unit | Domain | Services | Scoring V2', f
         beforeEach(function () {
           startedCertificationAssessment = domainBuilder.buildCertificationAssessment({
             ...certificationAssessment,
-            completedAt: null,
             state: Assessment.states.STARTED,
           });
         });

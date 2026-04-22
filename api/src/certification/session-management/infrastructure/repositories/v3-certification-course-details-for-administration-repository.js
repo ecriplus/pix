@@ -32,7 +32,6 @@ export async function getV3DetailsByCertificationCourseId({ certificationCourseI
       isRejectedForFraud: 'certification-courses.isRejectedForFraud',
       certificationCourseId: 'certification-courses.id',
       createdAt: 'certification-courses.createdAt',
-      completedAt: 'certification-courses.completedAt',
       abortReason: 'certification-courses.abortReason',
       assessmentState: 'assessments.state',
       assessmentResultStatus: 'assessment-results.status',

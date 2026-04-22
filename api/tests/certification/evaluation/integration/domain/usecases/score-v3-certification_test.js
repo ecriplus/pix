@@ -162,7 +162,6 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Score v
       }).id;
 
       certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
-        completedAt: null,
         sessionId: session.id,
         userId: certifiableUserId,
         createdAt: limitDate,
@@ -220,14 +219,6 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Score v
           certificationCourseId: certificationCourseId,
         });
 
-        const certifCourseCompletedAt = await knex('certification-courses')
-          .select('completedAt')
-          .where({
-            id: certificationCourseId,
-          })
-          .first();
-
-        expect(certifCourseCompletedAt).not.to.be.null;
         const competenceMarks = await knex('competence-marks').where({ assessmentResultId: results[0].id });
         expect(competenceMarks).to.have.lengthOf(1);
         expect(competenceMarks[0].assessmentResultId).to.equal(results[0].id);
@@ -272,14 +263,6 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Score v
           certificationCourseId: certificationCourseId,
         });
 
-        const certifCourseCompletedAt = await knex('certification-courses')
-          .select('completedAt')
-          .where({
-            id: certificationCourseId,
-          })
-          .first();
-
-        expect(certifCourseCompletedAt).not.to.be.null;
         const competenceMarks = await knex('competence-marks').where({ assessmentResultId: results[0].id });
         expect(competenceMarks).to.have.lengthOf(0);
 
@@ -327,14 +310,6 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Score v
         .first();
       expect(noResultForCertifCourse).not.to.exist;
 
-      const certifCourseNotUpdated = await knex('certification-courses')
-        .select('completedAt')
-        .where({
-          id: certificationCourseId,
-        })
-        .first();
-
-      expect(certifCourseNotUpdated.completedAt).to.be.null;
       const noCompetenceMarks = await knex('competence-marks').whereIn(
         'assessmentResultId',
         knex('assessment-results').select('id').where({ assessmentId: completedCertificationAssessmentId }),
@@ -374,7 +349,6 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Score v
       }).id;
 
       certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
-        completedAt: null,
         sessionId: session.id,
         userId: certifiableUserId,
         createdAt: limitDate,
@@ -455,7 +429,6 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Score v
       }).id;
 
       certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
-        completedAt: null,
         sessionId: session.id,
         userId: certifiableUserId,
         createdAt: limitDate,
@@ -513,14 +486,6 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Score v
         certificationCourseId: certificationCourseId,
       });
 
-      const certifCourseCompletedAt = await knex('certification-courses')
-        .select('completedAt')
-        .where({
-          id: certificationCourseId,
-        })
-        .first();
-
-      expect(certifCourseCompletedAt).not.to.be.null;
       const certificationChallengeCapacities = await knex('certification-challenge-capacities').whereIn(
         'certificationChallengeId',
         knex('certification-challenges').select('id').where({ courseId: certificationCourseId }),
@@ -568,14 +533,6 @@ describe('Certification | Evaluation | Integration | Domain | Usecases | Score v
         .first();
       expect(noResultForCertifCourse).not.to.exist;
 
-      const certifCourseNotUpdated = await knex('certification-courses')
-        .select('completedAt')
-        .where({
-          id: certificationCourseId,
-        })
-        .first();
-
-      expect(certifCourseNotUpdated.completedAt).to.be.null;
       const noCertificationChallengeCapacities = await knex('certification-challenge-capacities').whereIn(
         'certificationChallengeId',
         knex('certification-challenges').select('id').where({ courseId: certificationCourseId }),

@@ -41,7 +41,6 @@ describe('Certification | Session Management | Unit | Application | Controller |
             },
           ],
           createdAt: '12-02-2000',
-          completedAt: '15-02-2000',
           id: 456,
           listChallengesAndAnswers: [
             {
