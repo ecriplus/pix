@@ -40,6 +40,7 @@ import { participantResultsSharedRepository } from '../../infrastructure/reposit
 import * as participationsForCampaignManagementRepository from '../../infrastructure/repositories/participations-for-campaign-management-repository.js';
 import * as participationsForUserManagementRepository from '../../infrastructure/repositories/participations-for-user-management-repository.js';
 import * as poleEmploiSendingRepository from '../../infrastructure/repositories/pole-emploi-sending-repository.js';
+import * as userCampaignParticipationRepository from '../../infrastructure/repositories/user-campaign-participation-repository.js';
 
 const dependencies = {
   areaRepository,
@@ -77,6 +78,7 @@ const dependencies = {
   participationStartedJobRepository,
   participantResultsSharedRepository,
   poleEmploiSendingRepository,
+  userCampaignParticipationRepository,
   stageAcquisitionRepository,
   stageCollectionRepository,
   stageRepository,
@@ -87,6 +89,7 @@ const dependencies = {
 
 import { checkUserHasAccessToCampaignParticipation } from './check-user-has-access-to-campaign-participation.js';
 import { deleteCampaignParticipation } from './delete-campaign-participation.js';
+import { findCampaignParticipationsByUserId } from './find-campaign-participations-by-user-id.js';
 import { findCampaignParticipationsForUserManagement } from './find-campaign-participations-for-user-management.js';
 import { findPaginatedParticipationsForCampaignManagement } from './find-paginated-participations-for-campaign-management.js';
 import { findUserAnonymisedCampaignAssessments } from './find-user-anonymised-campaign-assessments.js';
@@ -112,6 +115,7 @@ import { updateParticipantExternalId } from './update-participant-external-id.js
 const usecasesWithoutInjectedDependencies = {
   checkUserHasAccessToCampaignParticipation,
   deleteCampaignParticipation,
+  findCampaignParticipationsByUserId,
   findCampaignParticipationsForUserManagement,
   findPaginatedParticipationsForCampaignManagement,
   findUserAnonymisedCampaignAssessments,
