@@ -492,7 +492,7 @@ module('Integration | Component | Certifications | certification > details v3', 
 
         const expected = answers.map((answer) => [
           answer.questionNumber,
-          `${answer.answeredAt.getHours()}:${answer.answeredAt.getMinutes()}:00`,
+          `${answer.answeredAt.getUTCHours()}:${answer.answeredAt.getUTCMinutes()}:00`,
           answer.answerStatusName,
           `${answer.competenceIndex} ${answer.competenceName}`,
           answer.skillName,
