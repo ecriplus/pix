@@ -107,6 +107,23 @@ module('Acceptance | Networks | List', function (hooks) {
         // then
         assert.strictEqual(currentURL(), '/networks/1');
       });
+
+      test('it should navigate to page 2 and display networks beyond the first page', async function (assert) {
+        // given
+        server.createList('network', 10);
+        server.create('network', { name: 'Réseau page deux alpha' });
+        server.create('network', { name: 'Réseau page deux beta' });
+
+        const screen = await visit('/networks/list');
+        assert.dom(screen.queryByText('Réseau page deux alpha')).doesNotExist();
+
+        // when
+        await click(screen.getByRole('button', { name: /Aller à la page suivante/ }));
+
+        // then
+        assert.dom(screen.getByText('Réseau page deux alpha')).exists();
+        assert.dom(screen.getByText('Réseau page deux beta')).exists();
+      });
     });
 
     module('when user does not have super admin role', function () {

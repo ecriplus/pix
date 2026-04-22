@@ -1,3 +1,5 @@
+import { applyPagination, getPaginationFromQueryParams } from './pagination-utils';
+
 export function createNetwork(schema, request) {
   const params = JSON.parse(request.requestBody);
 
@@ -17,10 +19,28 @@ export function updateNetwork(schema, request) {
 }
 
 export function findAllFilteredNetworks(schema, request) {
+  const { page, pageSize } = getPaginationFromQueryParams(request.queryParams);
   const name = request.queryParams['filter[name]'];
+
   let networks = schema.networks.all().models;
   if (name) {
     networks = networks.filter((network) => network.name.toLowerCase().includes(name.toLowerCase()));
   }
-  return { data: networks.map((n) => ({ id: n.id, type: 'networks', attributes: { name: n.name } })) };
+
+  const rowCount = networks.length;
+  const paginatedNetworks = applyPagination(networks, { page, pageSize });
+
+  return {
+    data: paginatedNetworks.map((network) => ({
+      id: network.id,
+      type: 'networks',
+      attributes: { name: network.name },
+    })),
+    meta: {
+      page,
+      pageSize,
+      rowCount,
+      pageCount: Math.ceil(rowCount / pageSize) || 0,
+    },
+  };
 }
