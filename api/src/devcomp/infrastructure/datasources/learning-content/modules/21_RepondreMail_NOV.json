@@ -67,8 +67,8 @@
               "element": {
                 "id": "11c9837c-3317-4bd9-a23d-dd571f2d6762",
                 "type": "custom",
-                "title": "",
-                "instruction": "<p>Sélectionner une application qui permet de consulter les mails.</p>",
+                "title": "[QCU image non fonctionnel]",
+                "instruction": "<p>Sélectionnez une application qui permet de consulter les mails.</p>",
                 "functionalInstruction": "",
                 "tagName": "image-quiz",
                 "props": {
@@ -132,7 +132,7 @@
                 "id": "f522ab24-0d04-4548-9dc7-6b82acc5cf87",
                 "type": "text",
                 "tag": " ",
-                "content": "<p><strong>[Feedbacks du qcu image]</strong></p><ul><li>Bien vu ! Pour consulter ses mails, il faut d’abord <strong>ouvrir sa messagerie électronique</strong>. Elle est souvent représentée par <strong>une icône en forme d’enveloppe&nbsp;✉️</strong>. <br>Il en existe plusieurs, par exemple&nbsp;: Gmail, Outlook, Mail, Proton Mail, etc.<br><br></li><li>Eh non. Cette application ne permet pas de consulter ses mails. [...]</li></ul>"
+                "content": "<p><strong>[Feedbacks du qcu image]</strong></p><ul><li>Bien vu ! Pour consulter ses mails, il faut d’abord <strong>ouvrir sa messagerie électronique</strong>. Elle est souvent représentée par <strong>une icône en forme d’enveloppe&nbsp;✉️</strong>. <br>Il en existe plusieurs, par exemple&nbsp;: Gmail, Outlook, Mail, Proton Mail, etc.<br><br></li><li>[WhatsApps] Eh non.  WhatsApp est une application de messagerie instantanée qui permet d’envoyer des messages rapidement (en ligne).&nbsp;<br>Pour consulter ses mails, il faut d’abord <strong>ouvrir sa messagerie électronique</strong>. Elle est souvent représentée par <strong>une icône en forme d’enveloppe</strong>&nbsp;✉️. <br>Il en existe plusieurs, par exemple&nbsp;: Gmail, Outlook, Mail, Proton Mail, etc.<br><br></li></ul>"
               }
             }
           ]
@@ -170,16 +170,7 @@
                 "id": "da94bec1-5d25-4c93-bf5a-05ab2fc52c56",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Regardons plus en détail le mail que vous avez reçu&nbsp;:&nbsp;certaines informations s’affichent avant même de l’ouvrir.</p><p>Dans la messagerie électronique ci-dessous, observez les informations du mail affiché puis répondez aux questions qui suivent.</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "c7e48acc-7640-4c07-883a-2e976e0048df",
-                "type": "expand",
-                "title": "[Capture d’écran basée sur le nouveau simulateur Pixmail]",
-                "content": "<p><strong><br></strong></p><p><strong>Description&nbsp;:</strong></p><ul><li><em>en novice, juste afficher&nbsp;: Boite de réception, Messages envoyés et Corbeille</em></li><li><em>dev&nbsp;: voir pour fixer la date &nbsp;: 22 janvier 15:00 (juste l’année qui évolue ?)</em></li></ul>"
+                "content": "<p>Regardons plus en détail le mail que vous avez reçu&nbsp;:&nbsp;certaines informations s’affichent avant même de l’ouvrir.</p><br><p><strong>Dans la messagerie électronique ci-dessous, observez les informations du mail affiché puis répondez aux questions qui suivent.</strong></p>"
               }
             },
             {
@@ -189,9 +180,18 @@
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/decouverte1-v2.png",
                 "alt": "Capture d’écran d’une interface de messagerie électronique décrite dans l’alternative textuelle.",
-                "alternativeText": "<p>Messagerie électronique ouverte</p><p>Un seul mail présent</p><p>Informations du mail&nbsp;:</p><ul><li>Expéditeur&nbsp;: BioChoux</li><li>Objet&nbsp;: Réponse à votre candidature de stage</li><li>Date&nbsp;: 22 janvier</li></ul>",
+                "alternativeText": "<p>Interface de messagerie électronique ouverte </p><ol><li>Boite de réception (1)&nbsp;: sélectionnée</li><li>Messages envoyés</li><li>Corbeille</li></ol><br><p>Contenu de «&nbsp;Boite de réception (1)&nbsp;»</p><ol><li>Expéditeur&nbsp;: BioChoux</li><li>Objet&nbsp;: Réponse à votre candidature de stage</li><li>Date&nbsp;: 22 janvier</li></ol>",
                 "legend": "",
                 "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "c7e48acc-7640-4c07-883a-2e976e0048df",
+                "type": "expand",
+                "title": "[Capture d’écran basée sur le nouveau simulateur Pixmail]",
+                "content": "<p><strong><br></strong></p><p><strong>Description&nbsp;:</strong></p><ul><li><em>en découverte 1 juste afficher&nbsp;: Boite de réception, Messages envoyés et Corbeille</em></li><li><em>dev&nbsp;: voir pour fixer la date dans simulations suivantes pour cohérence narration&nbsp;: 22 janvier 15:00 (juste l’année qui évolue ?)</em></li></ul>"
               }
             },
             {
@@ -210,14 +210,14 @@
                           "id": "1",
                           "content": "Oui",
                           "feedback": {
-                            "diagnosis": "<p>Eh oui. Le nom indique<strong> qui a envoyé le mail</strong>&nbsp;: ici, «&nbsp;Biochoux&nbsp;».</p>"
+                            "diagnosis": "<p>Eh oui. L’<strong>expéditeur </strong>indique<strong> qui a envoyé le mail</strong>&nbsp;: ici, «&nbsp;Biochoux&nbsp;».</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "Non",
                           "feedback": {
-                            "diagnosis": "<p>Eh si. Le nom de la personne<strong> qui a envoyé le mail</strong> est affiché sans avoir besoin d’ouvrir le mail&nbsp;: ici, «&nbsp;Biochoux&nbsp;».</p>"
+                            "diagnosis": "<p>Eh si. Le nom de la personne<strong> qui a envoyé le mail</strong> est affiché sans avoir besoin d’ouvrir le mail. Il s’agit de l’<strong>expéditeur </strong>: ici, «&nbsp;Biochoux&nbsp;».</p>"
                           }
                         }
                       ],
@@ -330,7 +330,7 @@
                 "id": "101482af-931f-45c6-bdde-e978a82de621",
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/lecon1-v2.png",
-                "alt": "Capture d’écran illustrée d’une messagerie électronique décrite dans l’alternative textuelle.",
+                "alt": "Capture d’écran illustrée d’une interface de messagerie électronique décrite dans l’alternative textuelle",
                 "alternativeText": "<p>À rédiger en fonction du media défintitif et du texte de la leçon.</p>",
                 "legend": "",
                 "licence": ""
@@ -459,7 +459,7 @@
                 "id": "05113e75-4a2e-4207-aaff-f528da503ab9",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Quand vous ouvrez un mail, l’objet du mail, la date et l’expéditeur sont encore affichés. De nouvelles informations s’affichent également&nbsp;:<br></p>    <ol><li>Le <strong>destinataire</strong> (À)&nbsp;: indique la personne qui reçoit le mail. Ici, c’est vous,</li><li>Le<strong> texte complet</strong> du mail.</li></ol><p>D’autres informations peuvent également être affichées selon l’outil de messagerie électronique utilisée.</p>"
+                "content": "<p>Quand vous ouvrez un mail, l’objet du mail, la date et l’expéditeur sont encore affichés. De nouvelles informations s’affichent également&nbsp;:<br></p>    <ol><li>Le <strong>destinataire</strong> (À)&nbsp;: indique la personne qui reçoit le mail. Ici, c’est vous.</li><li>Le<strong> texte complet</strong> du mail.</li></ol><p>D’autres informations peuvent également être affichées selon la messagerie électronique utilisée.</p>"
               }
             },
             {
@@ -576,7 +576,7 @@
                 "id": "69581e03-b7e7-4744-857d-a7c52629efd5",
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/lecon3.png",
-                "alt": "Capture d’écran de la fenêtre d’édition d’un mail",
+                "alt": "Capture d’écran illustrée de la fenêtre d’édition d’un mail décrite dans l’alternative textuelle",
                 "alternativeText": "<p>Capture d’écran de la fenêtre d’édition d’un mail pour répondre à un mail</p>",
                 "legend": "",
                 "licence": ""
@@ -587,8 +587,8 @@
               "element": {
                 "id": "5685f6f3-363f-4750-a963-b0af0ac6b07f",
                 "type": "text",
-                "tag": " ",
-                "content": "<p>🤔<strong>Bon à savoir</strong> </p><p>Le «&nbsp;Re&nbsp;:&nbsp;», pour «&nbsp;Réponse&nbsp;:&nbsp;», qui précède l’objet, indique que c’est une réponse à mail. Il est ajouté automatiquement.</p>"
+                "tag": "further-information",
+                "content": "<p>Le «&nbsp;Re&nbsp;:&nbsp;» (pour «&nbsp;Réponse&nbsp;:&nbsp;») qui précède l’objet, indique que c’est une réponse à mail. Il est ajouté automatiquement.</p>"
               }
             }
           ]
@@ -620,7 +620,7 @@
                 "id": "28fc8aaa-b30a-4974-a983-e65c84cc4299",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Dans la messagerie électronique, les <strong>mails reçus</strong> s’affichent à l’écran sous forme de <strong>liste</strong>. <br><br>Observez les mails que vous avez reçu dans la messagerie électronique ci-dessous puis répondez aux questions qui suivent.</p>"
+                "content": "<p>Dans la messagerie électronique, les <strong>mails reçus</strong> s’affichent à l’écran sous forme de <strong>liste</strong>. <br><br><strong>Observez les mails que vous avez reçu dans la messagerie électronique ci-dessous puis répondez aux questions qui suivent.</strong></p>"
               }
             },
             {
@@ -630,7 +630,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/decouverte4-v3.png",
                 "alt": "Capture d’écran d’une interface de messagerie électronique décrite dans l’alternative textuelle",
-                "alternativeText": "<p>Messagerie électronique ouverte </p><p>Dans le menu&nbsp;: «&nbsp;Boite de réception (3)&nbsp;» sélectionnée</p><p>Quatre mails présents&nbsp; </p><ul><li>Mail «&nbsp;PromoSports&nbsp;» affiché en gras<ul><li>Expéditeur&nbsp;: PromoSports</li><li>Objet&nbsp;: Soldes d’hiver</li><li>Date&nbsp;: 6 mars</li></ul></li><li>Mail «&nbsp;BioChoux&nbsp;» affiché en gras<ul><li>Expéditeur&nbsp;: BioChoux</li><li>Objet&nbsp;: Bienvenue chez BioChoux</li><li>Date&nbsp;: 3 février</li></ul></li><li>Mail «&nbsp;École de danse&nbsp;»&nbsp;affiché en gras<ul><li>Expéditeur&nbsp;: École de danse</li><li>Objet&nbsp;: Cours annulé</li><li>Date&nbsp;: 25 janvier</li></ul></li><li>Mail «&nbsp;BioChoux&nbsp;»<ul><li>Expéditeur&nbsp;: BioChoux</li><li>Objet&nbsp;: Réponse à votre candidature de stage</li><li>Date&nbsp;: 22 janvier</li></ul></li></ul>",
+                "alternativeText": "<p>Interface de messagerie électronique ouverte </p><ol>    <li>Boite de réception (3)&nbsp;: sélectionnée</li>    <li>Messages envoyés</li>    <li>Brouillons</li>    <li>Spams</li>    <li>Corbeille</li></ol><p>Contenu de «&nbsp;Boite de réception (3)&nbsp;»</p><table> <thead>        </thead><tbody><tr>            <th scope=\"col\">Expéditeur</th>            <th scope=\"col\">Objet</th>            <th scope=\"col\">Date</th>        </tr>        </tbody><tbody>        <tr>            <th scope=\"row\">PromoSports<span class=\"sr-only\"> (mail non lu)</span></th>            <td>Soldes d’hiver</td>            <td>6 mars</td>        </tr>        <tr>            <th scope=\"row\">BioChoux<span class=\"sr-only\"> (mail non lu)</span></th>            <td>Bienvenue chez BioChoux</td>            <td>3 février</td>        </tr>        <tr>            <th scope=\"row\">École de danse<span class=\"sr-only\"> (mail non lu)</span></th>            <td>Cours annulé</td>            <td>25 janvier</td>        </tr>        <tr>            <th scope=\"row\">BioChoux<span class=\"sr-only\"> (mail lu)</span></th>            <td>Réponse à votre candidature</td>            <td>22 janvier</td>        </tr>    </tbody></table>",
                 "legend": "",
                 "licence": ""
               }
@@ -748,7 +748,16 @@
                 "id": "e122bb57-c302-476c-b15e-7c58d95bd953",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Une fois lus ouverts, les mails ne sont plus en gras. Ils  restent présents dans la boite de réception. <br>Les mails sont rangés en général du plus récent (en haut de la liste) au plus ancien (en bas de la liste).<br><br></p><p>🤔<strong>Bon à savoir</strong><br>Il existe de nombreux services de messagerie électronique. Leur apparence peut varier, mais <strong>l’organisation des mails reste la même</strong> dans la boite de réception.</p>"
+                "content": "<p>Une fois ouverts, les mails ne sont plus en gras. Ils restent présents dans la boite de réception. <br>En général, les mails sont rangés du plus récent (en haut de la liste) au plus ancien (en bas de la liste).<br><br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "4b80f552-3e58-4f87-ac55-e6d7902d0ba5",
+                "type": "text",
+                "tag": "further-information",
+                "content": "<p>Il existe de nombreux services de messagerie électronique. Leur apparence peut varier, mais l’organisation des mails reste la même dans la boite de réception.</p>"
               }
             }
           ]
@@ -770,7 +779,7 @@
                 "id": "d0b8befc-28cd-44a7-aba4-c110548386c0",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>[Infographie à venir]<br></p><ul><li>Pour consulter ses mails, il faut <strong>ouvrir sa messagerie électronique</strong>. <br>Les <strong>mails reçus</strong> se trouvent dans la <strong>boite de réception</strong> et s’affichent sous forme de<strong> liste</strong>.</li><li>Dans cette liste, des informations sont affichées pour chaque mail&nbsp;: le <strong>nom de l’expéditeur</strong>, l’<strong>objet</strong> et la <strong>date de réception</strong> du mail.</li><li>Les mails qui <strong>n’ont pas encore été lus</strong> apparaissent en <strong>gras</strong>. <br>Le mail<strong> le plus récent</strong> est placé <strong>en</strong><strong> haut de la liste</strong> automatiquement.</li><li>Lorsqu’on <strong>ouvre un mail</strong>, on peut lire <strong>son contenu</strong>.<br>Depuis un mail ouvert, on peut cliquer sur <strong>répondre</strong>, puis <strong>écrire</strong><strong> son message</strong> et l’<strong>envoyer</strong>.</li></ul>"
+                "content": "<p>[Infographie à venir]<br></p><ul><li>Pour consulter ses mails, il faut <strong>ouvrir sa messagerie électronique</strong>. <br>Les <strong>mails reçus</strong> se trouvent dans la <strong>boite de réception</strong> et s’affichent sous forme de<strong> liste</strong>.</li><li>Dans cette liste, des informations sont affichées pour chaque mail&nbsp;: le <strong>nom de l’expéditeur</strong>, l’<strong>objet</strong> et la <strong>date de réception</strong> du mail.</li><li>Les mails qui <strong>n’ont pas encore été lus</strong> apparaissent en <strong>gras</strong>. <br>En général, le mail<strong> le plus récent</strong> est placé <strong>en</strong><strong> haut de la liste</strong> automatiquement.</li><li>Lorsqu’on <strong>ouvre un mail</strong>, on peut lire <strong>son contenu</strong>.<br>Depuis un mail ouvert, on peut cliquer sur <strong>répondre</strong>, puis <strong>écrire</strong><strong> son message</strong> et l’<strong>envoyer</strong>.</li></ul>"
               }
             }
           ]
@@ -802,7 +811,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/RepondreMail_NOV/activite1-v3.png",
                 "alt": "Capture d’écran d’une interface de messagerie électronique décrite dans l’alternative textuelle",
-                "alternativeText": "<p>Messagerie électronique ouverte </p><p> Dans le menu&nbsp;: «&nbsp;Boite de réception (2)&nbsp;» sélectionnée </p><p>Trois mails présents&nbsp; </p><ul><li> Mail «&nbsp;Sophie&nbsp;» affiché en gras<ul><li>Expéditeur&nbsp;: Sophie</li><li>Objet&nbsp;: Projet annuel</li><li>Date&nbsp;: 15 février</li></ul></li><li>Mail&nbsp;«&nbsp;Espaces verts&nbsp;»<ul><li>Expéditeur&nbsp;: Espaces verts</li><li>Objet&nbsp;: Lettre d’information</li><li>Date&nbsp;: 5 novembre</li></ul></li><li>Mail «&nbsp;Naïma&nbsp;»&nbsp;affiché en gras<ul><li>Expéditeur&nbsp;: Naïma</li><li>Objet&nbsp;: Photos</li><li>Date&nbsp;: 5 novembre</li></ul></li></ul>",
+                "alternativeText": "<p>Interface de messagerie électronique ouverte </p><ol>    <li>        Boite de réception (2)&nbsp;: sélectionnée    </li>    <li> Messages envoyés    </li>    <li> Brouillons    </li>    <li> Spams    </li>    <li> Corbeille    </li></ol><br><p>Contenu de «&nbsp;Boite de réception (2)&nbsp;»</p><table>    <thead>        <tr>            <th scope=\"col\">Expéditeur</th>            <th scope=\"col\">Objet</th>            <th scope=\"col\">Date</th>        </tr>    </thead>    <tbody>        <tr>            <th scope=\"row\">Sophie<span class=\"sr-only\"> (mail non lu)</span></th>            <td>Projet annuel</td>            <td>15 février</td>        </tr>        <tr>            <th scope=\"row\">Espaces verts<span class=\"sr-only\"> (mail lu)</span></th>            <td>Lettre d’information</td>            <td>5 novembre</td>        </tr>        <tr>            <th scope=\"row\">Naïma<span class=\"sr-only\"> (mail non lu)</span></th>            <td>Photos</td>            <td>5 novembre</td>        </tr>    </tbody></table><p>    &nbsp;&nbsp;<br></p>",
                 "legend": "",
                 "licence": ""
               }
