@@ -1,5 +1,33 @@
 # Pix Changelog
 
+# [5.393.0](https://github.com/1024pix/pix/compare/v5.392.1...v5.393.0) (2026-04-23)
+
+### :rocket: Amélioration
+
+- [#15893](https://github.com/1024pix/pix/pull/15893) Créer la page de résultat pour le moteur de recommandation (Pix 22214) 
+- [#15949](https://github.com/1024pix/pix/pull/15949) Scinder en 2 la colonne "Résultats" des .csv des résultats de certif (PIX-22429). 
+
+### :bug: Correction
+
+- [#15982](https://github.com/1024pix/pix/pull/15982) Éviter les problèmes de fuseau horaire sur PixAdmin (PIX-22515). 
+
+### :building_construction: Tech
+
+- [#15959](https://github.com/1024pix/pix/pull/15959) :broom: Suppression de l'utilisation de l'attribut `completedAt` de `CertificationCourse` 
+- [#15984](https://github.com/1024pix/pix/pull/15984) Ajoute le requestId aux logs SQL. 
+- [#16004](https://github.com/1024pix/pix/pull/16004) Mise à jour de epreuve component. 
+- [#15927](https://github.com/1024pix/pix/pull/15927) Nettoyer les utilisations de Accept-Language qui ne sont plus utiles (PIX-22456) 
+
+### :arrow_up: Montée de version
+
+- [#16003](https://github.com/1024pix/pix/pull/16003) Update dependency @1024pix/epreuves-components to ^4.4.0 (api) 
+- [#15992](https://github.com/1024pix/pix/pull/15992) Update dependency @1024pix/pix-ui to ^60.8.0 (admin) 
+- [#15994](https://github.com/1024pix/pix/pull/15994) Update dependency @1024pix/pix-ui to ^60.8.0 (certif) 
+- [#15995](https://github.com/1024pix/pix/pull/15995) Update dependency @1024pix/pix-ui to ^60.8.0 (junior) 
+- [#15996](https://github.com/1024pix/pix/pull/15996) Update dependency @1024pix/pix-ui to ^60.8.0 (mon-pix) 
+- [#15997](https://github.com/1024pix/pix/pull/15997) Update dependency @1024pix/pix-ui to ^60.8.0 (orga) 
+- [#15985](https://github.com/1024pix/pix/pull/15985) Update dependency webpack to v5.106.2 (junior)
+
 ## [5.392.1](https://github.com/1024pix/pix/compare/v5.392.0...v5.392.1) (2026-04-22)
 
 ### :building_construction: Tech
