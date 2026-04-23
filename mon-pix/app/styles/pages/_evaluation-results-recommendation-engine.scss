@@ -1,0 +1,73 @@
+@use 'pix-design-tokens/typography';
+@use "pix-design-tokens/colors";
+
+.evaluation-results-hero-recommendation-engine {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pix-spacing-10x);
+  justify-content: space-between;
+  max-width: 80rem;
+  margin: 0 auto var(--pix-spacing-10x);
+  padding: var(--pix-spacing-10x) 15%;
+  color: var(--pix-neutral-0);
+  background: var(--pix-gradient-default-dark);
+  border-radius: var(--radius-5x, 20px);
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-4x);
+    min-width: min(28rem, 100%);
+  }
+
+  &__title {
+    @extend %pix-title-s;
+
+    color: var(--pix-neutral-0);
+  }
+
+  &__percent {
+    @extend %pix-subtitle-s;
+
+    color: var(--pix-neutral-0);
+    font-weight: 500;
+    line-height: 2rem;
+  }
+
+  &__percent-value {
+    display: block;
+    font-size: 3rem;
+  }
+
+  &__percent-unit {
+    margin-left: var(--pix-spacing-2x);
+    font-size: 2.5rem;
+  }
+
+  &__stars {
+    display: flex;
+    flex-direction: row;
+    gap: var(--pix-spacing-3x);
+    align-items: center;
+
+    .pix-stars {
+      gap: var(--pix-spacing-1x);
+      height: var(--pix-spacing-6x);
+    }
+  }
+
+  &__stars-text {
+    @extend %pix-body-s;
+
+    color: var(--pix-neutral-0);
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: var(--pix-spacing-4x);
+    align-items: flex-start;
+  }
+}
+

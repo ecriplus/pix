@@ -2154,6 +2154,7 @@
         "explanations": {
           "trainings": "To help you progress, discover our training recommendations and find the ones that suit you best."
         },
+        "hidden-badges": "{ count, plural, =1 {additional badge earned not displayed} other {additional badges earned not displayed} }",
         "mastery-rate": "of success in questions",
         "retry": {
           "actions": {
@@ -2204,6 +2205,9 @@
       "stage": {
         "caption": "Details of your results in percentage and stars according to competences",
         "masteryPercentage": "Success rate: {rate, number, ::percent}",
+        "recommendedEngine": {
+          "starsAcquired": "{acquired} / {total, plural, =0 {star} =1 {# star} other {# stars}}"
+        },
         "starsAcquired": "{acquired, plural, =0 {no star} =1 {# star} other {# stars}} acquired out of {total}",
         "title": "Competence results details"
       },

@@ -33,6 +33,7 @@ async function _createScoCampaigns(databaseBuilder, trainingIds, participantCoun
       profileDistribution: { beginner: 1, perfect: 1, blank: 1 },
       recommendedTrainingsIds: trainingIds,
     },
+    recommendationEngine: true,
   });
 }
 

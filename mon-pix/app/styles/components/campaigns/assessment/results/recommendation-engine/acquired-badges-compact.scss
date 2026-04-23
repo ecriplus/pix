@@ -1,0 +1,32 @@
+@use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/colors';
+
+.acquired-badges-compact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+
+  &__item {
+    display: flex;
+  }
+
+  &__icon {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  &__overflow {
+    @extend %pix-body-s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    color: var(--pix-primary-300);
+    font-weight: var(--pix-font-bold);
+    background: url('/images/background/badge-overflow.svg') center no-repeat;
+  }
+}
