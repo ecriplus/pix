@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "checkJs": false,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "disableSizeLimit": true,
+    "maxNodeModuleJsDepth": 0
+  },
+  "include": ["**/*.js", "**/*.mjs", "**/*.cjs"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "coverage",
+    "tmp",
+    "build",
+    ".cache",
+    "*.json",
+    "**/*Base64*.js",
+    "**/*.base64.js"
+  ]
+}

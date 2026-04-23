@@ -35,6 +35,7 @@
 .DS_Store
 
 **/.env
+**/.env.*
 
 # CircleCI
 *.circle-cache-key
@@ -106,3 +107,16 @@ GEMINI.md
 
 # Allow JSON files in learning-content/modules directory
 !learning-content/modules/*.json
+
+# Allow jsconfig and tsconfig files
+!jsconfig.json
+!tsconfig*.json
+
+# Allow other config files
+!.lintstagedrc.json
+!scalingo.json
+!.oxfmtrc.json
+!.prettierrc.json
+!.stylelintrc.json
+!nodemon.json
+!timings.json

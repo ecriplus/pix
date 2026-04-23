@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "checkJs": false,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true
+  },
+  "include": ["**/*.js", "**/*.cjs", "**/*.mjs"],
+  "exclude": ["node_modules", "dist", "tmp", "coverage"]
+}

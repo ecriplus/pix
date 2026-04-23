@@ -2,7 +2,6 @@ import sinon from 'sinon';
 
 import { organizationAdminController } from '../../../../src/organizational-entities/application/organization/organization.admin.controller.js';
 import { organizationalEntitiesRoutes } from '../../../../src/organizational-entities/application/routes.js';
-import { logo3Mb } from '../../../integration/application/organizations-administration/_files/logo-3mb.js';
 import { expect } from '../../../test-helper.js';
 import { databaseBuilder } from '../../../tooling/databases.js';
 import { HttpTestServer } from '../../../tooling/server/http-test-server.js';
@@ -118,6 +117,9 @@ describe('Integration | Organizational Entities | Application | Route | Organiza
       const metierUserId = databaseBuilder.factory.buildUser.withRole({ role: 'METIER' }).id;
       await databaseBuilder.commit();
       headers = generateAuthenticatedUserRequestHeaders({ userId: metierUserId });
+
+      // generate a fake 3Mb logo in base64
+      const logo3Mb = `data:image/png;base64,${'A'.repeat(3 * 1024 * 1024)}`;
 
       const payload = {
         data: {
