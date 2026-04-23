@@ -1,8 +1,8 @@
 import pixRecommendedConfig from '@1024pix/eslint-plugin/config';
 import babelParser from '@babel/eslint-parser';
-import emberParser from 'ember-eslint-parser';
 import emberRecommendedConfig from 'eslint-plugin-ember/configs/recommended';
 import emberGjsRecommendedConfig from 'eslint-plugin-ember/configs/recommended-gjs';
+import { parser as emberParser } from 'eslint-plugin-ember/recommended';
 import i18nJsonPlugin from 'eslint-plugin-i18n-json';
 import nRecommendedConfig from 'eslint-plugin-n';
 import prettierRecommendedConfig from 'eslint-plugin-prettier/recommended';
@@ -25,16 +25,6 @@ const nodeFiles = [
   'lib/*/index.js',
   'server/**/*.js',
 ];
-
-const emberPatchedParser = Object.assign(
-  {
-    meta: {
-      name: 'ember-eslint-parser',
-      version: '*',
-    },
-  },
-  emberParser,
-);
 
 export default [
   ...pixRecommendedConfig,
@@ -72,7 +62,7 @@ export default [
   {
     files: ['**/*.gjs'],
     languageOptions: {
-      parser: emberPatchedParser,
+      parser: emberParser,
       sourceType: 'module',
     },
   },
