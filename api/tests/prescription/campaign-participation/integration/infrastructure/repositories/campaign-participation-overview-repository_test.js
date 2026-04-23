@@ -7,6 +7,7 @@ import {
   CampaignParticipationStatuses,
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { CombinedCourseBlueprint } from '../../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,
@@ -977,16 +978,21 @@ describe('Integration | Repository | Campaign Participation Overview', function 
         const campaign = databaseBuilder.factory.buildCampaign({ organizationId: organization.id });
 
         const campaignInCombinedCourse = databaseBuilder.factory.buildCampaign({ organizationId: organization.id });
+        const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+          successRequirements: [
+            CombinedCourseBlueprint.buildRequirementForCombinedCourse({
+              campaignId: campaignInCombinedCourse.id,
+            }).toDTO(),
+            CombinedCourseBlueprint.buildRequirementForCombinedCourse({
+              moduleId: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
+            }).toDTO(),
+          ],
+        });
         databaseBuilder.factory.buildCombinedCourse({
           name: 'Combinix',
-          rewardType: null,
-          rewardId: null,
           code: 'COMBINIX1',
           organizationId: organization.id,
-          combinedCourseContents: [
-            { campaignId: campaignInCombinedCourse.id },
-            { moduleId: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a' },
-          ],
+          questId,
         });
         databaseBuilder.factory.campaignParticipationOverviewFactory.build({
           userId,

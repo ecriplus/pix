@@ -1,4 +1,5 @@
 import { createServer } from '../../../../server.js';
+import { CombinedCourseBlueprint } from '../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,
@@ -46,15 +47,14 @@ describe('Acceptance | Application | SecurityPreHandlers', function () {
 
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       campaignId = databaseBuilder.factory.buildCampaign({ organizationId }).id;
+      const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+        successRequirements: [CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId }).toDTO()],
+      });
       databaseBuilder.factory.buildCombinedCourse({
         code: 'ABCDE1234',
         name: 'Mon parcours Combiné',
         organizationId,
-        combinedCourseContents: [
-          {
-            campaignId,
-          },
-        ],
+        questId,
       });
       await databaseBuilder.commit();
     });

@@ -2,6 +2,7 @@ import times from 'lodash/times.js';
 import sinon from 'sinon';
 
 import { createServer } from '../../../../../server.js';
+import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { constants } from '../../../../../src/shared/domain/constants.js';
 import { SCOPES } from '../../../../../src/shared/domain/models/BadgeDetails.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
@@ -801,18 +802,27 @@ describe('Acceptance | Campaign Participation | Application | Route', function (
       sinon.stub(constants, 'AUTONOMOUS_COURSES_ORGANIZATION_ID').value(777);
 
       const campaignInCombinedCourse = databaseBuilder.factory.buildCampaign({ organizationId });
+      const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+        successRequirements: [
+          CombinedCourseBlueprint.buildRequirementForCombinedCourse({
+            campaignId: campaignInCombinedCourse.id,
+          }).toDTO(),
+          CombinedCourseBlueprint.buildRequirementForCombinedCourse({
+            moduleId: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
+          }).toDTO(),
+          CombinedCourseBlueprint.buildRequirementForCombinedCourse({
+            moduleId: 'f32a2238-4f65-4698-b486-15d51935d335',
+          }).toDTO(),
+          CombinedCourseBlueprint.buildRequirementForCombinedCourse({
+            moduleId: 'ab82925d-4775-4bca-b513-4c3009ec5886',
+          }).toDTO(),
+        ],
+      });
       databaseBuilder.factory.buildCombinedCourse({
         name: 'Combinix',
-        rewardType: null,
-        rewardId: null,
         code: 'COMBINIX1',
         organizationId,
-        combinedCourseContents: [
-          { campaignId: campaignInCombinedCourse.id },
-          { moduleId: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a' },
-          { moduleId: 'f32a2238-4f65-4698-b486-15d51935d335' },
-          { moduleId: 'ab82925d-4775-4bca-b513-4c3009ec5886' },
-        ],
+        questId,
       });
       databaseBuilder.factory.campaignParticipationOverviewFactory.build({
         userId,

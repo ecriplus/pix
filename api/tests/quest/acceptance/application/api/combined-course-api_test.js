@@ -1,6 +1,7 @@
 import * as combinedCourseApi from '../../../../../src/quest/application/api/combined-course-api.js';
 import { CombinedCourse } from '../../../../../src/quest/application/api/CombinedCourse.model.js';
 import { MultipleQuestFoundError } from '../../../../../src/quest/application/api/errors.js';
+import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { expect } from '../../../../test-helper.js';
 import { databaseBuilder } from '../../../../tooling/databases.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
@@ -12,11 +13,14 @@ describe('Acceptance | Quest | Application | combined-course-api', function () {
     organizationId = databaseBuilder.factory.buildOrganization().id;
     campaignId = databaseBuilder.factory.buildCampaign({ organizationId }).id;
     combinedCourseName = 'Mon parcours Combiné';
+    const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      successRequirements: [CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId }).toDTO()],
+    });
     combinedCourseId = databaseBuilder.factory.buildCombinedCourse({
       code: 'ABCDE1234',
       name: combinedCourseName,
       organizationId,
-      combinedCourseContents: [{ campaignId }],
+      questId,
     }).id;
     await databaseBuilder.commit();
   });
@@ -45,11 +49,14 @@ describe('Acceptance | Quest | Application | combined-course-api', function () {
 
   it('should throw an error if multiple combined courses found', async function () {
     //given
+    const { id: questId2 } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      successRequirements: [CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId }).toDTO()],
+    });
     databaseBuilder.factory.buildCombinedCourse({
       code: 'QWERTY123',
       name: combinedCourseName,
       organizationId,
-      combinedCourseContents: [{ campaignId }],
+      questId: questId2,
     });
 
     await databaseBuilder.commit();

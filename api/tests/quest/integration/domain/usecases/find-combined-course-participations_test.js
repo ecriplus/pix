@@ -1,4 +1,5 @@
 import { CombinedCourseParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
+import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { CombinedCourseParticipationDetails } from '../../../../../src/quest/domain/models/CombinedCourseParticipationDetails.js';
 import { OrganizationLearnerParticipationStatuses } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
@@ -10,10 +11,18 @@ describe('Quest | Integration | Domain | Usecases | findCombinedCourseParticipat
 
   beforeEach(async function () {
     const { id: campaignId, organizationId } = databaseBuilder.factory.buildCampaign();
+    const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      successRequirements: [
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId }).toDTO(),
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({
+          moduleId: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a',
+        }).toDTO(),
+      ],
+    });
     const combinedCourse = databaseBuilder.factory.buildCombinedCourse({
       code: 'COMBI1',
       organizationId,
-      combinedCourseContents: [{ campaignId }, { moduleId: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a' }],
+      questId,
     });
     combinedCourseId = combinedCourse.id;
 

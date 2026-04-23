@@ -6,14 +6,13 @@ import { CAMPAIGN_PRO_COMBINED_NO_MOD_COURSE_ID } from '../constants.js';
 
 export const COMBINED_COURSE_WITHOUT_MODULES = {
   organizationId: PRO_ORGANIZATION_ID,
-  quest: {
-    code: 'CBNOMOD',
+  blueprint: {
     name: 'Parcours sans modules',
-    combinedCourseContents: [
-      {
-        campaignId: CAMPAIGN_PRO_COMBINED_NO_MOD_COURSE_ID,
-      },
-    ],
+    internalName: 'Parcours sans modules',
+    requirements: [{ type: 'evaluation' }],
+  },
+  combinedCourse: {
+    code: 'CBNOMOD',
   },
   targetProfile: {
     description: 'Description',
@@ -29,7 +28,7 @@ export const COMBINED_COURSE_WITHOUT_MODULES = {
       name: 'Je teste mes compétences',
       code: 'CODEX1',
       customResultPageButtonText: 'Continuer',
-      customResultPageButtonUrl: '/parcours/CBNOMOD/chargement',
+      customResultPageButtonUrl: '/parcours/CBNOMOD',
       skills: [],
     },
   },

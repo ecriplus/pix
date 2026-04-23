@@ -7,41 +7,24 @@ import { CAMPAIGN_MAXI_COMBINED_COURSE_ID } from '../constants.js';
 
 export const MAXI_COMBINED_COURSE = {
   organizationId: PRO_ORGANIZATION_ID,
-  quest: {
-    code: 'MAXICOMBI',
+  blueprint: {
     name: 'Parcours apprenant complet',
-    combinedCourseContents: [
-      {
-        campaignId: CAMPAIGN_MAXI_COMBINED_COURSE_ID,
-      },
-      {
-        moduleId: 'cf183961-e85a-421d-a316-05870191ff82',
-      },
-      {
-        moduleId: '7a38c90d-9937-4497-bee3-fe58541af420',
-      },
-      {
-        moduleId: '71618929-fcc9-415e-a3f3-9582545d7a78',
-      },
-      {
-        moduleId: 'd03cef94-74af-463d-8901-c886b48d6e0b',
-      },
-      {
-        moduleId: 'c8607621-09ab-4601-be7d-68ed9c914c30',
-      },
-      {
-        moduleId: 'a1eea948-2125-488f-8006-9f85e646830d',
-      },
-      {
-        moduleId: '8aa17e6d-3470-479d-838d-ff6923de6686',
-      },
-      {
-        moduleId: '8343e9c1-5b46-4500-ab85-54061e0c4712',
-      },
-      {
-        moduleId: '40ab5711-4025-4052-a269-00fd0448d60a',
-      },
+    internalName: 'Parcours apprenant complet',
+    requirements: [
+      { type: 'evaluation' },
+      { type: 'module', moduleId: 'cf183961-e85a-421d-a316-05870191ff82' },
+      { type: 'module', moduleId: '7a38c90d-9937-4497-bee3-fe58541af420' },
+      { type: 'module', moduleId: '71618929-fcc9-415e-a3f3-9582545d7a78' },
+      { type: 'module', moduleId: 'd03cef94-74af-463d-8901-c886b48d6e0b' },
+      { type: 'module', moduleId: 'c8607621-09ab-4601-be7d-68ed9c914c30' },
+      { type: 'module', moduleId: 'a1eea948-2125-488f-8006-9f85e646830d' },
+      { type: 'module', moduleId: '8aa17e6d-3470-479d-838d-ff6923de6686' },
+      { type: 'module', moduleId: '8343e9c1-5b46-4500-ab85-54061e0c4712' },
+      { type: 'module', moduleId: '40ab5711-4025-4052-a269-00fd0448d60a' },
     ],
+  },
+  combinedCourse: {
+    code: 'MAXICOMBI',
   },
   targetProfile: {
     description: 'Description parcours combinix 1',

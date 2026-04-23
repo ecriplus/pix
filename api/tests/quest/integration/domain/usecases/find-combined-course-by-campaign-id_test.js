@@ -1,4 +1,5 @@
 import { CombinedCourse } from '../../../../../src/quest/domain/models/CombinedCourse.js';
+import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { expect } from '../../../../test-helper.js';
 import { databaseBuilder } from '../../../../tooling/databases.js';
@@ -12,11 +13,14 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-campa
     campaignId = databaseBuilder.factory.buildCampaign({ organizationId }).id;
     const code = 'ABCDE1234';
     const name = 'Mon parcours Combiné';
+    const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      successRequirements: [CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId }).toDTO()],
+    });
     courseId = databaseBuilder.factory.buildCombinedCourse({
       code,
       name,
       organizationId,
-      combinedCourseContents: [{ campaignId }],
+      questId,
     }).id;
     await databaseBuilder.commit();
   });

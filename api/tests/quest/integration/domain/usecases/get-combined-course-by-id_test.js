@@ -1,4 +1,5 @@
 import { CombinedCourseDetails } from '../../../../../src/quest/domain/models/CombinedCourse.js';
+import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { expect } from '../../../../test-helper.js';
@@ -10,13 +11,20 @@ describe('Quest | Integration | Domain | Usecases | getCombinedCourseById', func
     // given
     const organizationId = databaseBuilder.factory.buildOrganization().id;
 
+    const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      successRequirements: [
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId: 100 }).toDTO(),
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId: 200 }).toDTO(),
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId: 300 }).toDTO(),
+      ],
+    });
     const combinedCourseId = databaseBuilder.factory.buildCombinedCourse({
       name: 'Test Combined Course',
       description: 'A test combined course description',
       illustration: 'https://example.com/image.png',
       code: 'TEST_COURSE_123',
       organizationId,
-      combinedCourseContents: [{ campaignId: 100 }, { campaignId: 200 }, { campaignId: 300 }],
+      questId,
     }).id;
 
     await databaseBuilder.commit();

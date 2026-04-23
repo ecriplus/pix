@@ -1,6 +1,7 @@
 import sinon from 'sinon';
 
 import { CampaignParticipation } from '../../../../../src/quest/domain/models/CampaignParticipation.js';
+import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,
@@ -37,8 +38,14 @@ describe('Integration | Quest | Domain | UseCases | delete-and-anonymise-partici
       organizationId: organization.id,
     });
 
+    const { id: questId } = databaseBuilder.factory.buildQuestForCombinedCourse({
+      successRequirements: [
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({ campaignId: campaign.id }).toDTO(),
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({ moduleId }).toDTO(),
+      ],
+    });
     combinedCourse = databaseBuilder.factory.buildCombinedCourse({
-      combinedCourseContents: [{ campaignId: campaign.id }, { moduleId }],
+      questId,
       code: 'RANDOM',
     });
 
