@@ -20,22 +20,22 @@ export function createV3AssessmentResult({
   if (toBeCancelled) {
     return AssessmentResultFactory.buildCancelledAssessmentResult({
       juryId,
-      pixScore,
+      pixScore: null,
       assessmentId,
-      competenceMarks,
-      capacity,
-      reachedMeshIndex,
+      competenceMarks: [],
+      capacity: null,
+      reachedMeshIndex: null,
       versionId,
     });
   }
   if (isRejectedForFraud) {
     return AssessmentResultFactory.buildFraud({
-      pixScore,
+      pixScore: null,
       assessmentId,
       juryId,
-      competenceMarks,
-      capacity,
-      reachedMeshIndex,
+      competenceMarks: [],
+      capacity: null,
+      reachedMeshIndex: null,
       versionId,
     });
   }
@@ -45,23 +45,22 @@ export function createV3AssessmentResult({
   ) {
     if (isAbortReasonTechnical) {
       return AssessmentResultFactory.buildLackOfAnswersForTechnicalReason({
-        pixScore,
+        pixScore: null,
         assessmentId,
         juryId,
-        competenceMarks,
-        capacity,
-        reachedMeshIndex,
+        competenceMarks: [],
+        capacity: null,
+        reachedMeshIndex: null,
         versionId,
       });
     } else {
       return AssessmentResultFactory.buildLackOfAnswers({
-        pixScore,
-        status,
+        pixScore: null,
         assessmentId,
         juryId,
-        competenceMarks,
-        capacity,
-        reachedMeshIndex,
+        competenceMarks: [],
+        capacity: null,
+        reachedMeshIndex: null,
         versionId,
       });
     }

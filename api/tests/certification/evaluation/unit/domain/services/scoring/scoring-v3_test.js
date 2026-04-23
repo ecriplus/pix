@@ -176,8 +176,8 @@ describe('Unit | Certification | Evaluation | Domain | Services | Scoring V3', f
         });
 
         expect(score.coreAssessmentResult).to.be.instanceOf(AssessmentResult);
-        expect(score.coreAssessmentResult.competenceMarks[0]).to.be.instanceOf(CompetenceMark);
-        expect(score.coreAssessmentResult.pixScore).to.equal(55);
+        expect(score.coreAssessmentResult.competenceMarks).to.be.empty;
+        expect(score.coreAssessmentResult.pixScore).to.be.null;
         expect(score.doubleCertificationScoring).to.be.instanceOf(DoubleCertificationScoring);
       });
     });
