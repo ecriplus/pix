@@ -99,6 +99,7 @@ module.exports = function (environment) {
         minValue: 0,
       }),
       sessionSupervisingPollingRate: process.env.SESSION_SUPERVISING_POLLING_RATE ?? 5000,
+      DEBOUNCE_FILTER_DELAY: 300,
       COOKIE_LOCALE_LIFESPAN_IN_SECONDS: 31536000, // 1 year in seconds
       APP_VERSION: process.env.SOURCE_VERSION || 'development',
     },
@@ -137,6 +138,7 @@ module.exports = function (environment) {
 
     ENV.APP.autoboot = false;
     ENV.APP.rootElement = '#ember-testing';
+    ENV.APP.DEBOUNCE_FILTER_DELAY = 0;
 
     ENV['ember-cli-mirage'] = {
       enabled: true,

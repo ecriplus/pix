@@ -3,12 +3,10 @@ import { service } from '@ember/service';
 
 export default class ListRoute extends Route {
   queryParams = {
-    pageNumber: {
-      refreshModel: true,
-    },
-    pageSize: {
-      refreshModel: true,
-    },
+    pageNumber: { refreshModel: true },
+    pageSize: { refreshModel: true },
+    status: { refreshModel: true },
+    sessionId: { refreshModel: true },
   };
 
   @service currentUser;
@@ -26,6 +24,10 @@ export default class ListRoute extends Route {
           number: params.pageNumber,
           size: params.pageSize,
         },
+        filter: {
+          status: params.status || undefined,
+          sessionId: params.sessionId || undefined,
+        },
       },
       { reload: true },
     );
@@ -39,6 +41,8 @@ export default class ListRoute extends Route {
     if (this._isNotComingFromSessionsDetails(isExiting, transition)) {
       controller.pageNumber = 1;
       controller.pageSize = 25;
+      controller.status = null;
+      controller.sessionId = null;
     }
   }
 
