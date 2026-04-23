@@ -9,7 +9,7 @@ import { config } from '../../config.js';
 import { executeInContext, EXECUTORS } from '../execution-context-manager.js';
 import { importNamedExportFromFile } from '../utils/import-named-exports-from-directory.js';
 import { child } from '../utils/logger.js';
-import { MonitoredJobHandler } from './monitoring/MonitoredJobHandler.js';
+import { MonitoredJobHandler } from './MonitoredJobHandler.js';
 
 const workerDirPath = resolve(dirname(fileURLToPath(import.meta.url)), '../../../..');
 const logger = child('worker', { event: 'worker' });
