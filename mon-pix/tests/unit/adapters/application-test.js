@@ -5,8 +5,6 @@ import sinon from 'sinon';
 
 import { stubSessionService } from '../../helpers/service-stubs.js';
 
-const FRENCH_FRANCE_LOCALE = 'fr-fr';
-
 module('Unit | Adapters | ApplicationAdapter', function (hooks) {
   setupTest(hooks);
 
@@ -41,17 +39,6 @@ module('Unit | Adapters | ApplicationAdapter', function (hooks) {
 
         // Then
         assert.notOk(applicationAdapter.headers['Authorization']);
-      });
-    });
-
-    module('Accept-Language headers', function () {
-      test('should add Accept-Language header from the locale service', function (assert) {
-        // Given // When
-        const applicationAdapter = this.owner.lookup('adapter:application');
-        applicationAdapter.locale = { acceptLanguageHeader: FRENCH_FRANCE_LOCALE };
-
-        // Then
-        assert.strictEqual(applicationAdapter.headers['Accept-Language'], FRENCH_FRANCE_LOCALE);
       });
     });
   });

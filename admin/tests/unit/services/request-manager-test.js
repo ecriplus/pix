@@ -39,7 +39,6 @@ module('Unit | Service | request-manager', function (hooks) {
 
       const [url, { headers }] = window.fetch.getCall(0).args;
       assert.strictEqual(url, '/test');
-      assert.strictEqual(headers.get('Accept-Language'), 'fr');
       assert.strictEqual(headers.get('X-App-Version'), 'development');
       assert.strictEqual(headers.get('Accept'), 'application/json');
       assert.strictEqual(headers.get('Content-Type'), 'application/json');

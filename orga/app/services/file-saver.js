@@ -15,8 +15,7 @@ export default class FileSaverService extends Service {
     downloadFileForModernBrowsers = _downloadFileForModernBrowsers,
     noContentMessageNotification = this.intl.t('common.no-content'),
   }) {
-    const acceptLanguage = this.locale.acceptLanguageHeader;
-    const response = await fetcher({ url, token, acceptLanguage });
+    const response = await fetcher({ url, token });
 
     if (response.status === 204) {
       this.notifications.sendWarning(noContentMessageNotification);
@@ -39,10 +38,9 @@ export default class FileSaverService extends Service {
   }
 }
 
-function _fetchData({ url, token, acceptLanguage }) {
+function _fetchData({ url, token }) {
   const reqHeaders = new Headers();
   reqHeaders.set('Authorization', `Bearer ${token}`);
-  reqHeaders.set('Accept-Language', acceptLanguage);
 
   return fetch(url, { headers: reqHeaders });
 }

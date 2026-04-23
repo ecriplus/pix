@@ -22,7 +22,6 @@ module('Unit | Authenticator | oidc', function (hooks) {
       method: 'POST',
       headers: {
         Accept: 'application/json',
-        'Accept-Language': 'fr',
         'Content-Type': 'application/json',
       },
     };

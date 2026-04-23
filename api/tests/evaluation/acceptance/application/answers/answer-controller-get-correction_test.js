@@ -7,7 +7,7 @@ import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/tes
 const buildOptions = (answerId, userId) => ({
   method: 'GET',
   url: `/api/answers/${answerId}/correction`,
-  headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: FRENCH_FRANCE }),
+  headers: generateAuthenticatedUserRequestHeaders({ userId }),
 });
 const solution =
   'l1:\n- chien\n- chat\n- cochon\nl2:\n- pigeon\n- poulet\n- veau\nl3:\n- canard\n- couincouin\nl4:\n- mouton';
@@ -184,97 +184,95 @@ describe('Acceptance | Controller | answer-controller-get-correction', function 
       await databaseBuilder.commit();
     });
 
-    context('when Accept-Language header is specified', function () {
-      it('should return the answer correction with tutorials restricted to given language', async function () {
-        // given
-        const options = {
-          method: 'GET',
-          url: `/api/answers/${answer.id}/correction`,
-          headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: FRENCH_FRANCE }),
-        };
+    it('should return the answer correction with tutorials restricted to given language', async function () {
+      // given
+      const options = {
+        method: 'GET',
+        url: `/api/answers/${answer.id}/correction`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId, acceptLanguage: FRENCH_FRANCE }),
+      };
 
-        const expectedBody = {
-          data: {
-            id: 'q_first_challenge',
-            type: 'corrections',
-            attributes: {
-              'answers-evaluation': [],
-              solution: 'fromage',
-              'solution-to-display': 'camembert',
-              'solutions-without-good-answers': [],
-              hint: 'Animaux ?',
+      const expectedBody = {
+        data: {
+          id: 'q_first_challenge',
+          type: 'corrections',
+          attributes: {
+            'answers-evaluation': [],
+            solution: 'fromage',
+            'solution-to-display': 'camembert',
+            'solutions-without-good-answers': [],
+            hint: 'Animaux ?',
+          },
+          relationships: {
+            tutorials: {
+              data: [
+                {
+                  id: 'french-tutorial-id',
+                  type: 'tutorials',
+                },
+              ],
             },
+            'learning-more-tutorials': {
+              data: [],
+            },
+          },
+        },
+        included: [
+          {
+            attributes: {
+              id: 10002,
+              status: 'LIKED',
+              'tutorial-id': 'french-tutorial-id',
+              'user-id': 111,
+            },
+            id: '10002',
+            type: 'tutorial-evaluation',
+          },
+          {
+            attributes: {
+              id: 10001,
+              'tutorial-id': 'french-tutorial-id',
+              'user-id': 111,
+            },
+            id: '10001',
+            type: 'user-saved-tutorial',
+          },
+          {
+            attributes: {
+              duration: '00:03:31',
+              format: 'vidéo',
+              id: 'french-tutorial-id',
+              link: 'http://www.example.com/this-is-an-example.html',
+              'skill-id': 'q_first_acquis',
+              source: 'Source Example, Example',
+              title: 'Communiquer',
+            },
+            id: 'french-tutorial-id',
+            type: 'tutorials',
             relationships: {
-              tutorials: {
-                data: [
-                  {
-                    id: 'french-tutorial-id',
-                    type: 'tutorials',
-                  },
-                ],
+              'user-saved-tutorial': {
+                data: {
+                  id: '10001',
+                  type: 'user-saved-tutorial',
+                },
               },
-              'learning-more-tutorials': {
-                data: [],
+              'tutorial-evaluation': {
+                data: {
+                  id: '10002',
+                  type: 'tutorial-evaluation',
+                },
               },
             },
           },
-          included: [
-            {
-              attributes: {
-                id: 10002,
-                status: 'LIKED',
-                'tutorial-id': 'french-tutorial-id',
-                'user-id': 111,
-              },
-              id: '10002',
-              type: 'tutorial-evaluation',
-            },
-            {
-              attributes: {
-                id: 10001,
-                'tutorial-id': 'french-tutorial-id',
-                'user-id': 111,
-              },
-              id: '10001',
-              type: 'user-saved-tutorial',
-            },
-            {
-              attributes: {
-                duration: '00:03:31',
-                format: 'vidéo',
-                id: 'french-tutorial-id',
-                link: 'http://www.example.com/this-is-an-example.html',
-                'skill-id': 'q_first_acquis',
-                source: 'Source Example, Example',
-                title: 'Communiquer',
-              },
-              id: 'french-tutorial-id',
-              type: 'tutorials',
-              relationships: {
-                'user-saved-tutorial': {
-                  data: {
-                    id: '10001',
-                    type: 'user-saved-tutorial',
-                  },
-                },
-                'tutorial-evaluation': {
-                  data: {
-                    id: '10002',
-                    type: 'tutorial-evaluation',
-                  },
-                },
-              },
-            },
-          ],
-        };
+        ],
+      };
 
-        // when
-        const response = await server.inject(options);
+      // when
+      const response = await server.inject(options);
 
-        // then
-        expect(response.statusCode).to.equal(200);
-        expect(response.result).to.deep.equal(expectedBody);
-      });
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(response.result).to.deep.equal(expectedBody);
     });
 
     context('when challenge is a QROCM-dep type', function () {

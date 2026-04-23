@@ -36,16 +36,6 @@ module('Unit | Adapters | ApplicationAdapter', function (hooks) {
       // Then
       assert.notOk(applicationAdapter.headers['Authorization']);
     });
-
-    test('should add Accept-Language header from the locale service', function (assert) {
-      // Given
-      const applicationAdapter = this.owner.lookup('adapter:application');
-      const localeService = this.owner.lookup('service:locale');
-      sinon.stub(localeService, 'acceptLanguageHeader').value('fr');
-
-      // Then
-      assert.strictEqual(applicationAdapter.headers['Accept-Language'], 'fr');
-    });
   });
 
   module('#ajax()', function () {

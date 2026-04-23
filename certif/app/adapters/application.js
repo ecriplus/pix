@@ -15,7 +15,6 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
     if (this.session.isAuthenticated) {
       headers['Authorization'] = `Bearer ${this.session.data.authenticated.access_token}`;
     }
-    headers['Accept-Language'] = this.locale.acceptLanguageHeader;
     headers['X-App-Version'] = ENV.APP.APP_VERSION;
 
     return headers;

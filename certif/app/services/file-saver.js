@@ -11,7 +11,7 @@ export default class FileSaverService extends Service {
     downloadFileForIEBrowser = _downloadFileForIEBrowser,
     downloadFileForModernBrowsers = _downloadFileForModernBrowsers,
   }) {
-    const response = await fetcher({ url, token, locale: this.locale.acceptLanguageHeader });
+    const response = await fetcher({ url, token });
 
     if (response.status !== 200) {
       const jsonResponse = await response.json();
@@ -29,9 +29,9 @@ export default class FileSaverService extends Service {
   }
 }
 
-function _fetchData({ url, token, locale }) {
+function _fetchData({ url, token }) {
   return fetch(url, {
-    headers: { Authorization: `Bearer ${token}`, 'Accept-Language': locale },
+    headers: { Authorization: `Bearer ${token}` },
   });
 }
 
