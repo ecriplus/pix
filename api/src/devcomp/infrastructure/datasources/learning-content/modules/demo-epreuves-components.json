@@ -986,6 +986,36 @@
           ]
         },
         {
+          "id": "b4c515e5-ca84-47f7-827e-428f1ce6c2e1",
+          "type": "discovery",
+          "title": "notification-antivirus",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a10e59dd-de5f-4bf2-81cf-41c62c181ecf",
+                "type": "text",
+                "content": "<p>notification-antivirus</p>",
+                "tag": " "
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "c894017d-df9e-4d6c-a95e-8ed81d3e0bf8",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "notification-antivirus",
+                "props": {
+                  "titleLevel": 2
+                },
+                "title": "",
+                "functionalInstruction": ""
+              }
+            }
+          ]
+        },
+        {
           "id": "1613420c-534d-4571-b0d1-88476b7f0dfd",
           "type": "discovery",
           "title": "phishing-message",
