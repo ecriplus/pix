@@ -195,7 +195,8 @@
     "handlebars": ">=4.7.9",
     "hapi-swagger": {
       "joi": "$joi"
-    }
+    },
+    "protobufjs": ">=7.5.5"
   },
   "engines": {
     "node": "^24.15.0"
