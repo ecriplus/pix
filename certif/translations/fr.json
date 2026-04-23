@@ -893,6 +893,7 @@
           "title": "Créer ma première session de certification"
         },
         "filters": {
+          "clear": "Effacer les filtres",
           "label": "Filtres sur la liste des sessions",
           "session-id": {
             "label": "ID de session"

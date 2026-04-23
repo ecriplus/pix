@@ -1,3 +1,4 @@
+import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixFilterBanner from '@1024pix/pix-ui/components/pix-filter-banner';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
@@ -42,6 +43,10 @@ export default class Sessions extends Component {
     return [{ value: 'all', label: this.intl.t(`pages.sessions.list.status.all`) }, ...sessionStatusesOptions];
   }
 
+  get displayClearFilters() {
+    return !!this.sessionIdFilter || this.selectedStatusFilter !== this.statusFilterOptions[0].value;
+  }
+
   @action
   goToSessionDetails(session) {
     this.router.transitionTo('authenticated.sessions.details', session.id);
@@ -66,6 +71,14 @@ export default class Sessions extends Component {
   @action
   handleLoadFilters(e) {
     e.preventDefault();
+  }
+
+  @action
+  handleClearFilters() {
+    this.sessionIdFilter = null;
+    this.selectedStatusFilter = 'all';
+
+    this.router.transitionTo({ queryParams: { sessionId: null, status: null, pageNumber: null } });
   }
 
   <template>
@@ -96,6 +109,17 @@ export default class Sessions extends Component {
           >
             <:label>{{t 'pages.sessions.list.filters.status.label'}}</:label>
           </PixSelect>
+          {{#if this.displayClearFilters}}
+            <PixButton
+              class='session-list-page-filters__clear-button'
+              @variant='tertiary'
+              @iconBefore='delete'
+              @size='small'
+              @triggerAction={{this.handleClearFilters}}
+            >
+              {{t 'pages.sessions.list.filters.clear'}}
+            </PixButton>
+          {{/if}}
         </PixFilterBanner>
 
         <SessionList @sessionSummaries={{this.sessionSummaries}} @goToSessionDetails={{this.goToSessionDetails}} />

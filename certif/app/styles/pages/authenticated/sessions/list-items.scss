@@ -33,6 +33,10 @@
   }
 }
 
+.session-list-page-filters__clear-button {
+  align-self: flex-end;
+}
+
 .session-list__table {
   margin-bottom: var(--pix-spacing-4x);
 }

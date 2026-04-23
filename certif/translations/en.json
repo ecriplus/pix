@@ -893,6 +893,7 @@
           "title": "Create my first certification session"
         },
         "filters": {
+          "clear": "Clear filters",
           "label": "Filters on the sessions list",
           "session-id": {
             "label": "Session ID"

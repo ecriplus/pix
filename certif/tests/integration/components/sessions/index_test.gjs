@@ -193,6 +193,44 @@ module('Integration | Component | Sessions | index', function (hooks) {
         // then
         assert.ok(router.transitionTo.calledWithMatch({ queryParams: { sessionId: '123', pageNumber: 1 } }));
       });
+
+      test('it should reset filters and transition on clear action', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const sessionSummaries = [store.createRecord('session-summary', { id: '123', status: CREATED })];
+        sessionSummaries.meta = { rowCount: 1, hasSessions: true };
+
+        const currentAllowedCertificationCenterAccess = store.createRecord('allowed-certification-center-access', {
+          type: 'SUP',
+          isRelatedToManagingStudentsOrganization: false,
+        });
+
+        class CurrentUserStub extends Service {
+          currentAllowedCertificationCenterAccess = currentAllowedCertificationCenterAccess;
+        }
+
+        this.owner.register('service:current-user', CurrentUserStub);
+
+        const router = this.owner.lookup('service:router');
+        sinon.stub(router, 'transitionTo');
+
+        // when
+        const screen = await render(<template><Sessions @sessionSummaries={{sessionSummaries}} /></template>);
+
+        await fillIn(screen.getByRole('spinbutton', { name: 'ID de session' }), '123');
+        await click(screen.getByRole('button', { name: 'Statut' }));
+        await screen.findByRole('listbox');
+        await click(screen.getByRole('option', { name: 'Finalisée' }));
+
+        await click(screen.getByRole('button', { name: 'Effacer les filtres' }));
+
+        // then
+        assert.dom(screen.getByRole('spinbutton', { name: 'ID de session' })).hasNoValue();
+        assert.dom(screen.getByRole('button', { name: 'Statut' })).hasText('Tous');
+        assert.ok(
+          router.transitionTo.calledWithMatch({ queryParams: { sessionId: null, status: null, pageNumber: null } }),
+        );
+      });
     });
   });
 });
