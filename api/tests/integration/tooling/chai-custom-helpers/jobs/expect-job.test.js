@@ -2,15 +2,20 @@ import { EMPTY_CORRELATION_INFO } from '../../../../../src/shared/infrastructure
 import { JobClient } from '../../../../../src/shared/infrastructure/jobs/JobClient.js';
 import { JobRepository } from '../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
 import { expect } from '../../../../test-helper.js';
-import { knex } from '../../../../tooling/databases.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Tooling | Expect Job', function () {
+  beforeEach(async function () {
+    await JobClient.instance.registerJob('JobTest');
+    await JobClient.instance.registerJob('JobTest2');
+    await JobClient.instance.registerJob('JobTestOther');
+  });
+
   describe('#withJobsCount', function () {
     it('succeeds when count of executed jobs is correct', async function () {
       // given
-      const job = new JobRepository({ name: 'JobTest' }, knex);
-      const job2 = new JobRepository({ name: 'JobTest2' }, knex);
+      const job = new JobRepository({ name: 'JobTest' });
+      const job2 = new JobRepository({ name: 'JobTest2' });
 
       // when
       await job.performAsync({ foo: 'bar' });
@@ -25,7 +30,7 @@ describe('Integration | Tooling | Expect Job', function () {
 
     it('fails when count of executed jobs is not correct', async function () {
       // given
-      const job = new JobRepository({ name: 'JobTest' }, knex);
+      const job = new JobRepository({ name: 'JobTest' });
 
       // when
       await job.performAsync({ foo: 'bar' });
@@ -43,7 +48,7 @@ describe('Integration | Tooling | Expect Job', function () {
   describe('#withJob', function () {
     it('succeeds when the full job data is the same', async function () {
       // given
-      const job = new JobRepository({ name: 'JobTest' }, knex);
+      const job = new JobRepository({ name: 'JobTest' });
 
       // when
       await job.performAsync({ foo: 'bar' });
@@ -61,7 +66,7 @@ describe('Integration | Tooling | Expect Job', function () {
 
     it('fails when the full job data is not the same', async function () {
       // given
-      const job = new JobRepository({ name: 'JobTest' }, knex);
+      const job = new JobRepository({ name: 'JobTest' });
 
       // when
       await job.performAsync({ foo: 'bar' });
@@ -75,7 +80,7 @@ describe('Integration | Tooling | Expect Job', function () {
 
     it('fails when multiple jobs are triggered instead of 1', async function () {
       // given
-      const job = new JobRepository({ name: 'JobTest' }, knex);
+      const job = new JobRepository({ name: 'JobTest' });
 
       // when
       await job.performAsync({ foo: 'bar' });
@@ -94,7 +99,7 @@ describe('Integration | Tooling | Expect Job', function () {
   describe('#withJobPayloads', function () {
     it('succeeds when the jobs payloads are correct', async function () {
       // given
-      const job = new JobRepository({ name: 'JobTest' }, knex);
+      const job = new JobRepository({ name: 'JobTest' });
 
       // when
       await job.performAsync({ foo: 'bar' });
@@ -115,7 +120,7 @@ describe('Integration | Tooling | Expect Job', function () {
 
     it('fails when not all job payloads are correct', async function () {
       // given
-      const job = new JobRepository({ name: 'JobTest' }, knex);
+      const job = new JobRepository({ name: 'JobTest' });
 
       // when
       await job.performAsync({ foo: 'bar' });
@@ -131,7 +136,7 @@ describe('Integration | Tooling | Expect Job', function () {
 
     it('fails when not all jobs are executed', async function () {
       // given
-      const job = new JobRepository({ name: 'JobTest' }, knex);
+      const job = new JobRepository({ name: 'JobTest' });
 
       // when
       await job.performAsync({ foo: 'bar' });
@@ -150,8 +155,8 @@ describe('Integration | Tooling | Expect Job', function () {
   describe('#withJobPayload', function () {
     it('succeeds when the job payload is correct', async function () {
       // given
-      const job = new JobRepository({ name: 'JobTest' }, knex);
-      const job2 = new JobRepository({ name: 'JobTest2' }, knex);
+      const job = new JobRepository({ name: 'JobTest' });
+      const job2 = new JobRepository({ name: 'JobTest2' });
 
       // when
       await job.performAsync({ foo: 'bar' });
@@ -170,7 +175,7 @@ describe('Integration | Tooling | Expect Job', function () {
 
     it('fails when the job payload is not correct', async function () {
       // given
-      const job = new JobRepository({ name: 'JobTest' }, knex);
+      const job = new JobRepository({ name: 'JobTest' });
 
       // when
       await job.performAsync({ foo: 'bar' });
@@ -184,7 +189,7 @@ describe('Integration | Tooling | Expect Job', function () {
 
     it('fails when multiple jobs are triggered instead of 1', async function () {
       // given
-      const job = new JobRepository({ name: 'JobTest' }, knex);
+      const job = new JobRepository({ name: 'JobTest' });
 
       // when
       await job.performAsync({ foo: 'bar' });
@@ -204,7 +209,7 @@ describe('Integration | Tooling | Expect Job', function () {
     describe('#withCronJobsCount', function () {
       it('succeeds when count of executed jobs is correct', async function () {
         // given
-        const jobName = 'My_Job';
+        const jobName = 'JobSchedule';
         // when
         await JobClient.instance.scheduleCronJob({
           name: jobName,
@@ -227,7 +232,7 @@ describe('Integration | Tooling | Expect Job', function () {
     describe('#withCronJob', function () {
       it('succeeds when count of executed jobs is correct', async function () {
         // given
-        const jobName = 'My_Job';
+        const jobName = 'JobSchedule';
         // when
         await JobClient.instance.scheduleCronJob({
           name: jobName,
