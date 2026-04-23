@@ -39,9 +39,11 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
     buildTrainingTrigger,
     buildTrainingTriggerTube,
     buildUser,
+    buildUserRecommendedTraining,
   } = databaseBuilder.factory;
 
   let targetProfileId;
+  let trainingIds = [];
   if (combinedCourseData.targetProfile) {
     targetProfileId = buildTargetProfile({
       description: combinedCourseData.targetProfile.description,
@@ -106,23 +108,26 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
       }),
     );
 
-    combinedCourseData.targetProfile.trainings?.map((training) => {
-      const { id: trainingId } = buildTraining(training);
-      const { id: trainingTriggerId } = buildTrainingTrigger({
-        trainingId,
-        threshold: training.threshold ?? 0,
-        type: 'prerequisite',
-      });
+    trainingIds =
+      combinedCourseData.targetProfile.trainings?.map((training) => {
+        const { id: trainingId } = buildTraining(training);
+        const { id: trainingTriggerId } = buildTrainingTrigger({
+          trainingId,
+          threshold: training.threshold ?? 0,
+          type: training.triggerType ?? 'prerequisite',
+        });
 
-      combinedCourseData.targetProfile.tubes.forEach((tube) =>
-        buildTrainingTriggerTube({ trainingTriggerId, tubeId: tube.id, level: tube.level }),
-      );
+        combinedCourseData.targetProfile.tubes.forEach((tube) =>
+          buildTrainingTriggerTube({ trainingTriggerId, tubeId: tube.id, level: tube.level }),
+        );
 
-      buildTargetProfileTraining({
-        targetProfileId,
-        trainingId,
-      });
-    });
+        buildTargetProfileTraining({
+          targetProfileId,
+          trainingId,
+        });
+
+        return trainingId;
+      }) ?? [];
   }
 
   const combinedCourseSuccessRequirements = combinedCourseData.blueprint.requirements.map((req) => {
@@ -204,6 +209,10 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
             campaignParticipationId,
           });
         }
+
+        trainingIds.forEach((trainingId) => {
+          buildUserRecommendedTraining({ userId, trainingId, campaignParticipationId });
+        });
       }
     }
   });

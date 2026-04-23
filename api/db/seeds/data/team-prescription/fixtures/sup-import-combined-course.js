@@ -32,7 +32,7 @@ export const SUP_IMPORT_COMBINED_COURSE = {
       name: 'Je teste mes compétences',
       code: 'SUPCAMPIX',
       customResultPageButtonText: 'Continuer',
-      customResultPageButtonUrl: '/parcours/SUPINIX/chargement',
+      customResultPageButtonUrl: '/parcours/SUPINIX',
       skills: [],
     },
   },

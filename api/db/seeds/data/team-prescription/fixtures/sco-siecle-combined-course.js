@@ -36,7 +36,7 @@ export const SCO_SIECLE_COMBINED_COURSE = {
       name: 'Je teste mes compétences',
       code: 'SCOCAMPIX',
       customResultPageButtonText: 'Continuer',
-      customResultPageButtonUrl: '/parcours/SCOMBINIX/chargement',
+      customResultPageButtonUrl: '/parcours/SCOMBINIX',
       skills: [],
     },
   },
