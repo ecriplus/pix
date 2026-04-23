@@ -714,6 +714,7 @@
       "jury-info": "Las observaciones del tribunal no se comparten en la página de comprobación de tu certificado.",
       "jury-title": "Observaciones del tribunal",
       "learn-about-certification-results": "¿Cómo interpretar los resultados?",
+      "obtained-certification": "El candidato ha obtenido la certificación {frameworkLabel}",
       "professionalizing-warning": "El certificado Pix está reconocido como cualificación profesional por France Compétences una vez alcanzada una puntuación mínima de 120 pix.",
       "results": {
         "sub-title": "El candidato es admisible para la certificación {framework}.",
@@ -721,6 +722,7 @@
       },
       "subtitle": "(niveles de {maxReachableLevel})",
       "title": "Certificado Pix",
+      "valid-status": "Certificado válido",
       "verification-code": {
         "alt": "Copiar",
         "copied": "¡Código copiado!",
@@ -2395,30 +2397,30 @@
     "user-certifications": {
       "meshes": {
         "DROIT": {
-          "0": "Independiente",
-          "1": "Confirmado",
-          "2": "Avanzado",
-          "3": "Experto",
-          "BELOW_MINIMUM": "No obtenido"
+          "ADVANCED": "Avanzado",
+          "BELOW_MINIMUM": "No obtenido",
+          "CONFIRMED": "Confirmado",
+          "EXPERT": "Experto",
+          "INDEPENDENT": "Independiente"
         },
         "EDU_1ER_DEGRE": {
-          "0": "Admisible",
+          "ADMISSIBLE": "Admisible",
           "BELOW_MINIMUM": "No admisible"
         },
         "EDU_2ND_DEGRE": {
-          "0": "Admisible",
+          "ADMISSIBLE": "Admisible",
           "BELOW_MINIMUM": "No admisible"
         },
         "EDU_CPE": {
-          "0": "Admisible",
+          "ADMISSIBLE": "Admisible",
           "BELOW_MINIMUM": "No admisible"
         },
         "PRO_SANTE": {
-          "0": "Independiente",
-          "1": "Confirmado",
-          "2": "Avanzado",
-          "3": "Experto",
-          "BELOW_MINIMUM": "No obtenido"
+          "ADVANCED": "Avanzado",
+          "BELOW_MINIMUM": "No obtenido",
+          "CONFIRMED": "Confirmado",
+          "EXPERT": "Experto",
+          "INDEPENDENT": "Independiente"
         }
       }
     },

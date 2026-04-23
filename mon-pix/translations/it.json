@@ -725,12 +725,14 @@
       "jury-info": "Le osservazioni della giuria non vengono condivise nella pagina di verifica del certificato.",
       "jury-title": "Commenti della giuria",
       "learn-about-certification-results": "Come vanno interpretati i risultati?",
+      "obtained-certification": "Il candidato ha ottenuto la certificazione {frameworkLabel}",
       "professionalizing-warning": "Il certificato Pix è riconosciuto come qualifica professionale da France Compétences una volta raggiunto un punteggio minimo di 120 pix.",
       "results": {
         "sub-title": "Il candidato è ammissibile alla certificazione {framework}.",
         "title": "Lettura del risultato:"
       },
       "title": "Certificato Pix",
+      "valid-status": "Certificato valido",
       "verification-code": {
         "alt": "Copia",
         "copied": "Codice copiato!",
@@ -2406,30 +2408,30 @@
     "user-certifications": {
       "meshes": {
         "DROIT": {
-          "0": "Indipendente",
-          "1": "Confirmado",
-          "2": "Avanzato",
-          "3": "Esperto",
-          "BELOW_MINIMUM": "Non ottenuto"
+          "ADVANCED": "Avanzato",
+          "BELOW_MINIMUM": "Non ottenuto",
+          "CONFIRMED": "Confirmado",
+          "EXPERT": "Esperto",
+          "INDEPENDENT": "Indipendente"
         },
         "EDU_1ER_DEGRE": {
-          "0": "Ammissibile",
+          "ADMISSIBLE": "Ammissibile",
           "BELOW_MINIMUM": "Non ammissibile"
         },
         "EDU_2ND_DEGRE": {
-          "0": "Ammissibile",
+          "ADMISSIBLE": "Ammissibile",
           "BELOW_MINIMUM": "Non ammissibile"
         },
         "EDU_CPE": {
-          "0": "Ammissibile",
+          "ADMISSIBLE": "Ammissibile",
           "BELOW_MINIMUM": "Non ammissibile"
         },
         "PRO_SANTE": {
-          "0": "Indipendente",
-          "1": "Confermato",
-          "2": "Avanzato",
-          "3": "Esperto",
-          "BELOW_MINIMUM": "Non ottenuto"
+          "ADVANCED": "Avanzato",
+          "BELOW_MINIMUM": "Non ottenuto",
+          "CONFIRMED": "Confermato",
+          "EXPERT": "Esperto",
+          "INDEPENDENT": "Indipendente"
         }
       }
     },

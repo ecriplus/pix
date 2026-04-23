@@ -82,7 +82,7 @@ export default class ListItem extends Component {
             @status={{@certificateSummary.status}}
             @extraStatus={{@certificateSummary.extraCertificationStatus}}
             @framework={{@certificateSummary.certificationFramework}}
-            @reachedMeshIndex={{@certificateSummary.reachedMeshIndex}}
+            @reachedMeshLevel={{@certificateSummary.reachedMeshLevel}}
             @certificateType={{@certificateSummary.certificateType}}
           />
           {{#if this.shouldDisplayFramework}}
@@ -104,7 +104,7 @@ export default class ListItem extends Component {
           @pixScore={{@certificateSummary.pixScore}}
           @status={{@certificateSummary.status}}
           @extraStatus={{@certificateSummary.extraCertificationStatus}}
-          @reachedMeshIndex={{@certificateSummary.reachedMeshIndex}}
+          @reachedMeshLevel={{@certificateSummary.reachedMeshLevel}}
           @framework={{@certificateSummary.certificationFramework}}
           @certificateType={{@certificateSummary.certificateType}}
         />

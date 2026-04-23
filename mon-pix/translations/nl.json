@@ -722,6 +722,7 @@
       "jury-info": "De opmerkingen van de jury worden niet gedeeld op de verificatiepagina van je certificaat.",
       "jury-title": "Commentaar van de jury",
       "learn-about-certification-results": "Hoe moeten de resultaten worden geïnterpreteerd?",
+      "obtained-certification": "De kandidaat heeft het {frameworkLabel}-certificaat behaald",
       "professionalizing-warning": "Het Pix-certificaat wordt door France Compétences erkend als een professionele kwalificatie zodra een minimale score van 120 pix is behaald.",
       "progressbar-explanation": "oortgangsbalk die aangeeft welk niveau je hebt bereikt ( {level}, i.e. level {globalLevelLabel} ) van het maximaal haalbare niveau van 7 (niveau Expert 1)",
       "results": {
@@ -729,6 +730,7 @@
         "title": "Resultaat lezen:"
       },
       "title": "Pix-certificaat",
+      "valid-status": "Geldig certificaat",
       "verification-code": {
         "alt": "Kopieer",
         "copied": "Code gekopieerd!",
@@ -2404,30 +2406,30 @@
     "user-certifications": {
       "meshes": {
         "DROIT": {
-          "0": "Onafhankelijk",
-          "1": "Bevestigd",
-          "2": "Gevorderd",
-          "3": "Expert",
-          "BELOW_MINIMUM": "Niet verkregen"
+          "ADVANCED": "Gevorderd",
+          "BELOW_MINIMUM": "Niet verkregen",
+          "CONFIRMED": "Bevestigd",
+          "EXPERT": "Expert",
+          "INDEPENDENT": "Onafhankelijk"
         },
         "EDU_1ER_DEGRE": {
-          "0": "Toelaatbaar",
+          "ADMISSIBLE": "Toelaatbaar",
           "BELOW_MINIMUM": "Niet toelaatbaar"
         },
         "EDU_2ND_DEGRE": {
-          "0": "Toelaatbaar",
+          "ADMISSIBLE": "Toelaatbaar",
           "BELOW_MINIMUM": "Niet toelaatbaar"
         },
         "EDU_CPE": {
-          "0": "Toelaatbaar",
+          "ADMISSIBLE": "Toelaatbaar",
           "BELOW_MINIMUM": "Niet toelaatbaar"
         },
         "PRO_SANTE": {
-          "0": "Onafhankelijk",
-          "1": "Bevestigd",
-          "2": "Gevorderd",
-          "3": "Expert",
-          "BELOW_MINIMUM": "Niet verkregen"
+          "ADVANCED": "Gevorderd",
+          "BELOW_MINIMUM": "Niet verkregen",
+          "CONFIRMED": "Bevestigd",
+          "EXPERT": "Expert",
+          "INDEPENDENT": "Onafhankelijk"
         }
       }
     },

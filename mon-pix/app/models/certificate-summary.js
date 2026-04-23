@@ -29,7 +29,7 @@ export default class CertificateSummary extends Model {
   @attr('string') status;
   @attr('string') extraCertificationStatus;
   @attr('string') certificateType;
-  @attr() reachedMeshIndex;
+  @attr('string') reachedMeshLevel;
 
   get isValidated() {
     return this.status === CERTIFICATE_STATUSES.VALIDATED;

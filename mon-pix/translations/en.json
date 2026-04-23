@@ -725,12 +725,14 @@
       "jury-info": "Notes from the examining body are not displayed on the verification page of your certificate.",
       "jury-title": "Notes from the examining body",
       "learn-about-certification-results": "How to interpret the results?",
+      "obtained-certification": "The candidate has obtained the {frameworkLabel} certification",
       "professionalizing-warning": "The Pix certificate is recognised as professionalising by France Compétences upon reaching a minimum score of 120 pix.",
       "results": {
         "sub-title": "The candidate is eligible for {framework} certification.",
         "title": "Reading the result:"
       },
       "title": "Pix Certificate",
+      "valid-status": "Valid certificate",
       "verification-code": {
         "alt": "Copy",
         "copied": "Copied!",
@@ -2413,30 +2415,30 @@
     "user-certifications": {
       "meshes": {
         "DROIT": {
-          "0": "Independent",
-          "1": "Confirmed",
-          "2": "Avanced",
-          "3": "Expert",
-          "BELOW_MINIMUM": "Not obtained"
+          "ADVANCED": "Advanced",
+          "BELOW_MINIMUM": "Not obtained",
+          "CONFIRMED": "Confirmed",
+          "EXPERT": "Expert",
+          "INDEPENDENT": "Independent"
         },
         "EDU_1ER_DEGRE": {
-          "0": "Eligible",
+          "ADMISSIBLE": "Eligible",
           "BELOW_MINIMUM": "Not eligible"
         },
         "EDU_2ND_DEGRE": {
-          "0": "Eligible",
+          "ADMISSIBLE": "Eligible",
           "BELOW_MINIMUM": "Not eligible"
         },
         "EDU_CPE": {
-          "0": "Eligible",
+          "ADMISSIBLE": "Eligible",
           "BELOW_MINIMUM": "Not eligible"
         },
         "PRO_SANTE": {
-          "0": "Independent",
-          "1": "Confirmed",
-          "2": "Avanced",
-          "3": "Expert",
-          "BELOW_MINIMUM": "Not obtained"
+          "ADVANCED": "Advanced",
+          "BELOW_MINIMUM": "Not obtained",
+          "CONFIRMED": "Confirmed",
+          "EXPERT": "Expert",
+          "INDEPENDENT": "Independent"
         }
       }
     },

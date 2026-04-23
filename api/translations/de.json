@@ -221,6 +221,10 @@
     },
     "global": {
       "meshlevel": {
+        "LEVEL_ADVANCED": {
+          "label": "Fortgeschrittene",
+          "summary": "Die Kandidatin / der Kandidat hat das Niveau Fortgeschrittene erreicht."
+        },
         "LEVEL_ADVANCED_5": {
           "description": "Sie sind in der Lage, auf spezialisierte Werkzeuge zurückzugreifen, um zuverlässig nach Informationen zu suchen, soziale Netzwerke zu verwalten und Bilder und Videos zu bearbeiten. Sie sind in der Lage, Datenanalysen und geeignete grafische Darstellungen zu erstellen. Sie sind in der Lage, eine digitale Umgebung einzurichten (Installation und Parametrierung). Sie kennen die Herausforderungen rund um die Rückverfolgung und Sammlung von Daten. Sie verstehen die ökologischen und gesellschaftlichen Auswirkungen der digitalen Nutzung und können Ihre Praktiken anpassen.",
           "label": "Fortgeschrittene 1",
@@ -241,6 +245,14 @@
           "label": "Novize 2",
           "summary": "Sie haben einfache digitale Praktiken mit Hilfe, wenn die Situation kompliziert wird."
         },
+        "LEVEL_CONFIRMED": {
+          "label": "Bestätigt",
+          "summary": "Die Kandidatin / der Kandidat hat das Niveau Bestätigt erreicht."
+        },
+        "LEVEL_EXPERT": {
+          "label": "Experte",
+          "summary": "Die Kandidatin / der Kandidat hat das Niveau Experte erreicht."
+        },
         "LEVEL_EXPERT_7": {
           "description": "Sie sind in der Lage, einen Bedarf zu analysieren, selbst technische Dokumentationen zu konsultieren und digitale Lösungen zu bewerten, um die optimalste umzusetzen, oder sogar selbst Werkzeuge zu entwickeln. Sie verstehen die wirtschaftlichen, gesellschaftlichen und ethischen Herausforderungen, die mit digitalen Technologien verbunden sind, und können Ihre digitalen Praktiken kritisch hinterfragen. Sie sind in der Lage, sich in neue Techniken einzuarbeiten und können mit den neuesten technologischen Entwicklungen, wie z. B. der künstlichen Intelligenz, problemlos umgehen.",
           "label": "Experte 1",
@@ -249,6 +261,10 @@
         "LEVEL_EXPERT_8": {
           "label": "Experte 2",
           "summary": "Sie sind in der Lage, Ihre Lösungen für neue und spezifische Probleme zu dokumentieren, um sie mit anderen zu teilen."
+        },
+        "LEVEL_INDEPENDENT": {
+          "label": "Unabhängig",
+          "summary": "Die Kandidatin / der Kandidat hat das Niveau Unabhängig erreicht."
         },
         "LEVEL_INDEPENDENT_3": {
           "description": "Sie können im Web navigieren, um eine gründliche Suche mit relevanten Informationen durchzuführen. Sie können an kollaborativen Aktivitäten teilnehmen (E-Mail, gemeinsamer Terminkalender, Videokonferenzen, gemeinsame Dokumente). Sie können die gängigsten Funktionen gängiger Software (Textverarbeitung und Tabellenkalkulation) nutzen. Sie sind sich der Risiken bewusst, die mit Ihren digitalen Praktiken verbunden sind, sowie der Notwendigkeit, diese zu sichern, und der Umweltauswirkungen Ihrer digitalen Nutzung. Sie können gängige Probleme lösen (Passwort, Login).",

@@ -449,7 +449,7 @@ describe('Certification | Results | Acceptance | Application | Certification', f
               'certificate-type': CERTIFICATE_TYPES.CERTIFICATE,
               status: CERTIFICATE_STATUSES.VALIDATED,
               'extra-certification-status': EXTRA_CERTIFICATE_STATUSES.NOT_APPLICABLE,
-              'reached-mesh-index': null,
+              'reached-mesh-level': null,
             },
           },
           {
@@ -465,7 +465,7 @@ describe('Certification | Results | Acceptance | Application | Certification', f
               'pix-score': null,
               status: CERTIFICATE_STATUSES.VALIDATED,
               'extra-certification-status': EXTRA_CERTIFICATE_STATUSES.NOT_ACQUIRED,
-              'reached-mesh-index': 1,
+              'reached-mesh-level': 'ADMISSIBLE',
             },
           },
         ]);

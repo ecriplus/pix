@@ -34,17 +34,17 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
         [
           {
             assessmentResultStatus: AssessmentResult.status.REJECTED,
-            expectedReachedMeshIndex: null,
+            expectedReachedMeshLevel: null,
           },
           {
             assessmentResultStatus: AssessmentResult.status.VALIDATED,
-            expectedReachedMeshIndex: baseData.reachedMeshIndex,
+            expectedReachedMeshLevel: 'LEVEL_BEGINNER_1',
           },
           {
             assessmentResultStatus: AssessmentResult.status.CANCELLED,
-            expectedReachedMeshIndex: baseData.reachedMeshIndex,
+            expectedReachedMeshLevel: 'LEVEL_BEGINNER_1',
           },
-        ].forEach(({ assessmentResultStatus, expectedReachedMeshIndex }) => {
+        ].forEach(({ assessmentResultStatus, expectedReachedMeshLevel }) => {
           it(`should set the status of the certificate as WAIT_FOR_RESULTS when assessment result status is ${assessmentResultStatus}`, function () {
             const actualCertificateSummary = CertificateSummary.buildFrom({
               ...baseData,
@@ -63,7 +63,7 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
               status: CERTIFICATE_STATUSES.WAITING_FOR_RESULTS,
               extraCertificationStatus: null,
               certificateType: CERTIFICATE_TYPES.CERTIFICATE,
-              reachedMeshIndex: expectedReachedMeshIndex,
+              reachedMeshLevel: expectedReachedMeshLevel,
             });
 
             expect(actualCertificateSummary).to.deepEqualInstance(expectedCertificateSummary);
@@ -77,21 +77,21 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
             assessmentResultStatus: AssessmentResult.status.REJECTED,
             status: CERTIFICATE_STATUSES.REJECTED,
             extraStatus: EXTRA_CERTIFICATE_STATUSES.ACQUIRED,
-            expectedReachedMeshIndex: null,
+            expectedReachedMeshLevel: null,
           },
           {
             assessmentResultStatus: AssessmentResult.status.CANCELLED,
             status: CERTIFICATE_STATUSES.CANCELLED,
             extraStatus: null,
-            expectedReachedMeshIndex: baseData.reachedMeshIndex,
+            expectedReachedMeshLevel: 'LEVEL_BEGINNER_1',
           },
           {
             assessmentResultStatus: AssessmentResult.status.VALIDATED,
             status: CERTIFICATE_STATUSES.VALIDATED,
             extraStatus: EXTRA_CERTIFICATE_STATUSES.ACQUIRED,
-            expectedReachedMeshIndex: baseData.reachedMeshIndex,
+            expectedReachedMeshLevel: 'LEVEL_BEGINNER_1',
           },
-        ].forEach(({ assessmentResultStatus, status, extraStatus, expectedReachedMeshIndex }) => {
+        ].forEach(({ assessmentResultStatus, status, extraStatus, expectedReachedMeshLevel }) => {
           it(`should set the status of the certificate as ${status} when assessment result status is ${assessmentResultStatus}`, function () {
             const actualCertificateSummary = CertificateSummary.buildFrom({
               ...baseData,
@@ -110,7 +110,7 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
               status,
               certificateType: CERTIFICATE_TYPES.CERTIFICATE,
               extraCertificationStatus: extraStatus,
-              reachedMeshIndex: expectedReachedMeshIndex,
+              reachedMeshLevel: expectedReachedMeshLevel,
             });
 
             expect(actualCertificateSummary).to.deepEqualInstance(expectedCertificateSummary);
@@ -140,6 +140,7 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
               status: CERTIFICATE_STATUSES.WAITING_FOR_RESULTS,
               extraCertificationStatus: null,
               certificateType: CERTIFICATE_TYPES.CERTIFICATE,
+              reachedMeshLevel: 'LEVEL_BEGINNER_1',
             });
 
             expect(actualCertificateSummary).to.deepEqualInstance(expectedCertificateSummary);
@@ -180,6 +181,7 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
               status: CERTIFICATE_STATUSES.VALIDATED,
               extraCertificationStatus,
               certificateType: CERTIFICATE_TYPES.CERTIFICATE,
+              reachedMeshLevel: 'LEVEL_BEGINNER_1',
             });
 
             expect(actualCertificateSummary).to.deepEqualInstance(expectedCertificateSummary);
@@ -188,9 +190,9 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
       });
     });
 
-    context('reachedMeshIndex computation', function () {
+    context('reachedMeshLevel computation', function () {
       context('when certification is V3 and rejected', function () {
-        it('should set reachedMeshIndex to null', function () {
+        it('should set reachedMeshLevel to null', function () {
           // when
           const actualCertificateSummary = CertificateSummary.buildFrom({
             ...baseData,
@@ -202,12 +204,12 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
           });
 
           // then
-          expect(actualCertificateSummary.reachedMeshIndex).to.be.null;
+          expect(actualCertificateSummary.reachedMeshLevel).to.be.null;
         });
       });
 
-      context('when certification is V3 and validated', function () {
-        it('should keep the reachedMeshIndex', function () {
+      context('when certification is V3 and not rejected', function () {
+        it('should convert reachedMeshIndex to the corresponding level key', function () {
           // when
           const actualCertificateSummary = CertificateSummary.buildFrom({
             ...baseData,
@@ -219,12 +221,12 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
           });
 
           // then
-          expect(actualCertificateSummary.reachedMeshIndex).to.equal(0);
+          expect(actualCertificateSummary.reachedMeshLevel).to.equal('LEVEL_PRE_BEGINNER');
         });
       });
 
       context('when certification is not V3', function () {
-        it('should keep the reachedMeshIndex regardless of status', function () {
+        it('should convert reachedMeshIndex to the corresponding level key regardless of status', function () {
           // when
           const actualCertificateSummary = CertificateSummary.buildFrom({
             ...baseData,
@@ -236,7 +238,7 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
           });
 
           // then
-          expect(actualCertificateSummary.reachedMeshIndex).to.equal(3);
+          expect(actualCertificateSummary.reachedMeshLevel).to.equal('LEVEL_INDEPENDENT_3');
         });
       });
     });
@@ -275,6 +277,7 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
             status: CERTIFICATE_STATUSES.VALIDATED,
             extraCertificationStatus: EXTRA_CERTIFICATE_STATUSES.NOT_APPLICABLE,
             certificateType,
+            reachedMeshLevel: 'LEVEL_BEGINNER_1',
           });
 
           expect(actualCertificateSummary).to.deepEqualInstance(expectedCertificateSummary);

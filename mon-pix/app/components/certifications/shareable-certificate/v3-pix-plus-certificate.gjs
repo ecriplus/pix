@@ -19,19 +19,24 @@ export default class PixPlusCertificate extends Component {
   }
 
   get reachedMeshLabel() {
-    return this.intl.t(`pages.user-certifications.meshes.${this.args.certificate.certificationFramework}.0`);
+    return this.intl.t(
+      `pages.user-certifications.meshes.${this.args.certificate.certificationFramework}.${this.args.certificate.level}`,
+    );
+  }
+
+  get certificationSubTitle() {
+    if (this.isEduCertification) {
+      return this.intl.t('pages.certificate.frameworks.EDU.sub-title');
+    }
+    return this.intl.t('pages.certificate.obtained-certification', {
+      frameworkLabel: this.certificationFrameworkLabel,
+    });
   }
 
   get frameworkTranslations() {
-    const prefix = this.isEduCertification
-      ? 'pages.certificate.frameworks.EDU'
-      : `pages.user-certifications.frameworks.${this.args.certificate.certificationFramework}`;
-
     return {
-      status: this.intl.t(`${prefix}.status`),
-      subTitle: this.intl.t(`${prefix}.sub-title`),
-      resultsInfos: this.intl.t(`${prefix}.results-infos`, { htmlSafe: true }),
-      resultsSubTitle: this.intl.t(`${prefix}.results-sub-title`, { htmlSafe: true }),
+      resultsInfos: this.intl.t('pages.certificate.frameworks.EDU.results-infos', { htmlSafe: true }),
+      resultsSubTitle: this.intl.t('pages.certificate.frameworks.EDU.results-sub-title', { htmlSafe: true }),
     };
   }
 
@@ -48,12 +53,12 @@ export default class PixPlusCertificate extends Component {
       <div>
         <PixTag @color="green" class="v3-pix-plus-certificate__valid-tag">
           <PixIcon @name="check" />
-          {{this.frameworkTranslations.status}}
+          {{t "pages.certificate.valid-status"}}
         </PixTag>
 
         <h2 class="v3-pix-plus-certificate__title">
-          <strong>{{this.frameworkTranslations.status}}</strong>
-          {{this.frameworkTranslations.subTitle}}
+          <strong>{{t "pages.certificate.valid-status"}}</strong>
+          {{this.certificationSubTitle}}
         </h2>
 
         {{#if this.isEduCertification}}
@@ -93,13 +98,15 @@ export default class PixPlusCertificate extends Component {
       </div>
     </PixBlock>
 
-    <PixBlock class="v3-pix-plus-certificate__results-infos-block">
-      <img src="/images/illustrations/user-certifications/certificate-magnifier.png" alt="" />
-      <div class="v3-pix-plus-certificate__results-infos-details">
-        <h3 class="v3-pix-plus-certificate__title">{{t "pages.certificate.results.title"}}</h3>
-        <p><strong>{{this.frameworkTranslations.resultsSubTitle}}</strong></p>
-        {{this.frameworkTranslations.resultsInfos}}
-      </div>
-    </PixBlock>
+    {{#if this.isEduCertification}}
+      <PixBlock class="v3-pix-plus-certificate__results-infos-block">
+        <img src="/images/illustrations/user-certifications/certificate-magnifier.png" alt="" />
+        <div class="v3-pix-plus-certificate__results-infos-details">
+          <h3 class="v3-pix-plus-certificate__title">{{t "pages.certificate.results.title"}}</h3>
+          <p><strong>{{this.frameworkTranslations.resultsSubTitle}}</strong></p>
+          {{this.frameworkTranslations.resultsInfos}}
+        </div>
+      </PixBlock>
+    {{/if}}
   </template>
 }

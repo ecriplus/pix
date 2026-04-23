@@ -226,6 +226,10 @@
           "label": "Admissible",
           "summary": "Le candidat est admissible à la certification Pix+ Edu."
         },
+        "LEVEL_ADVANCED": {
+          "label": "Avancé",
+          "summary": "Le candidat a obtenu le niveau Avancé."
+        },
         "LEVEL_ADVANCED_5": {
           "description": "Vous êtes capable de recourir à des outils spécialisés pour rechercher de l'information de façon fiable, gérer des réseaux sociaux, éditer des images et des vidéos. Vous savez produire des analyses de données et des représentations graphiques adaptées. Vous savez mettre en place un environnement numérique (installation et paramétrage). Vous connaissez les enjeux autour du traçage et de la collecte de données. Vous comprenez les impacts environnementaux et sociétaux des usages numériques et savez adapter vos pratiques.",
           "label": "Avancé 1",
@@ -246,6 +250,14 @@
           "label": "Novice 2",
           "summary": "Vous avez des pratiques numériques simples, avec de l'aide quand la situation se complique."
         },
+        "LEVEL_CONFIRMED": {
+          "label": "Confirmé",
+          "summary": "Le candidat a obtenu le niveau Confirmé."
+        },
+        "LEVEL_EXPERT": {
+          "label": "Expert",
+          "summary": "Le candidat a obtenu le niveau Expert."
+        },
         "LEVEL_EXPERT_7": {
           "description": "Vous êtes capable d'analyser un besoin, de consulter de la documentation même technique et d'évaluer des solutions numériques pour mettre en oeuvre la plus optimale, voire même de développer vous-mêmes des outils. Vous comprenez les enjeux économiques, sociétaux, et éthiques associés aux technologies numériques et pouvez exercer votre esprit critique sur vos pratiques numériques. Vous êtes en capacité de vous former à de nouvelles techniques et appréhendez avec aisance les avancées technologiques les plus récentes, telles que celles permises par l'intelligence artificielle.",
           "label": "Expert 1",
@@ -254,6 +266,10 @@
         "LEVEL_EXPERT_8": {
           "label": "Expert 2",
           "summary": "Vous êtes capables de documenter vos solutions à des problèmes nouveaux et spécifiques pour les partager."
+        },
+        "LEVEL_INDEPENDENT": {
+          "label": "Indépendant",
+          "summary": "Le candidat a obtenu le niveau Indépendant."
         },
         "LEVEL_INDEPENDENT_3": {
           "description": "Vous savez naviguer sur le Web pour réaliser une recherche approfondie avec des informations pertinentes. Vous savez participer à des activités collaboratives (messagerie, agenda partagé, réunion en visio, documents partagés). Vous savez utiliser les fonctionnalités les plus courantes des logiciels usuels (traitement de texte et tableur). Vous êtes sensible aux risques associés à vos pratiques numériques et à la nécessité de les sécuriser, ainsi qu'à l'impact environnemental de vos usages numériques. Vous savez résoudre les problèmes courants (mot de passe, connexion).",

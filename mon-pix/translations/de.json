@@ -724,12 +724,14 @@
       "jury-info": "Die Bemerkungen der Jury werden auf der Überprüfungsseite Ihres Zeugnisses nicht geteilt.",
       "jury-title": "Bemerkungen der Jury",
       "learn-about-certification-results": "Wie sind die Ergebnisse zu interpretieren?",
+      "obtained-certification": "Der Kandidat hat das {frameworkLabel}-Zertifikat erhalten",
       "professionalizing-warning": "Das Pix-Zertifikat wird von France compétences ab einer Mindestpunktzahl von 120 Pix als berufsqualifizierend anerkannt.",
       "results": {
         "sub-title": "Der Kandidat ist für die Zertifizierung {framework} zugelassen.",
         "title": "Ergebnis lesen:"
       },
       "title": "Pix-Zertifikat",
+      "valid-status": "Gültiges Zertifikat",
       "verification-code": {
         "alt": "Kopieren",
         "copied": "Code kopiert!",
@@ -2413,30 +2415,30 @@
     "user-certifications": {
       "meshes": {
         "DROIT": {
-          "0": "Selbstständig",
-          "1": "Bestätigt",
-          "2": "Fortgeschrittene",
-          "3": "Experte",
-          "BELOW_MINIMUM": "Nicht erlangt"
+          "ADVANCED": "Fortgeschrittene",
+          "BELOW_MINIMUM": "Nicht erlangt",
+          "CONFIRMED": "Bestätigt",
+          "EXPERT": "Experte",
+          "INDEPENDENT": "Selbstständig"
         },
         "EDU_1ER_DEGRE": {
-          "0": "Zulässig",
+          "ADMISSIBLE": "Zulässig",
           "BELOW_MINIMUM": "Nicht zulässig"
         },
         "EDU_2ND_DEGRE": {
-          "0": "Zulässig",
+          "ADMISSIBLE": "Zulässig",
           "BELOW_MINIMUM": "Nicht zulässig"
         },
         "EDU_CPE": {
-          "0": "Zulässig",
+          "ADMISSIBLE": "Zulässig",
           "BELOW_MINIMUM": "Nicht zulässig"
         },
         "PRO_SANTE": {
-          "0": "Selbstständig",
-          "1": "Bestätigt",
-          "2": "Fortgeschrittene",
-          "3": "Experte",
-          "BELOW_MINIMUM": "Nicht erlangt"
+          "ADVANCED": "Fortgeschrittene",
+          "BELOW_MINIMUM": "Nicht erlangt",
+          "CONFIRMED": "Bestätigt",
+          "EXPERT": "Experte",
+          "INDEPENDENT": "Selbstständig"
         }
       }
     },

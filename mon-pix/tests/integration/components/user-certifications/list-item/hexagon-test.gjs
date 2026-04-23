@@ -14,7 +14,7 @@ module('Integration | Component | User certifications | List item | Hexagon', fu
       const pixScore = 654;
       const isValidated = true;
       const framework = 'CORE';
-      const reachedMeshIndex = 0;
+      const reachedMeshLevel = 'LEVEL_PRE_BEGINNER';
 
       // when
       const screen = await render(
@@ -23,7 +23,7 @@ module('Integration | Component | User certifications | List item | Hexagon', fu
             @pixScore={{pixScore}}
             @isValidated={{isValidated}}
             @framework={{framework}}
-            @reachedMeshIndex={{reachedMeshIndex}}
+            @reachedMeshLevel={{reachedMeshLevel}}
           />
         </template>,
       );
@@ -40,7 +40,7 @@ module('Integration | Component | User certifications | List item | Hexagon', fu
       const pixScore = 654;
       const isValidated = false;
       const framework = 'CORE';
-      const reachedMeshIndex = 0;
+      const reachedMeshLevel = 'LEVEL_PRE_BEGINNER';
 
       // when
       const screen = await render(
@@ -49,7 +49,7 @@ module('Integration | Component | User certifications | List item | Hexagon', fu
             @pixScore={{pixScore}}
             @isValidated={{isValidated}}
             @framework={{framework}}
-            @reachedMeshIndex={{reachedMeshIndex}}
+            @reachedMeshLevel={{reachedMeshLevel}}
           />
         </template>,
       );
@@ -64,7 +64,7 @@ module('Integration | Component | User certifications | List item | Hexagon', fu
     test('has only base class for CORE framework', async function (assert) {
       // given
       const framework = 'CORE';
-      const reachedMeshIndex = 0;
+      const reachedMeshLevel = 'LEVEL_PRE_BEGINNER';
       const isValidated = true;
       const pixScore = 500;
 
@@ -75,7 +75,7 @@ module('Integration | Component | User certifications | List item | Hexagon', fu
             @pixScore={{pixScore}}
             @isValidated={{isValidated}}
             @framework={{framework}}
-            @reachedMeshIndex={{reachedMeshIndex}}
+            @reachedMeshLevel={{reachedMeshLevel}}
           />
         </template>,
       );
@@ -93,7 +93,7 @@ module('Integration | Component | User certifications | List item | Hexagon', fu
     test('has only base class for CLEA framework', async function (assert) {
       // given
       const framework = 'CLEA';
-      const reachedMeshIndex = 5;
+      const reachedMeshLevel = 'LEVEL_ADVANCED_5';
       const isValidated = true;
       const pixScore = 500;
 
@@ -104,7 +104,7 @@ module('Integration | Component | User certifications | List item | Hexagon', fu
             @pixScore={{pixScore}}
             @isValidated={{isValidated}}
             @framework={{framework}}
-            @reachedMeshIndex={{reachedMeshIndex}}
+            @reachedMeshLevel={{reachedMeshLevel}}
           />
         </template>,
       );
@@ -119,11 +119,16 @@ module('Integration | Component | User certifications | List item | Hexagon', fu
         .doesNotHaveClass('certification-item__hexagon--pix-plus-not-validated');
     });
 
-    test('has validated class for Pix+ v3 with a reachedMeshIndex', async function (assert) {
+    test('has validated class for Pix+ v3 with a reachedMeshLevel', async function (assert) {
       // when
       await render(
         <template>
-          <Hexagon @isValidated={{true}} @framework="DROIT" @reachedMeshIndex={{0}} @certificateType="CERTIFICATE" />
+          <Hexagon
+            @isValidated={{true}}
+            @framework="DROIT"
+            @reachedMeshLevel="LEVEL_INDEPENDENT"
+            @certificateType="CERTIFICATE"
+          />
         </template>,
       );
 
@@ -133,9 +138,9 @@ module('Integration | Component | User certifications | List item | Hexagon', fu
         .hasClass('certification-item__hexagon--pix-plus-validated');
     });
 
-    test('has not-validated class for Pix+ v3 with null reachedMeshIndex', async function (assert) {
+    test('has not-validated class for Pix+ v3 with null reachedMeshLevel', async function (assert) {
       // given
-      const reachedMeshIndex = null;
+      const reachedMeshLevel = null;
 
       // when
       await render(
@@ -143,7 +148,7 @@ module('Integration | Component | User certifications | List item | Hexagon', fu
           <Hexagon
             @isValidated={{true}}
             @framework="DROIT"
-            @reachedMeshIndex={{reachedMeshIndex}}
+            @reachedMeshLevel={{reachedMeshLevel}}
             @certificateType="CERTIFICATE"
           />
         </template>,

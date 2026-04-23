@@ -88,7 +88,7 @@ module('Integration | Component | User certifications | List item | Tags', funct
       const framework = 'EDU_2ND_DEGRE';
       const extraStatus = EXTRA_CERTIFICATE_STATUSES.NOT_APPLICABLE;
       const certificateType = CERTIFICATE_TYPES.CERTIFICATE;
-      const reachedMeshIndex = 0;
+      const reachedMeshLevel = 'ADMISSIBLE';
 
       // when
       const screen = await render(
@@ -97,7 +97,7 @@ module('Integration | Component | User certifications | List item | Tags', funct
             @status={{status}}
             @framework={{framework}}
             @extraStatus={{extraStatus}}
-            @reachedMeshIndex={{reachedMeshIndex}}
+            @reachedMeshLevel={{reachedMeshLevel}}
             @certificateType={{certificateType}}
           />
         </template>,
@@ -106,7 +106,7 @@ module('Integration | Component | User certifications | List item | Tags', funct
       // then
       const mainTag = screen.getByTestId('pw-certification-card-main-status');
       assert.dom(mainTag).containsText(t('pages.certification-frameworks.EDU_2ND_DEGRE'));
-      assert.dom(mainTag).containsText(t('pages.user-certifications.meshes.EDU_2ND_DEGRE.0'));
+      assert.dom(mainTag).containsText(t('pages.user-certifications.meshes.EDU_2ND_DEGRE.ADMISSIBLE'));
     });
 
     test('displays mesh level for Pix+ v3 rejected certification below minimum', async function (assert) {
@@ -115,7 +115,7 @@ module('Integration | Component | User certifications | List item | Tags', funct
       const framework = 'EDU_2ND_DEGRE';
       const extraStatus = EXTRA_CERTIFICATE_STATUSES.NOT_APPLICABLE;
       const certificateType = CERTIFICATE_TYPES.CERTIFICATE;
-      const reachedMeshIndex = null;
+      const reachedMeshLevel = null;
 
       // when
       const screen = await render(
@@ -124,7 +124,7 @@ module('Integration | Component | User certifications | List item | Tags', funct
             @status={{status}}
             @framework={{framework}}
             @extraStatus={{extraStatus}}
-            @reachedMeshIndex={{reachedMeshIndex}}
+            @reachedMeshLevel={{reachedMeshLevel}}
             @certificateType={{certificateType}}
           />
         </template>,
