@@ -12,6 +12,7 @@ import { debounceTask } from 'ember-lifeline';
 import ENV from 'pix-certif/config/environment';
 
 import { CREATED, FINALIZED, PROCESSED } from '../../models/session-management';
+import { SESSION_PAGE_SIZE } from '../../utils/pagination';
 import NoSessionPanel from './no-session-panel';
 import SessionList from './session-list';
 import SessionListHeader from './session-list-header';
@@ -26,7 +27,7 @@ export default class Sessions extends Component {
   @service router;
 
   @tracked pageNumber = DEFAULT_PAGE_NUMBER;
-  @tracked pageSize = 25;
+  @tracked pageSize = SESSION_PAGE_SIZE;
   @tracked sessionIdFilter = this.args.sessionId ?? null;
   @tracked selectedStatusFilter = this.args.status ?? this.statusFilterOptions[0].value;
 

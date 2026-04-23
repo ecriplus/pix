@@ -2,6 +2,7 @@ import { visit as visitScreen } from '@1024pix/ember-testing-library';
 import { click, currentURL, visit } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { setupApplicationTest } from 'ember-qunit';
+import { STUDENT_PAGE_SIZE } from 'pix-certif/utils/pagination';
 import { module, test } from 'qunit';
 
 import { authenticateSession } from '../helpers/test-init';
@@ -13,7 +14,6 @@ module('Acceptance | Session Add Sco Students', function (hooks) {
   let allowedCertificationCenterAccess;
   let certificationPointOfContact;
   let session;
-  const DEFAULT_PAGE_SIZE = 50;
 
   hooks.beforeEach(function () {
     allowedCertificationCenterAccess = server.create('allowed-certification-center-access', {
@@ -163,7 +163,7 @@ module('Acceptance | Session Add Sco Students', function (hooks) {
             isSelected: false,
             isEnrolled: false,
           });
-          server.createList('student', DEFAULT_PAGE_SIZE);
+          server.createList('student', STUDENT_PAGE_SIZE);
         });
 
         test('it should show first page of students (with default size)', async function (assert) {
@@ -175,7 +175,7 @@ module('Acceptance | Session Add Sco Students', function (hooks) {
 
           // then
           const allRowLength = screen.getAllByRole('row').length;
-          assert.strictEqual(allRowLength, DEFAULT_PAGE_SIZE + 1);
+          assert.strictEqual(allRowLength, STUDENT_PAGE_SIZE + 1);
         });
 
         module('when selecting some students', function () {
@@ -200,7 +200,7 @@ module('Acceptance | Session Add Sco Students', function (hooks) {
 
             // then
             const allRowLength = screen.getAllByRole('row').length;
-            assert.strictEqual(allRowLength, DEFAULT_PAGE_SIZE + 1);
+            assert.strictEqual(allRowLength, STUDENT_PAGE_SIZE + 1);
             assert.dom(firstCheckbox).isChecked();
             assert.dom(secondCheckbox).isChecked();
             assert.dom(thirdCheckbox).isChecked();

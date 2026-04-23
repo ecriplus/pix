@@ -2,6 +2,8 @@ import { action } from '@ember/object';
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 
+import { STUDENT_PAGE_SIZE } from '../../../utils/pagination';
+
 export default class AuthenticatedSessionsDetailsAddStudentRoute extends Route {
   @service currentUser;
   @service store;
@@ -27,12 +29,11 @@ export default class AuthenticatedSessionsDetailsAddStudentRoute extends Route {
       return { label: division.name, value: division.name };
     });
 
-    const DEFAULT_PAGE_SIZE = 50;
     const FIRST_PAGE_NUMBER = 1;
     const students = await this.store.query('student', {
       page: {
         number: params.pageNumber || FIRST_PAGE_NUMBER,
-        size: params.pageSize || DEFAULT_PAGE_SIZE,
+        size: params.pageSize || STUDENT_PAGE_SIZE,
       },
       filter: {
         certificationCenterId,
