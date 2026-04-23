@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { status } from '../../../../shared/domain/models/AssessmentResult.js';
 import { MINIMUM_REPRODUCIBILITY_RATE_TO_BE_CERTIFIED } from '../../../shared/domain/constants.js';
 
@@ -15,10 +13,7 @@ class CertificationAssessmentScore {
   }
 
   get nbPix() {
-    if (_.isEmpty(this.competenceMarks)) {
-      return 0;
-    }
-    return _.sumBy(this.competenceMarks, 'score');
+    return this.competenceMarks.reduce((pixCount, competenceMark) => pixCount + competenceMark.score, 0);
   }
 
   get status() {

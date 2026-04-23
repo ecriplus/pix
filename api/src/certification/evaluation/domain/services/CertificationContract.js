@@ -1,10 +1,8 @@
-import _ from 'lodash';
-
 import { CertificationComputeError } from '../errors.js';
 
-class CertificationContract {
+export class CertificationContract {
   static assertThatWeHaveEnoughAnswers(listAnswers, listChallenges) {
-    const someUnansweredChallenges = _.some(listChallenges, (challenge) => {
+    const someUnansweredChallenges = listChallenges.some((challenge) => {
       return (
         !challenge.hasBeenSkippedAutomatically &&
         !challenge.isNeutralized &&
@@ -33,7 +31,7 @@ class CertificationContract {
 
   static assertThatEveryAnswerHasMatchingChallenge(answersForCompetence, challengesForCompetence) {
     answersForCompetence.forEach((answer) => {
-      const challenge = _.find(challengesForCompetence, { challengeId: answer.challengeId });
+      const challenge = challengesForCompetence.find((challenge) => challenge.challengeId === answer.challengeId);
       if (!challenge) {
         throw new CertificationComputeError('Problème de chargement du challenge ' + answer.challengeId);
       }
@@ -41,12 +39,12 @@ class CertificationContract {
   }
 
   static assertThatNoChallengeHasMoreThanOneAnswer(answersForCompetence) {
-    const someChallengesHaveMoreThanOneAnswer = _(answersForCompetence)
-      .groupBy((answer) => answer.challengeId)
-      .some((answerGroup) => answerGroup.length > 1);
-
-    if (someChallengesHaveMoreThanOneAnswer) {
-      throw new CertificationComputeError('Plusieurs réponses pour une même épreuve');
+    const seenIds = new Set();
+    for (const answer of answersForCompetence) {
+      if (seenIds.has(answer.challengeId)) {
+        throw new CertificationComputeError('Plusieurs réponses pour une même épreuve');
+      }
+      seenIds.add(answer.challengeId);
     }
   }
 
@@ -55,5 +53,3 @@ class CertificationContract {
     return numberOfNonNeutralizedChallenges >= minimalNumberOfNonNeutralizedChallengesToBeTrusted;
   }
 }
-
-export { CertificationContract };
