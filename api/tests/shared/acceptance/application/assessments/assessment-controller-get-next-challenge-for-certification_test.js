@@ -42,19 +42,47 @@ const learningContent = [
               {
                 id: skillWeb2Id,
                 nom: '@web2',
-                challenges: [{ id: firstChallengeId, alpha: 2.8, delta: 1.1, langues: ['Franco Français'] }],
+                challenges: [
+                  {
+                    id: firstChallengeId,
+                    alpha: 2.8,
+                    delta: 1.1,
+                    langues: ['Franco Français'],
+                    status: 'validé',
+                  },
+                ],
               },
               {
                 id: skillWeb3Id,
                 nom: '@web3',
-                challenges: [{ id: secondChallengeId, langues: ['Franco Français'], alpha: -1.2, delta: 3.3 }],
+                challenges: [
+                  {
+                    id: secondChallengeId,
+                    langues: ['Franco Français'],
+                    alpha: -1.2,
+                    delta: 3.3,
+                    status: 'validé',
+                  },
+                ],
               },
               {
                 id: skillWeb1Id,
                 nom: '@web1',
                 challenges: [
-                  { id: thirdChallengeId, alpha: -0.2, delta: 2.7, langues: ['Franco Français'] },
-                  { id: otherChallengeId, alpha: -0.2, delta: -0.4, langues: ['Franco Français'] },
+                  {
+                    id: thirdChallengeId,
+                    alpha: -0.2,
+                    delta: 2.7,
+                    langues: ['Franco Français'],
+                    status: 'validé',
+                  },
+                  {
+                    id: otherChallengeId,
+                    alpha: -0.2,
+                    delta: -0.4,
+                    langues: ['Franco Français'],
+                    status: 'validé',
+                  },
                 ],
               },
             ],
@@ -96,17 +124,19 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           sessionId,
           reconciledAt: new Date('2020-01-15'),
         });
-        const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
-          isPublished: false,
-          version: AlgorithmEngineVersion.V3,
-          userId,
-          sessionId,
-          candidateId: candidate.id,
-        }).id;
         const version = databaseBuilder.factory.buildCertificationVersion({
           scope: SCOPES.CORE,
           startDate: new Date('2020-01-10'),
         });
+        const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+          isPublished: false,
+          version: AlgorithmEngineVersion.V3,
+          versionId: version.id,
+          userId,
+          sessionId,
+          candidateId: candidate.id,
+          lang: 'fr-fr',
+        }).id;
 
         databaseBuilder.factory.buildCertificationFrameworksChallenge({
           challengeId: firstChallengeId,
@@ -247,12 +277,19 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           sessionId,
           reconciledAt: new Date('2020-01-01'),
         });
+        const version = databaseBuilder.factory.buildCertificationVersion({
+          scope: SCOPES.CORE,
+          startDate: new Date('2019-01-01'),
+        });
+
         const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
           isPublished: false,
           version: AlgorithmEngineVersion.V3,
+          versionId: version.id,
           userId,
           sessionId,
           candidateId: candidate.id,
+          lang: 'fr-fr',
         }).id;
         databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
         const assessment = databaseBuilder.factory.buildAssessment({
@@ -270,10 +307,6 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           status: 'validated',
         });
         databaseBuilder.factory.buildCompetenceEvaluation({ assessmentId, competenceId, userId });
-        const version = databaseBuilder.factory.buildCertificationVersion({
-          scope: SCOPES.CORE,
-          startDate: new Date('2019-01-01'),
-        });
 
         databaseBuilder.factory.buildCertificationFrameworksChallenge({
           challengeId: firstChallengeId,
@@ -334,6 +367,7 @@ describe('Acceptance | API | assessment-controller-get-next-challenge-for-certif
           version: AlgorithmEngineVersion.V3,
           userId: user.id,
           sessionId,
+          candidateId: candidate.id,
         }).id;
         databaseBuilder.factory.buildCertificationChallenge({
           associatedSkillName: '@web3',

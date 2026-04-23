@@ -1,9 +1,9 @@
 /**
  * @typedef {import('../../../evaluation/domain/usecases/index.js').AnswerRepository} AnswerRepository
- * @typedef {import('../../../evaluation/domain/usecases/index.js').CertificationCandidateRepository} CertificationCandidateRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').CertificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').SharedChallengeRepository} SharedChallengeRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').CalibratedChallengeRepository} CalibratedChallengeRepository
+ * @typedef {import('../../../evaluation/domain/usecases/index.js').AssessmentSheetRepository} AssessmentSheetRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').SessionManagementCertificationChallengeRepository} SessionManagementCertificationChallengeRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').VersionApi} VersionApi
  * @typedef {import('../../../evaluation/domain/usecases/index.js').FlashAlgorithmService} FlashAlgorithmService
@@ -18,10 +18,10 @@ import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js'
 
 /**
  * @param {object} params
- * @param {Assessment} params.assessment
+ * @param {number} params.assessmentId
  * @param {string} params.locale
  * @param {AnswerRepository} params.answerRepository
- * @param {CertificationCandidateRepository} params.certificationCandidateRepository
+ * @param {AssessmentSheetRepository} params.assessmentSheetRepository
  * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
  * @param {SharedChallengeRepository} params.sharedChallengeRepository
  * @param {CalibratedChallengeRepository} params.calibratedChallengeRepository
@@ -31,10 +31,10 @@ import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js'
  * @param {PickChallengeService} params.pickChallengeService
  */
 const getNextChallenge = async function ({
-  assessment,
+  assessmentId,
   locale,
   answerRepository,
-  certificationCandidateRepository,
+  assessmentSheetRepository,
   certificationChallengeLiveAlertRepository,
   sessionManagementCertificationChallengeRepository,
   sharedChallengeRepository,
@@ -43,12 +43,14 @@ const getNextChallenge = async function ({
   flashAlgorithmService,
   pickChallengeService,
 }) {
+  const assessmentSheet = await assessmentSheetRepository.getByAssessmentId(assessmentId);
+
   const validatedLiveAlertChallengeIds = await _getValidatedLiveAlertChallengeIds({
-    assessmentId: assessment.id,
+    assessmentId: assessmentSheet.assessmentId,
     certificationChallengeLiveAlertRepository,
   });
 
-  let allAnswers = await answerRepository.findByAssessment(assessment.id);
+  let allAnswers = await answerRepository.findByAssessment(assessmentSheet.assessmentId);
   allAnswers = allAnswers.filter(({ challengeId }) => !validatedLiveAlertChallengeIds.includes(challengeId));
 
   const answeredChallengeIds = allAnswers.map(({ challengeId }) => challengeId);
@@ -57,7 +59,7 @@ const getNextChallenge = async function ({
 
   const lastNonAnsweredCertificationChallenge =
     await sessionManagementCertificationChallengeRepository.getNextChallengeByCourseId(
-      assessment.certificationCourseId,
+      assessmentSheet.certificationCourseId,
       excludedChallengeIds,
     );
 
@@ -65,15 +67,10 @@ const getNextChallenge = async function ({
     return sharedChallengeRepository.get(lastNonAnsweredCertificationChallenge.challengeId);
   }
 
-  const candidate = await certificationCandidateRepository.findByAssessmentId({ assessmentId: assessment.id });
-
-  const version = await versionApi.getByFrameworkAndDate({
-    framework: candidate.subscriptionFramework,
-    date: candidate.reconciledAt,
-  });
+  const version = await versionApi.getById({ id: assessmentSheet.versionId });
 
   const currentCalibratedChallenges = await calibratedChallengeRepository.findActiveFlashCompatible({
-    locale,
+    locale: assessmentSheet.lang || locale,
     version,
   });
 
@@ -89,7 +86,7 @@ const getNextChallenge = async function ({
     challenges,
   });
 
-  const challengesForCandidate = candidate.accessibilityAdjustmentNeeded
+  const challengesForCandidate = assessmentSheet.accessibilityAdjustmentNeeded
     ? challengesWithoutSkillsWithAValidatedLiveAlert.filter((challenge) => challenge.isAccessible)
     : challengesWithoutSkillsWithAValidatedLiveAlert;
 
@@ -97,6 +94,7 @@ const getNextChallenge = async function ({
     flashAlgorithmImplementation: flashAlgorithmService,
     configuration: version.challengesConfiguration,
   });
+
   const possibleChallenges = assessmentAlgorithm.getPossibleNextChallenges({
     assessmentAnswers: allAnswers,
     challenges: challengesForCandidate,
@@ -115,7 +113,7 @@ const getNextChallenge = async function ({
     associatedSkillId: challenge.skill.id,
     challengeId: challenge.id,
     competenceId: challenge.skill.competenceId,
-    courseId: assessment.certificationCourseId,
+    courseId: assessmentSheet.certificationCourseId,
     isNeutralized: false,
     certifiableBadgeKey: null,
     discriminant: challenge.discriminant,

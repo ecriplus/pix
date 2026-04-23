@@ -21,6 +21,8 @@ export const buildAssessmentSheet = function ({
   versionId = 4,
   certificationFramework = Frameworks.CORE,
   answers = [],
+  lang,
+  accessibilityAdjustmentNeeded,
 } = {}) {
   return new AssessmentSheet({
     certificationCourseId,
@@ -38,6 +40,8 @@ export const buildAssessmentSheet = function ({
     versionId,
     certificationFramework,
     answers,
+    lang,
+    accessibilityAdjustmentNeeded,
   });
 };
 
