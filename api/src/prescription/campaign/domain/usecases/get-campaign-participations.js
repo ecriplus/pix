@@ -50,8 +50,8 @@ const getBadgesWithBadgesCalculationAndBadgesAcquisitions = async ({
 };
 
 const computeTubes = (campaignId, campaignParticipation, learningContent, knowledgeElementsByParticipation) => {
-  if (campaignParticipation.status !== CampaignParticipationStatuses.SHARED) {
-    return;
+  if (campaignParticipation.status !== CampaignParticipationStatuses.SHARED || !learningContent) {
+    return [];
   }
 
   const campaignResultLevelPerTubesAndCompetences = new CampaignResultLevelsPerTubesAndCompetences({
@@ -67,6 +67,20 @@ const computeTubes = (campaignId, campaignParticipation, learningContent, knowle
       reachedLevel: tube.meanLevel,
     });
   });
+};
+
+const getAcquisitionPercentage = (
+  participation,
+  badge,
+  isAcquired,
+  badgesForCalculation,
+  knowledgeElementsByParticipations,
+) => {
+  if (participation.status !== CampaignParticipationStatuses.SHARED) return 0;
+  if (isAcquired) return 100;
+  return badgesForCalculation
+    .find((badgeForCalculation) => badgeForCalculation.id === badge.id)
+    .getAcquisitionPercentage(knowledgeElementsByParticipations[participation.id] ?? []);
 };
 
 export const getCampaignParticipations = async function ({
@@ -93,12 +107,29 @@ export const getCampaignParticipations = async function ({
   const participationIds = participations.map(({ id }) => id);
 
   if (campaign.isProfilesCollection) {
-    return {
-      models: participations.map((participation) => {
-        return new ProfilesCollectionCampaignParticipation(participation);
+    const knowledgeElementsByParticipations = await knowledgeElementSnapshotRepository.findByCampaignParticipationIds(
+      participations.map((participation) => participation.id),
+    );
+
+    const models = await Promise.all(
+      participations.map(async (participation) => {
+        const participationKEs = knowledgeElementsByParticipations[participation.id] ?? [];
+        const participationSkillIds = participationKEs.map(({ skillId }) => skillId);
+
+        const learningContent =
+          participationSkillIds.length > 0
+            ? await learningContentRepository.findBySkillIds(participationSkillIds, locale)
+            : null;
+
+        const tubes = computeTubes(campaignId, participation, learningContent, {
+          [participation.id]: participationKEs,
+        });
+
+        return new ProfilesCollectionCampaignParticipation({ ...participation, tubes });
       }),
-      meta,
-    };
+    );
+
+    return { models, meta };
   }
   const { stages, acquiredStagesByParticipation } = await getStagesAndStageAcquisitions(
     stageRepository,
@@ -124,7 +155,7 @@ export const getCampaignParticipations = async function ({
   return {
     models: participations.map((participation) => {
       const tubes = computeTubes(campaignId, participation, learningContent, {
-        [participation.id]: knowledgeElementsByParticipations[participation.id],
+        [participation.id]: knowledgeElementsByParticipations[participation.id] ?? [],
       });
 
       const acquiredStagesForParticipation = acquiredStagesByParticipation[participation.id] || [];
@@ -166,17 +197,3 @@ export const getCampaignParticipations = async function ({
     meta,
   };
 };
-
-function getAcquisitionPercentage(
-  participation,
-  badge,
-  isAcquired,
-  badgesForCalculation,
-  knowledgeElementsByParticipations,
-) {
-  if (participation.status !== CampaignParticipationStatuses.SHARED) return 0;
-  if (isAcquired) return 100;
-  return badgesForCalculation
-    .find((badgeForCalculation) => badgeForCalculation.id === badge.id)
-    .getAcquisitionPercentage(knowledgeElementsByParticipations[participation.id] ?? []);
-}

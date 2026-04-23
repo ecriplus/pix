@@ -172,7 +172,7 @@ describe('Acceptance | Maddo | Route | Campaigns', function () {
               numberOfStages: 0,
               reachedStage: 0,
             },
-            tubes: undefined,
+            tubes: [],
             badges: [
               {
                 altMessage: badge.altMessage,

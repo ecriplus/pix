@@ -99,7 +99,7 @@ const register = async function (server) {
                         }).label('CampaignParticipationTube'),
                       )
                       .description(
-                        'Sujets évalués dans la campagne, null si le type de la campagne est `PROFILES_COLLECTION`',
+                        "Sujets évalués dans la campagne ou sujets liés au profil cible pour une campagne de collecte de profil, vide si la campagne n'est pas encore partagée",
                       )
                       .label('CampaignParticipationTubes'),
                   }).label('CampaignParticipation'),

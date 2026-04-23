@@ -169,7 +169,7 @@ describe('Integration | Application | campaign-api', function () {
           sharedAt: null,
           masteryRate: null,
           status: CampaignParticipationStatuses.STARTED,
-          tubes: undefined,
+          tubes: [],
           stages: {
             numberOfStages: 0,
             reachedStage: 0,
