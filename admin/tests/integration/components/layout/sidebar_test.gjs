@@ -74,7 +74,7 @@ module('Integration | Component | Layout | Sidebar', function (hooks) {
     });
 
     module('When the user is not a super admin', function () {
-      test('should not display Networks menu', async function (assert) {
+      test('should display Networks menu', async function (assert) {
         // given
         currentUser.adminMember = { isSuperAdmin: false };
 
@@ -82,7 +82,7 @@ module('Integration | Component | Layout | Sidebar', function (hooks) {
         const screen = await render(<template><Sidebar /></template>);
 
         // then
-        assert.dom(screen.queryByRole('link', { name: t('components.layout.sidebar.networks') })).doesNotExist();
+        assert.dom(screen.getByRole('link', { name: t('components.layout.sidebar.networks') })).exists();
       });
     });
   });
