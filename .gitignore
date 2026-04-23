@@ -68,10 +68,6 @@ high-level-tests/e2e/cypress/videos
 *.heapsnapshot
 *.heapprofile
 
-# Artillery.io
-high-level-tests/load-testing/report/*.json
-high-level-tests/load-testing/report/*.html
-
 # Dependency violations script
 api/dependencies-violations.json
 api/dependencies-violations.md
