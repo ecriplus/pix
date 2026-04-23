@@ -355,6 +355,7 @@ describe('Acceptance | API | Certification Course', function () {
           // then
           const [certificationCourse] = await knex('certification-courses').where({ userId, sessionId });
           expect(certificationCourse.version).to.equal(AlgorithmEngineVersion.V3);
+          expect(certificationCourse.lang).to.equal('fr-fr');
           expect(response.statusCode).to.equal(201);
         });
 
