@@ -126,16 +126,45 @@ module('Acceptance | Networks | List', function (hooks) {
       });
     });
 
-    module('when user does not have super admin role', function () {
-      test('it should redirect to the organizations page', async function (assert) {
-        // given
-        await authenticateAdminMemberWithRole({ isSuperAdmin: false })(server);
+    module('when user has metier role', function (hooks) {
+      hooks.beforeEach(async function () {
+        await authenticateAdminMemberWithRole({ isMetier: true })(server);
+      });
 
+      test('it can access the networks list', async function (assert) {
         // when
         await visit('/networks/list');
 
         // then
-        assert.strictEqual(currentURL(), '/organizations/list');
+        assert.strictEqual(currentURL(), '/networks/list');
+      });
+    });
+
+    module('when user has certif role', function (hooks) {
+      hooks.beforeEach(async function () {
+        await authenticateAdminMemberWithRole({ isCertif: true })(server);
+      });
+
+      test('it can access the networks list', async function (assert) {
+        // when
+        await visit('/networks/list');
+
+        // then
+        assert.strictEqual(currentURL(), '/networks/list');
+      });
+    });
+
+    module('when user has support role', function (hooks) {
+      hooks.beforeEach(async function () {
+        await authenticateAdminMemberWithRole({ isSupport: true })(server);
+      });
+
+      test('it can access the networks list', async function (assert) {
+        // when
+        await visit('/networks/list');
+
+        // then
+        assert.strictEqual(currentURL(), '/networks/list');
       });
     });
   });
