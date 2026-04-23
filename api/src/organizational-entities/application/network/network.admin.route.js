@@ -14,10 +14,12 @@ const register = async function (server) {
         pre: [
           {
             method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([securityPreHandlers.checkAdminMemberHasRoleSuperAdmin])(
-                request,
-                h,
-              ),
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+                securityPreHandlers.checkAdminMemberHasRoleCertif,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+              ])(request, h),
             assign: 'hasAuthorizationToAccessAdminScope',
           },
         ],
@@ -40,7 +42,7 @@ const register = async function (server) {
         },
         handler: networkAdminController.findAllFilteredNetworks,
         notes: [
-          "- **Cette route est restreinte aux utilisateurs ayant les droits d'accès Superadmin**\n" +
+          '- **Cette route est accessible à tous les membres admin authentifiés**\n' +
             '- Renvoie les réseaux, filtrés par nom si le paramètre filter[name] est fourni.',
         ],
         tags: ['api', 'organizational-entities', 'network'],
@@ -53,10 +55,12 @@ const register = async function (server) {
         pre: [
           {
             method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([securityPreHandlers.checkAdminMemberHasRoleSuperAdmin])(
-                request,
-                h,
-              ),
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+                securityPreHandlers.checkAdminMemberHasRoleCertif,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+              ])(request, h),
             assign: 'hasAuthorizationToAccessAdminScope',
           },
         ],
@@ -68,8 +72,8 @@ const register = async function (server) {
         handler: (request, h) => networkAdminController.getNetworkDetails(request, h),
         tags: ['api', 'organizational-entities', 'network'],
         notes: [
-          "- **Cette route est restreinte aux utilisateurs authentifiés ayant les droits d'accès super admin**\n" +
-            "- Elle permet de récupérer les informations d'un réseau",
+          '- **Cette route est accessible à tous les membres admin authentifiés**\n' +
+            '- Renvoie les réseaux, filtrés par nom si le paramètre filter[name] est fourni.',
         ],
       },
     },
