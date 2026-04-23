@@ -36,12 +36,8 @@ export class JobController {
     return null;
   }
 
-  get teamSize() {
-    return config.pgBoss.teamSize;
-  }
-
-  get teamConcurrency() {
-    return config.pgBoss.teamConcurrency;
+  get localConcurrency() {
+    return config.pgBoss.localConcurrency;
   }
 
   #schema = Joi.object({

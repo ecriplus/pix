@@ -20,7 +20,7 @@ class FakePgBoss {
   on() {
     return;
   }
-  onComplete() {
+  createQueue() {
     return;
   }
   work() {
@@ -32,9 +32,19 @@ class FakePgBoss {
   unschedule() {
     return;
   }
+  getQueues() {
+    return;
+  }
+  getDb() {
+    return {
+      async exececuteSql() {
+        return;
+      },
+    };
+  }
 }
 
-describe('Unit | Worker', function () {
+describe('Unit | JobClient', function () {
   context('#registerJobs', function () {
     it('should register AuditLoggingJob', async function () {
       // given
@@ -186,6 +196,77 @@ describe('Unit | Worker', function () {
           // then
           expect(pgBossStub.unschedule).to.have.been.calledWith('CpfExportSenderJob');
         });
+      });
+    });
+  });
+  context('#getQueuesStats', function () {
+    it('returns stats', async function () {
+      // given
+      const pgBossStub = new FakePgBoss();
+      const executeSql = sinon.stub().resolves({
+        rows: [
+          { name: 'FirstJob', state: 'active', count: 1 },
+          { name: 'FirstJob', state: 'failed', count: 7 },
+          { name: 'FirstJob', state: 'completed', count: 33 },
+          { name: 'SecondJob', state: 'completed', count: 10 },
+        ],
+      });
+      sinon.stub(pgBossStub, 'getDb').returns({ executeSql });
+      sinon.stub(pgBossStub, 'getQueues').resolves([{ name: 'FirstJob' }, { name: 'SecondJob' }, { name: 'ThirdJob' }]);
+
+      const jobClient = new JobClient();
+      await jobClient.initialize(
+        {
+          jobGroups: [JobGroup.DEFAULT],
+          worker: true,
+        },
+        () => pgBossStub,
+      );
+
+      const stats = await jobClient.getQueuesStats();
+
+      // then
+      expect(stats).to.deep.equal({
+        global: {
+          pending: 0,
+          created: 0,
+          retry: 0,
+          active: 1,
+          completed: 43,
+          cancelled: 0,
+          failed: 7,
+          all: 51,
+        },
+        FirstJob: {
+          pending: 0,
+          created: 0,
+          retry: 0,
+          active: 1,
+          completed: 33,
+          cancelled: 0,
+          failed: 7,
+          all: 41,
+        },
+        SecondJob: {
+          pending: 0,
+          created: 0,
+          retry: 0,
+          active: 0,
+          completed: 10,
+          cancelled: 0,
+          failed: 0,
+          all: 10,
+        },
+        ThirdJob: {
+          pending: 0,
+          created: 0,
+          retry: 0,
+          active: 0,
+          completed: 0,
+          cancelled: 0,
+          failed: 0,
+          all: 0,
+        },
       });
     });
   });
