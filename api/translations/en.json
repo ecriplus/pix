@@ -372,8 +372,11 @@
           "BELOW_MINIMUM": "-"
         },
         "DROIT": {
-          "0": "Obtained",
-          "BELOW_MINIMUM": "Not obtained"
+          "0": "Independent",
+          "1": "Confirmed",
+          "2": "Advanced",
+          "3": "Expert",
+          "BELOW_MINIMUM": "-"
         },
         "EDU_1ER_DEGRE": {
           "0": "Eligible",
@@ -388,8 +391,11 @@
           "BELOW_MINIMUM": "Not eligible"
         },
         "PRO_SANTE": {
-          "0": "Obtained",
-          "BELOW_MINIMUM": "Not obtained"
+          "0": "Independent",
+          "1": "Confirmed",
+          "2": "Advanced",
+          "3": "Expert",
+          "BELOW_MINIMUM": "-"
         }
       }
     }

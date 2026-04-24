@@ -369,7 +369,11 @@
           "8": "Esperto 2"
         },
         "DROIT": {
-          "0": "Ottenuta"
+          "0": "Indipendente",
+          "1": "Confirmato",
+          "2": "Avanzato",
+          "3": "Esperto",
+          "BELOW_MINIMUM": "-"
         },
         "EDU_1ER_DEGRE": {
           "0": "Ammissibile"
@@ -381,7 +385,11 @@
           "0": "Ammissibile"
         },
         "PRO_SANTE": {
-          "0": "Ottenuta"
+          "0": "Indipendente",
+          "1": "Confermato",
+          "2": "Avanzato",
+          "3": "Esperto",
+          "BELOW_MINIMUM": "-"
         }
       }
     }

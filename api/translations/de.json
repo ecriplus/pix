@@ -369,7 +369,11 @@
           "8": "Experte 2"
         },
         "DROIT": {
-          "0": "Erhalten"
+          "0": "Selbstständig",
+          "1": "Bestätigt",
+          "2": "Fortgeschrittene",
+          "3": "Experte",
+          "BELOW_MINIMUM": "-"
         },
         "EDU_1ER_DEGRE": {
           "0": "Zulässig"
@@ -381,7 +385,11 @@
           "0": "Zulässig"
         },
         "PRO_SANTE": {
-          "0": "Erhalten"
+          "0": "Selbstständig",
+          "1": "Bestätigt",
+          "2": "Fortgeschrittene",
+          "3": "Experte",
+          "BELOW_MINIMUM": "-"
         }
       }
     }
