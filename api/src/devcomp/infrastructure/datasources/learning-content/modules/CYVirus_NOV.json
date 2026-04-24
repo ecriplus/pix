@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/CYVirus_NOV/picto_cyber_virus_nov.svg",
-    "description": "<p>Votre ordinateur fonctionne de manière étrange ? Cela peut venir d’un programme informatique malveillant qui s’est installé à votre insu.<br> Dans ce module, vous allez découvrir d'où viennent ces programmes, les risques pour vous et votre appareil, ainsi que les gestes sûrs à adopter pour les éviter.<br><br><em>Module produit en partenariat avec cybermalveillance.gouv.fr</em></p>",
+    "description": "<p>Votre ordinateur fonctionne de manière étrange ? Cela peut venir d’un logiciel malveillant qui s’est installé à votre insu.<br> Dans ce module, vous allez découvrir d’où viennent ces programmes, les risques pour votre appareil et vous, mais aussi les gestes sûrs à adopter pour éviter ces risques.<br><br><em>Module produit en partenariat avec cybermalveillance.gouv.fr</em></p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
@@ -33,7 +33,7 @@
                 "id": "d6b16bfc-5fc9-4b7b-b15e-235644643afa",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Parfois, il arrive qu’un ordinateur se comporte de manière inhabituelle.</p><p><strong>Lancez la vidéo ci-dessous et observez ce qui se passe sur l’écran d’ordinateur.</strong></p>"
+                "content": "<p>Parfois, il arrive qu’un ordinateur se comporte de manière inhabituelle.</p><p><strong>Lancez la vidéo ci-dessous et observez ce qui se passe sur l’écran d’ordinateur</strong>.</p>"
               }
             },
             {
@@ -44,7 +44,7 @@
                 "title": "Short-video de l’accroche",
                 "url": "https://assets.pix.org/modules/CYVirus_NOV/accroche.mp4",
                 "subtitles": "",
-                "transcription": "<p>L'écran montre un bureau d’ordinateur.</p><p>Une première fenêtre apparait à l'écran :&nbsp;</p><ul><li>Titre : Alerte</li><li>Message : Erreur. Activité inhabituelle détectée sur votre ordinateur</li></ul><p>Puis, d'autres fenêtres identiques apparaissent sans action de l'utilisateur. </p><p>À la fin, l'écran est rempli de nombreuses fenêtres d'alerte.</p>"
+                "transcription": "<p>L’écran montre un bureau d’ordinateur.</p><p>Une première fenêtre apparaît à l’écran :&nbsp;</p><ul><li>Titre : Alerte</li><li>Message : Erreur. Activité inhabituelle détectée sur votre ordinateur</li></ul><p>Puis, d’autres fenêtres identiques apparaissent sans action de l’utilisateur. </p><p>À la fin, l’écran est rempli de nombreuses fenêtres d’alerte.</p>"
               }
             },
             {
@@ -129,12 +129,12 @@
                 "id": "230872da-3e77-4993-b7d0-ece29d0b4a4c",
                 "type": "text",
                 "tag": " ",
-                "content": "<p><strong>Trois ordinateurs</strong> ont été <strong>infectés par un logiciel malveillant</strong>. </p><p>Observez leurs écrans ci-dessous puis répondez à la question.</p>"
+                "content": "<p><strong>Trois ordinateurs</strong> ont été <strong>infectés par des logiciels malveillants</strong>. </p>"
               }
             },
             {
               "type": "stepper",
-              "instruction": "",
+              "instruction": "<p>Observez les écrans d’ordinateur ci-dessous puis répondez à la question.</p>",
               "steps": [
                 {
                   "elements": [
@@ -145,13 +145,13 @@
                       "url": "https://assets.pix.org/modules/CYVirus_NOV/ordinateur1.mp4",
                       "poster": "https://assets.pix.org/modules/CYVirus_NOV/ordi1.png",
                       "subtitles": "",
-                      "transcription": "<p>L'écran montre l'interface d'un gestionnaire de fichiers. Un dossier « Mes fichiers » est présent.</p>\n<br>\n<p><strong>Ouverture du dossier « Mes fichiers » :</strong></p>\n<p>Un cercle bleu de chargement apparait au centre et tourne pendant plusieurs secondes. L'ordinateur semble ralentir.</p>\n<p>Puis le contenu du dossier s'affiche avec trois dossiers :</p>\n<ul>\n    <li>Ma musique</li>\n    <li>Ma présentation</li>\n    <li>Mes images</li><br>\n</ul>\n<p><strong>Ouverture du dossier « Mes images » :</strong></p>\n<p>Un cercle bleu de chargement apparait au centre et tourne pendant plusieurs secondes. </p>\n<p>Un message « Travail en cours... » s'affiche également. L'ordinateur semble ralentir.</p>\n<p>Puis le contenu du dossier « Mes images » s'affiche avec des fichiers image : </p>\n<ul>\n    <li>illustration_couverture.jpg</li>\n    <li>le_renard_et_la_cigogne.jpg</li>\n    <li>portrait_gustave_dore.jpg</li>\n    <li>portrait_la_fontaine.jpg</li><br>\n</ul>"
+                      "transcription": "<p>L’écran d’ordinateur montre l’interface d’un gestionnaire de fichiers. Un dossier « Mes fichiers » est présent.</p>\n<br>\n<p><strong>Ouverture du dossier « Mes fichiers » :</strong></p>\n<p>Un cercle bleu de chargement apparaît au centre et tourne pendant plusieurs secondes. L’ordinateur semble ralentir.</p>\n<p>Puis le contenu du dossier s’affiche avec trois dossiers :</p>\n<ul>\n    <li>Ma musique</li>\n    <li>Ma présentation</li>\n    <li>Mes images</li><br>\n</ul>\n<p><strong>Ouverture du dossier « Mes images » :</strong></p>\n<p>Un cercle bleu de chargement apparaît au centre et tourne pendant plusieurs secondes. </p>\n<p>Un message « Travail en cours... » s’affiche également. L’ordinateur semble ralentir.</p>\n<p>Puis le contenu du dossier « Mes images » s’affiche avec des fichiers images : </p>\n<ul>\n    <li>illustration_couverture.jpg</li>\n    <li>le_renard_et_la_cigogne.jpg</li>\n    <li>portrait_gustave_dore.jpg</li>\n    <li>portrait_la_fontaine.jpg</li><br>\n</ul>"
                     },
                     {
                       "id": "181aafad-5c86-48eb-97a8-8bd68f03a1d3",
                       "type": "text",
                       "tag": " ",
-                      "content": "<h5>Ordinateur 1</h5><p> <strong>Cet ordinateur a  été infecté par un logiciel malveillant.</strong></p>"
+                      "content": "<h5>Ordinateur 1</h5><p> <strong>Cet ordinateur a  été infecté par un logiciel malveillant</strong>.</p>"
                     }
                   ]
                 },
@@ -164,13 +164,13 @@
                       "url": "https://assets.pix.org/modules/CYVirus_NOV/ordinateur2.mp4",
                       "poster": "https://assets.pix.org/modules/CYVirus_NOV/ordi2.png",
                       "subtitles": "",
-                      "transcription": "<p>L'écran montre l'interface d'un gestionnaire de fichiers. Un dossier « Mes fichiers » est présent.</p>\n<br>\n<p><strong>Ouverture du dossier « Mes fichiers » :</strong></p>\n<p>Le contenu du dossier s'affiche avec trois dossiers :</p>\n<ul>\n    <li>M$£a}=4#p~μr$£é]{s7ùe#!n^£t-a&amp;@t-</li>\n    <li>Mμùè£9s![°=i~&amp;m̂èa+%g§!e][s</li>\n    <li>Mç_a$%ùméμ$u!§s7_i[q#~+u$£e</li><br>\n</ul>\n<p><strong>Ouverture du dossier « Mμùè£9s![°=i~&amp;m̂èa+%g§!e][s » :</strong></p>\n<p>Le contenu du dossier « Mμùè£9s![°=i~&amp;m̂èa+%g§!e][s » s'affiche avec des fichiers  : </p>\n<ul>\n    <li>i$|_|]u=s!t§r{a2t#i&amp;o%n.vir</li>\n    <li>l+eμ_£r5e#n]a)r[d£_μ.nor</li>\n    <li>p@o{r[t^ùr@a]i}t_ùl!a§_e.jcrr</li>\n    <li>pço#r4t%rùaμi$t£_!g§u.kkl</li><br>\n</ul>"
+                      "transcription": "<p>L’écran d’ordinateur montre l’interface d’un gestionnaire de fichiers. Un dossier « Mes fichiers » est présent.</p>\n<br>\n<p><strong>Ouverture du dossier « Mes fichiers » :</strong></p>\n<p>Le contenu du dossier s’affiche avec trois dossiers :</p>\n<ul>\n    <li>M$£a}=4#p~μr$£é]{s7ùe#!n^£t-a&amp;@t-</li>\n    <li>Mμùè£9s![°=i~&amp;m̂èa+%g§!e][s</li>\n    <li>Mç_a$%ùméμ$u!§s7_i[q#~+u$£e</li><br>\n</ul>\n<p><strong>Ouverture du dossier « Mμùè£9s![°=i~&amp;m̂èa+%g§!e][s » :</strong></p>\n<p>Le contenu du dossier « Mμùè£9s![°=i~&amp;m̂èa+%g§!e][s » s’affiche avec des fichiers  : </p>\n<ul>\n    <li>i$|_|]u=s!t§r{a2t#i&amp;o%n.vir</li>\n    <li>l+eμ_£r5e#n]a)r[d£_μ.nor</li>\n    <li>p@o{r[t^ùr@a]i}t_ùl!a§_e.jcrr</li>\n    <li>pço#r4t%rùaμi$t£_!g§u.kkl</li><br>\n</ul>"
                     },
                     {
                       "id": "7d5600fc-cff4-48b9-8e46-5170001f5069",
                       "type": "text",
                       "tag": " ",
-                      "content": "<h5>Ordinateur 2  </h5><p><strong>Cet ordinateur a  été infecté par un logiciel malveillant.</strong></p>"
+                      "content": "<h5>Ordinateur 2  </h5><p><strong>Cet ordinateur a  été infecté par un logiciel malveillant</strong>.</p>"
                     }
                   ]
                 },
@@ -183,13 +183,13 @@
                       "url": "https://assets.pix.org/modules/CYVirus_NOV/ordinateur3.mp4",
                       "poster": "https://assets.pix.org/modules/CYVirus_NOV/ordi3.png",
                       "subtitles": "",
-                      "transcription": "<p>L'écran montre l'interface d'un gestionnaire de fichiers. Un dossier « Mes fichiers » est présent.</p>\n<br>\n<p><strong>Ouverture du dossier « Mes fichiers » :</strong></p>\n<p>Le contenu du dossier s'affiche avec trois dossiers :</p>\n<ul>\n    <li>Ma musique</li>\n    <li>Ma présentation</li>\n    <li>Mes images</li><br>\n</ul>\n<p><strong>Ouverture du dossier « Mes images » :</strong></p>\n\n<p>Le contenu du dossier « Mes images » s'affiche avec des fichiers image : </p>\n<ul>\n    <li>illustration_couverture.jpg</li>\n    <li>le_renard_et_la_cigogne.jpg</li>\n    <li>portrait_gustave_dore.jpg</li>\n    <li>portrait_la_fontaine.jpg</li><br>\n</ul>"
+                      "transcription": "<p>L’écran montre l’interface d’un gestionnaire de fichiers. Un dossier « Mes fichiers » est présent.</p>\n<br>\n<p><strong>Ouverture du dossier « Mes fichiers » :</strong></p>\n<p>Le contenu du dossier s’affiche avec trois dossiers :</p>\n<ul>\n    <li>Ma musique</li>\n    <li>Ma présentation</li>\n    <li>Mes images</li><br>\n</ul>\n<p><strong>Ouverture du dossier « Mes images » :</strong></p>\n\n<p>Le contenu du dossier « Mes images » s’affiche avec des fichiers images : </p>\n<ul>\n    <li>illustration_couverture.jpg</li>\n    <li>le_renard_et_la_cigogne.jpg</li>\n    <li>portrait_gustave_dore.jpg</li>\n    <li>portrait_la_fontaine.jpg</li><br>\n</ul>"
                     },
                     {
                       "id": "e1404c05-11b5-4531-a373-ede7492d4676",
                       "type": "text",
                       "tag": " ",
-                      "content": "<h5>Ordinateur 3</h5><p><strong>Cet ordinateur a  été infecté par un logiciel malveillant.</strong></p>"
+                      "content": "<h5>Ordinateur 3</h5><p><strong>Cet ordinateur a  été infecté par un logiciel malveillant</strong>.</p>"
                     }
                   ]
                 }
@@ -214,21 +214,21 @@
                     "id": "1",
                     "content": "Oui",
                     "feedback": {
-                      "diagnosis": "Eh non, pas toujours. Certains logiciels malveillants peuvent causer des <strong>problèmes de fonctionnement </strong>qui sont<strong> visibles</strong>, comme des ralentissements ou des fichiers modifiés bizarrement (ordinateur 1 et 2). D’autres<strong> agissent discrètemen</strong>t sans qu’on les voie&nbsp;: l'ordinateur 3 semble fonctionner normalement, pourtant il est infecté."
+                      "diagnosis": "Eh non. Pas toujours. Certains logiciels malveillants peuvent causer des <strong>problèmes de fonctionnement </strong>qui sont<strong> visibles</strong>, comme des ralentissements ou des fichiers modifiés bizarrement (ordinateurs 1 et 2). D’autres logiciels<strong> agissent discrètemen</strong>t sans qu’on les voie&nbsp;: l’ordinateur 3 semble fonctionner normalement, pourtant il est infecté."
                     }
                   },
                   {
                     "id": "2",
                     "content": "Non",
                     "feedback": {
-                      "diagnosis": "Eh oui, pas toujours. Certains logiciels malveillants peuvent causer des <strong>problèmes de fonctionnement</strong> qui sont <strong>visibles</strong>, comme des ralentissements ou des fichiers modifiés bizarrement (ordinateur 1 et 2). D’autres <strong>agissent discrètement</strong> sans qu’on les voie&nbsp;: l'ordinateur 3 semble fonctionner normalement, pourtant il est infecté."
+                      "diagnosis": "Eh oui. Pas toujours. Certains logiciels malveillants peuvent causer des <strong>problèmes de fonctionnement</strong> qui sont <strong>visibles</strong>, comme des ralentissements ou des fichiers modifiés bizarrement (ordinateurs 1 et 2). D’autres logiciels <strong>agissent discrètement</strong> sans qu’on les voie&nbsp;: l’ordinateur 3 semble fonctionner normalement, pourtant il est infecté."
                     }
                   },
                   {
                     "id": "3",
                     "content": "Je ne sais pas.",
                     "feedback": {
-                      "diagnosis": "Pas toujours.&nbsp;Certains logiciels malveillants peuvent causer des <strong>problèmes de fonctionnemen</strong><strong>t</strong> qui sont <strong>visibles</strong>, comme des ralentissements ou des fichiers modifiés bizarrement (ordinateur 1 et 2). D’autres <strong>agissent discrètement</strong> sans qu’on les voie&nbsp;: l'ordinateur 3 semble fonctionner normalement, pourtant il est infecté."
+                      "diagnosis": "Pas toujours.&nbsp;Certains logiciels malveillants peuvent causer des <strong>problèmes de fonctionnemen</strong><strong>t</strong> qui sont <strong>visibles</strong>, comme des ralentissements ou des fichiers modifiés bizarrement (ordinateurs 1 et 2). D’autres logiciels <strong>agissent discrètement</strong> sans qu’on les voie&nbsp;: l’ordinateur 3 semble fonctionner normalement, pourtant il est infecté."
                     }
                   }
                 ],
@@ -248,7 +248,16 @@
                 "id": "3255ed2b-a635-4a59-a9ba-b30e1da38c3b",
                 "type": "text",
                 "tag": " ",
-                "content": "<h5>C’est quoi un logiciel malveillant ? </h5><p>Un <strong>logiciel malveillant</strong> (ou <em>malware </em>en anglais) est un <strong>programme informatique</strong> qui a pour objectif de <strong>perturber le fonctionnement normal</strong> d’un appareil (ordinateur, smartphone, tablette). <br>Il peut agir sans que l'utilisateur s’en rende compte.</p><br><h5>🤔 Bon à savoir</h5><p><strong>Un virus informatique</strong> est <strong>un type</strong> de logiciel malveillant parmi d’autres.</p>"
+                "content": "<h5>C’est quoi un logiciel malveillant ? </h5>\n<p>Un <strong>logiciel malveillant</strong> (ou <em>malware </em>en anglais) est un <strong>programme informatique</strong> qui a pour objectif de <strong>perturber le fonctionnement normal</strong> d’un appareil (ordinateur, smartphone, tablette). <br>Il peut agir sans que l’utilisateur s’en rende compte.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "8ea8d12a-162e-43a3-a28f-57b87e0493b5",
+                "type": "text",
+                "tag": "further-information",
+                "content": "<p>Un <strong>virus informatique</strong> est un <strong>type</strong> de logiciel malveillant parmi d’autres.</p>"
               }
             }
           ]
@@ -264,7 +273,7 @@
                 "id": "95d323ed-02d2-41cd-ade6-14898ffb9b9f",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Mais alors, si certains logiciels malveillants ne se voient pas toujours, est-ce qu’on doit s’inquiéter tout le temps d’en avoir un sur son appareil ? 😱</p><p>Pas forcément, car cela dépend surtout de ce que vous faites sur votre appareil.</p>"
+                "content": "<p>Mais alors, si certains logiciels malveillants ne se voient pas toujours, est-ce qu’il faut tout le temps s’inquiéter ? 😱</p><p>Pas forcément, car cela dépend surtout de ce que vous faites sur votre appareil.</p>"
               }
             }
           ]
@@ -280,7 +289,7 @@
                 "id": "50b2a382-b5d3-4105-a54b-10265376af41",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>La plupart du temps, un logiciel malveillant ne s’installe pas tout seul. Dans certaines situations, certains de vos gestes peuvent être risqués.</p>"
+                "content": "<p>La plupart du temps, un logiciel malveillant ne s’installe pas tout seul. Dans certaines situations, des gestes peuvent être risqués.</p>"
               }
             },
             {
@@ -336,7 +345,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "<p>Toutes ces actions présentent <strong>un risque</strong> d’installer un logiciel malveillant sur son appareil. Pour <strong>piéger</strong> un utilisateur, un logiciel malveillant peut se <strong>cacher</strong> dans&nbsp;:&nbsp;</p><ul><li><strong>un fichier, un lien de téléchargement</strong> ou <strong>une pièce jointe</strong> dans un message trompeur (sms, mail, discussion de forum), ✉️</li><li><strong>une publicité </strong>trompeuse ou <strong>une page web </strong>illégale particulièrement attrayante, 🌐</li><li><strong>un appareil USB</strong> dont on ne connaît pas la provenance, 🤔</li><li><strong>un câble </strong>ou<strong> une prise USB&nbsp;</strong>en accès libre.</li></ul>"
+                  "diagnosis": "<p>Toutes ces actions présentent un<strong> risque</strong><strong> d’installer un logiciel malveillant</strong> sur son appareil. Pour <strong>piéger</strong> un utilisateur, un logiciel malveillant peut se <strong>cacher</strong> dans&nbsp;:&nbsp;</p><ul><li>un<strong> fichier, </strong>un<strong> lien de téléchargement</strong> ou une <strong>pièce jointe</strong> dans un message trompeur (sms, mail, discussion de forum) ✉️</li><li>une<strong> publicité </strong>trompeuse ou une<strong> page web </strong>illégale particulièrement attrayante 🌐</li><li>un<strong> appareil USB</strong> dont on ne connaît pas la provenance 🤔</li><li>un<strong> câble </strong>ou une<strong> prise USB&nbsp;</strong>en accès libre</li></ul>"
                 }
               }
             }
@@ -353,7 +362,16 @@
                 "id": "8bdf5c90-6319-4f25-8183-cf92dc372ceb",
                 "type": "text",
                 "tag": " ",
-                "content": "<p><strong>Pour éviter d'installer un logiciel malveillant</strong>, il faut être vigilant et adopter des gestes sûrs&nbsp;:</p><ul><li>Téléchargez des logiciels ou des applications sur <strong>des sites légaux et dans les magasins d’applications officiels</strong>.</li><li>Faites attention <strong>aux liens sur lesquels vous cliquez</strong> ainsi qu’<strong>aux fichiers ou pièces jointes que vous ouvrez</strong>.</li><li>Connectez seulement <strong>des appareils de confiance</strong>.</li></ul><br><h5>🤔 Bon à savoir</h5><p>Pour recharger votre appareil en toute sécurité, il est préférable d’utiliser votre propre chargeur (secteur) branché sur une prise électrique. 🔌</p>"
+                "content": "<h5>Comment éviter les logiciels malveillants ?</h5>\n<p><strong>Pour éviter d’installer un logiciel malveillant</strong>, il faut être vigilant et adopter des gestes sûrs&nbsp;:</p>\n<ul>\n    <li><strong>Téléchargez</strong> des logiciels ou des applications sur des<strong> sites légaux </strong>et dans les<strong> magasins d’applications officiels</strong>.</li>\n    <li>Faites attention aux<strong> liens sur lesquels vous cliquez</strong> ainsi qu’aux<strong> fichiers </strong>ou<strong> pièces jointes </strong><strong>que vous ouvrez</strong>.</li>\n    <li><strong>Connectez seulement des appa</strong><strong>reils de confiance</strong>.</li>\n</ul>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "26d1843e-54fd-4cd0-9f56-7ac78b43aed9",
+                "type": "text",
+                "tag": "further-information",
+                "content": "<p>Pour recharger votre appareil en toute sécurité, il est préférable d’utiliser votre propre chargeur (secteur) branché sur une prise électrique. </p>"
               }
             }
           ]
@@ -385,7 +403,7 @@
                 "id": "3a24782c-14d5-4c2f-baf2-5da35f32694b",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Sans le savoir, vous avez peut-être des informations qui intéressent <strong>les pirates informatiques.</strong></p><p><strong></strong> Voyons cela ensemble.</p>"
+                "content": "<p>Sans le savoir, vous avez peut-être des informations qui intéressent les<strong> pirates informatiques</strong>.</p>\n<p> Voyons cela ensemble.</p>"
               }
             },
             {
@@ -394,13 +412,13 @@
                 "id": "deaeecaa-4090-4f0d-b2de-17bdbe407518",
                 "type": "custom",
                 "title": "",
-                "instruction": "<p>Cochez les éléments qui correspondent à ce que vous avez sur votre appareil et à ce que vous faites en ligne.</p>",
+                "instruction": "<p>Parmi les éléments suivants, lesquels correspondent à ce que vous avez sur votre appareil&nbsp;puis à ce que vous faites en ligne.</p>",
                 "functionalInstruction": "",
                 "tagName": "usages-donnees",
                 "props": {
                   "localeChoices": [
                     {
-                      "label": "📄 Fichiers administratifs (carte d’identité…)",
+                      "label": "📄 Fichiers administratifs (carte d’identité, etc.)",
                       "hasValue": true
                     },
                     {
@@ -416,7 +434,7 @@
                       "hasValue": false
                     },
                     {
-                      "label": "💼 Fichiers de travail (devoirs, projets…)",
+                      "label": "💼 Fichiers de travail (devoirs, projets, etc.)",
                       "hasValue": true
                     },
                     {
@@ -426,7 +444,7 @@
                   ],
                   "cloudChoices": [
                     {
-                      "label": "✉️ Consulter ses mails",
+                      "label": "✉️ Consulter vos mails",
                       "hasValue": true
                     },
                     {
@@ -466,7 +484,7 @@
                 "id": "e7efa1be-03f5-4844-830c-249636f8e122",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Les logiciels malveillants sont <strong>créés </strong>et<strong> diffusés</strong> par des <strong>pirates informatiques.</strong> En général, le but des pirates est de <strong>nuire</strong> au plus grand nombre de personnes possible <strong>pour en tirer profit.</strong></p>"
+                "content": "<h5>Doù viennent les logiciels malveillants ?<br></h5>\n<p>Les logiciels malveillants sont <strong>créés </strong>et<strong> diffusés</strong> par des <strong>pirates informatiques</strong>. En général, le but des pirates est de <strong>nuire</strong> au plus grand nombre de personnes possible <strong>pour en tirer profit</strong>.</p>"
               }
             }
           ]
@@ -482,7 +500,7 @@
                 "id": "b6b4fd71-8578-4d75-a513-e0ce629bdd78",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Tout le monde peut être la cible des pirates informatiques. C’est pourquoi il est essentiel d’adopter les bons réflexes pour protéger son appareil des logiciels malveillants.</p>"
+                "content": "<p>Tout le monde peut devenir la cible des pirates informatiques. C’est pourquoi il est essentiel d’adopter de bons réflexes pour protéger ses appareils (smartphone, ordinateur, tablette) des logiciels malveillants.</p>"
               }
             }
           ]
@@ -504,8 +522,8 @@
                 "id": "a6a46a0d-573d-4fb8-9fb3-f286aaeae6c5",
                 "type": "image",
                 "url": "https://assets.pix.org/modules/CYVirus_NOV/cy_virus_nov_infographies_v4.png",
-                "alt": "Récapitulatif détaillé dans l'alternative textuelle",
-                "alternativeText": "<h5>Du pirate informatique à l'appareil infecté, itinéraire d’un logiciel malveillant<br></h5><ol><li>Un pirate informatique créé et diffuse un logiciel malveillant pour perturber le fonctionnement normal d’un appareil. L'objectif est de nuire pour en tirer profit.<br></li><li>Pour piéger les utilisateurs, les pirates cachent des logiciels malveillants dans : des logiciels, des fichiers, des appareils, etc.<br></li><li>C’est souvent une action risquée de l’utilisateur qui permet au logiciel malveillant d’infecter un appareil.&nbsp;<br></li><li>Une fois présent sur un appareil, un logiciel malveillant peut provoquer des dysfonctionnements.<br></li><li>Le pirate peut ensuite récupérer des données personnelles ou demander de l'argent par exemple.</li></ol><p><br></p><h5>Comment éviter les logiciels malveillants ? </h5><ol><li> Télécharger un logiciel ou une application depuis des sites légaux et des magasins d'applications officiels.</li><li>Ne pas cliquer sur les liens, les fichiers ou les pièces jointes dans des&nbsp;messages inconnus.</li><li>Connecter uniquement des appareils de confiance  et de provenance connue (ex : clé usb).</li><li>Charger un appareil avec votre propre chargeur, en le branchant sur une prise électrique.</li></ol>",
+                "alt": "Récapitulatif détaillé dans l’alternative textuelle",
+                "alternativeText": "<h5>Du pirate informatique à l’appareil infecté, itinéraire d’un logiciel malveillant<br></h5><ol><li>Un pirate informatique crée et diffuse un logiciel malveillant pour perturber le fonctionnement normal d’un appareil. L’objectif est de nuire pour en tirer profit.<br></li><li>Pour piéger les utilisateurs, les pirates cachent des logiciels malveillants dans : des logiciels, des fichiers, des appareils, etc.<br></li><li>C’est souvent une action risquée de l’utilisateur qui permet au logiciel malveillant d’infecter un appareil.&nbsp;<br></li><li>Une fois présent sur un appareil, un logiciel malveillant peut provoquer des dysfonctionnements.<br></li><li>Le pirate peut ensuite récupérer des données personnelles ou demander de l’argent par exemple.</li></ol><p><br></p><h5>Comment éviter les logiciels malveillants ? </h5><ol><li> Télécharger un logiciel ou une application depuis des sites légaux et des magasins d’applications officiels.</li><li>Ne pas cliquer sur les liens, les fichiers ou les pièces jointes dans des&nbsp;messages inconnus.</li><li>Connecter uniquement des appareils de confiance  et de provenance connue (ex : clé usb).</li><li>Charger un appareil avec votre propre chargeur, en le branchant sur une prise électrique.</li></ol>",
                 "legend": "",
                 "licence": ""
               }
@@ -655,7 +673,7 @@
                         },
                         {
                           "id": "2",
-                          "content": "<p>Regarder un film sur un site de VOD officiel.</p>",
+                          "content": "<p>Regarder un film sur un site de VOD (vidéo à la demande) officiel.</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
                             "diagnosis": "<p>Cette action ne présente pas de risque particulier.</p>"
@@ -663,7 +681,7 @@
                         },
                         {
                           "id": "3",
-                          "content": "<p>Regarder un film sur un site de streaming gratuit  illégal.</p>",
+                          "content": "<p>Regarder un film sur un site de streaming vidéo gratuit  illégal.</p>",
                           "feedback": {
                             "state": "<p>Bonne réponse !</p>",
                             "diagnosis": "<p>Un logiciel malveillant peut se cacher dans une page web illégale.</p>"
@@ -692,7 +710,7 @@
                         },
                         {
                           "id": "2",
-                          "content": "<p>Télécharger un jeu gratuit depuis le magasin d’application.</p>",
+                          "content": "<p>Télécharger un jeu gratuit depuis le magasin d’applications.</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
                             "diagnosis": "<p>Cette action ne présente pas de risque particulier.</p>"
@@ -703,7 +721,7 @@
                           "content": "<p>Télécharger un jeu gratuit depuis un forum de discussion.</p>",
                           "feedback": {
                             "state": "<p>Bonne réponse !</p>",
-                            "diagnosis": "<p>Un logiciel malveillant peut se cacher dans un lien de téléchargement&nbsp;sur un site non officiel, ou dans un fichier à télécharger dans un message trompeur.</p>"
+                            "diagnosis": "<p>Un logiciel malveillant peut se cacher dans un lien de téléchargement&nbsp;sur un site non officiel ou dans un fichier à télécharger dans un message trompeur.</p>"
                           }
                         }
                       ],
@@ -732,7 +750,7 @@
                 "id": "af811730-2c61-4e59-ab1b-f19b2f1afac1",
                 "type": "text",
                 "tag": " ",
-                "content": "Vous avez vu qu’il est important d’être prudent au quotidien pour limiter les risques d’installer un logiciel malveillant sur son appareil.<br>Il existe également d’autres actions complémentaires pour renforcer la protection de vos appareils."
+                "content": "<p>Vous avez vu qu’il était important d’être prudent au quotidien pour limiter les risques d’installer un logiciel malveillant sur vos appareils.</p>\n<p>Il existe également d’autres actions complémentaires pour renforcer la protection de vos appareils.</p>"
               }
             },
             {
@@ -740,28 +758,28 @@
               "element": {
                 "id": "6d6b353b-9aec-45dc-9170-d0ba9f0af40b",
                 "type": "qcu-declarative",
-                "instruction": "<p>Parmi les actions suivantes, laquelle pouvez vous mettre en place pour renforcer la protection de vos appareils ?</p>",
+                "instruction": "<p>Parmi les actions suivantes, laquelle pouvez-vous mettre en place pour renforcer la protection de vos appareils ?</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>Je peux installer un logiciel antivirus sur un de mes appareils.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C'est une bonne action. Un antivirus permet d’identifier, de neutraliser, voire d’éliminer les logiciels malveillants.<br>Pour rester efficace, il doit aussi être mis à jour régulièrement.</p>"
+                      "diagnosis": "<p>C’est une bonne action. Un antivirus permet d’identifier, de neutraliser, voire d’éliminer les logiciels malveillants.<br>Pour rester efficace, il doit aussi être mis à jour régulièrement.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Je peux mettre à jour régulièrement mes appareils, mes logiciels et mes applications.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bon choix. En plus d’apporter de nouvelles fonctionnalités, les mises à jour améliorent régulièrement la sécurité des programmes informatiques.<br>Il est souvent possible d'activer les mises à jour automatiques.</p>"
+                      "diagnosis": "<p>Bon choix. En plus d’apporter de nouvelles fonctionnalités, les mises à jour améliorent régulièrement la sécurité des programmes informatiques.<br>Il est souvent possible d’activer les mises à jour automatiques.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>J’ai déjà mis en place ces deux actions.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est super. Installer un antivirus et mettre à jour régulièrement ses appareils, ses logiciels et ses applications, sont deux actions complémentaires pour renforcer la protection de vos appareils.</p>"
+                      "diagnosis": "<p>C’est super&nbsp;! Installer un antivirus et mettre à jour régulièrement ses appareils, ses logiciels et ses applications, sont deux actions complémentaires pour renforcer la protection de vos appareils.</p>"
                     }
                   },
                   {
