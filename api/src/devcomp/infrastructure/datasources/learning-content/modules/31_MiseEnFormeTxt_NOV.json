@@ -33,7 +33,7 @@
                 "id": "0e6b81d5-a7d6-4f2c-87ad-4f12699fae6e",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Naya a commencé à rédiger une annonce pour proposer des ateliers d’écriture.</p>"
+                "content": "<p>Naya souhaite proposer des ateliers d’écriture.</p><p>Ci-dessous, voici l’annonce qu’elle a commencé à rédiger dans un logiciel de traitement de texte :</p>"
               }
             },
             {
@@ -41,7 +41,7 @@
               "element": {
                 "id": "d4ddca8e-f9e8-413a-993e-9b81111b5f8c",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/31_MiseEnFormeTxt_NOV/captureaccroche-meft.png",
+                "url": "https://assets.pix.org/draft/modules/31_MiseEnFormeTxt_NOV/accroche.png",
                 "alt": "",
                 "alternativeText": "",
                 "legend": "",
@@ -110,7 +110,7 @@
                 "id": "f607d16f-32ea-41b6-ad08-d896982fa43b",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Naya a ajouté des sauts de ligne dans son texte.<br>Découvrons ensemble, quelles autres options vont aider Naya à faciliter la lecture de son texte.</p>"
+                "content": "<p>Naya a ajouté des sauts de ligne dans son texte.</p><p>Il existe d'autres options pour faciliter la lecture d’un texte. Découvrons cela ensemble</p>"
               }
             }
           ]
@@ -147,21 +147,21 @@
                     "id": "1",
                     "content": "Texte A",
                     "feedback": {
-                      "diagnosis": "<p>Eh non&nbsp;! Le texte B est plus facile à lire et à comprendre&nbsp;: les idées sont séparées en paragraphes et le texte est <strong>mis en forme</strong>.<br>La mise en forme permet de <strong>mettre en évidence les informations importantes d’un texte</strong>.</p>"
+                      "diagnosis": "<p>Pour la plupart des lecteurs, le texte B est plus facile à lire et à comprendre&nbsp;: les idées sont séparées en paragraphes et le texte est <strong>mis en forme</strong>.<br>La mise en forme permet de <strong>mettre en évidence les informations importantes d’un texte</strong>.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "Texte B",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement, le texte B est plus facile à lire et à comprendre&nbsp;: les idées sont séparées en paragraphes et le texte est <strong>mis en forme</strong>.<br>La mise en forme permet de <strong>mettre en évidence les informations importantes d’un texte</strong>.</p>"
+                      "diagnosis": "<p>Effectivement, pour la plupart des lecteurs, le texte B est plus facile à lire et à comprendre&nbsp;: les idées sont séparées en paragraphes et le texte est <strong>mis en forme</strong>.<br>La mise en forme permet de <strong>mettre en évidence les informations importantes d’un texte</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "Je ne sais pas.",
                     "feedback": {
-                      "diagnosis": "<p>Le texte B est plus facile à lire et à comprendre&nbsp;: les idées sont séparées en paragraphes et le texte est <strong>mis en forme</strong>.<br>La mise en forme permet de <strong>mettre en évidence les informations importantes d’un texte</strong>.</p>"
+                      "diagnosis": "<p>Pour la plupart des lecteurs, le texte B est plus facile à lire et à comprendre&nbsp;: les idées sont séparées en paragraphes et le texte est <strong>mis en forme</strong>.<br>La mise en forme permet de <strong>mettre en évidence les informations importantes d’un texte</strong>.</p>"
                     }
                   }
                 ],
@@ -201,8 +201,8 @@
               "element": {
                 "id": "2873344f-8acf-4fca-ab90-1422081c5886",
                 "type": "text",
-                "tag": "did-you-know",
-                "content": "<p>Les mêmes options existent dans les logiciels de traitement de texte et les <strong>autres logiciels de bureautique</strong> (tableurs, logiciels de présentation, logiciels de mail, etc).</p>"
+                "tag": "further-information",
+                "content": "<p>Ces options sont aussi dans les <strong>autres logiciels de bureautique</strong> (tableurs, logiciels de présentation, logiciels de mail, etc).</p>"
               }
             }
           ]
@@ -218,7 +218,7 @@
                 "id": "5940f7ba-6fa5-41b7-9cad-e4147fe65d61",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Reprenons l’exemple du texte de Naya. Elle voudrait maintenant mettre une information en avant dans son texte.</p>"
+                "content": "<p>Reprenons l’exemple du texte de Naya. Elle voudrait maintenant mettre en avant une information dans son texte.</p>"
               }
             }
           ]
@@ -255,7 +255,7 @@
               "element": {
                 "id": "008f9d74-8d51-4d6f-81b3-610dc9c8f9c7",
                 "type": "expand",
-                "title": "Indice 1 :",
+                "title": "🗝️ Indice 1 :",
                 "content": "<p>Pour sélectionner le mot, vous pouvez&nbsp;:&nbsp; </p><ul><li>cliquer au début du mot, </li><li>puis faire glisser la souris jusqu’à la fin du mot,ou double cliquer dessus.</li></ul>"
               }
             },
@@ -264,8 +264,8 @@
               "element": {
                 "id": "b19ad0fa-0980-4011-9bb9-e036474ae263",
                 "type": "expand",
-                "title": "Indice 2 :",
-                "content": "<p>Après avoir sélectionné le mot, cliquez sur le bouton «&nbsp;Gras&nbsp;» dans la barre d’outils pour mettre le mot en gras.</p>"
+                "title": "🗝️ Indice 2 :",
+                "content": "<p>Après avoir sélectionné le mot, cliquez sur le bouton «&nbsp;Gras&nbsp;» dans la barre d’outils pour mettre le mot en gras.</p><p>Pour afficher le nom des boutons, passez votre souris sur les différentes icônes de la barre d’outils.</p>"
               }
             }
           ]
@@ -355,7 +355,7 @@
               "element": {
                 "id": "67af2c7e-a9d1-475c-afc7-0019147a4a09",
                 "type": "expand",
-                "title": "Indice 1",
+                "title": "🗝️ Indice 1",
                 "content": "<p>Pour sélectionner une phrase ou un paragraphe, vous pouvez&nbsp;: </p><ul><li>cliquer au début de la phrase, </li><li>puis faire glisser la souris jusqu’à la fin de la phrase,ou triple cliquer dessus.</li></ul>"
               }
             },
@@ -364,8 +364,8 @@
               "element": {
                 "id": "6221ea8c-378e-438a-883b-aeb7c47984a1",
                 "type": "expand",
-                "title": "Indice 2",
-                "content": "<p>Après avoir sélectionné la phrase, choisir l’option «&nbsp;Taille de police&nbsp;» dans la barre d’outils pour agrandir la phrase.</p>"
+                "title": "🗝️ Indice 2",
+                "content": "<p>Après avoir sélectionné la phrase, choisir l’option «&nbsp;Taille de police&nbsp;» dans la barre d’outils pour agrandir la phrase.</p><p>Pour afficher le nom des boutons, passez votre souris sur les différentes icônes de la barre d’outils.</p>"
               }
             }
           ]
@@ -447,7 +447,7 @@
                       "id": "7fa5c82f-4e7d-4317-a73d-fad4ba83f0d8",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Vous écrivez un document à afficher et vous voulez<strong> faire ressortir une information</strong> importante.</p>"
+                      "content": "<p>Vous écrivez un document à afficher et vous voulez<strong> mettre en avant une information</strong> importante.</p>"
                     },
                     {
                       "id": "a637e835-eb28-4900-8be9-5e30ff48236e",
@@ -637,7 +637,7 @@
                 "id": "2b73b2d9-a836-4f3a-aa3a-fc532395a2c3",
                 "type": "text",
                 "tag": " ",
-                "content": "<ul><li>La mise en forme permet de rendre un texte <strong>plus facile à lire</strong> et de <strong>mettre en avant les informations importantes</strong>. 👀 </li><li>Pour mettre en forme un texte, il faut toujours <strong>sélectionner</strong>, puis <strong>choisir une option dans la barre d’outils</strong>. 🖱️ </li><li>La mise en forme peut s’appliquer à un <strong>mot </strong>ou à un <strong>paragraphe </strong>(taille, police…). ↔️ </li><li>La mise en forme suit des <strong>règles </strong>simples&nbsp;: utilisez-la pour mettre en valeur les informations importantes, sans en abuser. ✨</li></ul>"
+                "content": "<ul><li>La mise en forme permet de rendre un texte <strong>plus facile à lire</strong> et de <strong>mettre en avant les informations importantes</strong>. 👀 </li><li>Pour mettre en forme un texte, il faut toujours <strong>sélectionner</strong>, puis <strong>choisir une option dans la barre d’outils</strong>. 🖱️ </li><li>La mise en forme peut s’appliquer à un <strong>mot </strong>ou à un <strong>paragraphe </strong>(taille, police…). ↔️ </li><li>La mise en forme suit des <strong>règles </strong>simples&nbsp;: utilisez-la pour mettre en avant les informations importantes, sans en abuser. ✨</li></ul>"
               }
             }
           ]
@@ -674,7 +674,7 @@
               "element": {
                 "id": "3d414841-40dc-49f1-b95f-949a85417700",
                 "type": "qab",
-                "instruction": "<p>Quelles options de mise en forme sont possibles avec la barre d’outils ?</p>",
+                "instruction": "<p>Quelles actions sont possibles avec la barre d’outils ?</p>",
                 "cards": [
                   {
                     "id": "17bde533-9872-4fbd-9a8b-08094d1915ba",
@@ -751,7 +751,7 @@
                 "type": "embed",
                 "isCompletionRequired": true,
                 "title": "Mise en pratique",
-                "url": "https://epreuves.pix.fr/pixwriter-mise-en-forme/pixwriter-mise-en-forme.html?lang=fr&mode=module-mef-txt-ex2",
+                "url": "https://epreuves.pix.fr/pixwriter-mise-en-forme/pixwriter-mise-en-forme.html?lang=fr&mode=module-mef-txt-ex2#5a55634559434044544479074442554549715020545d",
                 "instruction": "<p>Dans l’interface de traitement de texte ci-dessous, mettez le texte en forme en suivant les instructions&nbsp;:&nbsp; </p><ul><li>Mettez l’ensemble du texte en police Arial.</li><li>Mettez en gras l’heure du rendez-vous.</li></ul>",
                 "solution": "pix1erdegr9",
                 "height": 550
@@ -831,7 +831,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<br><p>Jan écrit un article avec des mots en anglais dedans, il veut signaler qu’il s’agit de mots dans une autre langue.<br><strong>Qu’est-ce que Jan doit faire&nbsp;?</strong></p>"
+                    "content": "<br><p>Jan écrit un article avec des mots en anglais dedans. Il veut signaler qu’il s’agit de mots dans une autre langue.<br><strong>Qu’est-ce que Jan doit faire&nbsp;?</strong></p>"
                   },
                   {
                     "type": "select",
