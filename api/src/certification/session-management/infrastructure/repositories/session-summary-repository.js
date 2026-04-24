@@ -16,21 +16,15 @@ export async function findPaginatedFilteredByCertificationCenterId({ certificati
       finalizedAt: 'sessions.finalizedAt',
       publishedAt: 'sessions.publishedAt',
       createdAt: 'sessions.createdAt',
-    })
-    .select(
-      knexConn.raw('COUNT("certification-candidates"."id") AS "enrolledCandidatesCount"'),
-      knexConn.raw('COUNT("certification-courses"."id") AS "effectiveCandidatesCount"'),
-    )
-    .leftJoin('certification-candidates', 'certification-candidates.sessionId', 'sessions.id')
-    .leftJoin('certification-courses', function () {
-      this.on('certification-courses.userId', 'certification-candidates.userId').andOn(
-        'certification-courses.sessionId',
-        'certification-candidates.sessionId',
-      );
+      enrolledCandidatesCount: knexConn('certification-candidates')
+        .count('id')
+        .whereRaw('?? = ??', ['certification-candidates.sessionId', 'sessions.id']),
+      effectiveCandidatesCount: knexConn('certification-courses')
+        .count('id')
+        .whereRaw('?? = ??', ['certification-courses.sessionId', 'sessions.id']),
     })
     .where({ certificationCenterId })
     .modify(_setupFilters, filters)
-    .groupBy('sessions.id')
     .orderBy('sessions.date', 'DESC')
     .orderBy('sessions.time', 'DESC')
     .orderBy('sessions.id', 'ASC');
@@ -40,12 +34,7 @@ export async function findPaginatedFilteredByCertificationCenterId({ certificati
     paginationParams: page,
   });
 
-  const { row_count } = await knexConn('sessions')
-    .where({ certificationCenterId })
-    .count('*', { as: 'row_count' })
-    .first();
-  const hasSessions = Boolean(row_count);
-
+  const hasSessions = Boolean(await knexConn('sessions').select('id').where({ certificationCenterId }).first());
   const sessionSummaries = results.map((result) => SessionSummary.from(result));
   return { models: sessionSummaries, meta: { ...pagination, hasSessions } };
 }

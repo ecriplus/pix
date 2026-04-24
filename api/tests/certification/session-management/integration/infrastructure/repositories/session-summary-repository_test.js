@@ -257,6 +257,29 @@ describe('Integration | Repository | Session Summary', function () {
           });
         });
       });
+
+      it('should return "hasSessions" to true even when with setup filters no results show', async function () {
+        // given
+        databaseBuilder.factory.buildSession({ id: 1, certificationCenterId, finalizedAt: new Date('2021-01-02') });
+        databaseBuilder.factory.buildSession({ id: 2, certificationCenterId, finalizedAt: new Date('2022-01-02') });
+        databaseBuilder.factory.buildSession({ id: 3, certificationCenterId, finalizedAt: new Date('2023-01-02') });
+        databaseBuilder.factory.buildSession({ id: 4, certificationCenterId, finalizedAt: new Date('2024-01-02') });
+        await databaseBuilder.commit();
+
+        // when
+        const { models: sessionSummaries, meta } =
+          await sessionSummaryRepository.findPaginatedFilteredByCertificationCenterId({
+            certificationCenterId,
+            page,
+            filters: {
+              status: SESSION_STATUSES.CREATED,
+            },
+          });
+
+        // then
+        expect(sessionSummaries).to.have.lengthOf(0);
+        expect(meta.hasSessions).to.be.true;
+      });
     });
   });
 });
