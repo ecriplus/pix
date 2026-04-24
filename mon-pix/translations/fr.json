@@ -977,7 +977,7 @@
       "statuses": {
         "cancelled": "Annulée",
         "not-published": "En attente du résultat",
-        "rejected": "Non-obtenue",
+        "rejected": "Non obtenue",
         "validated": "Obtenue"
       },
       "title": "Mes certifications"
@@ -2417,7 +2417,7 @@
       "meshes": {
         "DROIT": {
           "ADVANCED": "Avancé",
-          "BELOW_MINIMUM": "Non obtenu",
+          "BELOW_MINIMUM": "Non obtenue",
           "CONFIRMED": "Confirmé",
           "EXPERT": "Expert",
           "INDEPENDENT": "Indépendant"
@@ -2436,7 +2436,7 @@
         },
         "PRO_SANTE": {
           "ADVANCED": "Avancé",
-          "BELOW_MINIMUM": "Non obtenu",
+          "BELOW_MINIMUM": "Non obtenue",
           "CONFIRMED": "Confirmé",
           "EXPERT": "Expert",
           "INDEPENDENT": "Indépendant"
