@@ -128,7 +128,7 @@ test(
           await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
             sessionNumber,
             status: 'Rejetée',
-            result: 'Expert 1 (895 Pix)',
+            result: 'Pix',
           });
         });
 

@@ -1,5 +1,3 @@
-import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
-
 class FinalizedSession {
   constructor({
     sessionId,
@@ -39,8 +37,7 @@ class FinalizedSession {
       isPublishable:
         !hasExaminerGlobalComment &&
         _hasNoIssueReportsWithRequiredAction(juryCertificationSummaries) &&
-        _hasNoScoringError(juryCertificationSummaries) &&
-        _containsOnlyPublishableFrameworks(juryCertificationSummaries),
+        _hasNoScoringError(juryCertificationSummaries),
       publishedAt: null,
     });
   }
@@ -67,17 +64,4 @@ function _hasNoIssueReportsWithRequiredAction(juryCertificationSummaries) {
 
 function _hasNoScoringError(juryCertificationSummaries) {
   return juryCertificationSummaries.every((summary) => !summary.hasScoringError());
-}
-
-function _containsOnlyPublishableFrameworks(juryCertificationSummaries) {
-  const publishableFrameworks = [
-    Frameworks.CORE,
-    Frameworks.CLEA,
-    Frameworks.EDU_CPE,
-    Frameworks.EDU_1ER_DEGRE,
-    Frameworks.EDU_2ND_DEGRE,
-  ];
-  return juryCertificationSummaries.every(({ certificationFramework }) => {
-    return publishableFrameworks.includes(certificationFramework);
-  });
 }

@@ -177,65 +177,6 @@ module('Integration | Component | certifications/header', function (hooks) {
         });
       });
 
-      module('when a certification the jury certification summaries is not with a Core scope', function () {
-        test('should display a disabled publication button', async function (assert) {
-          // given
-          const session = store.createRecord('session', { publishedAt: null, status: FINALIZED });
-
-          const juryCertificationSummaries = [
-            store.createRecord('jury-certification-summary', {
-              certificationFramework: 'DROIT',
-              status: 'validated',
-            }),
-            store.createRecord('jury-certification-summary', {
-              certificationFramework: 'CLEA',
-              status: 'validated',
-            }),
-            store.createRecord('jury-certification-summary', {
-              certificationFramework: 'CORE',
-              status: 'validated',
-            }),
-          ];
-
-          // when
-          const screen = await render(
-            <template>
-              <CertificationsHeader @session={{session}} @juryCertificationSummaries={{juryCertificationSummaries}} />
-            </template>,
-          );
-
-          // then
-          assert.dom(screen.getByRole('button', { name: 'Publier la session' })).hasAttribute('aria-disabled');
-        });
-      });
-
-      module('when every certification in the jury certification summaries is scope CORE', function () {
-        test('should display a disabled publication button', async function (assert) {
-          // given
-          const session = store.createRecord('session', { publishedAt: null, status: FINALIZED });
-
-          const juryCertificationSummaries = [
-            store.createRecord('jury-certification-summary', {
-              certificationFramework: 'CLEA',
-              status: 'validated',
-            }),
-            store.createRecord('jury-certification-summary', {
-              certificationFramework: 'CORE',
-              status: 'validated',
-            }),
-          ];
-
-          // when
-          const screen = await render(
-            <template>
-              <CertificationsHeader @session={{session}} @juryCertificationSummaries={{juryCertificationSummaries}} />
-            </template>,
-          );
-          // then
-          assert.dom(screen.getByRole('button', { name: 'Publier la session' })).doesNotHaveAttribute('aria-disabled');
-        });
-      });
-
       module('when there is only valid jury certification summaries', function () {
         test('should display an enabled publication button', async function (assert) {
           // given

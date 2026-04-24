@@ -375,4 +375,42 @@ describe('Certification | Evaluation | Unit | Domain | Factories | AssessmentRes
       expect(actualAssessmentResult).to.deepEqualInstance(expectedAssessmentResult);
     });
   });
+
+  describe('#buildLackOfAnswers', function () {
+    it('should return a rejected AssessmentResult', function () {
+      // when
+      const actualAssessmentResult = AssessmentResultFactory.buildLackOfAnswers({
+        pixScore: 0,
+        reproducibilityRate: 49,
+        assessmentId: 123,
+        juryId: 456,
+        competenceMarks: [],
+        capacity: -0.67,
+        reachedMeshIndex: 1,
+        versionId: 10,
+      });
+
+      // then
+      const expectedAssessmentResult = domainBuilder.buildAssessmentResult({
+        status: AssessmentResult.status.REJECTED,
+        pixScore: 0,
+        reproducibilityRate: 49,
+        assessmentId: 123,
+        juryId: 456,
+        competenceMarks: [],
+        capacity: -0.67,
+        reachedMeshIndex: 1,
+        versionId: 10,
+        commentForCandidate: domainBuilder.certification.shared.buildJuryComment.candidate({
+          commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_LACK_OF_ANSWERS,
+        }),
+        commentForOrganization: domainBuilder.certification.shared.buildJuryComment.organization({
+          commentByAutoJury: AutoJuryCommentKeys.REJECTED_DUE_TO_LACK_OF_ANSWERS,
+        }),
+      });
+      expectedAssessmentResult.id = undefined;
+      expectedAssessmentResult.createdAt = undefined;
+      expect(actualAssessmentResult).to.deepEqualInstance(expectedAssessmentResult);
+    });
+  });
 });

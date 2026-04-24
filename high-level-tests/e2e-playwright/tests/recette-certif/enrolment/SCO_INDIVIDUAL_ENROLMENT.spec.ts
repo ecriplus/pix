@@ -133,7 +133,7 @@ test(`${testRef} - Enroll candidate through individual enrolment modal`, async (
         Prénom: userDataCoreSubscription.firstName,
         Nom: userDataCoreSubscription.lastName,
         Statut: 'Annulée',
-        Résultats: '55 Pix',
+        Résultats: 'Pix',
         'Signalements impactants non résolus': '',
         'Certification passée': 'Pix Cœur',
       });

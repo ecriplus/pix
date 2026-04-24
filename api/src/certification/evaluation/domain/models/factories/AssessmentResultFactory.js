@@ -149,7 +149,6 @@ export class AssessmentResultFactory {
   static buildLackOfAnswers({
     pixScore,
     reproducibilityRate,
-    status,
     assessmentId,
     juryId,
     competenceMarks,
@@ -159,7 +158,7 @@ export class AssessmentResultFactory {
   }) {
     return this.#buildWithAutoJuryComment({
       autoJuryCommentKey: AutoJuryCommentKeys.REJECTED_DUE_TO_LACK_OF_ANSWERS,
-      status,
+      status: AssessmentResult.status.REJECTED,
       pixScore,
       reproducibilityRate,
       assessmentId,

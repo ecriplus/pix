@@ -277,7 +277,7 @@ test(
     const adminHomepage = new AdminHomePage(pixAdminRoleCertifPage);
     await test.step('Check candidates did pass what they enrolled for', async () => {
       const sessionsMainPage = await adminHomepage.goToCertificationSessionsTab();
-      const sessionPage = await sessionsMainPage.goToSessionWithRequiredActionPage(sessionNumber);
+      const sessionPage = await sessionsMainPage.goToSessionToPublishInfo(sessionNumber);
 
       await test.step('Check session information', async () => {
         await checkSessionInformationAndExpectSuccess(sessionPage, {
@@ -304,7 +304,7 @@ test(
           Prénom: userDataCoreSubscription.firstName,
           Nom: userDataCoreSubscription.lastName,
           Statut: 'Annulée',
-          Résultats: '55 Pix',
+          Résultats: 'Pix',
           'Signalements impactants non résolus': '',
           'Certification passée': 'Pix Cœur',
         });
@@ -313,7 +313,7 @@ test(
           Prénom: userDataCleaSubscription.firstName,
           Nom: userDataCleaSubscription.lastName,
           Statut: 'Annulée',
-          Résultats: '55 Pix',
+          Résultats: 'Pix',
           'Signalements impactants non résolus': '',
           'Certification passée': 'PIX / CléA Numérique',
         });
@@ -331,7 +331,7 @@ test(
           Prénom: userDataDroitSubscription.firstName,
           Nom: userDataDroitSubscription.lastName,
           Statut: 'Annulée',
-          Résultats: 'Indépendant',
+          Résultats: 'Non obtenue',
           'Signalements impactants non résolus': '',
           'Certification passée': 'Pix+ Droit',
         });
@@ -342,7 +342,7 @@ test(
           Prénom: userDataProSanteSubscription.firstName,
           Nom: userDataProSanteSubscription.lastName,
           Statut: 'Annulée',
-          Résultats: 'Indépendant',
+          Résultats: 'Non obtenue',
           'Signalements impactants non résolus': '',
           'Certification passée': 'Pix+ Pro Santé',
         });

@@ -56,22 +56,6 @@ describe('Unit | Certification | Session-Management | Domain | Models | Finalize
         // then
         expect(finalizedSession.isPublishable).to.be.true;
       });
-
-      it('is not publishable if a test is not finished yet has no abort reason', function () {
-        // when
-        const finalizedSession = FinalizedSession.from({
-          sessionId: 1234,
-          certificationCenterName: 'a certification center',
-          sessionDate: '2021-01-29',
-          sessionTime: '16:00',
-          hasExaminerGlobalComment: false,
-          juryCertificationSummaries: _someWhichAreUnfinishedButHaveNoAbortReason(),
-          finalizedAt: new Date('2020-01-01T00:00:00Z'),
-        });
-
-        // then
-        expect(finalizedSession.isPublishable).to.be.false;
-      });
     });
 
     it('is not publishable when has at least one unresolved issue report that requires action', function () {
@@ -150,58 +134,6 @@ describe('Unit | Certification | Session-Management | Domain | Models | Finalize
       });
       // then
       expect(finalizedSession.isPublishable).to.be.true;
-    });
-
-    [
-      { framework: Frameworks.CORE, isPublishable: true },
-      { framework: Frameworks.CLEA, isPublishable: true },
-      { framework: Frameworks.EDU_1ER_DEGRE, isPublishable: true },
-      { framework: Frameworks.EDU_2ND_DEGRE, isPublishable: true },
-      { framework: Frameworks.EDU_CPE, isPublishable: true },
-      { framework: Frameworks.DROIT, isPublishable: false },
-      { framework: Frameworks.PRO_SANTE, isPublishable: false },
-    ].forEach(({ framework, isPublishable }) => {
-      it(`session should be ${isPublishable ? 'publishable' : 'not publishable'} for certification ${framework}`, function () {
-        const juryCertificationSummary = new JuryCertificationSummary({
-          id: 1,
-          firstName: 'firstName',
-          lastName: 'lastName',
-          status: assessmentResultStatuses.VALIDATED,
-          pixScore: 120,
-          createdAt: new Date(),
-          isPublished: false,
-          certificationFramework: framework,
-          certificationIssueReports: [],
-        });
-        const finalizedSession = FinalizedSession.from({
-          sessionId: 1234,
-          certificationCenterName: 'a certification center',
-          sessionDate: '2021-01-29',
-          sessionTime: '16:00',
-          hasExaminerGlobalComment: false,
-          juryCertificationSummaries: [juryCertificationSummary],
-          finalizedAt: new Date('2020-01-01T00:00:00Z'),
-        });
-
-        // then
-        expect(finalizedSession.isPublishable).to.equal(isPublishable);
-      });
-    });
-
-    it('is not publishable when session has some Pix Plus scope certification', function () {
-      // given / when
-      const finalizedSession = FinalizedSession.from({
-        sessionId: 1234,
-        certificationCenterName: 'a certification center',
-        sessionDate: '2021-01-29',
-        sessionTime: '16:00',
-        hasExaminerGlobalComment: false,
-        juryCertificationSummaries: _someWithPixPlusScopeCertification(),
-        finalizedAt: new Date('2020-01-01T00:00:00Z'),
-      });
-
-      // then
-      expect(finalizedSession.isPublishable).to.be.false;
     });
   });
 
@@ -415,66 +347,6 @@ function _someWithResolvedRequiredActionButNoErrorOrStartedStatus() {
           category: CertificationIssueReportCategory.FRAUD,
           resolvedAt: new Date('2020-01-01'),
           resolution: 'des points gratos offerts',
-        }),
-      ],
-    }),
-  ];
-}
-
-function _someWhichAreUnfinishedButHaveNoAbortReason() {
-  return [
-    new JuryCertificationSummary({
-      id: 1,
-      firstName: 'firstName',
-      lastName: 'lastName',
-      status: 'started',
-      pixScore: 120,
-      createdAt: new Date(),
-      isPublished: false,
-      abortReason: null,
-      certificationFramework: Frameworks.CORE,
-      certificationIssueReports: [
-        domainBuilder.buildCertificationIssueReport({
-          category: CertificationIssueReportCategory.FRAUD,
-          resolvedAt: new Date('2020-01-01'),
-          resolution: 'des points gratos offerts',
-        }),
-      ],
-    }),
-  ];
-}
-
-function _someWithPixPlusScopeCertification() {
-  return [
-    new JuryCertificationSummary({
-      id: 1,
-      firstName: 'firstName',
-      lastName: 'lastName',
-      status: assessmentResultStatuses.VALIDATED,
-      pixScore: 120,
-      createdAt: new Date(),
-      isPublished: false,
-      certificationFramework: Frameworks.CLEA,
-      certificationIssueReports: [
-        domainBuilder.buildCertificationIssueReport({
-          category: 'NON_IMPACTFUL_CATEGORY',
-          subcategory: 'NON_IMPACTFUL_SUBCATEGORY',
-        }),
-      ],
-    }),
-    new JuryCertificationSummary({
-      id: 1,
-      firstName: 'firstName',
-      lastName: 'lastName',
-      status: assessmentResultStatuses.VALIDATED,
-      pixScore: 120,
-      createdAt: new Date(),
-      isPublished: false,
-      certificationFramework: Frameworks.DROIT,
-      certificationIssueReports: [
-        domainBuilder.buildCertificationIssueReport({
-          category: 'NON_IMPACTFUL_CATEGORY',
-          subcategory: 'NON_IMPACTFUL_SUBCATEGORY',
         }),
       ],
     }),

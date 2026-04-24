@@ -317,7 +317,7 @@ describe('Unit | Infrastructure | Utils | Csv | CertificationResultsCsvValues', 
       const result = new CertificationResultsCsvValues(i18n).formatReachedLevel(certificationResult);
 
       // Then
-      expect(result).to.equal('Non obtenue');
+      expect(result).to.equal('-');
     });
 
     it('returns "-" when certification is not V3', function () {

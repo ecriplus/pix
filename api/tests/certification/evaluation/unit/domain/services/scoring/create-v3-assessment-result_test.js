@@ -37,10 +37,10 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
 
         //then
         expect(assessmentResult.status).to.equal(AssessmentResult.status.CANCELLED);
-        expect(assessmentResult.pixScore).to.equal(pixScore);
-        expect(assessmentResult.competenceMarks).to.deep.equal(competenceMarks);
-        expect(assessmentResult.capacity).to.equal(capacity);
-        expect(assessmentResult.reachedMeshIndex).to.equal(reachedMeshIndex);
+        expect(assessmentResult.pixScore).to.be.null;
+        expect(assessmentResult.competenceMarks).to.deep.equal([]);
+        expect(assessmentResult.capacity).to.be.null;
+        expect(assessmentResult.reachedMeshIndex).to.be.null;
         expect(assessmentResult.versionId).to.equal(versionId);
       });
     });
@@ -70,10 +70,10 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
         });
         expect(assessmentResult.status).to.equal(AssessmentResult.status.REJECTED);
         expect(assessmentResult.commentForOrganization).to.deep.equal(juryComment);
-        expect(assessmentResult.pixScore).to.equal(pixScore);
-        expect(assessmentResult.competenceMarks).to.deep.equal(competenceMarks);
-        expect(assessmentResult.capacity).to.equal(capacity);
-        expect(assessmentResult.reachedMeshIndex).to.equal(reachedMeshIndex);
+        expect(assessmentResult.pixScore).to.be.null;
+        expect(assessmentResult.competenceMarks).to.deep.equal([]);
+        expect(assessmentResult.capacity).to.be.null;
+        expect(assessmentResult.reachedMeshIndex).to.be.null;
         expect(assessmentResult.versionId).to.equal(versionId);
       });
     });
@@ -103,10 +103,10 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
         });
         expect(assessmentResult.status).to.equal(AssessmentResult.status.CANCELLED);
         expect(assessmentResult.commentForOrganization).to.deep.equal(juryComment);
-        expect(assessmentResult.pixScore).to.equal(pixScore);
-        expect(assessmentResult.competenceMarks).to.deep.equal(competenceMarks);
-        expect(assessmentResult.capacity).to.equal(capacity);
-        expect(assessmentResult.reachedMeshIndex).to.equal(reachedMeshIndex);
+        expect(assessmentResult.pixScore).to.be.null;
+        expect(assessmentResult.competenceMarks).to.deep.equal([]);
+        expect(assessmentResult.capacity).to.be.null;
+        expect(assessmentResult.reachedMeshIndex).to.be.null;
         expect(assessmentResult.versionId).to.equal(versionId);
       });
 
@@ -134,10 +134,10 @@ describe('Unit | Certification | Evaluation | Domain | Services | Create V3 Asse
         });
         expect(assessmentResult.status).to.equal(AssessmentResult.status.REJECTED);
         expect(assessmentResult.commentForOrganization).to.deep.equal(juryComment);
-        expect(assessmentResult.pixScore).to.equal(pixScore);
-        expect(assessmentResult.competenceMarks).to.deep.equal(competenceMarks);
-        expect(assessmentResult.capacity).to.equal(capacity);
-        expect(assessmentResult.reachedMeshIndex).to.equal(reachedMeshIndex);
+        expect(assessmentResult.pixScore).to.be.null;
+        expect(assessmentResult.competenceMarks).to.deep.equal([]);
+        expect(assessmentResult.capacity).to.be.null;
+        expect(assessmentResult.reachedMeshIndex).to.be.null;
         expect(assessmentResult.versionId).to.equal(versionId);
       });
     });

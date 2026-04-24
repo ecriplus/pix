@@ -59,7 +59,7 @@
           "1": "Confirmé",
           "2": "Avancé",
           "3": "Expert",
-          "BELOW_MINIMUM": "Non obtenu",
+          "BELOW_MINIMUM": "Non obtenue",
           "NONE": "{pixScore} Pix"
         },
         "EDU_1ER_DEGRE": {
@@ -88,7 +88,7 @@
           "1": "Confirmé",
           "2": "Avancé",
           "3": "Expert",
-          "BELOW_MINIMUM": "Non obtenu",
+          "BELOW_MINIMUM": "Non obtenue",
           "NONE": "{pixScore} Pix"
         }
       }

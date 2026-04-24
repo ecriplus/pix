@@ -95,7 +95,7 @@ test(
           Prénom: certifiableUserData.firstName,
           Nom: certifiableUserData.lastName,
           Statut: 'Terminée par le surveillant',
-          Résultats: '55 Pix',
+          Résultats: 'Pix',
           'Signalements impactants non résolus': '',
           'Certification passée': 'PIX / CléA Numérique',
         });
@@ -105,7 +105,7 @@ test(
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
           status: 'Rejetée',
-          result: '55 Pix',
+          result: 'Pix',
         });
         const cleaResult = await certificationInformationPage.getCleaResult();
         expect(cleaResult).toBe('Rejetée');
@@ -118,7 +118,7 @@ test(
           nbValidatedTechnicalIssues: 0,
           testEndedBy: 'Le surveillant',
           abortReason: 'Abandon : Manque de temps ou départ prématuré',
-          result: '55 Pix',
+          result: 'Pix',
         });
       });
     });
@@ -134,8 +134,8 @@ test(
       const certificateListPage = await homePage.goToMyCertificates();
       const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment } =
         await certificateListPage.getCertificateData(certificationNumber);
-      expect(mainStatus).toBe('Certification Pix : Non-obtenue');
-      expect(extraStatus).toBe('CLéA Numérique : Non-obtenue');
+      expect(mainStatus).toBe('Certification Pix : Non obtenue');
+      expect(extraStatus).toBe('CLéA Numérique : Non obtenue');
       expect(detailsFramework).toBe(null);
       expect(certificationCenter).toBe('Centre de certification : ' + certificationCenterName);
       expect(examDate).toBe('Date de passage : ' + getNowAsDDMMYYYY());

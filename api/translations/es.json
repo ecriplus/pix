@@ -365,7 +365,11 @@
           "8": "Experto 2"
         },
         "DROIT": {
-          "0": "Obtenida"
+          "0": "Independiente",
+          "1": "Confirmado",
+          "2": "Avanzado",
+          "3": "Experto",
+          "BELOW_MINIMUM": "-"
         },
         "EDU_1ER_DEGRE": {
           "0": "Admisible"
@@ -377,7 +381,11 @@
           "0": "Admisible"
         },
         "PRO_SANTE": {
-          "0": "Obtenida"
+          "0": "Independiente",
+          "1": "Confirmado",
+          "2": "Avanzado",
+          "3": "Experto",
+          "BELOW_MINIMUM": "-"
         }
       }
     }

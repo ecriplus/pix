@@ -708,6 +708,119 @@ describe('Certification | Results | Integration | Infrastructure | Utils | certi
           });
         });
       });
+
+      context('Pix+ DROIT', function () {
+        const expectedCsvHeaders =
+          '"Numéro de certification";"Prénom";"Nom";"Date de naissance";"Lieu de naissance";"Identifiant Externe";"Type de certification";"Statut";"Niveau";"Commentaire jury pour l’organisation";"Session";"Centre de certification";"Date de passage de la certification"\n';
+        beforeEach(function () {
+          baseCertificationData.framework = Frameworks.DROIT;
+          baseCertificationData.pixScore = null;
+          baseCertificationData.complementaryCertificationCourseResults = [];
+        });
+
+        context('when certification is cancelled', function () {
+          it('writes the appropriate certification in the csv', async function () {
+            // given
+            const certificationResult = domainBuilder.buildCertificationResult.cancelled({
+              ...baseCertificationData,
+              reachedMeshIndex: 2,
+            });
+
+            // when
+            const result = await getSessionCertificationResultsCsv({
+              session,
+              certificationResults: [certificationResult],
+              i18n,
+            });
+
+            // then
+            const expectedFilename = '20210101_1500_resultats_session_1.csv';
+            const expectedContent =
+              '\uFEFF' + expectedCsvHeaders + expectedCsvStart + ';"Pix+ Droit";"Annulée";"-"' + expectedCsvEnd;
+            expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
+          });
+        });
+
+        context('when certification is in error', function () {
+          it('writes the appropriate certification in the csv', async function () {
+            // given
+            const certificationResult = domainBuilder.buildCertificationResult.error({
+              ...baseCertificationData,
+              reachedMeshIndex: 2,
+            });
+
+            // when
+            const result = await getSessionCertificationResultsCsv({
+              session,
+              certificationResults: [certificationResult],
+              i18n,
+            });
+
+            // then
+            const expectedFilename = '20210101_1500_resultats_session_1.csv';
+            const expectedContent =
+              '\uFEFF' + expectedCsvHeaders + expectedCsvStart + ';"Pix+ Droit";"En erreur";"-"' + expectedCsvEnd;
+            expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
+          });
+        });
+
+        context('when certification is rejected', function () {
+          it('forces a below the minimum mesh result', async function () {
+            // given
+            const certificationResult = domainBuilder.buildCertificationResult.rejected({
+              ...baseCertificationData,
+              reachedMeshIndex: 0,
+            });
+
+            // when
+            const result = await getSessionCertificationResultsCsv({
+              session,
+              certificationResults: [certificationResult],
+              i18n,
+            });
+
+            // then
+            const expectedFilename = '20210101_1500_resultats_session_1.csv';
+            const expectedContent =
+              '\uFEFF' + expectedCsvHeaders + expectedCsvStart + ';"Pix+ Droit";"Non obtenue";"-"' + expectedCsvEnd;
+            expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
+          });
+        });
+
+        context('when certification is validated', function () {
+          [
+            { reachedMeshIndex: 0, expectedResult: 'Indépendant' },
+            { reachedMeshIndex: 1, expectedResult: 'Confirmé' },
+            { reachedMeshIndex: 2, expectedResult: 'Avancé' },
+            { reachedMeshIndex: 3, expectedResult: 'Expert' },
+          ].forEach(({ reachedMeshIndex, expectedResult }) => {
+            it(`writes the appropriate certification in the csv when reachedMeshIndex is ${reachedMeshIndex}}`, async function () {
+              // given
+              const certificationResult = domainBuilder.buildCertificationResult.validated({
+                ...baseCertificationData,
+                reachedMeshIndex,
+              });
+
+              // when
+              const result = await getSessionCertificationResultsCsv({
+                session,
+                certificationResults: [certificationResult],
+                i18n,
+              });
+
+              // then
+              const expectedFilename = '20210101_1500_resultats_session_1.csv';
+              const expectedContent =
+                '\uFEFF' +
+                expectedCsvHeaders +
+                expectedCsvStart +
+                `;"Pix+ Droit";"Validée";"${expectedResult}"` +
+                expectedCsvEnd;
+              expect(result).to.deep.equal({ filename: expectedFilename, content: expectedContent });
+            });
+          });
+        });
+      });
     });
   });
 });

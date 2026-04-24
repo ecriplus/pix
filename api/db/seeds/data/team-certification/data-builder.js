@@ -1,4 +1,5 @@
 import { logger } from '../../../../src/shared/infrastructure/utils/logger.js';
+import { PixPlusDroitV3Seed } from './cases/pix-plus-droit-v3.js';
 import { PixPlusEdu2ndDegreV3Seed } from './cases/pix-plus-edu-2nd-degre-v3.js';
 import { CleaV3Seed } from './cases/simple-CLEA-v3.js';
 import { PixPlusDroitV2Seed } from './cases/simple-pix-plus-droit-v2.js';
@@ -19,6 +20,7 @@ export async function teamCertificationDataBuilder({ databaseBuilder }) {
     await new ScoManagingStudent({ databaseBuilder }).create();
     await new CleaV3Seed({ databaseBuilder }).create();
     await new PixPlusDroitV2Seed({ databaseBuilder }).create();
+    await new PixPlusDroitV3Seed({ databaseBuilder }).create();
     await new PixPlusEdu2ndDegreV3Seed({ databaseBuilder }).create();
   } catch (error) {
     if (error instanceof UnseedableError) {

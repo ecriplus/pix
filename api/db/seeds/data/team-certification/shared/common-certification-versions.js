@@ -66,11 +66,34 @@ export class CommonCertificationVersions {
         this.pixPlusDroitVersion = {};
 
         const pixPlusDroitFrameworkName = 'Droit';
-        this.pixPlusDroitVersion.currentVersionId = await this.#createActiveFrameworkVersion({
-          databaseBuilder,
-          fromLcmsFrameworkName: pixPlusDroitFrameworkName,
-          toFrameworkScope: SCOPES.PIX_PLUS_DROIT,
+
+        const tubeIds = await this.#getTubeIdsByFramework({ frameworkName: pixPlusDroitFrameworkName });
+        const currentVersionId = await configurationUsecases.createCertificationVersion({
+          scope: SCOPES.PIX_PLUS_DROIT,
+          tubeIds,
         });
+
+        await databaseBuilder
+          .knex('certification_versions')
+          .where('id', currentVersionId)
+          .update({
+            challengesConfiguration: JSON.stringify(CHALLENGES_CONFIGURATION),
+            globalScoringConfiguration: JSON.stringify([
+              { bounds: { max: 0, min: -2.33 }, meshLevel: 0 },
+              { bounds: { max: 2.33, min: 0 }, meshLevel: 1 },
+              { bounds: { max: 4.67, min: 2.33 }, meshLevel: 2 },
+              { bounds: { max: 8, min: 4.67 }, meshLevel: 3 },
+            ]),
+            competencesScoringConfiguration: null,
+            minimumAnswersRequiredToValidateACertification: MINIMUM_ANSWERS_REQUIRED_TO_VALIDATE_A_CERTIFICATION,
+          });
+        await databaseBuilder.commit();
+
+        await this.#simulateCalibration({ databaseBuilder, versionId: currentVersionId });
+
+        await databaseBuilder.commit();
+
+        this.pixPlusDroitVersion.currentVersionId = currentVersionId;
       }
     } catch (error) {
       if (error instanceof NotFoundError) {
@@ -104,7 +127,7 @@ export class CommonCertificationVersions {
           .where('id', currentVersionId)
           .update({
             challengesConfiguration: JSON.stringify(CHALLENGES_CONFIGURATION),
-            globalScoringConfiguration: JSON.stringify([{ bounds: { max: 8, min: 1 }, meshLevel: 1 }]),
+            globalScoringConfiguration: JSON.stringify([{ bounds: { max: 8, min: 1 }, meshLevel: 0 }]),
             competencesScoringConfiguration: null,
             minimumAnswersRequiredToValidateACertification: MINIMUM_ANSWERS_REQUIRED_TO_VALIDATE_A_CERTIFICATION,
           });
@@ -147,10 +170,7 @@ export class CommonCertificationVersions {
           .where('id', currentVersionId)
           .update({
             challengesConfiguration: JSON.stringify(CHALLENGES_CONFIGURATION),
-            globalScoringConfiguration: JSON.stringify([
-              { bounds: { max: 1, min: -8 }, meshLevel: 0 },
-              { bounds: { max: 8, min: 1 }, meshLevel: 1 },
-            ]),
+            globalScoringConfiguration: JSON.stringify([{ bounds: { max: 8, min: 1 }, meshLevel: 0 }]),
             competencesScoringConfiguration: null,
             minimumAnswersRequiredToValidateACertification: MINIMUM_ANSWERS_REQUIRED_TO_VALIDATE_A_CERTIFICATION,
           });

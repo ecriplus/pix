@@ -272,7 +272,7 @@ describe('Certification | Session-management | Acceptance | Application | Routes
         const competenceMarks = await knex('competence-marks').where({
           assessmentResultId: cancelledAssessmentResult.id,
         });
-        expect(competenceMarks).to.have.lengthOf(1);
+        expect(competenceMarks).to.have.lengthOf(0);
       });
     });
   });
@@ -282,6 +282,9 @@ describe('Certification | Session-management | Acceptance | Application | Routes
       // given
       const versionId = databaseBuilder.factory.buildCertificationVersion({
         startDate: new Date('2024-01-14'),
+        challengesConfiguration: {
+          maximumAssessmentLength: 1,
+        },
         competencesScoringConfiguration: [
           {
             competence: 'index Compétence A',
@@ -303,6 +306,7 @@ describe('Certification | Session-management | Acceptance | Application | Routes
             ],
           },
         ],
+        minimumAnswersRequiredToValidateACertification: 1,
       }).id;
       const juryMember = databaseBuilder.factory.buildUser.withRole({ roles: PIX_ADMIN.ROLES.SUPER_ADMIN });
       const session = databaseBuilder.factory.buildSession({
@@ -353,19 +357,10 @@ describe('Certification | Session-management | Acceptance | Application | Routes
         associatedSkillName: '@recSkill0_0',
         associatedSkillId: 'recSkill0_0',
       });
-      const answerId = databaseBuilder.factory.buildAnswer({
+      databaseBuilder.factory.buildAnswer({
         assessmentId: assessment.id,
         challengeId: certificationChallengeOk.challengeId,
         result: AnswerStatus.OK.status,
-      }).id;
-
-      databaseBuilder.factory.buildKnowledgeElement({
-        assessmentId: assessment.id,
-        answerId,
-        skillId: 'recSkill0_0',
-        competenceId: 'index Compétence A',
-        userId: certificationCourse.userId,
-        earnedPix: 16,
       });
 
       const options = {
@@ -382,7 +377,7 @@ describe('Certification | Session-management | Acceptance | Application | Routes
       const rejectedAssessmentResult = await knex('assessment-results')
         .where({
           assessmentId: assessment.id,
-          status: AssessmentResult.status.REJECTED,
+          status: AssessmentResult.status.VALIDATED,
           juryId: juryMember.id,
         })
         .first();

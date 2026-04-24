@@ -365,7 +365,11 @@
           "8": "Expert 2"
         },
         "DROIT": {
-          "0": "Behaald"
+          "0": "Onafhankelijk",
+          "1": "Bevestigd",
+          "2": "Gevorderd",
+          "3": "Expert",
+          "BELOW_MINIMUM": "-"
         },
         "EDU_1ER_DEGRE": {
           "0": "Toelaatbaar"
@@ -377,7 +381,11 @@
           "0": "Toelaatbaar"
         },
         "PRO_SANTE": {
-          "0": "Behaald"
+          "0": "Onafhankelijk",
+          "1": "Bevestigd",
+          "2": "Gevorderd",
+          "3": "Expert",
+          "BELOW_MINIMUM": "-"
         }
       }
     }

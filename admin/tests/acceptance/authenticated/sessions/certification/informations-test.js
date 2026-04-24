@@ -566,6 +566,26 @@ module('Acceptance | Route | routes/authenticated/sessions/certification | infor
       });
     });
 
+    module('when certification is v3 Pix+ Droit', function () {
+      test('it displays the certification result with the correct mesh level label', async function (assert) {
+        // given
+        await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+        certification.update({
+          version: 3,
+          isPublished: true,
+          certificationFramework: 'DROIT',
+          reachedResultKey: 'DROIT.0',
+          algorithmVersion: 3,
+        });
+
+        // when
+        const screen = await visit(`/sessions/certification/${certification.id}`);
+
+        // then
+        assert.dom(screen.getByText('Indépendant')).exists();
+      });
+    });
+
     module('Certification issue reports section', function () {
       module('Impactful issue reports resolution', function () {
         module('when Resolve button is clicked on issue report', function () {
