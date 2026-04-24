@@ -134,7 +134,7 @@
             },
             {
               "type": "stepper",
-              "instruction": "<p>Observez les écrans d’ordinateur ci-dessous puis répondez à la question.</p>",
+              "instruction": "<p>Observez les écrans ci-dessous puis répondez à la question.</p>",
               "steps": [
                 {
                   "elements": [
