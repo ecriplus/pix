@@ -33,7 +33,7 @@
                 "id": "0e6b81d5-a7d6-4f2c-87ad-4f12699fae6e",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Naya souhaite proposer des ateliers d’écriture.</p><br>p>Ci-dessous, voici l’annonce qu’elle a commencé à rédiger dans un logiciel de traitement de texte :</p>"
+                "content": "<p>Naya souhaite proposer des ateliers d’écriture.</p><p>Ci-dessous, voici l’annonce qu’elle a commencé à rédiger dans un logiciel de traitement de texte :</p>"
               }
             },
             {
@@ -110,7 +110,7 @@
                 "id": "f607d16f-32ea-41b6-ad08-d896982fa43b",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Naya a ajouté des sauts de ligne dans son texte.</p><br><p>Il existe d'autres options pour faciliter la lecture d’un texte. Découvrons cela ensemble</p>"
+                "content": "<p>Naya a ajouté des sauts de ligne dans son texte.</p><p>Il existe d'autres options pour faciliter la lecture d’un texte. Découvrons cela ensemble</p>"
               }
             }
           ]
