@@ -122,4 +122,11 @@ export default {
     defaultValue: [],
     tags: ['team-acces', 'iam', 'backend'],
   },
+  isFetchingModulesFromLearningContentEnabled: {
+    type: 'boolean',
+    description: 'Enable getting modules from learning content schema',
+    defaultValue: false,
+    devDefaultValues: { test: false, reviewApp: false },
+    tags: ['team-devcomp', 'pix-api', 'backend'],
+  },
 };
