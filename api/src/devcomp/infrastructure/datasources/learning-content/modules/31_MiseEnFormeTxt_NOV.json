@@ -255,7 +255,7 @@
               "element": {
                 "id": "008f9d74-8d51-4d6f-81b3-610dc9c8f9c7",
                 "type": "expand",
-                "title": "Indice 1 :",
+                "title": "🗝️ Indice 1 :",
                 "content": "<p>Pour sélectionner le mot, vous pouvez&nbsp;:&nbsp; </p><ul><li>cliquer au début du mot, </li><li>puis faire glisser la souris jusqu’à la fin du mot,ou double cliquer dessus.</li></ul>"
               }
             },
@@ -264,7 +264,7 @@
               "element": {
                 "id": "b19ad0fa-0980-4011-9bb9-e036474ae263",
                 "type": "expand",
-                "title": "Indice 2 :",
+                "title": "🗝️ Indice 2 :",
                 "content": "<p>Après avoir sélectionné le mot, cliquez sur le bouton «&nbsp;Gras&nbsp;» dans la barre d’outils pour mettre le mot en gras.</p><p>Pour afficher le nom des boutons, passez votre souris sur les différentes icônes de la barre d’outils.</p>"
               }
             }
@@ -355,7 +355,7 @@
               "element": {
                 "id": "67af2c7e-a9d1-475c-afc7-0019147a4a09",
                 "type": "expand",
-                "title": "Indice 1",
+                "title": "🗝️ Indice 1",
                 "content": "<p>Pour sélectionner une phrase ou un paragraphe, vous pouvez&nbsp;: </p><ul><li>cliquer au début de la phrase, </li><li>puis faire glisser la souris jusqu’à la fin de la phrase,ou triple cliquer dessus.</li></ul>"
               }
             },
@@ -364,7 +364,7 @@
               "element": {
                 "id": "6221ea8c-378e-438a-883b-aeb7c47984a1",
                 "type": "expand",
-                "title": "Indice 2",
+                "title": "🗝️ Indice 2",
                 "content": "<p>Après avoir sélectionné la phrase, choisir l’option «&nbsp;Taille de police&nbsp;» dans la barre d’outils pour agrandir la phrase.</p><p>Pour afficher le nom des boutons, passez votre souris sur les différentes icônes de la barre d’outils.</p>"
               }
             }
