@@ -39,14 +39,8 @@ describe('Unit | Infrastructure | key-value-storage | InMemoryKeyValueStorage', 
   });
 
   describe('#save', function () {
-    let clock;
-
     beforeEach(function () {
-      clock = sinon.useFakeTimers({ toFake: ['Date'] });
-    });
-
-    afterEach(function () {
-      clock.restore();
+      sinon.useFakeTimers();
     });
 
     it('should resolve with the generated key', async function () {
@@ -137,6 +131,7 @@ describe('Unit | Infrastructure | key-value-storage | InMemoryKeyValueStorage', 
 
     it('should not change the time to live', async function () {
       // given
+      const clock = sinon.useFakeTimers();
       const keyWithTtl = await inMemoryKeyValueStorage.save({
         value: {},
         expirationDelaySeconds: 1,
@@ -144,10 +139,10 @@ describe('Unit | Infrastructure | key-value-storage | InMemoryKeyValueStorage', 
       const keyWithoutTtl = await inMemoryKeyValueStorage.save({ value: {} });
 
       // when
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await clock.tickAsync(500);
       await inMemoryKeyValueStorage.update(keyWithTtl, {});
       await inMemoryKeyValueStorage.update(keyWithoutTtl, {});
-      await new Promise((resolve) => setTimeout(resolve, 600));
+      await clock.tickAsync(600);
 
       // then
       expect(await inMemoryKeyValueStorage.get(keyWithTtl)).to.be.undefined;
@@ -175,13 +170,14 @@ describe('Unit | Infrastructure | key-value-storage | InMemoryKeyValueStorage', 
   describe('#expire', function () {
     it('should add an expiration time to the list', async function () {
       // given
+      const clock = sinon.useFakeTimers();
       const inMemoryKeyValueStorage = new InMemoryKeyValueStorage();
 
       // when
       const key = 'key:lpush';
       await inMemoryKeyValueStorage.lpush(key, 'value');
       await inMemoryKeyValueStorage.expire({ key, expirationDelaySeconds: 1 });
-      await new Promise((resolve) => setTimeout(resolve, 1200));
+      await clock.tickAsync(1200);
       const list = inMemoryKeyValueStorage.lrange(key);
 
       // then
