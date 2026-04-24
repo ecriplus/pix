@@ -125,7 +125,7 @@ test(
           await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
             sessionNumber,
             status: 'Rejetée',
-            result: 'Admissible',
+            result: 'Non admissible',
           });
         });
       });

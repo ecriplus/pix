@@ -132,8 +132,8 @@ test(
       const certificateListPage = await homePage.goToMyCertificates();
       const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment } =
         await certificateListPage.getCertificateData(certificationNumber);
-      expect(mainStatus).toBe('Certification Pix : Non-obtenue');
-      expect(extraStatus).toBe('CLéA Numérique : Non-obtenue');
+      expect(mainStatus).toBe('Certification Pix : Non obtenue');
+      expect(extraStatus).toBe('CLéA Numérique : Non obtenue');
       expect(detailsFramework).toBe(null);
       expect(certificationCenter).toBe('Centre de certification : ' + certificationCenterName);
       expect(examDate).toBe('Date de passage : ' + getNowAsDDMMYYYY());

@@ -90,7 +90,7 @@ test(
           Prénom: certifiableUserData.firstName,
           Nom: certifiableUserData.lastName,
           Statut: 'Annulée',
-          Résultats: '55 Pix',
+          Résultats: 'Pix',
           'Signalements impactants non résolus': '',
           'Certification passée': 'PIX / CléA Numérique',
         });
@@ -100,7 +100,7 @@ test(
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
           status: 'Annulée',
-          result: '55 Pix',
+          result: 'Pix',
         });
         const cleaResult = await certificationInformationPage.getCleaResult();
         expect(cleaResult).toBe('Rejetée');
@@ -113,7 +113,7 @@ test(
           nbValidatedTechnicalIssues: 0,
           testEndedBy: 'Finalisation session',
           abortReason: 'Problème technique',
-          result: '55 Pix',
+          result: 'Pix',
         });
       });
     });

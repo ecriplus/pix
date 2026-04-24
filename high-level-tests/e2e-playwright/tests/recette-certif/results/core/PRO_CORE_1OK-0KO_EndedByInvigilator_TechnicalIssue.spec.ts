@@ -93,7 +93,7 @@ test(
           Prénom: certifiableUserData.firstName,
           Nom: certifiableUserData.lastName,
           Statut: 'Terminée par le surveillant',
-          Résultats: '55 Pix',
+          Résultats: 'Pix',
           'Signalements impactants non résolus': '',
           'Certification passée': 'Pix Cœur',
         });
@@ -103,7 +103,7 @@ test(
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
           status: 'Annulée',
-          result: '55 Pix',
+          result: 'Pix',
         });
         await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
           status: 'Annulée',
@@ -114,7 +114,7 @@ test(
           nbValidatedTechnicalIssues: 0,
           testEndedBy: 'Le surveillant',
           abortReason: 'Problème technique',
-          result: '55 Pix',
+          result: 'Pix',
         });
       });
     });

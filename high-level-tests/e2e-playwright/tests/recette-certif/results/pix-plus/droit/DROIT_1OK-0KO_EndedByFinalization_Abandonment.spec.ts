@@ -92,7 +92,7 @@ test(
           Prénom: certifiableUserData.firstName,
           Nom: certifiableUserData.lastName,
           Statut: 'Rejetée',
-          Résultats: 'Indépendant',
+          Résultats: 'Non obtenue',
           'Signalements impactants non résolus': '',
           'Certification passée': 'Pix+ Droit',
         });
@@ -102,7 +102,7 @@ test(
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
           status: 'Rejetée',
-          result: 'Indépendant',
+          result: 'Non obtenue',
         });
         await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
           status: 'Rejetée',
@@ -113,7 +113,7 @@ test(
           nbValidatedTechnicalIssues: 0,
           testEndedBy: 'Finalisation session',
           abortReason: 'Abandon : Manque de temps ou départ prématuré',
-          result: 'Indépendant',
+          result: 'Non obtenue',
         });
       });
     });
@@ -129,7 +129,7 @@ test(
       const certificateListPage = await homePage.goToMyCertificates();
       const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment } =
         await certificateListPage.getCertificateData(certificationNumber);
-      expect(mainStatus).toBe('Pix+ Droit : Non obtenu');
+      expect(mainStatus).toBe('Pix+ Droit : Non obtenue');
       expect(extraStatus).toBe(null);
       expect(detailsFramework).toBe(null);
       expect(certificationCenter).toBe('Centre de certification : ' + certificationCenterName);

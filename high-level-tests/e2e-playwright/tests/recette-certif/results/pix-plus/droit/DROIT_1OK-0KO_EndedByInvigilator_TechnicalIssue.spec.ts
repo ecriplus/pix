@@ -97,7 +97,7 @@ test(
           Prénom: certifiableUserData.firstName,
           Nom: certifiableUserData.lastName,
           Statut: 'Terminée par le surveillant',
-          Résultats: 'Indépendant',
+          Résultats: 'Non obtenue',
           'Signalements impactants non résolus': '',
           'Certification passée': 'Pix+ Droit',
         });
@@ -107,7 +107,7 @@ test(
         await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
           sessionNumber,
           status: 'Annulée',
-          result: 'Indépendant',
+          result: 'Non obtenue',
         });
         await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
           status: 'Annulée',
@@ -118,7 +118,7 @@ test(
           nbValidatedTechnicalIssues: 0,
           testEndedBy: 'Le surveillant',
           abortReason: 'Problème technique',
-          result: 'Indépendant',
+          result: 'Non obtenue',
         });
       });
     });

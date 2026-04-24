@@ -125,7 +125,7 @@ test(
           await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
             sessionNumber,
             status: 'Rejetée',
-            result: 'Expert',
+            result: 'Non obtenue',
           });
         });
       });
@@ -142,7 +142,7 @@ test(
       const certificateListPage = await homePage.goToMyCertificates();
       const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment } =
         await certificateListPage.getCertificateData(certificationNumber);
-      expect(mainStatus).toBe('Pix+ Droit : Non obtenu');
+      expect(mainStatus).toBe('Pix+ Droit : Non obtenue');
       expect(extraStatus).toBe(null);
       expect(detailsFramework).toBe(null);
       expect(certificationCenter).toBe('Centre de certification : ' + certificationCenterName);
