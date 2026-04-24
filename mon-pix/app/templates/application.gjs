@@ -1,3 +1,4 @@
+import PixToastContainer from '@1024pix/pix-ui/components/pix-toast-container';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import t from 'ember-intl/helpers/t';
@@ -88,5 +89,7 @@ export default class ApplicationTemplate extends Component {
       <!-- Preloading images -->
       <img src="/images/loader-white.svg" alt="{{t 'common.loading.default'}}" style="display: none" />
     </div>
+
+    <PixToastContainer @closeButtonAriaLabel={{t "common.notifications.close-button.extra-information"}} />
   </template>
 }
