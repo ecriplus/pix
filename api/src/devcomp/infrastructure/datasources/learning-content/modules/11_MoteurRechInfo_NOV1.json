@@ -53,40 +53,40 @@
               "element": {
                 "id": "b555b827-7629-4476-9913-faca10c453a1",
                 "type": "qcu-discovery",
-                "instruction": "<p>À votre avis qu’est-ce qu’il manque dans la demande d’Esther ?</p>",
+                "instruction": "<p>À votre avis, qu’est-ce qu’il manque dans la demande d’Esther&nbsp;?</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>une majuscule et un point</p>",
+                    "content": "<p>Une majuscule et un point</p>",
                     "feedback": {
                       "diagnosis": "<p>Eh non.</p><p>La demande d’Esther n’est pas assez précise. Il manque <strong>la ville</strong>.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>la date exacte</p>",
+                    "content": "<p>La date exacte</p>",
                     "feedback": {
                       "diagnosis": "<p>Eh non. </p><p>La demande d’Esther n’est pas assez précise. Il manque <strong>la ville</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>la ville</p>",
+                    "content": "<p>La ville</p>",
                     "feedback": {
                       "diagnosis": "<p>En effet. </p>\n<p>La demande d’Esther n’est pas assez précise. Il manque <strong>la ville</strong>.</p>"
                     }
                   },
                   {
                     "id": "4",
-                    "content": "<p>le nom de l’oncle d’Esther</p>",
+                    "content": "<p>Le nom de l’oncle d’Esther</p>",
                     "feedback": {
                       "diagnosis": "<p>Eh non. </p>\n<p>La demande d’Esther n’est pas assez précise. Il manque <strong>la ville</strong>.</p>"
                     }
                   },
                   {
                     "id": "5",
-                    "content": "<p>je ne sais pas</p>",
+                    "content": "<p>Je ne sais pas</p>",
                     "feedback": {
                       "diagnosis": "<p>La demande d’Esther n’est pas assez précise. Il manque <strong>la ville</strong>.</p>"
                     }
