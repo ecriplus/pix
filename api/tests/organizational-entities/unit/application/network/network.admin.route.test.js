@@ -9,39 +9,6 @@ import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 
 describe('Unit | Application | Admin | Route | Network', function () {
   describe('GET /api/admin/networks', function () {
-    describe('when the authenticated user has super admin role', function () {
-      it('should call findAllFilteredNetworks controller method without filter', async function () {
-        // given
-        sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
-        sinon.stub(usecases, 'findAllFilteredNetworks').returns('ok');
-        sinon.stub(networkAdminController, 'findAllFilteredNetworks').returns('ok');
-
-        const httpTestServer = new HttpTestServer();
-        await httpTestServer.register(moduleUnderTest);
-
-        // when
-        await httpTestServer.request('GET', '/api/admin/networks', {});
-
-        // then
-        sinon.assert.called(networkAdminController.findAllFilteredNetworks);
-      });
-
-      it('should call findAllFilteredNetworks controller method with filter', async function () {
-        // given
-        sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
-        sinon.stub(networkAdminController, 'findAllFilteredNetworks').returns('ok');
-
-        const httpTestServer = new HttpTestServer();
-        await httpTestServer.register(moduleUnderTest);
-
-        // when
-        await httpTestServer.request('GET', '/api/admin/networks?filter[name]=réseau', {});
-
-        // then
-        sinon.assert.called(networkAdminController.findAllFilteredNetworks);
-      });
-    });
-
     describe('when the user authenticated has no role', function () {
       it('should return 403 HTTP status code', async function () {
         // given

@@ -95,12 +95,12 @@ import { createOrganizationsWithTagsAndTargetProfiles } from './create-organizat
 import { createTag } from './create-tag.js';
 import { detachParentOrganizationFromOrganization } from './detach-parent-organization-from-organization.usecase.js';
 import { findAllAdministrationTeams } from './find-all-administration-teams.usecase.js';
-import { findAllFilteredNetworks } from './find-all-filtered-networks.usecase.js';
 import { findAllOrganizationLearnerTypes } from './find-all-organization-learner-types.refactor.js';
 import { findAllTags } from './find-all-tags.usecase.js';
 import { findChildrenOrganizations } from './find-children-organizations.usecase.js';
 import { findOrganizationFeatures } from './find-organization-features.js';
 import { findPaginatedFilteredCertificationCenters } from './find-paginated-filtered-certification-centers.usecase.js';
+import { findPaginatedFilteredNetworks } from './find-paginated-filtered-networks.usecase.js';
 import { findPaginatedFilteredOrganizations } from './find-paginated-filtered-organizations.usecase.js';
 import { getCenterForAdmin } from './get-center-for-admin.usecase.js';
 import { getNetworkDetails } from './get-network-details.usecase.js';
@@ -128,7 +128,7 @@ const usecasesWithoutInjectedDependencies = {
   createOrganizationsWithTagsAndTargetProfiles,
   createTag,
   detachParentOrganizationFromOrganization,
-  findAllFilteredNetworks,
+  findPaginatedFilteredNetworks,
   findAllTags,
   findChildrenOrganizations,
   findOrganizationFeatures,
@@ -161,7 +161,7 @@ const usecasesWithoutInjectedDependencies = {
  * @property {updateOrganizationsInBatch} updateOrganizationsInBatch
  * @property {updateOrganizationInformation} updateOrganizationInformation
  * @property {archiveOrganizationsInBatch} archiveOrganizationsInBatch
- * @property {findAllFilteredNetworks} findAllFilteredNetworks
+ * @property {findPaginatedFilteredNetworks} findPaginatedFilteredNetworks
  */
 
 /**

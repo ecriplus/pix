@@ -1,5 +1,6 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
+import { fetchPage } from '../../../shared/infrastructure/utils/knex-utils.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { StructureNotFoundError } from '../../domain/errors.js';
 import { Network } from '../../domain/models/Network.js';
@@ -8,9 +9,12 @@ import { Network } from '../../domain/models/Network.js';
  * @param {object} [params]
  * @param {object} [params.filter]
  * @param {string} [params.filter.name]
- * @returns {Promise<Array<Network>>}
+ * @param {object} [params.page]
+ * @param {number} [params.page.number]
+ * @param {number} [params.page.size]
+ * @returns {Promise<{models: Array<Network>, pagination: object}>}
  */
-async function findAll({ filter } = {}) {
+async function findPaginatedFiltered({ filter, page } = {}) {
   const knexConn = DomainTransaction.getConnection();
 
   const query = knexConn('networks').select('networks.id', 'networks.name').orderBy('name');
@@ -28,9 +32,12 @@ async function findAll({ filter } = {}) {
     );
   }
 
-  const networks = await query;
+  const { results, pagination } = await fetchPage({
+    queryBuilder: query,
+    paginationParams: page,
+  });
 
-  return networks.map(_toDomain);
+  return { models: results.map(_toDomain), pagination };
 }
 
 /**
@@ -175,4 +182,4 @@ function _toDomain(network) {
   return new Network(network);
 }
 
-export { attachOrganization, findAll, findByOrganizationId, getById, save, update };
+export { attachOrganization, findByOrganizationId, findPaginatedFiltered, getById, save, update };

@@ -7,42 +7,69 @@ import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Organizational Entities | Infrastructure | Repositories | network', function () {
-  describe('#findAll', function () {
+  describe('#findPaginatedFiltered', function () {
     describe('when there are networks', function () {
-      it('returns the networks ordered by name', async function () {
+      it('returns networks ordered by name', async function () {
         // given
         const secondNetwork = databaseBuilder.factory.buildNetwork({ name: 'B Réseau' });
         const firstNetwork = databaseBuilder.factory.buildNetwork({ name: 'A Réseau' });
-
         await databaseBuilder.commit();
 
         // when
-        const foundNetworks = await networkRepository.findAll();
+        const result = await networkRepository.findPaginatedFiltered({ page: { number: 1, size: 10 } });
 
         // then
-        const expectedFirstNetwork = domainBuilder.acquisition.buildNetwork({
-          id: firstNetwork.id,
-          name: firstNetwork.name,
-        });
+        expect(result.models).to.have.lengthOf(2);
+        expect(result.models[0]).to.deepEqualInstance(
+          domainBuilder.acquisition.buildNetwork({ id: firstNetwork.id, name: firstNetwork.name }),
+        );
+        expect(result.models[1]).to.deepEqualInstance(
+          domainBuilder.acquisition.buildNetwork({ id: secondNetwork.id, name: secondNetwork.name }),
+        );
+      });
 
-        const expectedSecondNetwork = domainBuilder.acquisition.buildNetwork({
-          id: secondNetwork.id,
-          name: secondNetwork.name,
-        });
+      it('returns the first page of networks with correct pagination metadata', async function () {
+        // given
+        databaseBuilder.factory.buildNetwork({ name: 'A Réseau' });
+        databaseBuilder.factory.buildNetwork({ name: 'B Réseau' });
+        databaseBuilder.factory.buildNetwork({ name: 'C Réseau' });
+        await databaseBuilder.commit();
 
-        expect(foundNetworks).to.have.lengthOf(2);
-        expect(foundNetworks[0]).to.deepEqualInstance(expectedFirstNetwork);
-        expect(foundNetworks[1]).to.deepEqualInstance(expectedSecondNetwork);
+        // when
+        const result = await networkRepository.findPaginatedFiltered({ page: { number: 1, size: 2 } });
+
+        // then
+        expect(result.models).to.have.lengthOf(2);
+        expect(result.pagination).to.deep.equal({ page: 1, pageSize: 2, rowCount: 3, pageCount: 2 });
+        expect(result.models[0].name).to.equal('A Réseau');
+        expect(result.models[1].name).to.equal('B Réseau');
+      });
+
+      it('returns the second page of networks', async function () {
+        // given
+        databaseBuilder.factory.buildNetwork({ name: 'A Réseau' });
+        databaseBuilder.factory.buildNetwork({ name: 'B Réseau' });
+        databaseBuilder.factory.buildNetwork({ name: 'C Réseau' });
+        await databaseBuilder.commit();
+
+        // when
+        const result = await networkRepository.findPaginatedFiltered({ page: { number: 2, size: 2 } });
+
+        // then
+        expect(result.models).to.have.lengthOf(1);
+        expect(result.models[0].name).to.equal('C Réseau');
       });
     });
 
     describe('when there are no networks', function () {
-      it('returns an empty array', async function () {
+      it('returns empty models with zero pagination', async function () {
         // when
-        const foundNetworks = await networkRepository.findAll();
+        const result = await networkRepository.findPaginatedFiltered({ page: { number: 1, size: 10 } });
 
         // then
-        expect(foundNetworks).to.be.empty;
+        expect(result.models).to.be.empty;
+        expect(result.pagination.rowCount).to.equal(0);
+        expect(result.pagination.pageCount).to.equal(0);
       });
     });
 
@@ -55,14 +82,17 @@ describe('Integration | Organizational Entities | Infrastructure | Repositories 
         await databaseBuilder.commit();
 
         // when
-        const foundNetworks = await networkRepository.findAll({ filter: { name: 'Réseau' } });
+        const result = await networkRepository.findPaginatedFiltered({
+          filter: { name: 'Réseau' },
+          page: { number: 1, size: 10 },
+        });
 
         // then
-        expect(foundNetworks).to.have.lengthOf(2);
-        expect(foundNetworks[0]).to.deepEqualInstance(
+        expect(result.models).to.have.lengthOf(2);
+        expect(result.models[0]).to.deepEqualInstance(
           domainBuilder.acquisition.buildNetwork({ id: matchingNetwork2.id, name: matchingNetwork2.name }),
         );
-        expect(foundNetworks[1]).to.deepEqualInstance(
+        expect(result.models[1]).to.deepEqualInstance(
           domainBuilder.acquisition.buildNetwork({ id: matchingNetwork1.id, name: matchingNetwork1.name }),
         );
       });
@@ -73,25 +103,31 @@ describe('Integration | Organizational Entities | Infrastructure | Repositories 
         await databaseBuilder.commit();
 
         // when
-        const foundNetworks = await networkRepository.findAll({ filter: { name: 'réseau national' } });
+        const result = await networkRepository.findPaginatedFiltered({
+          filter: { name: 'réseau national' },
+          page: { number: 1, size: 10 },
+        });
 
         // then
-        expect(foundNetworks).to.have.lengthOf(1);
-        expect(foundNetworks[0]).to.deepEqualInstance(
+        expect(result.models).to.have.lengthOf(1);
+        expect(result.models[0]).to.deepEqualInstance(
           domainBuilder.acquisition.buildNetwork({ id: network.id, name: network.name }),
         );
       });
 
-      it('returns an empty array when no network matches', async function () {
+      it('returns empty models when no network matches', async function () {
         // given
         databaseBuilder.factory.buildNetwork({ name: 'Réseau Bretagne' });
         await databaseBuilder.commit();
 
         // when
-        const foundNetworks = await networkRepository.findAll({ filter: { name: 'Introuvable' } });
+        const result = await networkRepository.findPaginatedFiltered({
+          filter: { name: 'Introuvable' },
+          page: { number: 1, size: 10 },
+        });
 
         // then
-        expect(foundNetworks).to.be.empty;
+        expect(result.models).to.be.empty;
       });
     });
   });

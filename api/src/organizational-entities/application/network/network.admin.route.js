@@ -29,6 +29,10 @@ const register = async function (server) {
             filter: Joi.object({
               name: Joi.string().empty('').allow(null).optional(),
             }).default({}),
+            page: Joi.object({
+              number: Joi.number().integer().min(1).optional(),
+              size: Joi.number().integer().min(1).optional(),
+            }).default({}),
           }),
           failAction: (request, h) => {
             return sendJsonApiError(new BadRequestError('Un des champs de recherche saisis est invalide.'), h);

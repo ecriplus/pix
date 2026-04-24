@@ -8,37 +8,43 @@ import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 describe('Unit | Organizational Entities | Application | Network', function () {
   describe('#findAllFilteredNetworks', function () {
-    it('calls findAllFilteredNetworks usecase with empty filter and serializes the result', async function () {
+    it('calls findPaginatedFilteredNetworks usecase with filter and page, and serializes the result', async function () {
       // given
       const network1 = domainBuilder.acquisition.buildNetwork({ id: 1, name: 'Network 1' });
       const network2 = domainBuilder.acquisition.buildNetwork({ id: 2, name: 'Network 2' });
-      const networks = [network1, network2];
-      sinon.stub(usecases, 'findAllFilteredNetworks').resolves(networks);
+      const pagination = { page: 1, pageSize: 10, rowCount: 2, pageCount: 1 };
+      sinon.stub(usecases, 'findPaginatedFilteredNetworks').resolves({ models: [network1, network2], pagination });
       const networkSerializer = { serialize: sinon.stub() };
-      const request = { query: { filter: {} } };
+      const request = { query: { filter: {}, page: { number: 1, size: 10 } } };
 
       // when
       await networkAdminController.findAllFilteredNetworks(request, hFake, { networkSerializer });
 
       // then
-      expect(usecases.findAllFilteredNetworks).to.have.been.calledOnceWith({ filter: {} });
-      expect(networkSerializer.serialize).to.have.been.calledWithExactly(networks);
+      expect(usecases.findPaginatedFilteredNetworks).to.have.been.calledOnceWith({
+        filter: {},
+        page: { number: 1, size: 10 },
+      });
+      expect(networkSerializer.serialize).to.have.been.calledWithExactly([network1, network2], pagination);
     });
 
-    it('calls findAllFilteredNetworks usecase with filter and serializes the result', async function () {
+    it('calls findPaginatedFilteredNetworks usecase with name filter and serializes the result', async function () {
       // given
       const network1 = domainBuilder.acquisition.buildNetwork({ id: 1, name: 'Mon réseau' });
-      const networks = [network1];
-      sinon.stub(usecases, 'findAllFilteredNetworks').resolves(networks);
+      const pagination = { page: 1, pageSize: 10, rowCount: 1, pageCount: 1 };
+      sinon.stub(usecases, 'findPaginatedFilteredNetworks').resolves({ models: [network1], pagination });
       const networkSerializer = { serialize: sinon.stub() };
-      const request = { query: { filter: { name: 'Mon' } } };
+      const request = { query: { filter: { name: 'Mon' }, page: { number: 1, size: 10 } } };
 
       // when
       await networkAdminController.findAllFilteredNetworks(request, hFake, { networkSerializer });
 
       // then
-      expect(usecases.findAllFilteredNetworks).to.have.been.calledOnceWith({ filter: { name: 'Mon' } });
-      expect(networkSerializer.serialize).to.have.been.calledWithExactly(networks);
+      expect(usecases.findPaginatedFilteredNetworks).to.have.been.calledOnceWith({
+        filter: { name: 'Mon' },
+        page: { number: 1, size: 10 },
+      });
+      expect(networkSerializer.serialize).to.have.been.calledWithExactly([network1], pagination);
     });
   });
 

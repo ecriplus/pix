@@ -1,5 +1,6 @@
 import PixFilterBanner from '@1024pix/pix-ui/components/pix-filter-banner';
 import PixInput from '@1024pix/pix-ui/components/pix-input';
+import PixPagination from '@1024pix/pix-ui/components/pix-pagination';
 import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
 import { fn } from '@ember/helper';
@@ -47,6 +48,7 @@ export default class NetworkListItems extends Component {
           </PixTableColumn>
         </:columns>
       </PixTable>
+      <PixPagination @pagination={{@networks.meta}} />
     {{else}}
       <div class="table__empty">{{t "common.tables.empty-result"}}</div>
     {{/if}}

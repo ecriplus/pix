@@ -100,5 +100,30 @@ module('Integration | Component | Networks | ListItems', function (hooks) {
 
       assert.dom(screen.getByText(t('common.tables.empty-result'))).exists();
     });
+
+    test('it does not render pagination controls', async function (assert) {
+      // given
+      const networks = [];
+
+      // when
+      const screen = await render(<template><ListItems @networks={{networks}} /></template>);
+
+      // then
+      assert.dom(screen.queryByRole('button', { name: /Aller à la page suivante/ })).doesNotExist();
+    });
+  });
+
+  module('pagination', function () {
+    test('it displays the next page button when there are multiple pages', async function (assert) {
+      // given
+      const networks = Array.from({ length: 10 }, (_, i) => ({ id: i + 1, name: `Réseau ${i + 1}` }));
+      networks.meta = { page: 1, pageSize: 10, rowCount: 12, pageCount: 2 };
+
+      // when
+      const screen = await render(<template><ListItems @networks={{networks}} /></template>);
+
+      // then
+      assert.dom(screen.getByRole('button', { name: /Aller à la page suivante/ })).isEnabled();
+    });
   });
 });
