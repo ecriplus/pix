@@ -1,5 +1,38 @@
 # Pix Changelog
 
+# [5.394.0](https://github.com/1024pix/pix/compare/v5.393.0...v5.394.0) (2026-04-24)
+
+### :rocket: Amélioration
+
+- [#15981](https://github.com/1024pix/pix/pull/15981) Ajouter la pagination sur la liste de réseaux dans pix-admin (PIX-21967) 
+- [#15966](https://github.com/1024pix/pix/pull/15966) Ajustement de la page vérificateur Pix+ Pro Santé/Droit en mode MVP (PIX-22294) 
+- [#16017](https://github.com/1024pix/pix/pull/16017) FRI 11_MoteurRechInfo_NOV1 v0 
+- [#15935](https://github.com/1024pix/pix/pull/15935) Module RangerFichier_Nov test avec embeds OsPix 
+
+### :building_construction: Tech
+
+- [#16008](https://github.com/1024pix/pix/pull/16008) :broom: Supprime (encore) le répertoire load-testing  
+- [#16001](https://github.com/1024pix/pix/pull/16001) :broom: Supprime le repertoire `load-testing` qui n'est plus utilisé 
+- [#16002](https://github.com/1024pix/pix/pull/16002) :broom: Supprime le répertoire inutilisé `docker/` 
+- [#15998](https://github.com/1024pix/pix/pull/15998) :package: Fixe la version minimum de la bibliothèque `protobufs` 
+- [#15993](https://github.com/1024pix/pix/pull/15993) :recycle: Réduit l'utilisation de LODASH 
+- [#15999](https://github.com/1024pix/pix/pull/15999) Améliorer la DX des IDE avec les jsconfig.json 
+- [#16000](https://github.com/1024pix/pix/pull/16000) Corriger les warnings du lint sur les composants gjs côté Pix App 
+- [#15960](https://github.com/1024pix/pix/pull/15960) Refactore les builders pour construire le contenu à partir d'un blueprint (PIX-22473) 
+
+### :arrow_up: Montée de version
+
+- [#16011](https://github.com/1024pix/pix/pull/16011) Update dependency @1024pix/pix-ui to ^60.9.0 (admin) 
+- [#16012](https://github.com/1024pix/pix/pull/16012) Update dependency @1024pix/pix-ui to ^60.9.0 (certif) 
+- [#16013](https://github.com/1024pix/pix/pull/16013) Update dependency @1024pix/pix-ui to ^60.9.0 (junior) 
+- [#16014](https://github.com/1024pix/pix/pull/16014) Update dependency @1024pix/pix-ui to ^60.9.0 (mon-pix) 
+- [#16015](https://github.com/1024pix/pix/pull/16015) Update dependency @1024pix/pix-ui to ^60.9.0 (orga) 
+- [#16009](https://github.com/1024pix/pix/pull/16009) Update dependency @datadog/datadog-api-client to v1.56.0 (api) 
+
+### :coffee: Autre
+
+- [#16019](https://github.com/1024pix/pix/pull/16019) Update IADefinition_IND.json - correction coquille
+
 # [5.393.0](https://github.com/1024pix/pix/compare/v5.392.1...v5.393.0) (2026-04-23)
 
 ### :rocket: Amélioration
