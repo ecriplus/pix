@@ -9,7 +9,6 @@ export default class ConnectionMethodsController extends Controller {
 
   @tracked isEmailEditionMode = false;
   @tracked showEmailUpdatedMessage = false;
-  @tracked showEmailAddedMessage = false;
 
   get shouldShowEmailConfirmedBanner() {
     return !!this.model.user.emailConfirmed;
@@ -56,11 +55,5 @@ export default class ConnectionMethodsController extends Controller {
   @action
   displayEmailUpdateMessage() {
     this.showEmailUpdatedMessage = true;
-    this.showEmailAddedMessage = false;
-  }
-
-  @action
-  displayEmailAddedMessage() {
-    this.showEmailAddedMessage = true;
   }
 }

@@ -16,6 +16,7 @@ export default class EmailVerificationCode extends Component {
   @service currentUser;
   @service store;
   @service intl;
+  @service pixToast;
   @tracked showResendCode = false;
   @tracked isResending = false;
   @tracked isEmailSent = false;
@@ -73,8 +74,9 @@ export default class EmailVerificationCode extends Component {
       const email = await emailVerificationCode.verifyCode();
       if (this.args.action === 'add-email') {
         await this._reloadAccountData();
-
-        this.args.displayEmailAddedMessage();
+        this.pixToast.sendSuccessNotification({
+          message: this.intl.t('pages.user-account.email-verification.add-successful'),
+        });
       } else {
         if (email) {
           this.currentUser.user.email = email;
