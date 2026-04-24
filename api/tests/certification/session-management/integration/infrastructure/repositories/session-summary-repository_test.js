@@ -1,12 +1,13 @@
 import _ from 'lodash';
 
 import * as sessionSummaryRepository from '../../../../../../src/certification/session-management/infrastructure/repositories/session-summary-repository.js';
+import { SESSION_STATUSES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { expect } from '../../../../../test-helper.js';
 import { databaseBuilder } from '../../../../../tooling/databases.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Integration | Repository | Session Summary', function () {
-  describe('#findPaginatedByCertificationCenterId', function () {
+  describe('#findPaginatedFilteredByCertificationCenterId', function () {
     let page;
     let certificationCenterId;
 
@@ -24,10 +25,11 @@ describe('Integration | Repository | Session Summary', function () {
         await databaseBuilder.commit();
 
         // when
-        const { models: sessionSummaries, meta } = await sessionSummaryRepository.findPaginatedByCertificationCenterId({
-          certificationCenterId,
-          page,
-        });
+        const { models: sessionSummaries, meta } =
+          await sessionSummaryRepository.findPaginatedFilteredByCertificationCenterId({
+            certificationCenterId,
+            page,
+          });
 
         // then
         expect(sessionSummaries).to.deepEqualArray([]);
@@ -52,10 +54,11 @@ describe('Integration | Repository | Session Summary', function () {
         await databaseBuilder.commit();
 
         // when
-        const { models: sessionSummaries } = await sessionSummaryRepository.findPaginatedByCertificationCenterId({
-          certificationCenterId,
-          page,
-        });
+        const { models: sessionSummaries } =
+          await sessionSummaryRepository.findPaginatedFilteredByCertificationCenterId({
+            certificationCenterId,
+            page,
+          });
 
         // then
         const expectedSessionSummary = domainBuilder.buildSessionSummary.finalized({
@@ -77,7 +80,7 @@ describe('Integration | Repository | Session Summary', function () {
         await databaseBuilder.commit();
 
         // when
-        const { meta } = await sessionSummaryRepository.findPaginatedByCertificationCenterId({
+        const { meta } = await sessionSummaryRepository.findPaginatedFilteredByCertificationCenterId({
           certificationCenterId,
           page,
         });
@@ -95,10 +98,11 @@ describe('Integration | Repository | Session Summary', function () {
         await databaseBuilder.commit();
 
         // when
-        const { models: sessionSummaries } = await sessionSummaryRepository.findPaginatedByCertificationCenterId({
-          certificationCenterId,
-          page,
-        });
+        const { models: sessionSummaries } =
+          await sessionSummaryRepository.findPaginatedFilteredByCertificationCenterId({
+            certificationCenterId,
+            page,
+          });
 
         // then
         expect(sessionSummaries).to.have.lengthOf(4);
@@ -125,10 +129,11 @@ describe('Integration | Repository | Session Summary', function () {
           await databaseBuilder.commit();
 
           // when
-          const { models: sessionSummaries } = await sessionSummaryRepository.findPaginatedByCertificationCenterId({
-            certificationCenterId,
-            page,
-          });
+          const { models: sessionSummaries } =
+            await sessionSummaryRepository.findPaginatedFilteredByCertificationCenterId({
+              certificationCenterId,
+              page,
+            });
 
           // then
           const expectedSessionA = domainBuilder.buildSessionSummary.finalized({
@@ -153,14 +158,127 @@ describe('Integration | Repository | Session Summary', function () {
           await databaseBuilder.commit();
 
           // when
-          const { models: sessionSummaries } = await sessionSummaryRepository.findPaginatedByCertificationCenterId({
-            certificationCenterId,
-            page,
-          });
+          const { models: sessionSummaries } =
+            await sessionSummaryRepository.findPaginatedFilteredByCertificationCenterId({
+              certificationCenterId,
+              page,
+            });
 
           // then
           expect(sessionSummaries[0]).to.include({ enrolledCandidatesCount: 0, effectiveCandidatesCount: 0 });
         });
+      });
+
+      context('with filters', function () {
+        context('with sessionId filter', function () {
+          it('should return the expected session summary', async function () {
+            // given
+            databaseBuilder.factory.buildSession({
+              id: 1,
+              certificationCenterId,
+            });
+            const expectedSession = databaseBuilder.factory.buildSession({
+              id: 456,
+              address: 'ici',
+              room: 'labas',
+              date: '2020-01-02',
+              time: '17:00:00',
+              examiner: 'Moi',
+              finalizedAt: new Date('2021-01-02'),
+              publishedAt: null,
+              certificationCenterId,
+            });
+            databaseBuilder.factory.buildSession({
+              id: 999,
+              certificationCenterId,
+            });
+            await databaseBuilder.commit();
+
+            // when
+            const { models: sessionSummaries } =
+              await sessionSummaryRepository.findPaginatedFilteredByCertificationCenterId({
+                certificationCenterId,
+                filters: {
+                  sessionId: expectedSession.id,
+                },
+                page,
+              });
+
+            // then
+            expect(sessionSummaries).to.have.lengthOf(1);
+            expect(sessionSummaries[0].id).to.equal(expectedSession.id);
+          });
+        });
+
+        context('with status filter', function () {
+          beforeEach(async function () {
+            // given
+            databaseBuilder.factory.buildSession({
+              address: 'created',
+              finalizedAt: null,
+              publishedAt: null,
+              assignedCertificationOfficerId: null,
+              certificationCenterId,
+            });
+            databaseBuilder.factory.buildSession({
+              address: 'finalized',
+              finalizedAt: new Date('2026-01-02'),
+              publishedAt: null,
+              assignedCertificationOfficerId: null,
+              certificationCenterId,
+            });
+            databaseBuilder.factory.buildSession({
+              address: 'processed',
+              finalizedAt: new Date('2026-01-02'),
+              publishedAt: new Date('2026-01-02'),
+              certificationCenterId,
+            });
+            await databaseBuilder.commit();
+          });
+
+          [
+            { status: SESSION_STATUSES.CREATED, expectedAddress: 'created' },
+            { status: SESSION_STATUSES.FINALIZED, expectedAddress: 'finalized' },
+            { status: SESSION_STATUSES.PROCESSED, expectedAddress: 'processed' },
+          ].forEach(({ status, expectedAddress }) => {
+            it(`should return the session summaries with the ${status} status`, async function () {
+              // when
+              const { models: sessionSummaries } =
+                await sessionSummaryRepository.findPaginatedFilteredByCertificationCenterId({
+                  certificationCenterId,
+                  filters: { status },
+                  page,
+                });
+
+              // then
+              expect(sessionSummaries).to.have.lengthOf(1);
+              expect(sessionSummaries[0].address).to.equal(expectedAddress);
+            });
+          });
+        });
+      });
+
+      it('should return "hasSessions" to true even when with setup filters no results show', async function () {
+        // given
+        databaseBuilder.factory.buildSession({ id: 1, certificationCenterId, finalizedAt: new Date('2021-01-02') });
+        databaseBuilder.factory.buildSession({ id: 2, certificationCenterId, finalizedAt: new Date('2022-01-02') });
+        databaseBuilder.factory.buildSession({ id: 3, certificationCenterId, finalizedAt: new Date('2023-01-02') });
+        databaseBuilder.factory.buildSession({ id: 4, certificationCenterId, finalizedAt: new Date('2024-01-02') });
+        await databaseBuilder.commit();
+
+        // when
+        const { models: sessionSummaries, meta } =
+          await sessionSummaryRepository.findPaginatedFilteredByCertificationCenterId({
+            certificationCenterId,
+            page,
+            filters: {
+              status: SESSION_STATUSES.CREATED,
+            },
+          });
+
+        // then
+        expect(sessionSummaries).to.have.lengthOf(0);
+        expect(meta.hasSessions).to.be.true;
       });
     });
   });

@@ -1,14 +1,14 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 
+import { SESSION_PAGE_SIZE } from '../../../utils/pagination';
+
 export default class ListRoute extends Route {
   queryParams = {
-    pageNumber: {
-      refreshModel: true,
-    },
-    pageSize: {
-      refreshModel: true,
-    },
+    pageNumber: { refreshModel: true },
+    pageSize: { refreshModel: true },
+    status: { refreshModel: true },
+    sessionId: { refreshModel: true },
   };
 
   @service currentUser;
@@ -23,8 +23,12 @@ export default class ListRoute extends Route {
       'session-summary',
       {
         page: {
-          number: params.pageNumber,
-          size: params.pageSize,
+          number: params.pageNumber || 1,
+          size: params.pageSize || SESSION_PAGE_SIZE,
+        },
+        filter: {
+          status: params.status || undefined,
+          sessionId: params.sessionId || undefined,
         },
       },
       { reload: true },
@@ -38,7 +42,9 @@ export default class ListRoute extends Route {
   resetController(controller, isExiting, transition) {
     if (this._isNotComingFromSessionsDetails(isExiting, transition)) {
       controller.pageNumber = 1;
-      controller.pageSize = 25;
+      controller.pageSize = SESSION_PAGE_SIZE;
+      controller.status = null;
+      controller.sessionId = null;
     }
   }
 

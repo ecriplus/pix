@@ -89,6 +89,7 @@ export default class SessionList extends Component {
   <template>
     {{#if @sessionSummaries.length}}
       <PixTable
+        class='session-list__table'
         @onRowClick={{@goToSessionDetails}}
         @data={{@sessionSummaries}}
         @variant='certif'

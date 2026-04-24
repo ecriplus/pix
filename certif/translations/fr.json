@@ -892,7 +892,19 @@
         "empty": {
           "title": "Créer ma première session de certification"
         },
+        "filters": {
+          "clear": "Effacer les filtres",
+          "label": "Filtres sur la liste des sessions",
+          "session-id": {
+            "label": "ID de session"
+          },
+          "status": {
+            "label": "Statut"
+          },
+          "title": "Filtres"
+        },
         "status": {
+          "all": "Tous",
           "created": "Créée",
           "finalized": "Finalisée",
           "processed": "Résultats transmis par Pix"

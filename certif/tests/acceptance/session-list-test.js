@@ -275,27 +275,27 @@ module('Acceptance | Session List', function (hooks) {
 
       test('it should redirect to the same page of session list', async function (assert) {
         // given
-        server.createList('session-summary', 30, {
+        server.createList('session-summary', 51, {
           address: 'Adresse',
           certificationCenterId: 123,
           date: '2020-01-01',
           time: '14:00',
         });
         server.create('session-enrolment', {
-          id: 26,
+          id: 51,
           address: 'Adresse',
           certificationCenterId: 123,
           date: '2020-01-01',
           time: '14:00',
         });
         server.create('session-management', {
-          id: 26,
+          id: 51,
         });
 
         const screen = await visit('/sessions');
         await click(screen.getByRole('button', { name: 'Aller à la page suivante' }));
         await click(screen.getByRole('button', { name: 'Aller à la page suivante' }));
-        await click(screen.getByRole('link', { name: 'Session 26' }));
+        await click(screen.getByRole('link', { name: 'Session 51' }));
 
         // when
         await click(screen.getByRole('link', { name: 'Revenir à la liste des sessions' }));

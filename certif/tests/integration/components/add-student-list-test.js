@@ -2,6 +2,7 @@ import { render, within } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
 import { click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
+import { STUDENT_PAGE_SIZE } from 'pix-certif/utils/pagination';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -28,7 +29,7 @@ module('Integration | Component | add-student-list', function (hooks) {
       const students = [firstStudent, secondStudent, thirdStudent];
       students.meta = {
         page: 1,
-        pageSize: 25,
+        pageSize: STUDENT_PAGE_SIZE,
         rowCount: 1,
         pageCount: 1,
       };
@@ -62,7 +63,7 @@ module('Integration | Component | add-student-list', function (hooks) {
       const students = [firstStudent, _buildUnselectedStudent()];
       students.meta = {
         page: 1,
-        pageSize: 25,
+        pageSize: STUDENT_PAGE_SIZE,
         rowCount: 1,
         pageCount: 1,
       };
@@ -94,7 +95,7 @@ module('Integration | Component | add-student-list', function (hooks) {
       const students = [_buildUnselectedStudent()];
       students.meta = {
         page: 1,
-        pageSize: 25,
+        pageSize: STUDENT_PAGE_SIZE,
         rowCount: 1,
         pageCount: 1,
       };
@@ -123,7 +124,7 @@ module('Integration | Component | add-student-list', function (hooks) {
       const students = [_buildSelectedStudent('Jean', 'Bon')];
       students.meta = {
         page: 1,
-        pageSize: 25,
+        pageSize: STUDENT_PAGE_SIZE,
         rowCount: 1,
         pageCount: 1,
       };
@@ -161,7 +162,7 @@ module('Integration | Component | add-student-list', function (hooks) {
         // given
         students.meta = {
           page: 1,
-          pageSize: 25,
+          pageSize: STUDENT_PAGE_SIZE,
           rowCount: 1,
           pageCount: 1,
         };
@@ -190,7 +191,7 @@ module('Integration | Component | add-student-list', function (hooks) {
       const students = [_buildSelectedStudent(), _buildSelectedStudent()];
       students.meta = {
         page: 1,
-        pageSize: 25,
+        pageSize: STUDENT_PAGE_SIZE,
         rowCount: 1,
         pageCount: 1,
       };
@@ -225,7 +226,7 @@ module('Integration | Component | add-student-list', function (hooks) {
             ];
             students.meta = {
               page: 1,
-              pageSize: 25,
+              pageSize: STUDENT_PAGE_SIZE,
               rowCount: 1,
               pageCount: 1,
             };
@@ -265,7 +266,7 @@ module('Integration | Component | add-student-list', function (hooks) {
             sinon.stub(store, 'peekAll').withArgs('student').returns(students);
             students.meta = {
               page: 1,
-              pageSize: 25,
+              pageSize: STUDENT_PAGE_SIZE,
               rowCount: 1,
               pageCount: 1,
             };
@@ -308,7 +309,7 @@ module('Integration | Component | add-student-list', function (hooks) {
             sinon.stub(store, 'peekAll').withArgs('student').returns(students);
             students.meta = {
               page: 1,
-              pageSize: 25,
+              pageSize: STUDENT_PAGE_SIZE,
               rowCount: 1,
               pageCount: 1,
             };
@@ -367,7 +368,7 @@ module('Integration | Component | add-student-list', function (hooks) {
             sinon.stub(store, 'peekAll').withArgs('student').returns(students);
             students.meta = {
               page: 1,
-              pageSize: 25,
+              pageSize: STUDENT_PAGE_SIZE,
               rowCount: 1,
               pageCount: 1,
             };
@@ -430,7 +431,7 @@ module('Integration | Component | add-student-list', function (hooks) {
         const students = [_buildSelectedStudent()];
         students.meta = {
           page: 1,
-          pageSize: 25,
+          pageSize: STUDENT_PAGE_SIZE,
           rowCount: 1,
           pageCount: 1,
         };
@@ -474,7 +475,7 @@ module('Integration | Component | add-student-list', function (hooks) {
           const students = [_buildSelectedStudent()];
           students.meta = {
             page: 1,
-            pageSize: 25,
+            pageSize: STUDENT_PAGE_SIZE,
             rowCount: 1,
             pageCount: 1,
           };
@@ -512,7 +513,7 @@ module('Integration | Component | add-student-list', function (hooks) {
         const students = [_buildSelectedStudent()];
         students.meta = {
           page: 1,
-          pageSize: 25,
+          pageSize: STUDENT_PAGE_SIZE,
           rowCount: 1,
           pageCount: 1,
         };

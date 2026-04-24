@@ -1,13 +1,13 @@
 import sinon from 'sinon';
 
-import { findPaginatedCertificationCenterSessionSummaries } from '../../../../../../src/certification/session-management/domain/usecases/find-paginated-certification-center-session-summaries.js';
+import { findPaginatedFilteredCertificationCenterSessionSummaries } from '../../../../../../src/certification/session-management/domain/usecases/find-paginated-filtered-certification-center-session-summaries.js';
 import { ForbiddenAccess } from '../../../../../../src/shared/domain/errors.js';
 import { expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Domain | Use Cases | find-paginated-certification-center-session-summaries', function () {
   const sessionSummaryRepository = {
-    findPaginatedByCertificationCenterId: () => undefined,
+    findPaginatedFilteredByCertificationCenterId: () => undefined,
   };
 
   const userRepository = {
@@ -15,7 +15,7 @@ describe('Unit | Domain | Use Cases | find-paginated-certification-center-sessio
   };
 
   beforeEach(function () {
-    sessionSummaryRepository.findPaginatedByCertificationCenterId = sinon.stub();
+    sessionSummaryRepository.findPaginatedFilteredByCertificationCenterId = sinon.stub();
     userRepository.isUserAllowedToAccessCertificationCenter = sinon.stub();
   });
 
@@ -23,10 +23,10 @@ describe('Unit | Domain | Use Cases | find-paginated-certification-center-sessio
     it('should throw a Forbidden Access error', async function () {
       // given
       userRepository.isUserAllowedToAccessCertificationCenter.withArgs(123, 456).resolves(false);
-      sessionSummaryRepository.findPaginatedByCertificationCenterId.rejects(new Error('should not be called'));
+      sessionSummaryRepository.findPaginatedFilteredByCertificationCenterId.rejects(new Error('should not be called'));
 
       // when
-      const error = await catchErr(findPaginatedCertificationCenterSessionSummaries)({
+      const error = await catchErr(findPaginatedFilteredCertificationCenterSessionSummaries)({
         userId: 123,
         certificationCenterId: 456,
         page: 'pagination-info',
@@ -46,10 +46,11 @@ describe('Unit | Domain | Use Cases | find-paginated-certification-center-sessio
       userRepository.isUserAllowedToAccessCertificationCenter.withArgs(123, 456).resolves(true);
       const sessionSummaries = Symbol('session-summaries');
       const meta = Symbol('meta');
-      sessionSummaryRepository.findPaginatedByCertificationCenterId
+      sessionSummaryRepository.findPaginatedFilteredByCertificationCenterId
         .withArgs({
           certificationCenterId: 456,
           page: 'pagination-info',
+          filters: { sessionId: 1 },
         })
         .resolves({
           models: sessionSummaries,
@@ -57,9 +58,10 @@ describe('Unit | Domain | Use Cases | find-paginated-certification-center-sessio
         });
 
       // when
-      const actualResult = await findPaginatedCertificationCenterSessionSummaries({
+      const actualResult = await findPaginatedFilteredCertificationCenterSessionSummaries({
         userId: 123,
         certificationCenterId: 456,
+        filters: { sessionId: 1 },
         page: 'pagination-info',
         sessionSummaryRepository,
         userRepository,

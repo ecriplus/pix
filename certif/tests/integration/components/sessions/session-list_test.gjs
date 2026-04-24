@@ -2,6 +2,7 @@ import { render, within } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import SessionList from 'pix-certif/components/sessions/session-list';
+import { SESSION_PAGE_SIZE } from 'pix-certif/utils/pagination';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
@@ -161,7 +162,7 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
           const sessionSummaries = [sessionSummary];
           sessionSummaries.meta = {
             page: 1,
-            pageSize: 25,
+            pageSize: SESSION_PAGE_SIZE,
             rowCount: 1,
             pageCount: 1,
             hasSessions: true,
@@ -191,7 +192,7 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
             const sessionSummaries = [sessionSummary];
             sessionSummaries.meta = {
               page: 1,
-              pageSize: 25,
+              pageSize: SESSION_PAGE_SIZE,
               rowCount: 1,
               pageCount: 1,
               hasSessions: true,
@@ -220,7 +221,7 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
             const sessionSummaries = [sessionSummary];
             sessionSummaries.meta = {
               page: 1,
-              pageSize: 25,
+              pageSize: SESSION_PAGE_SIZE,
               rowCount: 1,
               pageCount: 1,
               hasSessions: true,
@@ -251,7 +252,7 @@ module('Integration | Component | Sessions | SessionList', function (hooks) {
             const sessionSummaries = [sessionSummary];
             sessionSummaries.meta = {
               page: 1,
-              pageSize: 25,
+              pageSize: SESSION_PAGE_SIZE,
               rowCount: 1,
               pageCount: 1,
               hasSessions: true,
