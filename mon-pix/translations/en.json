@@ -1,11 +1,11 @@
 {
   "api-error-messages": {
     "join-error": {
-      "r11": "{ value }",
-      "r12": "You already have a Pix account under the username '<br>'{ value }.'<br>'To continue, log in with this account or ask for help from a teacher.'<br>'(Code R12)",
-      "r13": "You already have a Pix account through your virtual learning environment (\"ENT\") in another school '<br> 'To continue, contact a teacher who can give you access to this account using Pix Orga.",
-      "r31": "{ value }",
-      "r32": "You already have a Pix account under the username '<br>'{ value }.'<br>'To continue, log in with this account or ask for help from a teacher.'<br>'(Code R32)",
+      "r11": "You already have a Pix account with the email address'<br>'{ value }'<br><br>'To continue, log in with this account or ask for help from a teacher.'<br><br>'(Code R11)",
+      "r12": "You already have a Pix account under the username'<br>'{ value }'<br><br>'To continue, log in with this account or ask for help from a teacher.'<br><br>'(Code R12)",
+      "r13": "You already have a Pix account through your virtual learning environment (\"ENT\") in another school.'<br><br>'To continue, contact a teacher who can give you access to this account using Pix Orga.'<br><br>'(Code R13)",
+      "r31": "You already have a Pix account with the email address'<br>'{ value }'<br><br>'To continue, log in with this account or ask for help from a teacher.'<br><br>'(Code R31)",
+      "r32": "You already have a Pix account under the username'<br>'{ value }'<br><br>'To continue, log in with this account or ask for help from a teacher.'<br><br>'(Code R32)",
       "r33": "You already have a Pix account through your virtual learning environment (\"ENT\"). Log in with this account to take your customised test.",
       "r70": "An error occurred. Please log out and try again.",
       "r90": {
@@ -23,12 +23,12 @@
     },
     "register-error": {
       "s50": "This username already exists.",
-      "s51": "{ value }",
-      "s52": "You already have a Pix account under the username '<br>'{ value }.'<br>'To continue, log in with this account or ask for help from a teacher.'<br>'(Code S52)",
-      "s53": "You already have a Pix account through your virtual learning environment (\"ENT\"). Log in with this account to take your customised test.",
-      "s61": "{ value }",
-      "s62": "You already have a Pix account under the username '<br>'{ value }.'<br>'To continue, log in with this account or ask for help from a teacher.'<br>'(Code S62)",
-      "s63": "You already have a Pix account through your virtual learning environment (\"ENT\") in another school '<br> 'To continue, contact a teacher who can give you access to this account using Pix Orga.'<br>'(Code S63)"
+      "s51": "You already have a Pix account with the email address'<br>'{ value }'<br><br>'To continue, log in with this account or ask for help from a teacher.'<br><br>'(Code S51)",
+      "s52": "You already have a Pix account under the username '<br>'{ value }'<br><br>'To continue, log in with this account or ask for help from a teacher.'<br><br>'(Code S52)",
+      "s53": "You already have a Pix account through your virtual learning environment (\"ENT\").'<br>'Log in with this account to take your customised test.",
+      "s61": "You already have a Pix account with the email address'<br>'{ value }'<br><br>'To continue, log in with this account or ask for help from a teacher.'<br><br>'(Code S61)",
+      "s62": "You already have a Pix account under the username '<br>'{ value }'<br><br>'To continue, log in with this account or ask for help from a teacher.'<br><br>'(Code S62)",
+      "s63": "You already have a Pix account through your virtual learning environment (\"ENT\") in another school.'<br><br>'To continue, contact a teacher who can give you access to this account using Pix Orga.'<br><br>'(Code S63)"
     }
   },
   "application": {
@@ -635,7 +635,7 @@
         "started-at": "Started the {date}",
         "tag": {
           "deleted": "Inactive",
-          "disabled": "Route deactivated by your organization.'<br>'You can no longer act on this route.",
+          "disabled": "Disabled",
           "finished": "Finished",
           "started": "In progress"
         },
@@ -785,13 +785,14 @@
       "steps": {
         "1": {
           "paragraphs": {
-            "1": "Pix Certification is an '<strong>'adaptive test'</strong>' designed to assess your level in '<strong>'all 16 digital skills'</strong>' in the Pix reference framework.",
+            "1": "The {certificationName} Certification is an '<strong>'adaptive test'</strong>' designed to assess your level in '<strong>'all 16 digital skills'</strong>' in the Pix reference framework.",
             "2": "The '<strong>'difficulty of the questions adapts in real time'</strong>' according to the answers you give.",
             "3": "If some questions seem difficult, it's because the certification test aims to measure your maximum level. '<strong>'If you don't know how to answer a question, you can “skip” that question'</strong>': it will not be proposed again during this certification and will not be validated.",
-            "4": "To obtain a score as close as possible to your ability, '<strong>'you need to complete the test'</strong>'."
+            "4": "To obtain a score as close as possible to your ability, '<strong>'you need to complete the test'</strong>'.",
+            "pix-plus-1": "The {certificationName} Certification is an '<strong>'adaptive test'</strong>' designed to assess your level in '<strong>'all digital skills'</strong>' in the {certificationName} certification reference framework."
           },
           "question": "How does the test work?",
-          "title": "Welcome to the Pix Certification"
+          "title": "Welcome to the {certificationName} Certification"
         },
         "2": {
           "legend": {
@@ -840,7 +841,7 @@
             "3": "'<strong>'Have recourse to an artificial intelligence system'</strong>' or to a chatbot.",
             "4": "'<strong>'Peruse a self-help forum'</strong>' giving a direct answer to a question.",
             "5": "'<strong>'Mobilise any other mean that would directly give the answer to the question'</strong>', without having to do the work required by the instructions.",
-            "6": "'<strong>'Use another browser'</strong>' other than the one you are using for your Pix Certification test.",
+            "6": "'<strong>'Use another browser'</strong>' other than the one you are using for your {certificationName} Certification test.",
             "7": "'<strong>'Impersonate'</strong>' another person."
           },
           "pix-companion": "Access to certain sites is prohibited during the certification test, thanks to an extension installed on the browser. Any proven fraud (attempt to bypass the extension or failure to comply with the behaviors listed above) may invalidate your certification.",
@@ -868,7 +869,7 @@
           "check-session-number": "Check the session number.",
           "disclaimer": "The information entered does not match any candidate registered for the session."
         },
-        "language-not-supported": "The Pix certification is not yet available in %%language of account%%. The languages currently available for taking the certification exam are: Accepted languages%%. You may choose another language from ",
+        "language-not-supported": "The Pix certification is not yet available in {userLanguage}. '<br>' The languages currently available for taking the certification exam are: {availableLanguages}. '<br>' You may choose another language from ",
         "language-not-supported-link": "My account page",
         "missing-center-habilitation": "You cannot join the session. The certification centre is not authorized to administer this certification to you.",
         "session-not-accessible": "The session you are trying to join is no longer available.",
@@ -878,7 +879,7 @@
           "label": "How to find the account linked to the school/organisation ?",
           "url": "https://pix.fr/support/enseignement-scolaire/enseignant-ou-personnel-de-direction/que-faire-si-une-eleve-ne-parvient-pas-rejoindre-sa-session-de-certification"
         },
-        "wrong-domain-for-pix-plus": "Pix+ certifications are only available in French for now, so they are not available on <b>https://pix.org</b>.<br/>Please log out and log back in via '<a href=\"https://app.pix.fr/connexion\">this link.</a>'"
+        "wrong-domain-for-pix-plus": "Pix+ certifications are only available in French for now, so they are not available on https://pix.org.<br/>Please log out and log back in via '<a href=\"https://app.pix.fr/connexion\">this link.</a>'"
       },
       "first-title": "Join a session",
       "form": {
@@ -1083,7 +1084,7 @@
                 "link-other": "The link doesn’t work or has another problem",
                 "link-unauthorized": {
                   "label": "The link has been blocked by my organisation/school…",
-                  "solution": "You may belong to an organisation (schools, universities, companies, administrations, associations, etc.) that protects its users and devices by limiting the Internet pages you can access."
+                  "solution": "You may belong to an organisation (schools, universities, companies, administrations, associations, etc.) that protects its users and devices by limiting the Internet pages you can access.'<br>'"
                 },
                 "other-challenge-proposal": "I have a (great) idea to suggest for a question",
                 "other-difficulty": "I have another problem",
@@ -1557,7 +1558,7 @@
         "error-not-found": "If you're a pupil '<br>' Check your information (first name, last name and date of birth) or contact a teacher.'<br><br>' If you're a teacher '<br>' Access to this customised test is not available at the moment.",
         "first-title": "{ organizationName }",
         "invalid-reconciliation-error": "An error has occurred. '<br>' Please contact the support.",
-        "login-information-message": "The Pix account  '<b>'{ connectionMethod }'</b>' will be linked with the pupil:  '<b>'{ firstName }  { lastName }'</b>'.'<b>'If this is you, click on \"Link\". Otherwise, log out.",
+        "login-information-message": "The Pix account '<b>'{ connectionMethod }'</b>' will be linked with the pupil: '<b>'{ firstName } { lastName }'</b>'.'<br><br>'If this is you, click on \"Link\". Otherwise, log out.",
         "login-information-title": "Pix account information",
         "subtitle": "Please fill in the missing information"
       },
