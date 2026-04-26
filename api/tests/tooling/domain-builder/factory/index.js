@@ -219,11 +219,13 @@ import { buildComplementaryCertification as buildSharedComplementaryCertificatio
 import { buildJuryComment } from './certification/shared/build-jury-comment.js';
 import { buildV3CertificationScoring } from './certification/shared/build-v3-certification-scoring.js';
 import { buildPassage } from './devcomp/build-passage.js';
+import { builders as evaluationBuilders } from './evaluation/index.js';
 import {
   buildLtiPlatformRegistration,
   buildLtiPlatformRegistrationWithPlatformConfig,
 } from './identity-access-management/build-lti-platform-registration.js';
 import { buildUserLogin } from './identity-access-management/build-user-login.js';
+import { builders as learningContentBuilders } from './learning-content/index.js';
 import { buildChat } from './llm/build-chat.js';
 import { buildConfiguration } from './llm/build-configuration.js';
 import { buildAssistantMessage, buildUserMessage } from './llm/build-message.js';
@@ -235,8 +237,10 @@ import { buildCampaignResultLevelsPerTubesAndCompetences as boundedContextCampai
 import { buildCampaignParticipation as boundedContextCampaignParticipationBuildCampaignParticipation } from './prescription/campaign-participation/build-campaign-participation.js';
 import { buildOrganizationLearnerImportFormat } from './prescription/learner-management/build-organization-learner-import-format.js';
 import { buildOrganizationToJoin } from './prescription/organization-learner/build-organization-to-join.js';
+import { builders as sharedBuilders } from './shared/index.js';
 import { buildStageCollection as buildStageCollectionForTargetProfileManagement } from './target-profile-management/build-stage-collection.js';
 import { buildStageCollection as buildStageCollectionForUserCampaignResults } from './user-campaign-results/build-stage-collection.js';
+
 const acquisition = {
   buildNetwork,
   buildOrganizationLearnerType,
@@ -334,6 +338,8 @@ const devcomp = {
   buildPassage,
 };
 
+const evaluation = evaluationBuilders;
+
 const identityAccessManagement = {
   buildUserLogin,
   buildLtiPlatformRegistration,
@@ -348,6 +354,9 @@ const maddo = {
   buildCampaignParticipation: maddoBuildCampaignParticipation,
   buildTubeCoverage,
 };
+
+const learningContent = learningContentBuilders;
+const shared = sharedBuilders;
 
 const llm = {
   buildAssistantMessage,
@@ -530,9 +539,12 @@ export {
   buildValidator,
   certification,
   devcomp,
+  evaluation,
   identityAccessManagement,
+  learningContent,
   llm,
   maddo,
   organizationalEntities,
   prescription,
+  shared,
 };

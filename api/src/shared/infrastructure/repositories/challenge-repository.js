@@ -1,3 +1,4 @@
+import { Challenge as ChallengeProxy } from '../../../learning-content/domain/models/Challenge.js';
 import { NotFoundError } from '../../domain/errors.js';
 import { Challenge } from '../../domain/models/Challenge.js';
 import * as solutionAdapter from '../../infrastructure/adapters/solution-adapter.js';
@@ -74,17 +75,16 @@ export async function findValidated(locale) {
   return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
 }
 
-export async function findValidatedByCompetenceId(competenceId, locale) {
+export async function findValidatedByCompetenceId_proxy(competenceId, locale) {
   _assertLocaleIsDefined(locale);
   const cacheKey = `findValidatedByCompetenceId(${competenceId}, ${locale})`;
   const findValidatedByLocaleByCompetenceIdCallback = (knex) =>
     knex.whereRaw('?=ANY(??)', [locale, 'locales']).where({ competenceId, status: VALIDATED_STATUS }).orderBy('id');
   const challengeDtos = await getInstance().find(cacheKey, findValidatedByLocaleByCompetenceIdCallback);
-  const challengesDtosWithSkills = await loadChallengeDtosSkills(challengeDtos);
-  return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
+  return challengeDtos.map((challengeDto) => new ChallengeProxy(challengeDto));
 }
 
-export async function findOperativeBySkillsAndLocales(skills, locales) {
+export async function findOperativeBySkillsAndLocales_proxy(skills, locales) {
   const skillIds = skills.map((skill) => skill.id);
   const cacheKey = `findOperativesBySkillsAndLocales([${skillIds.sort()}], ${locales.sort().join(',')})`;
 
@@ -95,8 +95,7 @@ export async function findOperativeBySkillsAndLocales(skills, locales) {
       .whereIn('skillId', skillIds)
       .orderBy('id');
   const challengeDtos = await getInstance().find(cacheKey, findOperativeByLocaleBySkillIdsCallback);
-  const challengesDtosWithSkills = await loadChallengeDtosSkills(challengeDtos);
-  return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
+  return challengeDtos.map((challengeDto) => new ChallengeProxy(challengeDto));
 }
 
 export async function findOperativeBySkills(skills, locale) {

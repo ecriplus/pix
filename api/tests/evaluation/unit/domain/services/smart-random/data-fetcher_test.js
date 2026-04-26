@@ -4,11 +4,11 @@ import * as dataFetcher from '../../../../../../src/evaluation/domain/services/a
 import { expect } from '../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
-describe('Unit | Domain | services | smart-random | dataFetcher', function () {
+describe('Evaluation | Unit | Domain | services | smart-random | dataFetcher', function () {
   describe('#fetchForCampaigns', function () {
     let answerRepository;
     let campaignRepository;
-    let challengeRepository;
+    let smartRandomChallengeRepository;
     let knowledgeElementForParticipationService;
     let knowledgeElementRepository;
     let campaignParticipationRepository;
@@ -21,7 +21,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
       campaignRepository = {
         findSkillsByCampaignParticipationId: sinon.stub(),
       };
-      challengeRepository = {
+      smartRandomChallengeRepository = {
         findOperativeBySkillsAndLocales: sinon.stub(),
       };
       knowledgeElementForParticipationService = {
@@ -59,7 +59,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
           campaignParticipationId: assessment.campaignParticipationId,
         })
         .resolves(skills);
-      challengeRepository.findOperativeBySkillsAndLocales.resolves(challenges);
+      smartRandomChallengeRepository.findOperativeBySkillsAndLocales.resolves(challenges);
       knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId
         .withArgs({
           userId: assessment.userId,
@@ -86,7 +86,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
         assessment,
         answerRepository,
         campaignRepository,
-        challengeRepository,
+        smartRandomChallengeRepository,
         knowledgeElementForParticipationService,
         knowledgeElementRepository,
         campaignParticipationRepository,
@@ -98,10 +98,10 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
       expect(data.allAnswers).to.deep.equal([answer]);
       expect(data.lastAnswer).to.deep.equal(answer);
       expect(data.targetSkills).to.deep.equal(skills);
-      expect(challengeRepository.findOperativeBySkillsAndLocales).to.have.been.calledOnceWithExactly(skills, [
-        'fr-fr',
-        'fr',
-      ]);
+      expect(smartRandomChallengeRepository.findOperativeBySkillsAndLocales).to.have.been.calledOnceWithExactly(
+        skills,
+        ['fr-fr', 'fr'],
+      );
       expect(data.challenges).to.deep.equal(challenges);
       expect(data.knowledgeElements).to.deep.equal(filteredKnowledgeElements);
     });
@@ -127,7 +127,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
           campaignParticipationId: assessment.campaignParticipationId,
         })
         .resolves(skills);
-      challengeRepository.findOperativeBySkillsAndLocales.withArgs(skills).resolves(challenges);
+      smartRandomChallengeRepository.findOperativeBySkillsAndLocales.withArgs(skills).resolves(challenges);
       knowledgeElementForParticipationService.findUniqByUserOrCampaignParticipationId
         .withArgs({
           userId: assessment.userId,
@@ -154,7 +154,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
         assessment,
         answerRepository,
         campaignRepository,
-        challengeRepository,
+        smartRandomChallengeRepository,
         knowledgeElementForParticipationService,
         knowledgeElementRepository,
         campaignParticipationRepository,
@@ -173,7 +173,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
 
   describe('#fetchForCompetenceEvaluations', function () {
     let answerRepository;
-    let challengeRepository;
+    let smartRandomChallengeRepository;
     let knowledgeElementRepository;
     let skillRepository;
     let improvementService;
@@ -188,7 +188,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
       answerRepository = {
         findByAssessment: sinon.stub(),
       };
-      challengeRepository = {
+      smartRandomChallengeRepository = {
         findValidatedByCompetenceId: sinon.stub(),
       };
       knowledgeElementRepository = {
@@ -202,7 +202,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
       };
 
       answer = domainBuilder.buildAnswer();
-      challenges = [domainBuilder.buildChallenge()];
+      challenges = [domainBuilder.evaluation.buildSmartRandomChallenge()];
       knowledgeElements = [domainBuilder.buildKnowledgeElement()];
       skills = [domainBuilder.buildSkill()];
       const assessment = domainBuilder.buildAssessment.ofTypeCompetenceEvaluation({
@@ -212,7 +212,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
 
       answerRepository.findByAssessment.withArgs(assessment.id).resolves([answer]);
       skillRepository.findActiveByCompetenceId.withArgs(assessment.competenceId).resolves(skills);
-      challengeRepository.findValidatedByCompetenceId.withArgs(assessment.competenceId).resolves(challenges);
+      smartRandomChallengeRepository.findValidatedByCompetenceId.withArgs(assessment.competenceId).resolves(challenges);
       knowledgeElementRepository.findUniqByUserId.withArgs({ userId: assessment.userId }).resolves(knowledgeElements);
       improvementService.filterKnowledgeElements
         .withArgs({
@@ -228,7 +228,7 @@ describe('Unit | Domain | services | smart-random | dataFetcher', function () {
       data = await dataFetcher.fetchForCompetenceEvaluations({
         assessment,
         answerRepository,
-        challengeRepository,
+        smartRandomChallengeRepository,
         knowledgeElementRepository,
         skillRepository,
         improvementService,

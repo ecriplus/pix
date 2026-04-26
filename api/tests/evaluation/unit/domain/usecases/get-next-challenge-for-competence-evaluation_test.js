@@ -22,7 +22,8 @@ describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-compet
       challengeUrl21,
       challengeUrl22,
       algorithmDataFetcherServiceStub,
-      smartRandomStub;
+      smartRandomStub,
+      challengeRepository;
 
     beforeEach(async function () {
       userId = 'dummyUserId';
@@ -35,11 +36,6 @@ describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-compet
       lastAnswer = null;
       locale = 'fr';
 
-      algorithmDataFetcherServiceStub = {
-        fetchForCompetenceEvaluations: sinon.stub(),
-      };
-      pickChallengeService = { pickChallenge: sinon.stub().resolves(challengeUrl22) };
-
       recentKnowledgeElements = [
         { createdAt: 4, skillId: 'url2' },
         { createdAt: 2, skillId: 'web1' },
@@ -47,19 +43,27 @@ describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-compet
 
       const web2 = domainBuilder.buildSkill({ name: '@web2' });
       web2.challenges = [
-        domainBuilder.buildChallenge({ id: 'challenge_web2_1' }),
-        domainBuilder.buildChallenge({ id: 'challenge_web2_2' }),
+        domainBuilder.evaluation.buildSmartRandomChallenge({ id: 'challenge_web2_1' }),
+        domainBuilder.evaluation.buildSmartRandomChallenge({ id: 'challenge_web2_2' }),
       ];
       const url2 = domainBuilder.buildSkill({ name: '@url2' });
-      challengeUrl21 = domainBuilder.buildChallenge({ id: 'challenge_url2_1' });
-      challengeUrl22 = domainBuilder.buildChallenge({ id: 'challenge_url2_2' });
+      challengeUrl21 = domainBuilder.evaluation.buildSmartRandomChallenge({ id: 'challenge_url2_1' });
+      challengeUrl22 = domainBuilder.evaluation.buildSmartRandomChallenge({ id: 'challenge_url2_2' });
       url2.challenges = [challengeUrl21, challengeUrl22];
       const search2 = domainBuilder.buildSkill({ name: '@search2' });
       search2.challenges = [
-        domainBuilder.buildChallenge({ id: 'challenge_search2_1' }),
-        domainBuilder.buildChallenge({ id: 'challenge_search2_2' }),
+        domainBuilder.evaluation.buildSmartRandomChallenge({ id: 'challenge_search2_1' }),
+        domainBuilder.evaluation.buildSmartRandomChallenge({ id: 'challenge_search2_2' }),
       ];
 
+      algorithmDataFetcherServiceStub = {
+        fetchForCompetenceEvaluations: sinon.stub(),
+      };
+      pickChallengeService = { pickChallenge: sinon.stub() };
+      pickChallengeService.pickChallenge.returns(challengeUrl22);
+      challengeRepository = {
+        get: sinon.stub(),
+      };
       algorithmDataFetcherServiceStub.fetchForCompetenceEvaluations.resolves({
         allAnswers: [lastAnswer],
         lastAnswer: lastAnswer,
@@ -86,6 +90,7 @@ describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-compet
           locale,
           smartRandomService: smartRandomStub,
           algorithmDataFetcherService: algorithmDataFetcherServiceStub,
+          challengeRepository,
         });
       });
 
@@ -95,7 +100,10 @@ describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-compet
     });
 
     context('when user is related to assessment', function () {
+      let finalChallenge;
       beforeEach(async function () {
+        finalChallenge = domainBuilder.buildChallenge({ id: challengeUrl22.id });
+        challengeRepository.get.withArgs(challengeUrl22.id).resolves(finalChallenge);
         actualComputedChallenge = await getNextChallengeForCompetenceEvaluation({
           assessment,
           userId,
@@ -103,6 +111,7 @@ describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-compet
           locale,
           smartRandomService: smartRandomStub,
           algorithmDataFetcherService: algorithmDataFetcherServiceStub,
+          challengeRepository,
         });
       });
 
@@ -120,6 +129,7 @@ describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-compet
 
       it('should have returned the next challenge', function () {
         expect(actualComputedChallenge.id).to.equal(challengeUrl22.id);
+        expect(actualComputedChallenge).to.deep.equal(finalChallenge);
       });
     });
   });

@@ -1,15 +1,29 @@
 import { AssessmentEndedError, UserNotAuthorizedToAccessEntityError } from '../../../shared/domain/errors.js';
 
-const getNextChallengeForCompetenceEvaluation = async function ({
+export async function getNextChallengeForCompetenceEvaluation({
   assessment,
   userId,
   locale,
   pickChallengeService,
   smartRandomService,
   algorithmDataFetcherService,
+  challengeRepository,
+  answerRepository,
+  smartRandomChallengeRepository,
+  knowledgeElementRepository,
+  skillRepository,
+  improvementService,
 }) {
   _checkIfAssessmentBelongsToUser(assessment, userId);
-  const inputValues = await algorithmDataFetcherService.fetchForCompetenceEvaluations(...arguments);
+  const inputValues = await algorithmDataFetcherService.fetchForCompetenceEvaluations({
+    assessment,
+    locale,
+    answerRepository,
+    smartRandomChallengeRepository,
+    knowledgeElementRepository,
+    skillRepository,
+    improvementService,
+  });
 
   const { possibleSkillsForNextChallenge, hasAssessmentEnded } = smartRandomService.getPossibleSkillsForNextChallenge({
     ...inputValues,
@@ -20,14 +34,13 @@ const getNextChallengeForCompetenceEvaluation = async function ({
     throw new AssessmentEndedError();
   }
 
-  return pickChallengeService.pickChallenge({
+  const smartRandomChallenge = pickChallengeService.pickChallenge({
     skills: possibleSkillsForNextChallenge,
     randomSeed: assessment.id,
     locale: locale,
   });
-};
-
-export { getNextChallengeForCompetenceEvaluation };
+  return challengeRepository.get(smartRandomChallenge.id);
+}
 
 function _checkIfAssessmentBelongsToUser(assessment, userId) {
   if (assessment.userId !== userId) {

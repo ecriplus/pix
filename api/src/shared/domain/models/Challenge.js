@@ -126,6 +126,10 @@ class Challenge {
     this.noValidationNeeded = noValidationNeeded;
   }
 
+  get skillId() {
+    return this.skill.id;
+  }
+
   isTimed() {
     return Number.isFinite(Number.parseFloat(this.timer));
   }
@@ -146,14 +150,6 @@ class Challenge {
     return this.focused;
   }
 
-  hasEmbedWebComponentConfig() {
-    if (!this.embedUrl) {
-      return false;
-    }
-
-    return this.embedUrl.endsWith('.json');
-  }
-
   get isMobileCompliant() {
     return this._isCompliant('Smartphone');
   }
@@ -166,6 +162,7 @@ class Challenge {
     return [Statuses.VALIDATED, Statuses.ARCHIVED].includes(this.status);
   }
 
+  // TODO demander à lou ou alex si ça sert encore à quelque chose
   set successProbabilityThreshold(successProbabilityThreshold) {
     if (this.difficulty == null || this.discriminant == null || successProbabilityThreshold == null) return;
     this.minimumCapability = this.difficulty - Math.log(1 / successProbabilityThreshold - 1) / this.discriminant;
