@@ -56,15 +56,6 @@ export async function getMany(ids, locale) {
   return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
 }
 
-export async function list(locale) {
-  _assertLocaleIsDefined(locale);
-  const cacheKey = `list(${locale})`;
-  const findByLocaleCallback = (knex) => knex.whereRaw('?=ANY(??)', [locale, 'locales']).orderBy('id');
-  const challengeDtos = await getInstance().find(cacheKey, findByLocaleCallback);
-  const challengesDtosWithSkills = await loadChallengeDtosSkills(challengeDtos);
-  return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
-}
-
 export async function findValidated(locale) {
   _assertLocaleIsDefined(locale);
   const cacheKey = `findValidated(${locale})`;
