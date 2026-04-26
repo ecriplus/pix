@@ -1544,67 +1544,6 @@ describe('Integration | Repository | challenge-repository', function () {
     });
   });
 
-  describe('#findValidatedBySkillId', function () {
-    context('when locale is not defined', function () {
-      it('should throw an Error', async function () {
-        // when
-        const err = await catchErr(challengeRepository.findValidatedBySkillId)('skillId00');
-
-        // then
-        expect(err.message).to.equal('Locale shall be defined');
-      });
-    });
-
-    context('when locale is defined', function () {
-      context('when no validated challenges found for given locale and skillId', function () {
-        it('should return an empty array', async function () {
-          // when
-          const challenges = await challengeRepository.findValidatedBySkillId('skillId00', 'es');
-
-          // then
-          expect(challenges).to.deep.equal([]);
-        });
-      });
-
-      context('when validated challenges are found for given locale and skillId', function () {
-        it('should return the challenges', async function () {
-          // when
-          const challenges = await challengeRepository.findValidatedBySkillId('skillId00', 'en');
-
-          // then
-          expect(challenges).to.deep.equal([
-            domainBuilder.buildChallenge({
-              ...challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson,
-              blindnessCompatibility:
-                challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.accessibility1,
-              colorBlindnessCompatibility:
-                challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.accessibility2,
-              focused: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.focusable,
-              discriminant: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.alpha,
-              difficulty: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.delta,
-              validator: new ValidatorQCU({
-                solution: domainBuilder.buildSolution({
-                  id: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.id,
-                  type: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.type,
-                  value: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.solution,
-                  isT1Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t1Status,
-                  isT2Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t2Status,
-                  isT3Enabled: challengeData01_skill00_qcu_valide_flashCompatible_fren_withEmbedJson.t3Status,
-                  qrocBlocksTypes: {},
-                }),
-              }),
-              skill: domainBuilder.buildSkill({
-                ...skillData00_tube00competence00_actif,
-                difficulty: skillData00_tube00competence00_actif.level,
-                hint: skillData00_tube00competence00_actif.hint_i18n.fr,
-              }),
-            }),
-          ]);
-        });
-      });
-    });
-  });
-
   describe('#getManyTypes', function () {
     it('should return an object associating ids to type', async function () {
       // when
