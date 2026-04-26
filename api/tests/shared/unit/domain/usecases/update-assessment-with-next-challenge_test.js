@@ -20,7 +20,6 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
     let assessmentRepository_getWithAnswersStub;
     let assessmentRepository_updateLastQuestionDateStub;
     let assessmentRepository_updateWhenNewChallengeIsAskedStub;
-    let evaluationUsecases_getNextChallengeForPreviewStub;
     let evaluationUsecases_getNextChallengeForDemoStub;
     let evaluationUsecases_getNextChallengeForCampaignAssessmentStub;
     let evaluationUsecases_getNextChallengeForCompetenceEvaluationStub;
@@ -38,7 +37,6 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
       assessmentRepository_getWithAnswersStub = sinon.stub().named('getWithAnswers');
       assessmentRepository_updateLastQuestionDateStub = sinon.stub().named('updateLastQuestionDate');
       assessmentRepository_updateWhenNewChallengeIsAskedStub = sinon.stub().named('updateWhenNewChallengeIsAsked');
-      evaluationUsecases_getNextChallengeForPreviewStub = sinon.stub().named('getNextChallengeForPreview');
       evaluationUsecases_getNextChallengeForDemoStub = sinon.stub().named('getNextChallengeForDemo');
       evaluationUsecases_getNextChallengeForCampaignAssessmentStub = sinon
         .stub()
@@ -58,7 +56,6 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         assessmentRepository_getWithAnswersStub,
         assessmentRepository_updateLastQuestionDateStub,
         assessmentRepository_updateWhenNewChallengeIsAskedStub,
-        evaluationUsecases_getNextChallengeForPreviewStub,
         evaluationUsecases_getNextChallengeForDemoStub,
         evaluationUsecases_getNextChallengeForCampaignAssessmentStub,
         evaluationUsecases_getNextChallengeForCompetenceEvaluationStub,
@@ -77,7 +74,6 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
       };
 
       const evaluationUsecases = {
-        getNextChallengeForPreview: evaluationUsecases_getNextChallengeForPreviewStub,
         getNextChallengeForDemo: evaluationUsecases_getNextChallengeForDemoStub,
         getNextChallengeForCampaignAssessment: evaluationUsecases_getNextChallengeForCampaignAssessmentStub,
         getNextChallengeForCompetenceEvaluation: evaluationUsecases_getNextChallengeForCompetenceEvaluationStub,
@@ -148,13 +144,17 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
       it('should return an Assessment', async function () {
         const assessment = domainBuilder.buildAssessment({
           state: Assessment.states.STARTED,
-          type: Assessment.types.PREVIEW,
+          type: Assessment.types.DEMO,
+          courseId: 'recCourseId',
         });
+        courseRepository_getStub
+          .withArgs('recCourseId')
+          .resolves(domainBuilder.buildCourse({ isActive: true, name: 'Mon super course' }));
         assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
         assessmentRepository_updateLastQuestionDateStub.resolves();
         assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
         const challenge = domainBuilder.buildChallenge({ id: 'challengeForPreview' });
-        evaluationUsecases_getNextChallengeForPreviewStub.withArgs({}).resolves(challenge);
+        evaluationUsecases_getNextChallengeForDemoStub.withArgs({ assessment }).resolves(challenge);
 
         const { assessment: assessmentWithNextChallenge, globalProgression } =
           await updateAssessmentWithNextChallenge(dependencies);
@@ -166,14 +166,18 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
       it('should compute next challenge', async function () {
         const assessment = domainBuilder.buildAssessment({
           state: Assessment.states.STARTED,
-          type: Assessment.types.PREVIEW,
+          type: Assessment.types.DEMO,
           answers: [domainBuilder.buildAnswer({ challengeId: 'previousChallengeId' })],
+          courseId: 'recCourseId',
         });
+        courseRepository_getStub
+          .withArgs('recCourseId')
+          .resolves(domainBuilder.buildCourse({ isActive: true, name: 'Mon super course' }));
         assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
         assessmentRepository_updateLastQuestionDateStub.resolves();
         assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
         const challenge = domainBuilder.buildChallenge({ id: 'challengeForPreview' });
-        evaluationUsecases_getNextChallengeForPreviewStub.withArgs({}).resolves(challenge);
+        evaluationUsecases_getNextChallengeForDemoStub.withArgs({ assessment }).resolves(challenge);
 
         const { assessment: assessmentWithNextChallenge, globalProgression } =
           await updateAssessmentWithNextChallenge(dependencies);
@@ -196,8 +200,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
         });
 
-        it('should call usecase and return value from preview usecase', async function () {
-          evaluationUsecases_getNextChallengeForPreviewStub.rejects(new AssessmentEndedError());
+        it('returns null', async function () {
           const { assessment: assessmentWithoutChallenge, globalProgression } =
             await updateAssessmentWithNextChallenge(dependencies);
 
@@ -515,11 +518,15 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           assessment = domainBuilder.buildAssessment({
             state: Assessment.states.STARTED,
             id: assessmentId,
-            type: Assessment.types.PREVIEW,
+            type: Assessment.types.DEMO,
             answers: [],
+            courseId: 'recCourseId',
           });
           assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
-          evaluationUsecases_getNextChallengeForPreviewStub.withArgs({}).resolves({ id: 'someChallengeId' });
+          courseRepository_getStub
+            .withArgs('recCourseId')
+            .resolves(domainBuilder.buildCourse({ isActive: true, name: 'Mon super course', id: 'recCourseId' }));
+          evaluationUsecases_getNextChallengeForDemoStub.withArgs({ assessment }).resolves({ id: 'someChallengeId' });
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
         });
 
@@ -549,10 +556,14 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             const assessment = domainBuilder.buildAssessment({
               id: assessmentId,
               state: Assessment.states.STARTED,
-              type: Assessment.types.PREVIEW,
+              type: Assessment.types.DEMO,
+              courseId: 'recCourseId',
             });
             assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
-            evaluationUsecases_getNextChallengeForPreviewStub.withArgs({}).resolves(null);
+            courseRepository_getStub
+              .withArgs('recCourseId')
+              .resolves(domainBuilder.buildCourse({ isActive: true, name: 'Mon super course', id: 'recCourseId' }));
+            evaluationUsecases_getNextChallengeForDemoStub.withArgs({ assessment }).resolves(null);
 
             await updateAssessmentWithNextChallenge(dependencies);
 
@@ -565,14 +576,18 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             const assessment = domainBuilder.buildAssessment({
               id: assessmentId,
               state: Assessment.states.STARTED,
-              type: Assessment.types.PREVIEW,
+              type: Assessment.types.DEMO,
               lastChallengeId: 'currentChallengeId',
               answers: [domainBuilder.buildAnswer({ challengeId: 'currentChallengeId' })],
+              courseId: 'recCourseId',
             });
+            courseRepository_getStub
+              .withArgs('recCourseId')
+              .resolves(domainBuilder.buildCourse({ isActive: true, name: 'Mon super course', id: 'recCourseId' }));
             assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
 
-            evaluationUsecases_getNextChallengeForPreviewStub
-              .withArgs({})
+            evaluationUsecases_getNextChallengeForDemoStub
+              .withArgs({ assessment })
               .resolves(domainBuilder.buildChallenge({ id: 'currentChallengeId' }));
 
             await updateAssessmentWithNextChallenge(dependencies);
@@ -586,14 +601,18 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             const assessment = domainBuilder.buildAssessment({
               id: assessmentId,
               state: Assessment.states.STARTED,
-              type: Assessment.types.PREVIEW,
+              type: Assessment.types.DEMO,
               lastChallengeId: 'previousChallengeId',
               answers: [domainBuilder.buildAnswer({ challengeId: 'previousChallengeId' })],
+              courseId: 'recCourseId',
             });
+            courseRepository_getStub
+              .withArgs('recCourseId')
+              .resolves(domainBuilder.buildCourse({ isActive: true, name: 'Mon super course', id: 'recCourseId' }));
             assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
 
-            evaluationUsecases_getNextChallengeForPreviewStub
-              .withArgs({})
+            evaluationUsecases_getNextChallengeForDemoStub
+              .withArgs({ assessment })
               .resolves(domainBuilder.buildChallenge({ id: 'nextChallengeId' }));
             assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
 

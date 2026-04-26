@@ -34,7 +34,7 @@ export async function updateAssessmentWithNextChallenge({
     }
 
     if (assessment.isPreview() && assessment.isStarted()) {
-      nextChallenge = await evaluationUsecases.getNextChallengeForPreview({});
+      throw new AssessmentEndedError();
     }
 
     if (assessment.isDemo()) {

@@ -87,7 +87,6 @@ import { getCorrectionForAnswer } from './get-correction-for-answer.js';
 import { getNextChallengeForCampaignAssessment } from './get-next-challenge-for-campaign-assessment.js';
 import { getNextChallengeForCompetenceEvaluation } from './get-next-challenge-for-competence-evaluation.js';
 import { getNextChallengeForDemo } from './get-next-challenge-for-demo.js';
-import { getNextChallengeForPreview } from './get-next-challenge-for-preview.js';
 import { getNextChallengeForSimulator } from './get-next-challenge-for-simulator.js';
 import { getProgression } from './get-progression.js';
 import { getScorecard } from './get-scorecard.js';
@@ -126,7 +125,6 @@ const usecasesWithoutInjectedDependencies = {
   getNextChallengeForCampaignAssessment,
   getNextChallengeForCompetenceEvaluation,
   getNextChallengeForDemo,
-  getNextChallengeForPreview,
   getNextChallengeForSimulator,
   getProgression,
   getScorecard,
