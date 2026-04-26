@@ -104,14 +104,6 @@ export async function findValidatedBySkills(skills, locale) {
   return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
 }
 
-export async function getManyTypes(ids) {
-  const challengeDtos = await getInstance().loadMany(ids);
-  if (challengeDtos.some((challengeDto) => !challengeDto)) {
-    throw new NotFoundError();
-  }
-  return Object.fromEntries(challengeDtos.map(({ id, type }) => [id, type]));
-}
-
 export function clearCache(id) {
   return getInstance().clearCache(id);
 }
