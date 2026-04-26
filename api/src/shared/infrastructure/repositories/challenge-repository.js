@@ -89,21 +89,6 @@ export async function findOperativeBySkillsAndLocales_proxy(skills, locales) {
   return challengeDtos.map((challengeDto) => new ChallengeProxy(challengeDto));
 }
 
-export async function findOperativeBySkills(skills, locale) {
-  _assertLocaleIsDefined(locale);
-  const skillIds = skills.map((skill) => skill.id);
-  const cacheKey = `findOperativeBySkills([${skillIds.sort()}], ${locale})`;
-  const findOperativeByLocaleBySkillIdsCallback = (knex) =>
-    knex
-      .whereRaw('?=ANY(??)', [locale, 'locales'])
-      .whereIn('status', OPERATIVE_STATUSES)
-      .whereIn('skillId', skillIds)
-      .orderBy('id');
-  const challengeDtos = await getInstance().find(cacheKey, findOperativeByLocaleBySkillIdsCallback);
-  const challengesDtosWithSkills = await loadChallengeDtosSkills(challengeDtos);
-  return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
-}
-
 export async function findValidatedBySkills(skills, locale) {
   _assertLocaleIsDefined(locale);
   const skillIds = skills.map((skill) => skill.id);
