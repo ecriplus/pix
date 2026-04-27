@@ -9,17 +9,10 @@ module('Integration | Template | authenticated/catalogue', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   test('it renders template', async function (assert) {
-    // given
-    const model = [
-      {
-        name: 'Combinix',
-      },
-    ];
     // when
-    const screen = await render(<template><Catalogue @model={{model}} /></template>);
+    const screen = await render(<template><Catalogue /></template>);
 
     // then
     assert.ok(screen.getByRole('heading', { name: t('pages.catalogue.title'), level: 1 }));
-    assert.ok(screen.getByText('Combinix'));
   });
 });

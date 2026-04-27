@@ -1009,10 +1009,17 @@
         "modules-count": "{count, plural, =0 {Geen module} =1 {{count} module} other {{count} modules}}",
         "simplified-access": "Toegang zonder account",
         "tag": {
-          "blueprint": "Leertraject voor leerlingen",
-          "target-profile": "Leertrajecten"
+          "blueprint": "Leerprogramma",
+          "target-profile": "Leertraject"
         },
         "tubes-count": "{count, plural, =0 {Geen onderwerp} =1 {{count} onderwerp} other {{count} onderwerpen}}"
+      },
+      "empty-state": "Er zijn momenteel geen leertrajecten beschikbaar. Neem contact op met Pix om er enkele te verkrijgen.",
+      "tab-filters": {
+        "all": "Alle",
+        "blueprints": "leerprogramma's",
+        "label": "Type leertraject",
+        "target-profiles": "Leertrajecten"
       },
       "title": "Overzicht van leertrajecten"
     },

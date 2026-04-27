@@ -45,24 +45,4 @@ module('Unit | Route | authenticated/catalogue', function (hooks) {
       assert.ok(routerService.replaceWith.calledOnceWithExactly('authenticated.index'));
     });
   });
-
-  module('model', function () {
-    test('fetch courses ', async function (assert) {
-      // given
-      const route = this.owner.lookup('route:authenticated/catalogue');
-      const store = this.owner.lookup('service:store');
-      const currentUser = this.owner.lookup('service:current-user');
-      const organizationId = Symbol('organizationId');
-      sinon.stub(currentUser, 'organization').value({ id: organizationId });
-      const courses = Symbol('Courses');
-
-      sinon.stub(store, 'findAll').withArgs('course', { adapterOptions: { organizationId } }).resolves(courses);
-
-      // when
-      const result = await route.model();
-      // then
-      assert.ok(store.findAll.calledOnce);
-      assert.strictEqual(result, courses);
-    });
-  });
 });
