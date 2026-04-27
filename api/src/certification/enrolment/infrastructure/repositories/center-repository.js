@@ -65,6 +65,28 @@ export async function getById({ id }) {
 }
 
 /**
+ * @function
+ * @param {object} params
+ * @param {number} params.certificationCenterId
+ * @returns {Promise<number|null>}
+ */
+export async function findActiveScoOrganizationId({ certificationCenterId }) {
+  const knexConn = DomainTransaction.getConnection();
+
+  const [activeOrganizationId] = await knexConn('organizations')
+    .pluck('organizations.id')
+    .innerJoin('certification-centers', 'certification-centers.externalId', 'organizations.externalId')
+    .where({
+      'certification-centers.id': certificationCenterId,
+      'certification-centers.type': CERTIFICATION_CENTER_TYPES.SCO,
+      'organizations.type': Organization.types.SCO,
+      'organizations.archivedAt': null,
+    });
+
+  return activeOrganizationId || null;
+}
+
+/**
  * @typedef {object} CenterDTO
  * @property {number} id
  * @property {string} name
