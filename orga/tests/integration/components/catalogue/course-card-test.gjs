@@ -1,11 +1,11 @@
 import { render } from '@1024pix/ember-testing-library';
 import { t } from 'ember-intl/test-support';
-import CourseCard from 'pix-orga/components/courses/course-card';
+import CourseCard from 'pix-orga/components/catalogue/course-card';
 import { module, test } from 'qunit';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
-module('Integration | Component | Courses::CourseCard', function (hooks) {
+module('Integration | Component | Catalogue::CourseCard', function (hooks) {
   setupIntlRenderingTest(hooks);
 
   module('for a "targetProfile" type course', function () {
