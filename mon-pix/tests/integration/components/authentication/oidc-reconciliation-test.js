@@ -3,7 +3,7 @@ import Service from '@ember/service';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
-import Sinon from 'sinon';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
@@ -19,7 +19,7 @@ module('Integration | Component |  authentication | oidc-reconciliation', functi
         { organizationName: 'Impots.gouv' },
         { organizationName: 'Nouveau partenaire' },
       ];
-      getIdentityProviderNamesByAuthenticationMethods = Sinon.stub().returns(['France Connect', 'Impots.gouv']);
+      getIdentityProviderNamesByAuthenticationMethods = sinon.stub().returns(['France Connect', 'Impots.gouv']);
     }
     this.owner.register('service:oidcIdentityProviders', OidcIdentityProvidersStub);
     this.set('fullNameFromPix', 'Lloyd Pix');
