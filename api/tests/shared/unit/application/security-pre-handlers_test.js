@@ -807,24 +807,24 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
 
   describe('#checkCertificationCenterIsNotScoManagingStudents', function () {
     let checkOrganizationIsScoAndManagingStudentUsecaseStub;
-    let organizationRepositoryStub;
+    let centerRepositoryStub;
 
     let dependencies;
 
     beforeEach(function () {
       checkOrganizationIsScoAndManagingStudentUsecaseStub = { execute: sinon.stub() };
-      organizationRepositoryStub = {
-        getIdByCertificationCenterId: sinon.stub(),
+      centerRepositoryStub = {
+        findActiveScoOrganizationId: sinon.stub(),
       };
 
       dependencies = {
         checkOrganizationIsScoAndManagingStudentUsecase: checkOrganizationIsScoAndManagingStudentUsecaseStub,
-        organizationRepository: organizationRepositoryStub,
+        centerRepository: centerRepositoryStub,
       };
     });
 
     context('Successful cases', function () {
-      context('when certification center does not belong to an organization', function () {
+      context('when certification center does not belong to an active sco organization', function () {
         it('should authorize access to resource when the user is authenticated', async function () {
           // given
           const request = {
@@ -839,7 +839,7 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
             },
           };
           dependencies.checkOrganizationIsScoAndManagingStudentUsecase.execute.resolves(false);
-          dependencies.organizationRepository.getIdByCertificationCenterId.rejects(new NotFoundError());
+          dependencies.centerRepository.findActiveScoOrganizationId.resolves(null);
 
           // when
           const response = await securityPreHandlers.checkCertificationCenterIsNotScoManagingStudents(
@@ -868,7 +868,7 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
             },
           };
           dependencies.checkOrganizationIsScoAndManagingStudentUsecase.execute.resolves(false);
-          dependencies.organizationRepository.getIdByCertificationCenterId.resolves(1);
+          dependencies.centerRepository.findActiveScoOrganizationId.resolves(1);
 
           // when
           const response = await securityPreHandlers.checkCertificationCenterIsNotScoManagingStudents(
@@ -901,7 +901,7 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
             },
           };
           dependencies.checkOrganizationIsScoAndManagingStudentUsecase.execute.resolves(false);
-          dependencies.organizationRepository.getIdByCertificationCenterId.resolves(1);
+          dependencies.centerRepository.findActiveScoOrganizationId.resolves(1);
 
           // when
           const response = await securityPreHandlers.checkCertificationCenterIsNotScoManagingStudents(
@@ -959,7 +959,7 @@ describe('Shared | Unit | Application | SecurityPreHandlers', function () {
           },
         };
         dependencies.checkOrganizationIsScoAndManagingStudentUsecase.execute.resolves(true);
-        dependencies.organizationRepository.getIdByCertificationCenterId.resolves(1);
+        dependencies.centerRepository.findActiveScoOrganizationId.resolves(1);
 
         // when
         const response = await securityPreHandlers.checkCertificationCenterIsNotScoManagingStudents(

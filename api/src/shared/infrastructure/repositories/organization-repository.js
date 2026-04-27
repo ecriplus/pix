@@ -49,25 +49,6 @@ const get = async function (id) {
   return _toDomain({ ...organizationDB, tags });
 };
 
-const getIdByCertificationCenterId = async function (certificationCenterId) {
-  const knexConn = DomainTransaction.getConnection();
-
-  const organizationIds = await knexConn
-    .pluck('organizations.id')
-    .from(ORGANIZATIONS_TABLE_NAME)
-    .innerJoin('certification-centers', function () {
-      this.on('certification-centers.externalId', 'organizations.externalId').andOn(
-        'certification-centers.type',
-        'organizations.type',
-      );
-    })
-    .where('certification-centers.id', certificationCenterId);
-
-  if (organizationIds.length !== 1)
-    throw new NotFoundError(`Not found organization for certification center id ${certificationCenterId}`);
-  return organizationIds[0];
-};
-
 const findActiveScoOrganizationsByExternalId = async function (externalId) {
   const knexConn = DomainTransaction.getConnection();
   const organizationsDB = await knexConn(ORGANIZATIONS_TABLE_NAME)
@@ -102,9 +83,4 @@ const getOrganizationsWithPlacesManagementFeatureEnabled = async function () {
   return organizations.map((organization) => _toDomain(organization));
 };
 
-export {
-  findActiveScoOrganizationsByExternalId,
-  get,
-  getIdByCertificationCenterId,
-  getOrganizationsWithPlacesManagementFeatureEnabled,
-};
+export { findActiveScoOrganizationsByExternalId, get, getOrganizationsWithPlacesManagementFeatureEnabled };

@@ -3,7 +3,6 @@ import sinon from 'sinon';
 
 import { StudentForEnrolment } from '../../../../../../src/certification/enrolment/domain/read-models/StudentForEnrolment.js';
 import { findStudentsForEnrolment } from '../../../../../../src/certification/enrolment/domain/usecases/find-students-for-enrolment.js';
-import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { expect } from '../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
@@ -11,11 +10,11 @@ describe('Unit | UseCase | find-students-for-enrolment', function () {
   const certificationCenterId = 1;
   const userId = 'userId';
   let organization;
-  let organizationRepository, organizationLearnerRepository, certificationCandidateRepository;
+  let centerRepository, organizationLearnerRepository, certificationCandidateRepository;
 
   beforeEach(async function () {
-    organizationRepository = {
-      getIdByCertificationCenterId: sinon.stub(),
+    centerRepository = {
+      findActiveScoOrganizationId: sinon.stub(),
     };
     organizationLearnerRepository = {
       findByOrganizationIdAndUpdatedAtOrderByDivision: sinon.stub(),
@@ -27,23 +26,23 @@ describe('Unit | UseCase | find-students-for-enrolment', function () {
     const certificationCenter = domainBuilder.buildCertificationCenter({ id: certificationCenterId, externalId });
     organization = domainBuilder.buildOrganization({ externalId });
 
-    organizationRepository.getIdByCertificationCenterId.withArgs(certificationCenter.id).resolves(organization.id);
+    centerRepository.findActiveScoOrganizationId
+      .withArgs({ certificationCenterId: certificationCenter.id })
+      .resolves(organization.id);
   });
 
   describe('when user has access to certification center', function () {
-    describe('when there is no certification center for the organization ', function () {
+    describe('when there is no active sco organization for the certification center', function () {
       it('should return an empty list of student', async function () {
         // given
-        organizationRepository.getIdByCertificationCenterId
-          .withArgs(certificationCenterId)
-          .rejects(new NotFoundError());
+        centerRepository.findActiveScoOrganizationId.withArgs({ certificationCenterId }).resolves(null);
 
         // when
         const studentsFounds = await findStudentsForEnrolment({
           userId,
           certificationCenterId,
           page: { size: 10, number: 1 },
-          organizationRepository,
+          centerRepository,
           organizationLearnerRepository,
           certificationCandidateRepository,
         });
@@ -85,7 +84,7 @@ describe('Unit | UseCase | find-students-for-enrolment', function () {
         sessionId,
         page: { number: 1, size: 10 },
         filter: { divisions: ['3A'] },
-        organizationRepository,
+        centerRepository,
         organizationLearnerRepository,
         certificationCandidateRepository,
       });
@@ -118,7 +117,7 @@ describe('Unit | UseCase | find-students-for-enrolment', function () {
           certificationCenterId,
           page: { number: 1, size: 10 },
           filter: {},
-          organizationRepository,
+          centerRepository,
           organizationLearnerRepository,
           certificationCandidateRepository,
         });

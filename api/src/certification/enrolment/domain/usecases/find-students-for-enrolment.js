@@ -1,4 +1,3 @@
-import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { StudentForEnrolment } from '../read-models/StudentForEnrolment.js';
 
 const findStudentsForEnrolment = async function ({
@@ -6,30 +5,26 @@ const findStudentsForEnrolment = async function ({
   sessionId,
   page,
   filter,
-  organizationRepository,
+  centerRepository,
   organizationLearnerRepository,
   certificationCandidateRepository,
 }) {
-  try {
-    const organizationId = await organizationRepository.getIdByCertificationCenterId(certificationCenterId);
-    const paginatedStudents = await organizationLearnerRepository.findByOrganizationIdAndUpdatedAtOrderByDivision({
-      page,
-      filter,
-      organizationId,
-    });
-    const certificationCandidates = await certificationCandidateRepository.findBySessionId(sessionId);
-    return {
-      data: _buildStudentsForEnrolment({ students: paginatedStudents.data, certificationCandidates }),
-      pagination: paginatedStudents.pagination,
-    };
-  } catch (error) {
-    // This should not happen but still might (due to missing data in database)
-    // in that case, handle error gracefully.
-    // The error will be handled properly in the future.
-    if (error instanceof NotFoundError) return _emptyResponse(page);
+  const organizationId = await centerRepository.findActiveScoOrganizationId({ certificationCenterId });
 
-    throw error;
+  if (!organizationId) {
+    return _emptyResponse(page);
   }
+
+  const paginatedStudents = await organizationLearnerRepository.findByOrganizationIdAndUpdatedAtOrderByDivision({
+    page,
+    filter,
+    organizationId,
+  });
+  const certificationCandidates = await certificationCandidateRepository.findBySessionId(sessionId);
+  return {
+    data: _buildStudentsForEnrolment({ students: paginatedStudents.data, certificationCandidates }),
+    pagination: paginatedStudents.pagination,
+  };
 };
 
 export { findStudentsForEnrolment };
