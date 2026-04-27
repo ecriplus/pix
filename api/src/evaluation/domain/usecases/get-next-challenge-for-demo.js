@@ -1,22 +1,15 @@
 import { AssessmentEndedError } from '../../../shared/domain/errors.js';
 import { _ } from '../../../shared/infrastructure/utils/lodash-utils.js';
 
-const getNextChallengeForDemo = async function ({
-  assessment,
-  answerRepository,
-  challengeRepository,
-  courseRepository,
-}) {
+export async function getNextChallengeForDemo({ assessment, answerRepository, courseRepository }) {
   const course = await courseRepository.get(assessment.courseId);
   const answers = await answerRepository.findByAssessment(assessment.id);
   const nextChallengeId = _selectNextChallengeId(course, answers);
   if (!nextChallengeId) {
     throw new AssessmentEndedError();
   }
-  return challengeRepository.get(nextChallengeId);
-};
-
-export { getNextChallengeForDemo };
+  return nextChallengeId;
+}
 
 function _selectNextChallengeId(course, answers) {
   const courseChallengeIds = course.challenges;

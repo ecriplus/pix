@@ -1,6 +1,5 @@
 /**
  * @typedef {import('../../../evaluation/domain/usecases/index.js').CertificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
- * @typedef {import('../../../evaluation/domain/usecases/index.js').SharedChallengeRepository} SharedChallengeRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').CalibratedChallengeRepository} CalibratedChallengeRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').AssessmentSheetRepository} AssessmentSheetRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').SessionManagementCertificationChallengeRepository} SessionManagementCertificationChallengeRepository
@@ -20,19 +19,19 @@ import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js'
  * @param {number} params.assessmentId
  * @param {AssessmentSheetRepository} params.assessmentSheetRepository
  * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
- * @param {SharedChallengeRepository} params.sharedChallengeRepository
  * @param {CalibratedChallengeRepository} params.calibratedChallengeRepository
  * @param {VersionApi} params.versionApi
  * @param {SessionManagementCertificationChallengeRepository} params.sessionManagementCertificationChallengeRepository
  * @param {FlashAlgorithmService} params.flashAlgorithmService
  * @param {PickChallengeService} params.pickChallengeService
+ *
+ * @returns {Promise<string>} next challenge id
  */
-const getNextChallenge = async function ({
+export async function getNextChallenge({
   assessmentId,
   assessmentSheetRepository,
   certificationChallengeLiveAlertRepository,
   sessionManagementCertificationChallengeRepository,
-  sharedChallengeRepository,
   calibratedChallengeRepository,
   versionApi,
   flashAlgorithmService,
@@ -61,7 +60,7 @@ const getNextChallenge = async function ({
     );
 
   if (lastNonAnsweredCertificationChallenge) {
-    return sharedChallengeRepository.get(lastNonAnsweredCertificationChallenge.challengeId);
+    return lastNonAnsweredCertificationChallenge.challengeId;
   }
 
   const version = await versionApi.getById({ id: assessmentSheet.versionId });
@@ -119,12 +118,12 @@ const getNextChallenge = async function ({
 
   await sessionManagementCertificationChallengeRepository.save({ certificationChallenge });
 
-  return sharedChallengeRepository.get(challenge.id);
-};
+  return challenge.id;
+}
 
-const _hasAnsweredToAllChallenges = ({ possibleChallenges }) => {
+function _hasAnsweredToAllChallenges({ possibleChallenges }) {
   return possibleChallenges.length === 0;
-};
+}
 
 /**
  * Excludes challenges if their associated skill has a validated live alert.
@@ -134,7 +133,7 @@ const _hasAnsweredToAllChallenges = ({ possibleChallenges }) => {
  * @param {Array<CalibratedChallenge>} params.challenges - An array of calibrated challenges.
  * @returns {Array<CalibratedChallenge>} An array of challenges with skills that do not have validated live alerts.
  */
-const _excludeChallengesWithASkillWithAValidatedLiveAlert = ({ validatedLiveAlertChallengeIds, challenges }) => {
+function _excludeChallengesWithASkillWithAValidatedLiveAlert({ validatedLiveAlertChallengeIds, challenges }) {
   const validatedLiveAlertChallenges = challenges.filter((challenge) => {
     return validatedLiveAlertChallengeIds.includes(challenge.id);
   });
@@ -142,11 +141,11 @@ const _excludeChallengesWithASkillWithAValidatedLiveAlert = ({ validatedLiveAler
   const excludedSkillIds = validatedLiveAlertChallenges.map((challenge) => challenge.skill.id);
 
   return challenges.filter((challenge) => !excludedSkillIds.includes(challenge.skill.id));
-};
+}
 
-const _getValidatedLiveAlertChallengeIds = async ({ assessmentId, certificationChallengeLiveAlertRepository }) => {
+async function _getValidatedLiveAlertChallengeIds({ assessmentId, certificationChallengeLiveAlertRepository }) {
   return certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId({ assessmentId });
-};
+}
 
 /**
  * Construct a certification referential in the state presented to the current user
@@ -158,7 +157,7 @@ const _getValidatedLiveAlertChallengeIds = async ({ assessmentId, certificationC
  * @param {Array<CalibratedChallenge>} currentCalibratedChallenges.
  * @returns {Array<CalibratedChallenge>}
  */
-const candidateCertificationReferential = (answeredCalibratedChallenges, currentCalibratedChallenges) => {
+export function candidateCertificationReferential(answeredCalibratedChallenges, currentCalibratedChallenges) {
   // It is critical that answeredCalibratedChallenges is in first parameter in order to take precedence
   const challenges = [...answeredCalibratedChallenges, ...currentCalibratedChallenges];
 
@@ -173,6 +172,4 @@ const candidateCertificationReferential = (answeredCalibratedChallenges, current
       return acc;
     }, {}),
   );
-};
-
-export { candidateCertificationReferential, getNextChallenge };
+}

@@ -16,6 +16,7 @@ import { preventStubsToBeCalledUnexpectedly } from '../../../../tooling/test-uti
 
 describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () {
   describe('#getNextChallenge', function () {
+    const nextChallenge = Symbol('nextChallenge');
     let userId, assessmentId, locale, dependencies;
     let assessmentRepository_getWithAnswersStub;
     let assessmentRepository_updateLastQuestionDateStub;
@@ -27,6 +28,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
     let certificationEvaluationRepository_selectNextCertificationChallengeStub;
     let courseRepository_getStub;
     let competenceRepository_getCompetenceNameStub;
+    let challengeRepository_getStub;
     let certificationChallengeLiveAlertRepository_getByAssessmentIdStub;
     let certificationCompanionAlertRepository_getAllByAssessmentIdStub;
 
@@ -50,6 +52,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         .named('selectNextCertificationChallenge');
       courseRepository_getStub = sinon.stub().named('getCourse');
       competenceRepository_getCompetenceNameStub = sinon.stub().named('getCompetenceName');
+      challengeRepository_getStub = sinon.stub().named('getChallenge');
       certificationChallengeLiveAlertRepository_getByAssessmentIdStub = sinon.stub().named('getChallengeLiveAlerts');
       certificationCompanionAlertRepository_getAllByAssessmentIdStub = sinon.stub().named('getCompanionLiveAlerts');
       preventStubsToBeCalledUnexpectedly([
@@ -63,6 +66,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         certificationEvaluationRepository_selectNextCertificationChallengeStub,
         courseRepository_getStub,
         competenceRepository_getCompetenceNameStub,
+        challengeRepository_getStub,
         certificationChallengeLiveAlertRepository_getByAssessmentIdStub,
         certificationCompanionAlertRepository_getAllByAssessmentIdStub,
       ]);
@@ -92,6 +96,10 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         getCompetenceName: competenceRepository_getCompetenceNameStub,
       };
 
+      const challengeRepository = {
+        get: challengeRepository_getStub,
+      };
+
       const certificationChallengeLiveAlertRepository = {
         getByAssessmentId: certificationChallengeLiveAlertRepository_getByAssessmentIdStub,
       };
@@ -108,6 +116,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         certificationEvaluationRepository,
         courseRepository,
         competenceRepository,
+        challengeRepository,
         certificationChallengeLiveAlertRepository,
         certificationCompanionAlertRepository,
       };
@@ -153,13 +162,14 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
         assessmentRepository_updateLastQuestionDateStub.resolves();
         assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
-        const challenge = domainBuilder.buildChallenge({ id: 'challengeForPreview' });
-        evaluationUsecases_getNextChallengeForDemoStub.withArgs({ assessment }).resolves(challenge);
+        evaluationUsecases_getNextChallengeForDemoStub.withArgs({ assessment }).resolves('challengeForPreview');
+        challengeRepository_getStub.withArgs('challengeForPreview').resolves(nextChallenge);
 
         const { assessment: assessmentWithNextChallenge, globalProgression } =
           await updateAssessmentWithNextChallenge(dependencies);
 
         expect(assessmentWithNextChallenge).to.deepEqualInstance(assessment);
+        expect(assessmentWithNextChallenge.nextChallenge).to.equal(nextChallenge);
         expect(globalProgression).to.be.null;
       });
 
@@ -176,13 +186,13 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         assessmentRepository_getWithAnswersStub.withArgs(assessmentId).resolves(assessment);
         assessmentRepository_updateLastQuestionDateStub.resolves();
         assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
-        const challenge = domainBuilder.buildChallenge({ id: 'challengeForPreview' });
-        evaluationUsecases_getNextChallengeForDemoStub.withArgs({ assessment }).resolves(challenge);
+        evaluationUsecases_getNextChallengeForDemoStub.withArgs({ assessment }).resolves('challengeForPreview');
+        challengeRepository_getStub.withArgs('challengeForPreview').resolves(nextChallenge);
 
         const { assessment: assessmentWithNextChallenge, globalProgression } =
           await updateAssessmentWithNextChallenge(dependencies);
 
-        expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
+        expect(assessmentWithNextChallenge.nextChallenge).to.equal(nextChallenge);
         expect(globalProgression).to.be.null;
       });
     });
@@ -238,16 +248,17 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             courseRepository_getStub
               .withArgs('recCourseId')
               .resolves(domainBuilder.buildCourse({ isActive: true, name: 'Mon super course' }));
-            const challenge = domainBuilder.buildChallenge({ id: 'challengeForDemo' });
-            evaluationUsecases_getNextChallengeForDemoStub.withArgs({ assessment }).resolves(challenge);
+            evaluationUsecases_getNextChallengeForDemoStub.withArgs({ assessment }).resolves('challengeForDemo');
+            challengeRepository_getStub.withArgs('challengeForDemo').resolves(nextChallenge);
             const { assessment: assessmentWithNextChallenge, globalProgression } =
               await updateAssessmentWithNextChallenge(dependencies);
 
-            expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
+            expect(assessmentWithNextChallenge.nextChallenge).to.equal(nextChallenge);
             expect(assessmentWithNextChallenge.title).to.equal('Mon super course');
             expect(globalProgression).to.be.null;
           });
         });
+
         context('when there is no more challenge', function () {
           it('should return an assessment with no nextChallenge', async function () {
             // given
@@ -284,14 +295,14 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         it('should call usecase and return value from campaign usecase', async function () {
           assessmentRepository_updateLastQuestionDateStub.resolves();
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
-          const challenge = domainBuilder.buildChallenge({ id: 'challengeForCampaign' });
           evaluationUsecases_getNextChallengeForCampaignAssessmentStub
             .withArgs({ assessment, locale })
-            .resolves(challenge);
+            .resolves('challengeForCampaign');
+          challengeRepository_getStub.withArgs('challengeForCampaign').resolves(nextChallenge);
           const { assessment: assessmentWithNextChallenge, globalProgression } =
             await updateAssessmentWithNextChallenge(dependencies);
 
-          expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
+          expect(assessmentWithNextChallenge.nextChallenge).to.equal(nextChallenge);
           expect(globalProgression).to.be.null;
         });
 
@@ -350,17 +361,17 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
               .resolves({
                 completionRate: myGlobalProgression,
               });
-            const challenge = domainBuilder.buildChallenge({ id: 'challengeForCampaign' });
             evaluationUsecases_getNextChallengeForCampaignAssessmentStub
               .withArgs({ assessment: examAssessment, locale })
-              .resolves(challenge);
+              .resolves('challengeForCampaign');
+            challengeRepository_getStub.withArgs('challengeForCampaign').resolves(nextChallenge);
             const { assessment: assessmentWithNextChallenge, globalProgression } =
               await updateAssessmentWithNextChallenge({
                 ...dependencies,
                 assessmentId: 1234,
               });
 
-            expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
+            expect(assessmentWithNextChallenge.nextChallenge).to.equal(nextChallenge);
             expect(globalProgression).to.equal(myGlobalProgression);
           });
         });
@@ -385,14 +396,14 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
             .resolves('Ma super compétence');
           assessmentRepository_updateLastQuestionDateStub.resolves();
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
-          const challenge = domainBuilder.buildChallenge({ id: 'challengeForCompetenceEvaluation' });
           evaluationUsecases_getNextChallengeForCompetenceEvaluationStub
             .withArgs({ assessment, userId, locale })
-            .resolves(challenge);
+            .resolves('challengeForCompetenceEvaluation');
+          challengeRepository_getStub.withArgs('challengeForCompetenceEvaluation').resolves(nextChallenge);
           const { assessment: assessmentWithNextChallenge, globalProgression } =
             await updateAssessmentWithNextChallenge(dependencies);
 
-          expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
+          expect(assessmentWithNextChallenge.nextChallenge).to.equal(nextChallenge);
           expect(assessmentWithNextChallenge.title).to.equal('Ma super compétence');
           expect(globalProgression).to.be.null;
         });
@@ -444,14 +455,14 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
         it('should call usecase and return value from certification usecase', async function () {
           assessmentRepository_updateLastQuestionDateStub.resolves();
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
-          const challenge = domainBuilder.buildChallenge({ id: 'challengeForCertification' });
           certificationEvaluationRepository_selectNextCertificationChallengeStub
             .withArgs({ assessmentId: assessment.id })
-            .resolves(challenge);
+            .resolves('challengeForCertification');
+          challengeRepository_getStub.withArgs('challengeForCertification').resolves(nextChallenge);
           const { assessment: assessmentWithNextChallenge, globalProgression } =
             await updateAssessmentWithNextChallenge(dependencies);
 
-          expect(assessmentWithNextChallenge.nextChallenge).to.deepEqualInstance(challenge);
+          expect(assessmentWithNextChallenge.nextChallenge).to.equal(nextChallenge);
           expect(assessmentWithNextChallenge.challengeLiveAlerts).to.deep.equal([certificationChallengeLiveAlert]);
           expect(assessmentWithNextChallenge.companionLiveAlerts).to.deep.equal([certificationCompanionLiveAlert]);
           expect(globalProgression).to.be.null;
@@ -526,7 +537,8 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           courseRepository_getStub
             .withArgs('recCourseId')
             .resolves(domainBuilder.buildCourse({ isActive: true, name: 'Mon super course', id: 'recCourseId' }));
-          evaluationUsecases_getNextChallengeForDemoStub.withArgs({ assessment }).resolves({ id: 'someChallengeId' });
+          evaluationUsecases_getNextChallengeForDemoStub.withArgs({ assessment }).resolves('someChallengeId');
+          challengeRepository_getStub.withArgs('someChallengeId').resolves(nextChallenge);
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
         });
 
@@ -588,7 +600,8 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
 
             evaluationUsecases_getNextChallengeForDemoStub
               .withArgs({ assessment })
-              .resolves(domainBuilder.buildChallenge({ id: 'currentChallengeId' }));
+              .resolves('currentChallengeId');
+            challengeRepository_getStub.withArgs('currentChallengeId').resolves(nextChallenge);
 
             await updateAssessmentWithNextChallenge(dependencies);
 
@@ -613,7 +626,8 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
 
             evaluationUsecases_getNextChallengeForDemoStub
               .withArgs({ assessment })
-              .resolves(domainBuilder.buildChallenge({ id: 'nextChallengeId' }));
+              .resolves('nextChallengeId');
+            challengeRepository_getStub.withArgs('nextChallengeId').resolves(nextChallenge);
             assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
 
             await updateAssessmentWithNextChallenge(dependencies);

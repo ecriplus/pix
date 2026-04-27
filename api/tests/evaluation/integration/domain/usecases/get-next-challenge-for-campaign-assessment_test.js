@@ -70,13 +70,13 @@ describe('Evaluation | Integration | Domain | Use Cases | get-next-challenge-for
 
       // when
       const assessment = domainBuilder.buildAssessment(assessmentDB);
-      const challenge = await evaluationUsecases.getNextChallengeForCampaignAssessment({
+      const challengeId = await evaluationUsecases.getNextChallengeForCampaignAssessment({
         assessment,
         locale,
       });
 
       // then
-      expect(challenge.id).to.equal(challengeData[1].id);
+      expect(challengeId).to.equal(challengeData[1].id);
     });
   });
 
@@ -145,13 +145,13 @@ describe('Evaluation | Integration | Domain | Use Cases | get-next-challenge-for
 
       // when
       const assessment = domainBuilder.buildAssessment(assessmentDB);
-      const challenge = await evaluationUsecases.getNextChallengeForCampaignAssessment({
+      const challengeId = await evaluationUsecases.getNextChallengeForCampaignAssessment({
         assessment,
         locale,
       });
 
       // then
-      expect(challenge.id).to.equal(challengeData[1].id);
+      expect(challengeId).to.equal(challengeData[1].id);
     });
   });
 });
