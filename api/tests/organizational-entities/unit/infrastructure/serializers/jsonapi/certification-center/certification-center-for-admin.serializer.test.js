@@ -97,6 +97,11 @@ describe('Unit | Organizational Entities | Infrastructure | Serializer | JSONAPI
               related: `/api/admin/certification-centers/${certificationCenter.id}/certification-center-memberships`,
             },
           },
+          'certification-center-invitations': {
+            links: {
+              related: `/api/admin/certification-centers/${certificationCenter.id}/invitations`,
+            },
+          },
           habilitations: {
             data: [
               {

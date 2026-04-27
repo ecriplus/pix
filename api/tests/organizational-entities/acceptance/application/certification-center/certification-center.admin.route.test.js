@@ -277,6 +277,11 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
               'data-protection-officer-email': undefined,
             },
             relationships: {
+              'certification-center-invitations': {
+                links: {
+                  related: '/api/admin/certification-centers/1234/invitations',
+                },
+              },
               'certification-center-memberships': {
                 links: {
                   related: '/api/admin/certification-centers/1234/certification-center-memberships',
