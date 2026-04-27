@@ -68,8 +68,9 @@ export async function getByAssessmentId(assessmentId) {
   if (!data) {
     throw new NotFoundError();
   }
-
   const answers = await answerRepository.findByAssessment(data.assessmentId);
+
+  _sortAnswersByCreationDate(answers);
 
   return new AssessmentSheet({
     ...data,
@@ -91,4 +92,8 @@ export async function update(assessmentSheet) {
       lastAnswerAt: assessmentSheet.lastAnswerAt,
     })
     .where({ id: assessmentSheet.certificationCourseId });
+}
+
+function _sortAnswersByCreationDate(answers) {
+  return answers.sort((a, b) => a.createdAt - b.createdAt);
 }

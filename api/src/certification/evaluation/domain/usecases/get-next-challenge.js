@@ -1,5 +1,4 @@
 /**
- * @typedef {import('../../../evaluation/domain/usecases/index.js').AnswerRepository} AnswerRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').CertificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').SharedChallengeRepository} SharedChallengeRepository
  * @typedef {import('../../../evaluation/domain/usecases/index.js').CalibratedChallengeRepository} CalibratedChallengeRepository
@@ -20,7 +19,6 @@ import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js'
  * @param {object} params
  * @param {number} params.assessmentId
  * @param {string} params.locale
- * @param {AnswerRepository} params.answerRepository
  * @param {AssessmentSheetRepository} params.assessmentSheetRepository
  * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
  * @param {SharedChallengeRepository} params.sharedChallengeRepository
@@ -33,7 +31,6 @@ import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js'
 const getNextChallenge = async function ({
   assessmentId,
   locale,
-  answerRepository,
   assessmentSheetRepository,
   certificationChallengeLiveAlertRepository,
   sessionManagementCertificationChallengeRepository,
@@ -50,8 +47,10 @@ const getNextChallenge = async function ({
     certificationChallengeLiveAlertRepository,
   });
 
-  let allAnswers = await answerRepository.findByAssessment(assessmentSheet.assessmentId);
-  allAnswers = allAnswers.filter(({ challengeId }) => !validatedLiveAlertChallengeIds.includes(challengeId));
+  const assessmentAnswers = assessmentSheet.answers;
+  const allAnswers = assessmentAnswers.filter(
+    ({ challengeId }) => !validatedLiveAlertChallengeIds.includes(challengeId),
+  );
 
   const answeredChallengeIds = allAnswers.map(({ challengeId }) => challengeId);
 

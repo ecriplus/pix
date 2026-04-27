@@ -10,7 +10,7 @@ import { domainBuilder } from '../../../../../tooling/domain-builder/domain-buil
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Certification | Evaluation | Infrastructure | Repositories | AssessmentSheetRepository', function () {
-  let certificationCourseId, assessmentId, userId, versionId, answerData;
+  let certificationCourseId, assessmentId, userId, versionId, answer1;
 
   beforeEach(async function () {
     userId = databaseBuilder.factory.buildUser().id;
@@ -43,7 +43,12 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
       lastQuestionDate: new Date('2024-11-07'),
       lastQuestionState: Assessment.statesOfLastQuestion.TIMEOUT,
     }).id;
-    answerData = databaseBuilder.factory.buildAnswer({ assessmentId, result: 'ok' });
+    answer1 = databaseBuilder.factory.buildAnswer({
+      assessmentId,
+      challengeId: 'challenge1',
+      result: 'ok',
+      createdAt: new Date('2022-02-22'),
+    });
     await databaseBuilder.commit();
   });
 
@@ -63,7 +68,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
             isRejectedForFraud: true,
             state: Assessment.states.COMPLETED,
             assessmentUpdatedAt: new Date('2023-10-05'),
-            answers: [domainBuilder.buildAnswer(answerData)],
+            answers: [domainBuilder.buildAnswer(answer1)],
             lastChallengeId: 'nextChallengeIdToAnswer',
             lastQuestionDate: new Date('2024-11-07'),
             lastQuestionState: Assessment.statesOfLastQuestion.TIMEOUT,
@@ -90,6 +95,21 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
   describe('#getByAssessmentId', function () {
     context('when the assessment exists', function () {
       it('should return the assessment sheet', async function () {
+        // given
+        const answer3 = databaseBuilder.factory.buildAnswer({
+          assessmentId,
+          challengeId: 'challenge3',
+          result: 'ok',
+          createdAt: new Date('2022-02-24'),
+        });
+        const answer2 = databaseBuilder.factory.buildAnswer({
+          assessmentId,
+          challengeId: 'challenge2',
+          result: 'ok',
+          createdAt: new Date('2022-02-23'),
+        });
+        await databaseBuilder.commit();
+
         // when
         const assessmentSheet = await assessmentSheetRepository.getByAssessmentId(assessmentId);
 
@@ -103,7 +123,11 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
             isRejectedForFraud: true,
             state: Assessment.states.COMPLETED,
             assessmentUpdatedAt: new Date('2023-10-05'),
-            answers: [domainBuilder.buildAnswer(answerData)],
+            answers: [
+              domainBuilder.buildAnswer(answer1),
+              domainBuilder.buildAnswer(answer2),
+              domainBuilder.buildAnswer(answer3),
+            ],
             lastChallengeId: 'nextChallengeIdToAnswer',
             lastQuestionDate: new Date('2024-11-07'),
             lastQuestionState: Assessment.statesOfLastQuestion.TIMEOUT,
@@ -207,7 +231,7 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
           isRejectedForFraud: true,
           state: Assessment.states.STARTED, // updated
           assessmentUpdatedAt: new Date('2024-05-11'), // updated
-          answers: [domainBuilder.buildAnswer(answerData)],
+          answers: [domainBuilder.buildAnswer(answer1)],
           lastChallengeId: 'nextChallengeIdToAnswer',
           lastQuestionDate: new Date('2024-11-07'),
           lastQuestionState: Assessment.statesOfLastQuestion.TIMEOUT,

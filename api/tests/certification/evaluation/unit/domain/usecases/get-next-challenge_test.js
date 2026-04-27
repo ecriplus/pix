@@ -15,8 +15,7 @@ import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Unit | Domain | Use Cases | get-next-challenge', function () {
   describe('#getNextChallenge', function () {
-    let answerRepository,
-      sharedChallengeRepository,
+    let sharedChallengeRepository,
       calibratedChallengeRepository,
       complementaryCertificationRepository,
       assessmentSheetRepository,
@@ -37,9 +36,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
       };
       assessmentSheetRepository = {
         getByAssessmentId: sinon.stub(),
-      };
-      answerRepository = {
-        findByAssessment: sinon.stub(),
       };
       sharedChallengeRepository = {
         get: sinon.stub(),
@@ -78,6 +74,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         certificationFramework: Frameworks.EDU_1ER_DEGRE,
         accessibilityAdjustmentNeeded: false,
         lang: 'fr-fr',
+        answers: [],
       });
 
       versionApi.getById.withArgs({ id: version.id }).resolves(version);
@@ -100,7 +97,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
             });
 
-          answerRepository.findByAssessment.withArgs(assessmentSheet.assessmentId).resolves([]);
           certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
             .withArgs({ assessmentId: assessmentSheet.assessmentId })
             .resolves([]);
@@ -146,7 +142,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           // when
           const returnedChallenge = await getNextChallenge({
             assessmentSheetRepository,
-            answerRepository,
             assessmentId: assessment.id,
             sessionManagementCertificationChallengeRepository,
             certificationChallengeLiveAlertRepository,
@@ -167,15 +162,9 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         it('should save the returned next challenge using the locale', async function () {
           // given
           assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
-            certificationCourseId: 123,
-            assessmentId: assessment.id,
-            userId: 456,
-            state: Assessment.states.COMPLETED,
-            assessmentUpdatedAt: new Date('2023-10-05'),
-            versionId: version.id,
-            certificationFramework: Frameworks.EDU_1ER_DEGRE,
-            accessibilityAdjustmentNeeded: false,
+            ...assessmentSheet,
             lang: null,
+            answers: [],
           });
           assessmentSheetRepository.getByAssessmentId.withArgs(assessment.id).resolves(assessmentSheet);
           const locale = 'fr-be';
@@ -190,7 +179,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               key: ComplementaryCertificationKeys.PIX_PLUS_DROIT,
             });
 
-          answerRepository.findByAssessment.withArgs(assessmentSheet.assessmentId).resolves([]);
           certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
             .withArgs({ assessmentId: assessmentSheet.assessmentId })
             .resolves([]);
@@ -207,6 +195,7 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           calibratedChallengeRepository.findActiveFlashCompatible
             .withArgs({ locale, version })
             .resolves([nextCalibratedChallenge]);
+
           calibratedChallengeRepository.getMany.withArgs({ ids: [], version }).resolves([]);
 
           flashAlgorithmService.getCapacityAndErrorRate
@@ -238,7 +227,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           // when
           const returnedChallenge = await getNextChallenge({
             assessmentSheetRepository,
-            answerRepository,
             assessmentId: assessment.id,
             sessionManagementCertificationChallengeRepository,
             certificationChallengeLiveAlertRepository,
@@ -279,7 +267,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             }),
           ];
 
-          answerRepository.findByAssessment.withArgs(assessmentSheet.assessmentId).resolves([]);
           certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
             .withArgs({ assessmentId: assessmentSheet.assessmentId })
             .resolves([]);
@@ -325,7 +312,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
           // when
           const returnedChallenge = await getNextChallenge({
-            answerRepository,
             assessmentId: assessmentSheet.assessmentId,
             sessionManagementCertificationChallengeRepository,
             certificationChallengeLiveAlertRepository,
@@ -358,7 +344,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
             id: nonAnsweredCertificationChallenge.challengeId,
           });
 
-          answerRepository.findByAssessment.withArgs(assessmentSheet.assessmentId).resolves([]);
           certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
             .withArgs({ assessmentId: assessmentSheet.assessmentId })
             .resolves([]);
@@ -372,7 +357,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
           // when
           const challenge = await getNextChallenge({
-            answerRepository,
             assessmentId: assessment.id,
             sessionManagementCertificationChallengeRepository,
             certificationChallengeLiveAlertRepository,
@@ -410,9 +394,12 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
         const answerStillValid = domainBuilder.buildAnswer({ challengeId: alreadyAnsweredChallenge.id });
         const answerWithOutdatedChallenge = domainBuilder.buildAnswer({ challengeId: outdatedChallenge.id });
-        answerRepository.findByAssessment
-          .withArgs(assessmentSheet.assessmentId)
-          .resolves([answerStillValid, answerWithOutdatedChallenge]);
+
+        assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
+          ...assessmentSheet,
+          answers: [answerStillValid, answerWithOutdatedChallenge],
+        });
+        assessmentSheetRepository.getByAssessmentId.withArgs(assessment.id).resolves(assessmentSheet);
 
         certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
           .withArgs({ assessmentId: assessmentSheet.assessmentId })
@@ -462,7 +449,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
         // when
         const returnedChallenge = await getNextChallenge({
-          answerRepository,
           assessmentId: assessment.id,
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
@@ -502,8 +488,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         const lastSeenChallenge = domainBuilder.buildChallenge({
           id: nonAnsweredCertificationChallenge.challengeId,
         });
-
-        answerRepository.findByAssessment.withArgs(assessmentSheet.assessmentId).resolves([]);
 
         calibratedChallengeRepository.findActiveFlashCompatible
           .withArgs({
@@ -549,7 +533,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
         // when
         const returnedChallenge = await getNextChallenge({
-          answerRepository,
           assessmentId: assessment.id,
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
@@ -599,7 +582,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
           skill: firstSkill,
         });
 
-        answerRepository.findByAssessment.withArgs(assessmentSheet.assessmentId).resolves([]);
         calibratedChallengeRepository.findActiveFlashCompatible
           .withArgs()
           .resolves([
@@ -645,7 +627,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
         // when
         const returnedChallenge = await getNextChallenge({
-          answerRepository,
           assessmentId: assessmentSheet.assessmentId,
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
@@ -681,19 +662,12 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
         versionApi.getById.withArgs({ id: version.id }).resolves(version);
 
         assessmentSheet = domainBuilder.certification.evaluation.buildAssessmentSheet({
-          certificationCourseId: 123,
-          assessmentId: assessment.id,
-          userId: 456,
-          state: Assessment.states.COMPLETED,
-          assessmentUpdatedAt: new Date('2023-10-05'),
+          ...assessmentSheet,
           versionId: version.id,
-          certificationFramework: Frameworks.EDU_1ER_DEGRE,
-          accessibilityAdjustmentNeeded: false,
-          lang: 'fr-fr',
+          answers: [answer],
         });
         assessmentSheetRepository.getByAssessmentId.withArgs(assessment.id).resolves(assessmentSheet);
 
-        answerRepository.findByAssessment.withArgs(assessmentSheet.assessmentId).resolves([answer]);
         certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
           .withArgs({ assessmentId: assessmentSheet.assessmentId })
           .resolves([]);
@@ -715,7 +689,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
         // when
         const error = await catchErr(getNextChallenge)({
-          answerRepository,
           assessmentId: assessment.id,
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
@@ -767,10 +740,10 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
               certificationFramework: Frameworks.EDU_1ER_DEGRE,
               accessibilityAdjustmentNeeded: false,
               lang: 'fr-fr',
+              answers: [],
             });
             assessmentSheetRepository.getByAssessmentId.withArgs(assessment.id).resolves(assessmentSheet);
 
-            answerRepository.findByAssessment.withArgs(assessmentSheet.assessmentId).resolves([]);
             certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
               .withArgs({
                 assessmentId: assessmentSheet.assessmentId,
@@ -818,7 +791,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
             // when
             const returnedChallenge = await getNextChallenge({
-              answerRepository,
               assessmentId: assessment.id,
               sessionManagementCertificationChallengeRepository,
               certificationChallengeLiveAlertRepository,
@@ -840,7 +812,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
     context('when the certification is a complementary certification', function () {
       it('should call findActiveFlashCompatible with the version', async function () {
         // given
-        answerRepository.findByAssessment.withArgs(assessmentSheet.assessmentId).resolves([]);
         certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
           .withArgs({ assessmentId: assessmentSheet.assessmentId })
           .resolves([]);
@@ -857,7 +828,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
         // when
         await catchErr(getNextChallenge)({
-          answerRepository,
           assessmentId: assessment.id,
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
@@ -882,7 +852,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
     context('when the certification is a Pix core or double certification', function () {
       it('should call findActiveFlashCompatible without version', async function () {
         // given
-        answerRepository.findByAssessment.withArgs(assessmentSheet.assessmentId).resolves([]);
         certificationChallengeLiveAlertRepository.getLiveAlertValidatedChallengeIdsByAssessmentId
           .withArgs({ assessmentId: assessmentSheet.assessmentId })
           .resolves([]);
@@ -896,7 +865,6 @@ describe('Unit | Domain | Use Cases | get-next-challenge', function () {
 
         // when
         await catchErr(getNextChallenge)({
-          answerRepository,
           assessmentId: assessment.id,
           sessionManagementCertificationChallengeRepository,
           certificationChallengeLiveAlertRepository,
