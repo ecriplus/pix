@@ -6,10 +6,10 @@ export async function updateLastQuestionState({
   lastQuestionState,
   challengeId,
   assessmentRepository,
-  challengeToPlayApi,
+  challengeToPlayRepository,
 }) {
   if (lastQuestionState === Assessment.statesOfLastQuestion.FOCUSEDOUT && challengeId !== undefined) {
-    const challenge = await challengeToPlayApi.get(challengeId);
+    const challenge = await challengeToPlayRepository.get(challengeId);
     if (!challenge.focused) {
       logger.warn(
         {

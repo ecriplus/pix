@@ -5,10 +5,11 @@ import { expect } from '../../../../test-helper.js';
 import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
 describe('Evaluation | Unit | Application | challenge-controller', function () {
-  let challengeToPlayApi;
+  let challengeToPlayRepository, challengeToPlaySerializer;
 
   beforeEach(async function () {
-    challengeToPlayApi = { get: sinon.stub(), serialize: sinon.stub() };
+    challengeToPlayRepository = { get: sinon.stub() };
+    challengeToPlaySerializer = { serialize: sinon.stub() };
   });
 
   describe('#get', function () {
@@ -17,17 +18,18 @@ describe('Evaluation | Unit | Application | challenge-controller', function () {
       const challengeId = 123;
       const challenge = Symbol('someChallenge');
       const expectedResult = Symbol('serialized-challenge');
-      challengeToPlayApi.get.resolves(challenge);
-      challengeToPlayApi.serialize.resolves(expectedResult);
+      challengeToPlayRepository.get.resolves(challenge);
+      challengeToPlaySerializer.serialize.resolves(expectedResult);
 
       // when
       const response = await challengeController.get({ params: { id: challengeId } }, hFake, {
-        challengeToPlayApi,
+        challengeToPlayRepository,
+        challengeToPlaySerializer,
       });
 
       // then
-      expect(challengeToPlayApi.get).to.have.been.calledWithExactly(challengeId);
-      expect(challengeToPlayApi.serialize).to.have.been.calledOnce;
+      expect(challengeToPlayRepository.get).to.have.been.calledWithExactly(challengeId);
+      expect(challengeToPlaySerializer.serialize).to.have.been.calledOnce;
       expect(response).to.deep.equal(expectedResult);
     });
   });

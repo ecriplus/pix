@@ -5,8 +5,8 @@ import * as challengeSerializer from '../infrastructure/serializers/challenge-se
 
 const getNextChallengeForPix1d = async function (request, h, dependencies = { challengeSerializer }) {
   const assessmentId = request.params.id;
-  const challenge = await usecases.getNextChallenge({ assessmentId });
-  return dependencies.challengeSerializer.serialize(challenge);
+  const challengeToPlay = await usecases.getNextChallenge({ assessmentId });
+  return dependencies.challengeSerializer.serialize(challengeToPlay);
 };
 
 const create = async function (request, h, dependencies = { assessmentSerializer }) {

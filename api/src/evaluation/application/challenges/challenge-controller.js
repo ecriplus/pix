@@ -1,8 +1,9 @@
-import * as challengeToPlayApi from '../../../evaluation/application/api/challenge-to-play-api.js';
+import * as challengeToPlayRepository from '../../infrastructure/repositories/challenge-to-play-repository.js';
+import * as challengeToPlaySerializer from '../../infrastructure/serializers/jsonapi/challenge-to-play-serializer.js';
 
-async function get(request, h, dependencies = { challengeToPlayApi }) {
-  const challengeToPlay = await dependencies.challengeToPlayApi.get(request.params.id);
-  return dependencies.challengeToPlayApi.serialize(challengeToPlay);
+async function get(request, h, dependencies = { challengeToPlayRepository, challengeToPlaySerializer }) {
+  const challengeToPlay = await dependencies.challengeToPlayRepository.get(request.params.id);
+  return dependencies.challengeToPlaySerializer.serialize(challengeToPlay);
 }
 
 const challengeController = { get };

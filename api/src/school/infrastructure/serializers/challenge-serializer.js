@@ -21,10 +21,24 @@ const serialize = function (challenges) {
       'hasEmbedInternalValidation',
       'noValidationNeeded',
     ],
-    transform: (challenge) => {
+    transform: (challengeToPlay) => {
       return {
-        ...challenge,
-        instructions: challenge.instruction?.split('***'),
+        id: challengeToPlay.id,
+        type: challengeToPlay.type,
+        proposals: challengeToPlay.proposals,
+        illustrationUrl: challengeToPlay.illustrationUrl,
+        embedUrl: challengeToPlay.embedUrl,
+        embedTitle: challengeToPlay.embedTitle,
+        embedHeight: challengeToPlay.embedHeight,
+        webComponentTagName: challengeToPlay.webComponentTagName,
+        webComponentProps: challengeToPlay.webComponentProps,
+        illustrationAlt: challengeToPlay.illustrationAlt,
+        format: challengeToPlay.format,
+        autoReply: challengeToPlay.autoReply,
+        shuffled: challengeToPlay.shuffled,
+        hasEmbedInternalValidation: challengeToPlay.hasEmbedInternalValidation,
+        noValidationNeeded: challengeToPlay.noValidationNeeded,
+        instructions: challengeToPlay.instruction?.split('***'),
       };
     },
   }).serialize(challenges);

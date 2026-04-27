@@ -14,17 +14,6 @@ export function get(challengeId) {
 
 /**
  * @function
- * @name serialize
- *
- * @param {ChallengeToPlay} challengeToPlay
- * @returns {Object} JSON-API serialization of a ChallengeToPlay
- */
-export function serialize(challengeToPlay) {
-  return challengeToPlaySerializer.serialize(challengeToPlay);
-}
-
-/**
- * @function
  * @name getSerializationConfig
  *
  * @returns {Object} Config for JSON-API serialization of a ChallengeToPlay

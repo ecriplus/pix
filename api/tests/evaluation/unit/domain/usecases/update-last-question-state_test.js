@@ -8,14 +8,14 @@ describe('Evaluation | Unit | UseCase | update-last-question-state', function ()
   const assessmentId = 'assessmentId';
   const focusedChallengeId = 'focusedChallengeId';
   const notFocusedChallengeId = 'notFocusedChallengeId';
-  let challengeToPlayApi;
+  let challengeToPlayRepository;
   let assessmentRepository;
   let lastQuestionState;
   let focusedChallenge;
   let notFocusedChallenge;
 
   beforeEach(function () {
-    challengeToPlayApi = {
+    challengeToPlayRepository = {
       get: sinon.stub(),
     };
     assessmentRepository = {
@@ -49,7 +49,7 @@ describe('Evaluation | Unit | UseCase | update-last-question-state', function ()
         lastQuestionState,
         challengeId: focusedChallengeId,
         assessmentRepository,
-        challengeToPlayApi,
+        challengeToPlayRepository,
       });
 
       // Then
@@ -64,7 +64,7 @@ describe('Evaluation | Unit | UseCase | update-last-question-state', function ()
 
     it('should return early when challengeId is not provided', async function () {
       // Given
-      challengeToPlayApi.get.withArgs(notFocusedChallengeId).resolves(notFocusedChallenge);
+      challengeToPlayRepository.get.withArgs(notFocusedChallengeId).resolves(notFocusedChallenge);
 
       // When
       await updateLastQuestionState({
@@ -73,17 +73,17 @@ describe('Evaluation | Unit | UseCase | update-last-question-state', function ()
         challengeId: undefined,
 
         assessmentRepository,
-        challengeToPlayApi,
+        challengeToPlayRepository,
       });
 
       // Then
-      sinon.assert.notCalled(challengeToPlayApi.get);
+      sinon.assert.notCalled(challengeToPlayRepository.get);
       sinon.assert.called(assessmentRepository.updateLastQuestionState);
     });
 
     it('should early return if challenge is not focused', async function () {
       // Given
-      challengeToPlayApi.get.withArgs(notFocusedChallengeId).resolves(notFocusedChallenge);
+      challengeToPlayRepository.get.withArgs(notFocusedChallengeId).resolves(notFocusedChallenge);
 
       // When
       await updateLastQuestionState({
@@ -92,7 +92,7 @@ describe('Evaluation | Unit | UseCase | update-last-question-state', function ()
         challengeId: notFocusedChallengeId,
 
         assessmentRepository,
-        challengeToPlayApi,
+        challengeToPlayRepository,
       });
 
       // Then
@@ -102,7 +102,7 @@ describe('Evaluation | Unit | UseCase | update-last-question-state', function ()
     context('when challenge is focused', function () {
       it('should return early if the provided challenge id differs from assessment.lastChallengeId in repository', async function () {
         // Given
-        challengeToPlayApi.get.withArgs(focusedChallengeId).resolves(focusedChallenge);
+        challengeToPlayRepository.get.withArgs(focusedChallengeId).resolves(focusedChallenge);
 
         const assessment = domainBuilder.buildAssessment({
           id: assessmentId,
@@ -118,7 +118,7 @@ describe('Evaluation | Unit | UseCase | update-last-question-state', function ()
           challengeId: focusedChallengeId,
 
           assessmentRepository,
-          challengeToPlayApi,
+          challengeToPlayRepository,
         });
 
         // Then
@@ -127,7 +127,7 @@ describe('Evaluation | Unit | UseCase | update-last-question-state', function ()
 
       it('should call assessmentRepository.updateLastQuestionState when the challenge id equals assessment.lastChallengeId', async function () {
         // Given
-        challengeToPlayApi.get.withArgs(focusedChallengeId).resolves(focusedChallenge);
+        challengeToPlayRepository.get.withArgs(focusedChallengeId).resolves(focusedChallenge);
 
         const assessment = domainBuilder.buildAssessment({
           id: assessmentId,
@@ -145,7 +145,7 @@ describe('Evaluation | Unit | UseCase | update-last-question-state', function ()
           challengeId: focusedChallengeId,
 
           assessmentRepository,
-          challengeToPlayApi,
+          challengeToPlayRepository,
         });
 
         // Then
