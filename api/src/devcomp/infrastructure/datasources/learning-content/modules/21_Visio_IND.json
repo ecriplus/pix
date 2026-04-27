@@ -586,14 +586,14 @@
                           "id": "1",
                           "content": "Le bouton 2",
                           "feedback": {
-                            "diagnosis": "<p>En effet !&nbsp;Pour montrer quelque chose sur son écran, il faut utiliser la <strong>fonctionnalité «&nbsp;Partage d’écran&nbsp;»</strong> intégrée à l’outil de visioconférence.<br>Si la fonctionnalité n’apparaît pas ou est bloquée, il suffit que l’organisateur de la réunion vous donne accès à la fonctionnalité.</p>"
+                            "diagnosis": "<p>En effet !&nbsp;Pour montrer quelque chose sur son écran, il faut utiliser la <strong>fonctionnalité «&nbsp;partage d’écran&nbsp;»</strong> intégrée à l’outil de visioconférence.<br>Si la fonctionnalité n’apparaît pas ou est bloquée, il suffit que l’organisateur de la réunion vous donne accès à la fonctionnalité.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "Le bouton 3",
                           "feedback": {
-                            "diagnosis": "<p>Eh non&nbsp;! Pour montrer quelque chose sur son écran, il faut utiliser la <strong>fonctionnalité «&nbsp;Partage d’écran&nbsp;»</strong> intégrée à l’outil de visioconférence.<br>Si la fonctionnalité n’apparaît pas ou est bloquée, il suffit que l’organisateur de la réunion vous donne accès à la fonctionnalité.</p>"
+                            "diagnosis": "<p>Eh non&nbsp;! Pour montrer quelque chose sur son écran, il faut utiliser la <strong>fonctionnalité «&nbsp;partage d’écran&nbsp;»</strong> intégrée à l’outil de visioconférence.<br>Si la fonctionnalité n’apparaît pas ou est bloquée, il suffit que l’organisateur de la réunion vous donne accès à la fonctionnalité.</p>"
                           }
                         }
                       ],
