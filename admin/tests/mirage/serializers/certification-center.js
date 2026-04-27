@@ -9,6 +9,9 @@ export default JSONAPISerializer.extend({
       certificationCenterMemberships: {
         related: `/api/admin/certification-centers/${certificationCenter.id}/certification-center-memberships`,
       },
+      certificationCenterInvitations: {
+        related: `/api/admin/certification-centers/${certificationCenter.id}/invitations`,
+      },
     };
   },
 });

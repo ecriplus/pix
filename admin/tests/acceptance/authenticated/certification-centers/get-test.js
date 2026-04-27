@@ -279,7 +279,7 @@ module('Acceptance | authenticated/certification-centers/get', function (hooks) 
           }),
         );
         assert.dom(certificationCenterNavigation.getByRole('link', { name: /Équipe/ })).exists();
-        assert.dom(certificationCenterNavigation.getByRole('link', { name: 'Invitations' })).exists();
+        assert.dom(certificationCenterNavigation.getByRole('link', { name: /Invitations/ })).exists();
       });
 
       test('should display the number of active members in the Équipe tab', async function (assert) {

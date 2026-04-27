@@ -23,6 +23,9 @@ export default class CertificationCenter extends Model {
   @hasMany('certification-center-membership', { async: true, inverse: 'certificationCenter' })
   certificationCenterMemberships;
 
+  @hasMany('certification-center-invitation', { async: true, inverse: null })
+  certificationCenterInvitations;
+
   get typeLabel() {
     return types.find((type) => type.value === this.type).label;
   }
