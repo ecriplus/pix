@@ -110,6 +110,7 @@ Router.map(function () {
       this.route('participations', { path: '/' });
       this.route('participation-detail', { path: '/participations/:participation_id' });
     });
+    this.route('catalogue');
   });
 
   this.route('logout');
