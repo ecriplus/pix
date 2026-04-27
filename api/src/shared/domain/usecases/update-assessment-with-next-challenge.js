@@ -10,7 +10,7 @@ export async function updateAssessmentWithNextChallenge({
   assessmentRepository,
   certificationEvaluationRepository,
   courseRepository,
-  challengeRepository,
+  challengeToPlayApi,
   competenceRepository,
   certificationChallengeLiveAlertRepository,
   certificationCompanionAlertRepository,
@@ -111,7 +111,7 @@ export async function updateAssessmentWithNextChallenge({
     });
   }
 
-  assessment.nextChallenge = await challengeRepository.get(nextChallengeId);
+  assessment.nextChallenge = await challengeToPlayApi.get(nextChallengeId);
 
   return {
     assessment,
