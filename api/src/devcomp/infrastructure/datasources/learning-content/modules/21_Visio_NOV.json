@@ -227,7 +227,7 @@
                 "id": "efbddf56-384b-4179-b596-a3b8287cc7d8",
                 "type": "text",
                 "tag": "did-you-know",
-                "content": "<p>L’<strong>outil de visioconférence </strong>en ligne est <strong>choisi par l’organisateur</strong> de la réunion. Vous ne pouvez donc pas rejoindre une visioconférence avec un autre logiciel que celui prévu par l'organisateur.</p>"
+                "content": "<p>L’<strong>outil de visioconférence </strong>en ligne est <strong>choisi par l’organisateur</strong> de la réunion. Vous ne pouvez donc pas rejoindre une visioconférence avec un autre logiciel que celui prévu par l’organisateur.</p>"
               }
             }
           ]
@@ -279,7 +279,7 @@
               "element": {
                 "id": "aa9cf9cb-1d4a-49b3-b325-86429d148890",
                 "type": "qcm",
-                "instruction": "<p>À votre avis, quels sont les les réglages à effectuer par Sadie avant de cliquer sur « Rejoindre » ?</p>",
+                "instruction": "<p>À votre avis, quels sont les les réglages à effectuer par Sadie avant de cliquer sur «&nbsp;Rejoindre&nbsp;» ?</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
@@ -297,12 +297,12 @@
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "<p>Exactement !<br></p>",
-                    "diagnosis": "<p>Avant de rejoindre une visioconférence, vous pouvez <strong>préparer votre entrée : ouvrir ou fermer votre micro et votre caméra</strong>.</p>"
+                    "state": "<p>Exactement !<br></p>",
+                    "diagnosis": "<p>Avant de rejoindre une visioconférence, vous pouvez <strong>préparer votre entrée&nbsp;: ouvrir ou fermer votre micro et votre caméra</strong>.</p>"
                   },
                   "invalid": {
                     "state": "<p>Eh non.<br></p>",
-                    "diagnosis": "<p>Pour passer son entretien d’embauche, Sadie a besoin d’être vue et entendue par les recruteurs.<br></p>\n<p>Avant de rejoindre une visioconférence, vous pouvez <strong>préparer votre entrée : ouvrir ou fermer votre micro et votre caméra</strong>.</p>"
+                    "diagnosis": "<p>Pour passer son entretien d’embauche, Sadie a besoin d’être vue et entendue par les recruteurs.<br></p><p>Avant de rejoindre une visioconférence, vous pouvez <strong>préparer votre entrée&nbsp;: ouvrir ou fermer votre micro et votre caméra</strong>.</p>"
                   }
                 },
                 "solutions": [
@@ -806,45 +806,63 @@
       "type": "go-further",
       "grains": [
         {
-          "id": "631fdf7e-4f8e-4edd-87b9-dde2f82cb4aa",
+          "id": "e6c53ba6-aafd-4434-950d-84967e7f695d",
           "type": "challenge",
-          "title": "défi",
+          "title": "Transfert",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "07b1468a-1a52-4544-a30e-39e598c2ccb3",
-                "type": "text",
-                "tag": " ",
-                "content": "<p>Léon a une formation en visioconférence avec des collègues de chaque antenne régionale.</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
                 "id": "30cfa2c5-5999-4a8d-bf55-20a2ed64053d",
-                "type": "custom",
-                "title": "",
-                "instruction": "<p>Remettez dans l’ordre les actions suivantes pour que Léon participe correctement à sa visioconférence.</p>",
-                "functionalInstruction": "<p>Faites descendre ou monter les éléments à l’aide des flèches.<br></p>",
-                "tagName": "mdp-classement",
-                "props": {
-                  "passwords": [
-                    "Intervenir en levant la main.",
-                    "Cliquer sur le lien reçu.",
-                    "Quitter la visioconférence.",
-                    "Préparer son micro et sa caméra."
-                  ]
-                }
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Il n’y a pas que pour passer des entretiens qu’on utilise une visioconférence. C’est de plus en plus courant.</p>"
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "f9d6be28-1334-4cc2-bf2f-09dbe1cc9ac1",
-                "type": "text",
-                "tag": " ",
-                "content": "<p><u>Feedbacks :</u>&nbsp;</p>\n<p>Bien joué&nbsp;</p>\n<p>Vous avez aidé Léon. Vous êtes maintenant prêt pour participer à vos premières visioconférences.</p>\n<p><br></p>\n<p> Pas tout à fait</p>\n<p>Observez à nouveau l’ordre des étapes et réessayez.</p>"
+                "id": "b03f7ff3-7d52-4f9e-8f3e-2642183733c8",
+                "type": "qcu-declarative",
+                "instruction": "<p>Selon vous, dans quel cas est-il possible d’utiliser une visioconférence ?</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Pour parler avec un proche qui habite loin</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C’est possible, vous pouvez aussi utiliser un appel vidéo sur votre téléphone pour échanger avec vos proches à distance.<br><strong>Dans toutes les situations évoquées ici, la visioconférence peut être utilisée.</strong> Elle permet de voir et d’entendre les autres sans se déplacer.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Pour un rendez-vous médical</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C’est possible. Certains médecins généralistes proposent des rendez-vous en visioconférence.<br><strong>Dans toutes les situations évoquées ici, la visioconférence peut être utilisée.</strong> Elle permet de voir et d’entendre les autres sans se déplacer.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Pour participer à une formation à distance</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C’est tout à fait possible. Les formations et ateliers à distance sont courants.<br><strong>Dans toutes les situations évoquées ici, la visioconférence peut être utilisée.</strong> Elle permet de voir et d’entendre les autres sans se déplacer.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Pour assister à une réunion professionnelle</p>",
+                    "feedback": {
+                      "diagnosis": "<p>C’est possible. Certains professionnels utilisent beaucoup la visioconférence pour les réunions.<br><strong>Dans toutes les situations évoquées ici, la visioconférence peut être utilisée. </strong>Elle permet de voir et d’entendre les autres sans se déplacer.</p>"
+                    }
+                  },
+                  {
+                    "id": "5",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p><strong>Dans toutes les situations évoquées ici, la visioconférence peut être utilisée. </strong>Elle permet de voir et d’entendre les autres sans se déplacer.</p>"
+                    }
+                  }
+                ]
               }
             }
           ]
