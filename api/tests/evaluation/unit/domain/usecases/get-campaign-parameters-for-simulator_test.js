@@ -2,7 +2,7 @@ import sinon from 'sinon';
 
 import { getCampaignParametersForSimulator } from '../../../../../src/evaluation/domain/usecases/get-campaign-parameters-for-simulator.js';
 import { expect } from '../../../../test-helper.js';
-import { buildChallenge } from '../../../../tooling/domain-builder/factory/index.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Unit | UseCase | get-campaign-parameters-for-simulator', function () {
   describe('#getCampaignParametersForSimulator', function () {
@@ -16,18 +16,41 @@ describe('Unit | UseCase | get-campaign-parameters-for-simulator', function () {
       };
 
       challengeRepository = {
-        findOperativeBySkills: sinon.stub(),
+        findOperativeBySkillsAndLocales_proxy: sinon.stub(),
       };
     });
 
     it('should return skills and sanitized challenges', function () {
-      const campaignSKills = Symbol('campaignSkills');
+      const skill1 = domainBuilder.buildSkill({ id: 'skillId1', difficulty: 2 });
+      const skill2 = domainBuilder.buildSkill({ id: 'skillId2', difficulty: 3 });
+      const campaignSKills = [skill1, skill2];
       const challenges = [
-        buildChallenge({ id: 'rec1' }),
-        buildChallenge({
+        domainBuilder.learningContent.buildChallenge({
+          id: 'rec1',
+          format: 'petit',
+          instruction: 'Des instructions',
+          status: 'validé',
+          timer: null,
+          type: 'QCM',
+          locales: ['fr'],
+          skillId: 'skillId1',
+          focusable: false,
+          difficulty: 0,
+          responsive: 'Smartphone/Tablette',
+        }),
+        domainBuilder.learningContent.buildChallenge({
           id: 'rec2',
+          format: 'grand',
           instruction:
             'Des instructions qui devraient être tronquées à partir de 130 caractères pour éviter le spoil, des instructions qui devraient être tronquées à partir de 130 caractères pour éviter le spoil',
+          status: 'archivé',
+          timer: 190,
+          type: 'QCU',
+          locales: ['fr'],
+          skillId: 'skillId2',
+          focusable: true,
+          difficulty: 3,
+          responsive: 'Tablette',
         }),
       ];
 
@@ -40,7 +63,7 @@ describe('Unit | UseCase | get-campaign-parameters-for-simulator', function () {
         })
         .resolves(campaignSKills);
 
-      challengeRepository.findOperativeBySkills.withArgs(campaignSKills, 'fr').resolves(challenges);
+      challengeRepository.findOperativeBySkillsAndLocales_proxy.withArgs(campaignSKills, ['fr']).resolves(challenges);
 
       // when
       const result = getCampaignParametersForSimulator({
@@ -59,27 +82,27 @@ describe('Unit | UseCase | get-campaign-parameters-for-simulator', function () {
             format: 'petit',
             instruction: 'Des instructions',
             status: 'validé',
-            timer: undefined,
+            timer: null,
             type: 'QCM',
             locales: ['fr'],
-            skill: challenges[0].skill,
+            skill: skill1,
             focused: false,
-            difficulty: 0,
+            difficulty: 2,
             responsive: 'Smartphone/Tablette',
           },
           {
             id: 'rec2',
-            format: 'petit',
+            format: 'grand',
             instruction:
               'Des instructions qui devraient être tronquées à partir de 130 caractères pour éviter le spoil, des instructions qui devraient être',
-            status: 'validé',
-            timer: undefined,
-            type: 'QCM',
+            status: 'archivé',
+            timer: 190,
+            type: 'QCU',
             locales: ['fr'],
-            skill: challenges[1].skill,
-            focused: false,
-            difficulty: 0,
-            responsive: 'Smartphone/Tablette',
+            skill: skill2,
+            focused: true,
+            difficulty: 3,
+            responsive: 'Tablette',
           },
         ],
       });

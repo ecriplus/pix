@@ -5,7 +5,7 @@ import * as competenceRepository from '../../../../../src/shared/infrastructure/
 import * as skillRepository from '../../../../../src/shared/infrastructure/repositories/skill-repository.js';
 import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
 
-let ALL_COMPETENCES, ALL_ACTIVE_SKILLS, ALL_CHALLENGES, ACTIVE_SKILLS_BY_COMPETENCE, ACTIVE_SKILLS_BY_TUBE;
+let ALL_COMPETENCES, ALL_ACTIVE_SKILLS, ALL_VALIDATED_CHALLENGES, ACTIVE_SKILLS_BY_COMPETENCE, ACTIVE_SKILLS_BY_TUBE;
 let VALIDATED_CHALLENGES_BY_SKILL;
 
 async function getAllCompetences() {
@@ -16,16 +16,11 @@ async function getAllCompetences() {
   return ALL_COMPETENCES;
 }
 
-async function getAllChallenges() {
-  if (!ALL_CHALLENGES) {
-    ALL_CHALLENGES = await challengeRepository.list('fr-fr');
+async function getAllValidatedChallenges() {
+  if (!ALL_VALIDATED_CHALLENGES) {
+    ALL_VALIDATED_CHALLENGES = await challengeRepository.findValidated('fr-fr');
   }
-  return ALL_CHALLENGES;
-}
-
-async function findCompetence(competenceId) {
-  const allCompetences = await getAllCompetences();
-  return _.find(allCompetences, { id: competenceId });
+  return ALL_VALIDATED_CHALLENGES;
 }
 
 async function getCoreCompetences() {
@@ -77,38 +72,16 @@ async function _getActiveSkillsByCompetence() {
 
 async function _getValidatedChallengesBySkill() {
   if (!VALIDATED_CHALLENGES_BY_SKILL) {
-    const allChallenges = await getAllChallenges();
-    const validatedChallenges = _.filter(allChallenges, { status: 'validé' });
+    const validatedChallenges = await getAllValidatedChallenges();
     VALIDATED_CHALLENGES_BY_SKILL = _.groupBy(validatedChallenges, (challenge) => challenge.skill.id);
   }
   return VALIDATED_CHALLENGES_BY_SKILL;
 }
 
-async function getV3CertificationChallenges(count) {
-  const challenges = await getAllChallenges();
-
-  return challenges
-    .filter(
-      ({ status, difficulty, discriminant }) =>
-        status === 'validé' && difficulty !== undefined && discriminant !== undefined,
-    )
-    .slice(0, count);
-}
-
-async function findActiveSkillsByFrameworkName(frameworkName) {
-  const allCompetences = await getAllCompetences();
-  const competenceIds = _.filter(allCompetences, { origin: frameworkName }).map(({ id }) => id);
-  const activeSkills = await getAllActiveSkills();
-  return _.filter(activeSkills, (activeSkill) => competenceIds.includes(activeSkill.competenceId));
-}
-
 export {
   findActiveSkillsByCompetenceId,
-  findActiveSkillsByFrameworkName,
   findActiveSkillsByTubeId,
-  findCompetence,
   findFirstValidatedChallengeBySkillId,
   getAllCompetences,
   getCoreCompetences,
-  getV3CertificationChallenges,
 };

@@ -56,15 +56,6 @@ export async function getMany(ids, locale) {
   return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
 }
 
-export async function list(locale) {
-  _assertLocaleIsDefined(locale);
-  const cacheKey = `list(${locale})`;
-  const findByLocaleCallback = (knex) => knex.whereRaw('?=ANY(??)', [locale, 'locales']).orderBy('id');
-  const challengeDtos = await getInstance().find(cacheKey, findByLocaleCallback);
-  const challengesDtosWithSkills = await loadChallengeDtosSkills(challengeDtos);
-  return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
-}
-
 export async function findValidated(locale) {
   _assertLocaleIsDefined(locale);
   const cacheKey = `findValidated(${locale})`;
@@ -98,21 +89,6 @@ export async function findOperativeBySkillsAndLocales_proxy(skills, locales) {
   return challengeDtos.map((challengeDto) => new ChallengeProxy(challengeDto));
 }
 
-export async function findOperativeBySkills(skills, locale) {
-  _assertLocaleIsDefined(locale);
-  const skillIds = skills.map((skill) => skill.id);
-  const cacheKey = `findOperativeBySkills([${skillIds.sort()}], ${locale})`;
-  const findOperativeByLocaleBySkillIdsCallback = (knex) =>
-    knex
-      .whereRaw('?=ANY(??)', [locale, 'locales'])
-      .whereIn('status', OPERATIVE_STATUSES)
-      .whereIn('skillId', skillIds)
-      .orderBy('id');
-  const challengeDtos = await getInstance().find(cacheKey, findOperativeByLocaleBySkillIdsCallback);
-  const challengesDtosWithSkills = await loadChallengeDtosSkills(challengeDtos);
-  return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
-}
-
 export async function findValidatedBySkills(skills, locale) {
   _assertLocaleIsDefined(locale);
   const skillIds = skills.map((skill) => skill.id);
@@ -126,24 +102,6 @@ export async function findValidatedBySkills(skills, locale) {
   const challengeDtos = await getInstance().find(cacheKey, findOperativeByLocaleBySkillIdsCallback);
   const challengesDtosWithSkills = await loadChallengeDtosSkills(challengeDtos);
   return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
-}
-
-export async function findValidatedBySkillId(skillId, locale) {
-  _assertLocaleIsDefined(locale);
-  const cacheKey = `findValidatedBySkillId(${skillId}, ${locale})`;
-  const findValidatedByLocaleBySkillIdCallback = (knex) =>
-    knex.whereRaw('?=ANY(??)', [locale, 'locales']).where({ skillId, status: VALIDATED_STATUS }).orderBy('id');
-  const challengeDtos = await getInstance().find(cacheKey, findValidatedByLocaleBySkillIdCallback);
-  const challengesDtosWithSkills = await loadChallengeDtosSkills(challengeDtos);
-  return challengesDtosWithSkills.map(([challengeDto, skill]) => toDomain({ challengeDto, skill }));
-}
-
-export async function getManyTypes(ids) {
-  const challengeDtos = await getInstance().loadMany(ids);
-  if (challengeDtos.some((challengeDto) => !challengeDto)) {
-    throw new NotFoundError();
-  }
-  return Object.fromEntries(challengeDtos.map(({ id, type }) => [id, type]));
 }
 
 export function clearCache(id) {
