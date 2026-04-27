@@ -1,5 +1,27 @@
 # Pix Changelog
 
+# [5.395.0](https://github.com/1024pix/pix/compare/v5.394.0...v5.395.0) (2026-04-27)
+
+### :rocket: Amélioration
+
+- [#15990](https://github.com/1024pix/pix/pull/15990) Ajouter des filtres dans la liste des sessions sur PixCertif (PIX-22516). 
+- [#15986](https://github.com/1024pix/pix/pull/15986) Autoriser la publication de toutes les certifications (PIX-22286) 
+- [#16022](https://github.com/1024pix/pix/pull/16022) modifs relecture interne MiseEnFormeTexte_Nov_1 
+- [#16023](https://github.com/1024pix/pix/pull/16023) relecture finale Virus_Nov 
+
+### :building_construction: Tech
+
+- [#16020](https://github.com/1024pix/pix/pull/16020) Ajouter la table Modules (PIX-22531) 
+- [#16021](https://github.com/1024pix/pix/pull/16021) Ajouter le feature toggle isFetchingModulesFromLearningContentEnabled (PIX-22266) 
+- [#16018](https://github.com/1024pix/pix/pull/16018) Améliorer les performances du test InMemoryKeyValueStorage 
+- [#16025](https://github.com/1024pix/pix/pull/16025) Corrige le contenu d'un snapshot de csv de résultats sur un test E2E de la recette-certif 
+- [#15875](https://github.com/1024pix/pix/pull/15875) Créer des modèles d'épreuve dédiés pour le bounded-context contenant le code du get-next-challenge pour les campagnes et les évaluations de compétence 
+- [#15989](https://github.com/1024pix/pix/pull/15989) Rendre cohérent la traduction anglaise de Pix App (PIX-22522) 
+
+### :coffee: Autre
+
+- [#16029](https://github.com/1024pix/pix/pull/16029) Correction de la licence incluse dans  audit-logger
+
 # [5.394.0](https://github.com/1024pix/pix/compare/v5.393.0...v5.394.0) (2026-04-24)
 
 ### :rocket: Amélioration
