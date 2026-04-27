@@ -117,32 +117,33 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
 
       assert.dom(screen.getByRole('link', { name: t('navigation.main.support') })).exists();
     });
+    module('canAccessCataloguePage', function () {
+      test('should display Catalogue menu if canAccessCataloguePage is true', async function (assert) {
+        class CurrentUserStub extends Service {
+          organization = Object.create({ id: 5, type: 'PRO' });
+          canAccessMissionsPage = false;
+        }
+        this.owner.register('service:current-user', CurrentUserStub);
+        const featureToggleService = this.owner.lookup('service:feature-toggles');
+        sinon.stub(featureToggleService, 'featureToggles').value({ displayCatalogue: true });
+        const screen = await render(<template><Sidebar /></template>);
 
-    test('should display Catalogue menu if canAccessCataloguePage is true', async function (assert) {
-      class CurrentUserStub extends Service {
-        organization = Object.create({ id: 5, type: 'PRO' });
-        canAccessMissionsPage = false;
-      }
-      this.owner.register('service:current-user', CurrentUserStub);
-      const featureToggleService = this.owner.lookup('service:feature-toggles');
-      sinon.stub(featureToggleService, 'featureToggles').value({ displayCatalogue: true });
-      const screen = await render(<template><Sidebar /></template>);
+        assert.ok(screen.queryByRole('link', { name: t('navigation.main.catalogue') }));
+      });
 
-      assert.ok(screen.queryByRole('link', { name: t('navigation.main.catalogue') }));
-    });
+      test('should not display Catalogue menu if canAccessCataloguePage is false', async function (assert) {
+        class CurrentUserStub extends Service {
+          organization = Object.create({ id: 5, type: 'PRO' });
+          canAccessMissionsPage = false;
+        }
+        this.owner.register('service:current-user', CurrentUserStub);
+        const featureToggleService = this.owner.lookup('service:feature-toggles');
+        sinon.stub(featureToggleService, 'featureToggles').value({ displayCatalogue: false });
 
-    test('should not display Catalogue menu if canAccessCataloguePage is false', async function (assert) {
-      class CurrentUserStub extends Service {
-        organization = Object.create({ id: 5, type: 'PRO' });
-        canAccessMissionsPage = false;
-      }
-      this.owner.register('service:current-user', CurrentUserStub);
-      const featureToggleService = this.owner.lookup('service:feature-toggles');
-      sinon.stub(featureToggleService, 'featureToggles').value({ displayCatalogue: false });
+        const screen = await render(<template><Sidebar /></template>);
 
-      const screen = await render(<template><Sidebar /></template>);
-
-      assert.dom(screen.queryByRole('link', { name: t('navigation.main.catalogue') })).doesNotExist();
+        assert.dom(screen.queryByRole('link', { name: t('navigation.main.catalogue') })).doesNotExist();
+      });
     });
   });
 
