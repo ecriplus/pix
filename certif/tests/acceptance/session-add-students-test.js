@@ -1,7 +1,9 @@
 import { visit as visitScreen } from '@1024pix/ember-testing-library';
 import { click, currentURL, visit } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
+import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
+import { Response } from 'miragejs';
 import { STUDENT_PAGE_SIZE } from 'pix-certif/utils/pagination';
 import { module, test } from 'qunit';
 
@@ -63,6 +65,44 @@ module('Acceptance | Session Add Sco Students', function (hooks) {
 
         // then
         assert.strictEqual(currentURL(), '/espace-ferme');
+      });
+    });
+
+    module('when divisions request fails', function () {
+      test('it should redirect to candidates page and display a specific error toast on 404', async function (assert) {
+        // given
+        this.server.get(
+          '/certification-centers/:id/divisions',
+          () => new Response(404, {}, { errors: [{ status: '404' }] }),
+        );
+
+        // when
+        const screen = await visitScreen(`/sessions/${session.id}/inscription-eleves`);
+
+        // then
+        assert.strictEqual(currentURL(), `/sessions/${session.id}/candidats`);
+        assert
+          .dom(
+            screen.getByText(
+              t('pages.sco.enrol-candidates-in-session.certification-candidates-sco.errors.no-active-organization'),
+            ),
+          )
+          .exists();
+      });
+
+      test('it should redirect to candidates page and display a generic error toast on other errors', async function (assert) {
+        // given
+        this.server.get(
+          '/certification-centers/:id/divisions',
+          () => new Response(500, {}, { errors: [{ status: '500' }] }),
+        );
+
+        // when
+        const screen = await visitScreen(`/sessions/${session.id}/inscription-eleves`);
+
+        // then
+        assert.strictEqual(currentURL(), `/sessions/${session.id}/candidats`);
+        assert.dom(screen.getByText(t('common.api-error-messages.internal-server-error'))).exists();
       });
     });
 

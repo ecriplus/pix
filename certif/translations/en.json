@@ -292,6 +292,9 @@
           "actions": {
             "enrol-candidates": "Enrol candidates"
           },
+          "errors": {
+            "no-active-organization": "An error occurred, unable to add candidates. Please try again or contact us."
+          },
           "information": "Enrol students and you're readix to go !"
         },
         "information": "If some students don't appear in this list, please re-import the student file in Pix Orga.'<br>' If students are still not visible, please contact",
