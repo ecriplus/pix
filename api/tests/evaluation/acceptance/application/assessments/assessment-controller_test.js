@@ -668,9 +668,13 @@ describe('Acceptance | Controller | assessment-controller', function () {
             const limitDate = new Date('2020-01-01T00:00:00Z');
             const certifiableUserId = databaseBuilder.factory.buildUser().id;
 
+            const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate({
+              userId: certifiableUserId,
+            });
             const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
               userId: certifiableUserId,
               createdAt: limitDate,
+              candidateId: certificationCandidate.id,
               version: 3,
             }).id;
             const certificationAssessment = databaseBuilder.factory.buildAssessment({

@@ -17,10 +17,12 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | complete
 
   beforeEach(async function () {
     clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
+    const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate();
     certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
       abortReason: 'candidate',
       maxReachableLevelOnCertificationDate: 6,
       isRejectedForFraud: true,
+      candidateId: certificationCandidate.id,
     }).id;
     await databaseBuilder.commit();
 

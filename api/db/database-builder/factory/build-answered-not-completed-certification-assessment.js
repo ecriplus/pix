@@ -1,6 +1,7 @@
 import { Assessment } from '../../../src/shared/domain/models/Assessment.js';
 import { buildAnswer } from './build-answer.js';
 import { buildAssessment } from './build-assessment.js';
+import { buildCertificationCandidate } from './build-certification-candidate.js';
 import { buildCertificationChallenge } from './build-certification-challenge.js';
 import { buildCertificationCourse } from './build-certification-course.js';
 
@@ -10,7 +11,9 @@ const buildAnsweredNotCompletedCertificationAssessment = function ({
   limitDate,
   version = 2,
 }) {
+  const certificationCandidate = buildCertificationCandidate({ userId: certifiableUserId });
   const certificationCourseId = buildCertificationCourse({
+    candidateId: certificationCandidate.id,
     userId: certifiableUserId,
     createdAt: limitDate,
     version,

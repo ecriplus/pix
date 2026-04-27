@@ -75,6 +75,8 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
             certificationCourseUpdatedAt: new Date('2022-02-22'),
             lastAnswerAt: new Date('2022-01-11'),
             versionId,
+            lang: 'fr',
+            accessibilityAdjustmentNeeded: true,
             certificationFramework: Frameworks.EDU_1ER_DEGRE,
           }),
         );
@@ -238,6 +240,8 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
           certificationCourseUpdatedAt: new Date('2044-02-22'), // updated
           lastAnswerAt: new Date('2044-01-11'), // updated
           versionId,
+          lang: 'fr',
+          accessibilityAdjustmentNeeded: true,
           certificationFramework: Frameworks.EDU_1ER_DEGRE,
         }),
       );
