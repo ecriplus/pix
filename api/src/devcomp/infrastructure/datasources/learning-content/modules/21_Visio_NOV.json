@@ -33,7 +33,7 @@
                 "id": "95d8312d-c6b2-4ee7-9024-aa0a62215fae",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Sadie s’inquiète de son entretien d’embauche. Elle en parle à son ami Juan.</p>"
+                "content": "<p>Sadie s’interroge pour son entretien d’embauche. Elle en parle à son ami Juan.</p>"
               }
             },
             {
@@ -78,7 +78,7 @@
                 "id": "a718fa64-e9ea-40e3-a903-3403f426e525",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Sadie accepte de faire l’entretien d’embauche en visioconférence. Elle reçoit une invitation par mail.</p>"
+                "content": "<p>Sadie a accepté de faire l’entretien d’embauche en visioconférence. Elle a reçu une invitation par mail.</p>"
               }
             }
           ]
@@ -100,7 +100,7 @@
                 "id": "d901b8f9-8851-4166-aeeb-5a2c90ff1f0d",
                 "type": "custom",
                 "title": "",
-                "instruction": "<p>Observez le mail que Sadie a reçu pour sa visioconférence puis répondez à la question.</p>",
+                "instruction": "<p>Observez le mail que Sadie a reçu pour son entretien, puis répondez aux questions.</p>",
                 "functionalInstruction": "",
                 "tagName": "template-mail",
                 "props": {
@@ -109,7 +109,7 @@
                   "mailAddress": "e.alamer@aucoincuisine.org",
                   "avatarColor": "#f24645",
                   "expeditor": "Recrutement - Au Coin Cuisine ",
-                  "content": "Bonjour Madame Sadie Anderson,<br><br>Nous vous confirmons votre participation à l’entretien d’embauche ce mardi à 10h30. <br>Comme convenu, je serais présente ainsi que votre futur manager et un de vos futurs collaborateurs. <br><br>Participer à la visioconférence  :  https://outil.visio.pix.fr/gyf-kdop<br><br> Bien cordialement, <br><br> Elvire Alamer<br>Responsable recrutement <br> Au Coin Cuisine",
+                  "content": "Bonjour Madame Sadie Anderson,<br><br>Nous vous confirmons votre participation à l’entretien d’embauche ce mardi à 10h30. <br>Comme convenu, je serai présente ainsi que votre futur manager et un de vos futurs collaborateurs. <br><br>Participer à la visioconférence  :  <u>https://outil.visio.pix.fr/gyf-kdop</u><br><br> Bien cordialement, <br><br> Elvire Alamer<br>Responsable recrutement <br> Au Coin Cuisine",
                   "time": {
                     "days": -128,
                     "minutes": -27
@@ -133,19 +133,19 @@
                           "id": "1",
                           "content": "<p>Le bouton «&nbsp;Répondre&nbsp;»</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non.&nbsp;</p><p>Quand vous êtes convié à une visioconférence vous recevez <strong>un mail avec un lien cliquable</strong>. Au moment du rendez-vous, <strong>cliquez sur ce lien pour accéder à la visioconférence</strong>. </p>"
+                            "diagnosis": "<p>Eh non. Ce bouton permet seulement de répondre au mail.&nbsp;</p><p>Quand vous êtes convié à une visioconférence vous recevez <strong>un mail avec un lien cliquable</strong>. Au moment du rendez-vous, <strong>cliquez sur ce lien pour accéder à la visioconférence</strong>. </p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Le bouton «&nbsp;Transférer&nbsp;»</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non.&nbsp;</p><p>Quand vous êtes convié à une visioconférence vous recevez <strong>un mail avec un lien cliquable</strong>. Au moment du rendez-vous, <strong>cliquez sur ce lien pour accéder à la visioconférence</strong>. </p>"
+                            "diagnosis": "<p>Eh non. Ce bouton permet seulement de transférer le mail à un nouveau destinataire.&nbsp;</p><p>Quand vous êtes convié à une visioconférence vous recevez <strong>un mail avec un lien cliquable</strong>. Au moment du rendez-vous, <strong>cliquez sur ce lien pour accéder à la visioconférence</strong>. </p>"
                           }
                         },
                         {
                           "id": "3",
-                          "content": "<p>Le lien&nbsp;:&nbsp;https://outil.visio/gyf-kdop-dtxz</p>",
+                          "content": "<p>Le lien&nbsp;:&nbsp;«&nbsp;https://outil.visio/gyf-kdop-dtxz&nbsp;»</p>",
                           "feedback": {
                             "diagnosis": "<p>Exactement !</p><p>Quand vous êtes convié à une visioconférence vous recevez <strong>un mail avec un lien cliquable</strong>. Au moment du rendez-vous, <strong>cliquez sur ce lien pour accéder à la visioconférence</strong>. </p>"
                           }
@@ -218,7 +218,16 @@
                 "id": "fb2d9d56-682e-42d8-b175-7e5b1ec32d5e",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Un outil de visioconférence permet à des personnes de se réunir et de communiquer de manière fluide, même à distance.</p><p><br>🤔 <strong>Bon à savoir</strong> <br>L’<strong>outil de visioconférence</strong> en ligne est <strong>choisi par l’organisateur</strong> de la réunion.</p>"
+                "content": "<p>Un outil de visioconférence permet à des personnes de se réunir et de communiquer facilement à distance, quel que soit l’endroit où les personnes se trouvent.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "efbddf56-384b-4179-b596-a3b8287cc7d8",
+                "type": "text",
+                "tag": "did-you-know",
+                "content": "<p>L’<strong>outil de visioconférence </strong>en ligne est <strong>choisi par l’organisateur</strong> de la réunion. Vous ne pouvez donc pas rejoindre une visioconférence avec un autre logiciel que celui prévu par l'organisateur.</p>"
               }
             }
           ]
@@ -250,36 +259,56 @@
                 "id": "3bf7c798-9b12-4b76-bd17-4a064471556e",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Sadie a cliqué sur le lien dans le mail. La page qui s’affiche permet de se préparer à rejoindre la visioconférence.</p><br><p>Pour passer son entretien d’embauche, Sadie a besoin d’être <strong>vue et entendue </strong>par les recruteurs.</p>"
+                "content": "<p>Sadie a cliqué sur le lien dans le mail. La page qui s’affiche permet de se préparer à rejoindre la visioconférence.</p>"
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "8356e03c-dddd-4d96-a1cf-6e3c14d582dd",
-                "type": "custom-draft",
-                "title": "Rejoindre visio",
-                "url": "https://1024pix.github.io/atelier-contenus/PCH/21Visio_NOV-page-connexion1.html",
-                "instruction": "<p>Aidez Sadie à effectuer les réglages nécessaires puis cliquez sur «&nbsp;Rejoindre&nbsp;» quand vous pensez avoir terminé.</p>",
-                "height": 400
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/21VisioNov/ecran-reglage-avant-visio.jpg",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "aa9cf9cb-1d4a-49b3-b325-86429d148890",
-                "type": "text",
-                "tag": " ",
-                "content": "<p>Si besoin, aidez-vous d’un indice&nbsp;:</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "cc38f63f-a382-40cf-8025-a32115d6bac6",
-                "type": "expand",
-                "title": "🗝️Indice ",
-                "content": "<p>Cliquez sur le pictogramme micro barré pour ouvrir le micro, et sur le pictogramme caméra barrée pour ouvrir la caméra.</p>"
+                "type": "qcm",
+                "instruction": "<p>À votre avis, quels sont les les réglages à effectuer par Sadie avant de cliquer sur « Rejoindre » ?</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "0",
+                    "content": "<p>Ouvrir la caméra</p>"
+                  },
+                  {
+                    "id": "1",
+                    "content": "<p>Ouvrir le micro</p>"
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Réinitialiser</p>"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Exactement !<br></p>",
+                    "diagnosis": "<p>Avant de rejoindre une visioconférence, vous pouvez <strong>préparer votre entrée : ouvrir ou fermer votre micro et votre caméra</strong>.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Eh non.<br></p>",
+                    "diagnosis": "<p>Pour passer son entretien d’embauche, Sadie a besoin d’être vue et entendue par les recruteurs.<br></p>\n<p>Avant de rejoindre une visioconférence, vous pouvez <strong>préparer votre entrée : ouvrir ou fermer votre micro et votre caméra</strong>.</p>"
+                  }
+                },
+                "solutions": [
+                  "0",
+                  "1"
+                ]
               }
             }
           ]
@@ -295,7 +324,25 @@
                 "id": "37de7c8f-dd4f-4752-b421-cea0d969c401",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Dans certains cas, c’est l’organisateur qui autorise l’entrée des participants dans la visioconférence.<br>Quand vous vous connectez, vous êtes placé dans une <strong>salle d’attente virtuelle</strong> puis l’organisateur vous fait entrer lorsqu’il est prêt.</p><p><br>💡<strong> Astuce</strong><br>Pendant la visioconférence, quand votre caméra est ouverte, les autres participants voient ce qui se trouve derrière vous. Avant de rejoindre la visioconférence, pensez donc à vérifier ce qui est visible derrière vous.<br><br>🤔 <strong>Bon à savoir</strong><br>Lors de la première utilisation dans un navigateur, une demande d’accès au micro et à la caméra apparaît. Il faut <strong>autoriser l’accès</strong> pour pouvoir utiliser le micro et la caméra pendant la visioconférence.</p>"
+                "content": "<p>Dans certains cas, c’est l’organisateur qui autorise l’entrée des participants dans la visioconférence.<br>Quand vous vous connectez, vous êtes placé dans une <strong>salle d’attente virtuelle</strong> puis l’organisateur vous fait entrer lorsqu’il est prêt.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "f2b4fce6-9071-405c-b4af-5bc519f014bd",
+                "type": "text",
+                "tag": "tip",
+                "content": "<p>Pendant la visioconférence, quand votre caméra est ouverte, les autres participants vous voient et voient aussi ce qui se trouve derrière vous. Avant de rejoindre la visioconférence, pensez donc à <strong>vérifier ce qui est visible derrière vous</strong>.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "d63a89a0-5671-45a7-a4d6-6c9eca360910",
+                "type": "text",
+                "tag": "further-information",
+                "content": "<p>Lors de la première visioconférence dans un navigateur web, une demande d’accès au micro et à la caméra apparaît. Il faut <strong>autoriser l’accès </strong>pour pouvoir utiliser le micro et la caméra pendant la visioconférence.</p>"
               }
             },
             {
@@ -339,7 +386,7 @@
                 "id": "aa1d2356-2380-4820-8e8b-ec4fa450c114",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Sadie commence son entretien avec plusieurs interlocuteurs.</p>"
+                "content": "<p>Sadie commence son entretien avec plusieurs personnes.</p>"
               }
             },
             {
@@ -350,7 +397,7 @@
                 "isCompletionRequired": false,
                 "title": "Nom du locuteur",
                 "url": "https://epreuves.pix.fr/visio/visio.html?lang=fr&mode=visio21",
-                "instruction": "<p>Explorez le simulateur pour répondre aux deux questions ci-dessous.<br>[Warning relecteurs&nbsp;: la config n’est pas faite encore, on utilise une existante]</p>",
+                "instruction": "<p>Explorez la visioconférence suivante pour répondre aux questions ci-dessous.<br>[Warning relecteurs&nbsp;: la config n’est pas faite encore, on utilise une existante]</p>",
                 "solution": "",
                 "height": 400
               }
@@ -371,21 +418,21 @@
                           "id": "1",
                           "content": "<p>Julian</p>",
                           "feedback": {
-                            "diagnosis": "<p>Exactement !</p><p>Pendant une visioconférence, les participants sont visibles à l’écran. Souvent, un symbole ou un encadré <strong>indique qui est en train de parler</strong> (c’est utile quand leur caméra est fermée, et qu’on ne les voit pas).</p>"
+                            "diagnosis": "<p>Exactement !</p><p>Pendant une visioconférence, les participants sont visibles à l’écran. Souvent, un symbole ou un encadré <strong>indique qui est en train de parler</strong>&nbsp;:c’est utile quand leur caméra est fermée, et qu’on ne les voit pas.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>Helena<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non.&nbsp;</p><p>Pendant une visioconférence, les participants sont visibles à l’écran. Souvent, un symbole ou un encadré <strong>indique qui est en train de parler </strong>(c’est utile quand leur caméra est fermée, et qu’on ne les voit pas).</p>"
+                            "diagnosis": "<p>Eh non.&nbsp;</p><p>Pendant une visioconférence, les participants sont visibles à l’écran. Souvent, un symbole ou un encadré <strong>indique qui est en train de parler</strong>&nbsp;:c’est utile quand leur caméra est fermée, et qu’on ne les voit pas.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Ariana<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non.&nbsp;</p><p>Pendant une visioconférence, les participants sont visibles à l’écran. Souvent, un symbole ou un encadré <strong>indique qui est en train de parler </strong>(c’est utile quand leur caméra est fermée, et qu’on ne les voit pas).</p>"
+                            "diagnosis": "<p>Eh non.&nbsp;</p><p>Pendant une visioconférence, les participants sont visibles à l’écran. Souvent, un symbole ou un encadré <strong>indique qui est en train de parler</strong>&nbsp;:c’est utile quand leur caméra est fermée, et qu’on ne les voit pas.</p>"
                           }
                         },
                         {
@@ -411,12 +458,12 @@
                     {
                       "id": "bf9d93c2-7d2b-4dc3-89c4-a0c6b0d55e6c",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Quel est le nom du bouton qui lui permet de signaler aux autres participants qu’elle souhaite parler ?</p>",
+                      "instruction": "<p>Quel est le nom du bouton qui permet à Sadie de signaler aux autres participants qu’elle souhaite parler ?</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Demander la parole.</p>",
+                          "content": "<p>Ouvrir le micro.</p>",
                           "feedback": {
                             "diagnosis": "<p>Eh non.</p><p>Si vous voulez prendre la parole, il est recommandé d’utiliser le bouton «&nbsp;lever la main&nbsp;». Il permet de signaler que vous souhaitez intervenir.&nbsp; ✋ <br>Ensuite, n’oubliez pas d’<strong>ouvrir votre micro</strong> avant de parler. 🎙️</p>"
                           }
@@ -480,8 +527,8 @@
                     {
                       "id": "e348c101-e8f4-45a2-81c3-d563d83bd945",
                       "type": "text",
-                      "tag": " ",
-                      "content": "<p>🤔 <strong>Bon à savoir</strong><br><strong>Quand vous ne parlez pas</strong>, il est recommandé de <strong>fermer votre micro</strong>&nbsp;: les bruits autour de vous peuvent gêner les autres participants.</p>"
+                      "tag": "did-you-know",
+                      "content": "<p><strong>Quand vous ne parlez pas</strong>, il est recommandé de <strong>fermer votre micro</strong>&nbsp;: les bruits autour de vous peuvent gêner les autres participants.</p>"
                     }
                   ]
                 },
@@ -491,7 +538,7 @@
                       "id": "90f92ba8-173d-480f-8c05-8913ba7aba24",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>S’il y a «&nbsp;beaucoup&nbsp;» de participants lors d’une visioconférence, il ne sont pas forcément tous affichés sur l’écran central. Il faut alors ouvrir <strong>la liste des participants</strong> pour voir leurs noms, comme dans l’image suivante.</p>"
+                      "content": "<p>S’il y a «&nbsp;beaucoup&nbsp;» de participants lors d’une visioconférence, il ne sont pas forcément tous affichés sur l’écran central. Il faut alors ouvrir <strong>la liste des participants</strong> pour voir leurs noms.</p>"
                     },
                     {
                       "id": "d5519a27-41d8-4c69-99b0-cbb0e026871b",
@@ -537,7 +584,7 @@
                 "isCompletionRequired": false,
                 "title": "Quitter visio",
                 "url": "https://epreuves.pix.fr/visio/visio.html?lang=fr&mode=visio3",
-                "instruction": "<p>Dans l’interface ci-dessous, cliquez sur le bouton qui permet de se déconnecter de la visioconférence</p><p>[warning relecteurs&nbsp;: simulateur pas encore développé]</p>",
+                "instruction": "<p>Dans la visioconférence ci-dessous, cliquez sur le bouton qui permet de se déconnecter de la visioconférence</p><p>[warning relecteurs&nbsp;: simulateur pas encore développé]</p>",
                 "solution": "",
                 "height": 400
               }
@@ -555,7 +602,16 @@
                 "id": "bdee250d-109a-474b-8e60-ba91cd13ca80",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Pour <strong>se déconnecter d’une visioconférence</strong>, vous avez <strong>deux possibilités</strong>&nbsp;:</p><ul>    <li>cliquer sur le<strong> bouton «&nbsp;quitter&nbsp;»</strong>,</li>    <li><strong>fermer la fenêtre</strong> du navigateur.</li></ul><p>⚠️ Il est important de penser à quitter la visioconférence une fois la réunion terminée. Tant que vous n’avez pas quitté, les autres participants peuvent vous entendre ou vous voir, si vos micro et caméra sont ouverts.</p><p><br>💡<strong>Astuce</strong><br>Si vous vous déconnectez par erreur d’une visioconférence, pas de panique ! Pour vous connecter de nouveau, cliquez sur le lien que vous avez reçu par mail.</p>"
+                "content": "<p>Pour <strong>se déconnecter d’une visioconférence</strong>, vous avez <strong>deux possibilités</strong>&nbsp;:</p><ul>    <li>cliquer sur le<strong> bouton «&nbsp;quitter&nbsp;»</strong>,</li>    <li><strong>fermer la fenêtre</strong> du navigateur web.</li></ul><p>⚠️ Il est important de penser à quitter la visioconférence une fois la réunion terminée. Si vous ne le faites pas, les autres participants peuvent vous entendre ou vous voir.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "e0e410b0-fd77-41e0-81b6-d2abad1e8908",
+                "type": "text",
+                "tag": "tip",
+                "content": "<p>Si vous vous déconnectez par erreur d’une visioconférence, pas de panique ! Pour vous connecter de nouveau, cliquez sur le lien que vous avez reçu par mail.</p>"
               }
             }
           ]
@@ -598,7 +654,7 @@
               "element": {
                 "id": "6faff92d-85ba-4967-9ab6-d09494882c16",
                 "type": "qab",
-                "instruction": "<p>Pour chacune des phrases ci-dessous, indiquez si elle est vraie ou fausse.</p>",
+                "instruction": "<p>Pour chacune des phrases suivantes, indiquez si elle est vraie ou fausse.</p>",
                 "cards": [
                   {
                     "id": "8a4f459f-8ac0-4d47-911d-aad4f3d8712d",
@@ -635,7 +691,7 @@
                   },
                   {
                     "id": "57d3172c-a4fa-4c22-8e6c-30f7bd664967",
-                    "text": "Si je quitte la visioconférence, je ne peux pas la rejoindre à nouveau.",
+                    "text": "Si vous quittez la visioconférence, vous ne pourrez pas la rejoindre à nouveau.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -674,7 +730,7 @@
                 "isCompletionRequired": false,
                 "title": "Visio-activité-participants",
                 "url": "https://epreuves.pix.fr/visio/visio.html?lang=fr&mode=modulix-didacticiel",
-                "instruction": "<p>Observez l’élément ci-dessous puis répondez aux questions.</p>",
+                "instruction": "<p>Observez la visioconférence, puis répondez à la question ci-dessous.</p>",
                 "solution": "",
                 "height": 400
               }
@@ -736,7 +792,7 @@
                 "isCompletionRequired": false,
                 "title": "lever la main",
                 "url": "https://epreuves.pix.fr/visio/visio.html?lang=fr&mode=modulix-didacticiel",
-                "instruction": "<p>Signalez aux participants que vous voulez parler, puis ouvrez votre micro pour prendre la parole.</p>",
+                "instruction": "<p>Dans la visioconférence ci-dessous, signalez aux participants que vous voulez parler, puis ouvrez votre micro pour prendre la parole.</p>",
                 "solution": "",
                 "height": 400
               }
@@ -760,7 +816,7 @@
                 "id": "07b1468a-1a52-4544-a30e-39e598c2ccb3",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Vous allez faire une visioconférence avec vos amis pour planifier vos prochaines vacances au soleil.&nbsp;⛱️</p>"
+                "content": "<p>Léon a une formation en visioconférence avec des collègues de chaque antenne régionale.</p>"
               }
             },
             {
@@ -769,7 +825,7 @@
                 "id": "30cfa2c5-5999-4a8d-bf55-20a2ed64053d",
                 "type": "custom",
                 "title": "",
-                "instruction": "<p>Remettez dans l’ordre les actions suivantes pour participer correctement à une visioconférence.</p>",
+                "instruction": "<p>Remettez dans l’ordre les actions suivantes pour que Léon participe correctement à sa visioconférence.</p>",
                 "functionalInstruction": "<p>Faites descendre ou monter les éléments à l’aide des flèches.<br></p>",
                 "tagName": "mdp-classement",
                 "props": {
@@ -780,6 +836,15 @@
                     "Préparer son micro et sa caméra."
                   ]
                 }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "f9d6be28-1334-4cc2-bf2f-09dbe1cc9ac1",
+                "type": "text",
+                "tag": " ",
+                "content": "<p><u>Feedbacks :</u>&nbsp;</p>\n<p>Bien joué&nbsp;</p>\n<p>Vous avez aidé Léon. Vous êtes maintenant prêt pour participer à vos premières visioconférences.</p>\n<p><br></p>\n<p> Pas tout à fait</p>\n<p>Observez à nouveau l’ordre des étapes et réessayez.</p>"
               }
             }
           ]
