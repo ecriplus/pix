@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { Organization } from '../../../../src/organizational-entities/domain/models/Organization.js';
 import { ORGANIZATION_FEATURE } from '../../../../src/shared/domain/constants.js';
@@ -79,48 +77,6 @@ describe('Integration | Repository | Organization', function () {
         expect(error).to.be.an.instanceof(NotFoundError);
         expect(error.message).to.equal('Not found organization for ID 10083');
       });
-    });
-  });
-
-  describe('#getIdByCertificationCenterId', function () {
-    beforeEach(function () {
-      _.map(
-        [
-          { id: 1, type: 'SCO', name: 'organization 1', externalId: '1234567' },
-          { id: 2, type: 'SCO', name: 'organization 2', externalId: '1234568' },
-          { id: 3, type: 'SUP', name: 'organization 3', externalId: '1234568' },
-          { id: 4, type: 'SCO', name: 'organization 4', externalId: '1234569' },
-          { id: 5, type: 'SCO', name: 'organization 5', externalId: '1234569' },
-        ],
-        (organization) => {
-          databaseBuilder.factory.buildOrganization(organization);
-        },
-      );
-
-      databaseBuilder.factory.buildCertificationCenter({
-        id: 10,
-        externalId: '1234568',
-        type: 'SCO',
-      });
-
-      return databaseBuilder.commit();
-    });
-
-    it('should return the id of the organization given the certification center id matching the same type', async function () {
-      // when
-      const organisationId = await organizationRepository.getIdByCertificationCenterId(10);
-
-      // then
-      expect(organisationId).to.equal(2);
-    });
-
-    it('should throw an error if the id does not match a certification center with organization', async function () {
-      // when
-      const error = await catchErr(organizationRepository.getIdByCertificationCenterId)(123456);
-
-      // then
-      expect(error).to.be.instanceOf(NotFoundError);
-      expect(error.message).to.equal('Not found organization for certification center id 123456');
     });
   });
 

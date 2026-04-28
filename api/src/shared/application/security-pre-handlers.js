@@ -3,6 +3,7 @@ import lodash from 'lodash';
 
 import { PIX_ADMIN } from '../../authorization/domain/constants.js';
 import * as checkUserIsCandidateUseCase from '../../certification/enrolment/application/usecases/check-user-is-candidate.js';
+import * as centerRepository from '../../certification/enrolment/infrastructure/repositories/center-repository.js';
 import * as certificationIssueReportRepository from '../../certification/shared/infrastructure/repositories/certification-issue-report-repository.js';
 import { Organization } from '../../organizational-entities/domain/models/Organization.js';
 import * as checkCampaignBelongsToCombinedCourseUsecase from '../../prescription/campaign/application/usecases/checkCampaignBelongsToCombinedCourse.js';
@@ -442,7 +443,7 @@ async function checkCertificationCenterIsNotScoManagingStudents(
   dependencies = {
     checkOrganizationIsScoAndManagingStudentUsecase,
     checkUserIsMemberOfCertificationCenterUsecase,
-    organizationRepository,
+    centerRepository,
   },
 ) {
   if (_noCredentials(request)) {
@@ -452,14 +453,10 @@ async function checkCertificationCenterIsNotScoManagingStudents(
   const certificationCenterId =
     request?.params?.certificationCenterId || request?.payload?.data?.attributes?.certificationCenterId;
 
-  let organizationId;
+  const organizationId = await dependencies.centerRepository.findActiveScoOrganizationId({ certificationCenterId });
 
-  try {
-    organizationId = await dependencies.organizationRepository.getIdByCertificationCenterId(certificationCenterId);
-  } catch (error) {
-    if (_noOrganizationFound(error)) {
-      return h.response(true);
-    }
+  if (!organizationId) {
+    return h.response(true);
   }
 
   const isOrganizationScoManagingStudent = await dependencies.checkOrganizationIsScoAndManagingStudentUsecase.execute({
@@ -938,10 +935,6 @@ async function checkCampaignBelongsToCombinedCourse(
 
   await dependencies.checkCampaignBelongsToCombinedCourseUsecase.execute({ campaignId });
   return h.response(true);
-}
-
-function _noOrganizationFound(error) {
-  return error instanceof NotFoundError;
 }
 
 export const securityPreHandlers = {

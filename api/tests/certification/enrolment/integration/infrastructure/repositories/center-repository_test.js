@@ -146,4 +146,106 @@ describe('Integration | Certification |  Center | Repository | center-repository
       expect(result).to.deepEqualInstance(expectedCenter);
     });
   });
+
+  describe('#findActiveScoOrganizationId', function () {
+    context('when the certification center has an active linked organization', function () {
+      it('should return the linked organization id', async function () {
+        // given
+        const certificationCenter = databaseBuilder.factory.buildCertificationCenter({
+          type: CertificationCenter.types.SCO,
+          externalId: 'EXTERNALABC',
+        });
+
+        databaseBuilder.factory.buildOrganization({
+          type: CertificationCenter.types.SCO,
+          externalId: certificationCenter.externalId,
+          archivedAt: new Date(),
+          archivedBy: databaseBuilder.factory.buildUser().id,
+        });
+
+        const activeOrganization = databaseBuilder.factory.buildOrganization({
+          type: CertificationCenter.types.SCO,
+          externalId: certificationCenter.externalId,
+          archivedAt: null,
+          archivedBy: null,
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const result = await centerRepository.findActiveScoOrganizationId({
+          certificationCenterId: certificationCenter.id,
+        });
+
+        // then
+        expect(result).to.equal(activeOrganization.id);
+      });
+    });
+
+    context('when the certification center has no active linked organization', function () {
+      it('should return null', async function () {
+        // given
+        const certificationCenter = databaseBuilder.factory.buildCertificationCenter({
+          type: CertificationCenter.types.SCO,
+          externalId: 'EXTERNALABC',
+        });
+
+        databaseBuilder.factory.buildOrganization({
+          type: CertificationCenter.types.SCO,
+          externalId: certificationCenter.externalId,
+          archivedAt: new Date(),
+          archivedBy: databaseBuilder.factory.buildUser().id,
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const result = await centerRepository.findActiveScoOrganizationId({
+          certificationCenterId: certificationCenter.id,
+        });
+
+        // then
+        expect(result).to.be.null;
+      });
+    });
+
+    context('when the certification center does not exist', function () {
+      it('should return null', async function () {
+        // when
+        const result = await centerRepository.findActiveScoOrganizationId({
+          certificationCenterId: 9999,
+        });
+
+        // then
+        expect(result).to.be.null;
+      });
+    });
+
+    context('when only a non-SCO organization shares the certification center externalId', function () {
+      it('should return null', async function () {
+        // given
+        const certificationCenter = databaseBuilder.factory.buildCertificationCenter({
+          type: CertificationCenter.types.SCO,
+          externalId: 'EXTERNALABC',
+        });
+
+        databaseBuilder.factory.buildOrganization({
+          type: types.SUP,
+          externalId: certificationCenter.externalId,
+          archivedAt: null,
+          archivedBy: null,
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const result = await centerRepository.findActiveScoOrganizationId({
+          certificationCenterId: certificationCenter.id,
+        });
+
+        // then
+        expect(result).to.be.null;
+      });
+    });
+  });
 });

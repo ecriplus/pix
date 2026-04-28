@@ -1,10 +1,17 @@
-const findDivisionsByCertificationCenter = async function ({
+import { NotFoundError } from '../../../../shared/domain/errors.js';
+
+export async function findDivisionsByCertificationCenter({
   certificationCenterId,
-  organizationRepository,
+  centerRepository,
   divisionRepository,
 }) {
-  const organizationId = await organizationRepository.getIdByCertificationCenterId(certificationCenterId);
-  return divisionRepository.findByOrganizationIdForCurrentSchoolYear({ organizationId });
-};
+  const activeOrganizationId = await centerRepository.findActiveScoOrganizationId({
+    certificationCenterId,
+  });
 
-export { findDivisionsByCertificationCenter };
+  if (!activeOrganizationId) {
+    throw new NotFoundError('No organization found for this certification center');
+  }
+
+  return divisionRepository.findByOrganizationIdForCurrentSchoolYear({ organizationId: activeOrganizationId });
+}
