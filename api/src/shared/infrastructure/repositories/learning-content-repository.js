@@ -44,7 +44,7 @@ export class LearningContentRepository {
   /**
    * @param {{
    *   tableName: string
-   *   idType?: 'text' | 'integer'
+   *   idType?: 'text' | 'integer' | 'uuid'
    * }} config
    */
   constructor({ tableName, idType = 'text' }) {
