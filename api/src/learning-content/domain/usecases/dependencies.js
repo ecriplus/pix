@@ -12,6 +12,7 @@ import { frameworkRepository } from '../../infrastructure/repositories/framework
 import { lcmsCreateReleaseJobRepository } from '../../infrastructure/repositories/jobs/lcms-create-release-job-repository.js';
 import { lcmsRefreshCacheJobRepository } from '../../infrastructure/repositories/jobs/lcms-refresh-cache-job-repository.js';
 import { missionRepository } from '../../infrastructure/repositories/mission-repository.js';
+import { moduleRepository } from '../../infrastructure/repositories/module-repository.js';
 import { skillRepository } from '../../infrastructure/repositories/skill-repository.js';
 import { thematicRepository } from '../../infrastructure/repositories/thematic-repository.js';
 import { tubeRepository } from '../../infrastructure/repositories/tube-repository.js';
@@ -27,6 +28,7 @@ export const dependencies = {
   lcmsCreateReleaseJobRepository,
   lcmsRefreshCacheJobRepository,
   missionRepository,
+  moduleRepository,
   sharedAreaRepository,
   sharedFrameworkRepository,
   sharedSkillRepository,
