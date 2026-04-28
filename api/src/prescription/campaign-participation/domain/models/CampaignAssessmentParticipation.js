@@ -37,10 +37,10 @@ export class CampaignAssessmentParticipation {
     this.badges = badges ?? [];
     this.masteryRate = masteryRate != null ? Number(masteryRate) : null;
     this.validatedSkillsCount = validatedSkillsCount;
-    this.reachedStage = reachedStage;
-    this.totalStage = totalStage;
-    this.prescriberTitle = prescriberTitle;
-    this.prescriberDescription = prescriberDescription;
+    this.reachedStage = reachedStage ?? null;
+    this.totalStage = totalStage ?? null;
+    this.prescriberTitle = prescriberTitle ?? null;
+    this.prescriberDescription = prescriberDescription ?? null;
   }
 
   setBadges(badges) {
