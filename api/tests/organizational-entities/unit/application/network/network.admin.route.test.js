@@ -27,6 +27,25 @@ describe('Unit | Application | Admin | Route | Network', function () {
         sinon.assert.notCalled(networkAdminController.findAllFilteredNetworks);
       });
     });
+
+    it('should restrict access with the four admin roles for reading', async function () {
+      // given
+      sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
+      sinon.stub(networkAdminController, 'findAllFilteredNetworks').returns('ok');
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      // when
+      await httpTestServer.request('GET', '/api/admin/networks', {});
+
+      // then
+      sinon.assert.calledWithExactly(securityPreHandlers.hasAtLeastOneAccessOf, [
+        securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+        securityPreHandlers.checkAdminMemberHasRoleMetier,
+        securityPreHandlers.checkAdminMemberHasRoleCertif,
+        securityPreHandlers.checkAdminMemberHasRoleSupport,
+      ]);
+    });
   });
 
   describe('GET /api/admin/networks/{networkId}', function () {
@@ -65,6 +84,25 @@ describe('Unit | Application | Admin | Route | Network', function () {
         expect(response.statusCode).to.equal(403);
         sinon.assert.notCalled(networkAdminController.getNetworkDetails);
       });
+    });
+
+    it('should restrict access with the four admin roles for reading', async function () {
+      // given
+      sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns(() => true);
+      sinon.stub(networkAdminController, 'getNetworkDetails').returns('ok');
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      // when
+      await httpTestServer.request('GET', '/api/admin/networks/1', {});
+
+      // then
+      sinon.assert.calledWithExactly(securityPreHandlers.hasAtLeastOneAccessOf, [
+        securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+        securityPreHandlers.checkAdminMemberHasRoleMetier,
+        securityPreHandlers.checkAdminMemberHasRoleCertif,
+        securityPreHandlers.checkAdminMemberHasRoleSupport,
+      ]);
     });
   });
 

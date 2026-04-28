@@ -4,11 +4,6 @@ import { service } from '@ember/service';
 export default class GetRoute extends Route {
   @service store;
   @service router;
-  @service accessControl;
-
-  beforeModel() {
-    this.accessControl.restrictAccessTo(['isSuperAdmin'], 'authenticated');
-  }
 
   async model(params) {
     try {

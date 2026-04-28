@@ -1,5 +1,6 @@
 import { render } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
+import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import HeadInformation from 'pix-admin/components/networks/head-information';
@@ -13,6 +14,10 @@ module('Integration | Component | Networks | head-information', function (hooks)
   module('display', function () {
     test('it should display network informations', async function (assert) {
       // given
+      class AccessControlStub extends Service {
+        hasAccessToNetworkActionsScope = false;
+      }
+      this.owner.register('service:access-control', AccessControlStub);
       const network = EmberObject.create({ id: 1, name: 'My network' });
 
       // when
@@ -23,10 +28,44 @@ module('Integration | Component | Networks | head-information', function (hooks)
       assert.dom(screen.getByText((_, element) => element.textContent === 'ID : 1')).exists();
       assert.dom(screen.getByRole('button', { name: t('components.networks.copy-id') })).exists();
     });
+
+    test('it should hide the edit button when user does not have network actions scope', async function (assert) {
+      // given
+      class AccessControlStub extends Service {
+        hasAccessToNetworkActionsScope = false;
+      }
+      this.owner.register('service:access-control', AccessControlStub);
+      const network = EmberObject.create({ id: 1, name: 'My network' });
+
+      // when
+      const screen = await render(<template><HeadInformation @network={{network}} /></template>);
+
+      // then
+      assert.dom(screen.queryByRole('button', { name: t('common.actions.edit') })).doesNotExist();
+    });
+
+    test('it should show the edit button when user has network actions scope', async function (assert) {
+      // given
+      class AccessControlStub extends Service {
+        hasAccessToNetworkActionsScope = true;
+      }
+      this.owner.register('service:access-control', AccessControlStub);
+      const network = EmberObject.create({ id: 1, name: 'My network' });
+
+      // when
+      const screen = await render(<template><HeadInformation @network={{network}} /></template>);
+
+      // then
+      assert.dom(screen.getByRole('button', { name: t('common.actions.edit') })).exists();
+    });
   });
 
   test('clicking the edit button shows the edit form', async function (assert) {
     // given
+    class AccessControlStub extends Service {
+      hasAccessToNetworkActionsScope = true;
+    }
+    this.owner.register('service:access-control', AccessControlStub);
     const network = EmberObject.create({ id: 1, name: 'Mon réseau' });
     const screen = await render(<template><HeadInformation @network={{network}} /></template>);
 
@@ -40,6 +79,10 @@ module('Integration | Component | Networks | head-information', function (hooks)
 
   test('clicking the cancel button hides the form and shows the title view', async function (assert) {
     // given
+    class AccessControlStub extends Service {
+      hasAccessToNetworkActionsScope = true;
+    }
+    this.owner.register('service:access-control', AccessControlStub);
     const network = EmberObject.create({ id: 1, name: 'Mon réseau' });
     const screen = await render(<template><HeadInformation @network={{network}} /></template>);
     await click(screen.getByRole('button', { name: t('common.actions.edit') }));

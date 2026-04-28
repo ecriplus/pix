@@ -48,28 +48,26 @@ module('Acceptance | Networks | Get', function (hooks) {
     });
   });
 
-  module('when user does not have super admin role', function () {
-    test('it should redirect to the organizations page', async function (assert) {
+  module('when user has metier role', function (hooks) {
+    hooks.beforeEach(async () => {
+      await authenticateAdminMemberWithRole({ isMetier: true })(server);
+    });
+
+    test('it can access the network detail page', async function (assert) {
       // given
-      await authenticateAdminMemberWithRole({ isSuperAdmin: false })(server);
-
       const NETWORK_ID = 1;
-      const HEAD_ORGANIZATION_ID = 555;
-
       server.create('network', {
         id: NETWORK_ID,
         name: 'My Network',
-        headOrganization: {
-          name: 'Head organization',
-          id: HEAD_ORGANIZATION_ID,
-        },
+        headOrganization: { name: 'Head organization', id: 555 },
       });
 
       // when
-      await visit('/networks/1');
+      const screen = await visit(`/networks/${NETWORK_ID}`);
 
       // then
-      assert.strictEqual(currentURL(), '/organizations/list');
+      assert.strictEqual(currentURL(), `/networks/${NETWORK_ID}`);
+      assert.dom(screen.getByRole('heading', { name: 'My Network' })).exists();
     });
   });
 });

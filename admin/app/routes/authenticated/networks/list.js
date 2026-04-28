@@ -5,7 +5,6 @@ const DEFAULT_PAGE_NUMBER = 1;
 const DEFAULT_PAGE_SIZE = 10;
 
 export default class ListRoute extends Route {
-  @service accessControl;
   @service store;
 
   queryParams = {
@@ -13,10 +12,6 @@ export default class ListRoute extends Route {
     pageSize: { refreshModel: true },
     name: { refreshModel: true },
   };
-
-  beforeModel() {
-    this.accessControl.restrictAccessTo(['isSuperAdmin'], 'authenticated');
-  }
 
   model(params) {
     return this.store.query('network', {

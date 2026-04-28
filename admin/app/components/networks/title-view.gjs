@@ -7,18 +7,20 @@ import CopyButton from 'pix-admin/components/ui/copy-button';
   <div class="network__title-section">
     <div class="network__name-row">
       <h1 class="network__name">{{@network.name}}</h1>
-      <PixTooltip @id="edit-network-tooltip" @position="top" @isInline={{true}}>
-        <:triggerElement>
-          <PixIconButton
-            @iconName="edit"
-            @ariaLabel={{t "common.actions.edit"}}
-            @size="small"
-            @triggerAction={{@onEdit}}
-            aria-describedby="edit-network-tooltip"
-          />
-        </:triggerElement>
-        <:tooltip>{{t "components.networks.editing.actions.edit-tooltip"}}</:tooltip>
-      </PixTooltip>
+      {{#if @canEdit}}
+        <PixTooltip @id="edit-network-tooltip" @position="top" @isInline={{true}}>
+          <:triggerElement>
+            <PixIconButton
+              @iconName="edit"
+              @ariaLabel={{t "common.actions.edit"}}
+              @size="small"
+              @triggerAction={{@onEdit}}
+              aria-describedby="edit-network-tooltip"
+            />
+          </:triggerElement>
+          <:tooltip>{{t "components.networks.editing.actions.edit-tooltip"}}</:tooltip>
+        </PixTooltip>
+      {{/if}}
     </div>
     <div class="network__id">
       <p>ID : <span>{{@network.id}}</span></p>
