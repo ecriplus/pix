@@ -150,33 +150,23 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
         eligibilityRequirements: [],
         successRequirements: [
           {
-            requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
-            data: {
-              skillIds: ['skillA', 'skillB'],
-              threshold: 100,
-            },
+            requirement_type: REQUIREMENT_TYPES.CAPPED_TUBES,
+            data: { cappedTubes: [{ tubeId: 'tubeA', level: 1 }], threshold: 100 },
           },
           {
-            requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
-            data: {
-              skillIds: ['skillC', 'skillD'],
-              threshold: 50,
-            },
+            requirement_type: REQUIREMENT_TYPES.CAPPED_TUBES,
+            data: { cappedTubes: [{ tubeId: 'tubeB', level: 1 }], threshold: 50 },
           },
         ],
       });
       const success = new Success({
         knowledgeElements: [
-          { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillA' },
-          { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillB' },
-          { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillC' },
-          { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillD' },
+          { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillA', createdAt: new Date() },
+          { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillC', createdAt: new Date() },
         ],
-        skills: [
+        campaignSkills: [
           { id: 'skillA', tubeId: 'tubeA', difficulty: 1 },
-          { id: 'skillB', tubeId: 'tubeA', difficulty: 1 },
-          { id: 'skillC', tubeId: 'tubeA', difficulty: 1 },
-          { id: 'skillD', tubeId: 'tubeA', difficulty: 1 },
+          { id: 'skillC', tubeId: 'tubeB', difficulty: 1 },
         ],
       });
       const data = new DataForQuest({ success });
@@ -192,33 +182,23 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
         eligibilityRequirements: [],
         successRequirements: [
           {
-            requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
-            data: {
-              skillIds: ['skillA', 'skillB'],
-              threshold: 100,
-            },
+            requirement_type: REQUIREMENT_TYPES.CAPPED_TUBES,
+            data: { cappedTubes: [{ tubeId: 'tubeA', level: 1 }], threshold: 100 },
           },
           {
-            requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
-            data: {
-              skillIds: ['skillC', 'skillD'],
-              threshold: 50,
-            },
+            requirement_type: REQUIREMENT_TYPES.CAPPED_TUBES,
+            data: { cappedTubes: [{ tubeId: 'tubeB', level: 1 }], threshold: 50 },
           },
         ],
       });
       const success = new Success({
         knowledgeElements: [
-          { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillA' },
-          { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillB' },
-          { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillC' },
-          { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillD' },
+          { status: KnowledgeElement.StatusType.VALIDATED, skillId: 'skillA', createdAt: new Date() },
+          { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillC', createdAt: new Date() },
         ],
-        skills: [
+        campaignSkills: [
           { id: 'skillA', tubeId: 'tubeA', difficulty: 1 },
-          { id: 'skillB', tubeId: 'tubeA', difficulty: 1 },
-          { id: 'skillC', tubeId: 'tubeA', difficulty: 1 },
-          { id: 'skillD', tubeId: 'tubeA', difficulty: 1 },
+          { id: 'skillC', tubeId: 'tubeB', difficulty: 1 },
         ],
       });
       const data = new DataForQuest({ success });
@@ -234,33 +214,23 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
         eligibilityRequirements: [],
         successRequirements: [
           {
-            requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
-            data: {
-              skillIds: ['skillA', 'skillB'],
-              threshold: 100,
-            },
+            requirement_type: REQUIREMENT_TYPES.CAPPED_TUBES,
+            data: { cappedTubes: [{ tubeId: 'tubeA', level: 1 }], threshold: 100 },
           },
           {
-            requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
-            data: {
-              skillIds: ['skillC', 'skillD'],
-              threshold: 50,
-            },
+            requirement_type: REQUIREMENT_TYPES.CAPPED_TUBES,
+            data: { cappedTubes: [{ tubeId: 'tubeB', level: 1 }], threshold: 50 },
           },
         ],
       });
       const success = new Success({
         knowledgeElements: [
-          { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillA' },
-          { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillB' },
-          { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillC' },
-          { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillD' },
+          { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillA', createdAt: new Date() },
+          { status: KnowledgeElement.StatusType.INVALIDATED, skillId: 'skillC', createdAt: new Date() },
         ],
-        skills: [
+        campaignSkills: [
           { id: 'skillA', tubeId: 'tubeA', difficulty: 1 },
-          { id: 'skillB', tubeId: 'tubeA', difficulty: 1 },
-          { id: 'skillC', tubeId: 'tubeA', difficulty: 1 },
-          { id: 'skillD', tubeId: 'tubeA', difficulty: 1 },
+          { id: 'skillC', tubeId: 'tubeB', difficulty: 1 },
         ],
       });
       const data = new DataForQuest({ success });
@@ -837,9 +807,9 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
         ],
         successRequirements: [
           {
-            requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
+            requirement_type: REQUIREMENT_TYPES.CAPPED_TUBES,
             data: {
-              skillIds: ['id1', 'id2'],
+              cappedTubes: [{ tubeId: 'tubeA', level: 3 }],
               threshold: 70,
             },
           },
@@ -902,9 +872,9 @@ describe('Quest | Unit | Domain | Models | Quest ', function () {
         ],
         successRequirements: [
           {
-            requirement_type: REQUIREMENT_TYPES.SKILL_PROFILE,
+            requirement_type: REQUIREMENT_TYPES.CAPPED_TUBES,
             data: {
-              skillIds: ['id1', 'id2'],
+              cappedTubes: [{ tubeId: 'tubeA', level: 3 }],
               threshold: 70,
             },
           },
