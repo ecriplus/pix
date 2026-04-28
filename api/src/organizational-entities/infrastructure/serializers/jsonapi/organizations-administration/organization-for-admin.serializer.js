@@ -61,6 +61,7 @@ const serialize = function (organizations, meta) {
       'organizationLearnerTypeId',
       'organizationLearnerTypeName',
       'network',
+      'campaigns',
     ],
     network: {
       ref: 'id',
@@ -110,6 +111,16 @@ const serialize = function (organizations, meta) {
       ref: 'id',
       included: true,
       attributes: ['id', 'name'],
+    },
+    campaigns: {
+      ref: 'id',
+      ignoreRelationshipData: true,
+      nullIfMissing: true,
+      relationshipLinks: {
+        related: function (record, current, parent) {
+          return `/api/admin/organizations/${parent.id}/campaigns`;
+        },
+      },
     },
     meta,
   }).serialize(organizations);
