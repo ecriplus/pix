@@ -1,3 +1,4 @@
+import { FrameworkHistoryEntry } from '../../../../../../src/certification/configuration/domain/read-models/FrameworkHistoryEntry.js';
 import * as serializer from '../../../../../../src/certification/configuration/infrastructure/serializers/framework-history-serializer.js';
 import { SCOPES } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
 import { expect } from '../../../../../test-helper.js';
@@ -6,7 +7,15 @@ describe('Certification | Configuration | Unit | Serializer | framework-history-
   describe('#serialize', function () {
     it('should serialize a framework history to JSONAPI', function () {
       // given
-      const frameworkHistory = [{ id: 456, startDate: new Date('2024-01-01'), expirationDate: new Date('2025-02-02') }];
+      const frameworkHistory = [
+        new FrameworkHistoryEntry({
+          id: 456,
+          startDate: new Date('2024-01-01'),
+          expirationDate: new Date('2025-02-02'),
+          assessmentDuration: 90,
+          maximumAssessmentLength: 32,
+        }),
+      ];
       const scope = SCOPES.PIX_PLUS_DROIT;
 
       // when

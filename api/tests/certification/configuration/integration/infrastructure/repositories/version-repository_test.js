@@ -325,29 +325,32 @@ describe('Certification | Configuration | Integration | Repository | Version', f
       const scope = SCOPES.PIX_PLUS_DROIT;
       const otherScope = SCOPES.CLEA;
 
+      const version1Config = { maximumAssessmentLength: 1 };
       const version1 = databaseBuilder.factory.buildCertificationVersion({
         scope,
         startDate: new Date('2024-03-15'),
         assessmentDuration: 90,
-        challengesConfiguration: {},
+        challengesConfiguration: version1Config,
       });
+      const version2Config = { maximumAssessmentLength: 2 };
       const version2 = databaseBuilder.factory.buildCertificationVersion({
         scope,
         startDate: new Date('2025-06-21'),
-        assessmentDuration: 90,
-        challengesConfiguration: {},
+        assessmentDuration: 80,
+        challengesConfiguration: version2Config,
       });
+      const version3Config = { maximumAssessmentLength: 3 };
       const version3 = databaseBuilder.factory.buildCertificationVersion({
         scope,
         startDate: new Date('2026-01-01'),
-        assessmentDuration: 90,
-        challengesConfiguration: {},
+        assessmentDuration: 50,
+        challengesConfiguration: version3Config,
       });
       databaseBuilder.factory.buildCertificationVersion({
         scope: otherScope,
         startDate: new Date('2025-06-21'),
-        assessmentDuration: 90,
-        challengesConfiguration: {},
+        assessmentDuration: 60,
+        challengesConfiguration: { maximumAssessmentLength: 4 },
       });
 
       await databaseBuilder.commit();
@@ -357,9 +360,27 @@ describe('Certification | Configuration | Integration | Repository | Version', f
 
       // then
       expect(frameworkHistory).to.deep.equal([
-        { id: version3.id, startDate: version3.startDate, expirationDate: version3.expirationDate },
-        { id: version2.id, startDate: version2.startDate, expirationDate: version2.expirationDate },
-        { id: version1.id, startDate: version1.startDate, expirationDate: version1.expirationDate },
+        domainBuilder.certification.configuration.buildFrameworkHistoryEntry({
+          id: version3.id,
+          startDate: version3.startDate,
+          expirationDate: version3.expirationDate,
+          assessmentDuration: version3.assessmentDuration,
+          maximumAssessmentLength: version3Config.maximumAssessmentLength,
+        }),
+        domainBuilder.certification.configuration.buildFrameworkHistoryEntry({
+          id: version2.id,
+          startDate: version2.startDate,
+          expirationDate: version2.expirationDate,
+          assessmentDuration: version2.assessmentDuration,
+          maximumAssessmentLength: version2Config.maximumAssessmentLength,
+        }),
+        domainBuilder.certification.configuration.buildFrameworkHistoryEntry({
+          id: version1.id,
+          startDate: version1.startDate,
+          expirationDate: version1.expirationDate,
+          assessmentDuration: version1.assessmentDuration,
+          maximumAssessmentLength: version1Config.maximumAssessmentLength,
+        }),
       ]);
     });
   });
