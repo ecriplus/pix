@@ -7,12 +7,12 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/CYAntivirus_IND/picto_cyber_antivirus_ind.svg",
-    "description": "<p>Les appareils numériques sont régulièrement exposés à des logiciels malveillants. Un logiciel antivirus peut renforcer la protection de vos appareils, à condition d’être bien utilisé.<br>Découvrez comment fonctionne ce type de logiciel, comment l’utiliser efficacement et pourquoi le garder à jour est essentiel pour rester protégé.  🛡️<br><br><em>Module produit en partenariat avec cybermalveillance.gouv.fr</em></p>",
+    "description": "<p>Les appareils numériques sont régulièrement exposés à des logiciels malveillants. Un logiciel antivirus peut renforcer la protection de vos appareils, à condition d’être bien utilisé.<br>Découvrez comment fonctionne ce type de logiciel, comment l’utiliser efficacement et pourquoi il est essentiel de le garder à jour pour rester protégé. 🛡️<br><br><em>Module produit en partenariat avec cybermalveillance.gouv.fr</em></p>",
     "duration": 10,
     "level": "independent",
     "objectives": [
       "<p>Connaître le rôle d’un logiciel antivirus</p>",
-      "<p>Expliquer le fonctionnement d’un antivirus pour bien l’utiliser</p>",
+      "<p>Comprendre le fonctionnement d’un antivirus pour bien l’utiliser</p>",
       "<p>Comprendre l’importance des mises à jour d’un antivirus</p>"
     ],
     "tabletSupport": "comfortable"
@@ -33,7 +33,7 @@
                 "id": "5fd179ed-e09d-496e-adbd-47cda8b2b1c6",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Philippe est très prudent sur internet&nbsp;: il évite les sites peu fiables, il est vigilant avant de cliquer sur un lien ou d’ouvrir une pièce jointe et il ne branche jamais d’appareils inconnus.&nbsp;🤔</p><p><br>Pourtant, il a peur que son ordinateur soit infecté par un logiciel malveillant. C’est arrivé à un de ses amis récemment, alors que lui aussi était prudent.</p>"
+                "content": "<p>Philippe est très prudent sur internet&nbsp;: il évite les sites peu fiables, il est vigilant avant de cliquer sur un lien ou d’ouvrir une pièce jointe et il ne branche jamais d’appareils inconnus à son ordinateur.&nbsp;🤔</p><p><br>Pourtant, il a peur que son ordinateur soit infecté par un logiciel malveillant. C’est arrivé à un de ses amis récemment, alors que lui aussi était prudent.</p>"
               }
             },
             {
@@ -48,7 +48,7 @@
                     "id": "1",
                     "content": "<p>Être encore plus prudent.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non. Même en restant prudent, parfois cela n’est pas suffisant. Tout le monde peut se faire piéger sans s’en rendre compte.<br>Heureusement, il existe des logiciels qui renforcent la protection de vos appareils&nbsp;: les logiciels <strong>antivirus</strong>.</p>"
+                      "diagnosis": "<p>Même en restant prudent, parfois cela n’est pas suffisant. Tout le monde peut se faire piéger sans s’en rendre compte.<br>Heureusement, il existe des logiciels qui renforcent la protection de vos appareils&nbsp;: les logiciels <strong>antivirus</strong>.</p>"
                     }
                   },
                   {
@@ -118,7 +118,7 @@
                 "id": "ae2cfed2-9fde-45d3-bded-8ceb6feb7f99",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Même si l’ordinateur de Philippe intègre déjà certaines protections, il décide&nbsp;d’<strong>installer un logiciel antivirus</strong>.</p>"
+                "content": "<p>Même si son ordinateur intègre déjà certaines protections, Philippe décide&nbsp;d’y&nbsp;<strong>installer un logiciel antivirus</strong>.</p>"
               }
             },
             {
@@ -131,14 +131,14 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Optimiser les performances générales de l’ordinateur.</p>",
+                    "content": "<p>Optimiser les performances générales d’un ordinateur.</p>",
                     "feedback": {
                       "diagnosis": "<p>Eh non ! Un antivirus est un <strong>logiciel spécialisé contre les logiciels malveillants</strong>. <br>Son rôle principal est de <strong>détecter</strong> la présence de logiciels malveillants sur un appareil et de prévenir l’utilisateur.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Organiser automatiquement les fichiers pour libérer de l’espace.</p>",
+                    "content": "<p>Organiser automatiquement des fichiers pour libérer de l’espace.</p>",
                     "feedback": {
                       "diagnosis": "<p>Eh non ! Un antivirus est un <strong>logiciel spécialisé contre les logiciels malveillants</strong>. <br>Son rôle principal est de <strong>détecter</strong> la présence de logiciels malveillants sur un appareil et de prévenir l’utilisateur.</p>"
                     }
@@ -195,7 +195,7 @@
                     "id": "f78a8701-3c64-4625-b4a3-af42ed48dfbb",
                     "text": "Ouverture d’un fichier reçu par mail",
                     "image": {
-                      "url": "",
+                      "url": "https://assets.pix.org/modules/CYAntivirus_IND/cy_antivirus_fichier.svg",
                       "altText": ""
                     },
                     "proposalA": "Oui",
@@ -206,7 +206,7 @@
                     "id": "3717eb56-a751-4016-8cb4-9ae8f6229012",
                     "text": "Téléchargement d’une vidéo depuis un site web",
                     "image": {
-                      "url": "",
+                      "url": "https://assets.pix.org/modules/CYAntivirus_IND/cy_antivirus_telechargement.svg",
                       "altText": ""
                     },
                     "proposalA": "Oui",
@@ -217,7 +217,7 @@
                     "id": "ed4f7975-1936-4657-ba9c-ec0c9f029c93",
                     "text": "Rédaction d’une lettre sur un logiciel de traitement de texte",
                     "image": {
-                      "url": "",
+                      "url": "https://assets.pix.org/modules/CYAntivirus_IND/cy_antivirus_texte.svg",
                       "altText": ""
                     },
                     "proposalA": "Oui",
@@ -228,7 +228,7 @@
                     "id": "5360a3a5-f829-4069-9638-78a4a34b7966",
                     "text": "Branchement d’une clé usb à l’ordinateur",
                     "image": {
-                      "url": "",
+                      "url": "https://assets.pix.org/modules/CYAntivirus_IND/cy_antivirus_usb.svg",
                       "altText": ""
                     },
                     "proposalA": "Oui",
@@ -239,7 +239,7 @@
                     "id": "6ba0de24-6686-42fa-84db-389e1596c36c",
                     "text": "Paramétrage de la luminosité de l’écran",
                     "image": {
-                      "url": "",
+                      "url": "https://assets.pix.org/modules/CYAntivirus_IND/cy_antivirus_luminosite.svg",
                       "altText": ""
                     },
                     "proposalA": "Oui",
@@ -265,7 +265,7 @@
                 "id": "09624e99-41b4-4988-b697-5339222362cd",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Il existe des antivirus <strong>gratuits </strong>ou <strong>payants </strong>pour les ordinateurs, les tablettes, les smartphones&nbsp;: Norton, Avast, McAfee, Trend, CyRadar, Avira, AVG, Bitdefender, ReasonLabs, ClamAV...<br><strong>Un seul antivirus suffit.</strong></p><p><br>Une fois installé,<strong> pas besoin de lancer l’antivirus</strong> à chaque démarrage de l’appareil. L’antivirus fonctionne<strong> tout seul et en permanence</strong>.</p>"
+                "content": "<p>Il existe des antivirus <strong>gratuits </strong>ou <strong>payants </strong>pour les ordinateurs, les tablettes, les smartphones&nbsp;: Norton, Avast, McAfee, Trend, CyRadar, Avira, AVG, Bitdefender, ReasonLabs, ClamAV, etc.<br><strong>Un seul antivirus suffit.</strong></p><p><br>Une fois installé,<strong> pas besoin de lancer l’antivirus</strong> à chaque démarrage de l’appareil. L’antivirus fonctionne<strong> tout seul et en permanence</strong>.</p>"
               }
             },
             {
@@ -275,22 +275,6 @@
                 "type": "text",
                 "tag": "did-you-know",
                 "content": "<p>Certains appareils intègrent déjà des systèmes de protection contre les logiciels malveillants. Il est tout de même recommandé d’installer un logiciel antivirus.</p>"
-              }
-            }
-          ]
-        },
-        {
-          "id": "d4c70e2c-69f5-4db3-b8fd-87fcf372ed54",
-          "type": "transition",
-          "title": "Transition #1",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "024ea3ae-548b-4f85-8d3f-c09f0f6c8d37",
-                "type": "text",
-                "tag": " ",
-                "content": "<p>Mais comment un antivirus sait qu’un logiciel est malveillant ?</p>"
               }
             }
           ]
@@ -310,9 +294,9 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>En comparant les caractéristiques des fichiers et programmes à celles de logiciels malveillants déjà identifiés.</p>",
+                    "content": "<p>En comparant les caractéristiques des fichiers et programmes aux caractéristiques des logiciels malveillants déjà identifiés.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement ! Comme tout fichier, chaque logiciel malveillant possède des caractéristiques et un code qui lui sont propres. On appelle cela&nbsp;: la <strong>signature</strong> du logiciel malveillant.<br><br>Lorsqu’un fichier est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une base contenant les signatures des logiciels malveillants déjà connus par l’antivirus)&nbsp;: la <strong>base de signature</strong>.</p>"
+                      "diagnosis": "<p>Effectivement, chaque logiciel malveillant possède des caractéristiques et un code qui lui sont propres, appelées <strong>signatures </strong>(virales).</p><p>Lorsqu’un fichier est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une base contenant les signatures des logiciels malveillants déjà connus par l’antivirus)&nbsp;: la <strong>base de signature</strong>.</p>"
                     }
                   },
                   {
@@ -520,6 +504,20 @@
                   ]
                 }
               ]
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "6346aca3-6412-4853-bb87-f0c276c5cc0d",
+                "type": "custom",
+                "title": "",
+                "instruction": "<p>Pour chacune des notifications suivantes, indiquez ce que doit faire Philippe.</p>",
+                "functionalInstruction": "",
+                "tagName": "notification-antivirus",
+                "props": {
+                  "titleLevel": 2
+                }
+              }
             }
           ]
         },
@@ -550,7 +548,7 @@
                 "id": "4b268a76-cae4-43b1-bde4-cb9df881c581",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Mais de nouveaux logiciels malveillants apparaissent chaque jour, comment rester protégé ?</p>"
+                "content": "<p>Mais de nouveaux logiciels malveillants apparaissent chaque jour, alors comment rester protégé ?</p>"
               }
             }
           ]
@@ -644,7 +642,7 @@
                 "id": "8b661573-da41-43c2-ac3f-bd147e37f702",
                 "type": "text",
                 "tag": " ",
-                "content": "<ul><li>Un <strong>antivirus </strong>est un logiciel qui protège les appareils contre les <strong>logiciels malveillants</strong>. Il est nécessaire d’installer un antivirus pour renforcer la <strong>protection </strong>des appareils. 🛡️</li></ul><br><ul><li>Un antivirus fonctionne<strong> en permanence</strong> et surveille les fichiers et programmes de l’appareil. 👀</li></ul><br><ul><li>Il compare les fichiers et les programmes à une<strong> base de signatures</strong> recensant les logiciels malveillants connus. S’il détecte un logiciel malveillant, il peut le <strong> bloquer ou le supprimer</strong>, puis vous en informe via une notification. 🙅</li></ul><br><ul><li>De nouveaux logiciels malveillants sont inventés tous les jours. Pour rester efficace, l’antivirus doit être <strong>mis à jour régulièrement </strong>afin d’intégrer les nouveaux logiciels malveillants recensés.⚙️</li></ul>"
+                "content": "<ul><li>Un <strong>antivirus </strong>est un logiciel qui protège un appareil contre les <strong>logiciels malveillants</strong>. Il est nécessaire d’installer un antivirus sur chaque appareil pour mieux le <strong>protéger</strong>. 🛡️</li></ul><br><ul><li>Un antivirus fonctionne<strong> en permanence</strong> et surveille les fichiers et programmes de l’appareil. 👀</li></ul><br><ul><li>Un antivirus compare les fichiers et les programmes à une<strong> base de signatures</strong> recensant les logiciels malveillants connus. S’il détecte un logiciel malveillant, il peut le <strong> bloquer ou le supprimer</strong>, puis informe l’utilisateur via une notification. 🙅</li></ul><br><ul><li>De nouveaux logiciels malveillants sont inventés tous les jours. Pour rester efficace, l’antivirus doit être <strong>mis à jour régulièrement </strong>afin d’intégrer les nouveaux logiciels malveillants recensés.⚙️</li></ul>"
               }
             }
           ]
@@ -655,6 +653,22 @@
       "id": "80ef2c2d-df87-4989-a17f-068a69647838",
       "type": "practise",
       "grains": [
+        {
+          "id": "024a3b0a-345a-4aff-bec9-aa5255f91571",
+          "type": "transition",
+          "title": "Transition s’exercer",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "8bd8e579-5a57-41a1-9295-e17a042fd572",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Voyons si vous avez retenu l’essentiel.<br></p>"
+              }
+            }
+          ]
+        },
         {
           "id": "186fe985-8160-482f-bc69-94d6bcdc1fb7",
           "type": "activity",
@@ -678,17 +692,17 @@
                   },
                   {
                     "id": "3",
-                    "content": "<p>Bloquer ou supprimer les menaces.</p>"
+                    "content": "<p>Bloquer ou supprimer des menaces.</p>"
                   },
                   {
                     "id": "4",
-                    "content": "<p>Accélérer le fonctionnement de l’appareil.</p>"
+                    "content": "<p>Accélérer le fonctionnement d’un appareil.</p>"
                   }
                 ],
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Bonne réponse ! 🎉</p>",
-                    "diagnosis": "<p>Un antivirus est conçu pour protéger un  appareil&nbsp;: il surveille ce qu’il s’y passe en continu, repère les logiciels potentiellement malveillants puis les bloque ou les supprime en informant l’utilisateur.</p>"
+                    "diagnosis": "<p>Un antivirus est conçu pour protéger un  appareil&nbsp;: il surveille en continu ce qu’il s’y passe, repère les logiciels potentiellement malveillants puis les bloque ou les supprime en informant l’utilisateur.</p>"
                   },
                   "invalid": {
                     "state": "<p>Mauvaise réponse.</p>",
@@ -714,11 +728,11 @@
               "element": {
                 "id": "8a9454f7-e486-4069-9233-6f1cb8dc9dfd",
                 "type": "qab",
-                "instruction": "<p>Pour chacune des situations ci-dessous, indiquez si le comportement est prudent ou risqué.</p>",
+                "instruction": "<p>Pour chacune des situations suivantes, indiquez si le comportement est prudent ou risqué.</p>",
                 "cards": [
                   {
                     "id": "4b6ba947-69e6-4081-a5f1-c21225c5bc72",
-                    "text": "Martin n’a pas installé d’antivirus, pas besoin : son ordinateur a déjà des protections intégrées.",
+                    "text": "Zayd n’a pas installé d’antivirus, pas besoin : son ordinateur a déjà des protections intégrées.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -729,7 +743,7 @@
                   },
                   {
                     "id": "e2819ff8-f5f7-4070-b07c-d2cf8c2f680e",
-                    "text": "Isabelle lance une analyse manuelle après avoir téléchargé un fichier dont elle doute.",
+                    "text": "Isabelle lance une analyse manuelle après avoir téléchargé un fichier dont elle se méfie.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -740,7 +754,7 @@
                   },
                   {
                     "id": "e8be05f6-a45e-4e23-8a39-38317ad23bcc",
-                    "text": "Adrien arrête d’utiliser une clé USB que son antivirus lui a désignée comme étant infectée. ",
+                    "text": "Marius arrête d’utiliser une clé USB que son antivirus a désignée comme étant infectée. ",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -751,7 +765,7 @@
                   },
                   {
                     "id": "2f1690eb-6e3d-43a2-aa78-b917cc625bd5",
-                    "text": "Clarisse ferme les notifications de son antivirus sans les lire, ça ne sert à rien. ",
+                    "text": "Bao ferme les notifications de son antivirus sans les lire, ça ne sert à rien. ",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -789,7 +803,7 @@
               "element": {
                 "id": "d6b082d1-43eb-46b9-b756-3633c2c0e94b",
                 "type": "qrocm",
-                "instruction": "<p>Complétez la phrase&nbsp;:</p>",
+                "instruction": "<p>Complétez la phrase suivante&nbsp;:</p>",
                 "proposals": [
                   {
                     "type": "text",
@@ -862,7 +876,7 @@
                     "id": "2",
                     "content": "<p>Prendre l’habitude de lire les notifications de mon logiciel antivirus avant de les fermer.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est une excellente habitude&nbsp;: lire une notification permet souvent de comprendre s’ il y a un problème et d’agir en conséquence. N’oubliez pas d’installer les mises à jour pour rester à la pointe de la protection.</p>"
+                      "diagnosis": "<p>C’est une excellente habitude&nbsp;: lire une notification permet souvent de comprendre s’il y a un problème et d’agir en conséquence. N’oubliez pas d’installer les mises à jour pour rester à la pointe de la protection.</p>"
                     }
                   },
                   {
