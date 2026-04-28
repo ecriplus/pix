@@ -3,6 +3,7 @@ import {
   EmailModificationDemandNotFoundOrExpiredError,
   InvalidVerificationCodeError,
 } from '../../../shared/domain/errors.js';
+import { AuditLoggingJob } from '../../../shared/domain/models/jobs/AuditLoggingJob.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../constants/identity-providers.js';
 import { AuthenticationMethod } from '../models/AuthenticationMethod.js';
 
@@ -12,6 +13,7 @@ const addUserEmailWithValidation = async function ({
   userEmailRepository,
   userRepository,
   authenticationMethodRepository,
+  auditLoggingJobRepository,
 }) {
   const emailModificationDemand = await userEmailRepository.getEmailModificationDemandByUserId(userId);
   if (!emailModificationDemand || emailModificationDemand.action !== 'add-email') {
@@ -22,13 +24,15 @@ const addUserEmailWithValidation = async function ({
     throw new InvalidVerificationCodeError();
   }
 
-  await userRepository.checkIfEmailIsAvailable(emailModificationDemand.newEmail);
+  const { newEmail, password } = emailModificationDemand;
+
+  await userRepository.checkIfEmailIsAvailable(newEmail);
 
   const authenticationMethod = new AuthenticationMethod({
     userId,
     identityProvider: NON_OIDC_IDENTITY_PROVIDERS.PIX.code,
     authenticationComplement: new AuthenticationMethod.PixAuthenticationComplement({
-      password: emailModificationDemand.password,
+      password,
       shouldChangePassword: false,
     }),
   });
@@ -39,7 +43,7 @@ const addUserEmailWithValidation = async function ({
     await userRepository.updateWithEmailConfirmed({
       id: userId,
       userAttributes: {
-        email: emailModificationDemand.newEmail,
+        email: newEmail,
         emailConfirmedAt: new Date(),
       },
     });
@@ -47,7 +51,18 @@ const addUserEmailWithValidation = async function ({
 
   await userEmailRepository.deleteEmailModificationDemandByUserId(userId);
 
-  return { email: emailModificationDemand.newEmail };
+  await auditLoggingJobRepository.performAsync(
+    AuditLoggingJob.forUser({
+      client: 'PIX_APP',
+      action: 'EMAIL_ADDED',
+      role: 'USER',
+      userId,
+      updatedByUserId: userId,
+      data: { email: newEmail },
+    }),
+  );
+
+  return { email: newEmail };
 };
 
 export { addUserEmailWithValidation };

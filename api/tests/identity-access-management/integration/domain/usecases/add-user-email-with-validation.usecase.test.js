@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import sinon from 'sinon';
 
 import { InvalidOrAlreadyUsedEmailError } from '../../../../../src/identity-access-management/domain/errors.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
@@ -7,15 +7,21 @@ import {
   EmailModificationDemandNotFoundOrExpiredError,
   InvalidVerificationCodeError,
 } from '../../../../../src/shared/domain/errors.js';
+import { AuditLoggingJob } from '../../../../../src/shared/domain/models/jobs/AuditLoggingJob.js';
+import { EMPTY_CORRELATION_INFO } from '../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { temporaryStorage } from '../../../../../src/shared/infrastructure/key-value-storages/index.js';
+import { expect } from '../../../../test-helper.js';
 import { databaseBuilder, knex } from '../../../../tooling/databases.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 const verifyEmailTemporaryStorage = temporaryStorage.withPrefix('verify-email:');
 
 describe('Integration | Identity Access Management | Domain | UseCase | addUserEmailWithValidation', function () {
+  const now = new Date('2024-04-05T03:04:05Z');
+
   beforeEach(async function () {
     await verifyEmailTemporaryStorage.flushAll();
+    sinon.useFakeTimers({ now, toFake: ['Date'] });
   });
 
   it('checks verification code and adds email', async function () {
@@ -46,6 +52,17 @@ describe('Integration | Identity Access Management | Domain | UseCase | addUserE
       .first();
     expect(pixAuthenticationMethod).to.not.be.null;
     expect(pixAuthenticationMethod.authenticationComplement.password).to.equal('1234ABCD');
+
+    await expect(AuditLoggingJob.name).to.have.been.performed.withJobPayload({
+      action: 'EMAIL_ADDED',
+      client: 'PIX_APP',
+      role: 'USER',
+      data: { email: newEmail },
+      userId: user.id,
+      targetUserIds: [user.id],
+      occurredAt: now.toISOString(),
+      correlationContext: EMPTY_CORRELATION_INFO,
+    });
   });
 
   context('when the verification code is invalid', function () {

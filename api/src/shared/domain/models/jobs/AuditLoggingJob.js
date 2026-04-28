@@ -10,6 +10,7 @@ const CLIENTS = ['PIX_ADMIN', 'PIX_APP', 'PIX_ORGA', 'SCRIPT'];
 const ACTIONS = [
   'ANONYMIZATION',
   'ANONYMIZATION_GAR',
+  'EMAIL_ADDED',
   'EMAIL_CHANGED',
   ...Object.values(CampaignParticipationLoggerContext),
   ...Object.values(OrganizationLearnerLoggerContext),
