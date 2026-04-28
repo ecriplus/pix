@@ -83,6 +83,7 @@ class ProfilesCollectionCampaignParticipation extends CampaignParticipation {
    */
   constructor(args) {
     super(args);
+    this.tubes = args.tubes;
     this.pixScore = args.pixScore;
   }
 }

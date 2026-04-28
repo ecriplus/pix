@@ -13,7 +13,7 @@ export function buildCampaignParticipation({
   userId,
   clientId,
   masteryRate,
-  tubes,
+  tubes = [],
   badges,
   stages,
   pixScore,

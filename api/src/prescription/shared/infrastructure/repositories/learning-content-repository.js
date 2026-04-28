@@ -10,8 +10,15 @@ import { LearningContent } from '../../../../shared/domain/models/LearningConten
 import * as areaRepository from '../../../../shared/infrastructure/repositories/area-repository.js';
 import * as competenceRepository from '../../../../shared/infrastructure/repositories/competence-repository.js';
 import * as frameworkRepository from '../../../../shared/infrastructure/repositories/framework-repository.js';
+import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
 import * as thematicRepository from '../../../../shared/infrastructure/repositories/thematic-repository.js';
 import * as tubeRepository from '../../../../shared/infrastructure/repositories/tube-repository.js';
+
+export const findBySkillIds = async (skillIds, locale) => {
+  const skills = await skillRepository.findByRecordIds(skillIds);
+  const frameworks = await _getLearningContentBySkills(skills, locale);
+  return new CampaignLearningContent(frameworks);
+};
 
 export async function findByCampaignParticipationId(campaignParticipationId, locale) {
   const campaignId = await campaignRepository.getCampaignIdByCampaignParticipationId(campaignParticipationId);
@@ -21,7 +28,7 @@ export async function findByCampaignParticipationId(campaignParticipationId, loc
 export async function findByCampaignId(campaignId, locale) {
   const skills = await campaignRepository.findSkills({ campaignId });
 
-  const frameworks = await _getLearningContentBySkillIds(skills, locale);
+  const frameworks = await _getLearningContentBySkills(skills, locale);
 
   return new CampaignLearningContent(frameworks);
 }
@@ -74,7 +81,7 @@ export async function findByOrganizationId({ organizationId, locale }) {
   });
 }
 
-async function _getLearningContentBySkillIds(skills, locale) {
+async function _getLearningContentBySkills(skills, locale) {
   if (_.isEmpty(skills)) {
     throw new NoSkillsInCampaignError();
   }

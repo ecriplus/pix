@@ -238,6 +238,41 @@ describe('Integration | Repository | learning-content', function () {
     [skill2Fr, skill3Fr] = _buildDomainSkillsFromDB([skill2DB, skill3DB], 'fr');
   });
 
+  describe('#findBySkillIds', function () {
+    it('should return frameworks, areas, competences, thematics and tubes of the skills hierarchy', async function () {
+      // given
+      framework1Fr.areas = [area1Fr];
+      area1Fr.competences = [competence2Fr];
+      competence2Fr.thematics = [thematic2Fr];
+      competence2Fr.tubes = [tube2Fr];
+      thematic2Fr.tubes = [tube2Fr];
+      tube2Fr.skills = [skill2Fr, skill3Fr];
+
+      // when
+      const learningContent = await learningContentRepository.findBySkillIds(['recSkill2', 'recSkill3']);
+
+      // then
+      expect(learningContent.areas).to.deep.equal([area1Fr]);
+      expect(learningContent.frameworks).to.deep.equal([framework1Fr]);
+    });
+
+    it('should translate names and descriptions when specifying a locale', async function () {
+      // given
+      framework1En.areas = [area1En];
+      area1En.competences = [competence2En];
+      competence2En.thematics = [thematic2En];
+      competence2En.tubes = [tube2En];
+      thematic2En.tubes = [tube2En];
+      tube2En.skills = [skill2Fr, skill3Fr];
+
+      // when
+      const learningContent = await learningContentRepository.findBySkillIds(['recSkill2', 'recSkill3'], 'en');
+
+      // then
+      expect(learningContent.frameworks).to.deep.equal([framework1En]);
+    });
+  });
+
   describe('#findByCampaignId', function () {
     let campaignId;
 

@@ -79,6 +79,7 @@ class ProfilesCollectionCampaignParticipation extends CampaignParticipation {
   constructor(args) {
     super(args);
     this.pixScore = args.pixScore;
+    this.tubes = args.tubes?.map((tube) => new TubeCoverage(tube));
   }
 }
 
