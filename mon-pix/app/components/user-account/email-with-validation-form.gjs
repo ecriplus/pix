@@ -25,62 +25,6 @@ const ERROR_INPUT_MESSAGE_MAP = {
 };
 
 export default class EmailWithValidationForm extends Component {
-  <template>
-    <h2 class="update-email-with-validation__title">
-      {{t "pages.user-account.account-add-or-update-email-with-validation.title.update-email"}}
-    </h2>
-
-    <form onSubmit={{this.onSubmit}}>
-      <div class="update-email-with-validation__email-input">
-        <PixInput
-          @id="newEmail"
-          @validationStatus={{this.newEmailValidationStatus}}
-          @errorMessage={{this.newEmailValidationMessage}}
-          @value={{this.newEmail}}
-          type="email"
-          {{on "change" this.validateNewEmail}}
-          required
-          autocomplete="off"
-        >
-          <:label>{{t
-              "pages.user-account.account-add-or-update-email-with-validation.fields.email.update-email.label"
-            }}</:label>
-        </PixInput>
-      </div>
-      <div class="update-email-with-validation__informations">
-        <p>{{t
-            "pages.user-account.account-add-or-update-email-with-validation.fields.password.security-information"
-          }}</p>
-      </div>
-      <div class="update-email-with-validation__password-input">
-        <PixInputPassword
-          @id="update-email-with-validation__password"
-          {{on "change" this.passwordChanged}}
-          required
-          autocomplete="off"
-        >
-          <:label>{{t "pages.user-account.account-add-or-update-email-with-validation.fields.password.label"}}</:label>
-        </PixInputPassword>
-      </div>
-      {{#if this.errorMessage}}
-        <PixNotificationAlert @type="error">
-          {{this.errorMessage}}
-        </PixNotificationAlert>
-      {{/if}}
-      <div class="update-email-with-validation__action-buttons">
-        <PixButton @triggerAction={{@disableEmailEditionMode}} @variant="secondary">
-          {{t "common.actions.cancel"}}
-        </PixButton>
-        <PixButton
-          class="update-email-with-validation-actions__confirm-button"
-          @type="submit"
-          @isDisabled={{this.hasRequestedUpdate}}
-        >
-          {{t "pages.user-account.account-add-or-update-email-with-validation.save-button"}}
-        </PixButton>
-      </div>
-    </form>
-  </template>
   @service intl;
   @service store;
   @tracked newEmail = '';
@@ -158,4 +102,61 @@ export default class EmailWithValidationForm extends Component {
       this.errorMessage = this.intl.t(ERROR_INPUT_MESSAGE_MAP['unknownError']);
     }
   }
+
+  <template>
+    <h2 class="update-email-with-validation__title">
+      {{t "pages.user-account.account-add-or-update-email-with-validation.title.update-email"}}
+    </h2>
+
+    <form onSubmit={{this.onSubmit}}>
+      <div class="update-email-with-validation__email-input">
+        <PixInput
+          @id="newEmail"
+          @validationStatus={{this.newEmailValidationStatus}}
+          @errorMessage={{this.newEmailValidationMessage}}
+          @value={{this.newEmail}}
+          type="email"
+          {{on "change" this.validateNewEmail}}
+          required
+          autocomplete="off"
+        >
+          <:label>{{t
+              "pages.user-account.account-add-or-update-email-with-validation.fields.email.update-email.label"
+            }}</:label>
+        </PixInput>
+      </div>
+      <div class="update-email-with-validation__informations">
+        <p>{{t
+            "pages.user-account.account-add-or-update-email-with-validation.fields.password.security-information"
+          }}</p>
+      </div>
+      <div class="update-email-with-validation__password-input">
+        <PixInputPassword
+          @id="update-email-with-validation__password"
+          {{on "change" this.passwordChanged}}
+          required
+          autocomplete="off"
+        >
+          <:label>{{t "pages.user-account.account-add-or-update-email-with-validation.fields.password.label"}}</:label>
+        </PixInputPassword>
+      </div>
+      {{#if this.errorMessage}}
+        <PixNotificationAlert @type="error">
+          {{this.errorMessage}}
+        </PixNotificationAlert>
+      {{/if}}
+      <div class="update-email-with-validation__action-buttons">
+        <PixButton
+          class="update-email-with-validation-actions__confirm-button"
+          @type="submit"
+          @isDisabled={{this.hasRequestedUpdate}}
+        >
+          {{t "pages.user-account.account-add-or-update-email-with-validation.save-button"}}
+        </PixButton>
+        <PixButton @triggerAction={{@disableEmailEditionMode}} @variant="secondary">
+          {{t "common.actions.cancel"}}
+        </PixButton>
+      </div>
+    </form>
+  </template>
 }

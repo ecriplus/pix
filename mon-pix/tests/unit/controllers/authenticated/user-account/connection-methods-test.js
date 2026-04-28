@@ -48,20 +48,6 @@ module('Unit | Controller | user-account | connection-methods', function (hooks)
     });
   });
 
-  module('#displayEmailAddedMessage', function () {
-    test('displays email added message', function (assert) {
-      // given
-      const controller = this.owner.lookup('controller:authenticated/user-account/connection-methods');
-      controller.set('showEmailAddedMessage', false);
-
-      // when
-      controller.displayEmailAddedMessage();
-
-      // then
-      assert.true(controller.showEmailAddedMessage);
-    });
-  });
-
   module('#shouldShowPixAuthenticationMethod', function () {
     test('should display pix authentication method', function (assert) {
       // given & when

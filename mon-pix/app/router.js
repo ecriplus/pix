@@ -1,7 +1,10 @@
 import EmberRouter from '@ember/routing/router';
+import { service } from '@ember/service';
 import config from 'mon-pix/config/environment';
 
 export default class Router extends EmberRouter {
+  @service pixToast;
+
   location = config.locationType;
   rootURL = config.rootURL;
 
@@ -9,6 +12,7 @@ export default class Router extends EmberRouter {
     super(...arguments);
     this.on('routeDidChange', () => {
       window.scrollTo(0, 0);
+      this.pixToast.removeAllNotifications();
     });
   }
 }
