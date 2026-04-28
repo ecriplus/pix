@@ -4,6 +4,7 @@ import { buildCompetence, buildCompetenceWithNoDefaultValues } from './build-com
 import { buildCourse, buildCourseWithNoDefaultValues } from './build-course.js';
 import { buildFramework, buildFrameworkWithNoDefaultValues } from './build-framework.js';
 import { buildMission, buildMissionWithNoDefaultValues } from './build-mission.js';
+import { buildModule, buildModuleWithNoDefaultValues } from './build-modules.js';
 import { buildSkill, buildSkillWithNoDefaultValues } from './build-skill.js';
 import { buildThematic, buildThematicWithNoDefaultValues } from './build-thematic.js';
 import { buildTube, buildTubeWithNoDefaultValues } from './build-tube.js';
@@ -27,6 +28,7 @@ export function build(learningContent, { noDefaultValues = false } = {}) {
   learningContent.courses?.forEach(noDefaultValues ? buildCourseWithNoDefaultValues : buildCourse);
   learningContent.tutorials?.forEach(noDefaultValues ? buildTutorialWithNoDefaultValues : buildTutorial);
   learningContent.missions?.forEach(noDefaultValues ? buildMissionWithNoDefaultValues : buildMission);
+  learningContent.modules?.forEach(noDefaultValues ? buildModuleWithNoDefaultValues : buildModule);
 
   return nock?.('https://lcms-test.pix.fr/api')
     .get('/releases/latest')

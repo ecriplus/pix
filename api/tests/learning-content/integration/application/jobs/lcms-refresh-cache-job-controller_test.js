@@ -519,6 +519,56 @@ describe('Learning Content | Integration | Application | Jobs | Refresh cache', 
           competenceId: 'competenceId New Mission',
         },
       ],
+      modules: [
+        {
+          id: '6282925d-4775-4bca-b513-4c3009ec5886',
+          shortId: '6a68bf32',
+          slug: 'bac-a-sable',
+          title: 'Bac à sable',
+          isBeta: true,
+          visibility: 'private',
+          details: {
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
+            description:
+              "<p>Ce module est dédié à des tests internes à Pix.</p><p>Il contient normalement l'intégralité des fonctionnalités disponibles à date.</p>",
+            duration: 5,
+            level: 'novice',
+            objectives: ['Non régression fonctionnelle'],
+            tabletSupport: 'inconvenient',
+          },
+          sections: ['Première section', 'Deuxième section'],
+          glossary: [
+            {
+              word: 'chat',
+              definition:
+                '<p>Le chat, plus spécifiquement désigné sous le nom de chat domestique, est une espèce de mammifères de l’Ordre des Carnivores, de la famille des félins (Félidés).</p>',
+            },
+          ],
+        },
+        {
+          id: '6282925d-4775-4bca-b513-4c3009ec5887',
+          shortId: '6a68bf33',
+          slug: 'bac-a-gravier',
+          title: 'Bac à gravier',
+          isBeta: false,
+          visibility: 'public',
+          details: {
+            image: 'https://example.com/image.webp',
+            description: '<p>Ce module est dédié aux enfants pas sages.</p>',
+            duration: 666,
+            level: 'expert',
+            objectives: ['Régression cognitive'],
+            tabletSupport: 'convenient',
+          },
+          sections: ['Petite section', 'Moyenne section', 'Grande section'],
+          glossary: [
+            {
+              word: 'gravier',
+              definition: '<p>Le gravier c’est des petits cailloux.</p>',
+            },
+          ],
+        },
+      ],
     };
 
     databaseBuilder.factory.learningContent.buildFramework({
@@ -1016,19 +1066,31 @@ describe('Learning Content | Integration | Application | Jobs | Refresh cache', 
       cardImageUrl: 'cardImageUrl Missing Mission',
       competenceId: 'competenceId Missing Mission',
     });
+    databaseBuilder.factory.learningContent.buildModule({
+      id: '6282925d-4775-4bca-b513-4c3009ec5886',
+      shortId: '6a68bf32',
+      slug: 'sac-a-sable',
+      title: 'Sac à sable',
+      isBeta: false,
+      visibility: 'protected',
+      details: {
+        image: 'https://assets.pix.org/modules/placeholder.svg',
+        description: '<p>Ce module est dédié à des tests internes à Pix.</p>',
+        duration: 2,
+        level: 'debutant',
+        objectives: ['Régression fonctionnelle'],
+        tabletSupport: 'nia',
+      },
+      sections: ['Deuxième section', 'Première section'],
+      glossary: [
+        {
+          word: 'chien',
+          definition:
+            '<p>Le chien, plus spécifiquement désigné sous le nom de chien domestique, est une espèce de mammifères de l’Ordre des Carnivores, de la famille des canidés.</p>',
+        },
+      ],
+    });
     await databaseBuilder.commit();
-  });
-
-  afterEach(async function () {
-    await knex('learningcontent.frameworks').truncate();
-    await knex('learningcontent.areas').truncate();
-    await knex('learningcontent.competences').truncate();
-    await knex('learningcontent.thematics').truncate();
-    await knex('learningcontent.tubes').truncate();
-    await knex('learningcontent.challenges').truncate();
-    await knex('learningcontent.courses').truncate();
-    await knex('learningcontent.tutorials').truncate();
-    await knex('learningcontent.missions').truncate();
   });
 
   describe('#handle', function () {
@@ -1716,6 +1778,54 @@ describe('Learning Content | Integration | Application | Jobs | Refresh cache', 
             documentationUrl: 'documentationUrl New Mission',
             cardImageUrl: 'cardImageUrl New Mission',
             competenceId: 'competenceId New Mission',
+          },
+        ]);
+
+        const refreshedModules = await knex.select('*').from('learningcontent.modules').orderBy('id');
+        expect(refreshedModules).to.deep.equal([
+          {
+            id: '6282925d-4775-4bca-b513-4c3009ec5886',
+            shortId: '6a68bf32',
+            slug: 'bac-a-sable',
+            title: 'Bac à sable',
+            isBeta: true,
+            visibility: 'private',
+            image: 'https://assets.pix.org/modules/placeholder-details.svg',
+            description:
+              "<p>Ce module est dédié à des tests internes à Pix.</p><p>Il contient normalement l'intégralité des fonctionnalités disponibles à date.</p>",
+            duration: 5,
+            level: 'novice',
+            objectives: ['Non régression fonctionnelle'],
+            tabletSupport: 'inconvenient',
+            sections: ['Première section', 'Deuxième section'],
+            glossary: [
+              {
+                word: 'chat',
+                definition:
+                  '<p>Le chat, plus spécifiquement désigné sous le nom de chat domestique, est une espèce de mammifères de l’Ordre des Carnivores, de la famille des félins (Félidés).</p>',
+              },
+            ],
+          },
+          {
+            id: '6282925d-4775-4bca-b513-4c3009ec5887',
+            shortId: '6a68bf33',
+            slug: 'bac-a-gravier',
+            title: 'Bac à gravier',
+            isBeta: false,
+            visibility: 'public',
+            image: 'https://example.com/image.webp',
+            description: '<p>Ce module est dédié aux enfants pas sages.</p>',
+            duration: 666,
+            level: 'expert',
+            objectives: ['Régression cognitive'],
+            tabletSupport: 'convenient',
+            sections: ['Petite section', 'Moyenne section', 'Grande section'],
+            glossary: [
+              {
+                word: 'gravier',
+                definition: '<p>Le gravier c’est des petits cailloux.</p>',
+              },
+            ],
           },
         ]);
         expect(lcmsApiCall.isDone()).to.be.true;

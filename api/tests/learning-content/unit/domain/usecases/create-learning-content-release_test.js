@@ -24,6 +24,7 @@ describe('Learning Content | Unit | UseCase | create-learning-content-release', 
       const courses = Symbol('courses');
       const tutorials = Symbol('tutorials');
       const missions = Symbol('missions');
+      const modules = Symbol('modules');
 
       const lcmsClient = {
         createRelease: sinon.stub().resolves({
@@ -37,6 +38,7 @@ describe('Learning Content | Unit | UseCase | create-learning-content-release', 
           courses,
           tutorials,
           missions,
+          modules,
         }),
       };
 
@@ -80,6 +82,10 @@ describe('Learning Content | Unit | UseCase | create-learning-content-release', 
         saveMany: sinon.stub(),
         clearCache: sinon.stub(),
       };
+      const moduleRepository = {
+        saveMany: sinon.stub(),
+        clearCache: sinon.stub(),
+      };
 
       // when
       await createLearningContentRelease({
@@ -94,6 +100,7 @@ describe('Learning Content | Unit | UseCase | create-learning-content-release', 
         courseRepository,
         tutorialRepository,
         missionRepository,
+        moduleRepository,
       });
 
       // then
@@ -109,6 +116,7 @@ describe('Learning Content | Unit | UseCase | create-learning-content-release', 
       expect(courseRepository.saveMany).to.have.been.calledOnceWithExactly(courses);
       expect(tutorialRepository.saveMany).to.have.been.calledOnceWithExactly(tutorials);
       expect(missionRepository.saveMany).to.have.been.calledOnceWithExactly(missions);
+      expect(moduleRepository.saveMany).to.have.been.calledOnceWithExactly(modules);
 
       expect(frameworkRepository.clearCache).to.have.been.calledOnceWithExactly();
       expect(areaRepository.clearCache).to.have.been.calledOnceWithExactly();
@@ -120,6 +128,7 @@ describe('Learning Content | Unit | UseCase | create-learning-content-release', 
       expect(courseRepository.clearCache).to.have.been.calledOnceWithExactly();
       expect(tutorialRepository.clearCache).to.have.been.calledOnceWithExactly();
       expect(missionRepository.clearCache).to.have.been.calledOnceWithExactly();
+      expect(moduleRepository.clearCache).to.have.been.calledOnceWithExactly();
     });
   });
 });
