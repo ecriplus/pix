@@ -22,6 +22,7 @@ import { createNetwork, findAllFilteredNetworks, updateNetwork } from './handler
 import { createOrganizationMembership } from './handlers/organization-memberships';
 import {
   archiveOrganization,
+  findOrganizationCampaigns,
   findPaginatedFilteredOrganizations,
   findPaginatedOrganizationMemberships,
   getOrganizationInvitations,
@@ -395,6 +396,7 @@ export default function routes() {
   });
   this.post('/admin/organizations/import-csv', async () => new Response(204));
   this.get('/admin/organizations/:id');
+  this.get('/admin/organizations/:id/campaigns', findOrganizationCampaigns);
   this.get('/admin/organizations/:id/memberships', findPaginatedOrganizationMemberships);
   this.get('/admin/organizations/:id/target-profile-summaries', findOrganizationTargetProfileSummaries);
   this.post('/admin/organizations/:id/attach-target-profiles', attachTargetProfiles);

@@ -6,5 +6,6 @@ export default Model.extend({
   tags: hasMany('tag'),
   children: hasMany('organization'),
   organizationInvitations: hasMany('organizationInvitation'),
+  campaigns: hasMany('campaign'),
   network: belongsTo('network'),
 });
