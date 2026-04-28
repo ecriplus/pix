@@ -1,8 +1,11 @@
 import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
 import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
+import { CombinedCourseForCreation } from '../../../../../src/quest/domain/models/CombinedCourseForCreation.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
+import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
 import { expect } from '../../../../test-helper.js';
 import { databaseBuilder, knex } from '../../../../tooling/databases.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Integration | Combined course | Domain | UseCases | create-combined-course', function () {
   it('should create combined course for given payload', async function () {
@@ -43,17 +46,22 @@ describe('Integration | Combined course | Domain | UseCases | create-combined-co
     });
 
     const combinedCourseBlueprintId = databaseBuilder.factory.buildCombinedCourseBlueprint({ questId: quest.id }).id;
+    databaseBuilder.factory.buildCombinedCourseBlueprintShare({ combinedCourseBlueprintId, organizationId });
 
     await databaseBuilder.commit();
 
     const nameInput = 'Un parcours combiné';
 
+    const combinedCourseForCreation = new CombinedCourseForCreation({
+      blueprintId: combinedCourseBlueprintId,
+      organizationId,
+      name: nameInput,
+    });
+
     // when
     await usecases.createCombinedCourse({
-      combinedCourseBlueprintId,
-      name: nameInput,
+      combinedCourseForCreation,
       creatorId: userId,
-      organizationId,
     });
 
     const campaigns = await knex('campaigns')
@@ -84,5 +92,65 @@ describe('Integration | Combined course | Domain | UseCases | create-combined-co
     expect(campaigns[1].title).to.equal(otherTargetProfile.name);
     expect(campaigns[1].customResultPageButtonUrl.includes('/chargement')).false;
     expect(campaigns[1].customResultPageButtonText).to.equal('Continuer');
+  });
+
+  it('should throw ForbiddenAccess error when blueprint is not linked to the organization', async function () {
+    // given
+    const moduleId1 = 'eeeb4951-6f38-4467-a4ba-0c85ed71321a';
+    const moduleId2 = 'f32a2238-4f65-4698-b486-15d51935d335';
+    const userId = databaseBuilder.factory.buildUser().id;
+    const organizationId = databaseBuilder.factory.buildOrganization().id;
+    const otherOrganizationId = databaseBuilder.factory.buildOrganization().id;
+
+    const targetProfileWithTraining = databaseBuilder.factory.buildTargetProfile();
+    const otherTargetProfile = databaseBuilder.factory.buildTargetProfile();
+
+    const trainingId = databaseBuilder.factory.buildTraining({
+      type: 'modulix',
+      title: 'Demo combinix 1',
+      link: '/modules/demo-combinix-1',
+      locale: 'fr-fr',
+    }).id;
+
+    databaseBuilder.factory.buildTargetProfileTraining({
+      targetProfileId: targetProfileWithTraining.id,
+      trainingId: trainingId,
+    });
+
+    const attestation = databaseBuilder.factory.buildAttestation();
+
+    const quest = databaseBuilder.factory.buildQuest({
+      rewardId: attestation.id,
+      rewardType: REWARD_TYPES.ATTESTATION,
+      successRequirements: [
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({
+          targetProfileId: targetProfileWithTraining.id,
+        }).toDTO(),
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({ moduleId: moduleId1 }).toDTO(),
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({ moduleId: moduleId2 }).toDTO(),
+        CombinedCourseBlueprint.buildRequirementForCombinedCourse({ targetProfileId: otherTargetProfile.id }).toDTO(),
+      ],
+    });
+
+    const combinedCourseBlueprintId = databaseBuilder.factory.buildCombinedCourseBlueprint({ questId: quest.id }).id;
+    databaseBuilder.factory.buildCombinedCourseBlueprintShare({ combinedCourseBlueprintId, organizationId });
+
+    await databaseBuilder.commit();
+
+    const nameInput = 'Un parcours combiné';
+
+    const combinedCourseForCreation = new CombinedCourseForCreation({
+      blueprintId: combinedCourseBlueprintId,
+      organizationId: otherOrganizationId,
+      name: nameInput,
+    });
+
+    // when
+    const error = await catchErr(usecases.createCombinedCourse)({
+      combinedCourseForCreation,
+      creatorId: userId,
+    });
+
+    expect(error).to.be.instanceOf(ForbiddenAccess);
   });
 });

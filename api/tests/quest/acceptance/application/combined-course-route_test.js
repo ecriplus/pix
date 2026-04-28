@@ -419,6 +419,10 @@ ${organizationId};"{""name"":""Combinix"",""content"":[],""description"":""ma de
             { type: 'module', value: 'df82ec66' },
           ],
         });
+        databaseBuilder.factory.buildCombinedCourseBlueprintShare({
+          combinedCourseBlueprintId: combinedCourseBlueprint.id,
+          organizationId: organizationId,
+        });
 
         await databaseBuilder.commit();
 

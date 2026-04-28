@@ -1,13 +1,11 @@
 import { createReadStream } from 'node:fs';
 
 import { getDataBuffer } from '../../prescription/learner-management/infrastructure/utils/bufferize/get-data-buffer.js';
-import {
-  extractUserIdFromRequest,
-  getChallengeLocale,
-} from '../../shared/infrastructure/utils/request-response-utils.js';
+import { getChallengeLocale } from '../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as campaignTypeCombinedCourseSerializer from '../infrastructure/serializers/campaign-type-combined-course-serializer.js';
 import * as combinedCourseDetailsSerializer from '../infrastructure/serializers/combined-course-details-serializer.js';
+import * as combinedCourseForCreationSerializer from '../infrastructure/serializers/combined-course-for-creation-serializer.js';
 import * as combinedCourseListSerializer from '../infrastructure/serializers/combined-course-list-serializer.js';
 import * as combinedCourseParticipationDetailSerializer from '../infrastructure/serializers/combined-course-participation-detail-serializer.js';
 import * as combinedCourseParticipationSerializer from '../infrastructure/serializers/combined-course-participation-serializer.js';
@@ -72,7 +70,7 @@ const findParticipations = async (request, _, dependencies = { combinedCoursePar
 };
 
 const start = async function (request, h) {
-  const userId = extractUserIdFromRequest(request);
+  const { userId } = request.auth.credentials;
   const code = request.params.code;
 
   await usecases.startCombinedCourse({
@@ -84,7 +82,7 @@ const start = async function (request, h) {
 };
 
 const reassessStatus = async function (request, h) {
-  const userId = extractUserIdFromRequest(request);
+  const { userId } = request.auth.credentials;
   const code = request.params.code;
 
   await usecases.updateCombinedCourseProgress({
@@ -104,19 +102,18 @@ const createCombinedCourses = async function (request, h) {
   return h.response(null).code(204);
 };
 
-const createCombinedCourse = async function (request, h, dependencies = { campaignTypeCombinedCourseSerializer }) {
-  const data = request.payload.data;
+const createCombinedCourse = async function (
+  request,
+  h,
+  dependencies = { campaignTypeCombinedCourseSerializer, combinedCourseForCreationSerializer },
+) {
   const { userId } = request.auth.credentials;
 
-  const organizationId = parseInt(data.relationships.organization.data.id) || null;
-  const combinedCourseBlueprintId = parseInt(data.relationships['combined-course-blueprint'].data.id) || null;
-  const { name } = data.attributes;
+  const combinedCourseForCreation = dependencies.combinedCourseForCreationSerializer.deserialize(request.payload);
 
   const createdCombinedCourse = await usecases.createCombinedCourse({
-    name,
-    combinedCourseBlueprintId,
+    combinedCourseForCreation,
     creatorId: userId,
-    organizationId,
   });
   return h
     .response(

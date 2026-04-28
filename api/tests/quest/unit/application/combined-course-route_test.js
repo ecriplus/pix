@@ -113,7 +113,7 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
     });
   });
 
-  describe('PUT /api/combined-course/{code}/start', function () {
+  describe('PUT /api/combined-courses/{code}/start', function () {
     it('should call prehandler', async function () {
       // given
       sinon.stub(securityPreHandlers, 'checkAuthorizationToAccessCombinedCourse').returns(() => true);
@@ -137,7 +137,7 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
     });
   });
 
-  describe('PATCH /api/combined-course/{code}/reassess-status', function () {
+  describe('PATCH /api/combined-courses/{code}/reassess-status', function () {
     it('should call prehandler', async function () {
       // given
       sinon.stub(securityPreHandlers, 'checkAuthorizationToAccessCombinedCourse').returns(() => true);
@@ -182,6 +182,54 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
 
       // then
       expect(securityPreHandlers.checkUserBelongsToOrganization).to.have.been.called;
+    });
+  });
+
+  describe('POST /api/combined-courses', function () {
+    it('should call prehandlers', async function () {
+      // given
+      sinon.stub(securityPreHandlers, 'checkOrganizationAccess').returns(() => true);
+
+      const httpTestServer = new HttpTestServer();
+      httpTestServer.setupAuthentication();
+      await httpTestServer.register(combinedCourseRoute);
+
+      // when
+      const payload = {
+        data: {
+          type: 'campaign',
+          attributes: {
+            name: 'Parcours combiné collège',
+            type: 'COMBINED_COURSE',
+            ['owner-id']: null,
+          },
+          relationships: {
+            'combined-course-blueprint': {
+              data: {
+                type: 'combined-course-blueprints',
+                id: `456`,
+              },
+            },
+            organization: {
+              data: {
+                type: 'organizations',
+                id: `123`,
+              },
+            },
+          },
+        },
+      };
+
+      await httpTestServer.request(
+        'POST',
+        '/api/combined-courses',
+        payload,
+        null,
+        generateAuthenticatedUserRequestHeaders({ userId: 123 }),
+      );
+
+      // then
+      expect(securityPreHandlers.checkOrganizationAccess).to.have.been.called;
     });
   });
 });
