@@ -120,7 +120,7 @@
                 "id": "3e4a50c4-62e2-4b05-904d-d4575c73c983",
                 "type": "custom",
                 "title": "",
-                "instruction": "<p>À partir des informations visibles sur son profil, devinez son mot de passe et connectez-vous à son compte.</p>",
+                "instruction": "<p>À partir des informations visibles sur son profil, devinez le mot de passe d'Emma et connectez-vous à son compte.</p>",
                 "functionalInstruction": "",
                 "tagName": "trouver-mdp-rs",
                 "props": {
@@ -171,7 +171,7 @@
                 "id": "c888f762-4b0c-401a-bfa4-2816af13d1f2",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Pour empêcher qu’un pirate puisse deviner votre mot de passe à partir de quelques informations à votre sujet, <strong>évitez d’utiliser des informations personnelles ou publiques</strong> dans vos mots de passe. 🤫</p>"
+                "content": "<p>Pour empêcher qu’un pirate devine votre mot de passe à partir de quelques informations à votre sujet, <strong>évitez d’utiliser des informations personnelles ou publiques</strong> dans vos mots de passe. 🤫</p>"
               }
             }
           ]
@@ -209,7 +209,7 @@
                       "userName": "Jennifer",
                       "direction": "outgoing",
                       "type": "Texte",
-                      "content": "En fait, les pirates ont aussi d’autres techniques pour trouver les mots de passe. ..🥲"
+                      "content": "En fait, les pirates ont aussi d’autres techniques pour trouver les mots de passe...🥲"
                     }
                   ]
                 }
@@ -330,7 +330,7 @@
                 "id": "76208ca2-fb64-4350-92e2-96d6bec5ab8c",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Pour rendre la tâche plus difficile aux pirates, <strong>n’utilisez pas de prénoms, de noms, de mots du dictionnaire ou de mots de passe courants</strong>.</p>"
+                "content": "<p>Pour rendre la tâche plus difficile aux pirates, <strong>n’utilisez pas de prénoms</strong>, <strong>de noms</strong>, <strong>de mots du dictionnaire</strong> ou <strong>de mots de passe courants</strong>.</p>"
               }
             }
           ]
@@ -401,7 +401,7 @@
               "element": {
                 "id": "f019aa0e-68be-43ba-ac80-08d72e0635c7",
                 "type": "custom",
-                "title": "Test combinaisons",
+                "title": "",
                 "instruction": "",
                 "functionalInstruction": "<p>Cliquez sur les lettres disponibles pour trouver toutes les combinaisons de caractères possibles.</p>",
                 "tagName": "pix-combinaisons",
@@ -427,30 +427,30 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Environ mille deux cents.</p>",
+                    "content": "<p>Environ 1 200 (mille-deux-cents)</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non, c’est beaucoup plus ! Environ 12 millions de mots de passe sont possibles. Si on ajoute <strong>les majuscules, les chiffres</strong> et <strong>les caractères spéciaux</strong>, on dépasse les 6 milliards. 😱<br>Les pirates utilisent des programmes pour tester <strong>automatiquement et rapidement</strong> toutes ces combinaisons&nbsp;: on appelle ça <strong>une </strong><strong>attaque par force brute</strong>.</p>"
+                      "diagnosis": "<p>Eh non, c’est beaucoup plus ! Environ 12 000 000 (douze millions) de mots de passe sont possibles. Si on ajoute <strong>les majuscules</strong>, <strong>les chiffres</strong> et <strong>les caractères spéciaux</strong>, on dépasse les 6 000 000 000 (six milliards). 😱<br>Les pirates utilisent des programmes pour tester <strong>automatiquement</strong> et <strong>rapidement</strong> toutes ces combinaisons&nbsp;: on appelle ça <strong>une </strong><strong>attaque par force brute</strong>.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Environ douze mille.</p>",
+                    "content": "<p>Environ 12 000 (douze-mille)</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non, c’est beaucoup plus ! Environ 12 millions de mots de passe sont possibles. Si on ajoute <strong>les majuscules, les chiffres</strong> et <strong>les caractères spéciaux</strong>, on dépasse les 6 milliards. 😱<br>Les pirates utilisent des programmes pour tester <strong>automatiquement et rapidement</strong> toutes ces combinaisons&nbsp;: on appelle ça <strong>une </strong><strong>attaque par force brute</strong>.</p>"
+                      "diagnosis": "<p>Eh non, c’est beaucoup plus ! Environ 12 000 000 (douze millions) de mots de passe sont possibles. Si on ajoute <strong>les majuscules</strong>, <strong>les chiffres</strong> et <strong>les caractères spéciaux</strong>, on dépasse les 6 000 000 000 (six milliards). 😱<br>Les pirates utilisent des programmes pour tester <strong>automatiquement</strong> et <strong>rapidement</strong> toutes ces combinaisons&nbsp;: on appelle ça <strong>une </strong><strong>attaque par force brute</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Environ 12 millions.</p>",
+                    "content": "<p>Environ 12 000 000 (douze millions)</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh oui ! Environ 12 millions de mots de passe sont possibles. Si on ajoute <strong>les majuscules, les chiffres</strong> et <strong>les caractères spéciaux</strong>, on dépasse les 6 milliards. 😱<br>Les pirates utilisent des programmes pour tester <strong>automatiquement et rapidement</strong> toutes ces combinaisons&nbsp;: on appelle ça <strong>une</strong> <strong>attaque par force brute</strong>.</p>"
+                      "diagnosis": "<p>Eh oui ! Environ 12 000 000 (douze millions) de mots de passe sont possibles. Si on ajoute <strong>les majuscules</strong>, <strong>les chiffres</strong> et <strong>les caractères spéciaux</strong>, on dépasse les 6 000 000 000 (six milliards). 😱<br>Les pirates utilisent des programmes pour tester <strong>automatiquement</strong> et <strong>rapidement</strong> toutes ces combinaisons&nbsp;: on appelle ça <strong>une</strong> <strong>attaque par force brute</strong>.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Environ 12 millions de mots de passe sont possibles. Si on ajoute <strong>les majuscules, les chiffres</strong> et <strong>les caractères spéciaux</strong>, on dépasse les 6 milliards. 😱<br>Les pirates utilisent des programmes pour tester <strong>automatiquement et rapidement</strong> toutes ces combinaisons&nbsp;: on appelle ça <strong>une </strong><strong>attaque par force brute</strong>.</p>"
+                      "diagnosis": "<p>Environ 12 000 000 (douze millions) de mots de passe sont possibles. Si on ajoute <strong>les majuscules</strong>, <strong>les chiffres</strong> et <strong>les caractères spéciaux</strong>, on dépasse les 6 000 000 000 (six milliards). 😱<br>Les pirates utilisent des programmes pour tester <strong>automatiquement</strong> et <strong>rapidement</strong> toutes ces combinaisons&nbsp;: on appelle ça <strong>une </strong><strong>attaque par force brute</strong>.</p>"
                     }
                   }
                 ],
@@ -470,7 +470,7 @@
                 "id": "0490f920-e6fb-4af2-9148-7284f29df9e8",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Pour <strong>ralentir</strong> les attaques de mot de passe par <strong>force brute</strong>, voici deux règles à appliquer&nbsp;:</p><ul><li><strong>Créez un mot de passe long&nbsp;:</strong> à partir de 12 caractères, le mot de passe est assez long.</li><li><strong>Utilisez toutes les sortes de caractères en les mélangeant&nbsp;:</strong>&nbsp; des minuscules, des majuscules, des caractères spéciaux comme = @ $ # ! ? ou encore des chiffres.</li></ul><p>En respectant ces règles, vous augmentez énormément le nombre de combinaisons que le pirate devra tester avant de trouver votre mot de passe.</p>"
+                "content": "<p>Pour <strong>ralentir</strong> les attaques de mots de passe par <strong>force brute</strong>, il y a deux règles à appliquer&nbsp;:</p><ul><li><strong>Créez un mot de passe long&nbsp;:</strong> à partir de 12 caractères, le mot de passe est assez long.</li><li><strong>Utilisez toutes les sortes de caractères en les mélangeant&nbsp;:</strong> des minuscules, des majuscules, des caractères spéciaux comme = @ $ # ! ? ou encore des chiffres.</li></ul><p>En respectant ces règles, vous augmentez énormément le nombre de combinaisons que le pirate devra tester avant de trouver votre mot de passe.</p>"
               }
             }
           ]
@@ -542,6 +542,22 @@
       "type": "practise",
       "grains": [
         {
+          "id": "155e4d83-2c42-4472-b48a-6f750b694823",
+          "type": "transition",
+          "title": "Transition S'exercer",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "f87a6e99-b700-45a6-b6ea-c32b27ff2095",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Voyons si vous avez retenu l’essentiel.</p>"
+              }
+            }
+          ]
+        },
+        {
           "id": "689ed975-fe58-4877-9f19-a36e04b5885f",
           "type": "activity",
           "title": "Activité d’application #1",
@@ -575,7 +591,7 @@
                     "content": "<p>Utiliser un mot de passe fort.</p>",
                     "feedback": {
                       "state": "<p>Bonne réponse !🎉</p>",
-                      "diagnosis": "<p>Utiliser un mot de passe fort, c’est rendre la tâche difficile aux pirates informatiques.<br></p>"
+                      "diagnosis": "<p>Utiliser un mot de passe fort, c’est rendre la tâche difficile aux pirates informatiques.</p>"
                     }
                   }
                 ],
@@ -697,7 +713,7 @@
                     {
                       "id": "4ab807ec-d043-4aa3-861a-9fba4fbfd1ca",
                       "type": "qcu",
-                      "instruction": "<p>Pourquoi le mot de passe <em>BirtamoNatina</em> n’est pas un mot de passe fort ?</p>",
+                      "instruction": "<p>Pourquoi le mot de passe <em>BirltayNjtina</em> n’est pas un mot de passe fort ?</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
@@ -713,7 +729,7 @@
                           "content": "<p>Il contient des mots du dictionnaire.&nbsp;📖</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Le mot de passe ne contient de mots du dictionnaire, mais il ne contient que des lettres.</p>"
+                            "diagnosis": "<p>Le mot de passe ne contient pas de mots du dictionnaire, mais il ne contient que des lettres.</p>"
                           }
                         },
                         {
@@ -728,7 +744,7 @@
                           "id": "4",
                           "content": "<p>Il ne mélange pas de lettres, de chiffres et de caractères spéciaux. 🔣</p>",
                           "feedback": {
-                            "state": "<p>Bonne réponse !</p>",
+                            "state": "<p>Bonne réponse ! 🎉</p>",
                             "diagnosis": "<p>Effectivement, ce mot de passe ne contient que des lettres. Pour ralentir les pirates, il faut mélanger les types de caractères.</p>"
                           }
                         }
@@ -801,7 +817,12 @@
                 "functionalInstruction": "",
                 "tagName": "mdp-classement",
                 "props": {
-                  "passwords": ["r7&Kp9!qZ4#tV2", "MonCh@t!23\"", "Bonjour1", "1234567"]
+                  "passwords": [
+                    "r7&Kp9!qZ4#tV2",
+                    "MonCh@t!23\"",
+                    "Bonjour1",
+                    "1234567"
+                  ]
                 }
               }
             }
@@ -840,7 +861,7 @@
                       "userName": "Emma",
                       "direction": "incoming",
                       "type": "Texte",
-                      "content": "Oui, je les oublie tout le temps 😭"
+                      "content": "Oui, je les oublie tout le temps. 😭"
                     },
                     {
                       "userName": "Jennifer",
@@ -852,7 +873,7 @@
                       "userName": "Emma",
                       "direction": "incoming",
                       "type": "Texte",
-                      "content": "Genre « Blanche-Neige et les 7 nains est mon conte préféré ! » ?"
+                      "content": "Par exemple « Blanche-Neige et les 7 nains est mon conte préféré ! » ?"
                     },
                     {
                       "userName": "Jennifer",
@@ -864,7 +885,7 @@
                       "userName": "Emma",
                       "direction": "incoming",
                       "type": "Texte",
-                      "content": "Trop malin 😍"
+                      "content": "Trop malin ! 😍"
                     }
                   ]
                 }
@@ -919,11 +940,11 @@
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Bien joué ! 🎉</p>",
-                    "diagnosis": "<p>Vous avez transformé la phrase en un mot de passe fort qui respecte toutes les règles. Et en plus, il est facile à retrouver.&nbsp;<br>Maintenant, vous pouvez aussi créer vos propres mots de passe forts.<br></p>"
+                    "diagnosis": "<p>Vous avez transformé la phrase en un mot de passe fort qui respecte toutes les règles. Et en plus, il est facile à retenir.<br>Maintenant, vous pouvez aussi créer vos propres mots de passe forts.</p>"
                   },
                   "invalid": {
                     "state": "<p>Pas tout à fait !</p>",
-                    "diagnosis": "<p>Vérifiez que vous n’avez pas oublié la première lettre d’un mot, un chiffre, un signe de ponctuation ou encore la majuscule en début de phrase.<br></p>"
+                    "diagnosis": "<p>Vérifiez que vous n’avez pas oublié la première lettre d’un mot, un chiffre, un signe de ponctuation ou encore la majuscule en début de phrase.</p>"
                   }
                 }
               }
@@ -933,7 +954,7 @@
               "element": {
                 "id": "401dce3e-8708-4c9f-9c0a-cf8e4e899ee6",
                 "type": "expand",
-                "title": "🗝️ Si vous avez besoin d’aide, cliquez ici pour avoir un indice",
+                "title": "🗝️ Si vous avez besoin d’aide, cliquez ici pour avoir un indice.",
                 "content": "<p>Il faut prendre les premières lettres de chaque mot, garder les chiffres et les signes de ponctuation.</p>"
               }
             }
