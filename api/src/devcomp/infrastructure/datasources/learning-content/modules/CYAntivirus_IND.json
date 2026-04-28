@@ -401,7 +401,7 @@
                           "id": "1",
                           "content": "<p>Fermer la notification.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Effectivement, ici la notification transmet seulement une information mais ne demande pas d’action de la part de Philippe. Il faut toujours lire attentivement les notifications de l’antivirus.<br></p>"
+                            "diagnosis": "<p>Effectivement, ici la notification transmet seulement une information mais ne demande pas d’action de la part de Philippe. Il faut toujours lire attentivement les notifications de l’antivirus.</p>"
                           }
                         },
                         {
@@ -664,7 +664,7 @@
                 "id": "8bd8e579-5a57-41a1-9295-e17a042fd572",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Voyons si vous avez retenu l’essentiel.<br></p>"
+                "content": "<p>Voyons si vous avez retenu l’essentiel.</p>"
               }
             }
           ]
