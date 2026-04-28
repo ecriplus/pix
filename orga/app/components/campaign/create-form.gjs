@@ -428,10 +428,7 @@ export default class CreateForm extends Component {
               @onChange={{this.selectCombinedCourseBlueprint}}
               @value={{@campaign.targetProfile.id}}
               @requiredLabel={{t "common.form.mandatory-fields-title"}}
-              @errorMessage={{if
-                @errors.combinedCourse
-                (t "api-error-messages.campaign-creation.combined-course-blueprint-required")
-              }}
+              @errorMessage={{if @errors.blueprint (t "api-error-messages.campaign-creation.target-profile-required")}}
               @locale={{this.locale.currentLocale}}
               @searchLabel={{t "pages.campaign-creation.combined-course-blueprints-search-placeholder"}}
             >

@@ -1,10 +1,9 @@
+import { ForbiddenAccess } from '../../../shared/domain/errors.js';
 import { Campaign } from '../models/Campaign.js';
 
 export const createCombinedCourse = async ({
-  combinedCourseBlueprintId,
-  name,
+  combinedCourseForCreation,
   creatorId,
-  organizationId,
   campaignRepository,
   targetProfileRepository,
   codeGenerator,
@@ -16,8 +15,11 @@ export const createCombinedCourse = async ({
   questRepository,
 }) => {
   const combinedCourseBlueprint = await combinedCourseBlueprintRepository.findById({
-    id: combinedCourseBlueprintId,
+    id: combinedCourseForCreation.blueprintId,
   });
+  if (!combinedCourseBlueprint.organizationIds.includes(combinedCourseForCreation.organizationId)) {
+    throw new ForbiddenAccess();
+  }
 
   let modules = [];
 
@@ -38,7 +40,7 @@ export const createCombinedCourse = async ({
 
   for (const targetProfile of targetProfiles) {
     const campaignForCombinedCourse = Campaign.buildCampaignForCombinedCourse({
-      organizationId,
+      organizationId: combinedCourseForCreation.organizationId,
       targetProfile,
       creatorId,
       combinedCourseCode,
@@ -55,11 +57,11 @@ export const createCombinedCourse = async ({
   });
 
   const combinedCourse = combinedCourseBlueprint.toCombinedCourse({
-    name,
+    name: combinedCourseForCreation.name,
     description: combinedCourseBlueprint.description,
     illustration: combinedCourseBlueprint.illustration,
     code: combinedCourseCode,
-    organizationId,
+    organizationId: combinedCourseForCreation.organizationId,
     campaigns: createdCampaigns,
   });
 
