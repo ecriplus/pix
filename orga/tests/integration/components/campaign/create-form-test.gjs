@@ -1409,5 +1409,46 @@ module('Integration | Component | Campaign::CreateForm', function (hooks) {
       // then
       assert.dom(screen.getByText(t('api-error-messages.campaign-creation.target-profile-required'))).exists();
     });
+
+    test('it should display errors messages when the blueprint id field is empty', async function (assert) {
+      // given
+      const campaignWithErrors = EmberObject.create({
+        errors: {
+          blueprint: [
+            {
+              message: 'TARGET_PROFILE_IS_REQUIRED',
+            },
+          ],
+        },
+      });
+      data.errors = campaignWithErrors.errors;
+
+      const store = this.owner.lookup('service:store');
+      const combinedCourseBlueprint = store.createRecord('combined-course-blueprint', {
+        id: '1',
+        name: 'Blueprint 1',
+      });
+
+      data.combinedCourseBlueprints = [combinedCourseBlueprint];
+
+      // when
+      const screen = await render(
+        <template>
+          <CreateForm
+            @campaign={{data.campaign}}
+            @onSubmit={{createCampaignSpy}}
+            @onCancel={{cancelSpy}}
+            @errors={{data.errors}}
+            @targetProfiles={{data.targetProfiles}}
+            @membersSortedByFullName={{data.defaultMembers}}
+            @combinedCourseBlueprints={{data.combinedCourseBlueprints}}
+          />
+        </template>,
+      );
+      await clickByName(t('pages.campaign-creation.purpose.combined-course'));
+
+      // then
+      assert.dom(screen.getByText(t('api-error-messages.campaign-creation.target-profile-required'))).exists();
+    });
   });
 });
