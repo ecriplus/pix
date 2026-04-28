@@ -1,5 +1,28 @@
 # Pix Changelog
 
+# [5.396.0](https://github.com/1024pix/pix/compare/v5.395.0...v5.396.0) (2026-04-28)
+
+### :rocket: Amélioration
+
+- [#15964](https://github.com/1024pix/pix/pull/15964) Ajouter des logs sur l'ajout d'une adresse e-mail à un compte SSO (PIX-21989). 
+- [#15980](https://github.com/1024pix/pix/pull/15980) Ajouter la page catalogue (PIX-22345) 
+- [#15987](https://github.com/1024pix/pix/pull/15987) Ajouter les tubes aux collectes de profil dans l'API MADDO (PIX-22460) 
+- [#16034](https://github.com/1024pix/pix/pull/16034) Inté transfert v2 MEFT1 
+- [#15991](https://github.com/1024pix/pix/pull/15991) Modifications design suite à la review d'Epix d'ajout d'e-mail (PIX-22466). 
+- [#15961](https://github.com/1024pix/pix/pull/15961) Module MFA_IND aligner les qrocm 
+
+### :building_construction: Tech
+
+- [#16036](https://github.com/1024pix/pix/pull/16036) Corriger le lint des composants gjs sur les applications front 
+- [#16024](https://github.com/1024pix/pix/pull/16024) Retirer du code mort ou très peu utilisé dans le fichier shared/infra/repo/challenge-repository.js 
+
+### :arrow_up: Montée de version
+
+- [#16031](https://github.com/1024pix/pix/pull/16031) Update dependency @1024pix/pix-ui to ^60.10.0 (admin) 
+- [#16035](https://github.com/1024pix/pix/pull/16035) Update dependency @1024pix/pix-ui to ^60.10.0 (junior) 
+- [#16027](https://github.com/1024pix/pix/pull/16027) Update dependency ember-eslint-parser to ^0.10.0 (certif) 
+- [#16028](https://github.com/1024pix/pix/pull/16028) Update dependency ember-eslint-parser to ^0.10.0 (junior)
+
 # [5.395.0](https://github.com/1024pix/pix/compare/v5.394.0...v5.395.0) (2026-04-27)
 
 ### :rocket: Amélioration
