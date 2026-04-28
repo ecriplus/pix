@@ -32,19 +32,84 @@
                 "id": "c10b8f57-a99c-4af0-8515-838ad3eae5d1",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Qu’est-ce que vous avez dans la main quand vous tenez votre smartphone ?</p><p>Survolez l’image pour découvrir les matériaux qui composent un smartphone.</p>"
+                "content": "<p>Qu’est-ce que vous avez dans la main quand vous tenez votre smartphone ?</p>"
               }
             },
             {
               "type": "element",
               "element": {
-                "id": "f26b642c-4ffc-431f-b561-c6be35452d42",
-                "type": "image",
-                "url": "https://assets.pix.org/modules/nr_durabilite-nov/chat-gpt-image-nov-5-2025-03_51_38-pm.png",
-                "alt": "POI en cours de construction : Image cliquable. Une main avec un smartphone et, quand on le survole, on voit les matériaux qui le composent, les matières premières.",
-                "alternativeText": "POI en cours de construction : Image cliquable. Une main avec un smartphone et, quand on le survole, on voit les matériaux qui le composent, les matières premières.",
-                "legend": "POI en cours de construction : Image cliquable. Une main avec un smartphone et, quand on le survole, on voit les matériaux qui le composent, les matières premières.",
-                "licence": ""
+                "id": "f8db5d5c-52e6-411b-8170-3ddc498b7bc6",
+                "type": "custom",
+                "title": "",
+                "instruction": "<p>Survolez l’image pour découvrir les matériaux qui composent un smartphone.</p>",
+                "functionalInstruction": "",
+                "tagName": "clickable-image",
+                "props": {
+                  "image": {
+                    "src": "https://assets.pix.org/modules/nr_durabilite-nov/materiaux_telephone.png",
+                    "alt": "",
+                    "width": 0,
+                    "height": 0
+                  },
+                  "areas": [
+                    {
+                      "coords": {
+                        "x1": 360,
+                        "y1": 80,
+                        "x2": 440,
+                        "y2": 160
+                      },
+                      "spot": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "info": "Métaux : 40% à 60%",
+                      "tooltipPosition": "bottom"
+                    },
+                    {
+                      "coords": {
+                        "x1": 200,
+                        "y1": 130,
+                        "x2": 300,
+                        "y2": 180
+                      },
+                      "spot": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "info": "Plastiques et matières synthétiques : 30% à 50%",
+                      "tooltipPosition": "bottom"
+                    },
+                    {
+                      "coords": {
+                        "x1": 315,
+                        "y1": 185,
+                        "x2": 365,
+                        "y2": 235
+                      },
+                      "spot": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "info": "Carbone, magnésium, phosphore, etc.",
+                      "tooltipPosition": "bottom"
+                    },
+                    {
+                      "coords": {
+                        "x1": 195,
+                        "y1": 205,
+                        "x2": 285,
+                        "y2": 255
+                      },
+                      "spot": {
+                        "x": 0,
+                        "y": 0
+                      },
+                      "info": "Verre et céramique : 15% à 20%",
+                      "tooltipPosition": "bottom"
+                    }
+                  ]
+                }
               }
             }
           ]
