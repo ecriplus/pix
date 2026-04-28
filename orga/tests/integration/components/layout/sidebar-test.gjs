@@ -234,12 +234,16 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
   module('When the user is from a SCO organization', function () {
     test('should display support menu with SCO url', async function (assert) {
       class CurrentUserStub extends Service {
-        organization = Object.create({ id: '1', type: 'SCO' });
+        organization = Object.create({ id: '1', type: 'SCO-2D' });
         isSCOManagingStudents = true;
       }
       this.owner.register('service:current-user', CurrentUserStub);
-      const urlService = this.owner.lookup('service:url');
-      urlService.currentDomain = { isFranceDomain: true };
+
+      const domainService = this.owner.lookup('service:currentDomain');
+      sinon.stub(domainService, 'getExtension').returns('fr');
+
+      const localeService = this.owner.lookup('service:locale');
+      sinon.stub(localeService, 'currentLocale').value('fr-FR');
 
       const screen = await render(<template><Sidebar /></template>);
 
@@ -363,8 +367,12 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
         canAccessMissionsPage = true;
       }
       this.owner.register('service:current-user', CurrentUserStub);
-      const urlService = this.owner.lookup('service:url');
-      urlService.currentDomain = { isFranceDomain: true };
+
+      const domainService = this.owner.lookup('service:currentDomain');
+      sinon.stub(domainService, 'getExtension').returns('fr');
+
+      const localeService = this.owner.lookup('service:locale');
+      sinon.stub(localeService, 'currentLocale').value('fr-FR');
 
       const screen = await render(<template><Sidebar /></template>);
 

@@ -31,16 +31,29 @@ export default class Url extends UrlBaseService {
     const locale = this.locale.currentLocale;
     const orgType = this.currentUser.organization?.type ?? 'PRO';
 
-    switch (orgType) {
-      case 'SCO-1D':
-        return this.getPixWebsiteUrlFor('SUPPORT_SCO1D');
-      case 'SCO':
-        return this.getPixWebsiteUrlFor('SUPPORT_SCO');
-      default:
-        return locale === 'fr' || locale === 'fr-FR'
-          ? 'https://contact.pix.org/fr/hc/1137130200'
-          : this.getPixWebsiteUrlFor('SUPPORT');
+    if (orgType === 'SCO-1D') {
+      if (locale === 'fr-FR') {
+        return this.getPixWebsiteUrl('support/enseignement-scolaire/1er-degre');
+      }
+      if (['fr', 'nl-BE', 'fr-BE'].includes(locale)) {
+        return this.getPixWebsiteUrl('support');
+      }
+      return 'https://pix.org/en/support';
     }
+
+    if (orgType === 'SCO-2D' && locale === 'fr-FR') {
+      return this.getPixWebsiteUrl('support/enseignement-scolaire');
+    }
+
+    if (['fr', 'fr-FR', 'fr-BE'].includes(locale)) {
+      return 'https://contact.pix.org/fr/hc/1137130200';
+    }
+
+    if (locale === 'nl-BE') {
+      return 'https://pix.org/nl-be/support';
+    }
+
+    return 'https://pix.org/en/support';
   }
 
   get campaignsRootUrl() {
