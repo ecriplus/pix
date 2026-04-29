@@ -82,7 +82,7 @@
                 "id": "091a61a0-4de3-4e9a-98b2-d8d4dd4b5ecd",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Avoir un mot de passe fort c’est bien… mais est-ce vraiment suffisant ? 🤔</p>"
+                "content": "<p>Avoir un mot de passe fort, c’est bien… mais est-ce vraiment suffisant ? 🤔</p>"
               }
             }
           ]
@@ -113,7 +113,7 @@
                 "id": "f529dc80-5cef-42be-8f09-9515cf33c208",
                 "type": "custom",
                 "title": "",
-                "instruction": "<p>Cliquez sur chacune des cartes ci-dessous pour découvrir si les comptes de Max ont été piratés&nbsp;:</p>",
+                "instruction": "<p>Cliquez sur chacune des cartes ci-dessous pour découvrir si les comptes de Max ont été piratés.</p>",
                 "functionalInstruction": "",
                 "tagName": "flip-cards",
                 "props": {
@@ -128,7 +128,7 @@
                     },
                     {
                       "name": "Réseau social",
-                      "description": "Compte piraté : Max n’arrive plus à se connecter à son compte. !",
+                      "description": "Compte piraté : Max n’arrive plus à se connecter à son compte !",
                       "icon": "https://assets.pix.org/modules/CYGestionMDP_Nov/card_rs.svg",
                       "image": "https://assets.pix.org/modules/CYGestionMDP_Nov/card_verso_pirate.svg"
                     },
@@ -321,7 +321,16 @@
                 "id": "6f69f7d9-5de2-4994-96ed-b4b9891c97b7",
                 "type": "text",
                 "tag": " ",
-                "content": "<h5>💡 Astuce pour créer un mot de passe fort et facile à mémoriser</h5><p><br>1️⃣&nbsp;Choisir une phrase facile à retrouver.&nbsp;</p><blockquote>Par exemple&nbsp;: «&nbsp;<strong>L</strong>es <strong>3</strong> <strong>p</strong>etits <strong>c</strong>ochons <strong>é</strong>tait <strong>m</strong>on <strong>c</strong>onte <strong>p</strong>référé <strong>q</strong>uand <strong>j’</strong>étais <strong>p</strong>etit<strong>.</strong>&nbsp;»</blockquote><p> 2️⃣&nbsp;Transformer la phrase en gardant les premières lettres de chaque mot, les chiffres et la ponctuation.</p><blockquote>On obtient&nbsp;: <strong>L3pcémcpqj’p.</strong></blockquote>"
+                "content": "<p>Un mot de passe est<strong> strictement personnel</strong>. Le partager ou le laisser accessible, c’est <strong>comme laisser les clés de votre maison sur la porte</strong>. 😨</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "d37d2078-5df6-4977-a52d-f865d5231ae9",
+                "type": "text",
+                "tag": "tip",
+                "content": "<h5>Créez un mot de passe fort et facile à mémoriser</h5><br>\n<p>1️⃣&nbsp;Choisissez une phrase facile à retrouver.&nbsp;</p>\n<blockquote>Par exemple&nbsp;: «&nbsp;<strong>L</strong>es <strong>3</strong> <strong>p</strong>etits <strong>c</strong>ochons <strong>é</strong>tait <strong>m</strong>on <strong>c</strong>onte <strong>p</strong>référé <strong>q</strong>uand <strong>j’</strong>étais <strong>p</strong>etit<strong>.</strong>&nbsp;»</blockquote>\n<p> 2️⃣&nbsp;Transformez la phrase en gardant les premières lettres de chaque mot, les chiffres et la ponctuation.</p>\n<blockquote>On obtient&nbsp;: <strong>L3pcémcpqj’p.</strong></blockquote>"
               }
             }
           ]
@@ -364,7 +373,7 @@
                 "isCompletionRequired": false,
                 "title": "récupération de mot de passe #3",
                 "url": "https://epreuves.pix.fr/fr/mdp-oublie/modulix-gestionmdpnov.html",
-                "instruction": "<p>Explorez la page de connexion ci-dessous.<br> Trouvez où cliquer pour aider Max à retrouver l’accès à son compte</p>",
+                "instruction": "<p>Explorez la page de connexion ci-dessous.<br> Trouvez où cliquer pour aider Max à retrouver l’accès à son compte.</p>",
                 "height": 550
               }
             },
@@ -430,7 +439,7 @@
                 "id": "1f75f9cd-b8b0-470f-abaa-6d44dcfc38f0",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>En cas d'oubli ou au moindre doute, tous les sites proposent de <strong>réinitialiser</strong> un mot de passe en cas d’oubli, c’est-à-dire de créer un nouveau mot de passe.</p><h5><br>⚠️Attention</h5><p>Pour réinitialiser le mot de passe d’un compte, il faut souvent vous connecter à votre <strong>boîte mail</strong>. S’il y a un mot de passe à ne pas oublier, c’est celui-là&nbsp;!</p>"
+                "content": "<p>En cas d'oubli ou au moindre doute, tous les sites proposent de <strong>réinitialiser</strong> un mot de passe, c’est-à-dire de créer un nouveau mot de passe.</p><h5><br>⚠️Attention</h5><p>Pour réinitialiser le mot de passe d’un compte, il faut souvent vous connecter à votre <strong>boîte mail</strong>. S’il y a un mot de passe à ne pas oublier, c’est celui-ci&nbsp;!</p>"
               }
             }
           ]
@@ -456,7 +465,7 @@
                       "userName": "Max",
                       "direction": "outgoing",
                       "type": "Texte",
-                      "content": "T’avais raison j’étais loin du compte avec mon unique mot de passe ultra fort."
+                      "content": "T’avais raison, j’étais loin du compte avec mon unique mot de passe ultra fort."
                     },
                     {
                       "userName": "Sonia",
@@ -543,7 +552,7 @@
                   },
                   {
                     "id": "71835e39-8260-4d05-bdb0-69b65928d00a",
-                    "text": "Envoie un mot de passe à un collègue pour qu’il puisse consulter un dossier urgent.",
+                    "text": "Envoyer un mot de passe à un collègue pour qu’il puisse consulter un dossier urgent.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -607,7 +616,7 @@
                           "content": "<p>Contacter le service client.</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
-                            "diagnosis": "<p>Il existe une solution à essayer en priorité. En cas de difficultés, vous pourrez contacter le service client.</p>"
+                            "diagnosis": "<p>Il existe une autre solution à essayer en priorité. En cas de difficultés, vous pourrez contacter le service client.</p>"
                           }
                         },
                         {
@@ -655,7 +664,7 @@
                         },
                         {
                           "id": "3",
-                          "content": "<p>Recevoir son mot de passe par e-mail.</p>",
+                          "content": "<p>Recevoir son mot de passe par mail.</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse.</p>",
                             "diagnosis": "<p>La réinitialisation <strong>ne permet pas de retrouver un mot de passe perdu.</strong></p>"
@@ -698,7 +707,7 @@
                 "isCompletionRequired": false,
                 "title": "Défi recupération de mot de passe",
                 "url": "https://epreuves.pix.fr/fr/mdp-reinitialisation/mdx-gestionmdpnov-lolalastar.html",
-                "instruction": "<p>Aidez-la à réinitialiser son mot de passe pour qu’elle puisse de nouveau se connecter. <br>Son nouveau mot de passe sera : L2osémcpqjg!</p>",
+                "instruction": "<p>Aidez Lola à réinitialiser son mot de passe pour qu’elle puisse de nouveau se connecter. <br>Son nouveau mot de passe sera : L2osémcpqjg!</p>",
                 "solution": "",
                 "height": 550
               }
@@ -709,7 +718,7 @@
                 "id": "31145843-8bba-4fcc-b89d-a627ff59fefa",
                 "type": "expand",
                 "title": "🗝️ Indice de l'étape 1/5",
-                "content": "Cliquez sur« Mot de passe oublié » pour commencer la réinitialisation."
+                "content": "Cliquez sur «&nbsp;Mot de passe oublié ?&nbsp;» pour commencer la réinitialisation."
               }
             },
             {
@@ -727,7 +736,7 @@
                 "id": "2fef2c41-079d-4197-8e5c-e9f12d91bfd1",
                 "type": "expand",
                 "title": "🗝️ Indice de l'étape 3/5",
-                "content": "Dans le mail, cherchez cette phrase : « Cliquez sur ce lien afin de réinitialiser votre mot de passe ». Le lien se trouve juste après."
+                "content": "Dans le mail, cherchez la phrase suivante &nbsp;:&nbsp;«&nbsp;Cliquez sur ce lien afin de réinitialiser votre mot de passe&nbsp;». Le lien se trouve juste après."
               }
             },
             {
