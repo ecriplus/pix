@@ -212,7 +212,13 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
           test('should be redirected to the combined course entry page', async function (assert) {
             // given
             const combinedCourse = server.create('combined-course', { code: 'SOMETHING' });
-            server.create('organization-to-join', { id: 1, code: combinedCourse.code, identityProvider: 'GAR' });
+            server.create('organization-to-join', {
+              id: 1,
+              code: combinedCourse.code,
+              identityProvider: 'GAR',
+              type: 'SCO',
+              isRestricted: true,
+            });
 
             // when
             const screen = await visit(`/campagnes`);
@@ -222,7 +228,7 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
             await click(screen.getByRole('link', { name: 'Continuer' }));
 
             // then
-            assert.strictEqual(currentURL(), '/organisations/SOMETHING/rejoindre/mediacentre');
+            assert.strictEqual(currentURL(), '/organisations/SOMETHING/rejoindre/identification');
           });
         });
 
