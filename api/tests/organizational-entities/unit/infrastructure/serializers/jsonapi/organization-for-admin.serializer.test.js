@@ -133,6 +133,11 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
                 related: `/api/admin/organizations/${organization.id}/invitations`,
               },
             },
+            campaigns: {
+              links: {
+                related: `/api/admin/organizations/${organization.id}/campaigns`,
+              },
+            },
             tags: {
               data: [
                 {

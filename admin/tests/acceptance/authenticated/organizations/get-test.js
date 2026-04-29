@@ -263,14 +263,17 @@ module('Acceptance | Organizations | Get', function (hooks) {
       module('Campaigns tab', function () {
         test('it should display campaigns tab', async function (assert) {
           // given
-          server.create('campaign');
+          server.create('campaign', { organizationId: ORGANIZATION_ID });
+          server.create('campaign', { organizationId: ORGANIZATION_ID });
 
           // when
           const screen = await visit(`/organizations/${ORGANIZATION_ID}`);
 
           // then
           const navigationTabs = screen.getByRole('navigation', { name: t('pages.organization.navbar.aria-label') });
-          assert.ok(within(navigationTabs).getByRole('link', { name: t('pages.organization.navbar.campaigns') }));
+          assert.ok(
+            within(navigationTabs).getByRole('link', { name: `${t('pages.organization.navbar.campaigns')} (2)` }),
+          );
         });
       });
 

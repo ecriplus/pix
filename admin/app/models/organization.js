@@ -38,6 +38,7 @@ export default class Organization extends Model {
   @hasMany('tag', { async: true, inverse: null }) tags;
   @hasMany('organization', { async: true, inverse: null }) children;
   @hasMany('organization-invitation', { async: true, inverse: null }) organizationInvitations;
+  @hasMany('campaign', { async: true, inverse: null }) campaigns;
 
   @belongsTo('network', { async: true, inverse: null }) network;
 

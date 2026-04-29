@@ -15,6 +15,9 @@ export default ApplicationSerializer.extend({
       organizationInvitations: {
         related: `/api/admin/organizations/${organization.id}/invitations`,
       },
+      campaigns: {
+        related: `/api/admin/organizations/${organization.id}/campaigns`,
+      },
     };
   },
 

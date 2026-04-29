@@ -786,6 +786,11 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
                   related: `/api/admin/organizations/${organization.id}/invitations`,
                 },
               },
+              campaigns: {
+                links: {
+                  related: `/api/admin/organizations/${organization.id}/campaigns`,
+                },
+              },
             },
             type: 'organizations',
           },

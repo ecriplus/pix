@@ -65,6 +65,14 @@ function findPaginatedOrganizationMemberships(schema, request) {
   return json;
 }
 
+function findOrganizationCampaigns(schema, request) {
+  const organizationId = request.params.id;
+  const campaigns = schema.campaigns.where({ organizationId }).models;
+  const json = this.serialize({ modelName: 'campaign', models: campaigns }, 'campaign');
+  json.meta = { rowCount: campaigns.length };
+  return json;
+}
+
 function archiveOrganization(schema, request) {
   const id = request.params.id;
 
@@ -86,6 +94,7 @@ function findPaginatedFilteredOrganizations(schema) {
 
 export {
   archiveOrganization,
+  findOrganizationCampaigns,
   findPaginatedFilteredOrganizations,
   findPaginatedOrganizationMemberships,
   getOrganizationInvitations,

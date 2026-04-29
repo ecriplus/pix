@@ -56,6 +56,7 @@ import HeadInformation from 'pix-admin/components/organizations/head-information
 
       <LinkTo @route="authenticated.organizations.get.campaigns" @model={{@model}}>
         {{t "pages.organization.navbar.campaigns"}}
+        ({{@model.campaigns.meta.rowCount}})
       </LinkTo>
 
       {{#if @model.isPlacesManagementEnabled}}

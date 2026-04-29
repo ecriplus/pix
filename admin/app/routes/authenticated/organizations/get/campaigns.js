@@ -10,19 +10,20 @@ export default class OrganizationCampaignsRoute extends Route {
   };
 
   async model(params) {
-    const organizationId = this.paramsFor('authenticated.organizations.get').organization_id;
+    const organization = this.modelFor('authenticated.organizations.get');
 
-    const query = {
-      organizationId,
-      'page[number]': params.pageNumber || 1,
-      'page[size]': params.pageSize || 10,
-    };
-    const campaigns = await this.store.query('campaign', query);
+    const cachedCampaigns = organization.hasMany('campaigns').value();
+    if (cachedCampaigns !== null && !params.pageNumber) {
+      return { campaigns: cachedCampaigns, organizationId: organization.id };
+    }
 
-    return {
-      campaigns,
-      organizationId,
-    };
+    const campaigns = await this.store.query('campaign', {
+      organizationId: organization.id,
+      'page[number]': params.pageNumber ?? 1,
+      'page[size]': params.pageSize ?? 10,
+    });
+
+    return { campaigns, organizationId: organization.id };
   }
 
   resetController(controller, isExiting) {
