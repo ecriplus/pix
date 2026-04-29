@@ -298,7 +298,7 @@
       "explanation": {
         "ASSESSMENT": "Bewertungskampagne",
         "CAMPAIGN": "Bewertungskampagne",
-        "COMBINED_COURSE": "Lerner-Parcours",
+        "COMBINED_COURSE": "Lernpfad",
         "EXAM": "Testmodus [beta]",
         "FORMATION": "Ausbildung",
         "MODULE": "Modul",
@@ -307,7 +307,7 @@
       "information": {
         "ASSESSMENT": "Bewertung",
         "CAMPAIGN": "Bewertung",
-        "COMBINED_COURSE": "Lerner-Parcours",
+        "COMBINED_COURSE": "Lernpfad",
         "EXAM": "Testmodus [beta]",
         "FORMATION": "Ausbildung",
         "MODULE": "Modul",
