@@ -6,7 +6,9 @@ const getCampaignAssessmentParticipation = async function ({
   campaignRepository,
   campaignAssessmentParticipationRepository,
   badgeAcquisitionRepository,
-  stageCollectionRepository,
+  stageRepository,
+  stageAcquisitionRepository,
+  compareStagesAndAcquiredStages,
   campaignParticipationRepository,
   knowledgeElementForParticipationService,
   improvementService,
@@ -25,12 +27,21 @@ const getCampaignAssessmentParticipation = async function ({
     const badges = acquiredBadgesByCampaignParticipations[campaignAssessmentParticipation.campaignParticipationId];
     campaignAssessmentParticipation.setBadges(badges);
 
-    const stageCollection = await stageCollectionRepository.findStageCollection({ campaignId });
-    const reachedStage = stageCollection.getReachedStage(
-      campaignAssessmentParticipation.validatedSkillsCount,
-      campaignAssessmentParticipation.masteryRate * 100,
-    );
-    campaignAssessmentParticipation.setStageInfo(reachedStage);
+    const stages = await stageRepository.getByCampaignId(campaignId);
+
+    if (stages.length) {
+      const stageAcquisitions = await stageAcquisitionRepository.getByCampaignParticipation(campaignParticipationId);
+      const { reachedStageNumber, totalNumberOfStages, reachedStage } = compareStagesAndAcquiredStages.compare(
+        stages,
+        stageAcquisitions,
+      );
+      campaignAssessmentParticipation.setStageInfo({
+        reachedStage: reachedStageNumber,
+        totalStage: totalNumberOfStages,
+        prescriberTitle: reachedStage?.prescriberTitle ?? null,
+        prescriberDescription: reachedStage?.prescriberDescription ?? null,
+      });
+    }
     campaignAssessmentParticipation.setProgression(1);
   } else {
     // this is a big duplicate from get progression. need to be factorize

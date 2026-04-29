@@ -172,13 +172,13 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
   context('stages', function () {
     it('should set stages when participation', async function () {
       // given
-      databaseBuilder.factory.buildStage({
+      const reachedStageId = databaseBuilder.factory.buildStage({
         targetProfileId,
         level: 1,
         prescriberTitle: 'palier 0',
         prescriberDescription: 'message 0',
         threshold: null,
-      });
+      }).id;
       databaseBuilder.factory.buildStage({
         targetProfileId,
         isFirstSkill: true,
@@ -204,6 +204,8 @@ describe('Integration | UseCase | get-campaign-assessment-participation', functi
         type: Assessment.types.CAMPAIGN,
         state: Assessment.states.COMPLETED,
       });
+
+      databaseBuilder.factory.buildStageAcquisition({ stageId: reachedStageId, campaignParticipationId });
 
       await databaseBuilder.commit();
 
