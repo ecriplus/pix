@@ -166,6 +166,8 @@ export class FeatureTogglesClient {
       const defaultValue = this.#getFeatureToggleDefaultValue(featureToggle);
       await this.storage.save({ key, value: defaultValue });
     }
+
+    this.#topic.publish({ type: 'resetDefaults' });
   }
 
   #getFeatureToggleDefaultValue(featureToggle) {
@@ -187,19 +189,40 @@ export class FeatureTogglesClient {
    * }} message
    */
   async #onMessage(message) {
-    if (message.type !== 'set') return;
+    switch (message.type) {
+      case 'set': {
+        const oldValue = this.#currentValues[message.key];
+        const newValue = await this.get(message.key);
 
-    const oldValue = this.#currentValues[message.key];
-    const newValue = await this.get(message.key);
+        // skip updating/notifying on strict equality,
+        // array/object types will update/notify
+        // even if internal values don't change
+        if (newValue === oldValue) return;
 
-    // skip updating/notifying on strict equality,
-    // array/object types will update/notify
-    // even if internal values don't change
-    if (newValue === oldValue) return;
+        this.#currentValues[message.key] = newValue;
 
-    this.#currentValues[message.key] = newValue;
+        this.#eventTarget.dispatchEvent(new FeatureTogglesEvent('set', message.key, newValue, oldValue));
 
-    this.#eventTarget.dispatchEvent(new FeatureTogglesEvent('set', message.key, newValue, oldValue));
+        break;
+      }
+
+      case 'resetDefaults': {
+        for (const [key, newValue] of Object.entries(await this.all())) {
+          const oldValue = this.#currentValues[key];
+
+          // skip updating/notifying on strict equality,
+          // array/object types will update/notify
+          // even if internal values don't change
+          if (newValue === oldValue) continue;
+
+          this.#currentValues[key] = newValue;
+
+          this.#eventTarget.dispatchEvent(new FeatureTogglesEvent('set', key, newValue, oldValue));
+
+          break;
+        }
+      }
+    }
   }
 }
 
