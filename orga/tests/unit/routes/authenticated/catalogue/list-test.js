@@ -51,7 +51,10 @@ module('Unit | Route | authenticated/catalogue/list', function (hooks) {
       const courses = Symbol('Courses');
 
       sinon.stub(store, 'peekAll').withArgs('course').returns([]);
-      sinon.stub(store, 'findAll').withArgs('course', { adapterOptions: { organizationId } }).resolves(courses);
+      sinon
+        .stub(store, 'findAll')
+        .withArgs('course', { backgroundReload: false, adapterOptions: { organizationId } })
+        .resolves(courses);
 
       // when
       const result = await route.model({ type: 'all' });
@@ -62,17 +65,75 @@ module('Unit | Route | authenticated/catalogue/list', function (hooks) {
     });
     test('it returns cached courses without calling the API when the store is not empty', async function (assert) {
       // given
+      const currentUser = this.owner.lookup('service:current-user');
+      const organizationId = Symbol('organizationId');
+      sinon.stub(currentUser, 'organization').value({ id: organizationId });
       const route = this.owner.lookup('route:authenticated/catalogue/list');
       const store = this.owner.lookup('service:store');
       const courses = [Symbol('Course')];
       sinon.stub(store, 'peekAll').withArgs('course').returns(courses);
       sinon.stub(store, 'findAll');
+      sinon.stub(store, 'unloadAll');
 
       // when
       const result = await route.model({ type: 'all' });
       // then
       assert.ok(store.findAll.notCalled);
       assert.deepEqual(result, { courses, type: 'all' });
+    });
+    test('it unload cached courses when organization change', async function (assert) {
+      // given
+      const currentUser = this.owner.lookup('service:current-user');
+      const organizationId = Symbol('organizationId');
+      sinon.stub(currentUser, 'organization').value({ id: organizationId });
+      const route = this.owner.lookup('route:authenticated/catalogue/list');
+      const store = this.owner.lookup('service:store');
+      const courses = [Symbol('Course')];
+      sinon.stub(store, 'peekAll').withArgs('course').returns(courses);
+      sinon.stub(store, 'findAll');
+      sinon.stub(store, 'unloadAll');
+
+      // when
+      const result = await route.model({ type: 'all' });
+      // then
+      assert.ok(store.findAll.notCalled);
+      assert.deepEqual(result, { courses, type: 'all' });
+    });
+  });
+  module('handleCache', function () {
+    test('it unloads course items from cache when organization change', function (assert) {
+      // given
+      const currentUser = this.owner.lookup('service:current-user');
+      const organizationId = Symbol('organizationId');
+      sinon.stub(currentUser, 'organization').value({ id: organizationId });
+
+      const route = this.owner.lookup('route:authenticated/catalogue/list');
+      const store = this.owner.lookup('service:store');
+      sinon.stub(store, 'unloadAll');
+
+      // when
+      route.handleCache();
+
+      // then
+      assert.ok(store.unloadAll.calledOnceWithExactly('course'));
+    });
+    test('it do nothing when organizationhas not changed', function (assert) {
+      // given
+      const currentUser = this.owner.lookup('service:current-user');
+      const organizationId = Symbol('organizationId');
+      sinon.stub(currentUser, 'organization').value({ id: organizationId });
+
+      const route = this.owner.lookup('route:authenticated/catalogue/list');
+      const store = this.owner.lookup('service:store');
+      sinon.stub(store, 'unloadAll');
+      route.handleCache();
+      store.unloadAll.reset();
+
+      // when
+      route.handleCache();
+
+      // then
+      assert.ok(store.unloadAll.notCalled);
     });
   });
 });
