@@ -1,5 +1,6 @@
 import PixCard from '@1024pix/pix-ui/components/pix-card';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
+import { concat } from '@ember/helper';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 import { eq } from 'ember-truth-helpers';
@@ -23,16 +24,11 @@ export default class CourseCard extends Component {
       }
     }
   }
-
-  get category() {
-    return `pages.campaign-creation.tags.${this.args.course.category}`;
-  }
-
   <template>
     <PixCard
       variant="orga"
       @title={{@course.name}}
-      @subtitle={{if @course.category (t this.category)}}
+      @subtitle={{if @course.category (t (concat "pages.campaign-creation.tags." @course.category))}}
       @image={{this.courseInfo.image}}
     >
       <:tag>

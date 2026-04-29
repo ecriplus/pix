@@ -296,7 +296,7 @@
     "activity-type": {
       "explanation": {
         "ASSESSMENT": "Beoordelingscampagne",
-        "COMBINED_COURSE": "Leerprogramma",
+        "COMBINED_COURSE": "Leetraject",
         "EXAM": "Vraagmodus",
         "FORMATION": "Training",
         "MODULE": "Module",
@@ -304,7 +304,7 @@
       },
       "information": {
         "ASSESSMENT": "Beoordeling",
-        "COMBINED_COURSE": "Leerprogramma",
+        "COMBINED_COURSE": "Leetraject",
         "EXAM": "Vraagmodus",
         "FORMATION": "Training",
         "MODULE": "Module",
@@ -538,7 +538,7 @@
       "catalogue": "Catalogus",
       "certifications": "Certificeringen",
       "close": "Sluit de navigatie",
-      "combined-courses": "Leerprogramma's",
+      "combined-courses": "Leetrajecten",
       "documentation": "Documentatie",
       "home": "Home",
       "missions": "Opdrachten",
@@ -662,7 +662,7 @@
       "empty-state": "Geen deelnemers op het moment",
       "empty-state-with-copy-link": "Geen deelnemers op het moment! Stuur ze de volgende link om mee te doen aan je campagne.",
       "included-in-combined-course": "Deze evaluatiecampagne maakt deel uit van het",
-      "included-in-combined-course-end": "-leerprogramma.",
+      "included-in-combined-course-end": "-leetraject.",
       "link": "Link",
       "multiple-sendings": {
         "status": {
@@ -674,7 +674,7 @@
       "name": "Naam Campagne",
       "tab": {
         "activity": "Activiteit",
-        "combined-courses": "Leerprogramma's",
+        "combined-courses": "Leetrajecten",
         "results": "Resultaten ({count, number})",
         "review": "Analyse",
         "settings": "Instellingen"
@@ -744,8 +744,8 @@
         "create": "De campagne maken",
         "delete": "Wissen"
       },
-      "combined-course-blueprints-label": "Selecteer een leerprogramma",
-      "combined-course-blueprints-list-label": "Selecteer een leerprogramma",
+      "combined-course-blueprints-label": "Selecteer een leetraject",
+      "combined-course-blueprints-list-label": "Selecteer een leetraject",
       "copy-of": "Kopie van",
       "external-id-label": {
         "label": "Type externe user-ID",
@@ -788,7 +788,7 @@
         "assessment": "Deelnemers evalueren",
         "assessment-info": "Een beoordelingscampagne stelt deelnemers in staat om getest te worden op specifieke onderwerpen.",
         "combined-course": "De vaardigheden van de deelnemers ontwikkelen",
-        "combined-course-info": "Een leerprogramma helpt deelnemers om nieuwe vaardigheden te verwerven.",
+        "combined-course-info": "Een leetraject helpt deelnemers om nieuwe vaardigheden te verwerven.",
         "exam": "Vraagmodus",
         "exam-info": "Met een campagne in de “quizmodus” kunnen deelnemers worden getest op specifieke onderwerpen, zonder rekening te houden met hun gebruikersprofiel of er invloed op te hebben. De aangeboden tests zijn gepersonaliseerd voor elke deelnemer, afhankelijk van hoe ver ze gevorderd zijn in het traject.",
         "label": "Wat is het doel van je campagne?",
@@ -1009,10 +1009,17 @@
         "modules-count": "{count, plural, =0 {Geen module} =1 {{count} module} other {{count} modules}}",
         "simplified-access": "Toegang zonder account",
         "tag": {
-          "blueprint": "Leertraject voor leerlingen",
-          "target-profile": "Leertrajecten"
+          "blueprint": "Leertraject",
+          "target-profile": "Traject"
         },
         "tubes-count": "{count, plural, =0 {Geen onderwerp} =1 {{count} onderwerp} other {{count} onderwerpen}}"
+      },
+      "empty-state": "Er zijn momenteel geen traject beschikbaar. Neem contact op met Pix om er enkele te verkrijgen.",
+      "tab-filters": {
+        "all": "Alle",
+        "blueprints": "Leertrajecten",
+        "label": "Type traject",
+        "target-profiles": "Trajecten"
       },
       "title": "Overzicht van leertrajecten"
     },
@@ -1076,9 +1083,9 @@
       }
     },
     "combined-courses": {
-      "empty-state": "Geen leerprogramma beschikbaar op dit moment.",
+      "empty-state": "Geen leetraject beschikbaar op dit moment.",
       "table": {
-        "caption": "Lijst van leerprogramma's",
+        "caption": "Lijst van leetrajecten",
         "column": {
           "code": "Code",
           "completed": "Deelnemers die voltooid hebben",

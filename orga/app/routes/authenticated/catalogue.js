@@ -2,7 +2,6 @@ import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 
 export default class AuthenticatedCatalogue extends Route {
-  @service('store') store;
   @service currentUser;
   @service router;
   @service featureToggles;
@@ -14,11 +13,5 @@ export default class AuthenticatedCatalogue extends Route {
     if (!this.featureToggles.featureToggles?.displayCatalogue) {
       return this.router.replaceWith('authenticated.index');
     }
-  }
-
-  async model() {
-    return await this.store.findAll('course', {
-      adapterOptions: { organizationId: this.currentUser.organization.id },
-    });
   }
 }
