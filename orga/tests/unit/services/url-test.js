@@ -224,4 +224,65 @@ module('Unit | Service | url', function (hooks) {
       assert.strictEqual(accessibilityUrl, 'https://pix.org/en/my-legal-document-path');
     });
   });
+
+  module('#supportHelpCenterUrl', function () {
+    [
+      {
+        locale: 'fr-FR',
+        extension: 'fr',
+        type: 'SCO-1D',
+        expectedUrl: 'https://pix.fr/support/enseignement-scolaire/1er-degre',
+      },
+      { locale: 'fr-FR', extension: 'fr', type: 'SCO', expectedUrl: 'https://pix.fr/support/enseignement-scolaire' },
+      { locale: 'fr-FR', extension: 'fr', type: 'SUP', expectedUrl: 'https://contact.pix.org/fr/hc/1137130200' },
+      { locale: 'fr-FR', extension: 'fr', type: 'PRO', expectedUrl: 'https://contact.pix.org/fr/hc/1137130200' },
+      { locale: 'fr', extension: 'org', type: 'SCO-1D', expectedUrl: 'https://pix.org/fr/support' },
+      { locale: 'fr', extension: 'org', type: 'SCO', expectedUrl: 'https://contact.pix.org/fr/hc/1137130200' },
+      { locale: 'fr', extension: 'org', type: 'SUP', expectedUrl: 'https://contact.pix.org/fr/hc/1137130200' },
+      { locale: 'fr', extension: 'org', type: 'PRO', expectedUrl: 'https://contact.pix.org/fr/hc/1137130200' },
+      { locale: 'fr-BE', extension: 'org', type: 'SCO-1D', expectedUrl: 'https://pix.org/fr-be/support' },
+      { locale: 'fr-BE', extension: 'org', type: 'SCO', expectedUrl: 'https://contact.pix.org/fr/hc/1137130200' },
+      { locale: 'fr-BE', extension: 'org', type: 'SUP', expectedUrl: 'https://contact.pix.org/fr/hc/1137130200' },
+      { locale: 'fr-BE', extension: 'org', type: 'PRO', expectedUrl: 'https://contact.pix.org/fr/hc/1137130200' },
+      { locale: 'nl-BE', extension: 'org', type: 'SCO-1D', expectedUrl: 'https://pix.org/nl-be/support' },
+      { locale: 'nl-BE', extension: 'org', type: 'SCO', expectedUrl: 'https://pix.org/nl-be/support' },
+      { locale: 'nl-BE', extension: 'org', type: 'SUP', expectedUrl: 'https://pix.org/nl-be/support' },
+      { locale: 'nl-BE', extension: 'org', type: 'PRO', expectedUrl: 'https://pix.org/nl-be/support' },
+      { locale: 'en', extension: 'org', type: 'SCO-1D', expectedUrl: 'https://pix.org/en/support' },
+      { locale: 'en', extension: 'org', type: 'SCO', expectedUrl: 'https://pix.org/en/support' },
+      { locale: 'en', extension: 'org', type: 'SUP', expectedUrl: 'https://pix.org/en/support' },
+      { locale: 'en', extension: 'org', type: 'PRO', expectedUrl: 'https://pix.org/en/support' },
+      { locale: 'de-AT', extension: 'org', type: 'SCO-1D', expectedUrl: 'https://pix.org/en/support' },
+      { locale: 'de-AT', extension: 'org', type: 'SCO', expectedUrl: 'https://pix.org/en/support' },
+      { locale: 'de-AT', extension: 'org', type: 'SUP', expectedUrl: 'https://pix.org/en/support' },
+      { locale: 'de-AT', extension: 'org', type: 'PRO', expectedUrl: 'https://pix.org/en/support' },
+      { locale: 'it', extension: 'org', type: 'SCO-1D', expectedUrl: 'https://pix.org/en/support' },
+      { locale: 'it', extension: 'org', type: 'SCO', expectedUrl: 'https://pix.org/en/support' },
+      { locale: 'it', extension: 'org', type: 'SUP', expectedUrl: 'https://pix.org/en/support' },
+      { locale: 'it', extension: 'org', type: 'PRO', expectedUrl: 'https://pix.org/en/support' },
+      { locale: 'es', extension: 'org', type: 'SCO-1D', expectedUrl: 'https://pix.org/en/support' },
+      { locale: 'es', extension: 'org', type: 'SCO', expectedUrl: 'https://pix.org/en/support' },
+      { locale: 'es', extension: 'org', type: 'SUP', expectedUrl: 'https://pix.org/en/support' },
+      { locale: 'es', extension: 'org', type: 'PRO', expectedUrl: 'https://pix.org/en/support' },
+      { locale: 'es-419', extension: 'org', type: 'SCO-1D', expectedUrl: 'https://pix.org/en/support' },
+      { locale: 'es-419', extension: 'org', type: 'SCO', expectedUrl: 'https://pix.org/en/support' },
+      { locale: 'es-419', extension: 'org', type: 'SUP', expectedUrl: 'https://pix.org/en/support' },
+      { locale: 'es-419', extension: 'org', type: 'PRO', expectedUrl: 'https://pix.org/en/support' },
+    ].forEach(function ({ locale, extension, type, expectedUrl }) {
+      test(`returns ${expectedUrl} for organization of type ${type} and locale ${locale}`, async function (assert) {
+        const currentUser = this.owner.lookup('service:current-user');
+        sinon.stub(currentUser, 'organization').value({ type });
+
+        const domainService = this.owner.lookup('service:current-domain');
+        sinon.stub(domainService, 'getExtension').returns(extension);
+
+        const localeService = this.owner.lookup('service:locale');
+        sinon.stub(localeService, 'currentLocale').value(locale);
+
+        const service = this.owner.lookup('service:url');
+
+        assert.strictEqual(service.supportHelpCenterUrl, expectedUrl);
+      });
+    });
+  });
 });
