@@ -39,7 +39,20 @@ async function getByShortId({ shortId, moduleDatasource }) {
 }
 
 async function getBySlug({ slug, moduleDatasource }) {
-  return await _getModuleFromDatasource({ ref: 'slug', moduleDatasource, query: slug });
+  if (!isFetchingModulesFromLearningContentEnabled.value) {
+    return await _getModuleFromDatasource({ ref: 'slug', moduleDatasource, query: slug });
+  }
+
+  const cacheKey = `getBySlug(${slug})`;
+  const findBySlugCallback = (knex) => knex.where('slug', slug).limit(1);
+
+  const [module] = await getInstance().find(cacheKey, findBySlugCallback);
+
+  if (!module) {
+    throw new NotFoundError();
+  }
+
+  return toDomainFromDbObject(module);
 }
 
 async function list({ moduleDatasource }) {
