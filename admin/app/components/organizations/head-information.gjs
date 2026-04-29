@@ -104,30 +104,28 @@ export default class HeadInformation extends Component {
 
         <ul class="organization-tags-list">
           {{#if this.belongsToNetwork}}
-            {{#if this.accessControl.hasAccessToNetworkFeature}}
-              <PixTag class="organization__child-tag" @color="success">
-                {{t "components.organizations.head-information.network"}}
-                <LinkTo @route="authenticated.networks.get" @model={{@organization.network.id}}>
-                  {{@organization.network.name}}
-                </LinkTo>
-              </PixTag>
-              {{#if @organization.parentOrganizationId}}
-                <li>
-                  <PixTag class="organization__child-tag" @color="success">
-                    {{t "components.organizations.head-information.parent-organization-tag"}}
-                    <LinkTo @route="authenticated.organizations.get" @model={{@organization.parentOrganizationId}}>
-                      {{@organization.parentOrganizationName}}
-                    </LinkTo>
-                  </PixTag>
-                </li>
-              {{else}}
-                <li>
-                  <PixTag class="organization__child-tag" @color="success">
-                    {{t "components.organizations.head-information.head-organization-tag"}}
+            <PixTag class="organization__child-tag" @color="success">
+              {{t "components.organizations.head-information.network"}}
+              <LinkTo @route="authenticated.networks.get" @model={{@organization.network.id}}>
+                {{@organization.network.name}}
+              </LinkTo>
+            </PixTag>
+            {{#if @organization.parentOrganizationId}}
+              <li>
+                <PixTag class="organization__child-tag" @color="success">
+                  {{t "components.organizations.head-information.parent-organization-tag"}}
+                  <LinkTo @route="authenticated.organizations.get" @model={{@organization.parentOrganizationId}}>
+                    {{@organization.parentOrganizationName}}
+                  </LinkTo>
+                </PixTag>
+              </li>
+            {{else}}
+              <li>
+                <PixTag class="organization__child-tag" @color="success">
+                  {{t "components.organizations.head-information.head-organization-tag"}}
 
-                  </PixTag>
-                </li>
-              {{/if}}
+                </PixTag>
+              </li>
             {{/if}}
           {{/if}}
 

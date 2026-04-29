@@ -81,58 +81,6 @@ module('Integration | Component | organizations/header-information', function (h
             data: { id: '42', type: 'network', attributes: { name: 'Réseau Île-de-France' } },
           });
         });
-        module('when user has role CERTIF', function () {
-          test('it does not display a network tag nor Head of network tag', async function (assert) {
-            // given
-            const currentUser = this.owner.lookup('service:currentUser');
-            currentUser.adminMember = { isCertif: true };
-            const headOrganization = store.createRecord('organization', { network });
-
-            // when
-            const screen = await render(<template><HeadInformation @organization={{headOrganization}} /></template>);
-
-            // then
-            assert.dom(screen.queryByRole('link', { name: 'Réseau Île-de-France' })).doesNotExist();
-            assert
-              .dom(screen.queryByText(t('components.organizations.head-information.head-organization-tag')))
-              .doesNotExist();
-          });
-        });
-
-        module('when user has role SUPPORT', function () {
-          test('it does not display a network tag nor Head of network tag', async function (assert) {
-            // given
-            const currentUser = this.owner.lookup('service:currentUser');
-            currentUser.adminMember = { isSupport: true };
-            const headOrganization = store.createRecord('organization', { network });
-
-            // when
-            const screen = await render(<template><HeadInformation @organization={{headOrganization}} /></template>);
-
-            // then
-            assert.dom(screen.queryByRole('link', { name: 'Réseau Île-de-France' })).doesNotExist();
-            assert
-              .dom(screen.queryByText(t('components.organizations.head-information.head-organization-tag')))
-              .doesNotExist();
-          });
-        });
-
-        module('when user has role METIER', function () {
-          test('it displays network tags', async function (assert) {
-            // given
-            const currentUser = this.owner.lookup('service:currentUser');
-            currentUser.adminMember = { isMetier: true };
-            const headOrganization = store.createRecord('organization', { network });
-
-            // when
-            const screen = await render(<template><HeadInformation @organization={{headOrganization}} /></template>);
-
-            // then
-            assert.dom(screen.getByRole('link', { name: 'Réseau Île-de-France' })).exists();
-            assert.dom(screen.getByText(t('components.organizations.head-information.head-organization-tag'))).exists();
-          });
-        });
-
         module('when user is super admin', function () {
           test('it displays a tag with a link to the network', async function (assert) {
             // given
