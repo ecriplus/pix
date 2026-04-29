@@ -136,7 +136,7 @@
                     },
                     "failed": {
                       "title": "Mauvaise réponse",
-                      "content": "Comme Emma l’a dit à Jennifer, son mot de passe est composé du <strong>prénom de son fils</strong> et l’<strong>année de naissance de son chat</strong>."
+                      "content": "Comme Emma l’a dit à Jennifer, son mot de passe est composé du <strong>prénom de son fils</strong> et de l’<strong>année de naissance de son chat</strong>."
                     }
                   },
                   "userProfile": {
