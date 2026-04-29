@@ -23,9 +23,6 @@ import * as badgeRepository from '../../infrastructure/repositories/badge-reposi
 import * as competenceEvaluationRepository from '../../infrastructure/repositories/competence-evaluation-repository.js';
 import * as feedbackRepository from '../../infrastructure/repositories/feedback-repository.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
-import * as stageAcquisitionRepository from '../../infrastructure/repositories/stage-acquisition-repository.js';
-import * as stageCollectionForTargetProfileRepository from '../../infrastructure/repositories/stage-collection-repository.js';
-import * as stageRepository from '../../infrastructure/repositories/stage-repository.js';
 import * as algorithmDataFetcherService from '../services/algorithm-methods/data-fetcher.js';
 import * as smartRandomService from '../services/algorithm-methods/smart-random.js';
 import * as correctionService from '../services/correction-service.js';
@@ -34,8 +31,6 @@ import * as getMasteryPercentageService from '../services/get-mastery-percentage
 import * as improvementService from '../services/improvement-service.js';
 import { pickChallengeService } from '../services/pick-challenge-service.js';
 import * as scorecardService from '../services/scorecard-service.js';
-import * as convertLevelStagesIntoThresholdsService from '../services/stages/convert-level-stages-into-thresholds-service.js';
-import * as getNewAcquiredStagesService from '../services/stages/get-new-acquired-stages-service.js';
 
 const dependencies = {
   algorithmDataFetcherService,
@@ -68,14 +63,9 @@ const dependencies = {
   scorecardService,
   skillRepository,
   smartRandomService,
-  stageAcquisitionRepository,
-  stageCollectionForTargetProfileRepository,
-  stageRepository,
   targetProfileAdministrationRepository,
   targetProfileRepository,
   userRepository: repositories.userRepository,
-  getNewAcquiredStagesService,
-  convertLevelStagesIntoThresholdsService,
   getMasteryPercentageService,
   knowledgeElementForParticipationService,
   smartRandomChallengeRepository,
@@ -83,9 +73,7 @@ const dependencies = {
 
 import { completeAssessment } from './complete-assessment.js';
 import { copyTargetProfileBadges } from './copy-target-profile-badges.js';
-import { copyTargetProfileStages } from './copy-target-profile-stages.js';
 import { createBadge } from './create-badge.js';
-import { createOrUpdateStageCollection } from './create-or-update-stage-collection.js';
 import { findAllPaginatedAutonomousCourses } from './find-all-paginated-autonomous-courses.js';
 import { findAnswerByAssessment } from './find-answer-by-assessment.js';
 import { findAnswerByChallengeAndAssessment } from './find-answer-by-challenge-and-assessment.js';
@@ -104,7 +92,6 @@ import { getNextChallengeForSimulator } from './get-next-challenge-for-simulator
 import { getProgression } from './get-progression.js';
 import { getScorecard } from './get-scorecard.js';
 import { handleBadgeAcquisition } from './handle-badge-acquisition.js';
-import { handleStageAcquisition } from './handle-stage-acquisition.js';
 import { improveCompetenceEvaluation } from './improve-competence-evaluation.js';
 import { promptToLLMChat } from './prompt-to-llm-chat.js';
 import { rememberUserHasSeenAssessmentInstructions } from './remember-user-has-seen-assessment-instructions.js';
@@ -120,14 +107,11 @@ import { startOrResumeCompetenceEvaluation } from './start-or-resume-competence-
 import { updateAutonomousCourse } from './update-autonomous-course.js';
 import { updateBadge } from './update-badge.js';
 import { updateBadgeCriterion } from './update-badge-criterion.js';
-import { isStageNotUpdatable, updateStage } from './update-stage.js';
 
 const usecasesWithoutInjectedDependencies = {
   completeAssessment,
   copyTargetProfileBadges,
-  copyTargetProfileStages,
   createBadge,
-  createOrUpdateStageCollection,
   findAllPaginatedAutonomousCourses,
   findAnswerByAssessment,
   findAnswerByChallengeAndAssessment,
@@ -146,7 +130,6 @@ const usecasesWithoutInjectedDependencies = {
   getProgression,
   getScorecard,
   handleBadgeAcquisition,
-  handleStageAcquisition,
   improveCompetenceEvaluation,
   promptToLLMChat,
   rememberUserHasSeenAssessmentInstructions,
@@ -162,8 +145,6 @@ const usecasesWithoutInjectedDependencies = {
   updateAutonomousCourse,
   updateBadgeCriterion,
   updateBadge,
-  isStageNotUpdatable,
-  updateStage,
 };
 
 const evaluationUsecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);

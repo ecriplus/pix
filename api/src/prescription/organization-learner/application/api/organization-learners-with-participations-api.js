@@ -1,14 +1,15 @@
-import * as stageAcquisitionComparisonService from '../../../../evaluation/domain/services/stages/stage-and-stage-acquisition-comparison-service.js';
-import * as stageAcquisitionRepository from '../../../../evaluation/infrastructure/repositories/stage-acquisition-repository.js';
-import * as stageRepository from '../../../../evaluation/infrastructure/repositories/stage-repository.js';
 import { tagRepository } from '../../../../organizational-entities/infrastructure/repositories/tag.repository.js';
 import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
 import * as campaignParticipationOverviewRepository from '../../../campaign-participation/infrastructure/repositories/campaign-participation-overview-repository.js';
 import * as libOrganizationLearnerRepository from '../../../organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import * as organizationLearnerRepository from '../../../organization-learner/infrastructure/repositories/organization-learner-repository.js';
+import * as stageAcquisitionComparisonService from '../../../stages/domain/services/stage-and-stage-acquisition-comparison-service.js';
+import * as stageAcquisitionRepository from '../../../stages/infrastructure/repositories/stage-acquisition-repository.js';
+import * as stageRepository from '../../../stages/infrastructure/repositories/stage-repository.js';
 import { findOrganizationLearnersWithParticipations } from '../../domain/usecases/find-organization-learners-with-participations.js';
 import { getOrganizationLearnerWithParticipations } from '../../domain/usecases/get-organization-learner-with-participations.js';
 import { OrganizationLearnerWithParticipations } from './read-models/OrganizationLearnerWithParticipations.js';
+
 /**
  * @module OrganizationLearnerWithParticipationsApi
  */

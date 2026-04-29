@@ -1,5 +1,5 @@
 import { NoStagesForCampaign, UserNotAuthorizedToAccessEntityError } from '../../../../../shared/domain/errors.js';
-import { StageAcquisitionCollection } from '../../../../campaign-participation/domain/models/StageAcquisitionCollection.js';
+import { StageAcquisitionCollection } from '../../../../stages/domain/models/StageAcquisitionCollection.js';
 
 /**
  * For each campaign participation, get the highest reached stage id

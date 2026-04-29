@@ -1,7 +1,7 @@
-import { StageCollection } from '../../../../../src/prescription/target-profile/domain/models/StageCollection.js';
+import { TargetProfileStageCollection } from '../../../../../src/prescription/stages/domain/models/TargetProfileStageCollection.js';
 
 const buildStageCollection = function ({ id, stages = [], maxLevel } = {}) {
-  return new StageCollection({ id, stages, maxLevel });
+  return new TargetProfileStageCollection({ id, stages, maxLevel });
 };
 
 export { buildStageCollection };

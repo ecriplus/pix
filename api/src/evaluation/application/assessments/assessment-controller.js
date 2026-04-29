@@ -1,5 +1,6 @@
 import { usecases as devcompUsecases } from '../../../devcomp/domain/usecases/index.js';
 import { usecases as prescriptionUsecases } from '../../../prescription/campaign-participation/domain/usecases/index.js';
+import { stageUsecases } from '../../../prescription/stages/domain/usecases/index.js';
 import { usecases as profileUsecases } from '../../../profile/domain/usecases/index.js';
 import { usecases as questUsecases } from '../../../quest/domain/usecases/index.js';
 import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
@@ -33,7 +34,7 @@ const completeAssessment = withTransaction(async function (request) {
   const assessment = await evaluationUsecases.completeAssessment({ assessmentId, locale });
 
   await evaluationUsecases.handleBadgeAcquisition({ assessment });
-  await evaluationUsecases.handleStageAcquisition({ assessment });
+  await stageUsecases.handleStageAcquisition({ assessment });
 
   const isQuestEnabled = await featureToggles.get('isQuestEnabled');
 
