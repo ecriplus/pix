@@ -234,7 +234,7 @@ module('Integration | Component | Layout::Sidebar', function (hooks) {
   module('When the user is from a SCO organization', function () {
     test('should display support menu with SCO url', async function (assert) {
       class CurrentUserStub extends Service {
-        organization = Object.create({ id: '1', type: 'SCO-2D' });
+        organization = Object.create({ id: '1', type: 'SCO' });
         isSCOManagingStudents = true;
       }
       this.owner.register('service:current-user', CurrentUserStub);

@@ -41,7 +41,7 @@ export default class Url extends UrlBaseService {
       return 'https://pix.org/en/support';
     }
 
-    if (orgType === 'SCO-2D' && locale === 'fr-FR') {
+    if (orgType === 'SCO' && locale === 'fr-FR') {
       return this.getPixWebsiteUrl('support/enseignement-scolaire');
     }
 
