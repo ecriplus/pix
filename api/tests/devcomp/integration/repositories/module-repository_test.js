@@ -481,153 +481,191 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
   });
 
   describe('#list', function () {
-    describe('errors', function () {
-      describe('if there are no duplicated IDs in modules content', function () {
-        it('should result an empty array of duplicated IDs ', async function () {
-          const modules = await moduleDatasource.list();
-          const ids = [];
-          const shortIds = [];
+    describe('when isFetchingModulesFromLearningContentEnabled feature toggle is false', function () {
+      beforeEach(async function () {
+        await featureToggles.set('isFetchingModulesFromLearningContentEnabled', false);
+        await setImmediate();
+      });
 
-          const duplicateIds = new Set();
-          const duplicateShortIds = new Set();
+      describe('errors', function () {
+        describe('if there are no duplicated IDs in modules content', function () {
+          it('should result an empty array of duplicated IDs ', async function () {
+            const modules = await moduleDatasource.list();
+            const ids = [];
+            const shortIds = [];
 
-          for (const module of modules) {
-            if (ids.includes(module.id)) {
-              duplicateIds.add(module.id);
-            }
-            ids.push(module.id);
+            const duplicateIds = new Set();
+            const duplicateShortIds = new Set();
 
-            if (shortIds.includes(module.shortId)) {
-              duplicateShortIds.add(module.shortId);
-            }
-            shortIds.push(module.shortId);
-
-            for (const section of module.sections) {
-              if (ids.includes(section.id)) {
-                duplicateIds.add(section.id);
+            for (const module of modules) {
+              if (ids.includes(module.id)) {
+                duplicateIds.add(module.id);
               }
-              ids.push(section.id);
+              ids.push(module.id);
 
-              for (const grain of section.grains) {
-                if (ids.includes(grain.id)) {
-                  duplicateIds.add(grain.id);
+              if (shortIds.includes(module.shortId)) {
+                duplicateShortIds.add(module.shortId);
+              }
+              shortIds.push(module.shortId);
+
+              for (const section of module.sections) {
+                if (ids.includes(section.id)) {
+                  duplicateIds.add(section.id);
                 }
-                ids.push(grain.id);
+                ids.push(section.id);
 
-                for (const component of grain.components) {
-                  switch (component.type) {
-                    case 'element':
-                      if (ids.includes(component.element.id)) {
-                        duplicateIds.add(component.element.id);
-                      }
-                      if (component.element.type === 'flashcards') {
-                        for (const card of component.element.cards) {
-                          if (ids.includes(card.id)) {
-                            duplicateIds.add(card.id);
-                          }
-                          ids.push(card.id);
+                for (const grain of section.grains) {
+                  if (ids.includes(grain.id)) {
+                    duplicateIds.add(grain.id);
+                  }
+                  ids.push(grain.id);
+
+                  for (const component of grain.components) {
+                    switch (component.type) {
+                      case 'element':
+                        if (ids.includes(component.element.id)) {
+                          duplicateIds.add(component.element.id);
                         }
-                      }
-                      ids.push(component.element.id);
-                      break;
-                    case 'stepper':
-                      for (const step of component.steps) {
-                        for (const element of step.elements) {
-                          if (ids.includes(element.id)) {
-                            duplicateIds.add(element.id);
-                          }
-                          if (element.type === 'flashcards') {
-                            for (const card of element.cards) {
-                              if (ids.includes(card.id)) {
-                                duplicateIds.add(card.id);
-                              }
-                              ids.push(card.id);
+                        if (component.element.type === 'flashcards') {
+                          for (const card of component.element.cards) {
+                            if (ids.includes(card.id)) {
+                              duplicateIds.add(card.id);
                             }
+                            ids.push(card.id);
                           }
-                          ids.push(element.id);
                         }
-                      }
-                      break;
+                        ids.push(component.element.id);
+                        break;
+                      case 'stepper':
+                        for (const step of component.steps) {
+                          for (const element of step.elements) {
+                            if (ids.includes(element.id)) {
+                              duplicateIds.add(element.id);
+                            }
+                            if (element.type === 'flashcards') {
+                              for (const card of element.cards) {
+                                if (ids.includes(card.id)) {
+                                  duplicateIds.add(card.id);
+                                }
+                                ids.push(card.id);
+                              }
+                            }
+                            ids.push(element.id);
+                          }
+                        }
+                        break;
+                    }
                   }
                 }
               }
             }
-          }
 
-          expect([...duplicateIds]).to.deep.equal([]);
-          expect([...duplicateShortIds]).to.deep.equal([]);
+            expect([...duplicateIds]).to.deep.equal([]);
+            expect([...duplicateShortIds]).to.deep.equal([]);
+          });
         });
+      });
+
+      it('should return a list of Module instances', async function () {
+        const existingModuleSlug = 'bien-ecrire-son-adresse-mail';
+        const expectedFoundModule = {
+          id: 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d',
+          shortId: 'gbsri73s',
+          slug: existingModuleSlug,
+          title: 'Bien écrire son adresse mail',
+          isBeta: true,
+          visibility: 'public',
+          details: {
+            image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
+            description:
+              'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
+            duration: 12,
+            level: 'novice',
+            tabletSupport: 'comfortable',
+            objectives: [
+              'Écrire une adresse mail correctement, en évitant les erreurs courantes',
+              'Connaître les parties d’une adresse mail et les identifier sur des exemples',
+              'Comprendre les fonctions des parties d’une adresse mail',
+            ],
+          },
+          sections: [
+            {
+              id: '5bf1c672-3746-4480-b9ac-1f0af9c7c509',
+              type: 'practise',
+              grains: [
+                {
+                  id: 'z1f3c8c7-6d5c-4c6c-9c4d-1a3d8f7e9f5d',
+                  type: 'lesson',
+                  title: 'Explications : les parties d’une adresse mail',
+                  components: [
+                    {
+                      type: 'element',
+                      element: {
+                        id: 'd9e8a7b6-5c4d-3e2f-1a0b-9f8e7d6c5b4a',
+                        type: 'text',
+                        tag: ' ',
+                        content:
+                          "<h4 class='screen-reader-only'>L'arobase</h4><p>L’arobase est dans toutes les adresses mails. Il sépare l’identifiant et le fournisseur d’adresse mail.</p><p><span aria-hidden='true'>🇬🇧</span> En anglais, ce symbole se lit <i lang='en'>“at”</i> qui veut dire “chez”.</p><p><span aria-hidden='true'>🤔</span> Le saviez-vous : c’est un symbole qui était utilisé bien avant l’informatique ! Par exemple, pour compter des quantités.</p>",
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+          glossary: [
+            {
+              word: 'Pix',
+              definition:
+                'Pix est un service public en ligne pour évaluer, développer, et certifier ses compétences numériques.',
+            },
+          ],
+        };
+        const moduleDatasourceStub = {
+          list: sinon.stub(),
+        };
+        moduleDatasourceStub.list.resolves([expectedFoundModule]);
+        sinon.spy(ModuleFactory, 'build');
+
+        // when
+        const modules = await moduleRepository.list({ moduleDatasource: moduleDatasourceStub });
+
+        // then
+        expect(ModuleFactory.build).to.have.been.calledWith(expectedFoundModule);
+        expect(modules).to.be.an('array');
+        expect(modules[0]).to.be.instanceof(Module);
       });
     });
 
-    it('should return a list of Module instances', async function () {
-      const existingModuleSlug = 'bien-ecrire-son-adresse-mail';
-      const expectedFoundModule = {
-        id: 'f7b3a2e1-0d5c-4c6c-9c4d-1a3d8f7e9f5d',
-        shortId: 'gbsri73s',
-        slug: existingModuleSlug,
-        title: 'Bien écrire son adresse mail',
-        isBeta: true,
-        visibility: 'public',
-        details: {
-          image: 'https://assets.pix.org/modules/bien-ecrire-son-adresse-mail-details.svg',
-          description:
-            'Apprendre à rédiger correctement une adresse e-mail pour assurer une meilleure communication et éviter les erreurs courantes.',
-          duration: 12,
-          level: 'novice',
-          tabletSupport: 'comfortable',
-          objectives: [
-            'Écrire une adresse mail correctement, en évitant les erreurs courantes',
-            'Connaître les parties d’une adresse mail et les identifier sur des exemples',
-            'Comprendre les fonctions des parties d’une adresse mail',
-          ],
-        },
-        sections: [
-          {
-            id: '5bf1c672-3746-4480-b9ac-1f0af9c7c509',
-            type: 'practise',
-            grains: [
-              {
-                id: 'z1f3c8c7-6d5c-4c6c-9c4d-1a3d8f7e9f5d',
-                type: 'lesson',
-                title: 'Explications : les parties d’une adresse mail',
-                components: [
-                  {
-                    type: 'element',
-                    element: {
-                      id: 'd9e8a7b6-5c4d-3e2f-1a0b-9f8e7d6c5b4a',
-                      type: 'text',
-                      tag: ' ',
-                      content:
-                        "<h4 class='screen-reader-only'>L'arobase</h4><p>L’arobase est dans toutes les adresses mails. Il sépare l’identifiant et le fournisseur d’adresse mail.</p><p><span aria-hidden='true'>🇬🇧</span> En anglais, ce symbole se lit <i lang='en'>“at”</i> qui veut dire “chez”.</p><p><span aria-hidden='true'>🤔</span> Le saviez-vous : c’est un symbole qui était utilisé bien avant l’informatique ! Par exemple, pour compter des quantités.</p>",
-                    },
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-        glossary: [
-          {
-            word: 'Pix',
-            definition:
-              'Pix est un service public en ligne pour évaluer, développer, et certifier ses compétences numériques.',
-          },
-        ],
-      };
-      const moduleDatasourceStub = {
-        list: sinon.stub(),
-      };
-      moduleDatasourceStub.list.resolves([expectedFoundModule]);
-      sinon.spy(ModuleFactory, 'build');
+    describe('when isFetchingModulesFromLearningContentEnabled feature toggle is true', function () {
+      beforeEach(async function () {
+        await featureToggles.set('isFetchingModulesFromLearningContentEnabled', true);
+        await setImmediate();
+      });
 
-      // when
-      const modules = await moduleRepository.list({ moduleDatasource: moduleDatasourceStub });
+      it('should return a list of Module instances', async function () {
+        const expectedModules = [
+          databaseBuilder.factory.learningContent.buildModule({ shortId: 'niconico', slug: 'petit-escargot' }),
+          databaseBuilder.factory.learningContent.buildModule({ shortId: 'cacacaca', slug: 'porte-sur-son-dos' }),
+          databaseBuilder.factory.learningContent.buildModule({
+            shortId: 'pipipipi',
+            slug: 'saaaaaa-maisoneeeeeetteuuuuuuh',
+          }),
+        ];
+        await databaseBuilder.commit();
 
-      // then
-      expect(ModuleFactory.build).to.have.been.calledWith(expectedFoundModule);
-      expect(modules).to.be.an('array');
-      expect(modules[0]).to.be.instanceof(Module);
+        // when
+        const modules = await moduleRepository.list();
+
+        // then
+        expect(modules).to.have.lengthOf(3);
+        expect(modules[0]).to.be.instanceOf(Module).and.deep.contain(expectedModules[0]);
+        expect(modules[0].version).to.be.a('string').of.length(64);
+        expect(modules[1]).to.be.instanceOf(Module).and.deep.contain(expectedModules[1]);
+        expect(modules[1].version).to.be.a('string').of.length(64);
+        expect(modules[2]).to.be.instanceOf(Module).and.deep.contain(expectedModules[2]);
+        expect(modules[2].version).to.be.a('string').of.length(64);
+      });
     });
   });
 });

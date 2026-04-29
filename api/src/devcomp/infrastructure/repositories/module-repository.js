@@ -55,9 +55,18 @@ async function getBySlug({ slug, moduleDatasource }) {
   return toDomainFromDbObject(module);
 }
 
-async function list({ moduleDatasource }) {
-  const modulesData = await moduleDatasource.list();
-  return Promise.all(modulesData.map(async (moduleData) => await ModuleFactory.build(moduleData)));
+async function list({ moduleDatasource } = {}) {
+  if (!isFetchingModulesFromLearningContentEnabled.value) {
+    const modulesData = await moduleDatasource.list();
+    return Promise.all(modulesData.map(async (moduleData) => await ModuleFactory.build(moduleData)));
+  }
+
+  const cacheKey = 'list';
+  const listCallback = (knex) => knex.orderBy('slug');
+
+  const modules = await getInstance().find(cacheKey, listCallback);
+
+  return Promise.all(modules.map(toDomainFromDbObject));
 }
 
 export { getById, getByShortId, getBySlug, list };
