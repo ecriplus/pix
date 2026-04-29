@@ -642,7 +642,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>2 =&nbsp;</p>"
+                    "content": "<p>&nbsp;&nbsp;2 =&nbsp;</p>"
                   },
                   {
                     "type": "select",
@@ -675,7 +675,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>3 =&nbsp;</p>"
+                    "content": "</br><p>3 =&nbsp;</p>"
                   },
                   {
                     "type": "select",
@@ -708,7 +708,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>4 =&nbsp;</p>"
+                    "content": "<p>&nbsp;&nbsp;4 =&nbsp;</p>"
                   },
                   {
                     "type": "select",
