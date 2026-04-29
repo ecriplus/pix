@@ -2,6 +2,7 @@ import crypto from 'node:crypto';
 
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { LearningContentResourceNotFound } from '../../../shared/domain/errors.js';
+import { LearningContentRepository } from '../../../shared/infrastructure/repositories/learning-content-repository.js';
 import { ModuleDoesNotExistError } from '../../domain/errors.js';
 import { ModuleFactory } from '../factories/module-factory.js';
 
@@ -56,4 +57,20 @@ function getModuleMethod(ref, moduleDatasource) {
     default:
       return moduleDatasource.getById;
   }
+}
+
+export function clearCache(id) {
+  return getInstance().clearCache(id);
+}
+
+const TABLE_NAME = 'learningcontent.modules';
+
+/** @type {LearningContentRepository} */
+let instance;
+
+function getInstance() {
+  if (!instance) {
+    instance = new LearningContentRepository({ tableName: TABLE_NAME, idType: 'uuid' });
+  }
+  return instance;
 }
