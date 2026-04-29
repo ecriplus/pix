@@ -39,6 +39,7 @@ const serialize = function (certificationCenter) {
       'archivedAt',
       'archivistFullName',
       'certificationCenterMemberships',
+      'certificationCenterInvitations',
       'dataProtectionOfficerFirstName',
       'dataProtectionOfficerLastName',
       'dataProtectionOfficerEmail',
@@ -54,6 +55,16 @@ const serialize = function (certificationCenter) {
       relationshipLinks: {
         related(record, current, parent) {
           return `/api/admin/certification-centers/${parent.id}/certification-center-memberships`;
+        },
+      },
+    },
+    certificationCenterInvitations: {
+      ref: 'id',
+      ignoreRelationshipData: true,
+      nullIfMissing: true,
+      relationshipLinks: {
+        related(record, current, parent) {
+          return `/api/admin/certification-centers/${parent.id}/invitations`;
         },
       },
     },

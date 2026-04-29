@@ -9,6 +9,28 @@ module('Acceptance | Certification-centers | Invitations management', function (
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
+  test('should display invitations count in tab', async function (assert) {
+    // given
+    await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+    const certificationCenter = server.create('certification-center', {
+      name: 'Centre Test',
+    });
+    server.create('certification-center-invitation', {
+      certificationCenter,
+      email: 'invite1@example.com',
+    });
+    server.create('certification-center-invitation', {
+      certificationCenter,
+      email: 'invite2@example.com',
+    });
+
+    // when
+    const screen = await visit(`/certification-centers/${certificationCenter.id}/invitations`);
+
+    // then
+    assert.dom(screen.getByRole('link', { name: 'Invitations (2)' })).exists();
+  });
+
   test('should allow to invite a member', async function (assert) {
     // given
     await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
@@ -24,6 +46,7 @@ module('Acceptance | Certification-centers | Invitations management', function (
     // then
     assert.dom(screen.getByText('user@example.com')).exists();
     assert.dom(screen.getByRole('textbox', { name: 'Adresse e-mail du membre à inviter' })).hasNoValue();
+    assert.dom(screen.getByRole('link', { name: 'Invitations (1)' })).exists();
   });
 
   test('should be possible to cancel a certification center invitation', async function (assert) {

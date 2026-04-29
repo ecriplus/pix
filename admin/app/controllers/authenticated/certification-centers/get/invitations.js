@@ -40,6 +40,8 @@ export default class AuthenticatedCertificationCentersGetInvitationsController e
         certificationCenterId: this.model.certificationCenterId,
       });
 
+      await this.model.certificationCenter.hasMany('certificationCenterInvitations').reload();
+
       this.pixToast.sendSuccessNotification({ message: `Un email a bien a été envoyé à l'adresse ${email}.` });
       this.userEmailToInvite = null;
     } catch (err) {

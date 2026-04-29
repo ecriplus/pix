@@ -313,11 +313,12 @@ export default function routes() {
     return schema.certificationCenterInvitations.where({ certificationCenterId });
   });
   this.post('/admin/certification-centers/:id/invitations', (schema, request) => {
+    const certificationCenterId = request.params.id;
     const params = JSON.parse(request.requestBody);
     const email = params.data.attributes.email;
     const lang = params.data.attributes.lang;
     const updatedAt = Date.now();
-    return schema.certificationCenterInvitations.create({ email, lang, updatedAt });
+    return schema.certificationCenterInvitations.create({ email, lang, updatedAt, certificationCenterId });
   });
   this.delete('/admin/certification-center-invitations/:id', (schema, request) => {
     const certificationCenterInvitationId = request.params.id;

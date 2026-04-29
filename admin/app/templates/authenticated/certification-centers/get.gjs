@@ -11,20 +11,20 @@ import Information from 'pix-admin/components/certification-centers/information'
 
   <main class="page-body" id="certification-center-get-page">
     <Information
-      @availableHabilitations={{@controller.model.habilitations}}
-      @certificationCenter={{@controller.model.certificationCenter}}
+      @availableHabilitations={{@model.habilitations}}
+      @certificationCenter={{@model.certificationCenter}}
       @updateCertificationCenter={{@controller.updateCertificationCenter}}
       @refreshModel={{@controller.refresh}}
     />
 
-    {{#unless @controller.model.certificationCenter.isArchived}}
+    {{#unless @model.certificationCenter.isArchived}}
       <PixTabs @variant="primary" @ariaLabel="Navigation de la section centre de certification" class="navigation">
         <LinkTo @route="authenticated.certification-centers.get.team">
-          Équipe ({{@controller.model.certificationCenter.certificationCenterMemberships.length}})
+          Équipe ({{@model.certificationCenter.certificationCenterMemberships.length}})
         </LinkTo>
 
         <LinkTo @route="authenticated.certification-centers.get.invitations">
-          Invitations
+          Invitations ({{@model.certificationCenter.certificationCenterInvitations.length}})
         </LinkTo>
       </PixTabs>
     {{/unless}}
