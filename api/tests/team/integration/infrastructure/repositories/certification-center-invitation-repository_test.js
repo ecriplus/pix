@@ -153,6 +153,65 @@ describe('Integration | Team | Infrastructure | Repositories | CertificationCent
     });
   });
 
+  describe('#deleteInvitationsByCertificationCenterId', function () {
+    it('hard delete all invitations (all statuses included) of a given certification center', async function () {
+      // given
+      const pendingStatus = CertificationCenterInvitation.StatusType.PENDING;
+      const cancelledStatus = CertificationCenterInvitation.StatusType.CANCELLED;
+      const acceptedStatus = CertificationCenterInvitation.StatusType.ACCEPTED;
+
+      const givenCertificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
+      const otherCertificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
+
+      databaseBuilder.factory.buildCertificationCenterInvitation({
+        certificationCenterId: givenCertificationCenterId,
+        status: pendingStatus,
+      });
+      databaseBuilder.factory.buildCertificationCenterInvitation({
+        certificationCenterId: givenCertificationCenterId,
+        status: acceptedStatus,
+      });
+      databaseBuilder.factory.buildCertificationCenterInvitation({
+        certificationCenterId: givenCertificationCenterId,
+        status: cancelledStatus,
+      });
+
+      databaseBuilder.factory.buildCertificationCenterInvitation({
+        certificationCenterId: otherCertificationCenterId,
+        status: pendingStatus,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const [{ count: beforeDeleteForThisCertificationCenterInvitationsCount }] = await knex(
+        'certification-center-invitations',
+      )
+        .where({ certificationCenterId: givenCertificationCenterId })
+        .count();
+
+      await certificationCenterInvitationRepository.deleteInvitationsByCertificationCenterId({
+        certificationCenterId: givenCertificationCenterId,
+      });
+
+      // then
+      expect(beforeDeleteForThisCertificationCenterInvitationsCount).to.equal(3);
+
+      const givenCenterInvitations = await knex('certification-center-invitations').where({
+        certificationCenterId: givenCertificationCenterId,
+      });
+
+      expect(givenCenterInvitations).to.have.lengthOf(0);
+
+      const otherCenterInvitation = await knex('certification-center-invitations')
+        .where({
+          certificationCenterId: otherCertificationCenterId,
+        })
+        .first();
+      expect(otherCenterInvitation.status).to.equal(pendingStatus);
+    });
+  });
+
   describe('#findOnePendingByEmailAndCertificationCenterId', function () {
     it('returns null if no pending invitation exists for the given email and certification center id', async function () {
       // given
