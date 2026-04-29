@@ -540,7 +540,13 @@
                       "id": "e2b5c3b2-bd52-485d-b5a2-5ab2c983493d",
                       "type": "text",
                       "tag": " ",
-                      "content": "<h5>Quel est le point commun entre tous ces exemples ?</h5><p>Certains fabricants usent de stratégies pour réduire délibérément la durée de vie des produits et ainsi pousser les consommateurs à acheter des produits neufs. Ce mécanisme porte un nom&nbsp;: l’<strong>obsolescence programmée.<br><br>🤔 Bon à savoir&nbsp;: </strong>Ce phénomène d’obsolescence existe aussi dans d’autres secteurs comme l’électroménager, la mode ou l’automobile. Ce phénomène est puni par la loi.</p>"
+                      "content": "<h5>Quel est le point commun entre tous ces exemples ?</h5><p>Certains fabricants usent de stratégies pour réduire délibérément la durée de vie des produits et ainsi pousser les consommateurs à acheter des produits neufs. Ce mécanisme porte un nom&nbsp;: l’<strong>obsolescence programmée.</strong></p>"
+                    },
+                    {
+                      "id": "1f096bca-8174-4903-9ac6-d62c931e9508",
+                      "type": "text",
+                      "tag": "further-information",
+                      "content": "<p>Ce phénomène d’obsolescence existe aussi dans d’autres secteurs comme l’électroménager, la mode ou l’automobile. Ce phénomène est puni par la loi.</p>"
                     }
                   ]
                 },
