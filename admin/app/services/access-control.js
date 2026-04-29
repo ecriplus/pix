@@ -84,10 +84,6 @@ export default class AccessControlService extends Service {
     );
   }
 
-  get hasAccessToNetworkFeature() {
-    return Boolean(this.currentUser.adminMember.isSuperAdmin || this.currentUser.adminMember.isMetier);
-  }
-
   get hasAccessToNetworkActionsScope() {
     return Boolean(this.currentUser.adminMember.isSuperAdmin);
   }
