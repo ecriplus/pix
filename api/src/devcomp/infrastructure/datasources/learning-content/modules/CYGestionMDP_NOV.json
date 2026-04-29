@@ -304,7 +304,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "<p>Un mot de passe est <strong>strictement personnel</strong>. Le partager ou le laisser accessible, c’est <strong>comme laisser les clés de votre maison sur la porte.</strong></p><h4>Comment garder vos mots de passe secrets ? 🤫</h4><ul><li><strong>Ne jamais les communiquer</strong> à personne (collègue, ami, proche).</li><li><strong>Ne pas les noter </strong>sur un papier, un carnet ou un fichier de votre ordinateur.</li><li><strong>Ne pas les enregistrer dans votre navigateur.</strong></li></ul>"
+                  "diagnosis": "<h5>Comment garder vos mots de passe secrets ? 🤫</h5><ul><li><strong>Ne jamais les communiquer</strong> à personne (collègue, ami, proche).</li><li><strong>Ne pas les noter </strong>sur un papier, un carnet ou un fichier de votre ordinateur.</li><li><strong>Ne pas les enregistrer dans votre navigateur.</strong></li></ul>"
                 }
               }
             }
