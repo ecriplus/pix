@@ -1,5 +1,20 @@
 # Pix Changelog
 
+# [5.398.0](https://github.com/1024pix/pix/compare/v5.397.0...v5.398.0) (2026-04-29)
+
+### :rocket: Amélioration
+
+- [#16058](https://github.com/1024pix/pix/pull/16058) modif feedback poi trouver-mdp-rs 
+- [#16057](https://github.com/1024pix/pix/pull/16057) Relecture finale GestionMDP_NOV 
+
+### :bug: Correction
+
+- [#16063](https://github.com/1024pix/pix/pull/16063) Réparer l'affichage de la page de détail d'un centre de certif (PIX-22593) 
+
+### :building_construction: Tech
+
+- [#16044](https://github.com/1024pix/pix/pull/16044) Ajouter un test e2e de non-régression pour la réconciliation SCO (PIX-22411)
+
 # [5.397.0](https://github.com/1024pix/pix/compare/v5.396.0...v5.397.0) (2026-04-29)
 
 ### :rocket: Amélioration
