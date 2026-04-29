@@ -1,13 +1,17 @@
-import PixBreadcrumb from '@1024pix/pix-ui/components/pix-breadcrumb';
-import { service } from '@ember/service';
-import Component from '@glimmer/component';
-import { t } from 'ember-intl';
+import PixBreadcrumb from "@1024pix/pix-ui/components/pix-breadcrumb";
+import PixButtonLink from "@1024pix/pix-ui/components/pix-button-link";
+import { service } from "@ember/service";
+import Component from "@glimmer/component";
+import { and } from "ember-truth-helpers";
+import { t } from "ember-intl";
 
 export default class Header extends Component {
   @service intl;
+  @service currentUser;
+  @service router;
 
-  get isComplementaryCertification() {
-    return this.args.complementaryCertification;
+  get isNotCLEA() {
+    return this.args.complementaryCertification?.key !== 'CLEA';
   }
 
   get links() {
@@ -30,25 +34,25 @@ export default class Header extends Component {
 
     <div class="certification-framework-header">
       <h1 class="certification-framework-header__title">
-        <small>
-          {{#if this.isComplementaryCertification}}
-            {{#if @complementaryCertification.hasComplementaryReferential}}
-              {{t "components.complementary-certifications.item.certification-framework"}}
-            {{else}}
-              {{t "components.complementary-certifications.item.target-profile"}}
-            {{/if}}
-          {{else}}
-            {{t "components.complementary-certifications.item.certification-framework"}}
-          {{/if}}
-        </small>
         <span>
-          {{#if this.isComplementaryCertification}}
+          {{#if @complementaryCertification}}
             {{@complementaryCertification.label}}
           {{else}}
             {{t "components.certification-frameworks.labels.CORE"}}
           {{/if}}
         </span>
       </h1>
+
+      {{#if (and this.currentUser.adminMember.isSuperAdmin this.isNotCLEA)}}
+        <PixButtonLink
+          class="framework__creation-button"
+          @route="authenticated.certification-frameworks.item.framework.new-version"
+          @size="large"
+          @iconBefore="add"
+        >
+          {{t "components.complementary-certifications.item.framework.create-button"}}
+        </PixButtonLink>
+      {{/if}}
     </div>
   </template>
 }

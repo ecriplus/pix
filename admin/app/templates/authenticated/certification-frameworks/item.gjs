@@ -1,5 +1,5 @@
-import pageTitle from 'ember-page-title/helpers/page-title';
-import Header from 'pix-admin/components/certification-frameworks/item/header';
+import pageTitle from "ember-page-title/helpers/page-title";
+import Header from "pix-admin/components/certification-frameworks/item/header";
 
 <template>
   {{pageTitle "Référentiel " @model.label " | Pix Admin" replace=true}}
@@ -7,7 +7,7 @@ import Header from 'pix-admin/components/certification-frameworks/item/header';
   <div class="page">
     <Header @complementaryCertification={{@model.currentComplementaryCertification}} />
 
-    <section class="page-body certification-framework certification-framework__header">
+    <section class="page-body certification-framework">
       {{outlet}}
     </section>
   </div>

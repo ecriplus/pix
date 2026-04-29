@@ -639,11 +639,24 @@
           },
           "history": {
             "label": "Versions",
+            "statuses": {
+              "ACTIVE": "Actif",
+              "ARCHIVED": "Archivé",
+              "DRAFT": "En cours d'édition"
+            },
             "table": {
               "caption": "Liste des versions par ordre décroissant",
+              "actions": {
+                "delete": "Supprimer la version",
+                "view": "Voir les détails de la version"
+              },
               "columns": {
+                "actions": "Actions",
+                "assessment-duration": "Durée (min)",
                 "expiration-date": "Date d'expiration",
-                "start-date": "Date de début",
+                "maximum-assessment-length": "Nombre de questions",
+                "start-date": "Date d'activation",
+                "status": "Statut",
                 "version-id": "ID de version"
               }
             },
@@ -671,12 +684,16 @@
         },
         "history-list": {
           "caption": "Liste des profils cibles (actuellement rattaché ou ayant étés rattachés à la complémentaire). Contient la date de rattachement et de détachement et le nom.",
+          "actions": {
+            "view": "Voir le profil cible"
+          },
           "headers": {
+            "actions": "Actions",
             "attached-at": "Date de rattachement",
             "detached-at": "Date de détachement",
-            "name": "Nom du profil cible"
+            "name": "Nom interne"
           },
-          "title": "Historique des profils cibles rattachés"
+          "title": "Historique des profils cibles"
         }
       },
       "title": "Tous les référentiels de certification"

@@ -631,11 +631,24 @@
           },
           "history": {
             "label": "Versions",
+            "statuses": {
+              "ACTIVE": "Active",
+              "ARCHIVED": "Archived",
+              "DRAFT": "Draft"
+            },
             "table": {
               "caption": "Versions list in descending order",
+              "actions": {
+                "delete": "Delete version",
+                "view": "View version details"
+              },
               "columns": {
+                "actions": "Actions",
+                "assessment-duration": "Duration (min)",
                 "expiration-date": "Expiration date",
+                "maximum-assessment-length": "Nb of questions",
                 "start-date": "Start date",
+                "status": "Status",
                 "version-id": "Version ID"
               }
             },
@@ -663,10 +676,14 @@
         },
         "history-list": {
           "caption": "Liste des profils cibles (actuellement rattaché ou ayant étés rattachés à la complémentaire). Contient la date de rattachement et de détachement et le nom.",
+          "actions": {
+            "view": "View target profile"
+          },
           "headers": {
-            "attached-at": "Date de rattachement",
-            "detached-at": "Date de détachement",
-            "name": "Nom du profil cible"
+            "actions": "Actions",
+            "attached-at": "Attachment date",
+            "detached-at": "Detachment date",
+            "name": "Internal name"
           },
           "title": "Historique des profils cibles rattachés"
         }
