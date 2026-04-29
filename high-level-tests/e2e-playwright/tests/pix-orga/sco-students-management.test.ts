@@ -244,138 +244,282 @@ test.describe('SCO import does not auto-reconcile a learner when the user alread
     // CSV A : Jean Michel avec INE 12
     await writeFile(
       path.join(os.tmpdir(), `fregata-a-${UAJ_FREGATA}.csv`),
-      `${CSV_HEADER}\n12;Jean;;;Michel;;Masculin;01/01/1990;75056;;75;99100;ST;1234;CLASSE1\n`,
+      `${CSV_HEADER}\n12${UAJ_FREGATA};Jean;;;Michel;;Masculin;01/01/1990;75056;;75;99100;ST;1234;CLASSE12\n`,
     );
 
     // CSV B-initial : Jean Michel avec INE 13 (premier import Org B)
     await writeFile(
       path.join(os.tmpdir(), `fregata-b-${UAJ_FREGATA}.csv`),
-      `${CSV_HEADER}\n13;Jean;;;Michel;;Masculin;01/01/1990;75056;;75;99100;ST;1234;CLASSE1\n`,
-    );
-
-    // CSV B-second : Jean Michel avec INE 12 uniquement (INE 13 sera disabled)
-    await writeFile(
-      path.join(os.tmpdir(), `fregata-b2-${UAJ_FREGATA}.csv`),
-      `${CSV_HEADER}\n12;Jean;;;Michel;;Masculin;01/01/1990;75056;;75;99100;ST;1234;CLASSE1\n`,
+      `${CSV_HEADER}\n13${UAJ_FREGATA};Jean;;;Michel;;Masculin;01/01/1990;75056;;75;99100;ST;1234;CLASSE13\n`,
     );
   });
 
-  test('Prevents auto-reconciliation when the user is already in the target organization with a different INE', async ({
-    page,
-  }) => {
-    test.slow();
-    const orgaPage = new PixOrgaPage(page);
-    const reconciliationPage = new ReconciliationPage(page);
-    const challengePage = new ChallengePage(page);
-    let campaignCodeA: string;
-    let campaignCodeB: string;
-    let campaignCodeB2: string;
+  test.describe('when previous learner reconciled is disabled', () => {
+    test.beforeEach(async () => {
+      // CSV B-second : Jean Michel avec INE 12 uniquement (INE 13 sera disabled)
+      await writeFile(
+        path.join(os.tmpdir(), `fregata-b2-${UAJ_FREGATA}.csv`),
+        `${CSV_HEADER}\n12${UAJ_FREGATA};Jean;;;Michel;;Masculin;01/01/1990;75056;;75;99100;ST;1234;CLASSE1\n`,
+      );
+    });
 
-    await test.step('Organization A: login, create a campaign and import Jean Michel (INE 12)', async () => {
-      await page.goto(process.env.PIX_ORGA_URL as string);
-      await orgaPage.login(`admin-fregata-a-${UAJ_FREGATA}@example.net`, 'pix123');
-      await page.getByRole('button').filter({ hasText: 'Je me connecte' }).waitFor({ state: 'detached' });
-      await orgaPage.acceptCGU();
+    test('Prevents auto-reconciliation when the user is already in the target organization with a different INE', async ({
+      page,
+    }) => {
+      test.slow();
+      const orgaPage = new PixOrgaPage(page);
+      const reconciliationPage = new ReconciliationPage(page);
+      const challengePage = new ChallengePage(page);
+      let campaignCodeA: string;
+      let campaignCodeB: string;
+      let campaignCodeB2: string;
 
-      await page.getByRole('link', { name: 'Campagnes', exact: true }).click();
-      await page.getByRole('link', { name: 'Créer une campagne' }).click();
-      await orgaPage.createEvaluationCampaign({
-        campaignName: 'campagne fregata A',
-        targetProfileName: 'PC pour Playwright',
+      await test.step('Organization A: login, create a campaign and import Jean Michel (INE 12)', async () => {
+        await page.goto(process.env.PIX_ORGA_URL as string);
+        await orgaPage.login(`admin-fregata-a-${UAJ_FREGATA}@example.net`, 'pix123');
+        await page.getByRole('button').filter({ hasText: 'Je me connecte' }).waitFor({ state: 'detached' });
+        await orgaPage.acceptCGU();
+
+        await page.getByRole('link', { name: 'Campagnes', exact: true }).click();
+        await page.getByRole('link', { name: 'Créer une campagne' }).click();
+        await orgaPage.createEvaluationCampaign({
+          campaignName: 'campagne fregata A',
+          targetProfileName: 'PC pour Playwright',
+        });
+        campaignCodeA = (await page.locator('dd.campaign-header-title__campaign-code > span').textContent()) ?? '';
+
+        await page.getByRole('link', { name: 'Élèves' }).click();
+        await page.getByRole('link', { name: 'Importer', exact: true }).click();
+        await page
+          .locator('#students-file-upload')
+          .setInputFiles(path.join(os.tmpdir(), `fregata-a-${UAJ_FREGATA}.csv`));
+
+        const hasLoader = await page.locator('.app-loader').isVisible();
+        if (hasLoader) {
+          await page.waitForSelector('.app-loader', { state: 'detached' });
+        }
+        await orgaPage.waitForTheImportToComplete(page);
       });
-      campaignCodeA = (await page.locator('dd.campaign-header-title__campaign-code > span').textContent()) ?? '';
 
-      await page.getByRole('link', { name: 'Élèves' }).click();
-      await page.getByRole('link', { name: 'Importer', exact: true }).click();
-      await page.locator('#students-file-upload').setInputFiles(path.join(os.tmpdir(), `fregata-a-${UAJ_FREGATA}.csv`));
-
-      const hasLoader = await page.locator('.app-loader').isVisible();
-      if (hasLoader) {
-        await page.waitForSelector('.app-loader', { state: 'detached' });
-      }
-      await orgaPage.waitForTheImportToComplete(page);
-    });
-
-    await test.step('A user creates an account and reconciles with Jean Michel from Org A (INE 12)', async () => {
-      await page.goto(process.env.PIX_APP_URL + `/campagnes/${campaignCodeA}`);
-      await page.getByRole('button', { name: 'Je commence' }).click();
-      await reconciliationPage.reconcile('Jean', 'Michel', '01/01/1990', false);
-      await expect(page.getByText('Mon identifiant *')).toBeVisible();
-      await page.getByRole('textbox', { name: 'Mot de passe * (8 caractères' }).fill('Pix12345');
-      await page.getByRole('button', { name: 'Afficher le mot de passe' }).click();
-      await page.getByRole('button', { name: "Je m'inscris" }).click();
-      await expect(page.getByText('Vous pouvez rechercher sur')).toBeVisible();
-      await page.getByRole('button', { name: 'Ignorer' }).click();
-      await challengePage.leave();
-    });
-
-    await test.step('Org B: login, create a campaign and import Jean Michel (INE 13)', async () => {
-      await page.goto(process.env.PIX_ORGA_URL as string);
-      await page.getByRole('link', { name: 'Se déconnecter' }).click();
-      await orgaPage.login(`admin-fregata-b-${UAJ_FREGATA}@example.net`, 'pix123');
-      await page.getByRole('button').filter({ hasText: 'Je me connecte' }).waitFor({ state: 'detached' });
-      await orgaPage.acceptCGU();
-
-      await page.getByRole('link', { name: 'Campagnes', exact: true }).click();
-      await page.getByRole('link', { name: 'Créer une campagne' }).click();
-      await orgaPage.createEvaluationCampaign({
-        campaignName: 'campagne fregata B',
-        targetProfileName: 'PC pour Playwright',
+      await test.step('A user creates an account and reconciles with Jean Michel from Org A (INE 12)', async () => {
+        await page.goto(process.env.PIX_APP_URL + `/campagnes/${campaignCodeA}`);
+        await page.getByRole('button', { name: 'Je commence' }).click();
+        await reconciliationPage.reconcile('Jean', 'Michel', '01/01/1990', false);
+        await expect(page.getByText('Mon identifiant *')).toBeVisible();
+        await page.getByRole('textbox', { name: 'Mot de passe * (8 caractères' }).fill('Pix12345');
+        await page.getByRole('button', { name: 'Afficher le mot de passe' }).click();
+        await page.getByRole('button', { name: "Je m'inscris" }).click();
+        await expect(page.getByText('Vous pouvez rechercher sur')).toBeVisible();
+        await page.getByRole('button', { name: 'Ignorer' }).click();
+        await challengePage.leave();
       });
-      campaignCodeB = (await page.locator('dd.campaign-header-title__campaign-code > span').textContent()) ?? '';
 
-      await page.getByRole('link', { name: 'Élèves' }).click();
-      await page.getByRole('link', { name: 'Importer', exact: true }).click();
-      await page.locator('#students-file-upload').setInputFiles(path.join(os.tmpdir(), `fregata-b-${UAJ_FREGATA}.csv`));
+      await test.step('Org B: login, create a campaign and import Jean Michel (INE 13)', async () => {
+        await page.goto(process.env.PIX_ORGA_URL as string);
+        await page.getByRole('link', { name: 'Se déconnecter' }).click();
+        await orgaPage.login(`admin-fregata-b-${UAJ_FREGATA}@example.net`, 'pix123');
+        await page.getByRole('button').filter({ hasText: 'Je me connecte' }).waitFor({ state: 'detached' });
+        await orgaPage.acceptCGU();
 
-      const hasLoader = await page.locator('.app-loader').isVisible();
-      if (hasLoader) {
-        await page.waitForSelector('.app-loader', { state: 'detached' });
-      }
-      await orgaPage.waitForTheImportToComplete(page);
-    });
+        await page.getByRole('link', { name: 'Campagnes', exact: true }).click();
+        await page.getByRole('link', { name: 'Créer une campagne' }).click();
+        await orgaPage.createEvaluationCampaign({
+          campaignName: 'campagne fregata B',
+          targetProfileName: 'PC pour Playwright',
+        });
+        campaignCodeB = (await page.locator('dd.campaign-header-title__campaign-code > span').textContent()) ?? '';
 
-    await test.step('Jean Michel manually reconciles with Org B (INE 13) via the campaign', async () => {
-      // INE 13 est inconnu, pas d'auto-réconciliation à l'import : Jean Michel doit se réconcilier manuellement.
-      await page.goto(process.env.PIX_APP_URL + `/campagnes/${campaignCodeB}`);
-      await page.getByRole('button', { name: 'Je commence' }).click();
-      await reconciliationPage.reconcile('Jean', 'Michel', '01/01/1990', true);
-      await challengePage.leave();
-    });
+        await page.getByRole('link', { name: 'Élèves' }).click();
+        await page.getByRole('link', { name: 'Importer', exact: true }).click();
+        await page
+          .locator('#students-file-upload')
+          .setInputFiles(path.join(os.tmpdir(), `fregata-b-${UAJ_FREGATA}.csv`));
 
-    await test.step('Org B: second import with INE 12 only — INE 13 is disabled, we block auto-reconciliation of INE 12', async () => {
-      // Après cet import : INE 13 sera disabled (absent du CSV), INE 12 sera créé.
-      // On détecte que U1 est déjà dans Org B (via INE 13 disabled) avec un INE différent
-      // → INE 12 reste sans userId.
-      await page.goto(process.env.PIX_ORGA_URL as string);
-      await page.getByRole('link', { name: 'Campagnes', exact: true }).click();
-      await page.getByRole('link', { name: 'Créer une campagne' }).click();
-      await orgaPage.createEvaluationCampaign({
-        campaignName: 'campagne fregata B2',
-        targetProfileName: 'PC pour Playwright',
+        const hasLoader = await page.locator('.app-loader').isVisible();
+        if (hasLoader) {
+          await page.waitForSelector('.app-loader', { state: 'detached' });
+        }
+        await orgaPage.waitForTheImportToComplete(page);
       });
-      campaignCodeB2 = (await page.locator('dd.campaign-header-title__campaign-code > span').textContent()) ?? '';
 
-      await page.getByRole('link', { name: 'Élèves' }).click();
-      await page.getByRole('link', { name: 'Importer', exact: true }).click();
-      await page
-        .locator('#students-file-upload')
-        .setInputFiles(path.join(os.tmpdir(), `fregata-b2-${UAJ_FREGATA}.csv`));
+      await test.step('Jean Michel manually reconciles with Org B (INE 13) via the campaign', async () => {
+        // INE 13 est inconnu, pas d'auto-réconciliation à l'import : Jean Michel doit se réconcilier manuellement.
+        await page.goto(process.env.PIX_APP_URL + `/campagnes/${campaignCodeB}`);
+        await page.getByRole('button', { name: 'Je commence' }).click();
+        await reconciliationPage.reconcile('Jean', 'Michel', '01/01/1990', true);
+        await challengePage.leave();
+      });
 
-      const hasLoader = await page.locator('.app-loader').isVisible();
-      if (hasLoader) {
-        await page.waitForSelector('.app-loader', { state: 'detached' });
-      }
-      await orgaPage.waitForTheImportToComplete(page);
+      await test.step('Org B: second import with INE 12 only — INE 13 is disabled, we block auto-reconciliation of INE 12', async () => {
+        // Après cet import : INE 13 sera disabled (absent du CSV), INE 12 sera créé.
+        // On détecte que U1 est déjà dans Org B (via INE 13 disabled) avec un INE différent
+        // → INE 12 reste sans userId.
+        await page.goto(process.env.PIX_ORGA_URL as string);
+        await page.getByRole('link', { name: 'Campagnes', exact: true }).click();
+        await page.getByRole('link', { name: 'Créer une campagne' }).click();
+        await orgaPage.createEvaluationCampaign({
+          campaignName: 'campagne fregata B2',
+          targetProfileName: 'PC pour Playwright',
+        });
+        campaignCodeB2 = (await page.locator('dd.campaign-header-title__campaign-code > span').textContent()) ?? '';
+
+        await page.getByRole('link', { name: 'Élèves' }).click();
+        await page.getByRole('link', { name: 'Importer', exact: true }).click();
+        await page
+          .locator('#students-file-upload')
+          .setInputFiles(path.join(os.tmpdir(), `fregata-b2-${UAJ_FREGATA}.csv`));
+
+        const hasLoader = await page.locator('.app-loader').isVisible();
+        if (hasLoader) {
+          await page.waitForSelector('.app-loader', { state: 'detached' });
+        }
+        await orgaPage.waitForTheImportToComplete(page);
+      });
+
+      await test.step('Jean Michel cannot access the new Organization B campaign (INE 12 was not auto-reconciled)', async () => {
+        await page.goto(process.env.PIX_APP_URL + `/campagnes/${campaignCodeB2}`);
+        // Jean Michel est connecté, mais n'est plus réconcilié avec Orga B :
+        // - INE 13 est disabled : aucun learner actif avec userId=U1 dans Org B
+        // - INE 12 a userId=null
+        await page.getByRole('button', { name: 'Je commence' }).click();
+        await expect(page.getByRole('heading', { name: /Oups, la page demandée/ })).toBeVisible({ timeout: 15000 });
+      });
+    });
+  });
+
+  test.describe('when previous reconciled learner is still active', () => {
+    test.beforeEach(async () => {
+      // CSV B-second : Jean Michel avec INE 12 uniquement (INE 13 sera disabled)
+      await writeFile(
+        path.join(os.tmpdir(), `fregata-a2-${UAJ_FREGATA}.csv`),
+        `${CSV_HEADER}\n
+        12${UAJ_FREGATA};Jean;;;Michel;;Masculin;01/01/1990;75056;;75;99100;ST;1234;CLASSE12\n
+        13${UAJ_FREGATA};Jean;;;Michel;;Masculin;01/01/1990;75056;;75;99100;ST;1234;CLASSE13\n
+        `,
+      );
     });
 
-    await test.step('Jean Michel cannot access the new Organization B campaign (INE 12 was not auto-reconciled)', async () => {
-      await page.goto(process.env.PIX_APP_URL + `/campagnes/${campaignCodeB2}`);
-      // Jean Michel est connecté, mais n'est plus réconcilié avec Orga B :
-      // - INE 13 est disabled : aucun learner actif avec userId=U1 dans Org B
-      // - INE 12 a userId=null
-      await page.getByRole('button', { name: 'Je commence' }).click();
-      await expect(page.getByRole('heading', { name: /Oups, la page demandée/ })).toBeVisible({ timeout: 15000 });
+    test("Remove user reconciliation when the user is already in the target organization with a different INE,  (is it ok, i don't know, but it's here since the beginning of the time)", async ({
+      page,
+    }) => {
+      test.slow();
+      const orgaPage = new PixOrgaPage(page);
+      const reconciliationPage = new ReconciliationPage(page);
+      const challengePage = new ChallengePage(page);
+      let campaignCodeA: string;
+      let campaignCodeB: string;
+
+      await test.step('Organization A: login, create a campaign and import Jean Michel (INE 12)', async () => {
+        await page.goto(process.env.PIX_ORGA_URL as string);
+        await orgaPage.login(`admin-fregata-a-${UAJ_FREGATA}@example.net`, 'pix123');
+        await page.getByRole('button').filter({ hasText: 'Je me connecte' }).waitFor({ state: 'detached' });
+        await orgaPage.acceptCGU();
+
+        await page.getByRole('link', { name: 'Campagnes', exact: true }).click();
+        await page.getByRole('link', { name: 'Créer une campagne' }).click();
+        await orgaPage.createEvaluationCampaign({
+          campaignName: 'campagne fregata A',
+          targetProfileName: 'PC pour Playwright',
+        });
+        campaignCodeA = (await page.locator('dd.campaign-header-title__campaign-code > span').textContent()) ?? '';
+
+        await page.getByRole('link', { name: 'Élèves' }).click();
+        await page.getByRole('link', { name: 'Importer', exact: true }).click();
+        await page
+          .locator('#students-file-upload')
+          .setInputFiles(path.join(os.tmpdir(), `fregata-a-${UAJ_FREGATA}.csv`));
+
+        const hasLoader = await page.locator('.app-loader').isVisible();
+        if (hasLoader) {
+          await page.waitForSelector('.app-loader', { state: 'detached' });
+        }
+        await orgaPage.waitForTheImportToComplete(page);
+        await page.getByRole('link', { name: 'Se déconnecter' }).click();
+      });
+
+      await test.step('A user creates an account and reconciles with Jean Michel from Org A (INE 12)', async () => {
+        await page.goto(`${process.env.PIX_APP_URL}/campagnes/${campaignCodeA}`);
+        await page.getByRole('button', { name: 'Je commence' }).click();
+        await reconciliationPage.reconcile('Jean', 'Michel', '01/01/1990', false);
+        await expect(page.getByText('Mon identifiant *')).toBeVisible();
+        await page.getByRole('textbox', { name: 'Mot de passe * (8 caractères' }).fill('Pix12345');
+        await page.getByRole('button', { name: 'Afficher le mot de passe' }).click();
+        await page.getByRole('button', { name: "Je m'inscris" }).click();
+        await expect(page.getByText('Vous pouvez rechercher sur')).toBeVisible();
+        await page.getByRole('button', { name: 'Ignorer' }).click();
+        await challengePage.leave();
+      });
+
+      await test.step('Org B: login, create a campaign and import Jean Michel (INE 13)', async () => {
+        await page.goto(process.env.PIX_ORGA_URL as string);
+        await orgaPage.login(`admin-fregata-b-${UAJ_FREGATA}@example.net`, 'pix123');
+        await page.getByRole('button').filter({ hasText: 'Je me connecte' }).waitFor({ state: 'detached' });
+        await orgaPage.acceptCGU();
+
+        await page.getByRole('link', { name: 'Campagnes', exact: true }).click();
+        await page.getByRole('link', { name: 'Créer une campagne' }).click();
+        await orgaPage.createEvaluationCampaign({
+          campaignName: 'campagne fregata B',
+          targetProfileName: 'PC pour Playwright',
+        });
+        campaignCodeB = (await page.locator('dd.campaign-header-title__campaign-code > span').textContent()) ?? '';
+
+        await page.getByRole('link', { name: 'Élèves' }).click();
+        await page.getByRole('link', { name: 'Importer', exact: true }).click();
+        await page
+          .locator('#students-file-upload')
+          .setInputFiles(path.join(os.tmpdir(), `fregata-b-${UAJ_FREGATA}.csv`));
+
+        const hasLoader = await page.locator('.app-loader').isVisible();
+        if (hasLoader) {
+          await page.waitForSelector('.app-loader', { state: 'detached' });
+        }
+        await orgaPage.waitForTheImportToComplete(page);
+        await page.getByRole('link', { name: 'Se déconnecter' }).click();
+      });
+
+      await test.step('Jean Michel manually reconciles with Org B (INE 13) via the campaign', async () => {
+        // INE 13 est inconnu, pas d'auto-réconciliation à l'import : Jean Michel doit se réconcilier manuellement.
+        await page.goto(process.env.PIX_APP_URL + `/campagnes/${campaignCodeB}`);
+        await page.getByRole('button', { name: 'Je commence' }).click();
+        await reconciliationPage.reconcile('Jean', 'Michel', '01/01/1990', true);
+        await challengePage.leave();
+      });
+
+      await test.step('Org A: second import with INE 12 AND INE 13, we remove reconciliation of INE 12', async () => {
+        // On détecte que U1 est déjà dans Org B (via INE 13) avec un INE différent
+        // → INE 12 reste sans userId.
+        // → INE 13 perd son userId.
+        await page.goto(process.env.PIX_ORGA_URL as string);
+        await orgaPage.login(`admin-fregata-a-${UAJ_FREGATA}@example.net`, 'pix123');
+        await page.getByRole('button').filter({ hasText: 'Je me connecte' }).waitFor({ state: 'detached' });
+
+        await page.getByRole('link', { name: 'Campagnes', exact: true }).click();
+        await page.getByRole('link', { name: 'Créer une campagne' }).click();
+        await orgaPage.createEvaluationCampaign({
+          campaignName: 'campagne fregata B2',
+          targetProfileName: 'PC pour Playwright',
+        });
+
+        await page.getByRole('link', { name: 'Élèves' }).click();
+        await page.getByRole('link', { name: 'Importer', exact: true }).click();
+        await page
+          .locator('#students-file-upload')
+          .setInputFiles(path.join(os.tmpdir(), `fregata-a2-${UAJ_FREGATA}.csv`));
+
+        const hasLoader = await page.locator('.app-loader').isVisible();
+        if (hasLoader) {
+          await page.waitForSelector('.app-loader', { state: 'detached' });
+        }
+        await orgaPage.waitForTheImportToComplete(page);
+        await page.getByRole('link', { name: 'Élèves' }).click();
+        await expect(
+          page.getByRole('paragraph').filter({ hasText: 'Les participants ont bien été importés' }),
+        ).toBeVisible();
+
+        await expect(page.getByRole('cell', { name: '–' }).nth(0)).toBeVisible();
+        await expect(page.getByRole('cell', { name: '–' }).nth(1)).toBeVisible();
+      });
     });
   });
 });
