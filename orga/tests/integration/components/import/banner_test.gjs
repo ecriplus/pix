@@ -1,5 +1,4 @@
 import { render } from '@1024pix/ember-testing-library';
-import dayjs from 'dayjs';
 import { t } from 'ember-intl/test-support';
 import ImportBanner from 'pix-orga/components/import/banner';
 import { module, test } from 'qunit';
@@ -8,6 +7,11 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Import::Banner', function (hooks) {
   setupIntlRenderingTest(hooks);
+  let intlService;
+
+  hooks.beforeEach(function () {
+    intlService = this.owner.lookup('service:intl');
+  });
 
   module('inProgress', function () {
     test('it should display loading message', async function (assert) {
@@ -86,7 +90,7 @@ module('Integration | Component | Import::Banner', function (hooks) {
           t('pages.organization-participants-import.banner.upload-completed', {
             firstName: 'Obi',
             lastName: 'Wan',
-            date: dayjs(createdAt).format('D MMM YYYY'),
+            date: intlService.formatDate(createdAt, { format: 'LLL' }),
           }),
           { exact: false },
         ),
@@ -125,7 +129,7 @@ module('Integration | Component | Import::Banner', function (hooks) {
           t('pages.organization-participants-import.banner.upload-completed', {
             firstName: 'Obi',
             lastName: 'Wan',
-            date: dayjs(createdAt).format('D MMM YYYY'),
+            date: intlService.formatDate(createdAt, { format: 'LLL' }),
           }),
           { exact: false },
         ),
@@ -161,7 +165,7 @@ module('Integration | Component | Import::Banner', function (hooks) {
           t('pages.organization-participants-import.global-success', {
             firstName: 'Richard',
             lastName: 'Aldana',
-            date: dayjs(organizationImportDetail.updatedAt).format('D MMM YYYY'),
+            date: intlService.formatDate(organizationImportDetail.updatedAt, { format: 'LLL' }),
           }),
         ),
       );
@@ -188,7 +192,7 @@ module('Integration | Component | Import::Banner', function (hooks) {
           t('pages.organization-participants-import.global-success', {
             firstName: 'Richard',
             lastName: 'Aldana',
-            date: dayjs(organizationImportDetail.updatedAt).format('D MMM YYYY'),
+            date: intlService.formatDate(organizationImportDetail.updatedAt, { format: 'LLL' }),
           }),
         ),
       );
@@ -253,7 +257,7 @@ module('Integration | Component | Import::Banner', function (hooks) {
           t('pages.organization-participants-import.banner.upload-completed', {
             firstName: 'Dark',
             lastName: 'Vador',
-            date: dayjs(createdAt).format('D MMM YYYY'),
+            date: intlService.formatDate(createdAt, { format: 'LLL' }),
           }),
           { exact: false },
         ),
@@ -298,7 +302,7 @@ module('Integration | Component | Import::Banner', function (hooks) {
           t('pages.organization-participants-import.banner.upload-completed', {
             firstName: 'Dark',
             lastName: 'Vador',
-            date: dayjs(createdAt).format('D MMM YYYY'),
+            date: intlService.formatDate(createdAt, { format: 'LLL' }),
           }),
           { exact: false },
         ),

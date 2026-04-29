@@ -1,5 +1,6 @@
-import { clickByName, fillByLabel, getDefaultNormalizer, render } from '@1024pix/ember-testing-library';
+import { clickByName, fillByLabel, render } from '@1024pix/ember-testing-library';
 import EmberObject from '@ember/object';
+import { getDefaultNormalizer } from '@testing-library/dom';
 import { t } from 'ember-intl/test-support';
 import SupOrganizationParticipantModalEditStudentNumberModal from 'pix-orga/components/sup-organization-participant/modal/edit-student-number-modal';
 import { module, test } from 'qunit';

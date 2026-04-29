@@ -1,7 +1,6 @@
 import { clickByName, getByTextWithHtml, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
-import dayjs from 'dayjs';
 import { t } from 'ember-intl/test-support';
 import Statistics from 'pix-orga/components/statistics/index';
 import { module, test } from 'qunit';
@@ -27,13 +26,14 @@ module('Integration | Component | Statistics | Index', function (hooks) {
           },
         ],
       };
+      const intlService = this.owner.lookup('service:intl');
 
       //when
       const screen = await render(<template><Statistics @model={{model}} /></template>);
 
       //then
       assert.ok(screen.getByRole('heading', { name: t('pages.statistics.title'), level: 1 }));
-      assert.ok(screen.getByText(dayjs(extractionDate).format('D MMM YYYY'), { exact: false }));
+      assert.ok(screen.getByText(intlService.formatDate(extractionDate, { format: 'LLL' }), { exact: false }));
     });
 
     test('it should display table headers', async function (assert) {
@@ -334,13 +334,14 @@ module('Integration | Component | Statistics | Index', function (hooks) {
       const model = {
         data: [],
       };
+      const intlService = this.owner.lookup('service:intl');
 
       //when
       const screen = await render(<template><Statistics @model={{model}} /></template>);
 
       //then
       assert.ok(screen.getByRole('heading', { name: t('pages.statistics.title'), level: 1 }));
-      assert.notOk(screen.queryByText(dayjs(extractionDate).format('D MMM YYYY'), { exact: false }));
+      assert.notOk(screen.queryByText(intlService.formatDate(extractionDate, { format: 'LLL' }), { exact: false }));
     });
 
     test('should display empty state if data did not exists', async function (assert) {

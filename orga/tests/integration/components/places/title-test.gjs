@@ -1,5 +1,4 @@
 import { render } from '@1024pix/ember-testing-library';
-import dayjs from 'dayjs';
 import { t } from 'ember-intl/test-support';
 import Title from 'pix-orga/components/places/title';
 import { module, test } from 'qunit';
@@ -22,7 +21,8 @@ module('Integration | Component | Places::Title', function (hooks) {
 
   test('it should display date of today', async function (assert) {
     // given
-    const today = dayjs();
+    const today = new Date();
+    const intlService = this.owner.lookup('service:intl');
 
     // when
     const screen = await render(<template><Title /></template>);
@@ -30,6 +30,6 @@ module('Integration | Component | Places::Title', function (hooks) {
     // then
     assert.ok(screen.getByText(t('pages.places.title')));
     assert.ok(screen.getByText(t('pages.places.before-date'), { exact: false }));
-    assert.ok(screen.getByText(today.format('DD MMM YYYY'), { exact: false }));
+    assert.ok(screen.getByText(intlService.formatDate(today, { format: 'LLL' }), { exact: false }));
   });
 });

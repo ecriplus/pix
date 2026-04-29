@@ -1,12 +1,17 @@
 import { setupTest } from 'ember-qunit';
+import DisplayCampaignErrors from 'pix-orga/helpers/display-campaign-errors';
 import { module, test } from 'qunit';
+
+import setupIntl from '../../helpers/setup-intl';
 
 module('Unit | Helper | display-campaign-errors', function (hooks) {
   setupTest(hooks);
+  setupIntl(hooks);
+
   let helper;
   hooks.beforeEach(function () {
     this.owner.lookup('service:locale').setCurrentLocale('fr');
-    helper = this.owner.factoryFor('helper:display-campaign-errors').create();
+    helper = new DisplayCampaignErrors(this.owner);
   });
 
   module('when there is an error', function () {

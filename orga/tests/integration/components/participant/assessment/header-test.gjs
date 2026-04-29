@@ -1,5 +1,6 @@
-import { getDefaultNormalizer, render, within } from '@1024pix/ember-testing-library';
+import { render, within } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
+import { getDefaultNormalizer } from '@testing-library/dom';
 import { t } from 'ember-intl/test-support';
 import ParticipantAssessmentHeader from 'pix-orga/components/participant/assessment/header';
 import { module, test } from 'qunit';

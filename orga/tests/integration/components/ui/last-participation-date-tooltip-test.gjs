@@ -1,4 +1,5 @@
-import { getDefaultNormalizer, render } from '@1024pix/ember-testing-library';
+import { render } from '@1024pix/ember-testing-library';
+import { getDefaultNormalizer } from '@testing-library/dom';
 import { t } from 'ember-intl/test-support';
 import LastParticipationDateTooltip from 'pix-orga/components/ui/last-participation-date-tooltip';
 import { module, test } from 'qunit';

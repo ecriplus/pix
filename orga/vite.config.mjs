@@ -14,7 +14,7 @@ export default defineConfig({
           url: (asset) => {
             if (asset.url.startsWith('../@1024pix/')) {
               // Pix UI static files are referenced by url starting with "../"
-              // but vite is bunlding those files in root asset folder
+              // but vite is bundling those files in root asset folder
               // so we need to remove the "../" prefix
               // ../@1024pix/pix-ui/fonts/Nunito/Nunito-Bold.woff2
               return asset.url.replace('..', '');
