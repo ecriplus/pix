@@ -233,7 +233,60 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
   });
 
   describe('getByShortId', function () {
-    describe('errors', function () {
+    describe('when isFetchingModulesFromLearningContentEnabled feature toggle is false', function () {
+      beforeEach(async function () {
+        await featureToggles.set('isFetchingModulesFromLearningContentEnabled', false);
+        await setImmediate();
+      });
+
+      describe('errors', function () {
+        it('should throw a NotFoundError if the module does not exist', async function () {
+          // given
+          const nonExistingModuleShortId = 'm4tthia5';
+
+          // when
+          const error = await catchErr(moduleRepository.getByShortId)({
+            shortId: nonExistingModuleShortId,
+            moduleDatasource,
+          });
+
+          // then
+          expect(error).to.be.instanceOf(NotFoundError);
+        });
+
+        it('should throw an Error if module does not build correctly', async function () {
+          // given
+          const moduleDatasourceStub = {
+            getByShortId: async () => {
+              return {
+                id: 1,
+                shortId: 'm4tthia5',
+                slug: 'incomplete module',
+              };
+            },
+          };
+
+          sinon.stub(ModuleFactory, 'build').throws(new ModuleInstantiationError());
+
+          // when
+          const error = await catchErr(moduleRepository.getByShortId)({
+            shortId: 'm4tthia5',
+            moduleDatasource: moduleDatasourceStub,
+          });
+
+          // then
+          expect(error).not.to.be.instanceOf(NotFoundError);
+          expect(error).to.be.instanceOf(ModuleInstantiationError);
+        });
+      });
+    });
+
+    describe('when isFetchingModulesFromLearningContentEnabled feature toggle is true', function () {
+      beforeEach(async function () {
+        await featureToggles.set('isFetchingModulesFromLearningContentEnabled', true);
+        await setImmediate();
+      });
+
       it('should throw a NotFoundError if the module does not exist', async function () {
         // given
         const nonExistingModuleShortId = 'm4tthia5';
@@ -241,35 +294,24 @@ describe('Integration | DevComp | Repositories | ModuleRepository', function () 
         // when
         const error = await catchErr(moduleRepository.getByShortId)({
           shortId: nonExistingModuleShortId,
-          moduleDatasource,
         });
 
         // then
         expect(error).to.be.instanceOf(NotFoundError);
       });
-      it('should throw an Error if module does not build correctly', async function () {
-        // given
-        const moduleDatasourceStub = {
-          getByShortId: async () => {
-            return {
-              id: 1,
-              shortId: 'm4tthia5',
-              slug: 'incomplete module',
-            };
-          },
-        };
 
-        sinon.stub(ModuleFactory, 'build').throws(new ModuleInstantiationError());
+      it('reads the module from DB', async function () {
+        // given
+        const shortId = 'm4tthia5';
+        const expectedModule = databaseBuilder.factory.learningContent.buildModule({ shortId });
+        await databaseBuilder.commit();
 
         // when
-        const error = await catchErr(moduleRepository.getByShortId)({
-          shortId: 'm4tthia5',
-          moduleDatasource: moduleDatasourceStub,
-        });
+        const module = await moduleRepository.getByShortId({ shortId });
 
         // then
-        expect(error).not.to.be.instanceOf(NotFoundError);
-        expect(error).to.be.instanceOf(ModuleInstantiationError);
+        expect(module).to.be.instanceOf(Module).and.deep.contain(expectedModule);
+        expect(module.version).to.be.a('string').of.length(64);
       });
     });
   });
