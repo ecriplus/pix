@@ -1,5 +1,35 @@
 # Pix Changelog
 
+# [5.397.0](https://github.com/1024pix/pix/compare/v5.396.0...v5.397.0) (2026-04-29)
+
+### :rocket: Amélioration
+
+- [#16051](https://github.com/1024pix/pix/pull/16051) : modifs 1er relecture JRO Antivirus IND 
+- [#16046](https://github.com/1024pix/pix/pull/16046) Afficher le nombre de campagnes sur l'onglet dans la page de détail d'une organisation (PIX-21446) 
+- [#16040](https://github.com/1024pix/pix/pull/16040) Ajouter une navigation par type d'object du catalogue (PIX-22346) 
+- [#16010](https://github.com/1024pix/pix/pull/16010) Donner accès aux autres rôles à la liste des réseaux (PIX-22120) 
+- [#16048](https://github.com/1024pix/pix/pull/16048) Mettre à jour les liens du centre d'aide dans Pix Orga (PIX-22529) 
+- [#16042](https://github.com/1024pix/pix/pull/16042) Prendre en compte les modules en provenance de la release LCMS (PIX-22267) 
+- [#16052](https://github.com/1024pix/pix/pull/16052) relecture finale mdp_nov 
+- [#16030](https://github.com/1024pix/pix/pull/16030) Visio_IND Intégrer des retours suite aux relectures éval et édito 
+- [#16037](https://github.com/1024pix/pix/pull/16037) Voir le nombre d'invitations en attente sur la page de détail d'un centre de certification (PIX-21450) 
+
+### :bug: Correction
+
+- [#16043](https://github.com/1024pix/pix/pull/16043) Gérer l'erreur 500 à la création d'un parcours combiné sans blueprint (PIX-22481) 
+- [#16039](https://github.com/1024pix/pix/pull/16039) Sélectionner uniquement les orgas actives d'un centre de certif (PIX-22543). 
+
+### :building_construction: Tech
+
+- [#16047](https://github.com/1024pix/pix/pull/16047) Fix du test flaky pour la selection d'attestations (PIX-22470) 
+- [#16050](https://github.com/1024pix/pix/pull/16050) Lire les paliers acquis depuis la base de données (PIX-22419) 
+- [#16045](https://github.com/1024pix/pix/pull/16045) Supprime le critère SkillProfile qui n'est plus utilisé en production (PIX-22553) 
+
+### :arrow_up: Montée de version
+
+- [#16041](https://github.com/1024pix/pix/pull/16041) Update dependency @1024pix/pix-ui to ^60.10.0 (mon-pix) 
+- [#16053](https://github.com/1024pix/pix/pull/16053) Update dependency oxfmt to ^0.46.0 (api)
+
 # [5.396.0](https://github.com/1024pix/pix/compare/v5.395.0...v5.396.0) (2026-04-28)
 
 ### :rocket: Amélioration
