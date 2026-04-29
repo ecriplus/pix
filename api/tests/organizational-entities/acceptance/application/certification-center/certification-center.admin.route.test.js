@@ -408,11 +408,9 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
       expect(disabledMembership.updatedByUserId).to.equal(superAdmin.id);
       expect(disabledMembership.disabledAt).to.deep.equal(archivedCenter.archivedAt);
 
-      const cancelledInvitation = await knex('certification-center-invitations')
-        .where({ certificationCenterId })
-        .first();
-      expect(cancelledInvitation.status).to.deep.equal('cancelled');
-      expect(cancelledInvitation.updatedAt).to.deep.equal(archivedCenter.archivedAt);
+      const deletedInvitation = await knex('certification-center-invitations').where({ certificationCenterId });
+
+      expect(deletedInvitation).to.be.empty;
     });
   });
 

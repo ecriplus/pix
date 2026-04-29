@@ -49,9 +49,9 @@ describe('Integration | Organizational Entities | Domain | UseCase | archive-cer
     const disabledCertificationCenterMembership = await knex('certification-center-memberships')
       .where({ certificationCenterId: certificationCenter.id })
       .first();
-    const cancelledCertificationCenterInvitation = await knex('certification-center-invitations')
-      .where({ certificationCenterId: certificationCenter.id })
-      .first();
+    const deletedCertificationCenterInvitation = await knex('certification-center-invitations').where({
+      certificationCenterId: certificationCenter.id,
+    });
 
     // then
     expect(archivedCertificationCenter.archivedAt).to.deep.equal(now);
@@ -62,8 +62,7 @@ describe('Integration | Organizational Entities | Domain | UseCase | archive-cer
     expect(disabledCertificationCenterMembership.updatedByUserId).to.deep.equal(superAdminUser.id);
     expect(disabledCertificationCenterMembership.updatedAt).to.deep.equal(lastUpdateBeforeArchive);
 
-    expect(cancelledCertificationCenterInvitation.status).to.deep.equal('cancelled');
-    expect(cancelledCertificationCenterInvitation.updatedAt).to.deep.equal(now);
+    expect(deletedCertificationCenterInvitation).to.be.empty;
 
     clock.restore();
   });
