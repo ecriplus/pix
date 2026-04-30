@@ -2,7 +2,7 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
-    reporters: process.env.CI ? 'junit' : 'default',
+    reporters: ['default', process.env.CI ? 'junit' : {}],
     outputFile: process.env.CI ? './test-results/report.xml' : undefined,
     globals: true,
     clearMocks: true,
