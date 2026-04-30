@@ -16,6 +16,7 @@ const defaultSections = [
               id: 'd5e369ec-2a5e-4692-ac46-5be5a49f2acd',
               type: 'text',
               tag: 'context',
+              isAnswerable: false,
               content: "<p>Ceci&nbsp;est un contenu pour les amateurs de coquille d'escargots.</p>",
             },
           },
@@ -45,12 +46,12 @@ export function buildModule({
   glossary = [
     {
       word: 'coquille',
-      description:
+      definition:
         "Une coquille est un agglomérat de calcaire très résistant. Sa structure cristalline spécifique lui confère une résistance protectrice. Elle prodique à l'escargot toute sa force et sa vitalité.",
     },
   ],
 } = {}) {
-  return buildModuleInDB({
+  const values = {
     id,
     shortId,
     slug,
@@ -60,7 +61,9 @@ export function buildModule({
     details,
     sections,
     glossary,
-  });
+  };
+  buildModuleInDB(values);
+  return values;
 }
 
 export function buildModuleWithNoDefaultValues({
@@ -74,7 +77,7 @@ export function buildModuleWithNoDefaultValues({
   sections,
   glossary,
 }) {
-  return buildModuleInDB({
+  const values = {
     id,
     shortId,
     slug,
@@ -84,7 +87,9 @@ export function buildModuleWithNoDefaultValues({
     details,
     sections,
     glossary,
-  });
+  };
+  buildModuleInDB(values);
+  return values;
 }
 
 function buildModuleInDB({ id, shortId, slug, title, isBeta, visibility, details, sections, glossary }) {

@@ -4,7 +4,7 @@ import { buildCompetence, buildCompetenceWithNoDefaultValues } from './build-com
 import { buildCourse, buildCourseWithNoDefaultValues } from './build-course.js';
 import { buildFramework, buildFrameworkWithNoDefaultValues } from './build-framework.js';
 import { buildMission, buildMissionWithNoDefaultValues } from './build-mission.js';
-import { buildModule, buildModuleWithNoDefaultValues } from './build-modules.js';
+import { buildModule, buildModuleWithNoDefaultValues } from './build-module.js';
 import { buildSkill, buildSkillWithNoDefaultValues } from './build-skill.js';
 import { buildThematic, buildThematicWithNoDefaultValues } from './build-thematic.js';
 import { buildTube, buildTubeWithNoDefaultValues } from './build-tube.js';

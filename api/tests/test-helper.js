@@ -9,6 +9,7 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
 import { disconnect as disconnectKnex } from '../db/knex-database-connection.js';
+import * as moduleRepository from '../src/devcomp/infrastructure/repositories/module-repository.js';
 import * as tutorialRepository from '../src/devcomp/infrastructure/repositories/tutorial-repository.js';
 import * as missionRepository from '../src/school/infrastructure/repositories/mission-repository.js';
 import { featureToggles } from '../src/shared/infrastructure/feature-toggles/index.js';
@@ -60,6 +61,7 @@ afterEach(async function () {
   courseRepository.clearCache();
   tutorialRepository.clearCache();
   missionRepository.clearCache();
+  moduleRepository.clearCache();
   await featureToggles.resetDefaults();
   await clearMutex();
   try {

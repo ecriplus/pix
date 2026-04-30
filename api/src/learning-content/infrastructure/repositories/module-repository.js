@@ -1,3 +1,4 @@
+import { clearCache } from '../../../devcomp/infrastructure/repositories/module-repository.js';
 import { LearningContentRepository } from './learning-content-repository.js';
 
 class ModuleRepository extends LearningContentRepository {
@@ -19,8 +20,8 @@ class ModuleRepository extends LearningContentRepository {
     };
   }
 
-  clearCache(_id) {
-    // FIXME
+  clearCache(id) {
+    clearCache(id);
   }
 }
 
