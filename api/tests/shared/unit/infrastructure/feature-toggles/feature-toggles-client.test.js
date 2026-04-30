@@ -213,6 +213,7 @@ describe('Unit | Infrastructure | FeatureToggles | FeatureTogglesClient', functi
         it('returns the up to date value of the feature toggle', async function () {
           // given
           const values = ['fizz', 'buzz', 'fizzbuzz'];
+          const expectedValues = [...values, config[key].defaultValue];
 
           // when
           const readValues = [];
@@ -221,9 +222,12 @@ describe('Unit | Infrastructure | FeatureToggles | FeatureTogglesClient', functi
             await setImmediate(); // let the event loop run pubsub
             readValues.push(featureToggleRef.value);
           }
+          await featureToggles.resetDefaults();
+          await setImmediate(); // let the event loop run pubsub
+          readValues.push(featureToggleRef.value);
 
           // then
-          expect(readValues).to.deep.equal(values);
+          expect(readValues).to.deep.equal(expectedValues);
         });
       });
 
@@ -232,6 +236,12 @@ describe('Unit | Infrastructure | FeatureToggles | FeatureTogglesClient', functi
           // given
           const callback = sinon.stub();
           const values = ['fizz', 'buzz', 'fizzbuzz'];
+          const expectedCalls = [
+            [values[0], config[key].defaultValue],
+            [values[1], values[0]],
+            [values[2], values[1]],
+            [config[key].defaultValue, values[2]],
+          ];
 
           // when
           const unwatch = featureToggleRef.watch(callback);
@@ -239,15 +249,19 @@ describe('Unit | Infrastructure | FeatureToggles | FeatureTogglesClient', functi
             await featureToggles.set(key, value);
             await setImmediate(); // let the event loop run pubsub
           }
+          await featureToggles.resetDefaults();
+          await setImmediate(); // let the event loop run pubsub
           unwatch();
           await featureToggles.set(key, 'not received');
           await setImmediate(); // let the event loop run pubsub
+          await featureToggles.resetDefaults();
+          await setImmediate(); // let the event loop run pubsub
 
           // then
-          expect(callback).to.have.been.calledThrice;
-          expect(callback.firstCall).to.have.been.calledWithExactly(values[0], config[key].defaultValue);
-          expect(callback.secondCall).to.have.been.calledWithExactly(values[1], values[0]);
-          expect(callback.thirdCall).to.have.been.calledWithExactly(values[2], values[1]);
+          expect(callback).to.have.callCount(expectedCalls.length);
+          expectedCalls.forEach((args, i) => {
+            expect(callback.getCall(i)).to.have.been.calledWithExactly(...args);
+          });
         });
       });
     });
@@ -287,6 +301,7 @@ describe('Unit | Infrastructure | FeatureToggles | FeatureTogglesClient', functi
       const featureToggles = new FeatureTogglesClient(storage, undefined, topic);
       await featureToggles.init(config);
       await featureToggles.set('myToggle1', true);
+      topic.publish.reset();
 
       // when
       await featureToggles.resetDefaults();
@@ -294,6 +309,8 @@ describe('Unit | Infrastructure | FeatureToggles | FeatureTogglesClient', functi
 
       // then
       expect(all).to.deep.equal({ myToggle1: false, myToggle2: true, myToggle3: 'foo' });
+
+      expect(topic.publish).to.have.been.calledOnceWithExactly({ type: 'resetDefaults' });
     });
 
     context('when in test environement', function () {
@@ -311,6 +328,7 @@ describe('Unit | Infrastructure | FeatureToggles | FeatureTogglesClient', functi
         });
         await featureToggles.set('myToggle1', true);
         await featureToggles.set('myToggle2', false);
+        topic.publish.reset();
 
         // when
         await featureToggles.resetDefaults();
@@ -318,6 +336,8 @@ describe('Unit | Infrastructure | FeatureToggles | FeatureTogglesClient', functi
         // then
         const all = await featureToggles.all();
         expect(all).to.deep.equal({ myToggle1: false, myToggle2: true });
+
+        expect(topic.publish).to.have.been.calledOnceWithExactly({ type: 'resetDefaults' });
       });
     });
 
@@ -336,6 +356,7 @@ describe('Unit | Infrastructure | FeatureToggles | FeatureTogglesClient', functi
         });
         await featureToggles.set('myToggle1', true);
         await featureToggles.set('myToggle2', false);
+        topic.publish.reset();
 
         // when
         await featureToggles.resetDefaults();
@@ -343,6 +364,8 @@ describe('Unit | Infrastructure | FeatureToggles | FeatureTogglesClient', functi
         // then
         const all = await featureToggles.all();
         expect(all).to.deep.equal({ myToggle1: false, myToggle2: true });
+
+        expect(topic.publish).to.have.been.calledOnceWithExactly({ type: 'resetDefaults' });
       });
     });
   });
