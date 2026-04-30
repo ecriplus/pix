@@ -3,6 +3,10 @@
     margin-bottom: var(--pix-spacing-4x);
   }
 
+  &__filters {
+    margin-bottom: var(--pix-spacing-4x);
+  }
+
   &__list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));

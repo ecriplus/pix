@@ -1019,6 +1019,18 @@
         "tubes-count": "{count, plural, =0 {Nessun argomento} =1 {{count} argomento} other {{count} argomenti}}"
       },
       "empty-state": "Nessun percorso disponibile al momento. Contattare Pix per ottenerne.",
+      "filters": {
+        "aria-label": "Filtri sui percorsi",
+        "categories": {
+          "empty": "Nessuna categoria",
+          "label": "Categorie"
+        },
+        "name": {
+          "label": "Nome del percorso",
+          "placeholder": "Percorso prima media"
+        },
+        "nb-result": "{count, plural, =0 {Nessun percorso} =1 {{count} percorso} other {{count} percorsi}}"
+      },
       "tab-filters": {
         "all": "Tutti",
         "blueprints": "Percorsi di apprendimento",
