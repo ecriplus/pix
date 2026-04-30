@@ -4,10 +4,8 @@ import Route from '@ember/routing/route';
 export default class AuthenticatedCertificationCentersGetTeamRoute extends Route {
   async model() {
     const { certificationCenter } = this.modelFor('authenticated.certification-centers.get');
-    await certificationCenter.hasMany('certificationCenterMemberships').reload();
-
     return {
-      certificationCenterMemberships: certificationCenter.certificationCenterMemberships,
+      certificationCenterMemberships: await certificationCenter.certificationCenterMemberships,
       isCertificationCenterArchived: certificationCenter.isArchived,
       certificationCenterId: certificationCenter.id,
     };

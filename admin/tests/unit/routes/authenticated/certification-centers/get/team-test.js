@@ -14,7 +14,6 @@ module('Unit | Route | authenticated/certification-centers/get/team', function (
       id: 777,
       isArchived: false,
       certificationCenterMemberships,
-      hasMany: sinon.stub().returns({ reload: sinon.stub().resolves() }),
     };
 
     route.modelFor = sinon.stub();
@@ -24,7 +23,6 @@ module('Unit | Route | authenticated/certification-centers/get/team', function (
     const result = await route.model();
 
     // then
-    sinon.assert.calledWith(certificationCenter.hasMany, 'certificationCenterMemberships');
     assert.strictEqual(result.certificationCenterMemberships, certificationCenterMemberships);
     assert.strictEqual(result.certificationCenterId, 777);
   });
