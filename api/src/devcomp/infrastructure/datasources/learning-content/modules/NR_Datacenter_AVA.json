@@ -96,7 +96,7 @@
       "grains": [
         {
           "id": "f592f48b-2cad-4167-976e-deeaf05eb720",
-          "type": "short-lesson",
+          "type": "discovery",
           "title": "Introduction",
           "components": [
             {
@@ -590,7 +590,7 @@
                 "id": "6379f16a-320d-4217-8b85-e5190f6bc29b",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Mais, il n’y a pas que les concepteurs de site web qui peuvent agir.&nbsp;Il y a aussi les concepteurs des centres de données. Que peuvent-ils faire ?</p>"
+                "content": "<p>Il n’y a pas que les concepteurs de site web qui peuvent agir.&nbsp;Il y a aussi les concepteurs des centres de données. Que peuvent-ils faire ?</p>"
               }
             }
           ]
