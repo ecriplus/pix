@@ -1,0 +1,825 @@
+{
+  "id": "b080b39e-fa3d-4cd1-84b5-3f385d94f26d",
+  "shortId": "5c1088d0",
+  "slug": "liste-resultats-recherche",
+  "title": "Comprendre la liste des résultats d’une recherche sur internet",
+  "isBeta": false,
+  "visibility": "public",
+  "details": {
+    "image": "https://assets.pix.org/draft/modules/vg3Ro1F.png",
+    "description": "<p>Quand vous faites une recherche sur internet, une liste de résultats s’affiche. Dans ce module, vous allez apprendre à lire cette liste, à comprendre pourquoi certains résultats arrivent avant d’autres, et à repérer les publicités déguisées en résultats. 🥸</p>",
+    "duration": 10,
+    "level": "novice",
+    "objectives": [
+      "<p>Repérer les informations utiles dans un résultat de recherche</p>",
+      "<p>Comprendre pourquoi certains résultats apparaissent avant d’autres</p>",
+      "<p>Reconnaître un résultat sponsorisé</p>"
+    ],
+    "tabletSupport": "comfortable"
+  },
+  "sections": [
+    {
+      "id": "9c07e6d4-65ec-4e38-b8e4-8d8e65c30aef",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "f45ac838-7296-43e6-af00-50d9f65da893",
+          "type": "discovery",
+          "title": "Accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "1f2da8d0-e896-40a2-bb8d-8df954ff20b5",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Kevin fait une recherche sur internet.</p><p>Il veut savoir quand il est possible de visiter le Louvre de nuit. Il tape les mots-clés suivants&nbsp;: «&nbsp;<strong>Louvre visite de nuit date</strong>&nbsp;»</p><p>Une liste de résultats s’affiche.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "e041f233-dc18-46bc-91f4-ddc1d3f5573c",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_1.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "Image provisoire",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "3a78dc6a-9faa-4698-b049-8dc56f5c7299",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Il voit plusieurs pages web proposées, mais il ne sait pas laquelle choisir.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "127d0ade-245e-4eef-a67a-185abf45fec9",
+                "type": "qcu-discovery",
+                "instruction": "<p>Que pourriez-vous lui conseiller ?<br></p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Aller sur la première page, c’est toujours la meilleure.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non !&nbsp;</p><p>Sur une liste de résultats, il faut regarder avant de cliquer. Toutes les pages web ne se valent pas toujours.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Choisir au hasard, toutes les pages se valent.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non !&nbsp;</p><p>Sur une liste de résultats, il faut regarder avant de cliquer. Toutes les pages web ne se valent pas toujours.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Bien regarder les résultats avant de choisir.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Bien vu !&nbsp;</p><p>Sur une liste de résultats, il faut regarder avant de cliquer. Toutes les pages web ne se valent pas toujours.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.<br></p>",
+                    "feedback": {
+                      "diagnosis": "<p>Sur une liste de résultats, il faut regarder avant de cliquer. Toutes les pages web ne se valent pas toujours.</p>"
+                    }
+                  }
+                ],
+                "solution": "3"
+              }
+            }
+          ]
+        },
+        {
+          "id": "1b3c4015-c2b7-4d2c-a460-b125be4a89ef",
+          "type": "transition",
+          "title": "Transistion 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "9825419c-3a51-40cc-876d-1ace3ea6e03e",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Voyons maintenant ce que l’on peut repérer dans un résultat de recherche.<br></p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "89b6d88a-71b8-4bf7-976f-2540113e48dd",
+      "type": "explore-to-understand",
+      "grains": [
+        {
+          "id": "3e1e8e6c-c722-4d3a-abe7-2f9c4492f969",
+          "type": "discovery",
+          "title": "Découverte 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "7c1d8e0e-1270-4f58-b10a-73bcbb5ed17d",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Voici un résultat de recherche. Observez les informations qu'il contient puis répondez à la question qui suit.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "3469a8ff-a411-4db4-be95-e7be5802c782",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/chat-gpt-image-28-avr-2026-14_58_02.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "Image provisoire",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "918de184-e46e-4836-ab06-ced1ff94e216",
+                "type": "qcu-discovery",
+                "instruction": "<p>Qu’est-ce qui peut aider Kevin à choisir une page web&nbsp;?</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Le nom du site web.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Pas tout à fait&nbsp;!</p>\n<p>Avant de cliquer, on peut déjà lire plusieurs informations :</p>\n<ul>\n    <li>Le <strong>nom du site web</strong> peut aider à savoir d’où vient l’information.</li>\n    <li>Le <strong>titre du résultat</strong> et l’<strong>extrait de la page web</strong> aident à comprendre de quoi parle la page web. </li>\n</ul>\n<p>Tous ces éléments peuvent aider à choisir une page web.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Le titre du résultat.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Pas tout à fait&nbsp;!</p>\n<p>Avant de cliquer, on peut déjà lire plusieurs informations :</p>\n<ul>\n    <li>Le <strong>nom du site web</strong> peut aider à savoir d’où vient l’information.</li>\n    <li>Le <strong>titre du résultat</strong> et l’<strong>extrait de la page web</strong> aident à comprendre de quoi parle la page web. </li>\n</ul>\n<p>Tous ces éléments peuvent aider à choisir une page web.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>L’extrait de la page web.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Pas tout à fait&nbsp;!</p>\n<p>Avant de cliquer, on peut déjà lire plusieurs informations :</p>\n<ul>\n    <li>Le <strong>nom du site web</strong> peut aider à savoir d’où vient l’information.</li>\n    <li>Le <strong>titre du résultat</strong> et l’<strong>extrait de la page web</strong> aident à comprendre de quoi parle la page web. </li>\n</ul>\n<p>Tous ces éléments peuvent aider à choisir une page web.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Tous ces éléments</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Bien vu&nbsp;!</p>\n<p>Avant de cliquer, on peut déjà lire plusieurs informations :</p>\n<ul>\n    <li>Le <strong>nom du site web</strong> peut aider à savoir d’où vient l’information.</li>\n    <li>Le <strong>titre du résultat</strong> et l’<strong>extrait de la page web</strong> aident à comprendre de quoi parle la page web. </li>\n</ul>\n<p>Tous ces éléments peuvent aider à choisir une page web.</p>"
+                    }
+                  },
+                  {
+                    "id": "5",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Avant de cliquer, on peut déjà lire plusieurs informations :</p>\n<ul>\n    <li>Le <strong>nom du site web</strong> peut aider à savoir d’où vient l’information.</li>\n    <li>Le <strong>titre du résultat</strong> et l’<strong>extrait de la page web</strong> aident à comprendre de quoi parle la page web. </li>\n</ul>\n<p>Tous ces éléments peuvent aider à choisir une page web.</p>"
+                    }
+                  }
+                ],
+                "solution": "4"
+              }
+            }
+          ]
+        },
+        {
+          "id": "cdd4ae83-dc12-4f69-9a09-5ed1943c71dc",
+          "type": "short-lesson",
+          "title": "leçon 1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "be068486-faf3-4128-9234-d6d6af7166da",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Quand on fait une <strong>recherche</strong>, on n’a pas seulement une <strong>liste de pages web</strong>. Chaque <strong>résultat</strong> donne déjà des <strong>indices utiles</strong>.</p><p>Ces <strong>informations</strong> aident à <strong>choisir quelle page visiter</strong>. Chaque résultat est associé à un <strong>lien</strong> qui permet d’<strong>accéder à la page</strong> lorsque l’on clique dessus.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "41c1dfa7-2028-48f2-b24f-fc10fa1f2adf",
+          "type": "transition",
+          "title": "Transition 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "40598e91-593c-4eb2-a875-b8a1dd1b11dd",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Vous savez maintenant lire les résultats d’une recherche sur internet. Mais on obtient souvent beaucoup de résultats&nbsp;: comment sont-ils classés ?<br></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "38443fa8-1e44-43b7-a08a-b48b0ed4941c",
+          "type": "discovery",
+          "title": "Découverte 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "a8160e77-0337-4ef5-bac7-fa2466f9f51d",
+                "type": "text",
+                "tag": "context",
+                "content": "<p>Kevin regarde la <strong>page de résultats</strong> pour sa recherche «&nbsp;<strong>Louvre visite de nuit date</strong>&nbsp;».</p><p>    Maintenant, il se pose une autre question&nbsp;:</p><blockquote>«&nbsp;Pourquoi ce lien est-il en premier ?&nbsp;Pourquoi celui-ci est plus bas ?&nbsp;»</blockquote><p>Lors d’une <strong>recherche sur internet</strong>, il peut y avoir des <strong>milliers de pages possibles</strong>. Imaginez que vous deviez <strong>choisir lesquelles afficher en premier</strong>.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "61def0e1-524c-4f36-bd45-276758efcb2e",
+                "type": "qcm",
+                "instruction": "<p>Quels critères utiliseriez-vous pour classer les pages web ?</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Afficher d’abord les pages qui répondent le mieux à la recherche</p>"
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Afficher d’abord les pages avec le plus d’images.</p>"
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Afficher d’abord les pages que beaucoup de sites ou d’utilisateurs consultent ou citent.</p>"
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Afficher d’abord les pages les plus récentes.</p>"
+                  },
+                  {
+                    "id": "5",
+                    "content": "<p>Afficher d’abord les pages les plus longues.</p>"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bien vu !&nbsp;<br></p>",
+                    "diagnosis": "<p>Les résultats qui apparaissent en premier sont souvent ceux qui répondent le mieux à la recherche, qui sont les plus connus ou les plus récents.&nbsp;</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Pas exactement !<br></p>",
+                    "diagnosis": "<p>Les résultats qui apparaissent en premier sont souvent ceux qui répondent le mieux à la recherche, qui sont les plus consultés ou cités et les plus récents.&nbsp;<br></p>"
+                  }
+                },
+                "solutions": [
+                  "1",
+                  "3",
+                  "4"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "19a7b02a-1507-4a23-a743-1891cbd8a851",
+          "type": "short-lesson",
+          "title": "Leçon 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "69a9c46e-904c-4d5c-99f8-9fa227d2894d",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Dans les <strong>résultats d’un moteur de recherche</strong>, l’<strong>ordre des pages web</strong> dépend de plusieurs <strong>critères</strong>.</p><p>Une page peut apparaître plus haut si elle est jugée&nbsp;:</p><ul>  <li><strong>pertinente</strong>&nbsp;: les <strong>mots-clés</strong> de votre recherche sont bien présents dans le résultat.</li>  <li><strong>populaire</strong>&nbsp;: d’autres <strong>sites font des liens</strong> vers cette page. Plus il y a de liens qui pointent vers une page, plus le moteur de recherche peut considérer qu’elle est <strong>importante</strong> ou <strong>reconnue</strong>.</li>  <li><strong>récente</strong>&nbsp;: elle a été <strong>publiée ou mise à jour récemment</strong>. C’est surtout utile pour les <strong>sujets qui changent vite</strong>.</li></ul>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "4bed406b-7cce-4ccc-b83b-351c32656fe3",
+                "type": "text",
+                "tag": "further-information",
+                "content": "<p>Parfois, d’autres critères peuvent aussi être utilisés. </p><p>Par exemple&nbsp;: l’endroit où vous êtes, ou les sites web que vous avez déjà visités.</p><p>Les résultats ne sont donc pas toujours les mêmes pour tout le monde.</p><br>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "930f234e-e3ce-4abd-a06b-41c2b2695b40",
+          "type": "transition",
+          "title": "Transition 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "2c3a8d41-727a-4018-8dfe-afa81fb05b45",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Nous avons vu que les résultats donnés par un moteur de recherche ne sont pas rangés au hasard.</p><p> Mais il reste une question. Est-ce que les premiers résultats respectent toujours ces critères de classement ? Voyons cela ensemble.&nbsp;</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "f7e01c50-6523-4ef2-90ff-b96effc942f0",
+          "type": "discovery",
+          "title": "Découverte 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "29a4e381-d8e3-443f-96f1-2b24feb3435a",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Kevin cherche maintenant à <strong>réserver sa visite de nuit</strong>.</p><p>Mais en faisant sa recherche «&nbsp;<strong>réserver visite de nuit Louvre</strong>&nbsp;», il se rend compte que certaines <strong>pages</strong> peuvent aussi apparaître <strong>tout en haut de la liste</strong>, alors qu’elles ne respectent pas les <strong>critères de pertinence</strong>, de <strong>popularité</strong> ou de <strong>date de mise à jour</strong>.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "ae0a0076-1b6f-48f7-95d7-4c356362abc4",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_2_triche.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "Image provisoire",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "2c723925-4f9a-48e7-9e5e-d97754d9d100",
+                "type": "qcu-discovery",
+                "instruction": "<p>Quel est le point commun entre ces résultats ?</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "2",
+                    "content": "<p>Ils sont certainement pertinents, mais on ne le voit pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non !</p><p>Ces résultats sont en haut, mais ce sont des <strong>annonces</strong>. Ce sont donc des <strong>publicités</strong>.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Ils cherchent à vendre quelque chose.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Bien vu !</p><p>Ces résultats sont en haut, mais ce sont des <strong>annonces</strong>. Ce sont donc des <strong>publicités</strong>.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Ce sont les pages sur lesquelles les gens cliquent le plus.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non !</p><p>Ces résultats sont en haut, mais ce sont des <strong>annonces</strong>. Ce sont donc des <strong>publicités</strong>.</p>"
+                    }
+                  },
+                  {
+                    "id": "5",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Ces résultats sont en haut, mais ce sont des <strong>annonces</strong>. Ce sont donc des <strong>publicités</strong>.</p>"
+                    }
+                  }
+                ],
+                "solution": "4"
+              }
+            }
+          ]
+        },
+        {
+          "id": "0176f764-db2a-41eb-9d96-18e3731a55eb",
+          "type": "short-lesson",
+          "title": "Leçon 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "46c04a44-e878-457f-8c1f-d9067d61e766",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Parfois, des <strong>résultats</strong> apparaissent <strong>en haut de la liste</strong> parce que des entreprises <strong>paient le moteur de recherche</strong> 🪙 ou <strong>achètent des mots-clés</strong> pour apparaître en tête de liste lorsque ces termes sont recherchés.</p><p>On les appelle des <strong>annonces</strong> ou des <strong>résultats sponsorisés</strong>.</p><p>C’est la <strong>principale source de revenus</strong> des moteurs de recherche.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "54df5ffc-d9f2-46d8-a40e-de78020c7921",
+                "type": "text",
+                "tag": "further-information",
+                "content": "<p>Ces <strong>annonces publicitaires</strong> apparaissent généralement dans une section nommée «&nbsp;<strong>Résultats sponsorisés</strong>&nbsp;» de la page de résultats ou avec une étiquette «&nbsp;<strong>Annonce</strong>&nbsp;» ou «&nbsp;<strong>Pub</strong>&nbsp;». Elles peuvent être discrètes ! 👁️</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8e940c69-38c9-4065-9ba1-551d9f4c09a1",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "78bc3ca8-78c0-433e-ab05-1fa23316ce90",
+          "type": "summary",
+          "title": "Récap",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "680df229-5d3e-4fbc-9f03-85acf5e8aa01",
+                "type": "text",
+                "tag": " ",
+                "content": "<ul>  <li>🌐 Dans un moteur de recherche, les <strong>résultats</strong> sont présentés sous forme d’une <strong>liste de pages web</strong>.</li>  <li>🔎 Avant de cliquer sur un résultat, on peut déjà lire des informations utiles&nbsp;: le <strong>nom du site</strong>, le <strong>titre de la page</strong> et un <strong>extrait</strong>.</li>  <li>📊 L’ordre des résultats n’est pas choisi au hasard, le moteur de recherche mettra en haut de la liste les pages les plus <strong>pertinentes</strong>, les plus populaires ou les plus récentes.</li>  <li>📢 Certains résultats sont des <strong>annonces</strong>&nbsp;: ils apparaissent au début de la liste, car les propriétaires de ces pages ont payé pour les mettre en premier.</li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dbd49b4d-3bdd-4bfd-ac5a-6c2a6aa59234",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "84f947be-662e-4ada-a751-8ba111cb7931",
+          "type": "activity",
+          "title": "Activité 1 ",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "2c9c2cfd-19f9-41c4-8f33-ba39c3bdf951",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Voyons ensemble si vous avez retenu l’essentiel !&nbsp;<br></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "137f4b49-dcc3-401d-9724-b9118781b6d5",
+                "type": "text",
+                "tag": " ",
+                "content": "<p><strong>Samira</strong> s’intéresse à l’<strong>histoire de la planète Saturne</strong>. Elle fait une <strong>recherche</strong>. Elle obtient le <strong>résultat suivant</strong> mais décide de l’<strong>ignorer</strong>. </p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "7a31243d-0b62-4fd4-b498-8179024fc39d",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_3.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "Image provisoire",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "4ac3d276-b987-4fb2-8f09-896ffacf3c56",
+                "type": "qcu",
+                "instruction": "<p>Quel est l’élément du résultat qui pose problème ?<br></p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Le nom du site web.</p>",
+                    "feedback": {
+                      "state": "<p>Eh non !&nbsp;<br></p>",
+                      "diagnosis": "<p>Larousse est un dictionnaire et une encyclopédie très connu qui peut contenir des informations intéressantes par rapport au besoin de Samira.<br><br></p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Le titre du résultat.</p>",
+                    "feedback": {
+                      "state": "<p>Eh non !<br></p>",
+                      "diagnosis": "<p>Mauvaise réponse. Le titre du résultat correspond bien aux mots-clés de la recherche de Samira.<br><br></p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>L’extrait de la page web.</p>",
+                    "feedback": {
+                      "state": "<p>Bien vu !&nbsp;<br></p>",
+                      "diagnosis": "<p>L’extrait de la page web parle du dieu romain Saturne et non pas de la planète Saturne.</p>"
+                    }
+                  }
+                ],
+                "solution": "3"
+              }
+            }
+          ]
+        },
+        {
+          "id": "0bc04870-8032-498f-9d69-bb6c2c43a9de",
+          "type": "activity",
+          "title": "Activité 2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "9472a4c5-3247-4f64-bd43-aac76087d717",
+                "type": "text",
+                "tag": " ",
+                "content": "<p><strong>Gaëtan</strong> fait une <strong>recherche</strong> pour suivre les <strong>actualités sur les dernières missions spatiales</strong>. Il tape dans son moteur de recherche «&nbsp;<strong>actualité spatiale</strong>&nbsp;»</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "b967f928-7378-44b7-ba32-bcb689be03db",
+                "type": "custom",
+                "title": "Carrousel résultats recherche",
+                "instruction": "<p>Voici 4 résultats qui pourraient apparaitre dans la liste de résultats suite à la recherche de Gaëtan.<br></p>",
+                "functionalInstruction": "<p>Analysez bien ces résultats pour savoir lequel est le plus adapté pour la recherche effectuée.&nbsp;</p>",
+                "tagName": "pix-carousel",
+                "props": {
+                  "type": "image",
+                  "slides": [
+                    {
+                      "title": "Le site DW.com",
+                      "description": "",
+                      "displayWidth": 500,
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_4.png",
+                        "alt": ""
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "Le blog Espace et Exploration.",
+                      "description": "",
+                      "displayWidth": 500,
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_5.png",
+                        "alt": ""
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "Le site Aerocontact.com.",
+                      "description": "",
+                      "displayWidth": 500,
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_6.png",
+                        "alt": ""
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "Le site de l’Agence spatiale européenne (ESA).",
+                      "description": "",
+                      "displayWidth": 500,
+                      "image": {
+                        "src": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_7.png",
+                        "alt": ""
+                      },
+                      "license": {
+                        "name": "",
+                        "attribution": "",
+                        "url": ""
+                      }
+                    }
+                  ],
+                  "randomSlides": false,
+                  "titleLevel": 0,
+                  "disableAnimation": false,
+                  "disableStyleAroundImage": false,
+                  "enableLoop": false,
+                  "imageTextDisplay": ""
+                }
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "43762795-d2a4-4494-bc65-dce8bf989a21",
+                "type": "qcu",
+                "instruction": "<p>À votre avis, lequel de ces 4 sites va apparaitre en premier sur la <strong>liste de résultats</strong> que va obtenir Gaëtan ?&nbsp;</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Le site DW.com.</p>",
+                    "feedback": {
+                      "state": "<p>Eh non !</p>",
+                      "diagnosis": "<p>Ce contenu est ancien. Les moteurs de recherche privilégient souvent des informations plus récentes.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Le blog Espace et Exploration.</p>",
+                    "feedback": {
+                      "state": "<p>Eh non !</p>",
+                      "diagnosis": "<p>Le contenu est pertinent, mais le site manque de popularité, ce qui peut le faire apparaître plus bas.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Le site Aerocontact.com.</p>",
+                    "feedback": {
+                      "state": "<p>Eh non !</p>",
+                      "diagnosis": "<p>Ce résultat ne correspond pas à la recherche. Il n’est pas pertinent.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Le site de l’Agence spatiale européenne (ESA).</p>",
+                    "feedback": {
+                      "state": "<p>Bien vu !</p>",
+                      "diagnosis": "<p>Ce site est pertinent, populaire et à jour. Il a donc plus de chances d’apparaître en premier.</p>"
+                    }
+                  }
+                ],
+                "solution": "4"
+              }
+            }
+          ]
+        },
+        {
+          "id": "d0dcbbe1-3af2-4ecd-95c6-1a59a4caeea8",
+          "type": "activity",
+          "title": "Activité 3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "8df412b1-0028-41d8-9a5a-99eadeec53f7",
+                "type": "qab",
+                "instruction": "<p>Pour chacun des résultats suivants, dites s’il s’agit d’un résultat sponsorisé ou non.</p>",
+                "cards": [
+                  {
+                    "id": "d048204e-82f0-4f43-b2bd-7b5a85a040d3",
+                    "text": "",
+                    "image": {
+                      "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_qab1.png",
+                      "altText": ""
+                    },
+                    "proposalA": "Résultat sponsorisé",
+                    "proposalB": "Résultat non sponsorisé",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "025f653d-0a10-452d-a622-99f8317cf4f3",
+                    "text": "",
+                    "image": {
+                      "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_qab2.png",
+                      "altText": ""
+                    },
+                    "proposalA": "Résultat sponsorisé",
+                    "proposalB": "Résultat non sponsorisé",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "d57a9450-4775-4a46-9bbc-b80c5cf87f55",
+                    "text": "",
+                    "image": {
+                      "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_qab3_pixbanque.png",
+                      "altText": ""
+                    },
+                    "proposalA": "Résultat sponsorisé",
+                    "proposalB": "Résultat non sponsorisé",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "244e07e6-d625-4d65-bf6f-55741fc8e892",
+                    "text": "",
+                    "image": {
+                      "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_qab4.png",
+                      "altText": ""
+                    },
+                    "proposalA": "Résultat sponsorisé",
+                    "proposalB": "Résultat non sponsorisé",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "bdfc6dfe-09e8-4c64-aefd-3250dc11d3a0",
+                    "text": "",
+                    "image": {
+                      "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_qab5.png",
+                      "altText": ""
+                    },
+                    "proposalA": "Résultat sponsorisé",
+                    "proposalB": "Résultat non sponsorisé",
+                    "solution": "B"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": ""
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "0f9c483f-7c12-474f-88f0-d995ac5a65b4",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "df2301ac-866d-4a54-94a0-b59b03676d51",
+          "type": "activity",
+          "title": "Tranfert",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "12fd500d-89e0-4a9d-8d4f-aa8df8a48c6c",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Voici une page de résultats d'un moteur de recherche.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "6b7ce646-4d3e-42aa-8fa8-41e0b669c5dd",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/morech2_transfert.png",
+                "alt": "Page de résultats d'un moteur de recherche",
+                "alternativeText": "<p><br></p>",
+                "legend": "Image provisoire",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "c6aef7b8-d2dc-4404-9b71-cafcaebee1b7",
+                "type": "qcu-declarative",
+                "instruction": "<p>Que feriez-vous ?</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "0",
+                    "content": "<p>Je choisis le premier résultat car je veux trouver une histoire qui se passe au Moyen Âge pour les enfants.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p>\n<p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
+                    }
+                  },
+                  {
+                    "id": "1",
+                    "content": "<p>Je choisis le deuxième résultat car je veux en savoir plus sur la vie des enfants au Moyen Âge.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p>\n<p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Je choisis le troisième résultat car je veux des vidéos adaptées aux enfants.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p>\n<p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Je reformule ma recherche car je ne m’intéresse pas au Moyen Âge mais à l’Antiquité.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p>\n<p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je fais une autre recherche car ce sujet ne m’intéresse pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p>\n<p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "glossary": []
+}
