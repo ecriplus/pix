@@ -1,5 +1,5 @@
-import { DataForQuest } from '../models/DataForQuest.js';
 import { CombinedCourseDetails } from '../models/CombinedCourseDetails.js';
+import { DataForQuest } from '../models/DataForQuest.js';
 
 async function instantiateCombinedCourseDetails({
   combinedCourseId,

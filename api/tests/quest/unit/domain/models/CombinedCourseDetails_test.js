@@ -5,12 +5,14 @@ import {
   CombinedCourseParticipationStatuses,
   CombinedCourseStatuses,
 } from '../../../../../src/prescription/shared/domain/constants.js';
+import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
 import { CombinedCourseDetails } from '../../../../../src/quest/domain/models/CombinedCourseDetails.js';
 import {
   COMBINED_COURSE_ITEM_TYPES,
   CombinedCourseItem,
 } from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
 import { CombinedCourseParticipation } from '../../../../../src/quest/domain/models/CombinedCourseParticipation.js';
+import { CombinedCourseReward } from '../../../../../src/quest/domain/models/CombinedCourseReward.js';
 import {
   OrganizationLearnerParticipation,
   OrganizationLearnerParticipationStatuses,
@@ -773,6 +775,29 @@ describe('Quest | Unit | Domain | Models | CombinedCourseDetails', function () {
           isLocked: true,
         }),
       ]);
+    });
+
+    it('should set reward if provided', async function () {
+      const combinedCourseDetails = domainBuilder.buildCombinedCourseDetails({
+        name,
+        code,
+        organizationId,
+        questId,
+        combinedCourseItems: [
+          { campaignId: 2, targetProfileId: 888 },
+          { campaignId: 3, targetProfileId: 999 },
+          { moduleId: 'abc2de' },
+        ],
+        cryptoService,
+        rewardId: 1,
+        rewardType: REWARD_TYPES.ATTESTATION,
+      });
+
+      await combinedCourseDetails.setEncryptedUrl();
+      const dataForQuest = domainBuilder.buildCombinedCourseDataForQuest({ passages: [], campaignParticipations: [] });
+      const profileReward = domainBuilder.buildProfileReward();
+      combinedCourseDetails.setDataAndGenerateItems({ dataForQuest, reward: profileReward });
+      expect(combinedCourseDetails.reward).is.instanceOf(CombinedCourseReward);
     });
 
     describe('campaign completion', function () {

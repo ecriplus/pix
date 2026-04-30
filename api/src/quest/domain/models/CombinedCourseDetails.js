@@ -7,13 +7,21 @@ import { cryptoService as injectedCryptoService } from '../../../shared/domain/s
 import { CombinedCourse } from './CombinedCourse.js';
 import { COMBINED_COURSE_ITEM_TYPES, CombinedCourseItem } from './CombinedCourseItem.js';
 import { CombinedCourseParticipationDetails } from './CombinedCourseParticipationDetails.js';
+import { CombinedCourseReward } from './CombinedCourseReward.js';
 import { DataForQuest } from './DataForQuest.js';
 import { Eligibility } from './Eligibility.js';
 import { TYPES } from './Requirement.js';
 
 export class CombinedCourseDetails extends CombinedCourse {
-  items = null;
+  campaigns = [];
+  modules = [];
+  recommendableModuleIds = [];
+  recommendedModuleIdsForUser = [];
+  cryptoService = null;
+  items = [];
   #combinedCourseUrl = null;
+  participation = null;
+  dataForQuest = null;
 
   constructor(
     { id, code, organizationId, name, description, illustration, questId },
@@ -21,8 +29,6 @@ export class CombinedCourseDetails extends CombinedCourse {
     cryptoService = injectedCryptoService,
   ) {
     super({ id, code, organizationId, name, description, illustration, questId }, quest);
-    this.campaigns = [];
-    this.recommendableModuleIds = [];
     this.cryptoService = cryptoService;
   }
 
@@ -45,6 +51,10 @@ export class CombinedCourseDetails extends CombinedCourse {
 
   get hasModules() {
     return this.moduleIds.length > 0;
+  }
+
+  get hasParticipation() {
+    return this.participation !== null;
   }
 
   get campaignIds() {
@@ -176,16 +186,13 @@ export class CombinedCourseDetails extends CombinedCourse {
     return this;
   }
 
-  #setParticipationStatus(participation) {
-    this.participation = participation;
-
+  get status() {
     if (!this.participation) {
-      this.status = CombinedCourseStatuses.NOT_STARTED;
+      return CombinedCourseStatuses.NOT_STARTED;
     } else {
-      this.status =
-        participation.status === CombinedCourseParticipationStatuses.STARTED
-          ? CombinedCourseStatuses.STARTED
-          : CombinedCourseStatuses.COMPLETED;
+      return this.participation.status === CombinedCourseParticipationStatuses.STARTED
+        ? CombinedCourseStatuses.STARTED
+        : CombinedCourseStatuses.COMPLETED;
     }
   }
 
@@ -266,10 +273,16 @@ export class CombinedCourseDetails extends CombinedCourse {
     }
   }
 
-  setDataAndGenerateItems({ recommendedModuleIdsForUser = [], dataForQuest, participation = null } = {}) {
+  setDataAndGenerateItems({
+    recommendedModuleIdsForUser = [],
+    dataForQuest,
+    participation = null,
+    reward = null,
+  } = {}) {
     this.recommendedModuleIdsForUser = recommendedModuleIdsForUser;
-    this.#setParticipationStatus(participation);
+    this.participation = participation;
     this.#generateItems({ dataForQuest });
+    this.reward = reward ? new CombinedCourseReward({ combinedCourseDetails: this, reward }) : null;
   }
 
   isSuccessful() {

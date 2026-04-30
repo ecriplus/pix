@@ -19,7 +19,16 @@ function buildCombinedCourse({ name, code, organizationId, questId } = {}) {
   });
 }
 
-function buildCombinedCourseDetails({ name, code, organizationId, questId, combinedCourseItems, cryptoService } = {}) {
+function buildCombinedCourseDetails({
+  name,
+  code,
+  organizationId,
+  questId,
+  combinedCourseItems,
+  cryptoService,
+  rewardId = null,
+  rewardType = null,
+} = {}) {
   const combinedCourse = buildCombinedCourse({ name, code, organizationId, questId });
 
   const campaigns = [];
@@ -53,8 +62,8 @@ function buildCombinedCourseDetails({ name, code, organizationId, questId, combi
 
   const quest = new Quest({
     id: combinedCourse.questId,
-    rewardId: null,
-    rewardType: null,
+    rewardId,
+    rewardType,
     eligibilityRequirements: [],
     successRequirements: successRequirementsFromContents,
   });

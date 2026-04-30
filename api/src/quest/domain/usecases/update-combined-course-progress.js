@@ -26,7 +26,7 @@ export async function updateCombinedCourseProgress({
     combinedCourseDetails,
   });
 
-  if (!combinedCourseDetailsBeforeUpdate.participation) {
+  if (!combinedCourseDetailsBeforeUpdate.hasParticipation) {
     return null;
   }
 
