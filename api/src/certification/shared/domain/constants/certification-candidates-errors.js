@@ -144,6 +144,10 @@ const CERTIFICATION_CANDIDATES_ERRORS = {
     code: 'DUPLICATE_CANDIDATE',
     getMessage: () => '',
   },
+  EMPTY_CANDIDATES_IMPORT: {
+    code: 'EMPTY_CANDIDATES_IMPORT',
+    getMessage: () => '',
+  },
 };
 
 export { CERTIFICATION_CANDIDATES_ERRORS };

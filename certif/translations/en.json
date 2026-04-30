@@ -21,6 +21,7 @@
     "api-error-messages": {
       "CANDIDATE_NOT_ALLOWED_FOR_FINALIZED_SESSION": "This session has already been finalised and no new candidates may be added.",
       "CANDIDATE_NOT_FOUND": "An error has occurred, the candidate {firstName} {lastName} hasn't been found.",
+      "EMPTY_CANDIDATES_IMPORT": "The file appears to be empty. Please check the content of the uploaded file or contact us.",
       "INVALID_DOCUMENT": "This version of the document is unknown.<br />Please download and import the candidate list template again",
       "SESSION_ALREADY_EXISTS": "A session with the same information (date, time, address and room) already exists.",
       "SESSION_ALREADY_FINALIZED": "Cannot finalise session more than once.",

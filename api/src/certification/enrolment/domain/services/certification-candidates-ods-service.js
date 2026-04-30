@@ -50,6 +50,12 @@ export async function extractCertificationCandidatesFromCandidatesImportSheet({
 
   candidatesDataByLine = _filterOutEmptyCandidateData(candidatesDataByLine);
 
+  if (Object.keys(candidatesDataByLine).length === 0) {
+    throw new CertificationCandidatesError({
+      code: CERTIFICATION_CANDIDATES_ERRORS.EMPTY_CANDIDATES_IMPORT.code,
+    });
+  }
+
   const _checkForDuplication = _handleDuplicateCandidate();
 
   return PromiseUtils.mapSeries(Object.entries(candidatesDataByLine), async ([line, candidateData]) => {

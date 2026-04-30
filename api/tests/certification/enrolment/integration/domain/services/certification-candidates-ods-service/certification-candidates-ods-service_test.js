@@ -157,6 +157,33 @@ describe('Integration | Services | extractCertificationCandidatesFromCandidatesI
     expect(error).to.deepEqualInstance(certificationCandidatesError);
   });
 
+  context('when the file has valid headers but no extractable candidate data', function () {
+    it('should throw a CertificationCandidatesError with EMPTY_CANDIDATES_IMPORT code', async function () {
+      // given
+      const odsFilePath = `${__dirname}/attendance_sheet_extract_no_data_ko_test.ods`;
+      const odsBuffer = await readFile(odsFilePath);
+
+      // when
+      const error = await catchErr(
+        certificationCandidatesOdsService.extractCertificationCandidatesFromCandidatesImportSheet,
+      )({
+        i18n,
+        session,
+        odsBuffer,
+        certificationCpfService,
+        certificationCpfCountryRepository,
+        certificationCpfCityRepository,
+        centerRepository,
+        isSco: true,
+        mailCheck,
+      });
+
+      // then
+      expect(error).to.be.instanceOf(CertificationCandidatesError);
+      expect(error.code).to.equal(CERTIFICATION_CANDIDATES_ERRORS.EMPTY_CANDIDATES_IMPORT.code);
+    });
+  });
+
   context('when there is duplicate certification candidate', function () {
     it('should throw a CertificationCandidatesError', async function () {
       // given
