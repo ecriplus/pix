@@ -5,6 +5,10 @@
 
   &__filters {
     margin-bottom: var(--pix-spacing-4x);
+
+    .pix-filter-banner__filter > * {
+      flex-basis: 15rem;
+    }
   }
 
   &__list {

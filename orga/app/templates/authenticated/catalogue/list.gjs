@@ -5,8 +5,10 @@ import List from 'pix-orga/components/catalogue/list';
     @courses={{@model.courses}}
     @type={{@model.type}}
     @updateFilter={{@controller.updateFilter}}
+    @resetFilters={{@controller.resetFilters}}
     @search={{@controller.search}}
     @categories={{@controller.categories}}
-    @resetFilters={{@controller.resetFilters}}
+    @areas={{@controller.areas}}
+    @competences={{@controller.competences}}
   />
 </template>

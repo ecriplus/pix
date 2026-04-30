@@ -5,7 +5,7 @@ export default class Area extends Model {
   @attr('string') title;
   @attr('string') color;
 
-  @hasMany('competence', { async: true, inverse: null }) competences;
+  @hasMany('competence', { async: false, inverse: null }) competences;
 
   get sortedCompetences() {
     return this.hasMany('competences')

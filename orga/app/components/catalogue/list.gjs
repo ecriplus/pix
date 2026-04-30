@@ -16,19 +16,45 @@ export default class List extends Component {
   @service locale;
   @service intl;
 
-  isClearFiltersButtonDisabled() {
-    return !this.args.search;
+  get isClearFiltersButtonDisabled() {
+    const { search = '', categories, areas, competences } = this.args;
+    return !search && !categories?.length && !areas?.length && !competences?.length;
   }
 
-  get categories() {
+  get categoriesOptions() {
     return [...new Set(this.filteredItems.flatMap((item) => (item.category ? item.category : [])))].map((item) => ({
       label: this.intl.t(`pages.campaign-creation.tags.${item}`),
       value: item,
     }));
   }
 
+  get areasOptions() {
+    return [...new Set(this.filteredItems.flatMap((item) => (item.areas ? item.areas : [])))]
+      .sort((a, b) => a.code.localeCompare(b.code, this.locale.currentLanguage, { numeric: true }))
+      .map((area) => ({
+        label: `${area.code}. ${area.title}`,
+        value: area.id,
+      }));
+  }
+
+  get competencesOptions() {
+    return [
+      ...new Set(
+        this.filteredItems
+          .flatMap((item) => (item.areas ? item.areas : []))
+          .flatMap((area) => (area.competences ? area.sortedCompetences : [])),
+      ),
+    ]
+      .sort((a, b) => a.index.localeCompare(b.index, this.locale.currentLanguage, { numeric: true }))
+      .map((competence) => ({
+        label: `${competence.index} ${competence.name}`,
+        value: competence.id,
+      }));
+  }
+
   get filteredItems() {
-    const { type = 'all', search = '', categories } = this.args;
+    const { type = 'all', search = '', categories, areas, competences } = this.args;
+
     return this.args.courses
       .filter((item) => {
         if (type && type !== 'all') {
@@ -38,7 +64,7 @@ export default class List extends Component {
       })
       .filter((item) => {
         if (search.length > 0) {
-          return new RegExp(search, 'i').test(item.name);
+          return item.name.toLowerCase().includes(search.toLowerCase());
         }
         return true;
       })
@@ -47,11 +73,26 @@ export default class List extends Component {
           return categories.includes(item.category);
         }
         return true;
+      })
+      .filter((item) => {
+        if (areas?.length > 0) {
+          const itemAreaIds = item.areas.map((area) => area.id);
+          return areas.every((area) => itemAreaIds.includes(area));
+        }
+        return true;
+      })
+      .filter((item) => {
+        if (competences?.length > 0) {
+          const itemCompetenceIds = item.areas
+            .flatMap((area) => (area.competences ? area.get('competences') : []))
+            .map((competence) => competence.id);
+          return competences.every((competence) => itemCompetenceIds.includes(competence));
+        }
+        return true;
       });
   }
 
   <template>
-    {{log this.categories}}
     <div class="catalogue">
       <PixTabs @variant="orga" class="catalogue__nav" @ariaLabel={{t "pages.catalogue.tab-filters.label"}}>
         <LinkTo @route="authenticated.catalogue.list" @model="all">
@@ -69,15 +110,14 @@ export default class List extends Component {
         aria-label={{t "pages.catalogue.filters.aria-label"}}
         @details={{t "pages.catalogue.filters.nb-result" count=this.filteredItems.length}}
         @clearFiltersLabel={{t "common.filters.actions.clear"}}
-        @onClearFilters={{@resetFilter}}
+        @onClearFilters={{@resetFilters}}
         @isClearFilterButtonDisabled={{this.isClearFiltersButtonDisabled}}
       >
-
         <PixSearchInput
           @id="search"
           value={{@search}}
-          @screenReaderOnly={{true}}
           @placeholder={{t "pages.catalogue.filters.name.placeholder"}}
+          @screenReaderOnly={{true}}
           @debounceTimeInMs={{ENV.pagination.debounce}}
           @triggerFiltering={{@updateFilter}}
         >
@@ -96,6 +136,34 @@ export default class List extends Component {
           @onChange={{fn @updateFilter "categories"}}
         >
           <:label>{{t "pages.catalogue.filters.categories.label"}}</:label>
+          <:default as |option|>{{option.label}}</:default>
+        </PixMultiSelect>
+
+        <PixMultiSelect
+          @isDisabled={{eq this.areasOptions.length 0}}
+          @emptyMessage={{t "pages.catalogue.filters.areas.empty"}}
+          @screenReaderOnly={{true}}
+          @locale={{this.locale.currentLocale}}
+          @values={{@areas}}
+          @options={{this.areasOptions}}
+          @onChange={{fn @updateFilter "areas"}}
+        >
+          <:label>{{t "pages.catalogue.filters.areas.label"}}</:label>
+          <:placeholder>{{t "pages.catalogue.filters.areas.placeholder" count=@areas.length}}</:placeholder>
+          <:default as |option|>{{option.label}}</:default>
+        </PixMultiSelect>
+
+        <PixMultiSelect
+          @isDisabled={{eq this.competencesOptions.length 0}}
+          @emptyMessage={{t "pages.catalogue.filters.competences.empty"}}
+          @screenReaderOnly={{true}}
+          @locale={{this.locale.currentLocale}}
+          @values={{@competences}}
+          @options={{this.competencesOptions}}
+          @onChange={{fn @updateFilter "competences"}}
+        >
+          <:label>{{t "pages.catalogue.filters.competences.label"}}</:label>
+          <:placeholder>{{t "pages.catalogue.filters.competences.placeholder" count=@competences.length}}</:placeholder>
           <:default as |option|>{{option.label}}</:default>
         </PixMultiSelect>
       </PixFilterBanner>

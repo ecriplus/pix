@@ -1020,14 +1020,24 @@
       },
       "empty-state": "Nessun percorso disponibile al momento. Contattare Pix per ottenerne.",
       "filters": {
+        "areas": {
+          "empty": "Nessun dominio",
+          "label": "Domini",
+          "placeholder": "{count, plural, =0 {Domini} =1 {Dominio ({count})} other {Domini ({count})}}"
+        },
         "aria-label": "Filtri sui percorsi",
         "categories": {
           "empty": "Nessuna categoria",
           "label": "Categorie"
         },
+        "competences": {
+          "empty": "Nessuna competenza",
+          "label": "Competenze",
+          "placeholder": "{count, plural, =0 {Competenze} =1 {Competenza ({count})} other {Competenze ({count})}}"
+        },
         "name": {
           "label": "Nome del percorso",
-          "placeholder": "Percorso prima media"
+          "placeholder": "Cerca per titolo"
         },
         "nb-result": "{count, plural, =0 {Nessun percorso} =1 {{count} percorso} other {{count} percorsi}}"
       },

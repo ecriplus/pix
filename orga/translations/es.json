@@ -1023,14 +1023,24 @@
       },
       "empty-state": "No hay cursos disponibles por el momento. Póngase en contacto con Pix para obtenerlos.",
       "filters": {
+        "areas": {
+          "empty": "Ningún dominio",
+          "label": "Dominios",
+          "placeholder": "{count, plural, =0 {Dominios} =1 {Dominio ({count})} other {Dominios ({count})}}"
+        },
         "aria-label": "Filtros sobre los cursos",
         "categories": {
           "empty": "Ninguna categoría",
           "label": "Categorías"
         },
+        "competences": {
+          "empty": "Ninguna competencia",
+          "label": "Competencias",
+          "placeholder": "{count, plural, =0 {Competencias} =1 {Competencia ({count})} other {Competencias ({count})}}"
+        },
         "name": {
           "label": "Nombre del curso",
-          "placeholder": "Curso 1º ESO"
+          "placeholder": "Buscar por título"
         },
         "nb-result": "{count, plural, =0 {Ningún curso} =1 {{count} curso} other {{count} cursos}}"
       },
