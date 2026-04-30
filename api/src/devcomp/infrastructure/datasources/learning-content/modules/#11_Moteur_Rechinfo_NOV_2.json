@@ -701,12 +701,12 @@
                     "id": "d57a9450-4775-4a46-9bbc-b80c5cf87f55",
                     "text": "",
                     "image": {
-                      "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_qab3.png",
+                      "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_qab3_pixbanque.png",
                       "altText": ""
                     },
                     "proposalA": "Résultat sponsorisé",
                     "proposalB": "Résultat non sponsorisé",
-                    "solution": "B"
+                    "solution": "A"
                   },
                   {
                     "id": "244e07e6-d625-4d65-bf6f-55741fc8e892",
