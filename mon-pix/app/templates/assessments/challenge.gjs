@@ -1,3 +1,4 @@
+import { array } from '@ember/helper';
 import t from 'ember-intl/helpers/t';
 import pageTitle from 'ember-page-title/helpers/page-title';
 import AssessmentBanner from 'mon-pix/components/assessment-banner';
@@ -70,22 +71,25 @@ import TimedChallengeInstructions from 'mon-pix/components/timed-challenge-instr
       {{/if}}
 
       {{#if @controller.displayChallenge}}
-        <Content
-          @answer={{@model.answer}}
-          @assessment={{@model.assessment}}
-          @challenge={{@model.challenge}}
-          @focusedOutOfWindow={{@controller.focusedOutOfWindow}}
-          @hasFocusedOutOfWindow={{@controller.hasFocusedOutOfWindow}}
-          @hideOutOfFocusBorder={{@controller.hideOutOfFocusBorder}}
-          @isFocusedChallengeAndUserHasFocusedOutOfChallenge={{@controller.isFocusedChallengeAndUserHasFocusedOutOfChallenge}}
-          @isTextToSpeechActivated={{@controller.isTextToSpeechActivated}}
-          @resetAllChallengeInfo={{@controller.resetAllChallengeInfo}}
-          @resetChallengeInfoOnResume={{@controller.resetChallengeInfoOnResume}}
-          @setFocusedOutOfChallenge={{@controller.setFocusedOutOfChallenge}}
-          @showOutOfFocusBorder={{@controller.showOutOfFocusBorder}}
-          @submitLiveAlert={{@controller.submitLiveAlert}}
-          @timeoutChallenge={{@controller.timeoutChallenge}}
-        />
+        {{! SAFARI >=26.4 WORKAROUND: forces unmount/mount of content when challenge changes }}
+        {{#each (array @model.challenge)}}
+          <Content
+            @answer={{@model.answer}}
+            @assessment={{@model.assessment}}
+            @challenge={{@model.challenge}}
+            @focusedOutOfWindow={{@controller.focusedOutOfWindow}}
+            @hasFocusedOutOfWindow={{@controller.hasFocusedOutOfWindow}}
+            @hideOutOfFocusBorder={{@controller.hideOutOfFocusBorder}}
+            @isFocusedChallengeAndUserHasFocusedOutOfChallenge={{@controller.isFocusedChallengeAndUserHasFocusedOutOfChallenge}}
+            @isTextToSpeechActivated={{@controller.isTextToSpeechActivated}}
+            @resetAllChallengeInfo={{@controller.resetAllChallengeInfo}}
+            @resetChallengeInfoOnResume={{@controller.resetChallengeInfoOnResume}}
+            @setFocusedOutOfChallenge={{@controller.setFocusedOutOfChallenge}}
+            @showOutOfFocusBorder={{@controller.showOutOfFocusBorder}}
+            @submitLiveAlert={{@controller.submitLiveAlert}}
+            @timeoutChallenge={{@controller.timeoutChallenge}}
+          />
+        {{/each}}
       {{/if}}
     </main>
 
