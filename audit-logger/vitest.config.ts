@@ -8,6 +8,7 @@ export default defineConfig({
     clearMocks: true,
     watch: false,
     pool: 'threads',
-    poolOptions: { threads: { singleThread: true } },
+    maxWorkers: 1,
+    isolate: false,
   },
 });
