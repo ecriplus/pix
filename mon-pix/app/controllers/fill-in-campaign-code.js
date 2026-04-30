@@ -65,7 +65,7 @@ export default class FillInCampaignCodeController extends Controller {
   }
 
   get routeToTransitionAfterGarModal() {
-    return this.verifiedCode?.type === 'campaign' ? 'campaigns.entry-point' : 'organizations.join.sco-mediacentre';
+    return this.verifiedCode?.type === 'campaign' ? 'campaigns.entry-point' : 'organizations.access';
   }
 
   onStartCampaignError(error) {
