@@ -1,5 +1,22 @@
 # Pix Changelog
 
+# [5.399.0](https://github.com/1024pix/pix/compare/v5.398.0...v5.399.0) (2026-04-30)
+
+### :rocket: Amélioration
+
+- [#16062](https://github.com/1024pix/pix/pull/16062) Créer la logique pour lire les modules stockés dans learningContent (PIX-22552)(PIX-22265) 
+
+### :bug: Correction
+
+- [#16061](https://github.com/1024pix/pix/pull/16061) Corrige un problème de redirection sur la modal du GAR après avoir saisi un code (PIX-22467) 
+- [#16064](https://github.com/1024pix/pix/pull/16064) Éviter d'avoir une erreur 500 lors d'un import de candidats vide (PIX-22590). 
+- [#16059](https://github.com/1024pix/pix/pull/16059) Réinitialisation des références de feature toggles 
+- [#16069](https://github.com/1024pix/pix/pull/16069) Safari >=26.4 : Problème si 2 épreuves successives de même type (PIX-22597) 
+
+### :arrow_up: Montée de version
+
+- [#16054](https://github.com/1024pix/pix/pull/16054) Update dependency eslint-plugin-ember to v13 (admin)
+
 # [5.398.0](https://github.com/1024pix/pix/compare/v5.397.0...v5.398.0) (2026-04-29)
 
 ### :rocket: Amélioration
