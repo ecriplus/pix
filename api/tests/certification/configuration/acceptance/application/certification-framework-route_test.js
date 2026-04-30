@@ -200,7 +200,7 @@ describe('Acceptance | Application | Certification | ComplementaryCertification 
       const olderVersion = databaseBuilder.factory.buildCertificationVersion({
         scope: SCOPES.CORE,
         startDate: new Date('2024-01-11'),
-        expirationDate: newerVersion.expirationDate,
+        expirationDate: newerVersion.startDate,
       });
 
       await databaseBuilder.commit();
@@ -222,8 +222,22 @@ describe('Acceptance | Application | Certification | ComplementaryCertification 
         attributes: {
           scope: SCOPES.CORE,
           history: [
-            { id: newerVersion.id, startDate: newerVersion.startDate, expirationDate: newerVersion.expirationDate },
-            { id: olderVersion.id, startDate: olderVersion.startDate, expirationDate: olderVersion.expirationDate },
+            {
+              id: newerVersion.id,
+              startDate: newerVersion.startDate,
+              expirationDate: newerVersion.expirationDate,
+              assessmentDuration: newerVersion.assessmentDuration,
+              maximumAssessmentLength: JSON.parse(newerVersion.challengesConfiguration).maximumAssessmentLength,
+              status: 'ACTIVE',
+            },
+            {
+              id: olderVersion.id,
+              startDate: olderVersion.startDate,
+              expirationDate: olderVersion.expirationDate,
+              assessmentDuration: olderVersion.assessmentDuration,
+              maximumAssessmentLength: JSON.parse(olderVersion.challengesConfiguration).maximumAssessmentLength,
+              status: 'ARCHIVED',
+            },
           ],
         },
       });

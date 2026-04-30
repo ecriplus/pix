@@ -1,12 +1,13 @@
 // @ts-check
 /**
- * @typedef {import('../../../shared/domain/models/Scopes.js').SCOPES} SCOPES
- * @typedef {import('../../../../shared/domain/models/Challenge.js').Challenge} Challenge
+ * @typedef {import("../../../shared/domain/models/Scopes.js").SCOPES} SCOPES
+ * @typedef {import("../../../../shared/domain/models/Challenge.js").Challenge} Challenge
  */
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { FlashAssessmentAlgorithmConfiguration } from '../../../shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
 import { Version } from '../../domain/models/Version.js';
+import { FrameworkHistoryEntry } from '../../domain/read-models/FrameworkHistoryEntry.js';
 
 /**
  * @returns {Promise<Version[]>}
@@ -113,16 +114,28 @@ export async function update({ version }) {
 /**
  * @param {object} params
  * @param {SCOPES} params.scope
- * @returns {Promise<Array<number>>}
+ * @returns {Promise<Array<FrameworkHistoryEntry>>}
  */
 export async function getFrameworkHistory({ scope }) {
   const knexConn = DomainTransaction.getConnection();
 
-  return knexConn('certification_versions')
-    .select('id', 'startDate', 'expirationDate')
+  const rows = await knexConn('certification_versions')
+    .select('id', 'startDate', 'expirationDate', 'assessmentDuration', 'challengesConfiguration')
     .where({ scope })
     .orderBy('startDate', 'desc');
+
+  return rows.map(_toFrameworkHistoryEntry);
 }
+
+const _toFrameworkHistoryEntry = ({ id, startDate, expirationDate, assessmentDuration, challengesConfiguration }) => {
+  return new FrameworkHistoryEntry({
+    id,
+    startDate,
+    expirationDate,
+    assessmentDuration,
+    maximumAssessmentLength: challengesConfiguration.maximumAssessmentLength,
+  });
+};
 
 const _toDomain = ({
   id,
