@@ -1,7 +1,7 @@
 {
   "id": "b080b39e-fa3d-4cd1-84b5-3f385d94f26d",
   "shortId": "5c1088d0",
-  "slug": "moteur-rech-info",
+  "slug": "liste-resultats-recherche",
   "title": "Comprendre la liste des résultats d’une recherche sur internet",
   "isBeta": false,
   "visibility": "public",
@@ -44,7 +44,7 @@
                 "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_1.png",
                 "alt": "",
                 "alternativeText": "",
-                "legend": "",
+                "legend": "Image provisoire",
                 "licence": ""
               }
             },
@@ -132,7 +132,7 @@
                 "id": "7c1d8e0e-1270-4f58-b10a-73bcbb5ed17d",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Voici ce que l’on peut observer dans un résultat de recherche.&nbsp;</p>"
+                "content": "<p>Voici un résultat de recherche. Observez les informations qu'il contient puis répondez à la question qui suit.</p>"
               }
             },
             {
@@ -143,7 +143,7 @@
                 "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/chat-gpt-image-28-avr-2026-14_58_02.png",
                 "alt": "",
                 "alternativeText": "",
-                "legend": "",
+                "legend": "Image provisoire",
                 "licence": ""
               }
             },
@@ -152,42 +152,42 @@
               "element": {
                 "id": "918de184-e46e-4836-ab06-ced1ff94e216",
                 "type": "qcu-discovery",
-                "instruction": "<p>Qu’est-ce qui peut aider Kevin à choisir ?</p>",
+                "instruction": "<p>Qu’est-ce qui peut aider Kevin à choisir une page web&nbsp;?</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Le nom du site.</p>",
+                    "content": "<p>Le nom du site web.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas tout à fait !&nbsp;</p><p>Avant de cliquer, on peut déjà lire plusieurs informations. Le nom du site peut aider à savoir d’où vient l’information. Le titre et l’extrait aident à comprendre de quoi parle la page. Tous ces éléments peuvent aider à choisir une page web.&nbsp;</p>"
+                      "diagnosis": "<p>Pas tout à fait&nbsp;!</p>\n<p>Avant de cliquer, on peut déjà lire plusieurs informations :</p>\n<ul>\n    <li>Le <strong>nom du site web</strong> peut aider à savoir d’où vient l’information.</li>\n    <li>Le <strong>titre du résultat</strong> et l’<strong>extrait de la page web</strong> aident à comprendre de quoi parle la page web. </li>\n</ul>\n<p>Tous ces éléments peuvent aider à choisir une page web.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Le titre du résultat.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas tout à fait !&nbsp;</p><p>Avant de cliquer, on peut déjà lire plusieurs informations. Le nom du site peut aider à savoir d’où vient l’information. Le titre et l’extrait aident à comprendre de quoi parle la page. Tous ces éléments peuvent aider à choisir une page web.&nbsp;</p>"
+                      "diagnosis": "<p>Pas tout à fait&nbsp;!</p>\n<p>Avant de cliquer, on peut déjà lire plusieurs informations :</p>\n<ul>\n    <li>Le <strong>nom du site web</strong> peut aider à savoir d’où vient l’information.</li>\n    <li>Le <strong>titre du résultat</strong> et l’<strong>extrait de la page web</strong> aident à comprendre de quoi parle la page web. </li>\n</ul>\n<p>Tous ces éléments peuvent aider à choisir une page web.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>L’extrait.</p>",
+                    "content": "<p>L’extrait de la page web.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas tout à fait !&nbsp;</p><p>Avant de cliquer, on peut déjà lire plusieurs informations. Le nom du site peut aider à savoir d’où vient l’information. Le titre et l’extrait aident à comprendre de quoi parle la page. Tous ces éléments peuvent aider à choisir une page web.&nbsp;</p>"
+                      "diagnosis": "<p>Pas tout à fait&nbsp;!</p>\n<p>Avant de cliquer, on peut déjà lire plusieurs informations :</p>\n<ul>\n    <li>Le <strong>nom du site web</strong> peut aider à savoir d’où vient l’information.</li>\n    <li>Le <strong>titre du résultat</strong> et l’<strong>extrait de la page web</strong> aident à comprendre de quoi parle la page web. </li>\n</ul>\n<p>Tous ces éléments peuvent aider à choisir une page web.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Tous ces éléments</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu !&nbsp;</p><p>Avant de cliquer, vous pouvez lire plusieurs informations. Le nom du site aide à savoir d’où vient l’information. Le titre et l’extrait permettent de comprendre de quoi parle la page. Tous ces éléments vous aident à choisir une page web pertinente.</p>"
+                      "diagnosis": "<p>Bien vu&nbsp;!</p>\n<p>Avant de cliquer, on peut déjà lire plusieurs informations :</p>\n<ul>\n    <li>Le <strong>nom du site web</strong> peut aider à savoir d’où vient l’information.</li>\n    <li>Le <strong>titre du résultat</strong> et l’<strong>extrait de la page web</strong> aident à comprendre de quoi parle la page web. </li>\n</ul>\n<p>Tous ces éléments peuvent aider à choisir une page web.</p>"
                     }
                   },
                   {
                     "id": "5",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Avant de cliquer, vous pouvez lire plusieurs informations. Le nom du site aide à savoir d’où vient l’information. Le titre et l’extrait permettent de comprendre de quoi parle la page. Tous ces éléments vous aident à choisir une page web pertinente.</p>"
+                      "diagnosis": "<p>Avant de cliquer, on peut déjà lire plusieurs informations :</p>\n<ul>\n    <li>Le <strong>nom du site web</strong> peut aider à savoir d’où vient l’information.</li>\n    <li>Le <strong>titre du résultat</strong> et l’<strong>extrait de la page web</strong> aident à comprendre de quoi parle la page web. </li>\n</ul>\n<p>Tous ces éléments peuvent aider à choisir une page web.</p>"
                     }
                   }
                 ],
@@ -353,7 +353,7 @@
                 "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_2_triche.png",
                 "alt": "",
                 "alternativeText": "",
-                "legend": "",
+                "legend": "Image provisoire",
                 "licence": ""
               }
             },
@@ -483,7 +483,7 @@
                 "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_3.png",
                 "alt": "",
                 "alternativeText": "",
-                "legend": "",
+                "legend": "Image provisoire",
                 "licence": ""
               }
             },
@@ -673,7 +673,7 @@
               "element": {
                 "id": "8df412b1-0028-41d8-9a5a-99eadeec53f7",
                 "type": "qab",
-                "instruction": "<p>Pour chacun des resultats suivants, dites s’il s’agit d’une publicité déguisée en résultat ou d’un résultat normal<br></p>",
+                "instruction": "<p>Pour chacun des résultats suivants, dites s’il s’agit d’un résultat sponsorisé ou non.</p>",
                 "cards": [
                   {
                     "id": "d048204e-82f0-4f43-b2bd-7b5a85a040d3",
@@ -682,8 +682,8 @@
                       "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_qab1.png",
                       "altText": ""
                     },
-                    "proposalA": "Publicité",
-                    "proposalB": "Résultat",
+                    "proposalA": "Résultat sponsorisé",
+                    "proposalB": "Résultat non sponsorisé",
                     "solution": "A"
                   },
                   {
@@ -693,8 +693,8 @@
                       "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_qab2.png",
                       "altText": ""
                     },
-                    "proposalA": "Publicité",
-                    "proposalB": "Résultat",
+                    "proposalA": "Résultat sponsorisé",
+                    "proposalB": "Résultat non sponsorisé",
                     "solution": "A"
                   },
                   {
@@ -704,8 +704,8 @@
                       "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_qab3.png",
                       "altText": ""
                     },
-                    "proposalA": "Publicité",
-                    "proposalB": "Résultat",
+                    "proposalA": "Résultat sponsorisé",
+                    "proposalB": "Résultat non sponsorisé",
                     "solution": "B"
                   },
                   {
@@ -715,8 +715,8 @@
                       "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_qab4.png",
                       "altText": ""
                     },
-                    "proposalA": "Publicité",
-                    "proposalB": "Résultat",
+                    "proposalA": "Résultat sponsorisé",
+                    "proposalB": "Résultat non sponsorisé",
                     "solution": "A"
                   },
                   {
@@ -726,14 +726,94 @@
                       "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_qab5.png",
                       "altText": ""
                     },
-                    "proposalA": "Publicité",
-                    "proposalB": "Résultat",
+                    "proposalA": "Résultat sponsorisé",
+                    "proposalB": "Résultat non sponsorisé",
                     "solution": "B"
                   }
                 ],
                 "feedback": {
                   "diagnosis": ""
                 }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "0f9c483f-7c12-474f-88f0-d995ac5a65b4",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "df2301ac-866d-4a54-94a0-b59b03676d51",
+          "type": "activity",
+          "title": "Tranfert",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "12fd500d-89e0-4a9d-8d4f-aa8df8a48c6c",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Voici une page de résultats d'un moteur de recherche.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "6b7ce646-4d3e-42aa-8fa8-41e0b669c5dd",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/morech2_transfert.png",
+                "alt": "Page de résultats d'un moteur de recherche",
+                "alternativeText": "<p><br></p>",
+                "legend": "Image provisoire",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "c6aef7b8-d2dc-4404-9b71-cafcaebee1b7",
+                "type": "qcu-declarative",
+                "instruction": "<p>Que feriez-vous ?</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "0",
+                    "content": "<p>Je choisis le premier résultat car je veux trouver une histoire qui se passe au Moyen Âge pour les enfants.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p>\n<p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
+                    }
+                  },
+                  {
+                    "id": "1",
+                    "content": "<p>Je choisis le deuxième résultat car je veux en savoir plus sur la vie des enfants au Moyen Âge.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p>\n<p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Je choisis le troisième résultat car je veux des vidéos adaptées aux enfants.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p>\n<p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Je reformule ma recherche car je ne m’intéresse pas au Moyen Âge mais à l’Antiquité.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p>\n<p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je fais une autre recherche car ce sujet ne m’intéresse pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p>\n<p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
+                    }
+                  }
+                ]
               }
             }
           ]
