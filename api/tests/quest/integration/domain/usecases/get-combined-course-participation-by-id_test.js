@@ -1,4 +1,3 @@
-import { CombinedCourseDetails } from '../../../../../src/quest/domain/models/CombinedCourse.js';
 import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,
@@ -8,6 +7,7 @@ import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { expect } from '../../../../test-helper.js';
 import { databaseBuilder } from '../../../../tooling/databases.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
+import { CombinedCourseDetails } from '../../../../../src/quest/domain/models/CombinedCourseDetails.js';
 
 describe('Quest | Integration | Domain | Usecases | getCombinedCourseParticipationById', function () {
   it('should return participation details with given id', async function () {
