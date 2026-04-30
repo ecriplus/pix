@@ -552,7 +552,7 @@
                   "type": "image",
                   "slides": [
                     {
-                      "title": "",
+                      "title": "Le site DW.com",
                       "description": "",
                       "displayWidth": 500,
                       "image": {
@@ -566,7 +566,7 @@
                       }
                     },
                     {
-                      "title": "",
+                      "title": "Le blog Espace et Exploration.",
                       "description": "",
                       "displayWidth": 500,
                       "image": {
@@ -580,7 +580,7 @@
                       }
                     },
                     {
-                      "title": "",
+                      "title": "Le site Aerocontact.com.",
                       "description": "",
                       "displayWidth": 500,
                       "image": {
@@ -594,7 +594,7 @@
                       }
                     },
                     {
-                      "title": "",
+                      "title": "Le site de l’Agence spatiale européenne (ESA).",
                       "description": "",
                       "displayWidth": 500,
                       "image": {
