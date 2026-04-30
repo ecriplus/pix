@@ -31,11 +31,6 @@ describe('Unit | Organizational Entities | Infrastructure | Serializer | JSONAPI
             'created-at': new Date('2018-01-01T05:43:10Z'),
           },
           relationships: {
-            'certification-center-memberships': {
-              links: {
-                related: `/api/certification-centers/${certificationCenter.id}/certification-center-memberships`,
-              },
-            },
             habilitations: {
               data: [
                 {

@@ -72,11 +72,6 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
                 habilitations: {
                   data: [],
                 },
-                'certification-center-memberships': {
-                  links: {
-                    related: '/api/certification-centers/1/certification-center-memberships',
-                  },
-                },
               },
             },
             {
@@ -91,11 +86,6 @@ describe('Acceptance | Organization Entities | Admin | Route | Certification Cen
               relationships: {
                 habilitations: {
                   data: [],
-                },
-                'certification-center-memberships': {
-                  links: {
-                    related: '/api/certification-centers/2/certification-center-memberships',
-                  },
                 },
               },
             },
