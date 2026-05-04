@@ -1027,6 +1027,7 @@
         },
         "aria-label": "Filtri sui percorsi",
         "categories": {
+          "all": "Tutte le categorie",
           "empty": "Nessuna categoria",
           "label": "Categorie"
         },

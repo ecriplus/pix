@@ -1024,6 +1024,7 @@
         },
         "aria-label": "Filtres sur les parcours",
         "categories": {
+          "all": "Toutes les catégories",
           "empty": "Aucune catégorie",
           "label": "Catégories"
         },

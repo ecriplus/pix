@@ -1030,6 +1030,7 @@
         },
         "aria-label": "Filtros sobre los cursos",
         "categories": {
+          "all": "Todas las categorías",
           "empty": "Ninguna categoría",
           "label": "Categorías"
         },

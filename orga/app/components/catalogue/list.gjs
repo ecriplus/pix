@@ -1,6 +1,7 @@
 import PixFilterBanner from '@1024pix/pix-ui/components/pix-filter-banner';
 import PixMultiSelect from '@1024pix/pix-ui/components/pix-multi-select';
 import PixSearchInput from '@1024pix/pix-ui/components/pix-search-input';
+import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import PixTabs from '@1024pix/pix-ui/components/pix-tabs';
 import { fn } from '@ember/helper';
 import { LinkTo } from '@ember/routing';
@@ -17,8 +18,8 @@ export default class List extends Component {
   @service intl;
 
   get isClearFiltersButtonDisabled() {
-    const { search = '', categories, areas, competences } = this.args;
-    return !search && !categories?.length && !areas?.length && !competences?.length;
+    const { search = '', category, areas, competences } = this.args;
+    return !search && !category && !areas?.length && !competences?.length;
   }
 
   get categoriesOptions() {
@@ -53,7 +54,7 @@ export default class List extends Component {
   }
 
   get filteredItems() {
-    const { type = 'all', search = '', categories, areas, competences } = this.args;
+    const { type = 'all', search = '', category, areas, competences } = this.args;
 
     return this.args.courses
       .filter((item) => {
@@ -69,8 +70,8 @@ export default class List extends Component {
         return true;
       })
       .filter((item) => {
-        if (categories?.length > 0) {
-          return categories.includes(item.category);
+        if (category) {
+          return category === item.category;
         }
         return true;
       })
@@ -124,21 +125,19 @@ export default class List extends Component {
           <:label>{{t "pages.catalogue.filters.name.label"}}</:label>
         </PixSearchInput>
 
-        <PixMultiSelect
-          @isDisabled={{eq this.categories.length 0}}
-          @placeholder={{t "pages.catalogue.filters.categories.label"}}
-          @screenReaderOnly={{true}}
-          @emptyMessage={{t "pages.catalogue.filters.categories.empty"}}
-          @isSearchable={{false}}
-          @locale={{this.locale.currentLocale}}
-          @values={{@categories}}
-          @options={{this.categories}}
-          @onChange={{fn @updateFilter "categories"}}
-        >
-          <:label>{{t "pages.catalogue.filters.categories.label"}}</:label>
-          <:default as |option|>{{option.label}}</:default>
-        </PixMultiSelect>
-
+        {{#if (eq @type "targetProfile")}}
+          <PixSelect
+            @isDisabled={{eq this.categoriesOptions.length 0}}
+            @placeholder={{t "pages.catalogue.filters.categories.all"}}
+            @hideDefaultOption={{false}}
+            @screenReaderOnly={{true}}
+            @value={{@category}}
+            @options={{this.categoriesOptions}}
+            @onChange={{fn @updateFilter "category"}}
+          >
+            <:label>{{t "pages.catalogue.filters.categories.label"}}</:label>
+          </PixSelect>
+        {{/if}}
         <PixMultiSelect
           @isDisabled={{eq this.areasOptions.length 0}}
           @emptyMessage={{t "pages.catalogue.filters.areas.empty"}}

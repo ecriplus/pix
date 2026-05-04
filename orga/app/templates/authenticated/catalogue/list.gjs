@@ -7,7 +7,7 @@ import List from 'pix-orga/components/catalogue/list';
     @updateFilter={{@controller.updateFilter}}
     @resetFilters={{@controller.resetFilters}}
     @search={{@controller.search}}
-    @categories={{@controller.categories}}
+    @category={{@controller.category}}
     @areas={{@controller.areas}}
     @competences={{@controller.competences}}
   />

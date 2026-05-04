@@ -136,6 +136,24 @@ module('Integration | Component | Catalogue::List', function (hooks) {
     });
 
     module('category filter', function () {
+      test('it hides category filter on all page', async function (assert) {
+        // given
+        const updateFilter = sinon.stub();
+        const courses = [
+          { name: 'Ma super formation', type: 'targetProfile', nbTubes: 5, category: 'PREDEFINED' },
+          { name: 'Mon parcours combiné', type: 'blueprint', nbModules: 2 },
+        ];
+
+        // when
+        const screen = await render(
+          <template><List @updateFilter={{updateFilter}} @courses={{courses}} @type="all" /></template>,
+        );
+
+        // then
+        assert
+          .dom(screen.queryByRole('button', { name: t('pages.catalogue.filters.categories.label') }))
+          .doesNotExist();
+      });
       test('it should be disabled if there are no categories to filter', async function (assert) {
         // given
         const updateFilter = sinon.stub();
@@ -148,7 +166,7 @@ module('Integration | Component | Catalogue::List', function (hooks) {
         // when
         const screen = await render(
           <template>
-            <List @search={{search}} @updateFilter={{updateFilter}} @courses={{courses}} @type="all" />
+            <List @search={{search}} @updateFilter={{updateFilter}} @courses={{courses}} @type="targetProfile" />
           </template>,
         );
 
@@ -158,10 +176,10 @@ module('Integration | Component | Catalogue::List', function (hooks) {
           .exists();
       });
 
-      test('it preselects categories filter with initials values', async function (assert) {
+      test('it preselects category filter with initials values', async function (assert) {
         // given
         const updateFilter = sinon.stub();
-        const categories = ['PREDEFINED'];
+        const category = 'PREDEFINED';
         const courses = [
           { name: 'Ma super formation', type: 'targetProfile', nbTubes: 5, category: 'PREDEFINED' },
           { name: 'Mon parcours combiné', type: 'blueprint', nbModules: 2 },
@@ -170,20 +188,20 @@ module('Integration | Component | Catalogue::List', function (hooks) {
         // when
         const screen = await render(
           <template>
-            <List @categories={{categories}} @updateFilter={{updateFilter}} @courses={{courses}} @type="all" />
+            <List @category={{category}} @updateFilter={{updateFilter}} @courses={{courses}} @type="targetProfile" />
           </template>,
         );
         await click(screen.getByRole('button', { name: t('pages.catalogue.filters.categories.label') }));
-        await waitFor(() => screen.findByRole('menu'));
-
+        await waitFor(() => screen.findByRole('listbox'));
         // then
-        assert.dom(screen.getByRole('checkbox', { name: t('pages.campaign-creation.tags.PREDEFINED') })).isChecked();
+        const selectedOption = screen.getByRole('option', { selected: true });
+        assert.strictEqual(selectedOption.innerText, t(`pages.campaign-creation.tags.${category}`));
       });
 
       test('it filters items list that match selected categories', async function (assert) {
         // given
         const updateFilter = sinon.stub();
-        const categories = ['PREDEFINED'];
+        const category = 'PREDEFINED';
         const courses = [
           { name: 'Ma super formation', type: 'targetProfile', nbTubes: 5, category: 'PREDEFINED' },
           { name: 'Mon parcours combiné', type: 'blueprint', nbModules: 2 },
@@ -192,7 +210,7 @@ module('Integration | Component | Catalogue::List', function (hooks) {
         // when
         const screen = await render(
           <template>
-            <List @categories={{categories}} @updateFilter={{updateFilter}} @courses={{courses}} @type="all" />
+            <List @category={{category}} @updateFilter={{updateFilter}} @courses={{courses}} @type="targetProfile" />
           </template>,
         );
 
@@ -241,8 +259,8 @@ module('Integration | Component | Catalogue::List', function (hooks) {
       test('it preselects areas filter with initials values', async function (assert) {
         // given
         const updateFilter = sinon.stub();
-        const area1 = store.createRecord('area', { id: 1, title: 'area1', code: 1, competences: [] });
-        const area2 = store.createRecord('area', { id: 2, title: 'area2', code: 2, competences: [] });
+        const area1 = store.createRecord('area', { id: 1, title: 'area1', code: '1', competences: [] });
+        const area2 = store.createRecord('area', { id: 2, title: 'area2', code: '2', competences: [] });
         const selectedAreas = [area1.id];
 
         const courses = [
@@ -254,6 +272,7 @@ module('Integration | Component | Catalogue::List', function (hooks) {
             areas: [area1, area2],
           },
           { name: 'Mon parcours combiné', type: 'blueprint', nbModules: 2, areas: [area1] },
+          { name: 'Parcours nul', type: 'targetProfile', category: 'OTHER', nbModules: 2, areas: [area2] },
         ];
 
         // when
@@ -271,8 +290,8 @@ module('Integration | Component | Catalogue::List', function (hooks) {
       test('it filters items list that match selected areas using a AND', async function (assert) {
         // given
         const updateFilter = sinon.stub();
-        const area1 = store.createRecord('area', { id: 1, title: 'area1', code: 1, competences: [] });
-        const area2 = store.createRecord('area', { id: 2, title: 'area2', code: 2, competences: [] });
+        const area1 = store.createRecord('area', { id: 1, title: 'area1', code: '1', competences: [] });
+        const area2 = store.createRecord('area', { id: 2, title: 'area2', code: '2', competences: [] });
 
         const selectedAreas = [area1.id, area2.id];
 
@@ -305,10 +324,10 @@ module('Integration | Component | Catalogue::List', function (hooks) {
         // given
         const updateFilter = sinon.stub();
         const search = 'combiné';
-        const comp1 = store.createRecord('competence', { id: 1, name: 'comp1', index: 1 });
-        const comp2 = store.createRecord('competence', { id: 2, name: 'comp2', index: 2 });
-        const area1 = store.createRecord('area', { id: 1, title: 'area1', code: 1, competences: [comp1] });
-        const area2 = store.createRecord('area', { id: 2, title: 'area2', code: 2, competences: [comp2] });
+        const comp1 = store.createRecord('competence', { id: 1, name: 'comp1', index: '1.1' });
+        const comp2 = store.createRecord('competence', { id: 2, name: 'comp2', index: '2.1' });
+        const area1 = store.createRecord('area', { id: 1, title: 'area1', code: '1', competences: [comp1] });
+        const area2 = store.createRecord('area', { id: 2, title: 'area2', code: '2', competences: [comp2] });
 
         const courses = [
           {
@@ -337,10 +356,10 @@ module('Integration | Component | Catalogue::List', function (hooks) {
       test('it preselects competences filter with initials values', async function (assert) {
         // given
         const updateFilter = sinon.stub();
-        const comp1 = store.createRecord('competence', { id: 1, name: 'comp1', index: 1 });
-        const comp2 = store.createRecord('competence', { id: 2, name: 'comp2', index: 2 });
-        const area1 = store.createRecord('area', { id: 1, title: 'area1', code: 1, competences: [comp1] });
-        const area2 = store.createRecord('area', { id: 2, title: 'area2', code: 2, competences: [comp2] });
+        const comp1 = store.createRecord('competence', { id: 1, name: 'comp1', index: '1.1' });
+        const comp2 = store.createRecord('competence', { id: 2, name: 'comp2', index: '2.1' });
+        const area1 = store.createRecord('area', { id: 1, title: 'area1', code: '1', competences: [comp1] });
+        const area2 = store.createRecord('area', { id: 2, title: 'area2', code: '2', competences: [comp2] });
         const selectedCompetences = [comp1.id];
         const courses = [
           {
@@ -374,10 +393,10 @@ module('Integration | Component | Catalogue::List', function (hooks) {
       test('it filters items list that match selected competences using a AND', async function (assert) {
         // given
         const updateFilter = sinon.stub();
-        const comp1 = store.createRecord('competence', { id: 1, name: 'comp1', index: 1 });
-        const comp2 = store.createRecord('competence', { id: 2, name: 'comp2', index: 2 });
-        const area1 = store.createRecord('area', { id: 1, title: 'area1', code: 1, competences: [comp1] });
-        const area2 = store.createRecord('area', { id: 2, title: 'area2', code: 2, competences: [comp2] });
+        const comp1 = store.createRecord('competence', { id: 1, name: 'comp1', index: '1.1' });
+        const comp2 = store.createRecord('competence', { id: 2, name: 'comp2', index: '2.1' });
+        const area1 = store.createRecord('area', { id: 1, title: 'area1', code: '1', competences: [comp1] });
+        const area2 = store.createRecord('area', { id: 2, title: 'area2', code: '2', competences: [comp2] });
         const selectedCompetences = [comp2.id];
         const courses = [
           {
@@ -443,7 +462,7 @@ module('Integration | Component | Catalogue::List', function (hooks) {
           <template>
             <List
               @search={{search}}
-              @category={{categories}}
+              @category={{category}}
               @area={{areas}}
               @competences={{competences}}
               @updateFilter={{updateFilter}}

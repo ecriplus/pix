@@ -1023,6 +1023,7 @@
         },
         "aria-label": "Filters op trajecten",
         "categories": {
+          "all": "Alle categorieën",
           "empty": "Geen categorie",
           "label": "Categorieën"
         },

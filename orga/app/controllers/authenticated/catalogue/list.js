@@ -3,10 +3,10 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
 export default class CatalogueListController extends Controller {
-  queryParams = ['search', 'categories', 'areas', 'competences'];
+  queryParams = ['search', 'category', 'areas', 'competences'];
 
   @tracked search = '';
-  @tracked categories = [];
+  @tracked category = '';
   @tracked areas = [];
   @tracked competences = [];
 
@@ -18,7 +18,7 @@ export default class CatalogueListController extends Controller {
   @action
   resetFilters() {
     this.search = '';
-    this.categories = [];
+    this.category = '';
     this.areas = [];
     this.competences = [];
   }

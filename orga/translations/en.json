@@ -1036,6 +1036,7 @@
         },
         "aria-label": "Filters on courses",
         "categories": {
+          "all": "All categories",
           "empty": "No category",
           "label": "Categories"
         },
