@@ -264,15 +264,15 @@ function _buildComplexNetwork(databaseBuilder) {
 }
 
 function _buildExtraNetworksForPagination(databaseBuilder) {
-  databaseBuilder.factory.buildNetwork({ name: 'Réseau Auvergne-Rhône-Alpes' });
-  databaseBuilder.factory.buildNetwork({ name: 'Réseau Bourgogne-Franche-Comté' });
-  databaseBuilder.factory.buildNetwork({ name: 'Réseau Bretagne' });
-  databaseBuilder.factory.buildNetwork({ name: 'Réseau Centre-Val de Loire' });
-  databaseBuilder.factory.buildNetwork({ name: 'Réseau Grand Est' });
-  databaseBuilder.factory.buildNetwork({ name: 'Réseau Normandie' });
-  databaseBuilder.factory.buildNetwork({ name: 'Réseau Nouvelle-Aquitaine' });
-  databaseBuilder.factory.buildNetwork({ name: 'Réseau Occitanie' });
-  databaseBuilder.factory.buildNetwork({ name: 'Réseau Pays de la Loire' });
+  databaseBuilder.factory.buildNetworkAndHeadOrganization({ name: 'Réseau Auvergne-Rhône-Alpes' });
+  databaseBuilder.factory.buildNetworkAndHeadOrganization({ name: 'Réseau Bourgogne-Franche-Comté' });
+  databaseBuilder.factory.buildNetworkAndHeadOrganization({ name: 'Réseau Bretagne' });
+  databaseBuilder.factory.buildNetworkAndHeadOrganization({ name: 'Réseau Centre-Val de Loire' });
+  databaseBuilder.factory.buildNetworkAndHeadOrganization({ name: 'Réseau Grand Est' });
+  databaseBuilder.factory.buildNetworkAndHeadOrganization({ name: 'Réseau Normandie' });
+  databaseBuilder.factory.buildNetworkAndHeadOrganization({ name: 'Réseau Nouvelle-Aquitaine' });
+  databaseBuilder.factory.buildNetworkAndHeadOrganization({ name: 'Réseau Occitanie' });
+  databaseBuilder.factory.buildNetworkAndHeadOrganization({ name: 'Réseau Pays de la Loire' });
 }
 
 export function buildNetworks(databaseBuilder) {
