@@ -241,6 +241,50 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
           expect(actualCertificateSummary.reachedMeshLevel).to.equal('LEVEL_INDEPENDENT_3');
         });
       });
+
+      context('when certification is Pix+ V3 EDU', function () {
+        ['EDU_1ER_DEGRE', 'EDU_2ND_DEGRE', 'EDU_CPE'].forEach((eduFramework) => {
+          context(`for framework ${eduFramework}`, function () {
+            ['ADVANCED', 'EXPERT'].forEach((eduV3ExternalJuryResult) => {
+              it(`should override reachedMeshLevel with the external jury result LEVEL_${eduV3ExternalJuryResult}`, function () {
+                // when
+                const actualCertificateSummary = CertificateSummary.buildFrom({
+                  ...baseData,
+                  certificationFramework: Frameworks[eduFramework],
+                  algorithmVersion: AlgorithmEngineVersion.V3,
+                  assessmentResultStatus: AssessmentResult.status.VALIDATED,
+                  isPublished: true,
+                  isExtraCertificationAcquired: true,
+                  reachedMeshIndex: 0,
+                  eduV3ExternalJuryResult,
+                });
+
+                // then
+                expect(actualCertificateSummary.reachedMeshLevel).to.equal(`LEVEL_${eduV3ExternalJuryResult}`);
+              });
+            });
+
+            [null, 'UNSET'].forEach((eduV3ExternalJuryResult) => {
+              it(`should keep the admissible level when external jury result is ${eduV3ExternalJuryResult}`, function () {
+                // when
+                const actualCertificateSummary = CertificateSummary.buildFrom({
+                  ...baseData,
+                  certificationFramework: Frameworks[eduFramework],
+                  algorithmVersion: AlgorithmEngineVersion.V3,
+                  assessmentResultStatus: AssessmentResult.status.VALIDATED,
+                  isPublished: true,
+                  isExtraCertificationAcquired: true,
+                  reachedMeshIndex: 0,
+                  eduV3ExternalJuryResult,
+                });
+
+                // then
+                expect(actualCertificateSummary.reachedMeshLevel).to.equal('LEVEL_ADMISSIBLE');
+              });
+            });
+          });
+        });
+      });
     });
 
     context('certificate type computation', function () {

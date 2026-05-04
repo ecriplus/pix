@@ -2422,15 +2422,21 @@
         },
         "EDU_1ER_DEGRE": {
           "ADMISSIBLE": "Toelaatbaar",
-          "BELOW_MINIMUM": "Niet toelaatbaar"
+          "ADVANCED": "Gevorderd",
+          "BELOW_MINIMUM": "Niet toelaatbaar",
+          "EXPERT": "Expert"
         },
         "EDU_2ND_DEGRE": {
           "ADMISSIBLE": "Toelaatbaar",
-          "BELOW_MINIMUM": "Niet toelaatbaar"
+          "ADVANCED": "Gevorderd",
+          "BELOW_MINIMUM": "Niet toelaatbaar",
+          "EXPERT": "Expert"
         },
         "EDU_CPE": {
           "ADMISSIBLE": "Toelaatbaar",
-          "BELOW_MINIMUM": "Niet toelaatbaar"
+          "ADVANCED": "Gevorderd",
+          "BELOW_MINIMUM": "Niet toelaatbaar",
+          "EXPERT": "Expert"
         },
         "PRO_SANTE": {
           "ADVANCED": "Gevorderd",
