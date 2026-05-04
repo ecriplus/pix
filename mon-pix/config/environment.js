@@ -50,6 +50,7 @@ module.exports = function (environment) {
         { value: 'nl', nativeName: 'Nederlands', displayedInSwitcher: false },
         { value: 'nl-BE', nativeName: 'Nederlands (België)', displayedInSwitcher: true },
       ],
+      PIX_ASSETS_MANAGER_URL: process.env.PIX_ASSETS_MANAGER_URL,
       FT_FOCUS_CHALLENGE_ENABLED: _isFeatureEnabled(process.env.FT_FOCUS_CHALLENGE_ENABLED) || false,
       isTimerCountdownEnabled: true,
       LOAD_EXTERNAL_SCRIPT: true,
@@ -218,6 +219,7 @@ module.exports = function (environment) {
 
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.autoboot = false;
+    ENV.APP.PIX_ASSETS_MANAGER_URL = 'https://example-assets.net';
 
     ENV.APP.API_HOST = 'http://localhost:3000';
     ENV.APP.isTimerCountdownEnabled = false;
