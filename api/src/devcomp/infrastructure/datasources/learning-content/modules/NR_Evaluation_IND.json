@@ -116,7 +116,7 @@
             },
             {
               "type": "stepper",
-              "instruction": "<p>Pour chacun des élements suivant, dites si il s’agit pour vous si il appartient à la catégorie des appareils numériques (smartphones, PC, ect.), des réseaux ou celles des centres de données.&nbsp;</p>",
+              "instruction": "<p>Pour chacun des éléments suivants, dites à quel famille il appartient&nbsp;: équipements des utilisateurs, réseaux ou centres de données.</p>",
               "steps": [
                 {
                   "elements": [
