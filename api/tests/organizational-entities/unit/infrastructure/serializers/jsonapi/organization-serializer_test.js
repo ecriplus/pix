@@ -12,7 +12,9 @@ describe('Unit | Serializer | organization-serializer', function () {
         domainBuilder.buildTag({ id: 7, name: 'AEFE' }),
         domainBuilder.buildTag({ id: 44, name: 'PUBLIC' }),
       ];
-      const administrationTeam = domainBuilder.buildAdministrationTeam({ name: 'pouet' });
+      const administrationTeam = domainBuilder.buildAdministrationTeam({
+        name: 'pouet',
+      });
       const organization = domainBuilder.buildOrganizationForAdmin({
         email: 'sco.generic.account@example.net',
         tags,
@@ -48,11 +50,6 @@ describe('Unit | Serializer | organization-serializer', function () {
             'administration-team-name': organization.administrationTeamName,
           },
           relationships: {
-            memberships: {
-              links: {
-                related: `/api/organizations/${organization.id}/memberships`,
-              },
-            },
             'target-profiles': {
               links: {
                 related: `/api/organizations/${organization.id}/target-profiles`,
