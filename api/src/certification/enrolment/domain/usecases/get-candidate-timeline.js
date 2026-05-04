@@ -7,7 +7,6 @@
  * @typedef {import ('./index.js').CertificationBadgesService} CertificationBadgesService
  * @typedef {import ('../../infrastructure/repositories/index.js').ComplementaryCertificationCourseRepository} ComplementaryCertificationCourseRepository
  * @typedef {import ('../../infrastructure/repositories/index.js').ComplementaryCertificationBadgeWithOffsetVersionRepository} ComplementaryCertificationBadgeWithOffsetVersionRepository
- * @typedef {import ('./index.js').CertificationAssessmentRepository} CertificationAssessmentRepository
  * @typedef {import ('../models/timeline/TimelineEvent.js').TimelineEvent} TimelineEvent
  * @typedef {import ('../models/Candidate.js').Candidate} Candidate
  * @typedef {import ('../models/Candidate.js').Subscription} Subscription
@@ -24,7 +23,6 @@ import { CandidateNotCertifiableEvent } from '../models/timeline/CandidateNotCer
 import { CandidateNotEligibleEvent } from '../models/timeline/CandidateNotEligibleEvent.js';
 import { CandidateReconciledEvent } from '../models/timeline/CandidateReconciledEvent.js';
 import { CandidateTimeline } from '../models/timeline/CandidateTimeline.js';
-import { CertificationEndedEvent } from '../models/timeline/CertificationEndedEvent.js';
 import { CertificationStartedEvent } from '../models/timeline/CertificationStartedEvent.js';
 import { LastAnsweredEvent } from '../models/timeline/LastAnsweredEvent.js';
 
@@ -34,7 +32,6 @@ import { LastAnsweredEvent } from '../models/timeline/LastAnsweredEvent.js';
  * @param {number} params.certificationCandidateId
  * @param {CandidateRepository} params.candidateRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
- * @param {CertificationAssessmentRepository} params.certificationAssessmentRepository
  * @param {ComplementaryCertificationCourseRepository} params.complementaryCertificationCourseRepository
  * @param {ComplementaryCertificationBadgeWithOffsetVersionRepository} params.complementaryCertificationBadgeWithOffsetVersionRepository
  * @param {CertificationBadgesService} params.certificationBadgesService
@@ -46,7 +43,6 @@ export const getCandidateTimeline = async ({
   certificationCandidateId,
   candidateRepository,
   certificationCourseRepository,
-  certificationAssessmentRepository,
   certificationBadgesService,
   placementProfileService,
   eligibilityService,
@@ -96,13 +92,6 @@ export const getCandidateTimeline = async ({
 
   if (certificationCourse.lastAnswerAt) {
     timeline.addEvent(new LastAnsweredEvent({ when: certificationCourse.lastAnswerAt }));
-  }
-
-  const assessment = await certificationAssessmentRepository.getByCertificationCandidateId({
-    certificationCandidateId,
-  });
-  if (assessment.endedAt) {
-    timeline.addEvent(new CertificationEndedEvent({ when: assessment.endedAt, assessmentState: assessment.state }));
   }
 
   return timeline;

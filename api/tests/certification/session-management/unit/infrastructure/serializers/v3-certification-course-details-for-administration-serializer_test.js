@@ -24,7 +24,6 @@ describe('Unit | Serializer | JSONAPI | v3-certification-details-for-administrat
       const isRejectedForFraud = true;
       const numberOfChallenges = 20;
       const createdAt = new Date('2022-02-02');
-      const endedAt = new Date('2022-02-04');
       const assessmentState = Assessment.states.ENDED_DUE_TO_FINALIZATION;
       const assessmentResultStatus = AssessmentResult.status.VALIDATED;
       const abortReason = ABORT_REASONS.CANDIDATE;
@@ -60,7 +59,6 @@ describe('Unit | Serializer | JSONAPI | v3-certification-details-for-administrat
             'certification-course-id': certificationCourseId,
             'is-rejected-for-fraud': isRejectedForFraud,
             'created-at': createdAt,
-            'ended-at': endedAt,
             'assessment-state': assessmentState,
             'assessment-result-status': assessmentResultStatus,
             'abort-reason': abortReason,
@@ -95,7 +93,6 @@ describe('Unit | Serializer | JSONAPI | v3-certification-details-for-administrat
         certificationCourseId,
         isRejectedForFraud,
         createdAt,
-        endedAt,
         assessmentState,
         assessmentResultStatus,
         abortReason,

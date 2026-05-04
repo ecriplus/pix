@@ -411,49 +411,6 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
         // then
         expect(certificationAssessment.state).to.equal(Assessment.states.ENDED_DUE_TO_FINALIZATION);
       });
-
-      describe('where there are challenges', function () {
-        it('should set the last challenge creation date as certification end date', function () {
-          // given
-          const firstChallengeDate = new Date('2020-12-31T10:00:00Z');
-          const lastChallengeDate = new Date('2020-12-31T10:02:00Z');
-          const certificationChallenge = domainBuilder.buildCertificationChallenge({
-            createdAt: firstChallengeDate,
-          });
-          const lastCertificationChallenge = domainBuilder.buildCertificationChallenge({
-            createdAt: lastChallengeDate,
-          });
-          const certificationAssessment = domainBuilder.buildCertificationAssessment({
-            state: Assessment.states.STARTED,
-            certificationChallenges: [lastCertificationChallenge, certificationChallenge],
-          });
-
-          // when
-          certificationAssessment.endDueToFinalization();
-
-          // then
-          expect(certificationAssessment.endedAt).to.deep.equal(lastChallengeDate);
-        });
-      });
-
-      describe('when there are no challenges', function () {
-        it('should set the certification course created date as end date', function () {
-          // given
-          const certificationCourseCreatedAt = new Date('2020-01-01');
-
-          const certificationAssessment = domainBuilder.buildCertificationAssessment({
-            state: Assessment.states.STARTED,
-            createdAt: certificationCourseCreatedAt,
-            certificationChallenges: [],
-          });
-
-          // when
-          certificationAssessment.endDueToFinalization();
-
-          // then
-          expect(certificationAssessment.endedAt).to.deep.equal(certificationCourseCreatedAt);
-        });
-      });
     });
 
     describe('when the assessment is ENDED_BY_INVIGILATOR', function () {
@@ -475,17 +432,15 @@ describe('Unit | Domain | Models | CertificationAssessment', function () {
   describe('#endByInvigilator', function () {
     it('should change the assessment state to "endedByInvigilator"', function () {
       // given
-      const now = new Date('2020-12-31');
       const certificationAssessment = domainBuilder.buildCertificationAssessment({
         state: Assessment.states.STARTED,
       });
 
       // when
-      certificationAssessment.endByInvigilator({ now });
+      certificationAssessment.endByInvigilator();
 
       // then
       expect(certificationAssessment.state).to.equal(Assessment.states.ENDED_BY_INVIGILATOR);
-      expect(certificationAssessment.endedAt).to.deep.equal(now);
     });
   });
 

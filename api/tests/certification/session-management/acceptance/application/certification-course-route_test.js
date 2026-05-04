@@ -465,7 +465,6 @@ describe('Certification | Session Management | Acceptance | Application | Routes
           'certification-course-id': certificationCourse.id,
           'last-answer-at': certificationCourse.lastAnswerAt,
           'created-at': certificationCourse.createdAt,
-          'ended-at': null,
           'is-rejected-for-fraud': false,
           'pix-score': assessmentResult.pixScore,
           'reached-result-key': 'CORE.BELOW_MINIMUM',

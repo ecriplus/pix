@@ -19,11 +19,9 @@ export async function get({ id }) {
       certificationCourseId: 'certification-courses.id',
       certificationCourseVersion: 'certification-courses.version',
       certificationCourseUpdatedAt: 'certification-courses.updatedAt',
-      certificationCourseEndedAt: 'certification-courses.endedAt',
       certificationCourseAbortReason: 'certification-courses.abortReason',
       certificationCourseAssessmentId: 'assessments.id',
       certificationCourseAssessmentState: 'assessments.state',
-      certificationCourseAssessmentUpdatedAt: 'assessments.updatedAt',
     })
     .from('sessions')
     .leftJoin('certification-courses', 'certification-courses.sessionId', 'sessions.id')
@@ -42,11 +40,9 @@ export async function get({ id }) {
         id: certificationCourseData.certificationCourseId,
         version: certificationCourseData.certificationCourseVersion,
         updatedAt: certificationCourseData.certificationCourseUpdatedAt,
-        endedAt: certificationCourseData.certificationCourseEndedAt,
         abortReason: certificationCourseData.certificationCourseAbortReason,
         assessmentId: certificationCourseData.certificationCourseAssessmentId,
         assessmentState: certificationCourseData.certificationCourseAssessmentState,
-        assessmentLatestActivityAt: certificationCourseData.certificationCourseAssessmentUpdatedAt,
       });
       certificationCourses.push(certificationCourse);
     }
@@ -72,7 +68,6 @@ export async function save({ session }) {
   const certificationCoursesDataToUpdate = session.certificationCourses.map((certificationCourse) => ({
     id: certificationCourse.id,
     updatedAt: certificationCourse.updatedAt,
-    endedAt: certificationCourse.endedAt,
     abortReason: certificationCourse.abortReason,
   }));
   await batchUpdate({
@@ -97,7 +92,6 @@ export async function saveCertification({ certificationCourse }) {
   await knexConn('certification-courses')
     .update({
       updatedAt: certificationCourse.updatedAt,
-      endedAt: certificationCourse.endedAt,
       abortReason: certificationCourse.abortReason,
     })
     .where({ id: certificationCourse.id });

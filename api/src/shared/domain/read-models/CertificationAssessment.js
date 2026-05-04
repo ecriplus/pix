@@ -2,7 +2,7 @@ import { CertificationChallengeLiveAlertStatus } from '../../../certification/sh
 import { CertificationCompanionLiveAlertStatus } from '../../../certification/shared/domain/models/CertificationCompanionLiveAlert.js';
 import { Assessment } from '../models/Assessment.js';
 
-class CertificationAssessment {
+export class CertificationAssessment {
   constructor(assessment) {
     this.id = assessment.id;
     this.certificationCourseId = assessment.certificationCourseId;
@@ -55,5 +55,3 @@ class CertificationAssessment {
     );
   }
 }
-
-export { CertificationAssessment };

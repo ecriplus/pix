@@ -8,7 +8,6 @@ const serialize = function ({ certificationDetails }) {
     'certificationChallengesForAdministration',
     'isRejectedForFraud',
     'createdAt',
-    'endedAt',
     'assessmentState',
     'assessmentResultStatus',
     'abortReason',
