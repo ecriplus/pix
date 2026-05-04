@@ -1,5 +1,29 @@
 # Pix Changelog
 
+# [5.400.0](https://github.com/1024pix/pix/compare/v5.399.0...v5.400.0) (2026-05-04)
+
+### :rocket: Amélioration
+
+- [#16049](https://github.com/1024pix/pix/pull/16049) Ajoute le nombre de question, la durée et le statut à la route d'historique des versions de référentiel (PIX-21479) 
+- [#16056](https://github.com/1024pix/pix/pull/16056) MDX-232 #11_Moteur_Rechinfo_NOV_2 premiere integration 
+- [#15898](https://github.com/1024pix/pix/pull/15898) Relectures module NR_Durabilité_NOV 
+- [#16074](https://github.com/1024pix/pix/pull/16074) Update NR_Datacenter_AVA.json  
+
+### :bug: Correction
+
+- [#16076](https://github.com/1024pix/pix/pull/16076) Action test-modulix-content : cassée depuis l’ajout de tests (PIX-22605) 
+
+### :building_construction: Tech
+
+- [#16070](https://github.com/1024pix/pix/pull/16070) Ajoute un rapport de tests au job de test d'audit logger de la CI. 
+
+### :arrow_up: Montée de version
+
+- [#16033](https://github.com/1024pix/pix/pull/16033) Update dependency @1024pix/pix-ui to ^60.10.0 (certif) 
+- [#16077](https://github.com/1024pix/pix/pull/16077) Update dependency @1024pix/pix-ui to ^60.10.1 (admin) 
+- [#16078](https://github.com/1024pix/pix/pull/16078) Update dependency @1024pix/pix-ui to v60.10.1 (orga) 
+- [#16068](https://github.com/1024pix/pix/pull/16068) Update Node.js to v24.15.0
+
 # [5.399.0](https://github.com/1024pix/pix/compare/v5.398.0...v5.399.0) (2026-04-30)
 
 ### :rocket: Amélioration
