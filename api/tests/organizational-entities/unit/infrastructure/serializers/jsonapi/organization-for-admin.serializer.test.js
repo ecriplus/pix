@@ -34,7 +34,9 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         dataProtectionOfficerEmail: 'justin.ptipeu@example.net',
         identityProviderForCampaigns: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
         features: {
-          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true },
+          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: {
+            active: true,
+          },
         },
         name: 'motherSco',
         countryCode: 99100,
@@ -55,7 +57,9 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         dataProtectionOfficerEmail: 'justin.ptipeu@example.net',
         identityProviderForCampaigns: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
         features: {
-          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true },
+          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: {
+            active: true,
+          },
         },
         parentOrganizationId: parentOrganization.id,
         parentOrganizationName: parentOrganization.name,
@@ -115,7 +119,7 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
           relationships: {
             'organization-memberships': {
               links: {
-                related: `/api/organizations/${organization.id}/memberships`,
+                related: `/api/admin/organizations/${organization.id}/memberships`,
               },
             },
             'target-profile-summaries': {
@@ -214,7 +218,9 @@ describe('Unit | Serializer | organization-for-admin-serializer', function () {
         administrationTeamId: '1',
         features: {
           [ORGANIZATION_FEATURE.COMPUTE_ORGANIZATION_LEARNER_CERTIFICABILITY.key]: { active: true },
-          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: { active: true },
+          [ORGANIZATION_FEATURE.MULTIPLE_SENDING_ASSESSMENT.key]: {
+            active: true,
+          },
           [ORGANIZATION_FEATURE.IS_MANAGING_STUDENTS.key]: { active: true },
           [ORGANIZATION_FEATURE.SHOW_SKILLS.key]: { active: true },
         },
