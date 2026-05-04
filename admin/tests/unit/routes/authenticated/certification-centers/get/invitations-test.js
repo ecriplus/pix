@@ -5,6 +5,22 @@ import sinon from 'sinon';
 module('Unit | Route | authenticated/certification-centers/get/invitations', function (hooks) {
   setupTest(hooks);
 
+  module('#beforeModel', function () {
+    test('it should transition to get route when certification center is archived', async function (assert) {
+      // given
+      const certificationCenter = { id: 1, isArchived: true };
+      const route = this.owner.lookup('route:authenticated/certification-centers/get/invitations');
+      sinon.stub(route.router, 'replaceWith');
+      sinon.stub(route, 'modelFor').returns({ certificationCenter });
+
+      // when
+      await route.beforeModel();
+
+      // then
+      assert.ok(route.router.replaceWith.calledWith('authenticated.certification-centers.get'));
+    });
+  });
+
   test('it should return certification center with its invitations', async function (assert) {
     // given
     const route = this.owner.lookup('route:authenticated/certification-centers/get/invitations');
