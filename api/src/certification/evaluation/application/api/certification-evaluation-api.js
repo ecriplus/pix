@@ -11,7 +11,6 @@
  * @typedef {import ('../../../../shared/domain/errors.js').AssessmentLackOfChallengesError} AssessmentLackOfChallengesError
  * @typedef {import ('../../../../shared/domain/models/Challenge.js').Challenge} Challenge
  */
-import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { usecases } from '../../domain/usecases/index.js';
 
 /**
@@ -23,9 +22,9 @@ import { usecases } from '../../domain/usecases/index.js';
  *
  * @returns {Promise<void>}
  */
-export const rescoreV3Certification = async ({ event }) => {
+export async function rescoreV3Certification({ event }) {
   return usecases.scoreV3Certification({ certificationCourseId: event.certificationCourseId, event });
-};
+}
 /**
  * @function
  * @name rescoreV2Certification
@@ -35,9 +34,9 @@ export const rescoreV3Certification = async ({ event }) => {
  *
  * @returns {Promise<void>}
  */
-export const rescoreV2Certification = async ({ event }) => {
+export async function rescoreV2Certification({ event }) {
   return usecases.rescoreV2Certification({ event });
-};
+}
 
 /**
  * @function
@@ -50,9 +49,9 @@ export const rescoreV2Certification = async ({ event }) => {
  * @throws {AssessmentEndedError} test ended or no next challenge available
  * @throws {AssessmentLackOfChallengesError} no eligible challenges remaining before reaching maximum assessment length
  */
-export const selectNextCertificationChallenge = withTransaction(async ({ assessmentId }) => {
+export async function selectNextCertificationChallenge({ assessmentId }) {
   return usecases.getNextChallenge({ assessmentId });
-});
+}
 
 /**
  * @function
@@ -80,6 +79,6 @@ export async function evaluateAndSaveAnswer({ answer, userId, certificationCours
  *
  * @returns {Promise<void>}
  */
-export const completeCertificationAssessment = async ({ certificationCourseId, locale }) => {
+export async function completeCertificationAssessment({ certificationCourseId, locale }) {
   return usecases.completeCertificationAssessment({ certificationCourseId, locale });
-};
+}
