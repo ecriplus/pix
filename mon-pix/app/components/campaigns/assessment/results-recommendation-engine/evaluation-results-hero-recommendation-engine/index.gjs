@@ -11,6 +11,7 @@ import AcquiredBadgesCompact from './acquired-badges-compact';
 export default class EvaluationResultsHeroRecommendationEngine extends Component {
   @service currentUser;
   @service pixMetrics;
+  @service media;
 
   get masteryRatePercentage() {
     return Math.round(this.args.campaignParticipationResult.masteryRate * 100);
@@ -32,6 +33,12 @@ export default class EvaluationResultsHeroRecommendationEngine extends Component
 
   get isUserAnonymous() {
     return this.currentUser?.user?.isAnonymous;
+  }
+
+  get titleStyles() {
+    const baseStyle = 'evaluation-results-hero-recommendation-engine__title';
+    const titleSize = this.media.isMobile ? 'extra-small-size' : 'small-size';
+    return `${baseStyle} ${baseStyle}--${titleSize}`;
   }
 
   @action handleSeeTrainingsClick() {
@@ -60,11 +67,13 @@ export default class EvaluationResultsHeroRecommendationEngine extends Component
   <template>
     <div class="evaluation-results-hero-recommendation-engine">
       <div class="evaluation-results-hero-recommendation-engine__content">
-        <h2 class="evaluation-results-hero-recommendation-engine__title">{{t
+        <h2 class="{{this.titleStyles}}">{{t
             "pages.skill-review.hero.thanks"
             name=this.currentUser.user.firstName
           }}</h2>
-
+        {{#if this.media.isMobile}}
+          <hr class="evaluation-results-hero-recommendation-engine__separator" />
+        {{/if}}
         <p class="evaluation-results-hero-recommendation-engine__percent">
           <strong class="evaluation-results-hero-recommendation-engine__percent-value">
             {{this.masteryRatePercentage}}<span class="evaluation-results-hero-recommendation-engine__percent-unit">

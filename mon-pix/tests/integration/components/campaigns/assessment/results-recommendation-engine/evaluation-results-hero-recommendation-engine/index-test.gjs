@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 import { t } from 'ember-intl/test-support';
 import EvaluationResultsHeroRecommendationEngine from 'mon-pix/components/campaigns/assessment/results-recommendation-engine/evaluation-results-hero-recommendation-engine/index';
 import { module, test } from 'qunit';
@@ -12,16 +13,73 @@ module(
     setupIntlRenderingTest(hooks);
 
     module('global behaviour', function (hooks) {
-      let screen;
-
       hooks.beforeEach(async function () {
+        stubCurrentUserService(this.owner, { id: 1, firstName: 'Hermione' });
+      });
+
+      module('when screen is mobile', function () {
+        test('it display a separator', async function (assert) {
+          // given
+          const campaign = { organizationId: 1 };
+          const campaignParticipationResult = { masteryRate: 0.755 };
+
+          this.owner.register(
+            'service:media',
+            class MediaService extends Service {
+              isMobile = true;
+            },
+          );
+
+          // when
+          const screen = await render(
+            <template>
+              <EvaluationResultsHeroRecommendationEngine
+                @campaign={{campaign}}
+                @campaignParticipationResult={{campaignParticipationResult}}
+              />
+            </template>,
+          );
+
+          // then
+          assert.dom(screen.getByRole('separator')).exists();
+        });
+      });
+
+      module('when screen is not mobile', function () {
+        test('it does not display a separator', async function (assert) {
+          // given
+          const campaign = { organizationId: 1 };
+          const campaignParticipationResult = { masteryRate: 0.755 };
+
+          this.owner.register(
+            'service:media',
+            class MediaService extends Service {
+              isMobile = false;
+            },
+          );
+
+          // when
+          const screen = await render(
+            <template>
+              <EvaluationResultsHeroRecommendationEngine
+                @campaign={{campaign}}
+                @campaignParticipationResult={{campaignParticipationResult}}
+              />
+            </template>,
+          );
+
+          // then
+          assert.dom(screen.queryByRole('separator')).doesNotExist();
+        });
+      });
+
+      test('it displays a congratulation title', async function (assert) {
         // given
         const campaign = { organizationId: 1 };
         const campaignParticipationResult = { masteryRate: 0.755 };
-        stubCurrentUserService(this.owner, { id: 1, firstName: 'Hermione' });
 
         // when
-        screen = await render(
+        const screen = await render(
           <template>
             <EvaluationResultsHeroRecommendationEngine
               @campaign={{campaign}}
@@ -29,9 +87,7 @@ module(
             />
           </template>,
         );
-      });
 
-      test('it displays a congratulation title', async function (assert) {
         // then
         assert
           .dom(
@@ -43,6 +99,20 @@ module(
       });
 
       test('it displays a rounded mastery rate', async function (assert) {
+        // given
+        const campaign = { organizationId: 1 };
+        const campaignParticipationResult = { masteryRate: 0.755 };
+
+        // when
+        const screen = await render(
+          <template>
+            <EvaluationResultsHeroRecommendationEngine
+              @campaign={{campaign}}
+              @campaignParticipationResult={{campaignParticipationResult}}
+            />
+          </template>,
+        );
+
         // then
         const masteryRateElementWithoutWhiteSpaceTrimmed = screen.getByText('76').textContent.replace(/\s/g, '').trim();
         assert.strictEqual(masteryRateElementWithoutWhiteSpaceTrimmed, '76%');

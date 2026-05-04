@@ -1,31 +1,41 @@
+@use 'pix-design-tokens/breakpoints';
 @use 'pix-design-tokens/typography';
 @use "pix-design-tokens/colors";
+
+.evaluation-results-recommendation-engine {
+  padding: 0 var(--pix-spacing-3x);
+}
 
 .evaluation-results-hero-recommendation-engine {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--pix-spacing-10x);
-  justify-content: space-between;
-  max-width: 80rem;
-  margin: 0 auto var(--pix-spacing-10x);
-  padding: var(--pix-spacing-10x) 15%;
+  gap: var(--pix-spacing-6x);
+  padding: var(--pix-spacing-6x) var(--pix-spacing-3x);
   color: var(--pix-neutral-0);
   background: var(--pix-gradient-default-dark);
-  border-radius: var(--radius-5x, 20px);
+  border-radius: 20px 20px 0 0;
 
   &__content {
     display: flex;
     flex-direction: column;
-    gap: var(--pix-spacing-4x);
-    min-width: min(28rem, 100%);
+    gap: var(--pix-spacing-6x);
+    align-items: center;
+    justify-content: center;
+    width: 100%;
   }
 
   &__title {
-    @extend %pix-title-s;
-
-    color: var(--pix-neutral-0);
     line-height: 1.5;
     white-space: pre-line;
+    text-align: center;
+
+    &--extra-small-size {
+      @extend %pix-title-xxs;
+    }
+
+    &--small-size {
+      @extend %pix-title-s;
+    }
   }
 
   &__percent {
@@ -34,6 +44,7 @@
     color: var(--pix-neutral-0);
     font-weight: 500;
     line-height: 2rem;
+    text-align: center;
   }
 
   &__percent-value {
@@ -42,6 +53,7 @@
   }
 
   &__percent-unit {
+    display: inline-block;
     margin-left: var(--pix-spacing-2x);
     font-size: 2.5rem;
   }
@@ -64,12 +76,59 @@
     color: var(--pix-neutral-0);
   }
 
+  &__separator {
+    width: 100%;
+    height: 0;
+    padding: 0;
+    border: 0;
+    border-top: 1px solid var(--pix-neutral-0);
+  }
+
   &__actions {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     gap: var(--pix-spacing-4x);
     align-items: flex-start;
+    width: 100%;
+
+    .pix-button {
+      width: 100%;
+    }
+  }
+}
+
+@include breakpoints.device-is('tablet') {
+  .evaluation-results-hero-recommendation-engine {
+    gap: var(--pix-spacing-10x);
+    justify-content: space-between;
+    max-width: 80rem;
+    margin: 0 auto var(--pix-spacing-1x);
+    padding: var(--pix-spacing-10x) 15%;
+
+    &__content {
+      gap: var(--pix-spacing-4x);
+      align-items: normal;
+      justify-content: normal;
+      min-width: min(28rem, 100%);
+    }
+
+    &__title {
+      text-align: start;
+
+    }
+
+    &__percent {
+      text-align: start;
+    }
+
+    &__actions {
+      width: auto;
+
+      .pix-button {
+        width: auto;
+      }
+    }
   }
 }
 
