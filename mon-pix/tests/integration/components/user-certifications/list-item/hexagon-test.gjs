@@ -54,13 +54,13 @@ module('Integration | Component | User certifications | List item | Hexagon', fu
           );
 
           // then
-          assert.dom('[data-testid="pw-certification-card-result"]').hasClass('certification-item__hexagon');
+          assert.dom('[data-testid="pw-certification-card-result"]').hasClass('certification-result-hexagon');
           assert
             .dom('[data-testid="pw-certification-card-result"]')
-            .doesNotHaveClass('certification-item__hexagon--pix-plus-validated');
+            .doesNotHaveClass('certification-result-hexagon--pix-plus-validated');
           assert
             .dom('[data-testid="pw-certification-card-result"]')
-            .doesNotHaveClass('certification-item__hexagon--pix-plus-not-validated');
+            .doesNotHaveClass('certification-result-hexagon--pix-plus-not-validated');
         });
       });
 
@@ -74,13 +74,13 @@ module('Integration | Component | User certifications | List item | Hexagon', fu
           );
 
           // then
-          assert.dom('[data-testid="pw-certification-card-result"]').hasClass('certification-item__hexagon');
+          assert.dom('[data-testid="pw-certification-card-result"]').hasClass('certification-result-hexagon');
           assert
             .dom('[data-testid="pw-certification-card-result"]')
-            .doesNotHaveClass('certification-item__hexagon--pix-plus-validated');
+            .doesNotHaveClass('certification-result-hexagon--pix-plus-validated');
           assert
             .dom('[data-testid="pw-certification-card-result"]')
-            .doesNotHaveClass('certification-item__hexagon--pix-plus-not-validated');
+            .doesNotHaveClass('certification-result-hexagon--pix-plus-not-validated');
         });
       });
 
@@ -100,13 +100,13 @@ module('Integration | Component | User certifications | List item | Hexagon', fu
           );
 
           // then
-          assert.dom('[data-testid="pw-certification-card-result"]').hasClass('certification-item__hexagon');
+          assert.dom('[data-testid="pw-certification-card-result"]').hasClass('certification-result-hexagon');
           assert
             .dom('[data-testid="pw-certification-card-result"]')
-            .doesNotHaveClass('certification-item__hexagon--pix-plus-validated');
+            .doesNotHaveClass('certification-result-hexagon--pix-plus-validated');
           assert
             .dom('[data-testid="pw-certification-card-result"]')
-            .doesNotHaveClass('certification-item__hexagon--pix-plus-not-validated');
+            .doesNotHaveClass('certification-result-hexagon--pix-plus-not-validated');
         });
       });
 
@@ -128,10 +128,10 @@ module('Integration | Component | User certifications | List item | Hexagon', fu
           // then
           assert
             .dom('[data-testid="pw-certification-card-result"]')
-            .hasClass('certification-item__hexagon--pix-plus-validated');
+            .hasClass('certification-result-hexagon--pix-plus-validated');
           assert
             .dom('[data-testid="pw-certification-card-result"]')
-            .doesNotHaveClass('certification-item__hexagon--pix-plus-not-validated');
+            .doesNotHaveClass('certification-result-hexagon--pix-plus-not-validated');
         });
       });
 
@@ -153,10 +153,10 @@ module('Integration | Component | User certifications | List item | Hexagon', fu
           // then
           assert
             .dom('[data-testid="pw-certification-card-result"]')
-            .hasClass('certification-item__hexagon--pix-plus-not-validated');
+            .hasClass('certification-result-hexagon--pix-plus-not-validated');
           assert
             .dom('[data-testid="pw-certification-card-result"]')
-            .doesNotHaveClass('certification-item__hexagon--pix-plus-validated');
+            .doesNotHaveClass('certification-result-hexagon--pix-plus-validated');
         });
       });
     });
@@ -169,8 +169,8 @@ module('Integration | Component | User certifications | List item | Hexagon', fu
         <template>
           <Hexagon
             @isValidated={{true}}
-            @framework="DROIT"
-            @reachedMeshLevel="INDEPENDENT"
+            @framework="EDU_2ND_DEGRE"
+            @reachedMeshLevel="EXPERT"
             @certificateType="CERTIFICATE"
           />
         </template>,
@@ -178,24 +178,7 @@ module('Integration | Component | User certifications | List item | Hexagon', fu
 
       // then
       assert.dom('img').exists();
-      assert.dom('img').hasAttribute('src', /\/badges-certifies\/v3\/droit\/independent\.svg$/);
-    });
-
-    test('uses the "edu" segment in the URL for an EDU framework', async function (assert) {
-      // when
-      await render(
-        <template>
-          <Hexagon
-            @isValidated={{true}}
-            @framework="EDU_2ND_DEGRE"
-            @reachedMeshLevel="PRE_BEGINNER"
-            @certificateType="CERTIFICATE"
-          />
-        </template>,
-      );
-
-      // then
-      assert.dom('img').hasAttribute('src', /\/badges-certifies\/v3\/edu\/pre_beginner\.svg$/);
+      assert.dom('img').hasAttribute('src', /\/badges-certifies\/v3\/edu_2nd_degre\/expert\.svg$/);
     });
 
     test('does not render the score hexagon', async function (assert) {

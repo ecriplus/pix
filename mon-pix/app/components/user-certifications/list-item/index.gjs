@@ -100,6 +100,7 @@ export default class ListItem extends Component {
           </p>
         </div>
         <Hexagon
+          @size="small"
           @isValidated={{@certificateSummary.isValidated}}
           @pixScore={{@certificateSummary.pixScore}}
           @status={{@certificateSummary.status}}

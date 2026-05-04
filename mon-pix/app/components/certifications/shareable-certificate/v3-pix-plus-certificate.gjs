@@ -6,6 +6,9 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
+import { CERTIFICATE_TYPES } from 'mon-pix/models/certificate-summary';
+
+import Hexagon from '../../user-certifications/list-item/hexagon';
 
 export default class PixPlusCertificate extends Component {
   @service intl;
@@ -91,9 +94,11 @@ export default class PixPlusCertificate extends Component {
         </div>
       </div>
       <div class="v3-pix-plus-certificate__score">
-        <div class="v3-pix-plus-certificate-score__hexagon">
-          <strong class="dash">-</strong>
-        </div>
+        <Hexagon
+          @framework={{@certificate.certificationFramework}}
+          @certificateType={{CERTIFICATE_TYPES.CERTIFICATE}}
+          @reachedMeshLevel={{@certificate.level}}
+        />
         <PixTag @color="green">{{this.reachedMeshLabel}}</PixTag>
       </div>
     </PixBlock>
