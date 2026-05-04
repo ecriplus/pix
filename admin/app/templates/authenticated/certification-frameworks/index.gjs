@@ -14,7 +14,6 @@ import List from 'pix-admin/components/certification-frameworks/list';
       <section class="page-section">
         <List
           @certificationFrameworks={{@model.certificationFrameworks}}
-          @complementaryCertifications={{@model.complementaryCertifications}}
         />
       </section>
     </main>

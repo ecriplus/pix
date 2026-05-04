@@ -3,6 +3,7 @@ import Framework from 'pix-admin/components/certification-frameworks/item/framew
 <template>
   <Framework
     @frameworkKey={{@model.frameworkKey}}
-    @complementaryCertification={{@model.currentComplementaryCertification}}
+    @certificationFramework={{@model.currentCertificationFramework}}
+    @hasTargetProfilesHistory={{@model.hasTargetProfilesHistory}}
   />
 </template>

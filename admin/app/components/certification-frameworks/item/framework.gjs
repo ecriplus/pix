@@ -19,11 +19,11 @@ export default class CertificationFramework extends Component {
 
   async #onMount() {
     const frameworkKey = this.args.frameworkKey;
-    const complementaryCertification = this.args.complementaryCertification;
+    const certificationFramework = this.args.certificationFramework;
 
-    if (complementaryCertification) {
-      await complementaryCertification.reload();
-      this.targetProfilesHistory = complementaryCertification.targetProfilesHistory;
+    if (certificationFramework && this.args.hasTargetProfilesHistory) {
+      await certificationFramework.reload();
+      this.targetProfilesHistory = certificationFramework.targetProfilesHistory;
     }
 
     const frameworkHistory = await this.store.queryRecord('framework-history', frameworkKey);
