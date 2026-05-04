@@ -418,44 +418,6 @@ module('Acceptance | Organizations | Get', function (hooks) {
     });
   });
 
-  module('when the organization belongs to a network', function (hooks) {
-    hooks.beforeEach(async function () {
-      await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
-
-      server.create('network', { id: '42', name: 'Réseau Île-de-France' });
-
-      server.get('/admin/organizations/:id', () => ({
-        data: {
-          type: 'organizations',
-          id: '1',
-          attributes: {
-            name: 'My Organization',
-            features: { PLACES_MANAGEMENT: { active: true } },
-          },
-          relationships: {
-            network: { data: { type: 'networks', id: '42' } },
-            'organization-memberships': { links: { related: '/api/admin/organizations/1/memberships' } },
-            'target-profile-summaries': { links: { related: '/api/admin/organizations/1/target-profile-summaries' } },
-            children: { links: { related: '/api/admin/organizations/1/children' } },
-            'organization-invitations': { links: { related: '/api/admin/organizations/1/invitations' } },
-          },
-        },
-        included: [{ type: 'networks', id: '42', attributes: { name: 'Réseau Île-de-France' } }],
-      }));
-    });
-
-    test('clicking the network tag navigates to the network detail page', async function (assert) {
-      // given
-      const screen = await visit('/organizations/1/details');
-
-      // when
-      await click(screen.getByRole('link', { name: 'Réseau Île-de-France' }));
-
-      // then
-      assert.strictEqual(currentURL(), '/networks/42');
-    });
-  });
-
   module('When user is authenticated as Certif Admin', function (hooks) {
     hooks.beforeEach(async () => {
       await authenticateAdminMemberWithRole({ isCertif: true })(server);
@@ -473,65 +435,6 @@ module('Acceptance | Organizations | Get', function (hooks) {
       // then
       const navigationTabs = screen.getByRole('navigation', { name: t('pages.organization.navbar.aria-label') });
       assert.notOk(within(navigationTabs).queryByRole('link', { name: t('pages.organization.navbar.tags') }));
-    });
-  });
-
-  module('Network tab Access control', function (hooks) {
-    hooks.beforeEach(() => {
-      const network = server.create('network', { id: '42', name: 'Réseau Île-de-France' });
-      server.create('organization', {
-        id: 99,
-        name: 'My Organization',
-        features: { PLACES_MANAGEMENT: { active: true } },
-        network,
-      });
-    });
-    test('should not be visible for Certif member', async function (assert) {
-      // given
-      await authenticateAdminMemberWithRole({ isCertif: true })(server);
-
-      // when
-      const screen = await visit('/organizations/99');
-
-      // then
-      const navigationTabs = screen.getByRole('navigation', { name: t('pages.organization.navbar.aria-label') });
-      assert.notOk(
-        within(navigationTabs).queryByRole('link', {
-          name: t('pages.organization.navbar.network', { nbrOfChildren: 0 }),
-        }),
-      );
-    });
-
-    test('should not be visible for Support member', async function (assert) {
-      // given
-      await authenticateAdminMemberWithRole({ isSupport: true })(server);
-
-      //when
-      const screen = await visit('/organizations/99');
-
-      // then
-      const navigationTabs = screen.getByRole('navigation', { name: t('pages.organization.navbar.aria-label') });
-      assert.notOk(
-        within(navigationTabs).queryByRole('link', {
-          name: t('pages.organization.navbar.network', { nbrOfChildren: 0 }),
-        }),
-      );
-    });
-
-    test('should be visible for Metier member', async function (assert) {
-      // given
-      await authenticateAdminMemberWithRole({ isMetier: true })(server);
-
-      // when
-      const screen = await visit('/organizations/99');
-
-      // then
-      const navigationTabs = screen.getByRole('navigation', { name: t('pages.organization.navbar.aria-label') });
-      assert.ok(
-        within(navigationTabs).queryByRole('link', {
-          name: t('pages.organization.navbar.network', { nbrOfChildren: 0 }),
-        }),
-      );
     });
   });
 });

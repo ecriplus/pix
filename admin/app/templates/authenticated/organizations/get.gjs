@@ -71,12 +71,10 @@ import HeadInformation from 'pix-admin/components/organizations/head-information
         </LinkTo>
       {{/if}}
 
-      {{#if @controller.accessControl.hasAccessToNetworkFeature}}
-        {{#if @model.network.id}}
-          <LinkTo @route="authenticated.organizations.get.network" @model={{@model}}>
-            {{t "pages.organization.navbar.network" nbrOfChildren=@model.children.length}}
-          </LinkTo>
-        {{/if}}
+      {{#if @model.network.id}}
+        <LinkTo @route="authenticated.organizations.get.network" @model={{@model}}>
+          {{t "pages.organization.navbar.network" nbrOfChildren=@model.children.length}}
+        </LinkTo>
       {{/if}}
     </PixTabs>
 

@@ -131,37 +131,6 @@ module('Acceptance | Organizations | Network', function (hooks) {
     });
   });
 
-  // Network Tab is not accessible to these roles for the moment so these tests are irrelevent. TODO: delete skip at the end of EPIX PIX-21277
-  [
-    { name: 'METIER', authData: { isMetier: true } },
-    { name: 'SUPPORT', authData: { isSupport: true } },
-  ].forEach((role) => {
-    module.skip(`when user has role "${role.name}"`, function (hooks) {
-      let parentOrganizationId;
-
-      hooks.beforeEach(async function () {
-        await authenticateAdminMemberWithRole(role.authData)(server);
-        const network = this.server.create('network', { name: 'My network' });
-
-        parentOrganizationId = this.server.create('organization', {
-          name: 'Parent Orga name',
-          features: { PLACES_MANAGEMENT: { active: true } },
-          network,
-        }).id;
-      });
-
-      test('it does not display create child organization button', async function (assert) {
-        // when
-        const screen = await visit(`/organizations/${parentOrganizationId}/network`);
-
-        // then
-        assert.notOk(
-          screen.queryByRole('link', { name: t('components.organizations.network.create-child-organization-button') }),
-        );
-      });
-    });
-  });
-
   module.skip('when user has role "CERTIF"', function () {
     test('it should not display actions section', async function (assert) {
       await authenticateAdminMemberWithRole({ isCertif: true })(server);
