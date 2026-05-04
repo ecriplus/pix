@@ -4,8 +4,15 @@ import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Infrastructure | Serializers | course', function () {
   describe('#serialize', function () {
-    it('serializes an array of CourseItems', function () {
+    it('serializes an array of CourseItems with areas as JSON API relationships', function () {
       // given
+      const area = {
+        id: 'recAreaA',
+        code: '1',
+        title: 'Information et données',
+        color: 'jaffa',
+        competences: [{ id: 'recCompA', name: 'Mener une recherche', index: '1.1' }],
+      };
       const courseItems = [
         new CourseItem({
           id: 1,
@@ -15,8 +22,7 @@ describe('Quest | Unit | Infrastructure | Serializers | course', function () {
           nbModules: 3,
           category: null,
           isSimplifiedAccess: null,
-          areas: ['Information et données'],
-          competences: ['Mener une recherche'],
+          areas: [area],
         }),
         new CourseItem({
           id: 2,
@@ -25,8 +31,7 @@ describe('Quest | Unit | Infrastructure | Serializers | course', function () {
           nbTubes: 5,
           category: 'PREDEFINED',
           isSimplifiedAccess: true,
-          areas: ['Information et données'],
-          competences: ['Mener une recherche'],
+          areas: [area],
         }),
       ];
 
@@ -46,8 +51,9 @@ describe('Quest | Unit | Infrastructure | Serializers | course', function () {
               'nb-modules': 3,
               category: null,
               'is-simplified-access': null,
-              areas: ['Information et données'],
-              competences: ['Mener une recherche'],
+            },
+            relationships: {
+              areas: { data: [{ type: 'areas', id: 'recAreaA' }] },
             },
           },
           {
@@ -60,8 +66,25 @@ describe('Quest | Unit | Infrastructure | Serializers | course', function () {
               'nb-modules': null,
               category: 'PREDEFINED',
               'is-simplified-access': true,
-              areas: ['Information et données'],
-              competences: ['Mener une recherche'],
+            },
+            relationships: {
+              areas: { data: [{ type: 'areas', id: 'recAreaA' }] },
+            },
+          },
+        ],
+        included: [
+          {
+            id: 'recCompA',
+            type: 'competences',
+            attributes: { name: 'Mener une recherche', index: '1.1' },
+            relationships: {},
+          },
+          {
+            id: 'recAreaA',
+            type: 'areas',
+            attributes: { title: 'Information et données', code: '1', color: 'jaffa' },
+            relationships: {
+              competences: { data: [{ type: 'competences', id: 'recCompA' }] },
             },
           },
         ],

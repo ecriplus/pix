@@ -141,7 +141,7 @@ describe('Quest | Integration | Repository | course-repository', function () {
       expect(result[0].isSimplifiedAccess).to.equal(false);
     });
 
-    it('resolves areas and competences from learning content for a TARGET_PROFILE item', async function () {
+    it('resolves areas with nested competences from learning content for a TARGET_PROFILE item', async function () {
       // given
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
@@ -149,7 +149,9 @@ describe('Quest | Integration | Repository | course-repository', function () {
       databaseBuilder.factory.buildTargetProfileShare({ targetProfileId, organizationId });
 
       const learningContent = {
-        areas: [{ id: 'recAreaA', title_i18n: { fr: 'Information et données' }, competenceIds: ['recCompA'] }],
+        areas: [
+          { id: 'recAreaA', code: '1', title_i18n: { fr: 'Information et données' }, competenceIds: ['recCompA'] },
+        ],
         competences: [
           { id: 'recCompA', name_i18n: { fr: 'Mener une recherche' }, areaId: 'recAreaA', index: '1.1', origin: 'Pix' },
         ],
@@ -163,11 +165,18 @@ describe('Quest | Integration | Repository | course-repository', function () {
       const result = await courseRepository.findByOrganizationId({ organizationId, locale: 'fr' });
 
       // then
-      expect(result[0].areas).to.deep.equal(['Information et données']);
-      expect(result[0].competences).to.deep.equal(['Mener une recherche']);
+      expect(result[0].areas).to.deep.equal([
+        {
+          id: 'recAreaA',
+          code: '1',
+          title: 'Information et données',
+          color: 'color Domaine A',
+          competences: [{ id: 'recCompA', name: 'Mener une recherche', index: '1.1' }],
+        },
+      ]);
     });
 
-    it('resolves areas and competences aggregated from all target profiles in the quest for a BLUEPRINT item', async function () {
+    it('resolves areas with nested competences aggregated from all target profiles in the quest for a BLUEPRINT item', async function () {
       // given
       const organizationId = databaseBuilder.factory.buildOrganization().id;
       const targetProfileId1 = databaseBuilder.factory.buildTargetProfile().id;
@@ -188,8 +197,13 @@ describe('Quest | Integration | Repository | course-repository', function () {
 
       const learningContent = {
         areas: [
-          { id: 'recAreaA', title_i18n: { fr: 'Information et données' }, competenceIds: ['recCompA'] },
-          { id: 'recAreaB', title_i18n: { fr: 'Communication et collaboration' }, competenceIds: ['recCompB'] },
+          { id: 'recAreaA', code: '1', title_i18n: { fr: 'Information et données' }, competenceIds: ['recCompA'] },
+          {
+            id: 'recAreaB',
+            code: '2',
+            title_i18n: { fr: 'Communication et collaboration' },
+            competenceIds: ['recCompB'],
+          },
         ],
         competences: [
           { id: 'recCompA', name_i18n: { fr: 'Mener une recherche' }, areaId: 'recAreaA', index: '1.1', origin: 'Pix' },
@@ -208,8 +222,67 @@ describe('Quest | Integration | Repository | course-repository', function () {
       const result = await courseRepository.findByOrganizationId({ organizationId, locale: 'fr' });
 
       // then
-      expect(result[0].areas).to.deep.equal(['Information et données', 'Communication et collaboration']);
-      expect(result[0].competences).to.deep.equal(['Mener une recherche', 'Interagir']);
+      expect(result[0].areas).to.deep.equal([
+        {
+          id: 'recAreaA',
+          code: '1',
+          title: 'Information et données',
+          color: 'color Domaine A',
+          competences: [{ id: 'recCompA', name: 'Mener une recherche', index: '1.1' }],
+        },
+        {
+          id: 'recAreaB',
+          code: '2',
+          title: 'Communication et collaboration',
+          color: 'color Domaine A',
+          competences: [{ id: 'recCompB', name: 'Interagir', index: '2.1' }],
+        },
+      ]);
+    });
+
+    it('sorts areas by code and competences by index', async function () {
+      // given
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+      const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube1' });
+      databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube2' });
+      databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube3' });
+      databaseBuilder.factory.buildTargetProfileShare({ targetProfileId, organizationId });
+
+      const learningContent = {
+        areas: [
+          { id: 'recAreaB', code: '2', title_i18n: { fr: 'Communication' }, competenceIds: ['recCompB'] },
+          { id: 'recAreaA', code: '1', title_i18n: { fr: 'Information' }, competenceIds: ['recCompA1', 'recCompA2'] },
+        ],
+        competences: [
+          { id: 'recCompA2', name_i18n: { fr: 'Gérer des données' }, areaId: 'recAreaA', index: '1.2', origin: 'Pix' },
+          {
+            id: 'recCompA1',
+            name_i18n: { fr: 'Mener une recherche' },
+            areaId: 'recAreaA',
+            index: '1.1',
+            origin: 'Pix',
+          },
+          { id: 'recCompB', name_i18n: { fr: 'Interagir' }, areaId: 'recAreaB', index: '2.1', origin: 'Pix' },
+        ],
+        tubes: [
+          { id: 'recTube1', competenceId: 'recCompA2' },
+          { id: 'recTube2', competenceId: 'recCompA1' },
+          { id: 'recTube3', competenceId: 'recCompB' },
+        ],
+      };
+      databaseBuilder.factory.learningContent.build(learningContent);
+
+      await databaseBuilder.commit();
+
+      // when
+      const result = await courseRepository.findByOrganizationId({ organizationId, locale: 'fr' });
+
+      // then
+      expect(result[0].areas[0].code).to.equal('1');
+      expect(result[0].areas[0].competences[0].index).to.equal('1.1');
+      expect(result[0].areas[0].competences[1].index).to.equal('1.2');
+      expect(result[0].areas[1].code).to.equal('2');
     });
 
     it('does not return target profiles not shared with the organizations', async function () {

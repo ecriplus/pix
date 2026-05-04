@@ -1,4 +1,4 @@
-import Model, { attr } from '@ember-data/model';
+import Model, { attr, hasMany } from '@ember-data/model';
 
 export default class Course extends Model {
   @attr('string') name;
@@ -7,6 +7,5 @@ export default class Course extends Model {
   @attr('number') nbModules;
   @attr('string') category;
   @attr('boolean') isSimplifiedAccess;
-  @attr({ defaultValue: () => [] }) areas;
-  @attr({ defaultValue: () => [] }) competences;
+  @hasMany('area', { async: false, inverse: null }) areas;
 }
