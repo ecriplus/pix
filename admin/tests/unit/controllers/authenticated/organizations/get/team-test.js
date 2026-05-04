@@ -72,14 +72,12 @@ module('Unit | Controller | authenticated/organizations/get/team', function (hoo
         store.createRecord = sinon.stub().returns({ save: sinon.stub() });
 
         controller.model = {
-          organizationMemberships: {
-            reload: sinon.stub().resolves(true),
-          },
           organization: {
             id: '1',
             hasMember: sinon.stub().resolves(false),
           },
         };
+        controller.send = sinon.stub();
         controller.userEmailToAdd = email;
 
         // when
@@ -87,7 +85,7 @@ module('Unit | Controller | authenticated/organizations/get/team', function (hoo
 
         // then
         assert.deepEqual(controller.userEmailToAdd, null);
-        assert.ok(controller.model.organizationMemberships.reload.calledOnce);
+        sinon.assert.calledWith(controller.send, 'refreshModel');
         sinon.assert.calledWith(controller.pixToast.sendSuccessNotification, {
           message: 'Accès attribué avec succès.',
         });
@@ -100,11 +98,8 @@ module('Unit | Controller | authenticated/organizations/get/team', function (hoo
         const user = store.createRecord('user', { email, id: '5' });
 
         store.query = sinon.stub().resolves([user]);
-        store.createRecord = sinon.stub().returns({ save: sinon.stub() });
+        store.createRecord = sinon.stub().returns({ save: sinon.stub().rejects('some error') });
         controller.model = {
-          organizationMemberships: {
-            reload: sinon.stub().rejects('some error'),
-          },
           organization: {
             hasMember: sinon.stub().resolves(false),
             id: '1',

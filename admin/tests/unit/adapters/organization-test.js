@@ -17,58 +17,6 @@ module('Unit | Adapters | organization', function (hooks) {
     adapter.ajax.restore();
   });
 
-  module('#findHasMany', function () {
-    module('when type is organization-membership', function () {
-      module('when there are no query params', function () {
-        test('builds the correct url', async function (assert) {
-          // given
-          const snapshot = { modelName: 'organization', id: '1' };
-          const relationship = { type: 'organization-membership' };
-          const url = '/api/organizations/1/memberships';
-
-          // when
-          await adapter.findHasMany({}, snapshot, url, relationship);
-
-          // then
-          assert.ok(adapter.ajax.calledWith(`${ENV.APP.API_HOST}/api/admin/organizations/1/memberships`, 'GET'));
-        });
-      });
-
-      module('when there are query params', function () {
-        test('builds the correct url', async function (assert) {
-          // given
-          const snapshot = { modelName: 'organization', id: '1', adapterOptions: { 'page[size]': 2 } };
-          const relationship = { type: 'organization-membership' };
-          const url = '/api/organizations/1/memberships';
-
-          // when
-          await adapter.findHasMany({}, snapshot, url, relationship);
-
-          // then
-          assert.ok(
-            adapter.ajax.calledWith(
-              `${ENV.APP.API_HOST}/api/admin/organizations/1/memberships?page%5Bsize%5D=2`,
-              'GET',
-            ),
-          );
-        });
-      });
-    });
-
-    test('should build url without query params when type is not membership', async function (assert) {
-      // given
-      const snapshot = { modelName: 'organization', id: '1', adapterOptions: { 'page[size]': 2 } };
-      const relationship = { type: 'target-profile' };
-      const url = '/api/organizations/1/target-profiles';
-
-      // when
-      await adapter.findHasMany({}, snapshot, url, relationship);
-
-      // then
-      assert.ok(adapter.ajax.calledWith(`${ENV.APP.API_HOST}/api/organizations/1/target-profiles`, 'GET'));
-    });
-  });
-
   module('#attachTargetProfile', function () {
     test('should trigger an ajax call with the right url, method and payload', async function (assert) {
       // given
