@@ -9,7 +9,7 @@ import { databaseBuilder, knex } from '../../../../tooling/databases.js';
 import { buildLearningContent as learningContentBuilder } from '../../../../tooling/learning-content-builder/index.js';
 import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
-describe('Acceptance | Application | Certification | ComplementaryCertification | certification-framework-route', function () {
+describe('Acceptance | Application | Certification | Configuration | certification-framework-route', function () {
   let server;
   let superAdmin;
 
@@ -239,6 +239,70 @@ describe('Acceptance | Application | Certification | ComplementaryCertification 
               status: 'ARCHIVED',
             },
           ],
+        },
+      });
+    });
+  });
+
+  describe('GET /api/admin/certification-frameworks/{scope}/target-profiles', function () {
+    it('should return 200 HTTP status code', async function () {
+      // given
+      const server = await createServer();
+      const superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
+      const attachedAt = new Date('2019-01-01');
+      const scope = SCOPES.PIX_PLUS_DROIT;
+
+      const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
+        id: 1,
+        label: 'Pix+ Droit',
+        hasExternalJury: true,
+        key: scope,
+      });
+
+      const targetProfile = databaseBuilder.factory.buildTargetProfile({ id: 999, name: 'Target' });
+
+      const badge = databaseBuilder.factory.buildBadge({
+        id: 198,
+        key: 'badge',
+        targetProfileId: targetProfile.id,
+      });
+
+      databaseBuilder.factory.buildComplementaryCertificationBadge({
+        badgeId: badge.id,
+        label: 'badge label',
+        complementaryCertificationId: complementaryCertification.id,
+        createdAt: attachedAt,
+        minimumEarnedPix: 150,
+      });
+
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'GET',
+        url: `/api/admin/certification-frameworks/${scope}/target-profiles`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(response.result).to.deep.equal({
+        data: {
+          type: 'certification-frameworks',
+          id: scope,
+          attributes: {
+            name: scope,
+            'target-profiles-history': [
+              {
+                id: 999,
+                name: 'Target',
+                attachedAt,
+                detachedAt: null,
+              },
+            ],
+          },
         },
       });
     });

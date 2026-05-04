@@ -40,11 +40,20 @@ const createCertificationVersion = async function (request, h) {
     .code(201);
 };
 
+const getTargetProfileHistory = async function (request) {
+  const scope = request.params.scope;
+  const certificationFramework = await usecases.getComplementaryCertificationTargetProfileHistory({
+    complementaryCertificationKey: scope,
+  });
+  return certificationFrameworkSerializer.serializeWithTargetProfilesHistory(certificationFramework);
+};
+
 const certificationFrameworkController = {
   createCertificationVersion,
   findCertificationFrameworks,
   getActiveConsolidatedFramework,
   getFrameworkHistory,
+  getTargetProfileHistory,
 };
 
 export { certificationFrameworkController };
