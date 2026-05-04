@@ -36,7 +36,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
   const certificationBadgesService = {};
   const placementProfileService = {};
   const verifyCertificateCodeService = {};
-  const userRepository = {};
   const versionApi = {};
 
   const injectables = {
@@ -49,7 +48,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
     certificationBadgesService,
     placementProfileService,
     verifyCertificateCodeService,
-    userRepository,
     versionApi,
   };
 
@@ -66,7 +64,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
     certificationCourseRepository.findOneCertificationCourseByUserIdAndSessionId = sinon.stub();
     certificationCourseRepository.save = sinon.stub();
     evaluationSessionRepository.get = sinon.stub();
-    userRepository.get = sinon.stub();
     placementProfileService.getPlacementProfile = sinon.stub();
     verifyCertificateCodeService.generateCertificateVerificationCode = sinon.stub().resolves(verificationCode);
     certificationCenterRepository.getBySessionId = sinon.stub();
@@ -370,7 +367,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
             it('should return it with flag created marked as false', async function () {
               // given
               const user = domainBuilder.buildUser({ id: 2, lang: FRENCH_SPOKEN });
-              userRepository.get.withArgs({ id: user.id }).resolves(user);
 
               const foundSession = domainBuilder.certification.sessionManagement.buildSessionManagement.created({
                 id: 1,
@@ -433,7 +429,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
 
             beforeEach(function () {
               user = domainBuilder.buildUser({ id: 2, lang: FRENCH_SPOKEN });
-              userRepository.get.withArgs({ id: user.id }).resolves(user);
 
               version = domainBuilder.certification.configuration.buildVersion({
                 challengesConfiguration: { maximumAssessmentLength: 32, defaultCandidateCapacity: -3 },
@@ -549,9 +544,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 });
                 certificationCenterRepository.getBySessionId.resolves(certificationCenter);
 
-                const user = domainBuilder.buildUser({ id: userId, lang: 'nl' });
-                userRepository.get.withArgs({ id: userId }).resolves(user);
-
                 // when
                 const error = await catchErr(await retrieveLastOrCreateCertificationCourse)({
                   sessionId: 1,
@@ -604,7 +596,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
                 certificationBadgesService.findStillValidBadgeAcquisitions.withArgs({ userId }).resolves([]);
 
                 const user = domainBuilder.buildUser({ id: userId });
-                userRepository.get.withArgs({ id: userId }).resolves(user);
 
                 const certificationCourseToSave = CertificationCourse.from({
                   certificationCandidate: foundCertificationCandidate,
@@ -737,7 +728,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
 
               beforeEach(function () {
                 user = domainBuilder.buildUser({ id: 2, lang: FRENCH_SPOKEN });
-                userRepository.get.withArgs({ id: user.id }).resolves(user);
               });
 
               context('when certification center is habilitated', function () {
@@ -904,7 +894,6 @@ describe('Unit | UseCase | retrieve-last-or-create-certification-course', functi
 
               beforeEach(function () {
                 user = domainBuilder.buildUser({ id: 2, lang: FRENCH_SPOKEN });
-                userRepository.get.withArgs({ id: user.id }).resolves(user);
               });
 
               context('when certification center is habilitated', function () {

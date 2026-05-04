@@ -146,6 +146,7 @@ describe('Certification | Enrolment | Unit | Serializer | candidate', function (
         prepaymentCode: 'somePrepaymentCode1',
         subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: 123 })],
         hasSeenCertificationInstructions: true,
+        hasStartedTest: false,
       });
       const expectedJsonApiData = {
         data: {
@@ -157,6 +158,7 @@ describe('Certification | Enrolment | Unit | Serializer | candidate', function (
             birthdate: enrolledCandidate.birthdate,
             'has-seen-certification-instructions': true,
             'session-id': enrolledCandidate.sessionId,
+            'has-started-test': false,
           },
         },
       };

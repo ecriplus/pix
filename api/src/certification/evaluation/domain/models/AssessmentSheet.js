@@ -13,6 +13,8 @@ export class AssessmentSheet {
    * @param {number} params.versionId
    * @param {Frameworks} params.certificationFramework
    * @param {string} params.lastChallengeId
+   * @param {lang} params.lang
+   * @param {boolean} params.accessibilityAdjustmentNeeded
    * @param {Assessment.statesOfLastQuestion} params.lastQuestionState
    * @param {Date} params.lastQuestionDate
    * @param {ABORT_REASONS} params.abortReason
@@ -39,6 +41,8 @@ export class AssessmentSheet {
     certificationCourseUpdatedAt,
     lastAnswerAt,
     answers,
+    lang,
+    accessibilityAdjustmentNeeded,
   }) {
     this.certificationCourseId = certificationCourseId;
     this.userId = userId;
@@ -55,6 +59,8 @@ export class AssessmentSheet {
     this.certificationCourseUpdatedAt = certificationCourseUpdatedAt;
     this.lastAnswerAt = lastAnswerAt;
     this.answers = answers;
+    this.lang = lang;
+    this.accessibilityAdjustmentNeeded = accessibilityAdjustmentNeeded;
   }
 
   get isAbortReasonTechnical() {

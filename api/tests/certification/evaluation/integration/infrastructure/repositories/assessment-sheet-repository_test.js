@@ -1,24 +1,38 @@
 import * as assessmentSheetRepository from '../../../../../../src/certification/evaluation/infrastructure/repositories/assessment-sheet-repository.js';
+import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
+import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
+import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { expect } from '../../../../../test-helper.js';
-import { databaseBuilder } from '../../../../../tooling/databases.js';
+import { databaseBuilder, knex } from '../../../../../tooling/databases.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Integration | Certification | Evaluation | Infrastructure | Repositories | AssessmentSheetRepository', function () {
-  let certificationCourseId, assessmentId, userId, versionId, answerData;
+  let certificationCourseId, assessmentId, userId, versionId, answer1;
+
   beforeEach(async function () {
     userId = databaseBuilder.factory.buildUser().id;
     versionId = databaseBuilder.factory.buildCertificationVersion().id;
+    const session = databaseBuilder.factory.buildSession();
+    const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate({
+      sessionId: session.id,
+      userId,
+      accessibilityAdjustmentNeeded: true,
+    });
     certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
       abortReason: 'candidate',
       maxReachableLevelOnCertificationDate: 6,
       isRejectedForFraud: true,
       userId,
+      sessionId: session.id,
       updatedAt: new Date('2022-02-22'),
       lastAnswerAt: new Date('2022-01-11'),
       versionId,
       framework: Frameworks.EDU_1ER_DEGRE,
+      lang: 'fr',
+      candidateId: certificationCandidate.id,
     }).id;
     assessmentId = databaseBuilder.factory.buildAssessment({
       certificationCourseId,
@@ -29,7 +43,12 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
       lastQuestionDate: new Date('2024-11-07'),
       lastQuestionState: Assessment.statesOfLastQuestion.TIMEOUT,
     }).id;
-    answerData = databaseBuilder.factory.buildAnswer({ assessmentId, result: 'ok' });
+    answer1 = databaseBuilder.factory.buildAnswer({
+      assessmentId,
+      challengeId: 'challenge1',
+      result: 'ok',
+      createdAt: new Date('2022-02-22'),
+    });
     await databaseBuilder.commit();
   });
 
@@ -49,13 +68,15 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
             isRejectedForFraud: true,
             state: Assessment.states.COMPLETED,
             assessmentUpdatedAt: new Date('2023-10-05'),
-            answers: [domainBuilder.buildAnswer(answerData)],
+            answers: [domainBuilder.buildAnswer(answer1)],
             lastChallengeId: 'nextChallengeIdToAnswer',
             lastQuestionDate: new Date('2024-11-07'),
             lastQuestionState: Assessment.statesOfLastQuestion.TIMEOUT,
             certificationCourseUpdatedAt: new Date('2022-02-22'),
             lastAnswerAt: new Date('2022-01-11'),
             versionId,
+            lang: 'fr',
+            accessibilityAdjustmentNeeded: true,
             certificationFramework: Frameworks.EDU_1ER_DEGRE,
           }),
         );
@@ -70,6 +91,112 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
         // then
         expect(assessmentSheet).to.be.null;
       });
+    });
+  });
+
+  describe('#getByAssessmentId', function () {
+    context('when the assessment exists', function () {
+      it('should return the assessment sheet', async function () {
+        // given
+        const answer3 = databaseBuilder.factory.buildAnswer({
+          assessmentId,
+          challengeId: 'challenge3',
+          result: 'ok',
+          createdAt: new Date('2022-02-24'),
+        });
+        const answer2 = databaseBuilder.factory.buildAnswer({
+          assessmentId,
+          challengeId: 'challenge2',
+          result: 'ok',
+          createdAt: new Date('2022-02-23'),
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const assessmentSheet = await assessmentSheetRepository.getByAssessmentId(assessmentId);
+
+        // then
+        expect(assessmentSheet).to.deepEqualInstance(
+          domainBuilder.certification.evaluation.buildAssessmentSheet({
+            certificationCourseId,
+            assessmentId,
+            userId,
+            abortReason: 'candidate',
+            isRejectedForFraud: true,
+            state: Assessment.states.COMPLETED,
+            assessmentUpdatedAt: new Date('2023-10-05'),
+            answers: [
+              domainBuilder.buildAnswer(answer1),
+              domainBuilder.buildAnswer(answer2),
+              domainBuilder.buildAnswer(answer3),
+            ],
+            lastChallengeId: 'nextChallengeIdToAnswer',
+            lastQuestionDate: new Date('2024-11-07'),
+            lastQuestionState: Assessment.statesOfLastQuestion.TIMEOUT,
+            certificationCourseUpdatedAt: new Date('2022-02-22'),
+            lastAnswerAt: new Date('2022-01-11'),
+            versionId,
+            certificationFramework: Frameworks.EDU_1ER_DEGRE,
+            lang: 'fr',
+            accessibilityAdjustmentNeeded: true,
+          }),
+        );
+      });
+    });
+
+    context('when the assessment does not exist', function () {
+      it('returns a not found error', async function () {
+        // given
+        const unknownAssessmentId = 123;
+
+        // when
+        const error = await catchErr(assessmentSheetRepository.getByAssessmentId)(unknownAssessmentId);
+
+        // then
+        expect(error).to.be.instanceOf(NotFoundError);
+      });
+    });
+
+    it('should lock the assessment', async function () {
+      // given
+      const certificationCenter = databaseBuilder.factory.buildCertificationCenter({
+        id: 99,
+      });
+      const session = databaseBuilder.factory.buildSession({
+        certificationCenterId: certificationCenter.id,
+      });
+      const version = databaseBuilder.factory.buildCertificationVersion();
+      const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate({
+        sessionId: session.id,
+        accessibilityAdjustmentNeeded: false,
+      });
+      const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
+        sessionId: session.id,
+        version: AlgorithmEngineVersion.V3,
+        versionId: version.id,
+        userId: certificationCandidate.userId,
+        candidateId: certificationCandidate.id,
+      });
+
+      const originalAssessment = databaseBuilder.factory.buildAssessment({
+        certificationCourseId: certificationCourse.id,
+        type: Assessment.types.CERTIFICATION,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const error = await catchErr(DomainTransaction.execute)(async () => {
+        await assessmentSheetRepository.getByAssessmentId(originalAssessment.id);
+        // mimick a concurrent call on the same row
+        return knex('assessments').where({ id: originalAssessment.id }).first().forUpdate().timeout(100, {
+          cancel: true,
+        });
+      });
+
+      // then
+      expect(error).to.be.instanceOf(Error);
+      expect(error.message).to.equal('Defined query timeout of 100ms exceeded when running query.');
     });
   });
 
@@ -106,13 +233,15 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
           isRejectedForFraud: true,
           state: Assessment.states.STARTED, // updated
           assessmentUpdatedAt: new Date('2024-05-11'), // updated
-          answers: [domainBuilder.buildAnswer(answerData)],
+          answers: [domainBuilder.buildAnswer(answer1)],
           lastChallengeId: 'nextChallengeIdToAnswer',
           lastQuestionDate: new Date('2024-11-07'),
           lastQuestionState: Assessment.statesOfLastQuestion.TIMEOUT,
           certificationCourseUpdatedAt: new Date('2044-02-22'), // updated
           lastAnswerAt: new Date('2044-01-11'), // updated
           versionId,
+          lang: 'fr',
+          accessibilityAdjustmentNeeded: true,
           certificationFramework: Frameworks.EDU_1ER_DEGRE,
         }),
       );

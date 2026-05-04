@@ -955,6 +955,14 @@
         }
       },
       "first-title": "You are about to begin your certification test.",
+      "language-selector": {
+        "confirmation-label": "I confirm I am comfortable in the selected language to answer the questions.'<br>'The language choice is '<strong>'final'</strong>'.",
+        "label": "Certification language",
+        "options": {
+          "english": "English - EN",
+          "french": "French - FR"
+        }
+      },
       "link-to-user-certification": "See my certificates",
       "non-eligible-subscription": "You are not eligible to {complementarySubscriptionLabel}. However, you can still take your Pix Certification.",
       "title": "Join a certification session"

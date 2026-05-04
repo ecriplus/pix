@@ -3,6 +3,7 @@ import Model, { attr, belongsTo } from '@ember-data/model';
 export default class CertificationCourse extends Model {
   // attributes
   @attr('string') accessCode;
+  @attr('string') locale;
   @attr('number') nbChallenges;
   @attr('string') firstName;
   @attr('string') lastName;

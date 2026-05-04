@@ -14,7 +14,7 @@ import { AlgorithmEngineVersion } from './AlgorithmEngineVersion.js';
 
 const Joi = BaseJoi.extend(JoiDate);
 
-const V3_CERTIFICATION_AVAILABLE_LANGUAGES = ['fr', 'en'];
+export const V3_CERTIFICATION_AVAILABLE_LOCALES = ['fr-fr', 'fr', 'en'];
 
 export class CertificationCourse {
   /**
@@ -320,7 +320,7 @@ export class CertificationCourse {
   static isLanguageAvailableForV3Certification(candidateLanguage) {
     if (!candidateLanguage) return false;
 
-    return V3_CERTIFICATION_AVAILABLE_LANGUAGES.includes(candidateLanguage);
+    return V3_CERTIFICATION_AVAILABLE_LOCALES.includes(candidateLanguage);
   }
 
   toDTO() {

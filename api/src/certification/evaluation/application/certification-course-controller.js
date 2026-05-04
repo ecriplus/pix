@@ -5,11 +5,13 @@ const save = async function (request, h, dependencies = { certificationCourseSer
   const userId = request.auth.credentials.userId;
   const accessCode = request.payload.data.attributes['access-code'];
   const sessionId = request.payload.data.attributes['session-id'];
+  const locale = request.payload.data.attributes['locale'];
 
   const { created, certificationCourse } = await usecases.retrieveLastOrCreateCertificationCourse({
     sessionId,
     accessCode,
     userId,
+    locale,
   });
 
   const serialized = await dependencies.certificationCourseSerializer.serialize(certificationCourse);

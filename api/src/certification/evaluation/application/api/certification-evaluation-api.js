@@ -13,7 +13,6 @@
  */
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { usecases } from '../../domain/usecases/index.js';
-import * as assessmentRepository from '../../infrastructure/repositories/assessment-repository.js';
 
 /**
  * @function
@@ -52,19 +51,9 @@ export const rescoreV2Certification = async ({ event }) => {
  * @throws {AssessmentEndedError} test ended or no next challenge available
  * @throws {AssessmentLackOfChallengesError} no eligible challenges remaining before reaching maximum assessment length
  */
-export const selectNextCertificationChallenge = withTransaction(
-  async ({
-    assessmentId,
-    locale,
-    dependencies = {
-      assessmentRepository,
-    },
-  }) => {
-    const assessment = await dependencies.assessmentRepository.get(assessmentId);
-
-    return usecases.getNextChallenge({ assessment, locale });
-  },
-);
+export const selectNextCertificationChallenge = withTransaction(async ({ assessmentId, locale }) => {
+  return usecases.getNextChallenge({ assessmentId, locale });
+});
 
 /**
  * @function

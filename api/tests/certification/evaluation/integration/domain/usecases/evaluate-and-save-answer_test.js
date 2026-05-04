@@ -49,7 +49,11 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
     context('when user submitting the answer is not the owner of the certification test', function () {
       it('throws a ForbiddenAccess error', async function () {
         userId = databaseBuilder.factory.buildUser().id;
-        certificationCourseId = databaseBuilder.factory.buildCertificationCourse({ userId }).id;
+        const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate({ userId });
+        certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+          userId,
+          candidateId: certificationCandidate.id,
+        }).id;
         databaseBuilder.factory.buildAssessment({ certificationCourseId, userId });
         await databaseBuilder.commit();
 
@@ -72,7 +76,11 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
 
       context('when certification test has been ended by the invigilator', function () {
         it('throws a CertificationEndedByInvigilatorError error', async function () {
-          certificationCourseId = databaseBuilder.factory.buildCertificationCourse({ userId }).id;
+          const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate({ userId });
+          certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+            userId,
+            candidateId: certificationCandidate.id,
+          }).id;
           databaseBuilder.factory.buildAssessment({
             certificationCourseId,
             userId,
@@ -91,7 +99,11 @@ describe('Certification | Evaluation | Integration | Domain | UseCase | evaluate
 
       context('when certification test has been ended by session finalization', function () {
         it('throws a CertificationEndedByFinalizationError error', async function () {
-          certificationCourseId = databaseBuilder.factory.buildCertificationCourse({ userId }).id;
+          const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate({ userId });
+          certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
+            userId,
+            candidateId: certificationCandidate.id,
+          }).id;
           databaseBuilder.factory.buildAssessment({
             certificationCourseId,
             userId,

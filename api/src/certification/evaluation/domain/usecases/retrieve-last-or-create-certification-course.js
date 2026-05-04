@@ -4,7 +4,6 @@
  * @typedef {import('./index.js').CertificationCourseRepository} CertificationCourseRepository
  * @typedef {import('./index.js').CertificationCenterRepository} CertificationCenterRepository
  * @typedef {import('./index.js').EvaluationSessionRepository} EvaluationSessionRepository
- * @typedef {import('./index.js').UserRepository} UserRepository
  * @typedef {import('./index.js').VersionApi} VersionApi
  * @typedef {import('./index.js').CertificationBadgesService} CertificationBadgesService
  * @typedef {import('./index.js').VerifyCertificateCodeService} VerifyCertificateCodeService
@@ -28,14 +27,16 @@ import { ComplementaryCertificationKeys } from '../../../shared/domain/models/Co
 import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
 import { SCOPES } from '../../../shared/domain/models/Scopes.js';
 
+const DEFAULT_LOCALE = 'fr-fr';
+
 /**
  * @param {object} params
+ * @param {string} params.locale
  * @param {AssessmentRepository} params.assessmentRepository
  * @param {CertificationCandidateRepository} params.sharedCertificationCandidateRepository
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {CertificationCenterRepository} params.certificationCenterRepository
  * @param {EvaluationSessionRepository} params.evaluationSessionRepository
- * @param {UserRepository} params.userRepository
  * @param {VersionApi} params.versionApi
  * @param {CertificationBadgesService} params.certificationBadgesService
  * @param {VerifyCertificateCodeService} params.verifyCertificateCodeService
@@ -44,12 +45,12 @@ export const retrieveLastOrCreateCertificationCourse = async function ({
   accessCode,
   sessionId,
   userId,
+  locale = DEFAULT_LOCALE,
   assessmentRepository,
   sharedCertificationCandidateRepository,
   certificationCourseRepository,
   evaluationSessionRepository,
   certificationCenterRepository,
-  userRepository,
   versionApi,
   certificationBadgesService,
   verifyCertificateCodeService,
@@ -103,18 +104,18 @@ export const retrieveLastOrCreateCertificationCourse = async function ({
   return _startNewCertification({
     session,
     userId,
+    locale,
     certificationCandidate,
     certificationVersion,
     assessmentRepository,
     certificationCourseRepository,
     certificationCenterRepository,
-    userRepository,
     verifyCertificateCodeService,
     certificationBadgesService,
   });
 };
 
-function _validateUserLanguage(userLanguage) {
+function _validateUserLocale(userLanguage) {
   const isUserLanguageValid = CertificationCourse.isLanguageAvailableForV3Certification(userLanguage);
 
   if (!isUserLanguageValid) {
@@ -161,9 +162,9 @@ async function _blockCandidateFromRestartingWithoutExplicitValidation(
 /**
  * @param {object} params
  * @param {Session} params.session
+ * @param {string} params.locale
  * @param {CertificationCourseRepository} params.certificationCourseRepository
  * @param {CertificationCenterRepository} params.certificationCenterRepository
- * @param {UserRepository} params.userRepository
  * @param {CertificationBadgesService} params.certificationBadgesService
  * @param {AssessmentRepository} params.assessmentRepository
  * @param {VerifyCertificateCodeService} params.verifyCertificateCodeService
@@ -176,12 +177,11 @@ async function _startNewCertification({
   assessmentRepository,
   certificationCourseRepository,
   certificationCenterRepository,
-  userRepository,
   certificationBadgesService,
   verifyCertificateCodeService,
+  locale,
 }) {
-  const user = await userRepository.get({ id: userId });
-  _validateUserLanguage(user.lang);
+  _validateUserLocale(locale);
 
   const certificationCenter = await certificationCenterRepository.getBySessionId({ sessionId: session.id });
 
@@ -242,16 +242,15 @@ async function _startNewCertification({
     userId,
     verifyCertificateCodeService,
     complementaryCertificationCourseData,
-    lang: user.lang,
+    lang: locale,
     framework,
   });
 }
 
 /**
- * @param {object} params
- * @param {CertificationCourseRepository} params.certificationCourseRepository
- * @param {UserId} params.userId
- * @param {SessionId} params.sessionId
+ * @param {CertificationCourseRepository} certificationCourseRepository
+ * @param {number} userId
+ * @param {number} sessionId
  * @returns {Promise<CertificationCourse>}
  */
 function _getCertificationCourseIfCreatedMeanwhile(certificationCourseRepository, userId, sessionId) {

@@ -945,6 +945,14 @@
         }
       },
       "first-title": "Estás a punto de empezar tu prueba de certificación",
+      "language-selector": {
+        "confirmation-label": "Confirmo que me siento cómodo con el idioma seleccionado para responder a las preguntas.'<br>'La elección del idioma es '<strong>'definitiva'</strong>'.",
+        "label": "Idioma de certificación",
+        "options": {
+          "english": "Inglés - EN",
+          "french": "Francés - FR"
+        }
+      },
       "link-to-user-certification": "Ver mis certificaciones",
       "non-eligible-subscription": "No eres elegible para {complementarySubscriptionLabel}. Sin embargo, puedes presentarte a la certificación Pix.",
       "title": "Unirse a una sesión de certificación"

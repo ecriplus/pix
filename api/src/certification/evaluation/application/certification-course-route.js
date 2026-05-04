@@ -2,6 +2,7 @@ import Joi from 'joi';
 
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
+import { V3_CERTIFICATION_AVAILABLE_LOCALES } from '../../shared/domain/models/CertificationCourse.js';
 import { certificationCourseController } from './certification-course-controller.js';
 
 const register = async function (server) {
@@ -17,6 +18,10 @@ const register = async function (server) {
               attributes: {
                 'access-code': Joi.string().required(),
                 'session-id': identifiersType.sessionId,
+                locale: Joi.string()
+                  .valid(...V3_CERTIFICATION_AVAILABLE_LOCALES)
+                  .optional()
+                  .allow(null),
               },
             },
           }),

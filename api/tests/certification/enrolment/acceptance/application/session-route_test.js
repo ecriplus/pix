@@ -425,6 +425,7 @@ describe('Certification | Enrolment | Acceptance | Routes | session-route', func
             'complementary-certification-key': null,
             'session-id': sessionId,
             'has-seen-certification-instructions': false,
+            'has-started-test': false,
           },
         });
       });
@@ -460,6 +461,7 @@ describe('Certification | Enrolment | Acceptance | Routes | session-route', func
             'complementary-certification-key': null,
             'session-id': sessionId,
             'has-seen-certification-instructions': false,
+            'has-started-test': false,
           },
         });
       });
@@ -552,6 +554,7 @@ describe('Certification | Enrolment | Acceptance | Routes | session-route', func
             'complementary-certification-key': null,
             'session-id': sessionId,
             'has-seen-certification-instructions': false,
+            'has-started-test': false,
           },
         });
       });
@@ -587,6 +590,7 @@ describe('Certification | Enrolment | Acceptance | Routes | session-route', func
             'complementary-certification-key': null,
             'session-id': sessionId,
             'has-seen-certification-instructions': false,
+            'has-started-test': false,
           },
         });
       });

@@ -37,6 +37,7 @@ export const serializeForParticipation = function (candidate) {
       'sessionId',
       'hasSeenCertificationInstructions',
       'complementaryCertificationKey',
+      'hasStartedTest',
     ],
   }).serialize(candidate);
 };

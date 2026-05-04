@@ -38,6 +38,7 @@ export class Candidate {
     subscription,
     subscriptions = [],
     accessibilityAdjustmentNeeded,
+    hasStartedTest = false,
   } = {}) {
     this.id = id;
     this.firstName = firstName;
@@ -65,6 +66,7 @@ export class Candidate {
     this.subscriptions = subscriptions;
     this.accessibilityAdjustmentNeeded = accessibilityAdjustmentNeeded;
     this.reconciledAt = reconciledAt;
+    this.hasStartedTest = hasStartedTest;
   }
 
   static create(candidateDTO) {

@@ -117,6 +117,13 @@ test(
     });
 
     await test.step('user starts the test', async () => {
+      await pixAppPage
+        .getByRole('checkbox', {
+          name:
+            "Je confirme être à l'aise dans la langue sélectionnée pour répondre aux questions.\n" +
+            'Le choix de la langue est définitif.',
+        })
+        .click();
       await pixAppPage.getByLabel("Code d'accès communiqué").fill(accessCode);
       await pixAppPage.getByRole('button', { name: 'Commencer mon test' }).click();
       const rightWrongAnswerCycleIter = rightWrongAnswerCycle({ numRight: 2, numWrong: 1 });

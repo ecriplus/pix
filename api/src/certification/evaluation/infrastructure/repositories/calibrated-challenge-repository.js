@@ -38,6 +38,7 @@ export async function findActiveFlashCompatible({ locale, version }) {
   };
 
   const lcmsChallengeDtos = await getInstance().find(cacheKey, findCallback);
+
   const calibratedSkillsMap = await loadCalibratedSkillsMap(lcmsChallengeDtos);
   return toDomainMap({ lcmsChallengeDtos, calibrations, calibratedSkillsMap });
 }
