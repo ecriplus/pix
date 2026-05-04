@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import { convertLevelStagesIntoThresholds } from '../../../../evaluation/domain/services/stages/convert-level-stages-into-thresholds-service.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { Assessment } from '../../../../shared/domain/models/Assessment.js';
@@ -10,6 +9,7 @@ import * as competenceRepository from '../../../../shared/infrastructure/reposit
 import * as skillRepository from '../../../../shared/infrastructure/repositories/skill-repository.js';
 import * as campaignRepository from '../../../campaign/infrastructure/repositories/campaign-repository.js';
 import knowledgeElementForParticipationService from '../../../shared/domain/services/knowledge-element-for-participation-service.js';
+import { convertLevelStagesIntoThresholds } from '../../../stages/domain/services/convert-level-stages-into-thresholds-service.js';
 
 /**
  *

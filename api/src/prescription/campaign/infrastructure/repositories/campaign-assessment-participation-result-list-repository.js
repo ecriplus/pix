@@ -2,10 +2,10 @@ import { STAGE_ACQUISITIONS_TABLE_NAME } from '../../../../../db/migrations/2023
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { fetchPage } from '../../../../shared/infrastructure/utils/knex-utils.js';
 import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
-import { StageAcquisitionCollection } from '../../../campaign-participation/domain/models/StageAcquisitionCollection.js';
 import { CampaignParticipationStatuses } from '../../../shared/domain/constants.js';
+import { StageAcquisitionCollection } from '../../../stages/domain/models/StageAcquisitionCollection.js';
+import * as stageCollectionRepository from '../../../stages/infrastructure/repositories/stage-collection-repository.js';
 import { CampaignAssessmentParticipationResultMinimal } from '../../domain/read-models/CampaignAssessmentParticipationResultMinimal.js';
-import * as stageCollectionRepository from './stage-collection-repository.js';
 
 const { SHARED } = CampaignParticipationStatuses;
 

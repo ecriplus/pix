@@ -1,6 +1,3 @@
-import * as stageAcquisitionComparisonService from '../../../../../../src/evaluation/domain/services/stages/stage-and-stage-acquisition-comparison-service.js';
-import * as stageAcquisitionRepository from '../../../../../../src/evaluation/infrastructure/repositories/stage-acquisition-repository.js';
-import * as stageRepository from '../../../../../../src/evaluation/infrastructure/repositories/stage-repository.js';
 import { Organization } from '../../../../../../src/organizational-entities/domain/models/Organization.js';
 import { tagRepository } from '../../../../../../src/organizational-entities/infrastructure/repositories/tag.repository.js';
 import { CampaignParticipationOverview } from '../../../../../../src/prescription/campaign-participation/domain/read-models/CampaignParticipationOverview.js';
@@ -10,6 +7,9 @@ import {
   CampaignParticipationStatuses,
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
+import * as stageAcquisitionComparisonService from '../../../../../../src/prescription/stages/domain/services/stage-and-stage-acquisition-comparison-service.js';
+import * as stageAcquisitionRepository from '../../../../../../src/prescription/stages/infrastructure/repositories/stage-acquisition-repository.js';
+import * as stageRepository from '../../../../../../src/prescription/stages/infrastructure/repositories/stage-repository.js';
 import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,

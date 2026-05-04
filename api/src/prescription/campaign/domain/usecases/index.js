@@ -3,8 +3,6 @@ import * as userRecommendedTrainingRepository from '../../../../devcomp/infrastr
 import * as improvementService from '../../../../evaluation/domain/services/improvement-service.js';
 import * as badgeAcquisitionRepository from '../../../../evaluation/infrastructure/repositories/badge-acquisition-repository.js';
 import * as badgeRepository from '../../../../evaluation/infrastructure/repositories/badge-repository.js';
-import * as stageAcquisitionRepository from '../../../../evaluation/infrastructure/repositories/stage-acquisition-repository.js';
-import * as stageRepository from '../../../../evaluation/infrastructure/repositories/stage-repository.js';
 import * as userRepository from '../../../../identity-access-management/infrastructure/repositories/user.repository.js';
 import * as organizationFeatureApi from '../../../../organizational-entities/application/api/organization-features-api.js';
 import * as codeGenerator from '../../../../shared/domain/services/code-generator.js';
@@ -24,6 +22,9 @@ import * as campaignParticipationRepository from '../../../campaign-participatio
 import * as organizationLearnerImportFormatRepository from '../../../learner-management/infrastructure/repositories/organization-learner-import-format-repository.js';
 import knowledgeElementForParticipationService from '../../../shared/domain/services/knowledge-element-for-participation-service.js';
 import * as learningContentRepository from '../../../shared/infrastructure/repositories/learning-content-repository.js';
+import * as stageAcquisitionRepository from '../../../stages/infrastructure/repositories/stage-acquisition-repository.js';
+import * as stageCollectionRepository from '../../../stages/infrastructure/repositories/stage-collection-repository.js';
+import * as stageRepository from '../../../stages/infrastructure/repositories/stage-repository.js';
 import * as campaignAdministrationRepository from '../../infrastructure/repositories/campaign-administration-repository.js';
 import * as campaignAssessmentParticipationResultListRepository from '../../infrastructure/repositories/campaign-assessment-participation-result-list-repository.js';
 import * as campaignCollectiveResultRepository from '../../infrastructure/repositories/campaign-collective-result-repository.js';
@@ -40,7 +41,6 @@ import * as divisionRepository from '../../infrastructure/repositories/division-
 import * as groupRepository from '../../infrastructure/repositories/group-repository.js';
 import { repositories as campaignRepositories } from '../../infrastructure/repositories/index.js';
 import * as knowledgeElementSnapshotRepository from '../../infrastructure/repositories/knowledge-element-snapshot-repository.js';
-import * as stageCollectionRepository from '../../infrastructure/repositories/stage-collection-repository.js';
 
 const dependencies = {
   knowledgeElementForParticipationService,

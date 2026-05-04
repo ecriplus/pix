@@ -2,12 +2,9 @@ import * as learningContentRepository from '../../../../../src/prescription/shar
 import * as tutorialRepository from '../../../../devcomp/infrastructure/repositories/tutorial-repository.js';
 import * as userRecommendedTrainingRepository from '../../../../devcomp/infrastructure/repositories/user-recommended-training-repository.js';
 import * as improvementService from '../../../../evaluation/domain/services/improvement-service.js';
-import * as compareStagesAndAcquiredStages from '../../../../evaluation/domain/services/stages/stage-and-stage-acquisition-comparison-service.js';
 import * as badgeAcquisitionRepository from '../../../../evaluation/infrastructure/repositories/badge-acquisition-repository.js';
 import * as badgeRepository from '../../../../evaluation/infrastructure/repositories/badge-repository.js';
 import * as competenceEvaluationRepository from '../../../../evaluation/infrastructure/repositories/competence-evaluation-repository.js';
-import * as stageAcquisitionRepository from '../../../../evaluation/infrastructure/repositories/stage-acquisition-repository.js';
-import * as stageRepository from '../../../../evaluation/infrastructure/repositories/stage-repository.js';
 import * as userRepository from '../../../../identity-access-management/infrastructure/repositories/user.repository.js';
 import { featureToggles } from '../../../../shared/infrastructure/feature-toggles/index.js';
 import * as areaRepository from '../../../../shared/infrastructure/repositories/area-repository.js';
@@ -20,9 +17,12 @@ import * as organizationRepository from '../../../../shared/infrastructure/repos
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import * as campaignRepository from '../../../campaign/infrastructure/repositories/campaign-repository.js';
 import * as knowledgeElementSnapshotRepository from '../../../campaign/infrastructure/repositories/knowledge-element-snapshot-repository.js';
-import * as stageCollectionRepository from '../../../campaign/infrastructure/repositories/stage-collection-repository.js';
 import * as organizationLearnerRepository from '../../../organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import knowledgeElementForParticipationService from '../../../shared/domain/services/knowledge-element-for-participation-service.js';
+import * as compareStagesAndAcquiredStages from '../../../stages/domain/services/stage-and-stage-acquisition-comparison-service.js';
+import * as stageAcquisitionRepository from '../../../stages/infrastructure/repositories/stage-acquisition-repository.js';
+import * as stageCollectionRepository from '../../../stages/infrastructure/repositories/stage-collection-repository.js';
+import * as stageRepository from '../../../stages/infrastructure/repositories/stage-repository.js';
 import * as targetProfileRepository from '../../../target-profile/infrastructure/repositories/target-profile-repository.js';
 import * as campaignAssessmentParticipationRepository from '../../infrastructure/repositories/campaign-assessment-participation-repository.js';
 import * as campaignAssessmentParticipationResultRepository from '../../infrastructure/repositories/campaign-assessment-participation-result-repository.js';

@@ -1,12 +1,12 @@
 import dayjs from 'dayjs';
 import _ from 'lodash';
 
-import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
 import {
   CampaignExternalIdTypes,
   CampaignParticipationStatuses,
 } from '../../../../../src/prescription/shared/domain/constants.js';
 import { KnowledgeElementCollection } from '../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
+import { stageUsecases } from '../../../../../src/prescription/stages/domain/usecases/index.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { getPlacementProfile } from '../../../../../src/shared/domain/services/placement-profile-service.js';
@@ -251,7 +251,7 @@ async function createAssessmentCampaign({
 
   // Create stage acquisitions for each participation
   for (const assessment of createdAssessments) {
-    await evaluationUsecases.handleStageAcquisition({ assessment: new Assessment(assessment) });
+    await stageUsecases.handleStageAcquisition({ assessment: new Assessment(assessment) });
   }
 
   return { campaignId: realCampaignId, targetProfileId };

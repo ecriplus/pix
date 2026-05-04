@@ -14,7 +14,7 @@ import * as skillRepository from '../../../../shared/infrastructure/repositories
 import * as thematicRepository from '../../../../shared/infrastructure/repositories/thematic-repository.js';
 import * as tubeRepository from '../../../../shared/infrastructure/repositories/tube-repository.js';
 import { logger } from '../../../../shared/infrastructure/utils/logger.js';
-import { StageCollection } from '../../domain/models/StageCollection.js';
+import { TargetProfileStageCollection } from '../../../stages/domain/models/TargetProfileStageCollection.js';
 import { TargetProfileSummaryForAdmin } from '../../domain/models/TargetProfileSummaryForAdmin.js';
 
 const TARGET_PROFILE_TABLE = 'target-profiles';
@@ -259,7 +259,7 @@ async function _getStageCollection(targetProfileId) {
     .where('targetProfileId', targetProfileId)
     .first();
 
-  return new StageCollection({ id: targetProfileId, stages, maxLevel });
+  return new TargetProfileStageCollection({ id: targetProfileId, stages, maxLevel });
 }
 
 async function _hasLinkedCampaign(targetProfileId) {

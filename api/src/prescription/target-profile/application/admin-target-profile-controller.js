@@ -4,6 +4,7 @@ import { evaluationUsecases } from '../../../evaluation/domain/usecases/index.js
 import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { escapeFileName } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { stageUsecases } from '../../stages/domain/usecases/index.js';
 import { usecases as prescriptionTargetProfileUsecases } from '../domain/usecases/index.js';
 import * as targetProfileAttachOrganizationSerializer from '../infrastructure/serializers/jsonapi/target-profile-attach-organization-serializer.js';
 import * as targetProfileDetachOrganizationsSerializer from '../infrastructure/serializers/jsonapi/target-profile-detach-organizations-serializer.js';
@@ -148,7 +149,7 @@ const copyTargetProfile = withTransaction(async (request) => {
     originTargetProfileId: targetProfileIdToCopy,
     destinationTargetProfileId: copiedTargetProfileId,
   });
-  await evaluationUsecases.copyTargetProfileStages({
+  await stageUsecases.copyTargetProfileStages({
     originTargetProfileId: targetProfileIdToCopy,
     destinationTargetProfileId: copiedTargetProfileId,
   });

@@ -6,7 +6,6 @@ import {
   CompetenceResetError,
   EmptyAnswerError,
   ImproveCompetenceEvaluationForbiddenError,
-  StageModificationForbiddenForLinkedTargetProfileError,
 } from '../domain/errors.js';
 
 const evaluationDomainErrorMappingConfiguration = [
@@ -24,12 +23,6 @@ const evaluationDomainErrorMappingConfiguration = [
   },
   {
     name: CompetenceResetError.name,
-    httpErrorFn: (error) => {
-      return new HttpErrors.PreconditionFailedError(error.message);
-    },
-  },
-  {
-    name: StageModificationForbiddenForLinkedTargetProfileError.name,
     httpErrorFn: (error) => {
       return new HttpErrors.PreconditionFailedError(error.message);
     },

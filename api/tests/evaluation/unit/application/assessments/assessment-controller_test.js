@@ -3,7 +3,8 @@ import sinon from 'sinon';
 import { usecases as devcompUsecases } from '../../../../../src/devcomp/domain/usecases/index.js';
 import { assessmentController } from '../../../../../src/evaluation/application/assessments/assessment-controller.js';
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
-import { usecases as prescriptionUsecases } from '../../../../../src/prescription/campaign-participation/domain/usecases/index.js';
+import { usecases as campaignParticipationsUsecases } from '../../../../../src/prescription/campaign-participation/domain/usecases/index.js';
+import { stageUsecases } from '../../../../../src/prescription/stages/domain/usecases/index.js';
 import { usecases as profileUsecases } from '../../../../../src/profile/domain/usecases/index.js';
 import { usecases as questUsecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
@@ -28,9 +29,9 @@ describe('Unit | Controller | assessment-controller', function () {
       sinon.stub(evaluationUsecases, 'completeAssessment');
       sinon.stub(evaluationUsecases, 'handleBadgeAcquisition');
       sinon.stub(devcompUsecases, 'handleTrainingRecommendation');
-      sinon.stub(evaluationUsecases, 'handleStageAcquisition');
+      sinon.stub(stageUsecases, 'handleStageAcquisition');
       sinon.stub(questUsecases, 'rewardUser');
-      sinon.stub(prescriptionUsecases, 'shareCampaignResult');
+      sinon.stub(campaignParticipationsUsecases, 'shareCampaignResult');
       sinon.stub(questUsecases, 'getQuestResultsForCampaignParticipation');
       sinon.stub(profileUsecases, 'shareProfileReward');
       sinon.stub(featureToggles, 'get');
@@ -83,7 +84,7 @@ describe('Unit | Controller | assessment-controller', function () {
         await assessmentController.completeAssessment({ params: { id: assessmentId } });
 
         // then
-        expect(prescriptionUsecases.shareCampaignResult).to.have.been.calledWithExactly({
+        expect(campaignParticipationsUsecases.shareCampaignResult).to.have.been.calledWithExactly({
           userId,
           campaignParticipationId,
         });
@@ -99,7 +100,7 @@ describe('Unit | Controller | assessment-controller', function () {
         await assessmentController.completeAssessment({ params: { id: assessmentId } });
 
         // then
-        expect(prescriptionUsecases.shareCampaignResult).to.not.have.been.called;
+        expect(campaignParticipationsUsecases.shareCampaignResult).to.not.have.been.called;
       });
 
       it('should not call shareCampaignResult when there is no userId', async function () {
@@ -112,7 +113,7 @@ describe('Unit | Controller | assessment-controller', function () {
         await assessmentController.completeAssessment({ params: { id: assessmentId } });
 
         // then
-        expect(prescriptionUsecases.shareCampaignResult).to.not.have.been.called;
+        expect(campaignParticipationsUsecases.shareCampaignResult).to.not.have.been.called;
       });
     });
 
