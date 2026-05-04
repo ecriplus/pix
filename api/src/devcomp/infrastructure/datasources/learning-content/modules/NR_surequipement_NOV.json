@@ -33,27 +33,50 @@
                 "id": "72b66795-8050-4a97-903c-c3a4f0545efa",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Pour commencer, prenez une minute pour compter le nombre d’appareils numériques que vous avez chez vous.&nbsp;</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "164812ba-d74a-42d3-8e4a-023b3849a086",
-                "type": "text",
-                "tag": " ",
-                "content": "<p><em>Note à la relecture&nbsp;: il s’agit d’une version brouillon avant développement</em><br></p>"
+                "content": "<p>Pour commencer, prenez une minute pour compter le nombre d’appareils numériques que vous avez chez vous&nbsp;: ordinateurs (portable et PC fixe), téléphones, appareils connectés (enceinte, montre, etc.), écran, télévision, tablette, consoles de jeux... Et n’oubliez pas ceux qui dorment dans vos tiroirs !&nbsp;</p>"
               }
             },
             {
               "type": "element",
               "element": {
                 "id": "1e4a36f0-e2a9-4944-b814-10d787a56f5a",
-                "type": "custom-draft",
+                "type": "custom",
                 "title": "calculateur d’appareils",
-                "url": "https://1024pix.github.io/atelier-contenus/MVO/Surequipement/calculateur-appareils.html",
-                "instruction": "<p>Calculateur</p>",
-                "height": 550
+                "instruction": "<p>Combien avez-vous d’appareils numériques ? <br></p>",
+                "functionalInstruction": "",
+                "tagName": "pix-cursor",
+                "props": {
+                  "options": [
+                    {
+                      "label": "- de 5",
+                      "feedback": {
+                        "type": "neutral",
+                        "text": "Vous avez moins d’appareils numériques que la moyenne des Européens, qui en possèdent environ 10."
+                      }
+                    },
+                    {
+                      "label": "Entre 5 et 9",
+                      "feedback": {
+                        "type": "neutral",
+                        "text": "Vous avez moins d’appareils numériques que la moyenne des Européens, qui en possèdent environ 10."
+                      }
+                    },
+                    {
+                      "label": "Entre 10 et 15",
+                      "feedback": {
+                        "type": "neutral",
+                        "text": "Vous avez autant voire plus d’appareils numériques que la moyenne des Européens, qui en possèdent environ 10."
+                      }
+                    },
+                    {
+                      "label": "+ de 15",
+                      "feedback": {
+                        "type": "neutral",
+                        "text": "Vous avez plus d’appareils numériques que la moyenne des Européens, qui en possèdent environ 10."
+                      }
+                    }
+                  ]
+                }
               }
             }
           ]
@@ -570,7 +593,7 @@
                     {
                       "id": "4ec51b96-64ee-4989-8caf-08d8e845a3cb",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Dans son salon ou dans sa chambre, Divin laisse ses chargeurs de téléphone ou d’ordinateur branchés, même s'il&nbsp;ne charge pas d’appareil. Que pouvez-vous lui conseiller pour réduire sa consommation électrique ?&nbsp;</p>",
+                      "instruction": "<p>Dans son salon ou dans sa chambre, Divin laisse ses chargeurs de téléphone ou d’ordinateur branchés, même s’il&nbsp;ne charge pas d’appareil. Que pouvez-vous lui conseiller pour réduire sa consommation électrique ?&nbsp;</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
@@ -654,7 +677,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/modules/NR_Frugalite_NOV/surequipement_recap.svg",
                 "alt": "",
-                "alternativeText": "<p>Aujourd'hui, le suréquipement est réel. De nombreux foyers achètent et stockent plus d'appareils qu'ils n'en ont vraiment besoin. Fabriquer et utiliser autant d'appareils numériques à un coût environnemental fort. Vos appareils consomment même quand vous ne les utilisez pas. La veille notamment crée une consommation électrique souvent sous-estimée. Pour réduire cette consommation d'énergie, il est possible d'adopter les bons réflexes : limiter son équipement à son juste besoin, éteindre ou débrancher ses appareils inutilisés.&nbsp;<br></p>",
+                "alternativeText": "<p>Aujourd’hui, le suréquipement est réel. De nombreux foyers achètent et stockent plus d’appareils qu’ils n’en ont vraiment besoin. Fabriquer et utiliser autant d’appareils numériques à un coût environnemental fort. Vos appareils consomment même quand vous ne les utilisez pas. La veille notamment crée une consommation électrique souvent sous-estimée. Pour réduire cette consommation d’énergie, il est possible d’adopter les bons réflexes&nbsp;: limiter son équipement à son juste besoin, éteindre ou débrancher ses appareils inutilisés.&nbsp;<br></p>",
                 "legend": "",
                 "licence": ""
               }
