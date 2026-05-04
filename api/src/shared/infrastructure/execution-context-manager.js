@@ -101,7 +101,7 @@ export function executeInContext(context, lambda, executor = null) {
 export function getRequestId() {
   const context = getContext();
 
-  return get(context, 'request.headers.x-request-id', null);
+  return get(context, 'request.headers.x-request-id', getInContext('default_request_id', null));
 }
 
 /**

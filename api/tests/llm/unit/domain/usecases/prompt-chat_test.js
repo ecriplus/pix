@@ -12,14 +12,18 @@ import {
 import { Chat, Message } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { promptChat } from '../../../../../src/llm/domain/usecases/prompt-chat.js';
+import { executeInContext } from '../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { expect } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('LLM | Unit | Domain | Usecases | promptChat', function () {
+  const execContext = { default_request_id: 'requete123' };
+
   context('when no chat id provided', function () {
     it('should throw a ChatNotFoundError', async function () {
       // when
-      const err = await catchErr(promptChat)({ chatId: null });
+      const promptChatFnc = () => promptChat({ chatId: null });
+      const err = await catchErr(executeInContext)(execContext, promptChatFnc);
 
       // then
       expect(err).to.be.instanceOf(ChatNotFoundError);
@@ -37,12 +41,13 @@ describe('LLM | Unit | Domain | Usecases | promptChat', function () {
       };
 
       // when
-      const err = await catchErr(promptChat)({ chatId, redisMutex });
+      const promptChatFnc = () => promptChat({ chatId, redisMutex });
+      const err = await catchErr(executeInContext)(execContext, promptChatFnc);
 
       // then
       expect(err).to.be.instanceOf(PromptAlreadyOngoingError);
       expect(err.message).to.equal(`A prompt is already ongoing for chat with id ${chatId}`);
-      expect(redisMutex.lock).to.have.been.calledOnce;
+      expect(redisMutex.lock).to.have.been.calledOnceWith(chatId, execContext.default_request_id);
       expect(redisMutex.release).not.to.have.been.called;
     });
   });
@@ -60,13 +65,11 @@ describe('LLM | Unit | Domain | Usecases | promptChat', function () {
       };
 
       // when
-      const err = await catchErr(promptChat)({
-        chatId,
-        redisMutex,
-        chatRepository,
-      });
+      const promptChatFnc = () => promptChat({ chatId, redisMutex, chatRepository });
+      const err = await catchErr(executeInContext)(execContext, promptChatFnc);
 
       // then
+      expect(redisMutex.lock).to.have.been.calledOnceWith(chatId, execContext.default_request_id);
       expect(err).to.be.instanceOf(ChatNotFoundError);
       expect(err.message).to.equal(`The chat of id "${chatId}" does not exist`);
     });
@@ -92,15 +95,18 @@ describe('LLM | Unit | Domain | Usecases | promptChat', function () {
       };
 
       // when
-      const err = await catchErr(promptChat)({
-        chatId,
-        userId: 5678,
-        message: 'un message',
-        redisMutex,
-        chatRepository,
-      });
+      const promptChatFnc = () =>
+        promptChat({
+          chatId,
+          userId: 5678,
+          message: 'un message',
+          redisMutex,
+          chatRepository,
+        });
+      const err = await catchErr(executeInContext)(execContext, promptChatFnc);
 
       // then
+      expect(redisMutex.lock).to.have.been.calledOnceWith(chatId, execContext.default_request_id);
       expect(err).to.be.instanceOf(ChatForbiddenError);
       expect(err.message).to.equal('User has not the right to use this chat');
     });
