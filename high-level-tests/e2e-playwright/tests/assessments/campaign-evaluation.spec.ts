@@ -45,7 +45,7 @@ test(
   async ({ page: pixAppPage, pixOrgaMemberContext, globalTestId, snapshotHandler }) => {
     test.slow();
     const pixOrgaPage = await pixOrgaMemberContext.newPage();
-    await pixOrgaPage.goto(process.env.PIX_ORGA_URL as string);
+    await pixOrgaPage.goto(process.env.PIX_ORGA_ORG_URL as string);
     let campaignCode: string | null;
     await test.step('creates the campaign', async () => {
       await pixOrgaPage.getByRole('link', { name: 'Campagnes', exact: true }).click();
@@ -58,7 +58,7 @@ test(
       campaignCode = await pixOrgaPage.locator('dd.campaign-header-title__campaign-code > span').textContent();
     });
 
-    await pixAppPage.goto(process.env.PIX_APP_URL as string);
+    await pixAppPage.goto(process.env.PIX_APP_ORG_URL as string);
     const loginPage = new LoginPage(pixAppPage);
     await loginPage.signup('Buffy', 'Summers', `buffy.summers.${globalTestId}@example.net`, 'Coucoulesdevs66');
     const rightWrongAnswerCycleIter = rightWrongAnswerCycle({ numRight: 1, numWrong: 1 });

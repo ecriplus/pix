@@ -6,7 +6,7 @@ import { ReconciliationPage } from '../../pages/pix-app/ReconciliationPage.js';
 test('pass a combined course as sco user and see the final result', async ({ page }) => {
   await createDataForCombinedCourse();
 
-  await page.goto('http://localhost:4200/parcours/COMBINIX1/');
+  await page.goto(`${process.env.PIX_APP_ORG_URL}/parcours/COMBINIX1/`);
   await page.getByRole('button', { name: 'Se connecter' }).click();
 
   const reconciliationLoginPage = new ReconciliationLoginPage(page);
@@ -71,7 +71,7 @@ async function createDataForCombinedCourse() {
       ownerId: userId,
       type: 'ASSESSMENT',
       customResultPageButtonText: 'Continuer',
-      customResultPageButtonUrl: 'http://localhost:4200/parcours/COMBINIX1',
+      customResultPageButtonUrl: `${process.env.PIX_APP_ORG_URL}/parcours/COMBINIX1`,
     })
     .returning('id');
   await knex('campaign_skills').insert({ campaignId, skillId: CAMPAIGN_SKILLS[0] });

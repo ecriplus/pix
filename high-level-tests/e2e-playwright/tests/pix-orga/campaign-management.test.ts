@@ -19,7 +19,7 @@ test('Assessment campaign', async ({ page }) => {
   const orgaPage = new PixOrgaPage(page);
 
   await test.step('Login to pixOrga', async () => {
-    await page.goto(process.env.PIX_ORGA_URL as string);
+    await page.goto(process.env.PIX_ORGA_ORG_URL as string);
     await orgaPage.login(`admin-${uid}@example.net`, 'pix123');
     await page.getByRole('button').filter({ hasText: 'Je me connecte' }).waitFor({ state: 'detached' });
     await orgaPage.acceptCGU();

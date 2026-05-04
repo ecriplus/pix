@@ -3,14 +3,14 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '../../fixtures/index.ts';
 
 test('test modulix a11y on galerie module', async ({ page }) => {
-  await page.goto(process.env.PIX_APP_URL + '/modules/b9414fc3/galerie/details');
+  await page.goto(process.env.PIX_APP_ORG_URL + '/modules/b9414fc3/galerie/details');
 
   // Module Details
   await expect(page).toHaveTitle(/Galerie Modulix/, { timeout: 10_000 });
   await page.getByRole('button', { name: 'Commencer le module' }).click();
 
   // Module Passage
-  await expect(page).toHaveURL(process.env.PIX_APP_URL + '/modules/b9414fc3/galerie/passage');
+  await expect(page).toHaveURL(process.env.PIX_APP_ORG_URL + '/modules/b9414fc3/galerie/passage');
   await expect(page).toHaveTitle(/Galerie Modulix/);
   await page.getByRole('button', { name: 'Continuer' }).click();
 

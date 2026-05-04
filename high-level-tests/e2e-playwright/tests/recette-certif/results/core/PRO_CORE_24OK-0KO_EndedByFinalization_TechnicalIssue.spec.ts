@@ -122,7 +122,7 @@ test(
     });
 
     await test.step('User checks their certification result', async () => {
-      await pixAppCertifiablePage.goto(process.env.PIX_APP_URL as string);
+      await pixAppCertifiablePage.goto(process.env.PIX_APP_ORG_URL as string);
       const homePage = new HomePage(pixAppCertifiablePage);
       const certificateListPage = await homePage.goToMyCertificates();
       const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment } =

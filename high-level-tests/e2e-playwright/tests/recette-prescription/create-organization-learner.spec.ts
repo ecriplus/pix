@@ -14,7 +14,7 @@ test('set up base data for anonymization test : create an organization learner w
 }) => {
   test.slow();
   const pixOrgaPage = await pixOrgaMemberContext.newPage();
-  await pixOrgaPage.goto(process.env.PIX_ORGA_URL as string);
+  await pixOrgaPage.goto(process.env.PIX_ORGA_ORG_URL as string);
   let campaignCode: string | null;
   await test.step('creates the campaign', async () => {
     await pixOrgaPage.getByRole('link', { name: 'Campagnes', exact: true }).click();
@@ -27,7 +27,7 @@ test('set up base data for anonymization test : create an organization learner w
     campaignCode = await pixOrgaPage.locator('dd.campaign-header-title__campaign-code > span').textContent();
   });
 
-  await pixAppPage.goto(process.env.PIX_APP_URL as string);
+  await pixAppPage.goto(process.env.PIX_APP_ORG_URL as string);
   const loginPage = new LoginPage(pixAppPage);
   await loginPage.signup('Jambon', 'Beurre', `jambon.beurre@example.net`, 'Coucoulesdevs44');
   await test.step('plays the campaign', async () => {

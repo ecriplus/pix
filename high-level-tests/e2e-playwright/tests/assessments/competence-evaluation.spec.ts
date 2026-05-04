@@ -44,7 +44,7 @@ test(
     test.slow();
 
     const rightWrongAnswerCycleIter = rightWrongAnswerCycle({ numRight: 1, numWrong: 2 });
-    await page.goto(process.env.PIX_APP_URL as string);
+    await page.goto(process.env.PIX_APP_ORG_URL as string);
     const loginPage = new LoginPage(page);
     await loginPage.signup('Buffy', 'Summers', `buffy.summers.${globalTestId}@example.net`, 'Coucoulesdevs66');
     await page.getByRole('link', { name: 'Compétences', exact: true }).click();

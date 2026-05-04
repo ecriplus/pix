@@ -7,7 +7,7 @@ import { LoginPage } from '../../pages/pix-certif/index.js';
 test('login, cgu and logout', async ({ page, globalTestId }: { page: Page; globalTestId: string }) => {
   const email = `buffy.summers.${globalTestId}@example.net`;
   await buildFreshPixCertifUser('Buffy', 'Summers', email, 'Coucoulesdevs66');
-  await page.goto(process.env.PIX_CERTIF_URL as string);
+  await page.goto(process.env.PIX_CERTIF_ORG_URL as string);
 
   await test.step('Login for the first time to PixCertif and accept CGUs', async () => {
     await expect(page.getByRole('heading')).toContainText('Connectez-vous');

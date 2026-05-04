@@ -7,7 +7,7 @@ import { PIX_APP_USER_DATA } from '../../helpers/db-data.ts';
 import { LoginPage } from '../../pages/pix-app/index.js';
 
 test('Signup, logout and login', async ({ page, globalTestId }: { page: Page; globalTestId: string }) => {
-  await page.goto(process.env.PIX_APP_URL as string);
+  await page.goto(process.env.PIX_APP_ORG_URL as string);
   const email = `buffy.summers.${globalTestId}@example.net`;
 
   await test.step('Signup', async () => {
@@ -34,7 +34,7 @@ test('Signup, logout and login', async ({ page, globalTestId }: { page: Page; gl
 
 test('Login as existing GAR user and logout', async ({ page }) => {
   const token = getGarTokenForExistingUser(PIX_APP_USER_DATA.id);
-  await page.goto(process.env.PIX_APP_URL + `/connexion/gar#${token}`);
+  await page.goto(process.env.PIX_APP_ORG_URL + `/connexion/gar#${token}`);
 
   await expect(page).toHaveTitle('Accueil | Pix');
 
@@ -48,7 +48,7 @@ test('Accept the new terms of service', async ({ page, globalTestId }: { page: P
   const email = `buffy.summers.${globalTestId}@example.net`;
   await buildFreshPixAppUser('Buffy', 'Summers', email, 'Coucoulesdevs66', true);
 
-  await page.goto(process.env.PIX_APP_URL as string);
+  await page.goto(process.env.PIX_APP_ORG_URL as string);
 
   await test.step('Login and revalidate terms of service', async () => {
     await expect(page).toHaveTitle('Connexion | Pix');

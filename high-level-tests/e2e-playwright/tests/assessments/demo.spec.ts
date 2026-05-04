@@ -47,7 +47,7 @@ test(
   async ({ page, snapshotHandler }) => {
     const rightWrongAnswerCycleIter = rightWrongAnswerCycle({ numRight: 1, numWrong: 1 });
     await test.step(`DEMO assessment started`, async () => {
-      await page.goto(process.env.PIX_APP_URL + '/courses/' + DEMO_COURSE_ID);
+      await page.goto(process.env.PIX_APP_ORG_URL + '/courses/' + DEMO_COURSE_ID);
       await test.step(` answering right or wrong according to pattern`, async () => {
         while (!page.url().endsWith('results')) {
           const challengePage = new ChallengePage(page);

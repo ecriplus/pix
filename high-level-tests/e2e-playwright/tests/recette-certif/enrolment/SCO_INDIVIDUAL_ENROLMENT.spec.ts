@@ -14,7 +14,7 @@ test(`${testRef} - Enroll candidate through individual enrolment modal`, async (
 }) => {
   test.slow();
   const userDataCoreSubscription = await getCertifiableUserData('buffy.summers@example.net');
-  await pixCertifScoPage.goto(process.env.PIX_CERTIF_URL!);
+  await pixCertifScoPage.goto(process.env.PIX_CERTIF_ORG_URL!);
 
   let sessionNumber = '',
     accessCode = '',

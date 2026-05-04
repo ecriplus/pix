@@ -23,7 +23,7 @@ test(
   },
   async ({ page, snapshotHandler }) => {
     await test.step(`PREVIEW assessment started`, async () => {
-      await page.goto(process.env.PIX_APP_URL + '/challenges/' + PREVIEW_CHALLENGE_ID + '/preview');
+      await page.goto(process.env.PIX_APP_ORG_URL + '/challenges/' + PREVIEW_CHALLENGE_ID + '/preview');
       const challengePage = new ChallengePage(page);
       const challengeImprint = await challengePage.getChallengeImprint();
       snapshotHandler.push('challenge imprint to have value', challengeImprint);

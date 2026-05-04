@@ -22,6 +22,7 @@ export default defineConfig({
     locale: 'fr-FR',
     timezoneId: 'Europe/Paris',
     screenshot: isCI ? 'only-on-failure' : 'off',
+    ignoreHTTPSErrors: true,
   },
 });
 

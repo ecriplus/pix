@@ -66,7 +66,7 @@ export class CertificationSessionPage {
     await generateCsvLinkPromise;
     const link = await this.page.evaluate(() => navigator.clipboard.readText());
     const linkUrl = new URL(link);
-    const appPixUrl = new URL(process.env.PIX_APP_URL!);
+    const appPixUrl = new URL(process.env.PIX_APP_ORG_URL!);
     linkUrl.protocol = appPixUrl.protocol;
     linkUrl.host = appPixUrl.host;
     await this.page.goto(linkUrl.toString());
