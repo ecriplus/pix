@@ -2177,7 +2177,7 @@
         },
         "see-trainings": "Siehe Ausbildungen",
         "shared-message": "Ihre Ergebnisse wurden am {date} an {time} gesendet.",
-        "thanks": "Vielen Dank {name} für Ihre Teilnahme!"
+        "thanks": "Vielen Dank {name}\n für Ihre Teilnahme!"
       },
       "improve": {
         "description": "Sie können einige Fragen erneut versuchen",

@@ -60,9 +60,10 @@ export default class EvaluationResultsHeroRecommendationEngine extends Component
   <template>
     <div class="evaluation-results-hero-recommendation-engine">
       <div class="evaluation-results-hero-recommendation-engine__content">
-        <h2 class="evaluation-results-hero-recommendation-engine__title">
-          {{t "pages.skill-review.hero.thanks" name=this.currentUser.user.firstName}}
-        </h2>
+        <h2 class="evaluation-results-hero-recommendation-engine__title">{{t
+            "pages.skill-review.hero.thanks"
+            name=this.currentUser.user.firstName
+          }}</h2>
 
         <p class="evaluation-results-hero-recommendation-engine__percent">
           <strong class="evaluation-results-hero-recommendation-engine__percent-value">

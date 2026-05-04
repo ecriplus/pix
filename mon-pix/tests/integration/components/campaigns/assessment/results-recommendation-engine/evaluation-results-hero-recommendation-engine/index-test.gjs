@@ -34,7 +34,11 @@ module(
       test('it displays a congratulation title', async function (assert) {
         // then
         assert
-          .dom(screen.getByRole('heading', { name: t('pages.skill-review.hero.thanks', { name: 'Hermione' }) }))
+          .dom(
+            screen.getByRole('heading', {
+              name: t('pages.skill-review.hero.thanks', { name: 'Hermione' }).replace('\n', ''),
+            }),
+          )
           .exists();
       });
 

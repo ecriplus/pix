@@ -37,7 +37,7 @@ module('Integration | Components | Campaigns | Assessment | Results | Evaluation
     test('it should display a congratulation title', async function (assert) {
       // then
       const title = screen.getByRole('heading', {
-        name: t('pages.skill-review.hero.thanks', { name: 'Hermione' }),
+        name: t('pages.skill-review.hero.thanks', { name: 'Hermione' }).replace('\n', ''),
       });
       assert.dom(title).exists();
     });

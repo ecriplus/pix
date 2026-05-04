@@ -24,6 +24,8 @@
     @extend %pix-title-s;
 
     color: var(--pix-neutral-0);
+    line-height: 1.5;
+    white-space: pre-line;
   }
 
   &__percent {

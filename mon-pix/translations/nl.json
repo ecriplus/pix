@@ -2168,7 +2168,7 @@
         },
         "see-trainings": "Bekijk de cursussen",
         "shared-message": "Je resultaten zijn verzonden op {date} om {time}.",
-        "thanks": "Bedankt {name} voor je deelname!"
+        "thanks": "Bedankt {name}\n voor je deelname!"
       },
       "improve": {
         "description": "Je kunt sommige vragen opnieuw proberen",

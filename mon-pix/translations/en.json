@@ -2178,7 +2178,7 @@
         },
         "see-trainings": "See trainings",
         "shared-message": "Your results were sent on {date} at {time}.",
-        "thanks": "Thank you, {name}, for participating!"
+        "thanks": "Thank you {name}\n for participating!"
       },
       "improve": {
         "description": "You can retake some of the questions",
