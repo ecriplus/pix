@@ -151,6 +151,42 @@ executors:
           POSTGRES_HOST_AUTH_METHOD: trust
           POSTGRES_INITDB_ARGS: "--nosync"
       - image: redis:7.2.11-alpine
+      - image: caddy:latest
+        entrypoint:
+          - /bin/sh
+        command:
+          - -c
+          - |
+            cat > /etc/caddy/Caddyfile \<< 'EOF'
+            {
+              local_certs
+            }
+
+            (pix_proxy) {
+              reverse_proxy localhost:{args[0]}
+            }
+
+            app.dev.pix.fr, app.dev.pix.org {
+              import pix_proxy 4200
+            }
+
+            orga.dev.pix.fr, orga.dev.pix.org {
+              import pix_proxy 4201
+            }
+
+            admin.dev.pix.fr {
+              import pix_proxy 4202
+            }
+
+            certif.dev.pix.fr, certif.dev.pix.org {
+              import pix_proxy 4203
+            }
+
+            1d.dev.pix.fr, 1d.dev.pix.org {
+              import pix_proxy 4205
+            }
+            EOF
+            exec caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
       - image: adobe/s3mock:5.0.0
         environment:
           COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS: "pix-import-test"
@@ -168,6 +204,42 @@ executors:
           POSTGRES_HOST_AUTH_METHOD: trust
           POSTGRES_INITDB_ARGS: "--nosync"
       - image: redis:7.2.11-alpine
+      - image: caddy:latest
+        entrypoint:
+          - /bin/sh
+        command:
+          - -c
+          - |
+            cat > /etc/caddy/Caddyfile \<< 'EOF'
+            {
+              local_certs
+            }
+
+            (pix_proxy) {
+              reverse_proxy localhost:{args[0]}
+            }
+
+            app.dev.pix.fr, app.dev.pix.org {
+              import pix_proxy 4200
+            }
+
+            orga.dev.pix.fr, orga.dev.pix.org {
+              import pix_proxy 4201
+            }
+
+            admin.dev.pix.fr {
+              import pix_proxy 4202
+            }
+
+            certif.dev.pix.fr, certif.dev.pix.org {
+              import pix_proxy 4203
+            }
+
+            1d.dev.pix.fr, 1d.dev.pix.org {
+              import pix_proxy 4205
+            }
+            EOF
+            exec caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
       - image: adobe/s3mock:5.0.0
         environment:
           COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS: "pix-import-test"
@@ -1143,6 +1215,10 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/pix
+      - run:
+          name: Configure local domains in /etc/hosts
+          working_directory: ~/pix
+          command: echo y | bash scripts/local-domains/install
       - npm_install_with_cache:
           cache_key: playwright
       - run:
@@ -1231,9 +1307,12 @@ jobs:
             fi
           environment:
             PIX_API_PORT: 3000
-            PIX_APP_URL: http://localhost:4200
-            PIX_ORGA_URL: http://localhost:4201
-            PIX_CERTIF_URL: http://localhost:4203
+            PIX_APP_FR_URL: 'https://app.dev.pix.fr'
+            PIX_APP_ORG_URL: 'https://app.dev.pix.org'
+            PIX_ORGA_ORG_URL: 'https://orga.dev.pix.org'
+            PIX_CERTIF_FR_URL: 'https://certif.dev.pix.fr'
+            PIX_CERTIF_ORG_URL: 'https://certif.dev.pix.org'
+            PIX_ADMIN_FR_URL: 'https://admin.dev.pix.fr'
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
             JOBS_DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
             AUTH_SECRET: 'secret'
@@ -1253,6 +1332,10 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/pix
+      - run:
+          name: Configure local domains in /etc/hosts
+          working_directory: ~/pix
+          command: echo y | bash scripts/local-domains/install
       - run: cat package*.json > cachekey
       - restore_cache:
           keys:
@@ -1330,9 +1413,11 @@ jobs:
             npx playwright test --config playwright.config.certif.ts --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
           environment:
             PIX_API_PORT: 3000
-            PIX_APP_URL: http://localhost:4200
-            PIX_ADMIN_URL: http://localhost:4202
-            PIX_CERTIF_URL: http://localhost:4203
+            PIX_APP_FR_URL: 'https://app.dev.pix.fr'
+            PIX_APP_ORG_URL: 'https://app.dev.pix.org'
+            PIX_CERTIF_FR_URL: 'https://certif.dev.pix.fr'
+            PIX_CERTIF_ORG_URL: 'https://certif.dev.pix.org'
+            PIX_ADMIN_FR_URL: 'https://admin.dev.pix.fr'
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
             JOBS_DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
             AUTH_SECRET: 'secret'
