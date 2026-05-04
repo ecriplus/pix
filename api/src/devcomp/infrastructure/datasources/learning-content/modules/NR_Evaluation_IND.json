@@ -115,15 +115,180 @@
               }
             },
             {
-              "type": "element",
-              "element": {
-                "id": "8a9e4f1b-6d3c-4e2a-9f5b-7c1d0a8e2333",
-                "type": "custom-draft",
-                "title": "Draft",
-                "url": "https://1024pix.github.io/atelier-contenus/JBO/POICNR-eval-ind.html",
-                "instruction": "Cliquez sur la catégorie à laquelle appartient chaque équipement.",
-                "height": 500
-              }
+              "type": "stepper",
+              "instruction": "<p>Pour chacun des éléments suivants, dites à quel famille il appartient&nbsp;: équipements des utilisateurs, réseaux ou centres de données.</p>",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "16888562-b9ea-4e04-9b6f-8640645c9f26",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>À quelle grande famille appartient un <strong>smartphone</strong>&nbsp;?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Équipements utilisateurs</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu&nbsp;! Un smartphone est un équipement utilisé directement par une personne pour accéder aux services numériques.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Réseaux</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;! Le smartphone utilise les réseaux, mais il ne fait pas partie de l’infrastructure réseau.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Centres de données</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;! Un smartphone peut accéder à des services hébergés dans des centres de données, mais il n’en fait pas partie.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "b6da1c54-c667-41c4-856a-063ce600a249",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>À quelle grande famille appartient une <strong>télévision connectée</strong>&nbsp;?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Équipements utilisateurs</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu&nbsp;! Une télévision connectée est un équipement utilisé directement par les utilisateurs pour consulter des contenus numériques.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Réseaux</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;! La télévision connectée utilise le réseau pour accéder à Internet, mais elle reste un équipement utilisateur.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Centres de données</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;! Les contenus peuvent venir de centres de données, mais la télévision connectée est l’appareil utilisé côté utilisateur.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "3b8f509a-34ff-488c-83d3-e83d63c6ddf8",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>À quelle grande famille appartient une <strong>antenne 5G</strong>&nbsp;?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Équipements utilisateurs</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;! Une antenne 5G n’est pas utilisée directement comme un smartphone ou un ordinateur.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Réseaux</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu&nbsp;! Une antenne 5G fait partie des infrastructures qui permettent aux données de circuler entre les appareils et les services numériques.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Centres de données</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;! Une antenne 5G permet la transmission des données, mais elle ne sert pas à les stocker ou à les traiter dans un centre de données.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "5ef60a13-cddf-4000-aa2c-490dcaf25ee6",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>À quelle grande famille appartient un <strong>serveur</strong>&nbsp;?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Équipements utilisateurs</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;! Un serveur n’est généralement pas utilisé directement par l’utilisateur final.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Réseaux</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;! Le serveur communique grâce aux réseaux, mais son rôle principal est de traiter ou fournir des données et des services.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Centres de données</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu&nbsp;! Un serveur est un équipement central des centres de données. Il permet de faire fonctionner des sites, des applications ou des services en ligne.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "4cabd561-41ba-4137-bfc4-60b7bb5a0811",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>À quelle grande famille appartient une <strong>baie de stockage</strong>&nbsp;?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>Équipements utilisateurs</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;! Une baie de stockage n’est pas un appareil utilisé directement au quotidien par un utilisateur.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Réseaux</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non&nbsp;! Une baie de stockage peut être reliée à un réseau, mais son rôle principal est de stocker des données.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Centres de données</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu&nbsp;! Une baie de stockage fait partie des équipements que l’on trouve dans les centres de données pour conserver de grandes quantités de données.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
