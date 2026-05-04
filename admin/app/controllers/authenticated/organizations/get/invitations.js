@@ -24,6 +24,8 @@ export default class InvitationsController extends Controller {
   @action
   async createOrganizationInvitation(locale, role) {
     this.isLoading = true;
+    const adapter = this.store.adapterFor('organization-invitation');
+
     const email = this.userEmailToInvite?.trim();
     if (!this._isEmailToInviteValid(email)) {
       this.isLoading = false;
@@ -31,19 +33,13 @@ export default class InvitationsController extends Controller {
     }
 
     try {
-      const organizationInvitation = await this.store.queryRecord('organization-invitation', {
-        email,
-        locale,
-        role,
-        organizationId: this.model.organization.id,
-      });
-
+      await adapter.sendInvitation({ email, locale, role, organizationId: this.model.organization.id });
       await this.model.organization.hasMany('organizationInvitations').reload();
 
       this.pixToast.sendSuccessNotification({
-        message: `Un email a bien a été envoyé à l'adresse ${organizationInvitation.email}.`,
+        message: `Un email a bien a été envoyé à l'adresse ${email}.`,
       });
-      this.userEmailToInvite = null;
+      this.userEmailToInvite = '';
     } catch (err) {
       this.errorResponseHandler.notify(err, this.CUSTOM_ERROR_MESSAGES);
     }
@@ -53,13 +49,10 @@ export default class InvitationsController extends Controller {
   @action
   async sendNewInvitation(organizationInvitation) {
     this.isLoading = true;
+    const adapter = this.store.adapterFor('organization-invitation');
+    const { email, role, locale } = organizationInvitation;
     try {
-      await this.store.queryRecord('organization-invitation', {
-        email: organizationInvitation.email,
-        locale: organizationInvitation.locale,
-        role: organizationInvitation.role,
-        organizationId: this.model.organization.id,
-      });
+      await adapter.sendInvitation({ email, locale, role, organizationId: this.model.organization.id });
       this.pixToast.sendSuccessNotification({
         message: this.intl.t('common.invitations.send-new-confirm', {
           invitationEmail: organizationInvitation.email,

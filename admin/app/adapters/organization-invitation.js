@@ -13,21 +13,10 @@ export default class OrganizationInvitation extends ApplicationAdapter {
     return `${this.host}/${this.namespace}/organizations/${adapterOptions.organizationId}/invitations/${adapterOptions.organizationInvitationId}`;
   }
 
-  createRecord() {
-    return super.createRecord(...arguments).then((response) => {
-      response.data = response.data[0];
-      return response;
+  sendInvitation({ email, locale, role, organizationId }) {
+    const url = `${this.host}/${this.namespace}/organizations/${organizationId}/invitations`;
+    return this.ajax(url, 'POST', {
+      data: { data: { attributes: { email, locale, role } } },
     });
-  }
-
-  queryRecord(store, type, query) {
-    if (query.organizationId) {
-      const url = `${this.host}/${this.namespace}/organizations/${query.organizationId}/invitations`;
-      return this.ajax(url, 'POST', {
-        data: { data: { attributes: { email: query.email, locale: query.locale, role: query.role } } },
-      });
-    }
-
-    return super.queryRecord(...arguments);
   }
 }

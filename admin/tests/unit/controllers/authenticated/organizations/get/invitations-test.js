@@ -6,47 +6,45 @@ import sinon from 'sinon';
 module('Unit | Controller | authenticated/organizations/get/invitations', function (hooks) {
   setupTest(hooks);
 
-  let controller;
-  let store;
+  let controller, store, sendInvitationStub, reloadStub, locale, role;
 
   hooks.beforeEach(function () {
     controller = this.owner.lookup('controller:authenticated/organizations/get/invitations');
+    reloadStub = sinon.stub();
+
+    controller.model = {
+      organization: {
+        id: 1,
+        hasMany: sinon.stub(),
+      },
+    };
+    controller.model.organization.hasMany.withArgs('organizationInvitations').returns({
+      reload: reloadStub,
+    });
+
+    controller.userEmailToInvite = 'test@example.net';
+
     store = this.owner.lookup('service:store');
+    store.adapterFor = sinon.stub();
+    sendInvitationStub = sinon.stub();
+    store.adapterFor.withArgs('organization-invitation').returns({ sendInvitation: sendInvitationStub });
+
+    locale = 'fr';
+    role = 'METIER';
   });
 
   module('#createOrganizationInvitation', function () {
-    test('it should create an organization-invitation and reload model if the email is valid', async function (assert) {
+    test('it should call sendInvitation adapter method and reload model if the email is valid', async function (assert) {
       // given
-      const queryRecordStub = sinon.stub();
-      store.queryRecord = queryRecordStub;
-      const reloadStub = sinon.stub();
+      sendInvitationStub.resolves();
 
-      controller.model = {
-        organization: {
-          id: 1,
-          hasMany: sinon.stub(),
-        },
-      };
-      controller.model.organization.hasMany.withArgs('organizationInvitations').returns({
-        reload: reloadStub,
-      });
-
-      controller.userEmailToInvite = 'test@example.net';
-      const locale = 'en';
-      const role = 'MEMBER';
+      const invitationData = { email: controller.userEmailToInvite, locale, role };
 
       // when
       await controller.createOrganizationInvitation(locale, role);
 
       // then
-      assert.ok(
-        queryRecordStub.calledWith('organization-invitation', {
-          email: 'test@example.net',
-          locale,
-          role,
-          organizationId: 1,
-        }),
-      );
+      assert.ok(sendInvitationStub.calledOnceWith({ ...invitationData, organizationId: 1 }));
 
       assert.true(reloadStub.calledOnce);
     });
@@ -56,7 +54,7 @@ module('Unit | Controller | authenticated/organizations/get/invitations', functi
       controller.userEmailToInvite = undefined;
 
       // when
-      controller.createOrganizationInvitation();
+      controller.createOrganizationInvitation(locale, role);
 
       // then
       assert.strictEqual(controller.userEmailToInviteError, 'Ce champ est requis.');
@@ -67,7 +65,7 @@ module('Unit | Controller | authenticated/organizations/get/invitations', functi
       controller.userEmailToInvite = '';
 
       // when
-      controller.createOrganizationInvitation();
+      controller.createOrganizationInvitation(locale, role);
 
       // then
       assert.strictEqual(controller.userEmailToInviteError, 'Ce champ est requis.');
@@ -78,7 +76,7 @@ module('Unit | Controller | authenticated/organizations/get/invitations', functi
       controller.userEmailToInvite = 'not_valid_email';
 
       // when
-      controller.createOrganizationInvitation();
+      controller.createOrganizationInvitation(locale, role);
 
       // then
       assert.strictEqual(controller.userEmailToInviteError, "L'adresse e-mail saisie n'est pas valide.");
@@ -86,12 +84,8 @@ module('Unit | Controller | authenticated/organizations/get/invitations', functi
 
     test('it should send a notification error if an error occurred', async function (assert) {
       // given
-      const controller = this.owner.lookup('controller:authenticated/organizations/get/invitations');
-      const store = this.owner.lookup('service:store');
       const anError = Symbol('an error');
-      store.queryRecord = sinon.stub().rejects(anError);
-      controller.userEmailToInvite = 'anemail@exmpla.net';
-      controller.model = { organization: { id: 1 } };
+      sendInvitationStub.rejects(anError);
 
       const notifyStub = sinon.stub();
       class ErrorResponseHandler extends Service {
@@ -102,7 +96,7 @@ module('Unit | Controller | authenticated/organizations/get/invitations', functi
       controller.CUSTOM_ERROR_MESSAGES = customErrors;
 
       // when
-      await controller.createOrganizationInvitation('fr', 'MEMBER');
+      await controller.createOrganizationInvitation(locale, role);
 
       // then
       assert.ok(notifyStub.calledWithExactly(anError, customErrors));
@@ -110,10 +104,8 @@ module('Unit | Controller | authenticated/organizations/get/invitations', functi
   });
 
   module('#sendNewInvitation', function () {
-    test('sends a new invitation', function (assert) {
+    test('sends a new invitation by calling sendInvitation method from adapter', function (assert) {
       // given
-      const queryRecordStub = sinon.stub();
-      store.queryRecord = queryRecordStub;
       controller.model = { organization: { id: 1 } };
       const organizationInvitation = { email: 'test@example.net', locale: 'en', role: 'MEMBER' };
 
@@ -121,20 +113,15 @@ module('Unit | Controller | authenticated/organizations/get/invitations', functi
       controller.sendNewInvitation(organizationInvitation);
 
       // then
-      assert.ok(
-        queryRecordStub.calledWith('organization-invitation', {
-          ...organizationInvitation,
-          organizationId: 1,
-        }),
-      );
+      assert.ok(sendInvitationStub.calledOnceWith({ ...organizationInvitation, organizationId: 1 }));
     });
 
     test('When an error occurs, it should send a notification error', async function (assert) {
       // given
       const controller = this.owner.lookup('controller:authenticated/organizations/get/invitations');
-      const store = this.owner.lookup('service:store');
+
       const anError = Symbol('an error');
-      store.queryRecord = sinon.stub().rejects(anError);
+      sendInvitationStub.rejects(anError);
       const notifyStub = sinon.stub();
       class ErrorResponseHandler extends Service {
         notify = notifyStub;

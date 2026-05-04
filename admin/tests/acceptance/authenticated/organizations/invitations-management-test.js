@@ -1,5 +1,5 @@
 import { visit } from '@1024pix/ember-testing-library';
-import { click, fillIn } from '@ember/test-helpers';
+import { click, fillIn, settled } from '@ember/test-helpers';
 import { setupIntl } from 'ember-intl/test-support';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
@@ -33,7 +33,8 @@ module('Acceptance | Organizations | Invitations management', function (hooks) {
       await click(screen.getByRole('button', { name: 'Inviter un membre' }));
 
       // then
-      const createdInvitation = screen.getByRole('cell', { name: 'user@example.com' });
+      const createdInvitation = await screen.findByRole('cell', { name: 'user@example.com' });
+      await settled();
 
       assert.ok(createdInvitation);
       assert.dom(screen.getByRole('textbox', { name: 'Adresse e-mail du membre à inviter' })).hasNoValue();
@@ -62,6 +63,8 @@ module('Acceptance | Organizations | Invitations management', function (hooks) {
 
       // then
       const createdInvitation = screen.queryByRole('cell', { name: 'user@example.com' });
+      await settled();
+
       assert.notOk(createdInvitation);
       assert.ok(screen.getByText('Une erreur s’est produite, veuillez réessayer.'));
     });
