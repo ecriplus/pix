@@ -1,3 +1,4 @@
+import { AlreadyExistingEntityError } from '../../../shared/domain/errors.js';
 import { AuthenticationKeyExpired, MissingUserAccountError } from '../errors.js';
 import { AuthenticationMethod } from '../models/AuthenticationMethod.js';
 
@@ -52,14 +53,25 @@ export const reconcileOidcUser = async function ({
     sessionContent,
   });
 
-  await authenticationMethodRepository.create({
-    authenticationMethod: new AuthenticationMethod({
-      identityProvider,
-      userId,
-      externalIdentifier: externalIdentityId,
-      authenticationComplement,
-    }),
-  });
+  try {
+    await authenticationMethodRepository.create({
+      authenticationMethod: new AuthenticationMethod({
+        identityProvider,
+        userId,
+        externalIdentifier: externalIdentityId,
+        authenticationComplement,
+      }),
+    });
+  } catch (error) {
+    if (error instanceof AlreadyExistingEntityError) {
+      throw new AlreadyExistingEntityError(
+        'Already existing authentication method',
+        'SSO_PROVIDER_ALREADY_LINKED_TO_USER',
+      );
+    }
+
+    throw error;
+  }
 
   await _updateUserLastConnection({
     userId,

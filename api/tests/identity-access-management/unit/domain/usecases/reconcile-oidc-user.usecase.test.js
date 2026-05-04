@@ -8,6 +8,7 @@ import {
 import { AuthenticationMethod } from '../../../../../src/identity-access-management/domain/models/AuthenticationMethod.js';
 import { reconcileOidcUser } from '../../../../../src/identity-access-management/domain/usecases/reconcile-oidc-user.usecase.js';
 import { RequestedApplication } from '../../../../../src/identity-access-management/infrastructure/utils/network.js';
+import { AlreadyExistingEntityError } from '../../../../../src/shared/domain/errors.js';
 import { expect } from '../../../../test-helper.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
@@ -114,6 +115,48 @@ describe('Unit | Identity Access Management | Domain | UseCase | reconcile-oidc-
         // then
         expect(error).to.be.instanceOf(MissingUserAccountError);
         expect(error.message).to.be.equal('Les informations de compte requises sont manquantes');
+      });
+    });
+
+    context('when the user has already this authentication method', function () {
+      it('throws an AlreadyExistingEntityError', async function () {
+        // given
+        const sessionContent = { idToken: 'idToken' };
+        const externalIdentifier = 'external_id';
+        const userId = 1;
+        const userInfo = { userId, externalIdentityId: externalIdentifier, firstName: 'Anne' };
+        authenticationSessionService.getByKey.resolves({
+          sessionContent,
+          userInfo,
+        });
+
+        oidcAuthenticationService.createAuthenticationComplement.withArgs({ userInfo, sessionContent }).returns(
+          new AuthenticationMethod.OidcAuthenticationComplement({
+            accessToken: 'accessToken',
+            expiredDate: new Date(),
+          }),
+        );
+
+        authenticationMethodRepository.create.throws(
+          new AlreadyExistingEntityError(
+            `An authentication method already exists for the user ID ${userId} and the identityProvider ${identityProvider}.`,
+          ),
+        );
+
+        // when
+        const error = await catchErr(reconcileOidcUser)({
+          authenticationKey: 'authenticationKey',
+          identityProvider,
+          audience,
+          authenticationSessionService,
+          authenticationMethodRepository,
+          oidcAuthenticationServiceRegistry,
+          userLoginRepository,
+        });
+
+        // then
+        expect(error).to.be.instanceOf(AlreadyExistingEntityError);
+        expect(error.code).to.be.equal('SSO_PROVIDER_ALREADY_LINKED_TO_USER');
       });
     });
 
