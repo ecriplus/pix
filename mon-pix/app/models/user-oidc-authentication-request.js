@@ -11,6 +11,7 @@ export default class UserOidcAuthenticationRequest extends Model {
   @attr('string') logoutUrlUUID;
   @attr('string') fullNameFromPix;
   @attr('string') fullNameFromExternalIdentityProvider;
+  // eslint-disable-next-line ember/no-empty-attrs
   @attr() authenticationMethods;
 
   login = memberAction({

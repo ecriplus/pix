@@ -13,9 +13,6 @@ export const assessmentResultStatus = {
 const professionalizingDate = new Date('2022-01-01');
 
 export default class Certification extends Model {
-  @service currentDomain;
-  @service intl;
-
   // attributes
   @attr('string') firstName;
   @attr('string') lastName;
@@ -29,6 +26,7 @@ export default class Certification extends Model {
   @attr('number') pixScore;
   @attr('string') status;
   @attr('string') verificationCode;
+  // eslint-disable-next-line ember/no-empty-attrs
   @attr() certifiedBadgeImages;
   @attr('number') maxReachableLevelOnCertificationDate;
   @attr('number') version;
@@ -75,4 +73,6 @@ export default class Certification extends Model {
     const framework = this.certificationFramework || 'CORE';
     return this.intl.t(`pages.certificate.framework-title.${framework}`);
   }
+  @service currentDomain;
+  @service intl;
 }

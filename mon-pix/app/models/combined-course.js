@@ -11,6 +11,7 @@ export const CombinedCourseStatuses = {
 export default class CombinedCourse extends Model {
   @attr('string') name;
   @attr('string') code;
+  // eslint-disable-next-line ember/no-empty-attrs
   @attr() organizationId;
   @attr('string') status;
   @attr('string') description;

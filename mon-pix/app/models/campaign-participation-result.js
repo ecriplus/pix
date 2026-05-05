@@ -21,13 +21,13 @@ export default class CampaignParticipationResult extends Model {
   })
   campaignParticipationBadges;
 
-  get acquiredBadges() {
-    return this.campaignParticipationBadges.filter((badge) => badge.isAcquired);
-  }
-
   @hasMany('competence-result', { async: false, inverse: 'campaignParticipationResult' }) competenceResults;
 
   @belongsTo('reached-stage', { async: false, inverse: 'campaignParticipationResult' }) reachedStage;
+
+  get acquiredBadges() {
+    return this.campaignParticipationBadges.filter((badge) => badge.isAcquired);
+  }
 
   get hasReachedStage() {
     return this.reachedStage !== null;

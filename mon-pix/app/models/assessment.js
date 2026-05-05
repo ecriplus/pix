@@ -29,6 +29,7 @@ export default class Assessment extends Model {
   @attr('boolean') showLevelup;
   @attr('boolean') showQuestionCounter;
   @attr('number') globalProgression;
+  // eslint-disable-next-line ember/no-empty-attrs
   @attr orderedChallengeIdsAnswered;
 
   // references
@@ -41,20 +42,6 @@ export default class Assessment extends Model {
   @belongsTo('progression', { async: true, inverse: null }) progression;
   @belongsTo('challenge', { async: false, inverse: null }) nextChallenge;
   @belongsTo('campaign', { async: true, inverse: null }) campaign;
-
-  // methods
-  @equal('type', 'CERTIFICATION') isCertification;
-  @equal('type', 'COMPETENCE_EVALUATION') isCompetenceEvaluation;
-  @equal('type', 'DEMO') isDemo;
-  @equal('type', 'PREVIEW') isPreview;
-  @equal('type', 'CAMPAIGN') isForCampaign;
-
-  @equal('state', 'aborted') isAborted;
-  @equal('state', 'completed') isCompleted;
-  @equal('state', 'started') isStarted;
-
-  @equal('lastQuestionState', 'timeout') hasTimeoutChallenge;
-  @equal('lastQuestionState', 'focusedout') hasFocusedOutChallenge;
 
   get answersSinceLastCheckpoints() {
     const howManyAnswersSinceTheLastCheckpoint =
@@ -69,4 +56,17 @@ export default class Assessment extends Model {
   get currentChallengeNumber() {
     return this.orderedChallengeIdsAnswered.length;
   }
+  // methods
+  @equal('type', 'CERTIFICATION') isCertification;
+  @equal('type', 'COMPETENCE_EVALUATION') isCompetenceEvaluation;
+  @equal('type', 'DEMO') isDemo;
+  @equal('type', 'PREVIEW') isPreview;
+  @equal('type', 'CAMPAIGN') isForCampaign;
+
+  @equal('state', 'aborted') isAborted;
+  @equal('state', 'completed') isCompleted;
+  @equal('state', 'started') isStarted;
+
+  @equal('lastQuestionState', 'timeout') hasTimeoutChallenge;
+  @equal('lastQuestionState', 'focusedout') hasFocusedOutChallenge;
 }
