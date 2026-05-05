@@ -305,7 +305,7 @@ module(
             );
 
             // then
-            assert.dom(screen.getByRole('link', { name: t('navigation.back-to-homepage') })).exists();
+            assert.dom(screen.getByRole('link', { name: t('pages.skill-review.actions.back-to-pix') })).exists();
             assert
               .dom(screen.queryByRole('button', { name: t('pages.skill-review.hero.see-trainings') }))
               .doesNotExist();

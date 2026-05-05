@@ -124,7 +124,7 @@ export default class EvaluationResultsHeroRecommendationEngine extends Component
               @variant="secondary-white"
               onclick={{this.handleBackToHomepageClick}}
             >
-              {{t "navigation.back-to-homepage"}}
+              {{t "pages.skill-review.actions.back-to-pix"}}
             </PixButtonLink>
           {{/if}}
         </div>
