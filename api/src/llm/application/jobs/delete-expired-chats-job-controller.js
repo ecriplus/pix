@@ -19,23 +19,22 @@ class DeleteExpiredChatsJobController extends JobScheduleController {
   async handle({ dependencies = { config, logger } }) {
     const { lifespan, dryRun, chunkSize, msBetweenChunks } = dependencies.config.llm.deleteChatsJob;
 
-    if (dryRun) {
-      dependencies.logger.info(
-        'DeleteExpiredChatsJobHandler - Starting script in dry run mode. No chats will actually be deleted.',
-      );
-    }
-
     const today = new Date();
     const cutoffDate = new Date();
     cutoffDate.setDate(today.getDate() - lifespan);
 
-    dependencies.logger.info(`About to delete chats started before ${cutoffDate.toISOString()}`);
+    const knex = DomainTransaction.getConnection();
+    const [{ count: chatsToBeDeletedCount }] = await knex.count('id').from('chats').where('startedAt', '<', cutoffDate);
+
+    dependencies.logger.info(
+      `About to delete ${chatsToBeDeletedCount} chat(s) started before ${cutoffDate.toISOString()}`,
+    );
+
     if (dryRun) {
       dependencies.logger.info('Dry run is enabled, not proceeding with deletion');
       return;
     }
 
-    const knex = DomainTransaction.getConnection();
     try {
       let totalChatsDeletedCount = 0;
       for (let i = 0; i <= MAX_SAFE_ITER_COUNT; i++) {
