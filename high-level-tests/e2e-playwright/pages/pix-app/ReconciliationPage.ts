@@ -24,4 +24,11 @@ export class ReconciliationPage {
       await this.page.getByRole('button', { name: "Je m'inscris" }).click();
     }
   }
+
+  async connect(username: string, password: string) {
+    await this.page.getByRole('button', { name: 'Se connecter' }).click();
+    await this.page.getByRole('textbox', { name: /Adresse e-mail ou identifiant/ }).fill(username);
+    await this.page.getByRole('textbox', { name: /Mot de passe/ }).fill(password);
+    await this.page.getByRole('button', { name: 'Se connecter' }).click();
+  }
 }
