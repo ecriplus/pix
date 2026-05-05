@@ -42,7 +42,7 @@ before(async function () {
   nock.enableNetConnect('localhost:9090'); // Unmock S3 storage
 
   try {
-    await JobClient.instance.initialize();
+    await JobClient.instance.initialize({ worker: true, isTestOnly: true });
   } catch {
     // pgBoss is not available on unit tests
   }

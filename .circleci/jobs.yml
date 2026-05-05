@@ -612,6 +612,7 @@ jobs:
           environment:
             NODE_ENV: test
             TEST_DATABASE_URL: postgres://circleci@localhost:5432/circleci_integration
+            TEST_JOBS_DATABASE_URL: postgres://circleci@localhost:5432/circleci_integration
       - run:
           name: Prepare datamart
           command: npm run datamart:prepare
@@ -637,6 +638,7 @@ jobs:
             TEST_DATABASE_URL: postgres://circleci@localhost:5432/circleci_integration
             TEST_DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_integration_datamart
             TEST_DATAWAREHOUSE_DATABASE_URL: postgres://circleci@localhost:5432/circleci_integration_datawarehouse
+            TEST_JOBS_DATABASE_URL: postgres://circleci@localhost:5432/circleci_integration
             TEST_REDIS_URL: redis://localhost:6379
             TEST_IMPORT_STORAGE_ENDPOINT: http://localhost:9090
             TEST_IMPORT_STORAGE_BUCKET_NAME: pix-import-test
@@ -669,6 +671,7 @@ jobs:
           environment:
             NODE_ENV: test
             TEST_DATABASE_URL: postgres://circleci@localhost:5432/circleci_acceptance
+            TEST_JOBS_DATABASE_URL: postgres://circleci@localhost:5432/circleci_acceptance
       - run:
           name: Prepare datamart
           command: npm run datamart:prepare
@@ -692,6 +695,7 @@ jobs:
             TEST_DATABASE_URL: postgres://circleci@localhost:5432/circleci_acceptance
             TEST_DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_acceptance_datamart
             TEST_DATAWAREHOUSE_DATABASE_URL: postgres://circleci@localhost:5432/circleci_acceptance_datawarehouse
+            TEST_JOBS_DATABASE_URL: postgres://circleci@localhost:5432/circleci_acceptance
             TEST_REDIS_URL: redis://localhost:6379
             TEST_IMPORT_STORAGE_ENDPOINT: http://localhost:9090
             TEST_IMPORT_STORAGE_BUCKET_NAME: pix-import-test
@@ -999,24 +1003,11 @@ jobs:
           working_directory: ~/pix/api
           command: npm ci
       - run:
-          name: Start Pix API
-          working_directory: ~/pix/api
-          environment:
-            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
-            DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_datamart
-            REDIS_URL: 'redis://localhost:6379'
-          background: true
-          command: npm start
-      - run:
-          name: Start Pix App
-          working_directory: ~/pix/mon-pix
-          command: npx ember serve --path=./dist --proxy=http://localhost:3000
-          background: true
-      - run:
           name: Prepare database
           working_directory: ~/pix/api
           environment:
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            JOBS_DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
           command: npm run db:prepare
       - run:
           name: Refresh cache
@@ -1031,9 +1022,26 @@ jobs:
           environment:
             DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_datamart
       - run:
+          name: Start Pix API
+          working_directory: ~/pix/api
+          environment:
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            JOBS_DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_datamart
+            REDIS_URL: 'redis://localhost:6379'
+            START_JOB_IN_WEB_PROCESS: 'true'
+          background: true
+          command: npm start
+      - run:
+          name: Start Pix App
+          working_directory: ~/pix/mon-pix
+          command: npx ember serve --path=./dist --proxy=http://localhost:3000
+          background: true
+      - run:
           name: Run tests
           environment:
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            JOBS_DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
           command: npm run test:ci:app
       - store_test_results:
           path: /home/circleci/test-results
@@ -1080,24 +1088,11 @@ jobs:
           working_directory: ~/pix/api
           command: npm ci
       - run:
-          name: Start Pix API
-          working_directory: ~/pix/api
-          environment:
-            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
-            DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_datamart
-            REDIS_URL: 'redis://localhost:6379'
-          background: true
-          command: npm start
-      - run:
-          name: Start Pix Orga
-          working_directory: ~/pix/orga
-          command: npx ember serve --path=./dist --proxy=http://localhost:3000
-          background: true
-      - run:
           name: Prepare database
           working_directory: ~/pix/api
           environment:
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            JOBS_DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
           command: npm run db:prepare
       - run:
           name: Refresh cache
@@ -1112,9 +1107,26 @@ jobs:
           environment:
             DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_datamart
       - run:
+          name: Start Pix API
+          working_directory: ~/pix/api
+          environment:
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            JOBS_DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            DATAMART_DATABASE_URL: postgres://circleci@localhost:5432/circleci_datamart
+            REDIS_URL: 'redis://localhost:6379'
+            START_JOB_IN_WEB_PROCESS: 'true'
+          background: true
+          command: npm start
+      - run:
+          name: Start Pix Orga
+          working_directory: ~/pix/orga
+          command: npx ember serve --path=./dist --proxy=http://localhost:3000
+          background: true
+      - run:
           name: Run tests
           environment:
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            JOBS_DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
           command: npm run test:ci:orga
       - store_test_results:
           path: /home/circleci/test-results
@@ -1150,6 +1162,20 @@ jobs:
           working_directory: ~/pix/api
           command: npm ci
       - run:
+          name: Prepare database
+          working_directory: ~/pix/api
+          environment:
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            DATAMART_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datamart'
+            DATAWAREHOUSE_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datawarehouse'
+            JOBS_DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            REDIS_URL: 'redis://localhost:6379'
+            START_JOB_IN_WEB_PROCESS: 'true'
+            AUTH_SECRET: 'secret'
+            LCMS_API_RELEASE_ID: '2360?forCI'
+            IS_RUNNING_PLAYWRIGHT: 'true'
+          command: npm run db:prepare
+      - run:
           name: Start Pix API
           working_directory: ~/pix/api
           command: npm start
@@ -1158,6 +1184,7 @@ jobs:
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
             DATAMART_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datamart'
             DATAWAREHOUSE_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datawarehouse'
+            JOBS_DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
             REDIS_URL: 'redis://localhost:6379'
             START_JOB_IN_WEB_PROCESS: 'true'
             MAILING_ENABLED: 'false'
@@ -1179,19 +1206,6 @@ jobs:
           working_directory: ~/pix/certif
           command: npx ember serve --path=./dist --proxy=http://localhost:3000
           background: true
-      - run:
-          name: Prepare database
-          working_directory: ~/pix/api
-          environment:
-            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
-            DATAMART_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datamart'
-            DATAWAREHOUSE_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datawarehouse'
-            REDIS_URL: 'redis://localhost:6379'
-            START_JOB_IN_WEB_PROCESS: 'true'
-            AUTH_SECRET: 'secret'
-            LCMS_API_RELEASE_ID: '2360?forCI'
-            IS_RUNNING_PLAYWRIGHT: 'true'
-          command: npm run db:prepare
       - run:
           name: Refresh cache
           environment:
@@ -1221,6 +1235,7 @@ jobs:
             PIX_ORGA_URL: http://localhost:4201
             PIX_CERTIF_URL: http://localhost:4203
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            JOBS_DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
             AUTH_SECRET: 'secret'
             REDIRECTION_URL_SECRET: 'secret'
             NODE_OPTIONS: '--no-experimental-strip-types'
@@ -1254,6 +1269,20 @@ jobs:
           working_directory: ~/pix/api
           command: npm ci
       - run:
+          name: Prepare database
+          working_directory: ~/pix/api
+          environment:
+            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            DATAMART_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datamart'
+            DATAWAREHOUSE_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datawarehouse'
+            JOBS_DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            REDIS_URL: 'redis://localhost:6379'
+            START_JOB_IN_WEB_PROCESS: 'true'
+            AUTH_SECRET: 'secret'
+            LCMS_API_RELEASE_ID: '2360?forCI'
+            IS_RUNNING_PLAYWRIGHT: 'true'
+          command: npm run db:prepare
+      - run:
           name: Start Pix API
           working_directory: ~/pix/api
           command: npm start
@@ -1262,6 +1291,7 @@ jobs:
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
             DATAMART_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datamart'
             DATAWAREHOUSE_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datawarehouse'
+            JOBS_DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
             REDIS_URL: 'redis://localhost:6379'
             START_JOB_IN_WEB_PROCESS: 'true'
             MAILING_ENABLED: 'false'
@@ -1285,19 +1315,6 @@ jobs:
           command: npx ember serve --path=./dist --proxy=http://localhost:3000
           background: true
       - run:
-          name: Prepare database
-          working_directory: ~/pix/api
-          environment:
-            DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
-            DATAMART_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datamart'
-            DATAWAREHOUSE_DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/circleci_datawarehouse'
-            REDIS_URL: 'redis://localhost:6379'
-            START_JOB_IN_WEB_PROCESS: 'true'
-            AUTH_SECRET: 'secret'
-            LCMS_API_RELEASE_ID: '2360?forCI'
-            IS_RUNNING_PLAYWRIGHT: 'true'
-          command: npm run db:prepare
-      - run:
           name: Refresh cache
           environment:
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
@@ -1317,6 +1334,7 @@ jobs:
             PIX_ADMIN_URL: http://localhost:4202
             PIX_CERTIF_URL: http://localhost:4203
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
+            JOBS_DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
             AUTH_SECRET: 'secret'
             REDIRECTION_URL_SECRET: 'secret'
             NODE_OPTIONS: '--no-experimental-strip-types'

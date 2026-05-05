@@ -2,55 +2,58 @@ import { glob } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import _ from 'lodash';
-import PgBoss from 'pg-boss';
+import { PgBoss } from 'pg-boss';
 
 import { Metrics } from '../../../monitoring/infrastructure/metrics.js';
 import { config } from '../../config.js';
 import { executeInContext, EXECUTORS } from '../execution-context-manager.js';
 import { importNamedExportFromFile } from '../utils/import-named-exports-from-directory.js';
 import { child } from '../utils/logger.js';
-import { MonitoredJobHandler } from './monitoring/MonitoredJobHandler.js';
-import { MonitoringJobExecutionTimeHandler } from './monitoring/MonitoringJobExecutionTimeHandler.js';
+import { MonitoredJobHandler } from './MonitoredJobHandler.js';
 
 const workerDirPath = resolve(dirname(fileURLToPath(import.meta.url)), '../../../..');
 const logger = child('worker', { event: 'worker' });
 const metrics = new Metrics({ config });
 
-const monitorStateIntervalSeconds = config.pgBoss.monitorStateIntervalSeconds;
-
 export class JobClient {
+  /** @type JobClient */
   static #jobClient;
 
+  /** @type {PgBoss} */
   #pgBoss = null;
+  #isTestOnly = false;
   #isInitialized = false;
 
-  async initialize({ worker, jobGroups } = { worker: false, jobGroups: [] }, pgBossFactory) {
-    if (this.#isInitialized) return;
+  static get instance() {
+    if (!JobClient.#jobClient) {
+      JobClient.#jobClient = new JobClient();
+    }
+    return JobClient.#jobClient;
+  }
 
-    const connectionString = process.env.NODE_ENV === 'test' ? process.env.TEST_DATABASE_URL : process.env.DATABASE_URL;
+  async initialize(
+    { worker, isTestOnly, jobGroups } = { worker: false, isTestOnly: false, jobGroups: [] },
+    pgBossFactory,
+  ) {
+    if (this.#isInitialized) return;
+    this.#isTestOnly = isTestOnly;
+
+    const connectionString =
+      process.env.NODE_ENV === 'test' ? process.env.TEST_JOBS_DATABASE_URL : process.env.JOBS_DATABASE_URL;
 
     if (worker) {
       this.#pgBoss = pgBossFactory
         ? pgBossFactory()
-        : new PgBoss({
-            connectionString,
-            max: config.pgBoss.workerConnexionPoolMaxSize,
-            ...(monitorStateIntervalSeconds ? { monitorStateIntervalSeconds } : {}),
-            archiveFailedAfterSeconds: config.pgBoss.archiveFailedAfterSeconds,
-          });
+        : new PgBoss({ connectionString, max: config.pgBoss.workerConnexionPoolMaxSize, migrate: false });
 
-      this.#pgBoss.on('monitor-states', ({ queues, ...state }) => {
-        logger.info({ event: 'pg-boss-state', name: 'global', queue: state }, 'PGBOSS MONITOR-STATES');
-        _.each(queues, (queue, name) => {
-          logger.info({ event: 'pg-boss-state', name, queue }, 'PGBOSS MONITOR-STATES');
-        });
-      });
       this.#pgBoss.on('error', (err) => {
-        logger.error({ err, event: 'pg-boss-error' }, 'PGBOSS ERROR');
+        logger.error({ event: 'pg-boss-error', err }, 'PGBOSS ERROR');
+      });
+      this.#pgBoss.on('warning', ({ message, data }) => {
+        logger.warn({ event: 'pg-boss-warning', data }, message);
       });
       this.#pgBoss.on('wip', (data) => {
-        logger.info({ data, event: 'pg-boss-wip' }, 'PGBOSS WIP');
+        logger.info({ event: 'pg-boss-wip', data }, 'PGBOSS WIP');
       });
 
       await this.#pgBoss.start();
@@ -61,8 +64,9 @@ export class JobClient {
         : new PgBoss({
             connectionString,
             max: config.pgBoss.clientConnexionPoolMaxSize,
-            noSupervisor: true,
-            noScheduling: true,
+            supervise: false,
+            schedule: false,
+            migrate: false,
           });
       await this.#pgBoss.start();
     }
@@ -76,7 +80,7 @@ export class JobClient {
     }
   }
 
-  async #registerJobs(jobGroups) {
+  async #registerJobs(jobGroups = []) {
     const globPattern = `${workerDirPath}/src/**/application/**/*job-controller.js`;
 
     logger.info(`Search for job handlers in ${globPattern}`);
@@ -94,15 +98,15 @@ export class JobClient {
     for (const [moduleName, ModuleClass] of Object.entries(jobModules)) {
       const job = new ModuleClass();
 
-      if (!jobGroups.includes(job.jobGroup)) continue;
+      if (!jobGroups.includes(job.jobGroup) && !this.#isTestOnly) continue;
 
       if (job.isJobEnabled) {
         logger.info(`Job "${job.jobName}" registered from module "${moduleName}."`);
-        this.#registerJob(metrics, job.jobName, ModuleClass);
+        await this.registerJob(job.jobName, ModuleClass);
 
         if (!job.jobCron && job.legacyName) {
           logger.warn(`Temporary Job" ${job.legacyName}" registered from module "${moduleName}."`);
-          this.#registerJob(metrics, job.legacyName, ModuleClass);
+          await this.registerJob(job.legacyName, ModuleClass);
         }
 
         if (job.jobCron) {
@@ -136,29 +140,22 @@ export class JobClient {
     logger.info(`${cronJobCount} cron jobs scheduled for groups "${jobGroups}".`);
   }
 
-  #registerJob(metrics, name, handlerClass) {
-    const jobHandler = new handlerClass();
-    const { teamConcurrency, teamSize } = jobHandler;
+  async registerJob(name, handlerClass) {
+    await this.#pgBoss.createQueue(name, { retentionSeconds: config.pgBoss.retentionSeconds });
 
-    this.#pgBoss.work(name, { teamSize, teamConcurrency }, async (job) => {
+    if (this.#isTestOnly) return;
+
+    const jobHandler = new handlerClass();
+
+    const { localConcurrency } = jobHandler;
+
+    await this.#pgBoss.work(name, { localConcurrency, includeMetadata: true }, async ([job]) => {
       const context = this.#initLogContext(job);
       return executeInContext(
         context,
         async () => {
           const monitoredJobHandler = new MonitoredJobHandler(metrics, jobHandler, logger);
-          return monitoredJobHandler.handle({ data: job.data, jobName: name, jobId: job.id });
-        },
-        EXECUTORS.JOB,
-      );
-    });
-
-    this.#pgBoss.onComplete(name, { teamSize, teamConcurrency }, (completedJob) => {
-      const context = this.#initLogContext(completedJob.data.request);
-      return executeInContext(
-        context,
-        async () => {
-          const monitoringJobHandler = new MonitoringJobExecutionTimeHandler({ logger });
-          return monitoringJobHandler.handle(completedJob);
+          return monitoredJobHandler.handle(name, job);
         },
         EXECUTORS.JOB,
       );
@@ -174,6 +171,7 @@ export class JobClient {
   }
 
   async scheduleCronJob({ name, cron, data, options }) {
+    await this.#pgBoss.createQueue(name, { retentionSeconds: config.pgBoss.retentionSeconds });
     return this.#pgBoss.schedule(name, cron, data, options);
   }
 
@@ -186,9 +184,9 @@ export class JobClient {
     await this.#pgBoss.send(name, payload, options);
   }
 
-  async fetch(name, count, options) {
+  async fetch(name, options) {
     this.#assertIsInitialized();
-    return this.#pgBoss.fetch(name, count, options);
+    return this.#pgBoss.fetch(name, options);
   }
 
   async getSchedules() {
@@ -198,19 +196,43 @@ export class JobClient {
 
   async flushJobs() {
     this.#assertIsInitialized();
-    await this.#pgBoss.clearStorage();
+    await this.#pgBoss.deleteAllJobs();
   }
 
-  async stop(options = { graceful: false, timeout: 1000, destroy: true }) {
+  async stop(options = { graceful: false, timeout: 1000 }) {
     this.#assertIsInitialized();
     await this.#pgBoss.stop(options);
     this.#isInitialized = false;
   }
 
-  static get instance() {
-    if (!JobClient.#jobClient) {
-      JobClient.#jobClient = new JobClient();
+  async getQueuesStats() {
+    const queues = await this.#pgBoss.getQueues();
+    const emptyStat = {
+      pending: 0,
+      created: 0,
+      retry: 0,
+      active: 0,
+      completed: 0,
+      cancelled: 0,
+      failed: 0,
+      all: 0,
+    };
+
+    const stats = { global: { ...emptyStat } };
+
+    for (const queue of queues) {
+      stats[queue.name] = { ...emptyStat };
     }
-    return JobClient.#jobClient;
+
+    const { rows } = await this.#pgBoss
+      .getDb()
+      .executeSql('SELECT name, state, COUNT(id) FROM pgboss.job GROUP BY 1, 2');
+
+    for (const row of rows) {
+      stats[row.name] = { ...stats[row.name], [row.state]: row.count, all: (stats[row.name].all += row.count) };
+      stats.global[row.state] += row.count;
+      stats.global.all += row.count;
+    }
+    return stats;
   }
 }

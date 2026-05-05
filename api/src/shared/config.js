@@ -134,6 +134,7 @@ const schema = Joi.object({
   DATABASE_URL: Joi.string().uri().required(),
   DATAMART_DATABASE_URL: Joi.string().uri().required(),
   DATAWAREHOUSE_DATABASE_URL: Joi.string().uri().requiredForMaddo(),
+  JOBS_DATABASE_URL: Joi.string().uri().required(),
   DOMAIN_PIX: Joi.string().optional(),
   DOMAIN_PIX_APP: Joi.string().optional(),
   DOMAIN_PIX_ORGA: Joi.string().optional(),
@@ -159,6 +160,7 @@ const schema = Joi.object({
   MAILING_PROVIDER: Joi.string().optional().valid('brevo', 'mailpit'),
   DEVCOMP_MODULE_JSON_SCHEMA_CACHE_MAX_AGE: Joi.number().optional(),
   NODE_ENV: Joi.string().optional().valid('development', 'test', 'production'),
+  PGBOSS_STATES_MONITORING_JOB_CRON: Joi.string().optional(),
   POLE_EMPLOI_CLIENT_ID: Joi.string().optional(),
   POLE_EMPLOI_CLIENT_SECRET: Joi.string().optional(),
   REDIS_URL: Joi.string().uri().optional(),
@@ -459,11 +461,9 @@ const configuration = (function () {
     pgBoss: {
       clientConnexionPoolMaxSize: _getNumber(process.env.PGBOSS_CLIENT_CONNECTION_POOL_MAX_SIZE, 2),
       workerConnexionPoolMaxSize: _getNumber(process.env.PGBOSS_WORKER_CONNECTION_POOL_MAX_SIZE, 15),
-      teamSize: _getNumber(process.env.PG_BOSS_TEAM_SIZE, 1),
-      teamConcurrency: _getNumber(process.env.PG_BOSS_TEAM_CONCURRENCY, 1),
-      monitorStateIntervalSeconds: _getNumber(process.env.PGBOSS_MONITOR_STATE_INTERVAL_SECONDS, undefined),
-      // 43200 is equal to 12 hours - its the default pgboss configuration
-      archiveFailedAfterSeconds: _getNumber(process.env.PGBOSS_ARCHIVE_FAILED_AFTER_SECONDS, 43200),
+      localConcurrency: _getNumber(process.env.PGBOSS_LOCAL_CONCURRENCY, 1),
+      retentionSeconds: _getNumber(process.env.PGBOSS_RETENTION_SECONDS, 30 * 24 * 3600),
+      statesMonitoringJobCron: process.env.PGBOSS_STATES_MONITORING_JOB_CRON || '* * * * *',
       validationFileJobEnabled: process.env.PGBOSS_VALIDATION_FILE_JOB_ENABLED
         ? toBoolean(process.env.PGBOSS_VALIDATION_FILE_JOB_ENABLED)
         : true,
