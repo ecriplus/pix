@@ -40,6 +40,53 @@ describe('Quest | Acceptance | Application | Course catalogue Route', function (
         expect(Number(data[0].id)).to.equal(targetProfileFromShare.id);
         expect(data[0].attributes.name).to.equal('Profil partagé');
       });
+
+      it('returns areas as JSON API relationships with nested competences', async function () {
+        // given
+        const userId = databaseBuilder.factory.buildUser().id;
+        const organizationId = databaseBuilder.factory.buildOrganization().id;
+        databaseBuilder.factory.buildMembership({ userId, organizationId });
+
+        const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+        databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId: 'recTube1' });
+        databaseBuilder.factory.buildTargetProfileShare({ targetProfileId, organizationId });
+        databaseBuilder.factory.learningContent.build({
+          areas: [
+            { id: 'recArea1', code: '1', title_i18n: { fr: 'Information et données' }, competenceIds: ['recComp1'] },
+          ],
+          competences: [
+            {
+              id: 'recComp1',
+              name_i18n: { fr: 'Mener une recherche' },
+              areaId: 'recArea1',
+              index: '1.1',
+              origin: 'Pix',
+            },
+          ],
+          tubes: [{ id: 'recTube1', competenceId: 'recComp1' }],
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        const response = await server.inject({
+          method: 'GET',
+          url: `/api/organizations/${organizationId}/courses`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId }),
+        });
+
+        // then
+        expect(response.statusCode).to.equal(200);
+        const { data, included } = response.result;
+        expect(data[0].relationships.areas.data).to.deep.equal([{ type: 'areas', id: 'recArea1' }]);
+        const areaInIncluded = included.find((resource) => resource.type === 'areas' && resource.id === 'recArea1');
+        expect(areaInIncluded.attributes).to.include({ title: 'Information et données', code: '1' });
+        expect(areaInIncluded.relationships.competences.data).to.deep.equal([{ type: 'competences', id: 'recComp1' }]);
+        const competenceInIncluded = included.find(
+          (resource) => resource.type === 'competences' && resource.id === 'recComp1',
+        );
+        expect(competenceInIncluded.attributes).to.include({ name: 'Mener une recherche', index: '1.1' });
+      });
     });
 
     context('when displayCatalogue feature toggle is disabled', function () {

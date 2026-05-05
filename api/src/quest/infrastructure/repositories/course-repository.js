@@ -34,8 +34,9 @@ export const findByOrganizationId = async ({ organizationId, locale }) => {
   const allRows = new Map([...blueprintRowsById, ...targetProfileRowsById]);
   const { areasByCompetenceId, competencesByTubeId } = await resolveLearningContent(allRows, locale);
 
-  const toItem = (type) => (row) =>
-    new CourseItem({
+  const toItem = (type) => (row) => {
+    const areas = resolveAreas(row, competencesByTubeId, areasByCompetenceId);
+    return new CourseItem({
       id: row.id,
       name: row.name,
       type,
@@ -43,10 +44,10 @@ export const findByOrganizationId = async ({ organizationId, locale }) => {
       nbModules: row.nbModules,
       category: row.category,
       isSimplifiedAccess: row.isSimplifiedAccess,
-      areas: resolveAreas(row, competencesByTubeId, areasByCompetenceId),
-      competences: resolveCompetences(row, competencesByTubeId),
+      areas,
       createdAt: row.createdAt,
     });
+  };
 
   const blueprintItems = [...blueprintRowsById.values()].map(toItem(COURSE_ITEM_TYPES.BLUEPRINT));
   const targetProfileItems = [...targetProfileRowsById.values()].map(toItem(COURSE_ITEM_TYPES.TARGET_PROFILE));
@@ -134,13 +135,24 @@ const uniqueById = (items) => {
   });
 };
 
-const resolveCompetences = (row, competencesByTubeId) => {
-  const uniqueCompetences = uniqueById(row.tubeIds.map((tubeId) => competencesByTubeId.get(tubeId)));
-  return uniqueCompetences.map((competence) => competence.name);
-};
-
 const resolveAreas = (row, competencesByTubeId, areasByCompetenceId) => {
   const uniqueCompetences = uniqueById(row.tubeIds.map((tubeId) => competencesByTubeId.get(tubeId)));
-  const uniqueAreas = uniqueById(uniqueCompetences.map((competence) => areasByCompetenceId.get(competence.id)));
-  return uniqueAreas.map((area) => area.title);
+
+  const areasMap = new Map();
+  for (const competence of uniqueCompetences) {
+    const area = areasByCompetenceId.get(competence.id);
+    if (!areasMap.has(area.id)) {
+      areasMap.set(area.id, { id: area.id, code: area.code, title: area.title, color: area.color, competences: [] });
+    }
+    areasMap.get(area.id).competences.push({ id: competence.id, name: competence.name, index: competence.index });
+  }
+
+  return [...areasMap.values()]
+    .sort((a, b) => (a.code ?? '').localeCompare(b.code ?? '', undefined, { numeric: true }))
+    .map((area) => ({
+      ...area,
+      competences: area.competences.sort((a, b) =>
+        (a.index ?? '').localeCompare(b.index ?? '', undefined, { numeric: true }),
+      ),
+    }));
 };
