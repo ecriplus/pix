@@ -1,5 +1,11 @@
 # Pix Changelog
 
+## [5.401.1](https://github.com/1024pix/pix/compare/v5.401.0...v5.401.1) (2026-05-05)
+
+### :building_construction: Tech
+
+- [#15803](https://github.com/1024pix/pix/pull/15803) Met à jour pgboss en v12
+
 # [5.401.0](https://github.com/1024pix/pix/compare/v5.400.0...v5.401.0) (2026-05-05)
 
 ### :rocket: Amélioration
