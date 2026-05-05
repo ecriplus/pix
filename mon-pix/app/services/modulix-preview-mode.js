@@ -19,7 +19,15 @@ export default class ModulixPreviewModeService extends Service {
     return this.isEnabled && this.isElementsIdButtonEnabled;
   }
 
+  get isPreviewAndGrainsTitleButtonEnabled() {
+    return this.isEnabled && this.isGrainsTitleButtonEnabled;
+  }
+
   @action toggleElementIdButton() {
     this.isElementsIdButtonEnabled = !this.isElementsIdButtonEnabled;
+  }
+
+  @action toggleGrainsTitleButton() {
+    this.isGrainsTitleButtonEnabled = !this.isGrainsTitleButtonEnabled;
   }
 }
