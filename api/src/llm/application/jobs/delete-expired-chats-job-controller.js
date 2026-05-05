@@ -1,3 +1,5 @@
+import { setTimeout } from 'node:timers/promises';
+
 import { JobScheduleController } from '../../../shared/application/jobs/job-schedule-controller.js';
 import { config } from '../../../shared/config.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
@@ -5,7 +7,7 @@ import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
 
 const logger = child('llm:delete-expired-chats-job', { event: SCOPES.LLM });
 
-const MAX_SAFE_ITER_COUNT = 10_000;
+const MAX_SAFE_ITER_COUNT = 1_000_000;
 
 class DeleteExpiredChatsJobController extends JobScheduleController {
   constructor() {
@@ -15,7 +17,7 @@ class DeleteExpiredChatsJobController extends JobScheduleController {
   }
 
   async handle({ dependencies = { config, logger } }) {
-    const { lifespan, dryRun, chunkSize } = dependencies.config.llm.deleteChatsJob;
+    const { lifespan, dryRun, chunkSize, msBetweenChunks } = dependencies.config.llm.deleteChatsJob;
 
     if (dryRun) {
       dependencies.logger.info(
@@ -62,9 +64,7 @@ class DeleteExpiredChatsJobController extends JobScheduleController {
 
         totalChatsDeletedCount += chatIds.length;
 
-        if (i === MAX_SAFE_ITER_COUNT) {
-          throw new Error(`Unrealistic iteration count detected (${i}), stopping execution`);
-        }
+        await setTimeout(msBetweenChunks);
       }
 
       dependencies.logger.info({ totalChatsDeletedCount }, 'DONE');

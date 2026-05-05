@@ -160,6 +160,7 @@ const schema = Joi.object({
   LLM_DELETE_CHATS_JOB_LIFESPAN: Joi.number().min(0).optional(),
   LLM_DELETE_CHATS_JOB_DRY_RUN: Joi.string().optional().valid('true', 'false'),
   LLM_DELETE_CHATS_JOB_CRON: Joi.string().optional(),
+  LLM_DELETE_CHATS_JOB_MS_BETWEEN_CHUNKS: Joi.number().min(0).optional(),
   LOG_ENABLED: Joi.string().required().valid('true', 'false'),
   LOG_FOR_HUMANS: Joi.string().optional().valid('true', 'false'),
   LOG_LEVEL: Joi.string().optional().valid('silent', 'fatal', 'error', 'warn', 'info', 'debug', 'trace'),
@@ -386,6 +387,7 @@ const configuration = (function () {
         cron: process.env.LLM_DELETE_CHATS_JOB_CRON || '0 19 * * *',
         dryRun: process.env.LLM_DELETE_CHATS_JOB_DRY_RUN ? toBoolean(process.env.LLM_DELETE_CHATS_JOB_DRY_RUN) : true,
         chunkSize: _getNumber(process.env.LLM_DELETE_CHATS_JOB_CHUNK_SIZE, 3_333),
+        msBetweenChunks: _getNumber(process.env.LLM_DELETE_CHATS_JOB_MS_BETWEEN_CHUNKS, 10),
       },
     },
     logging: {
