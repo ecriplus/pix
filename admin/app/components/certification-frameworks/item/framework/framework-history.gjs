@@ -2,11 +2,14 @@ import PixIcon from "@1024pix/pix-ui/components/pix-icon";
 import PixIconButton from "@1024pix/pix-ui/components/pix-icon-button";
 import PixTable from "@1024pix/pix-ui/components/pix-table";
 import PixTableColumn from "@1024pix/pix-ui/components/pix-table-column";
+import PixTag from "@1024pix/pix-ui/components/pix-tag";
+import { concat, get } from "@ember/helper";
 import Component from "@glimmer/component";
-import { concat } from "@ember/helper";
-import { eq, not } from "ember-truth-helpers";
 import { t } from "ember-intl";
 import formatDate from "ember-intl/helpers/format-date";
+import { eq, not } from "ember-truth-helpers";
+
+const STATUS_COLORS = { ACTIVE: 'success', DRAFT: 'tertiary', ARCHIVED: 'secondary' };
 
 function formatDuration(minutes) {
   if (!minutes) return '-';
@@ -18,10 +21,6 @@ function formatDuration(minutes) {
 }
 
 export default class FrameworkHistory extends Component {
-  viewVersion() {}
-
-  deleteVersion() {}
-
   <template>
     <section class="framework-versions">
       <PixTable
@@ -40,7 +39,9 @@ export default class FrameworkHistory extends Component {
           </PixTableColumn>
           <PixTableColumn @context={{context}}>
             <:header>
-              {{t "components.complementary-certifications.item.framework.history.table.columns.maximum-assessment-length"}}
+              {{t
+                "components.complementary-certifications.item.framework.history.table.columns.maximum-assessment-length"
+              }}
             </:header>
             <:cell>
               {{version.maximumAssessmentLength}}
@@ -78,9 +79,9 @@ export default class FrameworkHistory extends Component {
               {{t "components.complementary-certifications.item.framework.history.table.columns.status"}}
             </:header>
             <:cell>
-              <span class="framework-version-status framework-version-status--{{version.status}}">
+              <PixTag @color={{get STATUS_COLORS version.status}}>
                 {{t (concat "components.complementary-certifications.item.framework.history.statuses." version.status)}}
-              </span>
+              </PixTag>
             </:cell>
           </PixTableColumn>
           <PixTableColumn @context={{context}}>

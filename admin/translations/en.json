@@ -637,11 +637,11 @@
               "DRAFT": "Draft"
             },
             "table": {
-              "caption": "Versions list in descending order",
               "actions": {
                 "delete": "Delete version",
                 "view": "View version details"
               },
+              "caption": "Versions list in descending order",
               "columns": {
                 "actions": "Actions",
                 "assessment-duration": "Duration (min)",
@@ -675,10 +675,10 @@
           "title": "Badges certifiés du profil cible actuel"
         },
         "history-list": {
-          "caption": "Liste des profils cibles (actuellement rattaché ou ayant étés rattachés à la complémentaire). Contient la date de rattachement et de détachement et le nom.",
           "actions": {
             "view": "View target profile"
           },
+          "caption": "Liste des profils cibles (actuellement rattaché ou ayant étés rattachés à la complémentaire). Contient la date de rattachement et de détachement et le nom.",
           "headers": {
             "actions": "Actions",
             "attached-at": "Attachment date",

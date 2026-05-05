@@ -9,7 +9,7 @@ export default class Header extends Component {
   @service currentUser;
 
   get frameworkLabel() {
-    return this.intl.t(`components.certification-frameworks.labels.${this.args.certificationFramework?.name}`);
+    return this.intl.t(`components.certification-frameworks.labels.${this.args.certificationFramework.name}`);
   }
 
   get canCreateVersion() {
@@ -44,7 +44,6 @@ export default class Header extends Component {
         <PixButtonLink
           class="framework__creation-button"
           @route="authenticated.certification-frameworks.item.framework.new-version"
-          @size="large"
           @iconBefore="add"
         >
           {{t "components.complementary-certifications.item.framework.create-button"}}

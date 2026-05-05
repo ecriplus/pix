@@ -50,7 +50,7 @@ module('Integration | Component | complementary-certifications/item/target-profi
 
       assert
         .dom(
-          screen.getByRole('heading', {
+          screen.getByRole('button', {
             name: t('components.complementary-certifications.target-profiles.history-list.title'),
           }),
         )
@@ -100,11 +100,7 @@ module('Integration | Component | complementary-certifications/item/target-profi
       assert.dom(screen.queryByText('Badge Volcan')).doesNotExist();
 
       assert
-        .dom(
-          screen.queryByRole('heading', {
-            name: t('components.complementary-certifications.target-profiles.history-list.title'),
-          }),
-        )
+        .dom(screen.getByText(t('components.complementary-certifications.target-profiles.history-list.title')))
         .exists();
     });
   });

@@ -35,40 +35,18 @@
   color: var(--pix-neutral-900);
 
   .pix-table-header-container {
+    margin-right: var(--pix-spacing-1x);
     color: var(--pix-primary-900);
     vertical-align: middle;
-    margin-right: var(--pix-spacing-1x);
   }
 
-  .pix-icon {
+  .pix-table-header-container > .pix-icon {
+    margin-right: var(--pix-spacing-1x);
     color: var(--pix-neutral-800);
     vertical-align: middle;
-    margin-right: var(--pix-spacing-1x);
   }
 }
 
-.framework-version-status {
-  display: inline-block;
-  padding: var(--pix-spacing-1x) var(--pix-spacing-3x);
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 500;
-
-  &--DRAFT {
-    background-color: var(--pix-tertiary-100);
-    color: var(--pix-tertiary-900);
-  }
-
-  &--ACTIVE {
-    background-color: var(--pix-success-100);
-    color: var(--pix-success-900);
-  }
-
-  &--ARCHIVED {
-    background-color: var(--pix-secondary-100);
-    color: var(--pix-secondary-900);
-  }
-}
 
 /* Target profiles history accordion */
 .framework-target-profiles-history {
@@ -86,18 +64,6 @@
   .pix-accordions__content {
     padding: var(--pix-spacing-4x);
     color: inherit;
-  }
-
-  a.framework-target-profiles-history__action-link {
-    display: inline-flex;
-    align-items: center;
-    color: var(--pix-neutral-800);
-    text-decoration: none;
-
-    .pix-icon {
-      width: 1.35rem;
-      height: 1.35rem;
-    }
   }
 }
 
