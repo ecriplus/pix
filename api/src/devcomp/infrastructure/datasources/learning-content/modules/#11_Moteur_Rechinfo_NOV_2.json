@@ -419,7 +419,7 @@
                 "id": "54df5ffc-d9f2-46d8-a40e-de78020c7921",
                 "type": "text",
                 "tag": "further-information",
-                "content": "<p>Ces <strong>annonces publicitaires</strong> apparaissent généralement dans une section nommée «&nbsp;<strong>Résultats sponsorisés</strong>&nbsp;» de la page de résultats ou avec une étiquette «&nbsp;<strong>Annonce</strong>&nbsp;» ou «&nbsp;<strong>Pub</strong>&nbsp;». Elles peuvent être discrètes ! 👁️</p>"
+                "content": "<p>Ces <strong>annonces publicitaires</strong> apparaissent généralement dans une section nommée «&nbsp;<strong>Résultats sponsorisés</strong>&nbsp;» de la liste des résultats ou avec une étiquette «&nbsp;<strong>Annonce</strong>&nbsp;» ou «&nbsp;<strong>Pub</strong>&nbsp;». Elles peuvent être discrètes ! 👁️</p>"
               }
             }
           ]
@@ -755,7 +755,7 @@
                 "id": "12fd500d-89e0-4a9d-8d4f-aa8df8a48c6c",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Voici une page de résultats pour le recherche «&nbsp;histoire enfants moyen âge&nbsp;».</p>"
+                "content": "<p>Vous cherchez à vous renseigner sur comment les enfants vivaient au moyen-âge sur internet. Vous utilisez votre moteur de recherche préféré pour faire la recherche suivante&nbsp;:  «&nbsp;histoire enfants moyen âge&nbsp;». Voici la liste de résultats pour le recherche</p>"
               }
             },
             {
@@ -763,7 +763,7 @@
               "element": {
                 "id": "6b7ce646-4d3e-42aa-8fa8-41e0b669c5dd",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/morech2_transfert.png",
+                "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/694eaaaf-a9cb-4326-8bb7-57cbc592624a.png",
                 "alt": "Page de résultats d’un moteur de recherche",
                 "alternativeText": "",
                 "legend": "Image provisoire",
@@ -775,12 +775,12 @@
               "element": {
                 "id": "c6aef7b8-d2dc-4404-9b71-cafcaebee1b7",
                 "type": "qcu-declarative",
-                "instruction": "<p>Que feriez-vous ?</p>",
+                "instruction": "<p>Sur quel résultat cliquez-vous ?&nbsp;</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "0",
-                    "content": "<p>Je choisis le premier résultat car je veux trouver une histoire qui se passe au Moyen Âge pour les enfants.</p>",
+                    "content": "<p>Je choisis le premier résultat, même si c’est une publicité, ce livre me fait envie !&nbsp;</p>",
                     "feedback": {
                       "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p><p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
                     }
@@ -794,21 +794,14 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>Je choisis le troisième résultat car je veux des vidéos adaptées aux enfants.</p>",
+                    "content": "<p>Je choisis le troisième résultat, même si il est ancien, il a l’air intéressant !</p>",
                     "feedback": {
                       "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p><p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Je reformule ma recherche car je ne m’intéresse pas au Moyen Âge mais à l’Antiquité.</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p><p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
-                    }
-                  },
-                  {
-                    "id": "4",
-                    "content": "<p>Je fais une autre recherche car ce sujet ne m’intéresse pas.</p>",
+                    "content": "<p>Aucun de ces liens, je vais changer mes mots cléfs pour avoir de meilleurs résultats.</p>",
                     "feedback": {
                       "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p><p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
                     }
