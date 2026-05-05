@@ -1,6 +1,7 @@
 @use 'pix-design-tokens/breakpoints';
 @use 'pix-design-tokens/typography';
 @use "pix-design-tokens/colors";
+@use 'pix-design-tokens/shadows';
 
 .evaluation-results-recommendation-engine {
   padding: 0 var(--pix-spacing-3x);
@@ -95,6 +96,21 @@
     .pix-button {
       width: 100%;
     }
+  }
+}
+
+.evaluation-results-hero-recommendation-engine-staged-message {
+  @extend %pix-shadow-default;
+
+  margin-bottom: var(--pix-spacing-4x);
+  padding: var(--pix-spacing-6x);
+  background-color: var(--pix-neutral-0);
+  border-radius: 0 0 20px 20px;
+
+  &__title {
+    @extend %pix-title-xxs;
+
+    color: var(--pix-neutral-900);
   }
 }
 

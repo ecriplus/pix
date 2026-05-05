@@ -122,12 +122,17 @@ module(
 
     module('stages', function () {
       module('when there are multiple stages', function () {
-        test('it displays reached stage stars', async function (assert) {
+        test('it displays reached stage stars and message', async function (assert) {
           // given
           const campaign = { organizationId: 1 };
           const campaignParticipationResult = {
             hasReachedStage: true,
-            reachedStage: { reachedStage: 4, totalStage: 5 },
+            reachedStage: {
+              reachedStage: 4,
+              totalStage: 5,
+              message: 'existing message stages',
+              title: 'existing title stages',
+            },
           };
 
           // when
@@ -144,6 +149,9 @@ module(
           const stars = { acquired: 3, total: 4 };
           assert.dom(screen.getByText(t('pages.skill-review.stage.starsAcquired', stars))).exists();
           assert.dom(screen.getByText(t('pages.skill-review.stage.recommendedEngine.starsAcquired', stars))).exists();
+
+          assert.dom(screen.getByText(campaignParticipationResult.reachedStage.title)).exists();
+          assert.dom(screen.getByText(campaignParticipationResult.reachedStage.message)).exists();
         });
       });
 

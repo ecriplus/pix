@@ -6,6 +6,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
+import MarkdownToHtml from '../../../../markdown-to-html';
 import AcquiredBadgesCompact from './acquired-badges-compact';
 
 export default class EvaluationResultsHeroRecommendationEngine extends Component {
@@ -129,5 +130,14 @@ export default class EvaluationResultsHeroRecommendationEngine extends Component
         </div>
       </div>
     </div>
+    {{#if @campaignParticipationResult.hasReachedStage}}
+      <section class="evaluation-results-hero-recommendation-engine-staged-message">
+        <h2 class="evaluation-results-hero-recommendation-engine-staged-message__title"><MarkdownToHtml
+            @isInline={{true}}
+            @markdown={{@campaignParticipationResult.reachedStage.title}}
+          /></h2>
+        <MarkdownToHtml @isInline={{true}} @markdown={{@campaignParticipationResult.reachedStage.message}} />
+      </section>
+    {{/if}}
   </template>
 }
