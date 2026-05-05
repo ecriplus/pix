@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import XLSX from 'xlsx';
 
 import { UnprocessableEntityError } from '../../../../../shared/application/http-errors.js';
@@ -6,14 +5,14 @@ import { loadOdsZip } from './common-ods-utils.js';
 
 const CONTENT_XML_IN_ODS = 'content.xml';
 
-async function getContentXml({ odsFilePath }) {
+export async function getContentXml({ odsFilePath }) {
   const zip = await loadOdsZip(odsFilePath);
   const contentXmlBufferCompressed = zip.file(CONTENT_XML_IN_ODS);
   const uncompressedBuffer = await contentXmlBufferCompressed.async('nodebuffer');
   return Buffer.from(uncompressedBuffer, 'utf8').toString();
 }
 
-async function extractTableDataFromOdsFile({ odsBuffer, tableHeaderTargetPropertyMap }) {
+export async function extractTableDataFromOdsFile({ odsBuffer, tableHeaderTargetPropertyMap }) {
   const sheetDataRows = await getSheetDataRowsFromOdsBuffer({ odsBuffer });
   const tableHeaders = tableHeaderTargetPropertyMap.map((tt) => tt.header);
   const sheetHeaderRow = _findHeaderRow(sheetDataRows, tableHeaders);
@@ -24,13 +23,13 @@ async function extractTableDataFromOdsFile({ odsBuffer, tableHeaderTargetPropert
   const sheetHeaderPropertyMap = _mapSheetHeadersWithProperties(sheetHeaderRow, tableHeaderTargetPropertyMap);
 
   const dataByLine = _transformSheetDataRows(sheetDataRowsBelowHeader, sheetHeaderPropertyMap);
-  if (_.isEmpty(dataByLine)) {
+  if (isEmpty(dataByLine)) {
     throw new UnprocessableEntityError('No data in table');
   }
   return dataByLine;
 }
 
-async function validateOdsHeaders({ odsBuffer, headers }) {
+export async function validateOdsHeaders({ odsBuffer, headers }) {
   const sheetDataRows = await getSheetDataRowsFromOdsBuffer({ odsBuffer });
   const headerRow = _findHeaderRow(sheetDataRows, headers);
   if (!headerRow) {
@@ -38,7 +37,7 @@ async function validateOdsHeaders({ odsBuffer, headers }) {
   }
 }
 
-async function getSheetDataRowsFromOdsBuffer({ odsBuffer, jsonOptions = { header: 'A' } }) {
+export async function getSheetDataRowsFromOdsBuffer({ odsBuffer, jsonOptions = { header: 'A' } }) {
   let document;
   try {
     document = await XLSX.read(odsBuffer, { type: 'buffer', cellDates: true });
@@ -47,40 +46,52 @@ async function getSheetDataRowsFromOdsBuffer({ odsBuffer, jsonOptions = { header
   }
   const sheet = document.Sheets[document.SheetNames[0]];
   const sheetDataRows = XLSX.utils.sheet_to_json(sheet, jsonOptions);
-  if (_.isEmpty(sheetDataRows)) {
+  if (isEmpty(sheetDataRows)) {
     throw new UnprocessableEntityError('Empty data in sheet');
   }
   return sheetDataRows;
 }
 
 function _extractRowsBelowHeader(sheetHeaderRow, sheetDataRows) {
-  const headerIndex = _.findIndex(sheetDataRows, (row) => _.isEqual(row, sheetHeaderRow));
+  const headerIndex = sheetDataRows.findIndex((row) => row === sheetHeaderRow);
   return _takeRightUntilIndex({ array: sheetDataRows, index: headerIndex + 1 });
 }
 
 function _takeRightUntilIndex({ array, index }) {
-  const countElementsToTake = _.size(array) - index;
-  return _.takeRight(array, countElementsToTake);
+  const countElementsToTake = array.length - index;
+  if (countElementsToTake === 0) return [];
+  return array.slice(countElementsToTake * -1);
 }
 
 function _findHeaderRow(sheetDataRows, tableHeaders) {
-  return _.find(sheetDataRows, (row) => _allHeadersValuesAreInTheRow(row, tableHeaders));
+  return sheetDataRows.find((row) => _allHeadersValuesAreInTheRow(row, tableHeaders));
 }
 
 function _allHeadersValuesAreInTheRow(row, headers) {
-  const cellValuesInRow = _.values(row);
+  const cellValuesInRow = Object.values(row);
   const strippedCellValuesInRow = cellValuesInRow.map(_removeNewlineCharacters);
   const strippedHeaders = headers.map(_removeNewlineCharacters);
-  const headersInRow = _.intersection(strippedCellValuesInRow, strippedHeaders);
+  const headersInRow = strippedCellValuesInRow.filter((value) => strippedHeaders.includes(value));
   return headersInRow.length === headers.length;
 }
 
 function _removeNewlineCharacters(header) {
-  return _.isString(header) ? header.replace(/[\n\r]/g, '') : header;
+  const isHeaderIsString = typeof header.valueOf() === 'string';
+  return isHeaderIsString ? header.replace(/[\n\r]/g, '') : header;
 }
 
 function _mapSheetHeadersWithProperties(sheetHeaderRow, tableHeaderTargetPropertyMap) {
-  return _(sheetHeaderRow).map(_addTargetDatas(tableHeaderTargetPropertyMap)).compact().value();
+  return Object.keys(sheetHeaderRow)
+    .map((key) => {
+      const v = sheetHeaderRow[key];
+
+      const targetProperties = _findTargetPropertiesByHeader(tableHeaderTargetPropertyMap, v);
+      if (targetProperties) {
+        const { property: targetProperty, transformFn } = targetProperties;
+        return { columnName: key, targetProperty, transformFn };
+      }
+    })
+    .filter(Boolean);
 }
 
 function _findTargetPropertiesByHeader(tableHeaderTargetPropertyMap, header) {
@@ -89,17 +100,7 @@ function _findTargetPropertiesByHeader(tableHeaderTargetPropertyMap, header) {
     header: _removeNewlineCharacters(obj.header),
   }));
 
-  return _.find(mapWithSanitizedHeaders, { header: _removeNewlineCharacters(header) });
-}
-
-function _addTargetDatas(tableHeaderTargetPropertyMap) {
-  return (header, columnName) => {
-    const targetProperties = _findTargetPropertiesByHeader(tableHeaderTargetPropertyMap, header);
-    if (targetProperties) {
-      const { property: targetProperty, transformFn } = targetProperties;
-      return { columnName, targetProperty, transformFn };
-    }
-  };
+  return mapWithSanitizedHeaders.find((h) => h.header === _removeNewlineCharacters(header));
 }
 
 function _transformSheetDataRows(sheetDataRows, sheetHeaderPropertyMap) {
@@ -111,15 +112,11 @@ function _transformSheetDataRows(sheetDataRows, sheetHeaderPropertyMap) {
 }
 
 function _transformSheetDataRow(sheetDataRow, sheetHeaderPropertyMap) {
-  return _.reduce(
-    sheetHeaderPropertyMap,
-    (target, { columnName, targetProperty, transformFn }) => {
-      const cellValue = sheetDataRow[columnName];
-      target[targetProperty] = transformFn(cellValue);
-      return target;
-    },
-    {},
-  );
+  return sheetHeaderPropertyMap.reduce((target, { columnName, targetProperty, transformFn }) => {
+    const cellValue = sheetDataRow[columnName];
+    target[targetProperty] = transformFn(cellValue);
+    return target;
+  }, {});
 }
 
-export { extractTableDataFromOdsFile, getContentXml, getSheetDataRowsFromOdsBuffer, validateOdsHeaders };
+const isEmpty = (obj) => [Object, Array].includes((obj || {}).constructor) && !Object.entries(obj || {}).length;

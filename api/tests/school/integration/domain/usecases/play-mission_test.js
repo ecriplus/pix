@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { Activity } from '../../../../../src/school/domain/models/Activity.js';
 import { Assessment } from '../../../../../src/school/domain/models/Assessment.js';
 import { usecases } from '../../../../../src/school/domain/usecases/index.js';
@@ -39,14 +37,10 @@ describe('Integration | UseCases | play-mission', function () {
         organizationLearnerId,
       });
 
-      const assessment = {
-        state: Assessment.states.STARTED,
-        type: Assessment.types.PIX1D_MISSION,
-        method: Assessment.methods.PIX1D,
-      };
       const record = await knex('assessments').where({ id: result.id }).first();
-
-      expect(_.pick(record, Object.keys(assessment))).to.deep.equal(assessment);
+      expect(record.state).to.deep.equal(Assessment.states.STARTED);
+      expect(record.type).to.deep.equal(Assessment.types.PIX1D_MISSION);
+      expect(record.method).to.deep.equal(Assessment.methods.PIX1D);
     });
 
     it('should save a new mission assessment', async function () {
@@ -74,13 +68,10 @@ describe('Integration | UseCases | play-mission', function () {
         organizationLearnerId,
       });
 
-      const expectedMissionAssesment = {
-        missionId,
-        organizationLearnerId,
-        assessmentId: result.id,
-      };
       const missionAssesment = await knex('mission-assessments').where({ assessmentId: result.id }).first();
-      expect(_.pick(missionAssesment, Object.keys(expectedMissionAssesment))).to.deep.equal(expectedMissionAssesment);
+      expect(missionAssesment.missionId).to.deep.equal(missionId);
+      expect(missionAssesment.organizationLearnerId).to.deep.equal(organizationLearnerId);
+      expect(missionAssesment.assessmentId).to.deep.equal(result.id);
     });
 
     it('should save an activity', async function () {
@@ -108,13 +99,10 @@ describe('Integration | UseCases | play-mission', function () {
         organizationLearnerId,
       });
 
-      const activity = {
-        level: Activity.levels.VALIDATION,
-        status: Activity.status.STARTED,
-        alternativeVersion: 0,
-      };
       const record = await knex('activities').where({ assessmentId: result.id }).first();
-      expect(_.pick(record, Object.keys(activity))).to.deep.equal(activity);
+      expect(record.level).to.deep.equal(Activity.levels.VALIDATION);
+      expect(record.status).to.deep.equal(Activity.status.STARTED);
+      expect(record.alternativeVersion).to.deep.equal(0);
     });
 
     it('should return the school assessment', async function () {
@@ -137,21 +125,31 @@ describe('Integration | UseCases | play-mission', function () {
       });
       await databaseBuilder.commit();
 
-      const assessment = await usecases.playMission({
+      const {
+        // eslint-disable-next-line no-unused-vars
+        createdAt: _createdAt,
+        // eslint-disable-next-line no-unused-vars
+        updatedAt: _updatedAt,
+        ...assessment
+      } = await usecases.playMission({
         missionId,
         organizationLearnerId,
       });
 
-      const expectedAssessment = domainBuilder.buildSchoolAssessment({
+      const {
+        // eslint-disable-next-line no-unused-vars
+        createdAt: __createdAt,
+        // eslint-disable-next-line no-unused-vars
+        updatedAt: __updatedAt,
+        ...expectedAssessment
+      } = domainBuilder.buildSchoolAssessment({
         missionId,
         organizationLearnerId,
         id: assessment.id,
         state: Assessment.states.STARTED,
       });
 
-      expect(_.omit(assessment, ['createdAt', 'updatedAt'])).to.deep.equal(
-        _.omit(expectedAssessment, ['createdAt', 'updatedAt']),
-      );
+      expect(assessment).to.deep.equal(expectedAssessment);
     });
 
     context('when the organizationLearnerId provided does not exist', function () {

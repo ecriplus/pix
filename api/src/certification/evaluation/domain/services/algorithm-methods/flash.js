@@ -3,37 +3,35 @@
  * @typedef {import('../../../../../evaluation/domain/models/Answer.js').Answer} Answer
  */
 
-import lodash from 'lodash';
-
 import { logger } from '../../../../../shared/infrastructure/utils/logger.js';
-
-const { orderBy, range } = lodash;
 
 const DEFAULT_CAPACITY = 0;
 const START_OF_SAMPLES = -9;
 const STEP_OF_SAMPLES = 18 / 80;
-const END_OF_SAMPLES = 9 + STEP_OF_SAMPLES;
-const samples = range(START_OF_SAMPLES, END_OF_SAMPLES, STEP_OF_SAMPLES);
+const END_OF_SAMPLES = 9;
+const samples = generateSampleArray(START_OF_SAMPLES, END_OF_SAMPLES, STEP_OF_SAMPLES);
 const DEFAULT_PROBABILITY_TO_ANSWER = 1;
 const DEFAULT_ERROR_RATE = 5;
 const ERROR_RATE_CLASS_INTERVAL = 9 / 80;
 
 const MAX_NUMBER_OF_RETURNED_CHALLENGES = 5;
 
-export {
-  getCapacityAndErrorRate,
-  getCapacityAndErrorRateHistory,
-  getChallengesForNonAnsweredSkills,
-  getPossibleNextChallenges,
-  getReward,
-};
+function generateSampleArray(start, end, step) {
+  let i = start;
+  const resultArray = [];
+  while (i < end) {
+    resultArray.push(i);
+    i += step;
+  }
+  return resultArray;
+}
 
 /**
  * @param {object} params
  * @param {CalibratedChallenge[]} params.availableChallenges
  * @param {number} [params.capacity=DEFAULT_CAPACITY]
  */
-function getPossibleNextChallenges({ availableChallenges, capacity = DEFAULT_CAPACITY }) {
+export function getPossibleNextChallenges({ availableChallenges, capacity = DEFAULT_CAPACITY }) {
   const challengesWithReward = availableChallenges.map((challenge) => {
     return {
       challenge,
@@ -55,7 +53,7 @@ function getPossibleNextChallenges({ availableChallenges, capacity = DEFAULT_CAP
  * @param {number} [params.capacity=DEFAULT_CAPACITY]
  * @param {number} params.variationPercent
  */
-function getCapacityAndErrorRate({ allAnswers, challenges, capacity = DEFAULT_CAPACITY, variationPercent }) {
+export function getCapacityAndErrorRate({ allAnswers, challenges, capacity = DEFAULT_CAPACITY, variationPercent }) {
   if (challenges.length === 0 || allAnswers.length === 0) {
     return { capacity, errorRate: DEFAULT_ERROR_RATE };
   }
@@ -77,7 +75,12 @@ function getCapacityAndErrorRate({ allAnswers, challenges, capacity = DEFAULT_CA
  * @param {number} [params.capacity=DEFAULT_CAPACITY]
  * @param {number} params.variationPercent
  */
-function getCapacityAndErrorRateHistory({ allAnswers, challenges, capacity = DEFAULT_CAPACITY, variationPercent }) {
+export function getCapacityAndErrorRateHistory({
+  allAnswers,
+  challenges,
+  capacity = DEFAULT_CAPACITY,
+  variationPercent,
+}) {
   let latestCapacity = capacity;
 
   let likelihood = samples.map(() => DEFAULT_PROBABILITY_TO_ANSWER);
@@ -185,7 +188,8 @@ function _computeNormalizedPosteriori(likelihood, normalizedGaussian) {
  * @returns {number}
  */
 function _computeCapacity(previousCapacity, variationPercent, normalizedPosteriori) {
-  const rawNextCapacity = lodash.sum(samples.map((sample, index) => sample * normalizedPosteriori[index]));
+  const rawCapacities = samples.map((sample, index) => sample * normalizedPosteriori[index]);
+  const rawNextCapacity = rawCapacities.reduce((accumulator, capacity) => accumulator + capacity, 0);
 
   return variationPercent
     ? _limitCapacityVariation(previousCapacity, rawNextCapacity, variationPercent)
@@ -199,9 +203,8 @@ function _computeCapacity(previousCapacity, variationPercent, normalizedPosterio
  * @returns {number}
  */
 function _computeCorrectedErrorRate(latestCapacity, normalizedPosteriori) {
-  const rawErrorRate = lodash.sum(
-    samples.map((sample, index) => normalizedPosteriori[index] * (sample - latestCapacity) ** 2),
-  );
+  const errorRates = samples.map((sample, index) => normalizedPosteriori[index] * (sample - latestCapacity) ** 2);
+  const rawErrorRate = errorRates.reduce((accumulator, rate) => accumulator + rate, 0);
 
   // oxfmt-ignore
   return Math.sqrt(rawErrorRate - (ERROR_RATE_CLASS_INTERVAL ** 2) / 12.0);
@@ -213,7 +216,7 @@ function _computeCorrectedErrorRate(latestCapacity, normalizedPosteriori) {
  * @param {Answer[]} params.allAnswers
  * @param {CalibratedChallenge[]} params.challenges
  */
-function getChallengesForNonAnsweredSkills({ allAnswers, challenges }) {
+export function getChallengesForNonAnsweredSkills({ allAnswers, challenges }) {
   const alreadyAnsweredSkillsIds = allAnswers
     .map((answer) => _findChallengeForAnswer(challenges, answer))
     .map((challenge) => challenge.skill.id);
@@ -247,24 +250,14 @@ function _limitCapacityVariation(previousCapacity, nextCapacity, variationPercen
  * @param {number} capacity
  * @returns {CalibratedChallenge[]}
  */
-function _findBestPossibleChallenges(challengesWithReward, capacity) {
+function _findBestPossibleChallenges(challengesWithReward) {
   /**
    * @param {{challenge: CalibratedChallenge, reward: number}} challengeWithReward
    * @returns {boolean}
    */
-  const canChallengeBeSuccessful = (challengeWithReward) => {
-    const { challenge } = challengeWithReward;
-    const minimumSuccessRate = 0;
-    const successProbability = _getProbability(capacity, challenge.discriminant, challenge.difficulty);
-
-    return successProbability >= minimumSuccessRate;
-  };
-
-  const orderedChallengesWithReward = orderBy(
-    challengesWithReward,
-    [canChallengeBeSuccessful, 'reward'],
-    ['desc', 'desc'],
-  );
+  const orderedChallengesWithReward = challengesWithReward.sort((a, b) => {
+    return a.reward > b.reward ? -1 : a.reward < b.reward ? 1 : 0;
+  });
 
   const possibleChallengesWithReward = orderedChallengesWithReward.slice(0, MAX_NUMBER_OF_RETURNED_CHALLENGES);
 
@@ -291,7 +284,7 @@ function _findChallengeForAnswer(challenges, answer) {
  * @param {number} params.discriminant
  * @param {number} params.difficulty
  */
-function getReward({ capacity, discriminant, difficulty }) {
+export function getReward({ capacity, discriminant, difficulty }) {
   const probability = _getProbability(capacity, discriminant, difficulty);
   return probability * (1 - probability) * Math.pow(discriminant, 2);
 }
@@ -328,6 +321,6 @@ function _getGaussianValue({ gaussianMean, value }) {
  * @returns {number[]}
  */
 function _normalizeDistribution(data) {
-  const sum = lodash.sum(data);
+  const sum = data.reduce((s, d) => s + d, 0);
   return data.map((value) => value / sum);
 }
