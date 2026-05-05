@@ -17,7 +17,7 @@ export async function findByCertificationCourseId(certificationCourseId) {
 }
 
 export async function getByAssessmentId(assessmentId) {
-  const data = await baseQuery().where('assessments.id', '=', assessmentId).forUpdate('assessments').first();
+  const data = await baseQuery().where('assessments.id', '=', assessmentId).first();
 
   if (!data) {
     throw new NotFoundError();

@@ -156,48 +156,6 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
         expect(error).to.be.instanceOf(NotFoundError);
       });
     });
-
-    it('should lock the assessment', async function () {
-      // given
-      const certificationCenter = databaseBuilder.factory.buildCertificationCenter({
-        id: 99,
-      });
-      const session = databaseBuilder.factory.buildSession({
-        certificationCenterId: certificationCenter.id,
-      });
-      const version = databaseBuilder.factory.buildCertificationVersion();
-      const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate({
-        sessionId: session.id,
-        accessibilityAdjustmentNeeded: false,
-      });
-      const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
-        sessionId: session.id,
-        version: AlgorithmEngineVersion.V3,
-        versionId: version.id,
-        userId: certificationCandidate.userId,
-        candidateId: certificationCandidate.id,
-      });
-
-      const originalAssessment = databaseBuilder.factory.buildAssessment({
-        certificationCourseId: certificationCourse.id,
-        type: Assessment.types.CERTIFICATION,
-      });
-
-      await databaseBuilder.commit();
-
-      // when
-      const error = await catchErr(DomainTransaction.execute)(async () => {
-        await assessmentSheetRepository.getByAssessmentId(originalAssessment.id);
-        // mimick a concurrent call on the same row
-        return knex('assessments').where({ id: originalAssessment.id }).first().forUpdate().timeout(100, {
-          cancel: true,
-        });
-      });
-
-      // then
-      expect(error).to.be.instanceOf(Error);
-      expect(error.message).to.equal('Defined query timeout of 100ms exceeded when running query.');
-    });
   });
 
   describe('#update', function () {
