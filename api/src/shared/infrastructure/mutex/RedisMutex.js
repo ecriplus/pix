@@ -16,6 +16,7 @@ class RedisMutex {
    * @returns { Promise<boolean> } true : successful lock
    */
   async lock(resourceId, ownerId, lockExpirationDelay = config.timeouts.server - 5_000) {
+    // todo change me
     return (await this._client.set(resourceId, ownerId, 'PX', lockExpirationDelay, 'NX')) === 'OK';
   }
 

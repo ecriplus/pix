@@ -5,8 +5,22 @@ export default class AssessmentsRoute extends Route {
   @service intl;
   @service store;
 
-  model(params) {
-    return this.store.findRecord('assessment', params.assessment_id);
+  async model(params) {
+    return this.fetchAssessment(params.assessment_id, 1);
+  }
+
+  async fetchAssessment(id, retryCounter) {
+    try {
+      return await this.store.findRecord('assessment', id);
+    } catch (error) {
+      const isLocked = error.errors?.some((e) => e.status === '423');
+
+      if (isLocked && retryCounter < 5) {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        return this.fetchAssessment(id, retryCounter + 1);
+      }
+      throw error;
+    }
   }
 
   afterModel(model) {
