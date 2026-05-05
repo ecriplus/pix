@@ -11,6 +11,9 @@
  * @typedef {import ('../../../../shared/domain/errors.js').AssessmentLackOfChallengesError} AssessmentLackOfChallengesError
  * @typedef {import ('../../../../shared/domain/models/Challenge.js').Challenge} Challenge
  */
+import { getRequestId } from '../../../../shared/infrastructure/execution-context-manager.js';
+import { redisMutex } from '../../../../shared/infrastructure/mutex/RedisMutex.js';
+import { NextChallengeAlreadyComputingError } from '../../domain/errors.js';
 import { usecases } from '../../domain/usecases/index.js';
 
 /**
@@ -50,7 +53,16 @@ export async function rescoreV2Certification({ event }) {
  * @throws {AssessmentLackOfChallengesError} no eligible challenges remaining before reaching maximum assessment length
  */
 export async function selectNextCertificationChallenge({ assessmentId }) {
-  return usecases.getNextChallenge({ assessmentId });
+  const owner = getRequestId();
+  const locked = await redisMutex.lock(assessmentId.toString(), owner);
+  if (!locked) {
+    throw new NextChallengeAlreadyComputingError();
+  }
+  try {
+    return await usecases.getNextChallenge({ assessmentId });
+  } finally {
+    await redisMutex.release(assessmentId.toString(), owner);
+  }
 }
 
 /**

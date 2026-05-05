@@ -1,5 +1,6 @@
 import sinon from 'sinon';
 
+import { NextChallengeAlreadyComputingError } from '../../../../src/certification/evaluation/domain/errors.js';
 import {
   SessionAlreadyFinalizedError,
   SessionWithoutStartedCertificationError,
@@ -173,6 +174,18 @@ describe('Integration | API | Controller Error', function () {
       const response = await server.requestObject(request);
 
       expect(response.statusCode).to.equal(PRECONDITION_FAILED);
+    });
+  });
+
+  context('423 Locked', function () {
+    const LOCKED_ERROR = 423;
+
+    it('responds Locked when a NextChallengeAlreadyComputingError occurs', async function () {
+      routeHandler.throws(new NextChallengeAlreadyComputingError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(LOCKED_ERROR);
+      expect(responseDetail(response)).to.equal('Une nouvelle épreuve est en cours de calcul');
     });
   });
 
