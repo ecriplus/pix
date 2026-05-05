@@ -10,7 +10,5 @@ export class ScriptWithJob extends Script {
     this.onFinished = async () => {
       await JobClient.instance.stop();
     };
-
-    return super.handle(...arguments);
   }
 }
