@@ -1,5 +1,37 @@
 # Pix Changelog
 
+# [5.401.0](https://github.com/1024pix/pix/compare/v5.400.0...v5.401.0) (2026-05-05)
+
+### :rocket: Amélioration
+
+- [#16055](https://github.com/1024pix/pix/pull/16055) Afficher l'onglet Réseau d'une organisation pour tous les rôles (pix-22550) 
+- [#15983](https://github.com/1024pix/pix/pull/15983) Ajout du sélecteur de langue sur pix.org en entrée de certification (PIX-22425). 
+- [#16084](https://github.com/1024pix/pix/pull/16084) Enlever la mention bêta sur les contenus formatifs de type Modules (PIX-22533) 
+- [#16095](https://github.com/1024pix/pix/pull/16095) Lier les compétences et domaines dans le retour de la route /courses (PIX-22635) 
+- [#16081](https://github.com/1024pix/pix/pull/16081) MDX-57 retrait POI 
+- [#16032](https://github.com/1024pix/pix/pull/16032) module Visio_NOV retours relectures eval pedago edito  
+- [#16066](https://github.com/1024pix/pix/pull/16066) obsolescence-schema-definitif 
+
+### :building_construction: Tech
+
+- [#16016](https://github.com/1024pix/pix/pull/16016) :package: Mise à jour de la bibliothèque `sheetjs` en version 0.20.3 
+- [#16067](https://github.com/1024pix/pix/pull/16067) Ajouter un tests e2e qui couvre le cas de la dissociation d'un learner lors de l'import SIECLE/FREGATA (PIX-22596). 
+- [#16060](https://github.com/1024pix/pix/pull/16060) Deplacer le contexte des "stages" dans le scope prescription 
+- [#16075](https://github.com/1024pix/pix/pull/16075) Supprimer le lien erroné certificationCenterMemberships du sérialiseur non-admin (PIX-22599) 
+
+### :arrow_up: Montée de version
+
+- [#16079](https://github.com/1024pix/pix/pull/16079) Update dependency @1024pix/pix-ui to ^60.10.1 (certif) 
+- [#16080](https://github.com/1024pix/pix/pull/16080) Update dependency @1024pix/pix-ui to ^60.10.1 (junior) 
+- [#16086](https://github.com/1024pix/pix/pull/16086) Update dependency @1024pix/pix-ui to ^60.10.1 (mon-pix) 
+- [#16090](https://github.com/1024pix/pix/pull/16090) Update dependency @datadog/datadog-api-client to v1.57.0 (api) 
+- [#16026](https://github.com/1024pix/pix/pull/16026) Update dependency axios to v1.15.1 (api) 
+- [#16087](https://github.com/1024pix/pix/pull/16087) Update dependency axios to v1.15.2 (api) 
+- [#16102](https://github.com/1024pix/pix/pull/16102) Update dependency eslint-plugin-ember to v13 (junior) 
+- [#16105](https://github.com/1024pix/pix/pull/16105) Update dependency eslint-plugin-ember to v13 (orga) 
+- [#16092](https://github.com/1024pix/pix/pull/16092) Update dependency oxfmt to ^0.47.0 (api) 
+- [#16089](https://github.com/1024pix/pix/pull/16089) Update slackapi/slack-github-action action to v3.0.2 (workflows)
+
 # [5.400.0](https://github.com/1024pix/pix/compare/v5.399.0...v5.400.0) (2026-05-04)
 
 ### :rocket: Amélioration
