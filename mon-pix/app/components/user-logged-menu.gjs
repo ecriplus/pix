@@ -10,7 +10,46 @@ import t from 'ember-intl/helpers/t';
 import onKey from 'ember-keyboard/modifiers/on-key';
 
 export default class UserLoggedMenu extends Component {
+  @service currentUser;
+
+  @tracked canDisplayMenu = false;
+
+  get displayedIdentifier() {
+    return this.currentUser.user.email ? this.currentUser.user.email : this.currentUser.user.username;
+  }
+
+  get showMyTestsLink() {
+    return this.currentUser.user.hasAssessmentParticipations;
+  }
+
+  @action
+  toggleUserMenu() {
+    this.canDisplayMenu = !this.canDisplayMenu;
+  }
+
+  @action
+  closeMenu() {
+    this.canDisplayMenu = false;
+  }
+
+  @action
+  handleTab() {
+    /* `setTimeout(..., 0)` is used to wait the next browser rendering and get the new focused element */
+    setTimeout(() => {
+      if (!document.activeElement.classList.contains('logged-user-menu__link')) {
+        this.closeMenu();
+      }
+    }, 0);
+  }
+
+  @action
+  closeMenuOnPointerClick(event) {
+    if (!event.pointerType || !event.target.closest('.logged-user-menu__link')) return;
+    this.closeMenu();
+  }
+
   <template>
+    {{! template-lint-disable no-invalid-interactive }}
     <div class="logged-user-details">
       {{#if this.currentUser.user}}
         <button
@@ -31,6 +70,7 @@ export default class UserLoggedMenu extends Component {
             {{onClickOutside this.closeMenu}}
             {{onKey "Escape" this.closeMenu}}
             {{onKey "Tab" this.handleTab}}
+            {{on "click" this.closeMenuOnPointerClick}}
           >
             <div class="logged-user-menu__details">
               <div class="logged-user-menu-details__fullname">{{this.currentUser.user.fullName}}</div>
@@ -75,35 +115,4 @@ export default class UserLoggedMenu extends Component {
       {{/if}}
     </div>
   </template>
-  @service currentUser;
-
-  @tracked canDisplayMenu = false;
-
-  get displayedIdentifier() {
-    return this.currentUser.user.email ? this.currentUser.user.email : this.currentUser.user.username;
-  }
-
-  get showMyTestsLink() {
-    return this.currentUser.user.hasAssessmentParticipations;
-  }
-
-  @action
-  toggleUserMenu() {
-    this.canDisplayMenu = !this.canDisplayMenu;
-  }
-
-  @action
-  closeMenu() {
-    this.canDisplayMenu = false;
-  }
-
-  @action
-  handleTab() {
-    /* `setTimeout(..., 0)` is used to wait the next browser rendering and get the new focused element */
-    setTimeout(() => {
-      if (!document.activeElement.classList.contains('logged-user-menu__link')) {
-        this.closeMenu();
-      }
-    }, 0);
-  }
 }
