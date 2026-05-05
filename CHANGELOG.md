@@ -1,5 +1,11 @@
 # Pix Changelog
 
+## [5.401.2](https://github.com/1024pix/pix/compare/v5.401.1...v5.401.2) (2026-05-05)
+
+### :bug: Correction
+
+- [#16114](https://github.com/1024pix/pix/pull/16114) Script de migration pgboss v9 vers v12
+
 ## [5.401.1](https://github.com/1024pix/pix/compare/v5.401.0...v5.401.1) (2026-05-05)
 
 ### :building_construction: Tech
