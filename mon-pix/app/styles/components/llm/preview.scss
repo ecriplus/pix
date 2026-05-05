@@ -18,8 +18,15 @@
     border-radius: 4px;
   }
 
-  &__elements-id-tag {
+  &__elements-id-tag, &__grains-title-tag {
     margin: var(--pix-spacing-2x) 0;
+  }
+
+  &__grains-title-tag {
+    // Due to module-preview-passage__content class, all children elements are centered
+    // We are making an exception for this class by adding a margin-right
+    // see https://stackoverflow.com/a/36102124 for further explanations
+    margin-right: auto;
   }
 }
 

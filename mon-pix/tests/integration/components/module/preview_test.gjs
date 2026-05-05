@@ -1,6 +1,7 @@
 import { render, within } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
-import { click } from '@ember/test-helpers';
+// eslint-disable-next-line no-restricted-imports
+import { click, find } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import ModulixPreview from 'mon-pix/components/module/preview';
 import { module, test } from 'qunit';
@@ -204,15 +205,68 @@ module('Integration | Component | Module | Preview', function (hooks) {
       .exists();
   });
 
-  test('should display a display grains title button', async function (assert) {
-    // given
-    //  when
-    const screen = await render(<template><ModulixPreview /></template>);
+  module('grains title button', function () {
+    test('should display a display grains title button', async function (assert) {
+      // given
+      // when
+      const screen = await render(<template><ModulixPreview /></template>);
 
-    // then
-    const radioGroup = screen.getByRole('radiogroup', { name: t('pages.modulix.preview.grains-title-button.label') });
-    assert.dom(radioGroup).exists();
-    assert.dom(within(radioGroup).getByRole('radio', { name: t('common.yes') })).exists();
-    assert.dom(within(radioGroup).getByRole('radio', { name: t('common.no') })).exists();
+      // then
+      const radioGroup = screen.getByRole('radiogroup', { name: t('pages.modulix.preview.grains-title-button.label') });
+      assert.dom(radioGroup).exists();
+      assert.dom(within(radioGroup).getByRole('radio', { name: t('common.yes') })).exists();
+      assert.dom(within(radioGroup).getByRole('radio', { name: t('common.no') })).exists();
+    });
+
+    module('when clicking on grain title button', function () {
+      test('should display all grain title in page', async function (assert) {
+        // given
+        const firstSectionGrain = [
+          { id: '4198b9b7-75a3-4bf2-8f1d-71f1f4f408bd', title: 'grain1', components: [] },
+          { id: 'e845cece-aea3-4d61-885d-abf00765e784', title: 'grain2', components: [] },
+        ];
+        const lastSectionGrain = [{ id: '268fbbcf-c01b-4ae5-af0c-79d4654484c7', title: 'grain3', components: [] }];
+        const moduleData = {
+          title: 'Existing module',
+          sections: [
+            { type: 'question-yourself', grains: firstSectionGrain },
+            { type: 'practise', grains: lastSectionGrain },
+          ],
+        };
+
+        // when
+        const screen = await render(<template><ModulixPreview @module={{moduleData}} /></template>);
+
+        const grainsTitleRadioGroup = screen.getByRole('radiogroup', {
+          name: t('pages.modulix.preview.grains-title-button.label'),
+        });
+        await click(within(grainsTitleRadioGroup).getByRole('radio', { name: t('common.yes') }));
+
+        // then
+        const moduleContent = find('.module-preview-passage__content');
+
+        assert
+          .dom(
+            within(moduleContent).getByText(
+              t('pages.modulix.preview.grain-select.grain-label', { index: 0, title: firstSectionGrain[0].title }),
+            ),
+          )
+          .exists();
+        assert
+          .dom(
+            within(moduleContent).getByText(
+              t('pages.modulix.preview.grain-select.grain-label', { index: 1, title: firstSectionGrain[1].title }),
+            ),
+          )
+          .exists();
+        assert
+          .dom(
+            within(moduleContent).getByText(
+              t('pages.modulix.preview.grain-select.grain-label', { index: 2, title: lastSectionGrain[0].title }),
+            ),
+          )
+          .exists();
+      });
+    });
   });
 });

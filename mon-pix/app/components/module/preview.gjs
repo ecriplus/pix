@@ -2,6 +2,7 @@ import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixSegmentedControl from '@1024pix/pix-ui/components/pix-segmented-control';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
+import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
@@ -188,6 +189,11 @@ export default class ModulixPreview extends Component {
   }
 
   @action
+  getModuleGrainIndex(grainId) {
+    return this.moduleGrains.findIndex((grain) => grain.id === grainId);
+  }
+
+  @action
   toggleModuleCodeEditor() {
     this.moduleCodeDisplayed = !this.moduleCodeDisplayed;
   }
@@ -273,6 +279,15 @@ export default class ModulixPreview extends Component {
               <ModulixSectionTitle @sectionType={{section.type}} />
             {{/if}}
             {{#each section.grains as |grain|}}
+              {{#if this.modulixPreviewMode.isPreviewAndGrainsTitleButtonEnabled}}
+                <PixTag @color="primary" class="modulix-preview__grains-title-tag">
+                  {{t
+                    "pages.modulix.preview.grain-select.grain-label"
+                    index=(this.getModuleGrainIndex grain.id)
+                    title=grain.title
+                  }}
+                </PixTag>
+              {{/if}}
               <ModulixGrain
                 @grain={{grain}}
                 @onElementRetry={{this.noop}}
