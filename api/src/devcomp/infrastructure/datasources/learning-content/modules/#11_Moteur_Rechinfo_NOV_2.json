@@ -247,7 +247,7 @@
               "element": {
                 "id": "61def0e1-524c-4f36-bd45-276758efcb2e",
                 "type": "qcm",
-                "instruction": "<p>À votre avis, pourquoi certaines pages web sont-elles mises en avant plutôt que d’autres ?<br> (3 bonnes réponses à séléctionner)&nbsp;</p>",
+                "instruction": "<p>À votre avis, pourquoi certaines pages web sont-elles mises en avant plutôt que d’autres ?<br> (3 bonnes réponses à sélectionner)</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
@@ -264,7 +264,7 @@
                   },
                   {
                     "id": "4",
-                    "content": "<p>Elles sont plus récentes ou mises à jour récemment.</p>"
+                    "content": "<p>Elles sont plus récentes ou ont été mises à jour récemment.</p>"
                   },
                   {
                     "id": "5",
