@@ -1,4 +1,4 @@
-import { render } from '@1024pix/ember-testing-library';
+import { render, within } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
@@ -194,8 +194,25 @@ module('Integration | Component | Module | Preview', function (hooks) {
     const screen = await render(<template><ModulixPreview /></template>);
 
     // then
-    assert.dom(screen.getByRole('radiogroup', { name: t('pages.modulix.preview.elements-id-button.label') })).exists();
-    assert.dom(screen.getByRole('radio', { name: t('pages.modulix.preview.elements-id-button.choices.yes') })).exists();
-    assert.dom(screen.getByRole('radio', { name: t('pages.modulix.preview.elements-id-button.choices.no') })).exists();
+    const radioGroup = screen.getByRole('radiogroup', { name: t('pages.modulix.preview.elements-id-button.label') });
+    assert.dom(radioGroup).exists();
+    assert
+      .dom(within(radioGroup).getByRole('radio', { name: t('pages.modulix.preview.elements-id-button.choices.yes') }))
+      .exists();
+    assert
+      .dom(within(radioGroup).getByRole('radio', { name: t('pages.modulix.preview.elements-id-button.choices.no') }))
+      .exists();
+  });
+
+  test('should display a display grains title button', async function (assert) {
+    // given
+    //  when
+    const screen = await render(<template><ModulixPreview /></template>);
+
+    // then
+    const radioGroup = screen.getByRole('radiogroup', { name: t('pages.modulix.preview.grains-title-button.label') });
+    assert.dom(radioGroup).exists();
+    assert.dom(within(radioGroup).getByRole('radio', { name: t('common.yes') })).exists();
+    assert.dom(within(radioGroup).getByRole('radio', { name: t('common.no') })).exists();
   });
 });

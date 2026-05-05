@@ -24,6 +24,16 @@
 }
 
 .modulix-preview-panel {
+  &__metadata-display-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-2x);
+  }
+
+  &__grains-title-control {
+    margin-top: var(--pix-spacing-2x);
+  }
+
   &__grain-form {
     display: flex;
     flex-direction: column;
