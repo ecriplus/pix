@@ -3,12 +3,13 @@ import { expect } from '../../../../test-helper.js';
 import { wait } from '../../../../tooling/test-utils/wait.js';
 
 describe('Shared | Integration | Infrastructure | Mutex | RedisMutex', function () {
+  let lockExpirationDelay = 5_000;
   describe('#lock', function () {
     context('same owner', function () {
       it('should successfully lock resource for the first time, but fail the second time because resource is already locked', async function () {
         // when
-        const isLockSuccess_firstCall = await redisMutex.lock('someResourceId', 'processA');
-        const isLockSuccess_secondCall = await redisMutex.lock('someResourceId', 'processA');
+        const isLockSuccess_firstCall = await redisMutex.lock('someResourceId', 'processA', lockExpirationDelay);
+        const isLockSuccess_secondCall = await redisMutex.lock('someResourceId', 'processA', lockExpirationDelay);
 
         // then
         expect(isLockSuccess_firstCall).to.be.true;
@@ -19,8 +20,8 @@ describe('Shared | Integration | Infrastructure | Mutex | RedisMutex', function 
     context('different owner', function () {
       it('should successfully lock resource for the first time, but fail the second time because resource is already locked', async function () {
         // when
-        const isLockSuccess_firstCall = await redisMutex.lock('someResourceId', 'processA');
-        const isLockSuccess_secondCall = await redisMutex.lock('someResourceId', 'processB');
+        const isLockSuccess_firstCall = await redisMutex.lock('someResourceId', 'processA', lockExpirationDelay);
+        const isLockSuccess_secondCall = await redisMutex.lock('someResourceId', 'processB', lockExpirationDelay);
 
         // then
         expect(isLockSuccess_firstCall).to.be.true;
@@ -29,7 +30,7 @@ describe('Shared | Integration | Infrastructure | Mutex | RedisMutex', function 
     });
 
     it('should release automatically after expiration delay', async function () {
-      const lockExpirationDelay = 250;
+      lockExpirationDelay = 250;
       await redisMutex.lock('someResourceId', 'ownerId', lockExpirationDelay);
 
       // when
@@ -47,9 +48,9 @@ describe('Shared | Integration | Infrastructure | Mutex | RedisMutex', function 
 
     it('only allows one process to take the lock', async function () {
       const results = await Promise.all([
-        redisMutex.lock('resource', 'A'),
-        redisMutex.lock('resource', 'B'),
-        redisMutex.lock('resource', 'C'),
+        redisMutex.lock('resource', 'A', lockExpirationDelay),
+        redisMutex.lock('resource', 'B', lockExpirationDelay),
+        redisMutex.lock('resource', 'C', lockExpirationDelay),
       ]);
 
       const successCount = results.filter(Boolean).length;
@@ -62,7 +63,7 @@ describe('Shared | Integration | Infrastructure | Mutex | RedisMutex', function 
     context('same owner', function () {
       it('should successfully release the resource for the first time, but fail the second time because resource is already released', async function () {
         // given
-        await redisMutex.lock('someResourceId', 'ownerId');
+        await redisMutex.lock('someResourceId', 'ownerId', lockExpirationDelay);
 
         // when
         const isReleaseSuccess_firstCall = await redisMutex.release('someResourceId', 'ownerId');
@@ -77,7 +78,7 @@ describe('Shared | Integration | Infrastructure | Mutex | RedisMutex', function 
     context('different owner', function () {
       it('should always fail to release the resource because owner is not the right one', async function () {
         // given
-        await redisMutex.lock('someResourceId', 'ownerA');
+        await redisMutex.lock('someResourceId', 'ownerA', lockExpirationDelay);
 
         // when
         const isReleaseSuccess = await redisMutex.release('someResourceId', 'ownerB');
@@ -96,11 +97,11 @@ describe('Shared | Integration | Infrastructure | Mutex | RedisMutex', function 
 
   describe('lock and release scenarios', function () {
     it('should allow locking again after release', async function () {
-      await redisMutex.lock('someResourceId', 'ownerA');
+      await redisMutex.lock('someResourceId', 'ownerA', lockExpirationDelay);
 
       await redisMutex.release('someResourceId', 'ownerA');
 
-      const isLockSuccess = await redisMutex.lock('someResourceId', 'ownerB');
+      const isLockSuccess = await redisMutex.lock('someResourceId', 'ownerB', lockExpirationDelay);
 
       expect(isLockSuccess).to.be.true;
     });
@@ -108,7 +109,7 @@ describe('Shared | Integration | Infrastructure | Mutex | RedisMutex', function 
     it('should not release lock if ownership changed after expiration', async function () {
       await redisMutex.lock('someResourceId', 'ownerA', 100);
       await wait(120);
-      await redisMutex.lock('someResourceId', 'ownerB');
+      await redisMutex.lock('someResourceId', 'ownerB', lockExpirationDelay);
 
       const result = await redisMutex.release('someResourceId', 'ownerA');
 

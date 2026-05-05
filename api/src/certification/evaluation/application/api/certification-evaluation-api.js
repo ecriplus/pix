@@ -11,11 +11,13 @@
  * @typedef {import ('../../../../shared/domain/errors.js').AssessmentLackOfChallengesError} AssessmentLackOfChallengesError
  * @typedef {import ('../../../../shared/domain/models/Challenge.js').Challenge} Challenge
  */
+import { config } from '../../../../shared/config.js';
 import { getRequestId } from '../../../../shared/infrastructure/execution-context-manager.js';
 import { redisMutex } from '../../../../shared/infrastructure/mutex/RedisMutex.js';
 import { NextChallengeAlreadyComputingError } from '../../domain/errors.js';
 import { usecases } from '../../domain/usecases/index.js';
 
+const GET_NEXT_LOCK_DELAY = config.timeouts.server ? Math.max(config.timeouts.server - 5_000, 5_000) : 5_000;
 /**
  * @function
  * @name rescoreV3Certification
@@ -54,7 +56,7 @@ export async function rescoreV2Certification({ event }) {
  */
 export async function selectNextCertificationChallenge({ assessmentId }) {
   const owner = getRequestId();
-  const locked = await redisMutex.lock(assessmentId.toString(), owner);
+  const locked = await redisMutex.lock(assessmentId.toString(), owner, GET_NEXT_LOCK_DELAY);
   if (!locked) {
     throw new NextChallengeAlreadyComputingError();
   }
