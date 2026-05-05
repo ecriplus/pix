@@ -423,7 +423,7 @@
                         },
                         {
                           "id": "2",
-                          "content": "<p>Ali<br></p>",
+                          "content": "<p>Ali</p>",
                           "feedback": {
                             "diagnosis": "<p>Eh non, c’est Diane.&nbsp;</p><p>Pendant une visioconférence, les participants sont visibles à l’écran. Souvent, un symbole ou un encadré <strong>indique qui est en train de parler</strong>&nbsp;:c’est utile quand leur caméra est fermée, et qu’on ne les voit pas.</p>"
                           }
@@ -437,7 +437,7 @@
                         },
                         {
                           "id": "4",
-                          "content": "<p>Je ne sais pas.<br></p>",
+                          "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
                             "diagnosis": "<p>C’est Diane.&nbsp;</p><p>Pendant une visioconférence, les participants sont visibles à l’écran. Souvent, un symbole ou un encadré <strong>indique qui est en train de parler </strong>&nbsp;:c’est utile quand leur caméra est fermée, et qu’on ne les voit pas.</p>"
                           }
