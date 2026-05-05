@@ -129,4 +129,11 @@ export default {
     devDefaultValues: { test: false, reviewApp: false },
     tags: ['team-devcomp', 'pix-api', 'backend'],
   },
+  newPixAppLegalDocumentsVersioning: {
+    type: 'boolean',
+    description: 'Enable new pix app legal documents versioning for pix',
+    defaultValue: false,
+    devDefaultValues: { test: false, reviewApp: false },
+    tags: ['team-acces', 'pix-api', 'backend'],
+  },
 };
