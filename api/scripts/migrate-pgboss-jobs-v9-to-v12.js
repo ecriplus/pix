@@ -22,6 +22,8 @@ export class MigratePgbossJobsV9toV12Script extends ScriptWithJob {
   }
 
   async handle({ options, logger }) {
+    await super.handle({ options, logger });
+
     const nonCompletedJobs = await knex
       .select()
       .from(options.jobTableName)
