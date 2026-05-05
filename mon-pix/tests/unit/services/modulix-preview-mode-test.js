@@ -47,6 +47,16 @@ module('Unit | Service | modulix-preview-mode', function (hooks) {
     });
   });
 
+  module('isGrainsTitleButtonEnabled', function () {
+    test('it should be disabled by default', function (assert) {
+      // when
+      const previewMode = this.owner.lookup('service:modulix-preview-mode');
+
+      // then
+      assert.false(previewMode.isGrainsTitleButtonEnabled);
+    });
+  });
+
   module('toggleElementIdButton', function () {
     test('it switches elements id button state', function (assert) {
       // given
