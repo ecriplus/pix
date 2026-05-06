@@ -62,11 +62,13 @@ describe('Profile | Integration | Domain | get-shared-attestations-user-detail-b
       expect(results[0]).to.be.instanceOf(AttestationUserDetail);
       expect(results).to.deep.equal([
         buildAttestationUserDetail({
+          id: firstProfileReward.id,
           attestationKey: attestation.key,
           obtainedAt: firstProfileReward.createdAt,
           userId: firstUser.id,
         }),
         buildAttestationUserDetail({
+          id: secondProfileReward.id,
           attestationKey: attestation.key,
           obtainedAt: secondProfileReward.createdAt,
           userId: secondUser.id,

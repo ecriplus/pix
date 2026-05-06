@@ -7,3 +7,7 @@ export const save = async (userId, rewardId) => {
 export const getByUserId = async (userId) => {
   return usecases.getProfileRewardsByUserId({ userId });
 };
+
+export const findByUserIdAndRewardId = async ({ rewardId, userId }) => {
+  return usecases.findByUserIdAndRewardId({ rewardId, userId });
+};

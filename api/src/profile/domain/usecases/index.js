@@ -31,6 +31,7 @@ const dependencies = {
   attestationStorage,
 };
 
+import { findByUserIdAndRewardId } from './find-by-user-id-and-reward-id.js';
 import { getAllAttestations } from './get-all-attestations.js';
 import { getAttestationDataForUsers } from './get-attestation-data-for-users.js';
 import { getAttestationDetails } from './get-attestation-details.js';
@@ -55,6 +56,7 @@ const usecasesWithoutInjectedDependencies = {
   rewardUser,
   shareProfileReward,
   getByAttestationKey,
+  findByUserIdAndRewardId,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);

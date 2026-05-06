@@ -24,6 +24,7 @@ export async function getSharedAttestationsUserDetailByOrganizationId({
 
   return profileRewards.map((profileReward) => {
     return new AttestationUserDetail({
+      id: profileReward.id,
       attestationKey,
       obtainedAt: profileReward.createdAt,
       userId: profileReward.userId,
