@@ -639,6 +639,7 @@
             "table": {
               "actions": {
                 "delete": "Delete version",
+                "edit": "Edit version",
                 "view": "View version details"
               },
               "caption": "Versions list in descending order",

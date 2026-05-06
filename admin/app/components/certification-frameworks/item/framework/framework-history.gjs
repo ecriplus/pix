@@ -95,6 +95,12 @@ export default class FrameworkHistory extends Component {
                 @iconName="eye"
               />
               <PixIconButton
+                @triggerAction={{this.editVersion}}
+                @ariaLabel={{t "components.complementary-certifications.item.framework.history.table.actions.edit"}}
+                @iconName="edit"
+                @isDisabled={{not (eq version.status "DRAFT")}}
+              />
+              <PixIconButton
                 @triggerAction={{this.deleteVersion}}
                 @ariaLabel={{t "components.complementary-certifications.item.framework.history.table.actions.delete"}}
                 @iconName="delete"

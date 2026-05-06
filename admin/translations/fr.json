@@ -647,6 +647,7 @@
             "table": {
               "actions": {
                 "delete": "Supprimer la version",
+                "edit": "Éditer la version",
                 "view": "Voir les détails de la version"
               },
               "caption": "Liste des versions par ordre décroissant",
