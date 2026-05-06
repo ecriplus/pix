@@ -33,7 +33,7 @@
                 "id": "1f2da8d0-e896-40a2-bb8d-8df954ff20b5",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Kevin fait une recherche sur internet.</p><p>Il veut savoir quand il est possible de visiter le Louvre de nuit. Il tape les mots-clés suivants&nbsp;: «&nbsp;<strong>Louvre visite de nuit date</strong>&nbsp;»</p><p>Une liste de résultats s’affiche.</p>"
+                "content": "<p>Kevin fait une recherche sur internet.</p><p>Il veut savoir quand il est possible de visiter le Louvre de nuit. Il tape les mots clés suivants&nbsp;: «&nbsp;<strong>louvre visite de nuit date</strong>&nbsp;»</p><p>Une liste de résultats s’affiche.</p>"
               }
             },
             {
@@ -132,7 +132,7 @@
                 "id": "7c1d8e0e-1270-4f58-b10a-73bcbb5ed17d",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Voici un résultat de recherche. Observez les informations qu'il contient puis répondez à la question qui suit.</p>"
+                "content": "<p>Voici un résultat de recherche. Observez les informations qu’il contient puis répondez à la question qui suit.</p>"
               }
             },
             {
@@ -159,35 +159,35 @@
                     "id": "1",
                     "content": "<p>Le nom du site web.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas tout à fait&nbsp;!</p>\n<p>Avant de cliquer, on peut déjà lire plusieurs informations :</p>\n<ul>\n    <li>Le <strong>nom du site web</strong> peut aider à savoir d’où vient l’information.</li>\n    <li>Le <strong>titre du résultat</strong> et l’<strong>extrait de la page web</strong> aident à comprendre de quoi parle la page web. </li>\n</ul>\n<p>Tous ces éléments peuvent aider à choisir une page web.</p>"
+                      "diagnosis": "<p>Pas tout à fait&nbsp;!</p><p>Avant de cliquer, on peut déjà lire plusieurs informations&nbsp;:</p><ul>    <li>Le <strong>nom du site web</strong> peut aider à savoir d’où vient l’information.</li>    <li>Le <strong>titre du résultat</strong> et l’<strong>extrait de la page web</strong> aident à comprendre de quoi parle la page web. </li></ul><p>Tous ces éléments peuvent aider à choisir une page web.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Le titre du résultat.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas tout à fait&nbsp;!</p>\n<p>Avant de cliquer, on peut déjà lire plusieurs informations :</p>\n<ul>\n    <li>Le <strong>nom du site web</strong> peut aider à savoir d’où vient l’information.</li>\n    <li>Le <strong>titre du résultat</strong> et l’<strong>extrait de la page web</strong> aident à comprendre de quoi parle la page web. </li>\n</ul>\n<p>Tous ces éléments peuvent aider à choisir une page web.</p>"
+                      "diagnosis": "<p>Pas tout à fait&nbsp;!</p><p>Avant de cliquer, on peut déjà lire plusieurs informations&nbsp;:</p><ul>    <li>Le <strong>nom du site web</strong> peut aider à savoir d’où vient l’information.</li>    <li>Le <strong>titre du résultat</strong> et l’<strong>extrait de la page web</strong> aident à comprendre de quoi parle la page web. </li></ul><p>Tous ces éléments peuvent aider à choisir une page web.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>L’extrait de la page web.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas tout à fait&nbsp;!</p>\n<p>Avant de cliquer, on peut déjà lire plusieurs informations :</p>\n<ul>\n    <li>Le <strong>nom du site web</strong> peut aider à savoir d’où vient l’information.</li>\n    <li>Le <strong>titre du résultat</strong> et l’<strong>extrait de la page web</strong> aident à comprendre de quoi parle la page web. </li>\n</ul>\n<p>Tous ces éléments peuvent aider à choisir une page web.</p>"
+                      "diagnosis": "<p>Pas tout à fait&nbsp;!</p><p>Avant de cliquer, on peut déjà lire plusieurs informations&nbsp;:</p><ul>    <li>Le <strong>nom du site web</strong> peut aider à savoir d’où vient l’information.</li>    <li>Le <strong>titre du résultat</strong> et l’<strong>extrait de la page web</strong> aident à comprendre de quoi parle la page web. </li></ul><p>Tous ces éléments peuvent aider à choisir une page web.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Tous ces éléments</p>",
                     "feedback": {
-                      "diagnosis": "<p>Bien vu&nbsp;!</p>\n<p>Avant de cliquer, on peut déjà lire plusieurs informations :</p>\n<ul>\n    <li>Le <strong>nom du site web</strong> peut aider à savoir d’où vient l’information.</li>\n    <li>Le <strong>titre du résultat</strong> et l’<strong>extrait de la page web</strong> aident à comprendre de quoi parle la page web. </li>\n</ul>\n<p>Tous ces éléments peuvent aider à choisir une page web.</p>"
+                      "diagnosis": "<p>Bien vu&nbsp;!</p><p>Avant de cliquer, on peut déjà lire plusieurs informations&nbsp;:</p><ul>    <li>Le <strong>nom du site web</strong> peut aider à savoir d’où vient l’information.</li>    <li>Le <strong>titre du résultat</strong> et l’<strong>extrait de la page web</strong> aident à comprendre de quoi parle la page web. </li></ul><p>Tous ces éléments peuvent aider à choisir une page web.</p>"
                     }
                   },
                   {
                     "id": "5",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Avant de cliquer, on peut déjà lire plusieurs informations :</p>\n<ul>\n    <li>Le <strong>nom du site web</strong> peut aider à savoir d’où vient l’information.</li>\n    <li>Le <strong>titre du résultat</strong> et l’<strong>extrait de la page web</strong> aident à comprendre de quoi parle la page web. </li>\n</ul>\n<p>Tous ces éléments peuvent aider à choisir une page web.</p>"
+                      "diagnosis": "<p>Avant de cliquer, on peut déjà lire plusieurs informations&nbsp;:</p><ul>    <li>Le <strong>nom du site web</strong> peut aider à savoir d’où vient l’information.</li>    <li>Le <strong>titre du résultat</strong> et l’<strong>extrait de la page web</strong> aident à comprendre de quoi parle la page web. </li></ul><p>Tous ces éléments peuvent aider à choisir une page web.</p>"
                     }
                   }
                 ],
@@ -239,7 +239,7 @@
                 "id": "a8160e77-0337-4ef5-bac7-fa2466f9f51d",
                 "type": "text",
                 "tag": "context",
-                "content": "<p>Kevin regarde la <strong>page de résultats</strong> pour sa recherche «&nbsp;<strong>Louvre visite de nuit date</strong>&nbsp;».</p><p>    Maintenant, il se pose une autre question&nbsp;:</p><blockquote>«&nbsp;Pourquoi ce lien est-il en premier ?&nbsp;Pourquoi celui-ci est plus bas ?&nbsp;»</blockquote><p>Lors d’une <strong>recherche sur internet</strong>, il peut y avoir des <strong>milliers de pages possibles</strong>. Imaginez que vous deviez <strong>choisir lesquelles afficher en premier</strong>.</p>"
+                "content": "<p>Kevin observe les <strong>résultats</strong> de sa recherche «&nbsp;<strong>louvre visite de nuit date</strong>&nbsp;».</p><p>Lors d’une <strong>recherche sur internet</strong>, il peut y avoir des <strong>milliers de pages possibles</strong>.<br>Pourtant, certaines pages apparaissent <strong>tout en haut de la liste</strong>.</p><p>Il se demande ce qui les rend <strong>plus visibles</strong> que les autres.</p>"
               }
             },
             {
@@ -247,28 +247,28 @@
               "element": {
                 "id": "61def0e1-524c-4f36-bd45-276758efcb2e",
                 "type": "qcm",
-                "instruction": "<p>Quels critères utiliseriez-vous pour classer les pages web ?</p>",
+                "instruction": "<p>À votre avis, pourquoi certaines pages web sont-elles mises en avant plutôt que d’autres ?<br> (3 bonnes réponses à sélectionner)</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Afficher d’abord les pages qui répondent le mieux à la recherche</p>"
+                    "content": "<p>Elles contiennent les mots clés de la recherche de Kevin.</p>"
                   },
                   {
                     "id": "2",
-                    "content": "<p>Afficher d’abord les pages avec le plus d’images.</p>"
+                    "content": "<p>Elles contiennent beaucoup d’images.</p>"
                   },
                   {
                     "id": "3",
-                    "content": "<p>Afficher d’abord les pages que beaucoup de sites ou d’utilisateurs consultent ou citent.</p>"
+                    "content": "<p>Beaucoup de sites ou d’utilisateurs consultent ou citent ces pages.</p>"
                   },
                   {
                     "id": "4",
-                    "content": "<p>Afficher d’abord les pages les plus récentes.</p>"
+                    "content": "<p>Elles sont plus récentes ou ont été mises à jour récemment.</p>"
                   },
                   {
                     "id": "5",
-                    "content": "<p>Afficher d’abord les pages les plus longues.</p>"
+                    "content": "<p>Elles sont très longues.</p>"
                   }
                 ],
                 "feedbacks": {
@@ -301,7 +301,7 @@
                 "id": "69a9c46e-904c-4d5c-99f8-9fa227d2894d",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Dans les <strong>résultats d’un moteur de recherche</strong>, l’<strong>ordre des pages web</strong> dépend de plusieurs <strong>critères</strong>.</p><p>Une page peut apparaître plus haut si elle est jugée&nbsp;:</p><ul>  <li><strong>pertinente</strong>&nbsp;: les <strong>mots-clés</strong> de votre recherche sont bien présents dans le résultat.</li>  <li><strong>populaire</strong>&nbsp;: d’autres <strong>sites font des liens</strong> vers cette page. Plus il y a de liens qui pointent vers une page, plus le moteur de recherche peut considérer qu’elle est <strong>importante</strong> ou <strong>reconnue</strong>.</li>  <li><strong>récente</strong>&nbsp;: elle a été <strong>publiée ou mise à jour récemment</strong>. C’est surtout utile pour les <strong>sujets qui changent vite</strong>.</li></ul>"
+                "content": "<p>Dans les <strong>résultats d’un moteur de recherche</strong>, l’<strong>ordre des pages web</strong> dépend de plusieurs <strong>critères</strong>.</p><p>Une page peut apparaître plus haut si elle est jugée&nbsp;:</p><ul>  <li><strong>pertinente</strong>&nbsp;: les <strong>mots clés</strong> de votre recherche sont bien présents dans le résultat.</li>  <li><strong>populaire</strong>&nbsp;: d’autres <strong>sites font des liens</strong> vers cette page. Plus il y a de liens qui pointent vers une page, plus le moteur de recherche peut considérer qu’elle est <strong>importante</strong> ou <strong>reconnue</strong>.</li>  <li><strong>récente</strong>&nbsp;: elle a été <strong>publiée ou mise à jour récemment</strong>. C’est surtout utile pour les <strong>sujets qui changent vite</strong>.</li></ul>"
               }
             },
             {
@@ -342,7 +342,7 @@
                 "id": "29a4e381-d8e3-443f-96f1-2b24feb3435a",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Kevin cherche maintenant à <strong>réserver sa visite de nuit</strong>.</p><p>Mais en faisant sa recherche «&nbsp;<strong>réserver visite de nuit Louvre</strong>&nbsp;», il se rend compte que certaines <strong>pages</strong> peuvent aussi apparaître <strong>tout en haut de la liste</strong>, alors qu’elles ne respectent pas les <strong>critères de pertinence</strong>, de <strong>popularité</strong> ou de <strong>date de mise à jour</strong>.</p>"
+                "content": "<p>Kevin cherche maintenant à <strong>réserver sa visite de nuit</strong>.</p><p>Mais en faisant sa recherche «&nbsp;<strong>réserver visite de nuit louvre</strong>&nbsp;», il se rend compte que certaines <strong>pages</strong> peuvent aussi apparaître <strong>tout en haut de la liste</strong>, alors qu’elles ne respectent pas les <strong>critères de pertinence</strong>, de <strong>popularité</strong> ou de <strong>date de mise à jour</strong>.</p>"
               }
             },
             {
@@ -410,7 +410,7 @@
                 "id": "46c04a44-e878-457f-8c1f-d9067d61e766",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Parfois, des <strong>résultats</strong> apparaissent <strong>en haut de la liste</strong> parce que des entreprises <strong>paient le moteur de recherche</strong> 🪙 ou <strong>achètent des mots-clés</strong> pour apparaître en tête de liste lorsque ces termes sont recherchés.</p><p>On les appelle des <strong>annonces</strong> ou des <strong>résultats sponsorisés</strong>.</p><p>C’est la <strong>principale source de revenus</strong> des moteurs de recherche.</p>"
+                "content": "<p>Parfois, des <strong>résultats</strong> apparaissent <strong>en haut de la liste</strong> parce que des entreprises <strong>paient le moteur de recherche</strong> 🪙 ou <strong>achètent des mots clés</strong> pour apparaître en tête de liste lorsque ces termes sont recherchés.</p><p>On les appelle des <strong>annonces</strong> ou des <strong>résultats sponsorisés</strong>.</p><p>C’est la <strong>principale source de revenus</strong> des moteurs de recherche.</p>"
               }
             },
             {
@@ -419,7 +419,7 @@
                 "id": "54df5ffc-d9f2-46d8-a40e-de78020c7921",
                 "type": "text",
                 "tag": "further-information",
-                "content": "<p>Ces <strong>annonces publicitaires</strong> apparaissent généralement dans une section nommée «&nbsp;<strong>Résultats sponsorisés</strong>&nbsp;» de la page de résultats ou avec une étiquette «&nbsp;<strong>Annonce</strong>&nbsp;» ou «&nbsp;<strong>Pub</strong>&nbsp;». Elles peuvent être discrètes ! 👁️</p>"
+                "content": "<p>Ces <strong>annonces publicitaires</strong> apparaissent généralement dans une section nommée «&nbsp;<strong>Résultats sponsorisés</strong>&nbsp;» de la liste des résultats ou bien avec une étiquette «&nbsp;<strong>Annonce</strong>&nbsp;» ou «&nbsp;<strong>Pub</strong>&nbsp;». Elles peuvent être discrètes ! 👁️</p>"
               }
             }
           ]
@@ -492,7 +492,7 @@
               "element": {
                 "id": "4ac3d276-b987-4fb2-8f09-896ffacf3c56",
                 "type": "qcu",
-                "instruction": "<p>Quel est l’élément du résultat qui pose problème ?<br></p>",
+                "instruction": "<p>Quel est l’élément qui incite Samira à ignorer ce résultat ?</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
@@ -500,7 +500,7 @@
                     "content": "<p>Le nom du site web.</p>",
                     "feedback": {
                       "state": "<p>Eh non !&nbsp;<br></p>",
-                      "diagnosis": "<p>Larousse est un dictionnaire et une encyclopédie très connu qui peut contenir des informations intéressantes par rapport au besoin de Samira.<br><br></p>"
+                      "diagnosis": "<p>Le site web est une encyclopédie en ligne qui peut contenir des informations intéressantes par rapport au besoin de Samira.</p>"
                     }
                   },
                   {
@@ -508,7 +508,7 @@
                     "content": "<p>Le titre du résultat.</p>",
                     "feedback": {
                       "state": "<p>Eh non !<br></p>",
-                      "diagnosis": "<p>Mauvaise réponse. Le titre du résultat correspond bien aux mots-clés de la recherche de Samira.<br><br></p>"
+                      "diagnosis": "<p>Mauvaise réponse. Le titre du résultat correspond bien aux mots clés de la recherche de Samira.</p>"
                     }
                   },
                   {
@@ -755,7 +755,7 @@
                 "id": "12fd500d-89e0-4a9d-8d4f-aa8df8a48c6c",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Voici une page de résultats d'un moteur de recherche.</p>"
+                "content": "<p>Vous cherchez à vous renseigner sur comment les enfants vivaient au moyen-âge sur internet. Vous utilisez votre moteur de recherche préféré pour faire la recherche suivante&nbsp;:  «&nbsp;histoire enfants moyen âge&nbsp;». Voici la liste de résultats pour le recherche</p>"
               }
             },
             {
@@ -763,9 +763,9 @@
               "element": {
                 "id": "6b7ce646-4d3e-42aa-8fa8-41e0b669c5dd",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/morech2_transfert.png",
-                "alt": "Page de résultats d'un moteur de recherche",
-                "alternativeText": "<p><br></p>",
+                "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/694eaaaf-a9cb-4326-8bb7-57cbc592624a.png",
+                "alt": "Page de résultats d’un moteur de recherche",
+                "alternativeText": "",
                 "legend": "Image provisoire",
                 "licence": ""
               }
@@ -775,42 +775,35 @@
               "element": {
                 "id": "c6aef7b8-d2dc-4404-9b71-cafcaebee1b7",
                 "type": "qcu-declarative",
-                "instruction": "<p>Que feriez-vous ?</p>",
+                "instruction": "<p>Sur quel résultat cliquez-vous ?&nbsp;</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "0",
-                    "content": "<p>Je choisis le premier résultat car je veux trouver une histoire qui se passe au Moyen Âge pour les enfants.</p>",
+                    "content": "<p>Je choisis le premier résultat, même si c’est une publicité, ce livre me fait envie&nbsp;!</p>",
                     "feedback": {
-                      "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p>\n<p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
+                      "diagnosis": "<p>Pourquoi pas&nbsp;: tout dépend de ce qui vous intéresse&nbsp;!</p><p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les résultats pour faire son choix.</p>"
                     }
                   },
                   {
                     "id": "1",
                     "content": "<p>Je choisis le deuxième résultat car je veux en savoir plus sur la vie des enfants au Moyen Âge.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p>\n<p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
+                      "diagnosis": "<p>Pourquoi pas&nbsp;: tout dépend de ce qui vous intéresse&nbsp;!</p><p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les résultats pour faire son choix.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Je choisis le troisième résultat car je veux des vidéos adaptées aux enfants.</p>",
+                    "content": "<p>Je choisis le troisième résultat, même s’il est ancien, il a l’air intéressant&nbsp;!</p>",
                     "feedback": {
-                      "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p>\n<p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
+                      "diagnosis": "<p>Pourquoi pas&nbsp;: tout dépend de ce qui vous intéresse&nbsp;!</p><p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les résultats pour faire son choix.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Je reformule ma recherche car je ne m’intéresse pas au Moyen Âge mais à l’Antiquité.</p>",
+                    "content": "<p>Aucun de ces liens, je vais changer mes mots clés pour avoir de meilleurs résultats.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p>\n<p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
-                    }
-                  },
-                  {
-                    "id": "4",
-                    "content": "<p>Je fais une autre recherche car ce sujet ne m’intéresse pas.</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p>\n<p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
+                      "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p><p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les résultats pour faire son choix.</p>"
                     }
                   }
                 ]
