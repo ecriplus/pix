@@ -9,6 +9,7 @@ const serialize = function (certificateSummaries, { translate }) {
         ...certificateSummary,
         comment: certificateSummary.juryComment.getComment(translate),
         reachedMeshLevel: certificateSummary.reachedMeshLevel?.split('_').at(-1) ?? null,
+        badgeUrl: certificateSummary.badgeUrl,
       };
     },
     attributes: [
@@ -22,6 +23,7 @@ const serialize = function (certificateSummaries, { translate }) {
       'extraCertificationStatus',
       'certificateType',
       'reachedMeshLevel',
+      'badgeUrl',
     ],
   }).serialize(certificateSummaries);
 };

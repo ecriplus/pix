@@ -450,6 +450,7 @@ describe('Certification | Results | Acceptance | Application | Certification', f
               status: CERTIFICATE_STATUSES.VALIDATED,
               'extra-certification-status': EXTRA_CERTIFICATE_STATUSES.NOT_APPLICABLE,
               'reached-mesh-level': null,
+              'badge-url': null,
             },
           },
           {
@@ -466,6 +467,7 @@ describe('Certification | Results | Acceptance | Application | Certification', f
               status: CERTIFICATE_STATUSES.VALIDATED,
               'extra-certification-status': EXTRA_CERTIFICATE_STATUSES.NOT_ACQUIRED,
               'reached-mesh-level': 'ADMISSIBLE',
+              'badge-url': null,
             },
           },
         ]);

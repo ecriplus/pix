@@ -2,6 +2,7 @@ import { AssessmentResult } from '../../../../shared/domain/models/AssessmentRes
 import { PIX_PLUS_EDU_EXTERNAL_LEVELS } from '../../../shared/domain/constants/mesh-configuration.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
 import { isEduFramework } from '../../../shared/domain/models/Frameworks.js';
+import { hasCoreScope } from '../../../shared/domain/models/Frameworks.js';
 import { JuryComment, JuryCommentContexts } from '../../../shared/domain/models/JuryComment.js';
 import { GlobalCertificationLevel } from './v3/GlobalCertificationLevel.js';
 
@@ -49,6 +50,21 @@ export class CertificateSummary {
     this.extraCertificationStatus = extraCertificationStatus;
     this.certificateType = certificateType;
     this.reachedMeshLevel = reachedMeshLevel;
+  }
+
+  get badgeUrl() {
+    if (
+      hasCoreScope(this.certificationFramework) ||
+      !this.reachedMeshLevel ||
+      this.reachedMeshLevel === 'LEVEL_ADMISSIBLE'
+    ) {
+      return null;
+    }
+
+    const framework = this.certificationFramework.toLowerCase();
+    const meshLevel = this.reachedMeshLevel.replace('LEVEL_', '').toLowerCase();
+
+    return `${process.env.PIX_ASSETS_MANAGER_URL}/badges-certifies/v3/${framework}/${meshLevel}.svg`;
   }
 
   static buildFrom({

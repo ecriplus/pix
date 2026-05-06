@@ -4,6 +4,7 @@ import {
   CertificateSummary,
   EXTRA_CERTIFICATE_STATUSES,
 } from '../../../../../../src/certification/results/domain/models/CertificateSummary.js';
+import { PIX_PLUS_EDU_EXTERNAL_LEVELS } from '../../../../../../src/certification/shared/domain/constants/mesh-configuration.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import {
@@ -13,7 +14,6 @@ import {
 import { AssessmentResult } from '../../../../../../src/shared/domain/models/AssessmentResult.js';
 import { expect } from '../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
-
 describe('Unit | Domain | Models | CertificationSummary', function () {
   context('#static buildFrom', function () {
     const baseData = {
@@ -327,6 +327,80 @@ describe('Unit | Domain | Models | CertificationSummary', function () {
           expect(actualCertificateSummary).to.deepEqualInstance(expectedCertificateSummary);
         });
       });
+    });
+  });
+  context('badgeUrl', function () {
+    it('should return null when certification is not V3', function () {
+      const certificateSummary = CertificateSummary.buildFrom({
+        algorithmVersion: AlgorithmEngineVersion.V2,
+      });
+
+      expect(certificateSummary.badgeUrl).to.equal(null);
+    });
+
+    it('should return null when reachedMeshLevel is null', function () {
+      const certificateSummary = CertificateSummary.buildFrom({
+        algorithmVersion: AlgorithmEngineVersion.V3,
+        assessmentResultStatus: AssessmentResult.status.REJECTED,
+        reachedMeshIndex: 1,
+        certificationFramework: Frameworks.EDU_2ND_DEGRE,
+        eduV3ExternalJuryResult: PIX_PLUS_EDU_EXTERNAL_LEVELS.EXPERT,
+      });
+
+      expect(certificateSummary.reachedMeshLevel).to.equal(null);
+      expect(certificateSummary.badgeUrl).to.equal(null);
+    });
+
+    it('should return null when reachedMeshLevel is equal to ADMISSIBLE', function () {
+      const certificateSummary = CertificateSummary.buildFrom({
+        algorithmVersion: AlgorithmEngineVersion.V3,
+        assessmentResultStatus: AssessmentResult.status.VALIDATED,
+        reachedMeshIndex: 1,
+        certificationFramework: Frameworks.EDU_CPE,
+      });
+
+      expect(certificateSummary.reachedMeshLevel).to.equal('LEVEL_ADMISSIBLE');
+      expect(certificateSummary.badgeUrl).to.equal(null);
+    });
+
+    it('should return null if the framework is CORE', function () {
+      const certificateSummary = CertificateSummary.buildFrom({
+        algorithmVersion: AlgorithmEngineVersion.V3,
+        assessmentResultStatus: AssessmentResult.status.VALIDATED,
+        reachedMeshIndex: 1,
+        certificationFramework: Frameworks.CORE,
+      });
+
+      expect(certificateSummary.certificationFramework).to.equal('CORE');
+      expect(certificateSummary.badgeUrl).to.equal(null);
+    });
+
+    it('should return null if the framework is CLEA', function () {
+      const certificateSummary = CertificateSummary.buildFrom({
+        algorithmVersion: AlgorithmEngineVersion.V3,
+        assessmentResultStatus: AssessmentResult.status.VALIDATED,
+        reachedMeshIndex: 1,
+        certificationFramework: Frameworks.CLEA,
+      });
+
+      expect(certificateSummary.certificationFramework).to.equal('CLEA');
+      expect(certificateSummary.badgeUrl).to.equal(null);
+    });
+
+    it('should return the url of the bagde image as a string', function () {
+      process.env.PIX_ASSETS_MANAGER_URL = 'https://super-assert-url.org';
+
+      const certificateSummary = CertificateSummary.buildFrom({
+        algorithmVersion: AlgorithmEngineVersion.V3,
+        assessmentResultStatus: AssessmentResult.status.VALIDATED,
+        reachedMeshIndex: 1,
+        certificationFramework: Frameworks.EDU_2ND_DEGRE,
+        eduV3ExternalJuryResult: PIX_PLUS_EDU_EXTERNAL_LEVELS.ADVANCED,
+      });
+
+      expect(certificateSummary.badgeUrl).to.equal(
+        'https://super-assert-url.org/badges-certifies/v3/edu_2nd_degre/advanced.svg',
+      );
     });
   });
 });
