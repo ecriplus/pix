@@ -111,6 +111,42 @@
                   ]
                 }
               }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "742aed22-b878-4e9f-806e-76e03acfd5b4",
+                "type": "qcu",
+                "instruction": "<p>Vrai ou faux : un smartphone contient, entre autre, du cobalt.</p>",
+                "hasShortProposals": true,
+                "proposals": [
+                  {
+                    "id": "0",
+                    "content": "Vrai.",
+                    "feedback": {
+                      "state": "<p>Bien vu !</p>",
+                      "diagnosis": "<p>Un smartphone contient bien du cobalt.</p>"
+                    }
+                  },
+                  {
+                    "id": "1",
+                    "content": "Faux.",
+                    "feedback": {
+                      "state": "<p>Eh non !</p>",
+                      "diagnosis": "<p>Un smartphone contient bien du cobalt.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "Je ne sais pas.",
+                    "feedback": {
+                      "state": "<p>Cette affirmation est vraie !</p>",
+                      "diagnosis": "<p>Un smartphone contient bien du cobalt.</p>"
+                    }
+                  }
+                ],
+                "solution": "0"
+              }
             }
           ]
         }
@@ -267,7 +303,7 @@
                     {
                       "id": "45948196-92cf-4ffd-a2c8-a6a228b4cd34",
                       "type": "qcu",
-                      "instruction": "<p>Un métal précieux, utilisé pour mes capacités à conduire l'électricité.</p>",
+                      "instruction": "<p>Un métal précieux, utilisé pour ses capacités à conduire l'électricité.</p>",
                       "hasShortProposals": true,
                       "proposals": [
                         {
@@ -404,7 +440,7 @@
                     },
                     {
                       "title": "Étape 4 : assemblage.",
-                      "description": "L'assemblage des composants a lieu en Asie du Sud-Est.",
+                      "description": "L'assemblage des composants a généralement lieu en Asie du Sud-Est.",
                       "displayWidth": 0,
                       "image": {
                         "src": "https://assets.pix.org/modules/nr_durabilite-nov/tour_monde_4.png",
@@ -452,7 +488,7 @@
                 "props": {
                   "options": [
                     {
-                      "label": "2",
+                      "label": "0",
                       "feedback": {
                         "type": "bad",
                         "text": "Eh non !  On estime que les éléments d'un smartphone ont parcouru environ 4 fois le tour de la Terre entre sa conception et sa distribution!"
@@ -613,12 +649,12 @@
                       "altText": ""
                     },
                     "proposalA": "Bonne idée !",
-                    "proposalB": "Faux",
+                    "proposalB": "Mauvaise idée !",
                     "solution": "B"
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "<p>Pour faire durer son smartphone, il faut en prendre soin ! Le protéger avec une coque et un film protecteur, mais aussi l’eloigner des sources de chaleur et des objets qui pourraient l’abîmer. Il faut aussi prendre soin de la baterie et pour cela, pas besoin de recharger votre smartphone tous les soirs ou d’attendre que la baterie soit complètement à plat !&nbsp;</p>"
+                  "diagnosis": "<p>Pour faire durer son smartphone, il faut en <strong>prendre soin</strong> !<br>Le protéger avec une coque et un film protecteur, mais aussi l’eloigner des sources de chaleur et des objets qui pourraient l’abîmer.<br>Il faut aussi prendre soin de la batterie et, pour cela, pas besoin de recharger votre smartphone tous les soirs ou d’attendre que la batterie soit complètement à plat !&nbsp;</p>"
                 }
               }
             }
@@ -781,7 +817,7 @@
                     {
                       "id": "ab421b9d-b6f1-4648-a481-26e05a5fe17f",
                       "type": "image",
-                      "url": "https://assets.pix.org/modules/nr_durabilite-nov/weee_symbol_small-400.png",
+                      "url": "https://assets.pix.org/modules/nr_durabilite-nov/logo_deee_smallest.png",
                       "alt": "Logo des déchets éléctriques et électroniques",
                       "alternativeText": "",
                       "legend": "",
@@ -842,7 +878,7 @@
                 "id": "84230031-3337-4598-9a01-971e1b8c8c47",
                 "type": "text",
                 "tag": " ",
-                "content": "<ul>    <li>😱 Un smartphone est composé de nombreux matériaux différents. Leur extraction est souvent <strong>très polluante</strong> et réalisée dans de <strong>mauvaises conditions de travail</strong>.</li>    <li>✈️ Les  étapes de conception, fabrication et distribution d'un smartphone ont lieu sur des continents différents, ce qui nécessite beaucoup de <strong>transports</strong>, donc émet beaucoup de <strong>gaz à effet de serre</strong>.</strong></li><li>💡 Pour limiter l’impact environnemental d’un smartphone, le plus important est qu'il soit <strong>utilisé le plus longtemps possible</strong>. Pour cela on peut :        <ul>            <li>en prendre soin, le protéger</li>            <li>le faire réparer s'il est cassé</li>            <li>le donner ou le vendre plutôt que le jeter où l'abandonner</li>        </ul>    </li>    <li>♻️ S'il ne marche plus, il faut le déposer dans un <strong>point de collecte spécialisé</strong> pour que les composants soient <strong>recyclés</strong> ou <strong>réutilisés</strong>.</li></ul>"
+                "content": "<ul>    <li>😱 Un smartphone est composé de nombreux matériaux différents. Leur extraction est souvent <strong>très polluante</strong> et réalisée dans de <strong>mauvaises conditions de travail</strong>.</li>    <li>✈️ Les  étapes de conception, fabrication et distribution d'un smartphone ont lieu sur des continents différents, ce qui nécessite beaucoup de <strong>transports</strong>, donc émet beaucoup de <strong>gaz à effet de serre</strong>.</li><li>💡 Pour limiter l’impact environnemental d’un smartphone, le plus important est qu'il soit <strong>utilisé le plus longtemps possible</strong>. Pour cela on peut :        <ul>            <li>en prendre soin, le protéger</li>            <li>le faire réparer s'il est cassé</li>            <li>le donner ou le vendre plutôt que le jeter où l'abandonner</li>        </ul>    </li>    <li>♻️ S'il ne marche plus, il faut le déposer dans un <strong>point de collecte spécialisé</strong> pour que les composants soient <strong>recyclés</strong> ou <strong>réutilisés</strong>.</li></ul>"
               }
             }
           ]
@@ -956,7 +992,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p>Pour cela il faut les </p>"
+                    "content": "<br><p>Pour cela il faut les </p>"
                   },
                   {
                     "type": "select",
