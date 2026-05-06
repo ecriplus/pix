@@ -41,10 +41,6 @@ export default class EvaluationResultsHeroRecommendationEngine extends Component
     };
   }
 
-  get isUserAnonymous() {
-    return this.currentUser?.user?.isAnonymous;
-  }
-
   get titleStyles() {
     const baseStyle = 'evaluation-results-hero-recommendation-engine__title';
     const titleSize = this.media.isMobile ? 'extra-small-size' : 'small-size';
