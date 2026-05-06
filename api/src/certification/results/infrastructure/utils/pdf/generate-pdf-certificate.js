@@ -5,7 +5,7 @@ import url from 'node:url';
 
 import PDFDocument from 'pdfkit';
 
-import { generateV3AttestationTemplate } from './templates/certificate.js';
+import generateV3AttestationTemplate from './templates/v3-certificate.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 

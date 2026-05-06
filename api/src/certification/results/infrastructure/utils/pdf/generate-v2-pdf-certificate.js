@@ -3,7 +3,7 @@ import url from 'node:url';
 import PDFDocument from 'pdfkit';
 
 import { CertificateGenerationError } from '../../../domain/errors.js';
-import { generateV2AttestationTemplate } from './templates/certificate.js';
+import generateV2AttestationTemplate from './templates/v2-certificate.js';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 /**
