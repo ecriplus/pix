@@ -71,7 +71,7 @@ export default class SidebarMenu extends Component {
   }
 
   get shouldDisplayCatalogEntry() {
-    return this.featureToggles.featureToggles?.displayCatalogue;
+    return this.featureToggles.featureToggles?.displayCatalogue && this.currentUser.canAccessCampaignsPage;
   }
 
   get shouldDisplaySeparator() {
