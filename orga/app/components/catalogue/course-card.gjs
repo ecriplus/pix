@@ -10,16 +10,16 @@ export default class CourseCard extends Component {
     switch (this.args.course.type) {
       case 'blueprint': {
         return {
-          color: 'green',
+          color: 'yellow',
           label: 'pages.catalogue.card.tag.blueprint',
-          image: 'https://assets.pix.org/sites/orga/parcours-apprenant.png',
+          image: 'https://assets.pix.org/sites/orga/combined-course.png',
         };
       }
       default: {
         return {
           color: 'blue',
           label: 'pages.catalogue.card.tag.target-profile',
-          image: 'https://assets.pix.org/sites/orga/profile-cible.png',
+          image: 'https://assets.pix.org/sites/orga/target-profile.png',
         };
       }
     }
