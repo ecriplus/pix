@@ -33,7 +33,7 @@
                 "id": "1f2da8d0-e896-40a2-bb8d-8df954ff20b5",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Kevin fait une recherche sur internet.</p><p>Il veut savoir quand il est possible de visiter le Louvre de nuit. Il tape les mots-clés suivants&nbsp;: «&nbsp;<strong>Louvre visite de nuit date</strong>&nbsp;»</p><p>Une liste de résultats s’affiche.</p>"
+                "content": "<p>Kevin fait une recherche sur internet.</p><p>Il veut savoir quand il est possible de visiter le Louvre de nuit. Il tape les mots clés suivants&nbsp;: «&nbsp;<strong>louvre visite de nuit date</strong>&nbsp;»</p><p>Une liste de résultats s’affiche.</p>"
               }
             },
             {
@@ -239,7 +239,7 @@
                 "id": "a8160e77-0337-4ef5-bac7-fa2466f9f51d",
                 "type": "text",
                 "tag": "context",
-                "content": "<p>Kevin observe les <strong>résultats</strong> de sa recherche «&nbsp;<strong>Louvre visite de nuit date</strong>&nbsp;».</p><p>Lors d’une <strong>recherche sur internet</strong>, il peut y avoir des <strong>milliers de pages possibles</strong>.<br>Pourtant, certaines pages apparaissent <strong>tout en haut de la liste</strong>.</p><p>Il se demande ce qui les rend <strong>plus visibles</strong> que les autres.</p>"
+                "content": "<p>Kevin observe les <strong>résultats</strong> de sa recherche «&nbsp;<strong>louvre visite de nuit date</strong>&nbsp;».</p><p>Lors d’une <strong>recherche sur internet</strong>, il peut y avoir des <strong>milliers de pages possibles</strong>.<br>Pourtant, certaines pages apparaissent <strong>tout en haut de la liste</strong>.</p><p>Il se demande ce qui les rend <strong>plus visibles</strong> que les autres.</p>"
               }
             },
             {
@@ -252,7 +252,7 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Elles contiennent les mots-clés de la recherche de Kevin.</p>"
+                    "content": "<p>Elles contiennent les mots clés de la recherche de Kevin.</p>"
                   },
                   {
                     "id": "2",
@@ -301,7 +301,7 @@
                 "id": "69a9c46e-904c-4d5c-99f8-9fa227d2894d",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Dans les <strong>résultats d’un moteur de recherche</strong>, l’<strong>ordre des pages web</strong> dépend de plusieurs <strong>critères</strong>.</p><p>Une page peut apparaître plus haut si elle est jugée&nbsp;:</p><ul>  <li><strong>pertinente</strong>&nbsp;: les <strong>mots-clés</strong> de votre recherche sont bien présents dans le résultat.</li>  <li><strong>populaire</strong>&nbsp;: d’autres <strong>sites font des liens</strong> vers cette page. Plus il y a de liens qui pointent vers une page, plus le moteur de recherche peut considérer qu’elle est <strong>importante</strong> ou <strong>reconnue</strong>.</li>  <li><strong>récente</strong>&nbsp;: elle a été <strong>publiée ou mise à jour récemment</strong>. C’est surtout utile pour les <strong>sujets qui changent vite</strong>.</li></ul>"
+                "content": "<p>Dans les <strong>résultats d’un moteur de recherche</strong>, l’<strong>ordre des pages web</strong> dépend de plusieurs <strong>critères</strong>.</p><p>Une page peut apparaître plus haut si elle est jugée&nbsp;:</p><ul>  <li><strong>pertinente</strong>&nbsp;: les <strong>mots clés</strong> de votre recherche sont bien présents dans le résultat.</li>  <li><strong>populaire</strong>&nbsp;: d’autres <strong>sites font des liens</strong> vers cette page. Plus il y a de liens qui pointent vers une page, plus le moteur de recherche peut considérer qu’elle est <strong>importante</strong> ou <strong>reconnue</strong>.</li>  <li><strong>récente</strong>&nbsp;: elle a été <strong>publiée ou mise à jour récemment</strong>. C’est surtout utile pour les <strong>sujets qui changent vite</strong>.</li></ul>"
               }
             },
             {
@@ -342,7 +342,7 @@
                 "id": "29a4e381-d8e3-443f-96f1-2b24feb3435a",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Kevin cherche maintenant à <strong>réserver sa visite de nuit</strong>.</p><p>Mais en faisant sa recherche «&nbsp;<strong>réserver visite de nuit Louvre</strong>&nbsp;», il se rend compte que certaines <strong>pages</strong> peuvent aussi apparaître <strong>tout en haut de la liste</strong>, alors qu’elles ne respectent pas les <strong>critères de pertinence</strong>, de <strong>popularité</strong> ou de <strong>date de mise à jour</strong>.</p>"
+                "content": "<p>Kevin cherche maintenant à <strong>réserver sa visite de nuit</strong>.</p><p>Mais en faisant sa recherche «&nbsp;<strong>réserver visite de nuit louvre</strong>&nbsp;», il se rend compte que certaines <strong>pages</strong> peuvent aussi apparaître <strong>tout en haut de la liste</strong>, alors qu’elles ne respectent pas les <strong>critères de pertinence</strong>, de <strong>popularité</strong> ou de <strong>date de mise à jour</strong>.</p>"
               }
             },
             {
@@ -410,7 +410,7 @@
                 "id": "46c04a44-e878-457f-8c1f-d9067d61e766",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Parfois, des <strong>résultats</strong> apparaissent <strong>en haut de la liste</strong> parce que des entreprises <strong>paient le moteur de recherche</strong> 🪙 ou <strong>achètent des mots-clés</strong> pour apparaître en tête de liste lorsque ces termes sont recherchés.</p><p>On les appelle des <strong>annonces</strong> ou des <strong>résultats sponsorisés</strong>.</p><p>C’est la <strong>principale source de revenus</strong> des moteurs de recherche.</p>"
+                "content": "<p>Parfois, des <strong>résultats</strong> apparaissent <strong>en haut de la liste</strong> parce que des entreprises <strong>paient le moteur de recherche</strong> 🪙 ou <strong>achètent des mots clés</strong> pour apparaître en tête de liste lorsque ces termes sont recherchés.</p><p>On les appelle des <strong>annonces</strong> ou des <strong>résultats sponsorisés</strong>.</p><p>C’est la <strong>principale source de revenus</strong> des moteurs de recherche.</p>"
               }
             },
             {
@@ -419,7 +419,7 @@
                 "id": "54df5ffc-d9f2-46d8-a40e-de78020c7921",
                 "type": "text",
                 "tag": "further-information",
-                "content": "<p>Ces <strong>annonces publicitaires</strong> apparaissent généralement dans une section nommée «&nbsp;<strong>Résultats sponsorisés</strong>&nbsp;» de la liste des résultats ou avec une étiquette «&nbsp;<strong>Annonce</strong>&nbsp;» ou «&nbsp;<strong>Pub</strong>&nbsp;». Elles peuvent être discrètes ! 👁️</p>"
+                "content": "<p>Ces <strong>annonces publicitaires</strong> apparaissent généralement dans une section nommée «&nbsp;<strong>Résultats sponsorisés</strong>&nbsp;» de la liste des résultats ou bien avec une étiquette «&nbsp;<strong>Annonce</strong>&nbsp;» ou «&nbsp;<strong>Pub</strong>&nbsp;». Elles peuvent être discrètes ! 👁️</p>"
               }
             }
           ]
@@ -500,7 +500,7 @@
                     "content": "<p>Le nom du site web.</p>",
                     "feedback": {
                       "state": "<p>Eh non !&nbsp;<br></p>",
-                      "diagnosis": "<p>Le site web est une encyclopédie en ligne qui peut contenir des informations intéressantes par rapport au besoin de Samira.<br><br></p>"
+                      "diagnosis": "<p>Le site web est une encyclopédie en ligne qui peut contenir des informations intéressantes par rapport au besoin de Samira.</p>"
                     }
                   },
                   {
@@ -508,7 +508,7 @@
                     "content": "<p>Le titre du résultat.</p>",
                     "feedback": {
                       "state": "<p>Eh non !<br></p>",
-                      "diagnosis": "<p>Mauvaise réponse. Le titre du résultat correspond bien aux mots-clés de la recherche de Samira.<br><br></p>"
+                      "diagnosis": "<p>Mauvaise réponse. Le titre du résultat correspond bien aux mots clés de la recherche de Samira.</p>"
                     }
                   },
                   {
@@ -780,30 +780,30 @@
                 "proposals": [
                   {
                     "id": "0",
-                    "content": "<p>Je choisis le premier résultat, même si c’est une publicité, ce livre me fait envie !&nbsp;</p>",
+                    "content": "<p>Je choisis le premier résultat, même si c’est une publicité, ce livre me fait envie&nbsp;!</p>",
                     "feedback": {
-                      "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p><p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
+                      "diagnosis": "<p>Pourquoi pas&nbsp;: tout dépend de ce qui vous intéresse&nbsp;!</p><p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les résultats pour faire son choix.</p>"
                     }
                   },
                   {
                     "id": "1",
                     "content": "<p>Je choisis le deuxième résultat car je veux en savoir plus sur la vie des enfants au Moyen Âge.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p><p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
+                      "diagnosis": "<p>Pourquoi pas&nbsp;: tout dépend de ce qui vous intéresse&nbsp;!</p><p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les résultats pour faire son choix.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Je choisis le troisième résultat, même si il est ancien, il a l’air intéressant !</p>",
+                    "content": "<p>Je choisis le troisième résultat, même s’il est ancien, il a l’air intéressant&nbsp;!</p>",
                     "feedback": {
-                      "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p><p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
+                      "diagnosis": "<p>Pourquoi pas&nbsp;: tout dépend de ce qui vous intéresse&nbsp;!</p><p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les résultats pour faire son choix.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Aucun de ces liens, je vais changer mes mots cléfs pour avoir de meilleurs résultats.</p>",
+                    "content": "<p>Aucun de ces liens, je vais changer mes mots clés pour avoir de meilleurs résultats.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p><p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les premiers résultats pour faire son choix.</p>"
+                      "diagnosis": "<p>Tout dépend de ce qui vous intéresse&nbsp;!</p><p>Rappelez-vous&nbsp;: il est toujours important de regarder attentivement les résultats pour faire son choix.</p>"
                     }
                   }
                 ]
