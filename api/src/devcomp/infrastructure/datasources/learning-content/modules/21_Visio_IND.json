@@ -43,7 +43,7 @@
                 "type": "embed",
                 "isCompletionRequired": false,
                 "title": "Simulateur Accroche",
-                "url": "https://epreuves.pix.fr/visio/visio.html?lang=fr&mode=visio23",
+                "url": "https://epreuves.pix.fr/visio/visio.html?lang=fr&mode=modulix_visio1",
                 "instruction": "<p>Observez la visioconférence ci-dessous pour répondre aux questions qui suivent.</p>",
                 "solution": "",
                 "height": 550
@@ -202,7 +202,7 @@
                 "type": "embed",
                 "isCompletionRequired": false,
                 "title": "Simulateur Découverte 1",
-                "url": "https://epreuves.pix.fr/visio/visio.html?lang=fr&mode=visio23",
+                "url": "https://epreuves.pix.fr/visio/visio.html?lang=fr&mode=modulix_visio2",
                 "instruction": "<p>Explorez la visioconférence ci-dessous pour répondre à la question qui suit.</p>",
                 "solution": "",
                 "height": 550
@@ -314,7 +314,7 @@
                 "type": "embed",
                 "isCompletionRequired": false,
                 "title": "Simulateur Découverte 2",
-                "url": "https://epreuves.pix.fr/visio/visio.html?lang=fr&mode=visio4",
+                "url": "https://epreuves.pix.fr/visio/visio.html?lang=fr&mode=modulix_visio3",
                 "instruction": "<p>Observez la visioconférence ci-dessous pour compléter le texte qui suit.</p>",
                 "solution": "",
                 "height": 550
@@ -797,7 +797,7 @@
                 "type": "embed",
                 "isCompletionRequired": false,
                 "title": "Simulateur Activité 2",
-                "url": "https://epreuves.pix.fr/visio/visio.html?lang=fr&mode=visio24",
+                "url": "https://epreuves.pix.fr/visio/visio.html?lang=fr&mode=modulix_visio4",
                 "instruction": "<p>Explorez la visioconférence ci-dessous pour compléter le texte qui suit.</p>",
                 "solution": "",
                 "height": 550
