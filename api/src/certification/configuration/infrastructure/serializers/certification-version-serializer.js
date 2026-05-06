@@ -11,6 +11,7 @@ export const serialize = (certificationVersion) => {
     'globalScoringConfiguration',
     'competencesScoringConfiguration',
     'challengesConfiguration',
+    'minimumAnswersRequiredToValidateACertification',
   ];
 
   return new Serializer('certification-versions', {

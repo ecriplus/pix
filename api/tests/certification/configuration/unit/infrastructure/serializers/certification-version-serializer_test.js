@@ -11,6 +11,7 @@ describe('Unit | Certification | Configuration | Serializer | certification-vers
         startDate: new Date('2024-01-01T00:00:00Z'),
         expirationDate: new Date('2025-12-31T23:59:59Z'),
         assessmentDuration: 120,
+        minimumAnswersRequiredToValidateACertification: 20,
         globalScoringConfiguration: [{ meshLevel: 0, bounds: { min: -8, max: -1.4 } }],
         competencesScoringConfiguration: [
           { competence: '1.1', values: [{ bounds: { max: -2, min: -10 }, competenceLevel: 0 }] },
@@ -36,6 +37,7 @@ describe('Unit | Certification | Configuration | Serializer | certification-vers
             'start-date': new Date('2024-01-01T00:00:00Z'),
             'expiration-date': new Date('2025-12-31T23:59:59Z'),
             'assessment-duration': 120,
+            'minimum-answers-required-to-validate-a-certification': 20,
             'global-scoring-configuration': [{ meshLevel: 0, bounds: { min: -8, max: -1.4 } }],
             'competences-scoring-configuration': [
               { competence: '1.1', values: [{ bounds: { max: -2, min: -10 }, competenceLevel: 0 }] },
