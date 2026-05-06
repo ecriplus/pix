@@ -4,9 +4,10 @@ export async function getCombinedCourseByCode({
   combinedCourseRepository,
   combinedCourseDetailsService,
   organizationLearnerPrescriptionRepository,
+  attestationRepository,
+  profileRewardRepository,
 }) {
   const combinedCourse = await combinedCourseRepository.getByCode({ code });
-
   const combinedCourseDetails = await combinedCourseDetailsService.instantiateCombinedCourseDetails({
     combinedCourseId: combinedCourse.id,
   });
@@ -19,8 +20,20 @@ export async function getCombinedCourseByCode({
     userId,
     organizationId: combinedCourse.organizationId,
   });
+
+  const attestation = await attestationRepository.getByRewardId({ rewardId: combinedCourse.quest.rewardId });
+  const profileReward = await profileRewardRepository.findByUserIdAndRewardId({
+    rewardId: combinedCourse.quest.rewardId,
+    userId,
+  });
+
   return combinedCourseDetailsService.getCombinedCourseDetails({
     organizationLearnerId,
     combinedCourseDetails,
+    reward: {
+      id: attestation.id,
+      key: attestation.key,
+      obtainedAt: profileReward?.createdAt,
+    },
   });
 }

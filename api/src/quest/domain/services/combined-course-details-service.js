@@ -43,6 +43,7 @@ async function getCombinedCourseDetails({
   combinedCourseParticipationRepository,
   eligibilityRepository,
   recommendedModuleRepository,
+  reward,
 }) {
   const participation = await combinedCourseParticipationRepository.findByLearnerId({
     organizationLearnerId,
@@ -75,6 +76,7 @@ async function getCombinedCourseDetails({
     participation,
     recommendedModuleIdsForUser,
     dataForQuest,
+    reward,
   });
 
   return combinedCourseDetails;

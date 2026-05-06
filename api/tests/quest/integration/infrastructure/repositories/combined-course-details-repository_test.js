@@ -1,8 +1,8 @@
 import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
+import { CombinedCourseDetails } from '../../../../../src/quest/domain/models/CombinedCourseDetails.js';
 import * as combinedCourseDetailsRepository from '../../../../../src/quest/infrastructure/repositories/combined-course-details-repository.js';
 import { expect } from '../../../../test-helper.js';
 import { databaseBuilder } from '../../../../tooling/databases.js';
-import { CombinedCourseDetails } from '../../../../../src/quest/domain/models/CombinedCourseDetails.js';
 
 describe('Quest | Integration | Repository | combined-course-details', function () {
   describe('#findByOrganizationId', function () {

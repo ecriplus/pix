@@ -1,10 +1,11 @@
 import sinon from 'sinon';
 
 import { CombinedCourseStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
+import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
 import { COMBINED_COURSE_ITEM_TYPES } from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
+import { CombinedCourseRewardStatuses } from '../../../../../src/quest/domain/models/CombinedCourseReward.js';
 import * as combinedCourseSerializer from '../../../../../src/quest/infrastructure/serializers/combined-course-serializer.js';
 import { cryptoService } from '../../../../../src/shared/domain/services/crypto-service.js';
-import { expect } from '../../../../test-helper.js';
 import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Quest | Unit | Infrastructure | Serializers | combined-course', function () {
@@ -14,34 +15,23 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
     cryptoService.encrypt.withArgs('/parcours/COMBINIX1').resolves('encryptedCombinedCourseUrl');
     const combinedCourseDetails = domainBuilder.buildCombinedCourseDetails({
       combinedCourseItems: [{ campaignId: 1 }, { moduleId: 7 }],
+      rewardId: 456,
+      rewardType: REWARD_TYPES.ATTESTATION,
     });
     await combinedCourseDetails.setEncryptedUrl();
-    combinedCourseDetails.setDataAndGenerateItems();
+
+    const reward = {
+      id: 456,
+      key: 'key',
+      obtainedAt: new Date(),
+    };
+
+    combinedCourseDetails.setDataAndGenerateItems({ reward });
     // when
     const serializedCombinedCourse = combinedCourseSerializer.serialize(combinedCourseDetails);
 
     // then
-    expect(serializedCombinedCourse).to.deep.equal({
-      data: {
-        attributes: {
-          name: 'Mon parcours',
-          code: 'COMBINIX1',
-          'organization-id': 3,
-          status: CombinedCourseStatuses.NOT_STARTED,
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-          illustration: '/illustrations/image.svg',
-        },
-        type: 'combined-courses',
-        id: '1',
-        relationships: {
-          items: {
-            data: [
-              { id: '1', type: 'combined-course-items' },
-              { id: '7', type: 'combined-course-items' },
-            ],
-          },
-        },
-      },
+    sinon.assert.match(serializedCombinedCourse, {
       included: [
         {
           type: 'combined-course-items',
@@ -77,7 +67,42 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
             image: 'emile7',
           },
         },
+        {
+          type: 'combined-course-rewards',
+          id: '456',
+          attributes: {
+            status: CombinedCourseRewardStatuses.OBTAINED,
+            type: REWARD_TYPES.ATTESTATION,
+            data: sinon.match.object,
+          },
+        },
       ],
+      data: {
+        attributes: {
+          name: 'Mon parcours',
+          code: 'COMBINIX1',
+          'organization-id': 3,
+          status: CombinedCourseStatuses.NOT_STARTED,
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          illustration: '/illustrations/image.svg',
+        },
+        type: 'combined-courses',
+        id: '1',
+        relationships: {
+          items: {
+            data: [
+              { id: '1', type: 'combined-course-items' },
+              { id: '7', type: 'combined-course-items' },
+            ],
+          },
+          reward: {
+            data: {
+              type: 'combined-course-rewards',
+              id: '456',
+            },
+          },
+        },
+      },
     });
   });
 });

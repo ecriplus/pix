@@ -25,6 +25,7 @@ import * as courseRepository from './course-repository.js';
 import * as eligibilityRepository from './eligibility-repository.js';
 import * as moduleRepository from './module-repository.js';
 import * as organizationLearnerParticipationRepository from './organization-learner-participation-repository.js';
+import * as profileRewardRepository from './profile-reward-repository.js';
 import * as questRepository from './quest-repository.js';
 import * as recommendedModuleRepository from './recommended-module-repository.js';
 import * as rewardRepository from './reward-repository.js';
@@ -53,6 +54,7 @@ const repositoriesWithoutInjectedDependencies = {
   targetProfileRepository,
   campaignParticipationRepository,
   attestationRepository,
+  profileRewardRepository,
 };
 
 const dependencies = {
