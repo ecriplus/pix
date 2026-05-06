@@ -36,7 +36,7 @@ test(
     test.slow();
     const pixCertifPage = await pixCertifProContext.newPage();
     await test.step('creates a certification session', async () => {
-      await pixCertifPage.goto(process.env.PIX_CERTIF_ORG_URL as string);
+      await pixCertifPage.goto(process.env.PIX_CERTIF_FR_URL as string);
       await pixCertifPage.getByRole('link', { name: 'Créer une session' }).click();
       const sessionCreationPage = new SessionCreationPage(pixCertifPage);
       await sessionCreationPage.createSession({
@@ -109,7 +109,7 @@ test(
     });
 
     await test.step('invigilatorCode authorizes user to access the certification session', async () => {
-      await pixCertifPage.goto(process.env.PIX_CERTIF_ORG_URL + '/connexion-espace-surveillant');
+      await pixCertifPage.goto(process.env.PIX_CERTIF_FR_URL + '/connexion-espace-surveillant');
       await pixCertifPage.getByLabel('Numéro de la session').fill(sessionNumber);
       await pixCertifPage.getByLabel('Mot de passe de la session').fill(invigilatorCode);
       await pixCertifPage.getByRole('button', { name: 'Surveiller la session' }).click();

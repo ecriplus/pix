@@ -53,7 +53,7 @@ export const PIX_CERTIF_PRO_CREDENTIALS: Credentials = {
   lastName: PIX_CERTIF_PRO_DATA.lastName,
   email: PIX_CERTIF_PRO_DATA.email,
   rawPassword: PIX_CERTIF_PRO_DATA.rawPassword,
-  appUrl: process.env.PIX_CERTIF_ORG_URL as string,
+  appUrl: process.env.PIX_CERTIF_FR_URL as string,
 };
 
 export function getGarTokenForNewUser(firstName: string, lastName: string, expiresIn: ms.StringValue = '1h') {

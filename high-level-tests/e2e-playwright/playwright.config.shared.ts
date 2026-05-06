@@ -63,6 +63,7 @@ export function setupWebServer(app: App, reuseExistingServer: boolean): WebServe
           DATABASE_URL: process.env.DATABASE_URL ?? '',
           DATAMART_DATABASE_URL: process.env.DATAMART_DATABASE_URL ?? '',
           DATAWAREHOUSE_DATABASE_URL: process.env.DATAWAREHOUSE_DATABASE_URL ?? '',
+          JOBS_DATABASE_URL: process.env.JOBS_DATABASE_URL ?? '',
           REDIS_URL: process.env.REDIS_URL ?? '',
           START_JOB_IN_WEB_PROCESS: 'true',
           MAILING_ENABLED: 'false',

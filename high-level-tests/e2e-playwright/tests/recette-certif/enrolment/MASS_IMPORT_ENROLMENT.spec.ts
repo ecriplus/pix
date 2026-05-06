@@ -41,7 +41,7 @@ test(
     const userDataEduSubscription = await getCertifiableUserData('cordelia.chase@example.net');
     const userDataDroitSubscription = await getCertifiableUserData('willow.rosenberg@example.net');
     const userDataProSanteSubscription = await getCertifiableUserData('riley.finn@example.net');
-    await pixCertifProPage.goto(process.env.PIX_CERTIF_ORG_URL!);
+    await pixCertifProPage.goto(process.env.PIX_CERTIF_FR_URL!);
 
     let sessionNumber = '',
       accessCode = '',
