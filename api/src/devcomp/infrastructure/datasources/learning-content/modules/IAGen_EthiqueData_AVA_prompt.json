@@ -44,7 +44,7 @@
                 "url": "https://assets.pix.org/draft/modules/IAGen_Ethique_AVA_prompt/mona_small.png",
                 "alt": "La joconde avec les cheveux blonds",
                 "alternativeText": "",
-                "legend": "Image créée avec ChatGPT et le prompt « génère une image d’une Joconde blonde »",
+                "legend": "Image créée avec ChatGPT et le prompt « génère une image d’une Joconde blonde »",
                 "licence": ""
               }
             },
@@ -94,7 +94,7 @@
                 "id": "037553cd-861e-4707-913a-d6b52d04e38d",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Comme nous l’avons vu, la notion \"d’auteur\" lorsqu’on utilise l’IA peut être débattu. Voyons pourquoi.</p>"
+                "content": "<p>Avec les logiciels d’intelligence artificielle, il devient facile de créer du contenu nouveau, au sens où ce qui a été créé n’existait pas auparavant. C’est une situation inédite qui interroge la notion d’œuvre de l’esprit et le droit d’auteur. Voyons pourquoi.</p>"
               }
             }
           ]
@@ -116,75 +116,113 @@
                 "id": "0cdcab2e-95e3-4f07-99f4-cba40648acd5",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Voici plusieurs situations&nbsp;:&nbsp;<br></p>"
+                "content": "<p>Voici plusieurs situations&nbsp;:<br></p>"
               }
             },
             {
-              "type": "element",
-              "element": {
-                "id": "6d4351bf-5401-405a-910a-f854bce05117",
-                "type": "custom",
-                "title": "Prompts",
-                "instruction": "<p>Pour chacune des requêtes ou situations suivantes, sélectionnez celle où on voit un effort créatif de la part de l’utilisateur. </p>",
-                "functionalInstruction": "",
-                "tagName": "quiz-stepper",
-                "props": {
-                  "titleLevel": 0,
-                  "steps": [
+              "type": "stepper",
+              "instruction": "<p>Voici plusieurs situations. Pour chacune de ces situations, dites si, selon vous, l’utilisateur montre un choix créatif&nbsp;:&nbsp;<br></p>",
+              "steps": [
+                {
+                  "elements": [
                     {
-                      "question": "Laquelle de ces deux requêtes montre un réel effort créatif ?",
-                      "feedback": {
-                        "success": "En effet, ici l’utilisateur montre déjà des choix d’orientation, de style etc.",
-                        "failed": "Ici ce prompt est très simple. Si l’utilisateur utilise ce logo, il n’aura fait aucun effort créatif."
-                      },
-                      "choice1": {
-                        "title": "Prompt 1",
-                        "content": "Crée un logo pour une association de jeux de rôle nommé \"L’atelier des mondes\".",
-                        "isGoodAnswer": false
-                      },
-                      "choice2": {
-                        "title": "Prompt 2 ",
-                        "content": "Crée un logo en combinant des éléments d’artisanat (atelier, outils) et d’imaginaire (mondes fantastiques, dragons). Style illustratif, avec une ambiance mystérieuse.",
-                        "isGoodAnswer": true
-                      }
+                      "id": "fcf2a3b9-1ac6-4ffc-99cb-60ec3908fbe1",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p>Romain souhaite créer un logo. Il utilise un logiciel d’IA générative et prompte&nbsp;: \"Crée un logo pour une association de jeux de rôle nommé \"L’atelier des mondes\". Il utilise le logo créé par l’IA générative pour le site web de l’association.</p>"
                     },
                     {
-                      "question": "Laquelle de ces deux requêtes montre un réel effort créatif ?",
-                      "feedback": {
-                        "success": "Effectivement, ce prompt met en avant des choix esthétiques précis.",
-                        "failed": "Eh non, ce prompt reste très simple. Le deuxième prompt met en avant des choix esthétiques précis."
-                      },
-                      "choice1": {
-                        "title": "Prompt 1",
-                        "content": "Génère 25 images représentant un coucher de soleil pour une image de publicité.",
-                        "isGoodAnswer": false
-                      },
-                      "choice2": {
-                        "title": "Prompt 2",
-                        "content": "Génère une image d’un paysage de montagne au lever du soleil, avec une lumière dorée, un lac calme au premier plan et une ambiance brumeuse. Style réaliste avec une touche cinématographique",
-                        "isGoodAnswer": true
-                      }
+                      "id": "8cd4b444-1da3-41b9-a8bc-40ab0272cfef",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Y a-t-il eu selon vous un effort créatif pour créer ce logo ? <br></p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Oui",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non, ici ce prompt est très simple. Si l’utilisateur utilise ce logo, il n’aura fait aucun effort créatif.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Non ",
+                          "feedback": {
+                            "diagnosis": "<p>En effet !&nbsp;Ici ce prompt est très simple. Si l’utilisateur utilise ce logo, il n’aura fait aucun effort créatif.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "bf11665e-cef9-4d62-b15c-78be69b8e4d1",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p>Jeanne souhaite créer une image pour son site web. Elle rédige alors le prompt suivant&nbsp;: «&nbsp;Génère une image d’un paysage de montagne au lever du soleil, avec une lumière dorée, un lac paisible au premier plan et une atmosphère légèrement brumeuse.&nbsp;La scène est traitée dans un style réaliste, avec une composition soignée et une profondeur de champ subtile, enrichie d’une esthétique cinématographique (jeu de lumière dramatique, contraste maîtrisé, légère granulation)&nbsp;» Satisfaite du résultat, elle décide d’utiliser l’image sur son site web.</p>"
                     },
                     {
-                      "question": "Laquelle de ces deux situations montre un réel effort créatif ?",
-                      "feedback": {
-                        "success": "Eh oui ! Le prompt peut être simple mais si le résultat est retravaillé, il y a quand même un effort créatif humain.",
-                        "failed": "Eh non. Le prompt peut être simple mais si le résultat est retravaillé, il y a quand même un effort créatif humain."
-                      },
-                      "choice1": {
-                        "title": "Prompt 1 ",
-                        "content": "Génère cinq images d’un logo dans le style fantasy avec des dragons”. L’utilisateur télécharge les fichiers générés et les présentera ses amis pour avis.",
-                        "isGoodAnswer": false
-                      },
-                      "choice2": {
-                        "title": "Situation 2",
-                        "content": "\"Génère cinq images d’un logo dans le style fantasy avec des dragons\". L’utilisateur retouche ensuite l’une des cinq images pendant 3h.",
-                        "isGoodAnswer": true
-                      }
+                      "id": "bdc43e6a-b205-4b23-9f25-b42c70546330",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Y a-t-il eu selon vous un effort créatif pour créer ce logo ?</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Oui",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu ! Dans ce prompt, l’utilisateur montre déjà des choix d’orientation, de style, d’esthétique, etc.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Non",
+                          "feedback": {
+                            "diagnosis": "<p>Eh si !&nbsp;Dans ce prompt, l’utilisateur montre déjà des choix d’orientation, de style, d’esthétique, etc.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "dd4a5df4-38d0-40cb-a214-f317640296d2",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p>Maé aimerait refaire le logo de son équipe de roller. Il prompte \"Génère cinq images d’un logo pour une association de roller derby\". Maé en sélectionne une qu’il retouche en modifiant la taille.</p>"
+                    },
+                    {
+                      "id": "2786c781-131e-4669-b158-36c1fd00e07a",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Y a-t-il eu selon vous un effort créatif pour créer ce logo ?</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Oui",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non ! Les modifications sont ici trop limitées pour constituer un apport créatif réel ! Maé n’a pas fait de choix originaux.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Non",
+                          "feedback": {
+                            "diagnosis": "<p>Bien joué !&nbsp;Les modifications sont ici trop limitées pour constituer un apport créatif réel ! Maé n’a pas fait de choix originaux.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
                     }
                   ]
                 }
-              }
+              ]
             }
           ]
         },
@@ -203,7 +241,7 @@
                       "id": "56d6de2c-b52e-4fa2-b524-6586883c87fa",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Pour savoir si un contenu produit avec une IA est une œuvre, on va chercher à savoir quelle est <strong>la part d’effort créatif de l’humain</strong> dans la création. Cela peut être par exemple&nbsp;:&nbsp;</p><ul><li>Un travail de <strong>réécriture</strong> ou de <strong>retouche</strong> sur le contenu généré.</li><li>Un choix de point de vue, une contrainte stylistique, une <strong>orientation esthétique </strong>ou intellectuelle au sein du prompt. </li></ul>"
+                      "content": "<p>Pour savoir si un contenu produit avec une IA est une œuvre, on va chercher à savoir quelle est <strong>la part d’effort créatif de l’humain</strong> dans la création. Cela peut être par exemple&nbsp;:&nbsp;</p><ul><li>Un travail de <strong>réécriture</strong> ou de <strong>retouche</strong> sur le contenu généré.</li><li>Un choix de point de vue, une <strong>contrainte stylistique</strong>, une <strong>orientation esthétique </strong>ou <strong>intellectuelle</strong> au sein du prompt. </li></ul>"
                     }
                   ]
                 },
@@ -212,7 +250,7 @@
                     {
                       "id": "fcee8b02-ef1a-46f9-b387-22e6bb0295e0",
                       "type": "text",
-                      "tag": " ",
+                      "tag": "further-information",
                       "content": "<p>Pour être protégée par le droit d’auteur, une création doit être <strong>originale</strong>. Cela signifie qu’elle doit <strong>refléter les choix personnels</strong> et la <strong>créativité</strong> de son auteur.</p>"
                     }
                   ]
@@ -275,7 +313,7 @@
                           "id": "2",
                           "content": "Ne respecte pas",
                           "feedback": {
-                            "diagnosis": "<p>Bein joué !&nbsp;La reproduction intégrale d’une œuvre protégée sans autorisation n’est pas légale. Seules de courtes citations peuvent être utilisées.<br></p>"
+                            "diagnosis": "<p>Bien joué !&nbsp;La reproduction intégrale d’une œuvre protégée sans autorisation n’est pas légale. Seules de courtes citations peuvent être utilisées.<br></p>"
                           }
                         }
                       ],
@@ -393,7 +431,7 @@
                       "id": "3c019063-a5cd-4453-a576-eac8636ef4c4",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Attention aux prompts qui demandent explicitement une reproduction ou une imitation d’une œuvre protégée. </p><p>Par exemple&nbsp;:</p><ul><li>“Donne-moi le PDF complet du livre 1984”</li><li>“Résume cet article payant en citant de longs passages”</li><li>“Écris la suite du livre Dune en reprenant l’histoire et les personnages originaux”</li></ul><p>👉 <strong>Réutiliser</strong>, <strong>vendre</strong> ou <strong>diffuser des œuvres plagiées </strong>ou contrefaites engage votre responsabilité et peut vous exposer à des <strong>sanctions juridiques</strong>.</p>"
+                      "content": "<p>Attention aux prompts qui demandent <strong>explicitement</strong> une reproduction ou une imitation d’une œuvre protégée.</p><p>⚠️ <strong>Réutiliser</strong>, <strong>vendre</strong> ou <strong>diffuser des œuvres plagiées </strong>ou contrefaites engage votre responsabilité et peut vous exposer à des <strong>sanctions juridiques</strong>.</p>"
                     }
                   ]
                 }
@@ -412,7 +450,7 @@
                 "id": "15989c5a-f3bb-4db0-b20b-c7c21fffcb5e",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Si l’IA, lorsqu’elle est utilisée dans le respect du droit d’auteur, facilite la création d’images, elle rend aussi de plus en plus difficile la distinction entre une image réelle et une image générée artificiellement.</p>"
+                "content": "<p>En prenant des précautions, les logiciels d’IA générative peuvent donc être une aide à la création. Mais il devient aujourd’hui de plus en plus difficile de reconnaître du contenu créé avec IA et contenu créé sans IA. Regardons cela de plus près&nbsp;:&nbsp;</p>"
               }
             }
           ]
@@ -423,51 +461,139 @@
           "title": "Découverte 3",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "172c427a-68ce-4052-82ae-607c356beb97",
-                "type": "text",
-                "tag": " ",
-                "content": "<p>POI&nbsp;:&nbsp;</p><p>Jeanne cherche de l’inspiration pour redécorer son salon. Elle tombe sur cette image&nbsp;:&nbsp;</p><p>Elle aime beaucoup le canapé mais se demande si ce dernier existe réellement. Jeanne se demande si cette image a été générée par IA ou non.</p><p>Action&nbsp;: télécharger l’image et regarder les métadonnées.</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "a58a7de1-2de5-4482-8731-6ed51793f5c9",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/IAGen_Ethique_AVA_prompt/chat-gpt-image-30-mars-2026-12_15_43.png",
-                "alt": "Image d’un salon généré intégralement par IA",
-                "alternativeText": "",
-                "legend": "Image type Pinterest",
-                "licence": ""
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "4e264b1f-4e8f-4816-bdbf-5ddb05ba8f69",
-                "type": "qcu-discovery",
-                "instruction": "<p>L’image de ce salon a-t-elle été généré intégralement par IA ?</p>",
-                "hasShortProposals": true,
-                "proposals": [
-                  {
-                    "id": "1",
-                    "content": "Oui",
-                    "feedback": {
-                      "diagnosis": "<p>Bien joué&nbsp;! Comme on peut le voir ici, les <strong>métadonnées</strong> contiennent des informations importantes pour détecter si oui ou non l’IA a été utilisée pour créer une image.<br></p>"
+              "type": "stepper",
+              "instruction": "",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "4cf94ae5-d948-4937-873e-5f0e802d1fa0",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/IAGen_Ethique_AVA_prompt/dec3-2.jpeg",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "0083bdf0-dd58-4ae8-a4ce-5b64eefc7ad4",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Qui a créé ce contenu ?&nbsp;<br></p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Un logiciel d’IA",
+                          "feedback": {
+                            "diagnosis": "<p>Pas tout à fait ! On voit au début de l’article la mention \"particellement généré par IA\". On ne sait pas, par contre, la part de contenu fait avec IA et la part retravaillé par l’auteur.<br></p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Un humain",
+                          "feedback": {
+                            "diagnosis": "<p>Pas tout à fait ! On voit au début de l’article la mention \"particellement généré par IA\". On ne sait pas, par contre, la part de contenu fait avec IA et la part retravaillé par l’auteur.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "Humain + IA",
+                          "feedback": {
+                            "diagnosis": "<p>En effet ! On voit au début de l’article la mention \"particellement généré par IA\". On ne sait pas, par contre, la part de contenu fait avec IA et la part retravaillé par l’auteur.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
                     }
-                  },
-                  {
-                    "id": "2",
-                    "content": "Non",
-                    "feedback": {
-                      "diagnosis": "<p>Eh non&nbsp;! Comme on peut le voir ici, les <strong>métadonnées</strong> contiennent des informations importantes pour détecter si oui ou non l’IA a été utilisée pour créer une image.</p>"
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "84a21a6a-9c4a-4574-b031-e0c93fbcc107",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/IAGen_Ethique_AVA_prompt/dec3-1.png",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "217fa7c0-71f6-4fc3-acc2-7179c0e7deec",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Qui a créé ce contenu ?</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Un logiciel d’IA",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu ! Sur l’image, on voit un <strong>filigrane</strong> (ou \"<strong><em>watermark</em></strong>\" en anglais) visible qui montre que l’image a été créé intégralement par une IA. Mais il est important de savoir que le <strong>filigrane peut aussi être invisible</strong> (c’est-à-dire dans le code de l’image) !<br></p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Un humain",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non. Sur l’image, on voit un <strong>filigrane</strong> (ou \"<strong>watermark</strong>\" en anglais) visible qui montre que l’image a été créé intégralement par une IA. Mais il est important de savoir que le filigrane peut aussi être <strong>invisible</strong> (c’est-à-dire dans le code de l’image) !</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "Humain + IA",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non ! Sur l’image, on voit un <strong>filigrane</strong> (ou \"<strong>watermark</strong>\" en anglais) visible qui montre que l’image a été créé intégralement par une IA. Mais il est important de savoir que le filigrane peut aussi être <strong>invisible</strong> (c’est-à-dire dans le code de l’image) !</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
                     }
-                  }
-                ],
-                "solution": "1"
-              }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "ad4ca922-45f2-4d7c-9850-f322207fb33f",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/IAGen_Ethique_AVA_prompt/dec3-3.png",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "503861d4-771f-4267-bd24-441df7895612",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>Qui a créé ce contenu ?</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Un logiciel d’IA",
+                          "feedback": {
+                            "diagnosis": "<p>Oui, cette image pourrait aussi avoir été créée par un humain. Pour le vérifier, on peut regarder ses informations techniques (appelées métadonnées)&nbsp;: la loi oblige les images générées par IA à être signalées, par exemple via ces informations ou un marquage invisible.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Un humain",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non ! Cette image a été intégralement générée par un logiciel d’IA générative. Pour le vérifier, on peut regarder ses informations techniques (appelées métadonnées)&nbsp;: la loi oblige les images générées par IA à être signalées, par exemple via ces informations ou un marquage invisible.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "Un humain + IA",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non ! Cette image a été intégralement générée par un logiciel d’IA générative. Pour le vérifier, on peut regarder ses informations techniques (appelées métadonnées)&nbsp;: la loi oblige les images générées par IA à être signalées, par exemple via ces informations ou un marquage invisible.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -796,10 +922,10 @@
             {
               "type": "element",
               "element": {
-                "id": "ecf842fc-8e21-4f3f-bf0d-5955e0a3679d",
+                "id": "6227073b-33a4-428a-95f2-22339f89239f",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Aujourd’hui, des associations tentent de créer des logos et des marquages \"fait par humain\" ou \"fait sans IA\".&nbsp;</p><p>En voici quelques-uns&nbsp;:&nbsp;</p>"
+                "content": "<p>Vous venez d’écouter une chanson que vous avez trouvé super sur une plateforme de streaming. En cherchant plus de détail sur l’auteur, vous vous rendez compte que cette musique a été intégralement généré par IA, sans aucune intervention humaine et sans aucune mention sur la plateforme d’écoute. <br></p>"
               }
             },
             {
@@ -807,21 +933,35 @@
               "element": {
                 "id": "4d226842-13a8-4546-8917-a3216b18ee39",
                 "type": "qcu-declarative",
-                "instruction": "<p>Les connaissiez-vous ?</p>",
-                "hasShortProposals": true,
+                "instruction": "<p>Quel est votre sentiment ?</p>",
+                "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "Oui",
+                    "content": "<p>Cela ne me dérange pas, peu importe l’origine tant que la musique me plaît.</p>",
                     "feedback": {
-                      "diagnosis": "<p>...<br></p>"
+                      "diagnosis": "<p>Chacun peut réagir différemment face aux contenus générés par IA. Il est important de garder en mémoire qu’en tant qu’utilisateurs, nous ne sommes pas toujours informés si un humain ou une IA est derrière la \"création\".</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "Non",
+                    "content": "<p>Cela me dérange de ne pas être informé que la musique a été générée par IA.</p>",
                     "feedback": {
-                      "diagnosis": "<p>...<br></p>"
+                      "diagnosis": "<p>En effet, aujourd’hui, de nombreuses plateformes n’indiquent pas si le contenu a été généré par IA, ce qui peut être trompeur.&nbsp;<br></p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Cela remet en question la valeur artistique de la musique.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Effectivement, comme nous l’avons vu, sans apport créatif humain, on peut remettre en question la qualité de ce qui a été produit par le logiciel d’IA générative.<br></p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Cela me gêne, je préfère soutenir les artistes humains.&nbsp;</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Effectivement, il existe de plus en plus de mouvements aujourd’hui prônant le «&nbsp;fait sans IA&nbsp;» et des mouvements de soutien aux artistes.</p>"
                     }
                   }
                 ]
