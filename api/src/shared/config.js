@@ -19,6 +19,11 @@ function toBoolean(environmentVariable) {
   return environmentVariable === 'true';
 }
 
+/**
+ * @template T
+ * @param {string=} numberAsString
+ * @param {T} defaultValue
+ */
 function _getNumber(numberAsString, defaultValue) {
   const number = parseInt(numberAsString, 10);
   return isNaN(number) ? defaultValue : number;
@@ -152,6 +157,10 @@ const schema = Joi.object({
   LLM_CONFIGURATION_EDITOR_API_JWT_SECRET: Joi.string().optional(),
   LLM_INFERENCE_API_POST_PROMPT_URL: Joi.string().optional(),
   LLM_INFERENCE_API_JWT_SECRET: Joi.string().optional(),
+  LLM_DELETE_CHATS_JOB_LIFESPAN: Joi.number().min(0).optional(),
+  LLM_DELETE_CHATS_JOB_DRY_RUN: Joi.string().optional().valid('true', 'false'),
+  LLM_DELETE_CHATS_JOB_CRON: Joi.string().optional(),
+  LLM_DELETE_CHATS_JOB_MS_BETWEEN_CHUNKS: Joi.number().min(0).optional(),
   LOG_ENABLED: Joi.string().required().valid('true', 'false'),
   LOG_FOR_HUMANS: Joi.string().optional().valid('true', 'false'),
   LOG_LEVEL: Joi.string().optional().valid('silent', 'fatal', 'error', 'warn', 'info', 'debug', 'trace'),
@@ -372,6 +381,13 @@ const configuration = (function () {
           process.env.LLM_CONFIGURATION_EDITOR_API_GET_CONFIGURATION_URL ?? '',
         ),
         authSecret: process.env.LLM_CONFIGURATION_EDITOR_API_JWT_SECRET,
+      },
+      deleteChatsJob: {
+        lifespan: _getNumber(process.env.LLM_DELETE_CHATS_JOB_LIFESPAN, 80),
+        cron: process.env.LLM_DELETE_CHATS_JOB_CRON || '0 19 * * *',
+        dryRun: process.env.LLM_DELETE_CHATS_JOB_DRY_RUN ? toBoolean(process.env.LLM_DELETE_CHATS_JOB_DRY_RUN) : true,
+        chunkSize: _getNumber(process.env.LLM_DELETE_CHATS_JOB_CHUNK_SIZE, 3_333),
+        msBetweenChunks: _getNumber(process.env.LLM_DELETE_CHATS_JOB_MS_BETWEEN_CHUNKS, 10),
       },
     },
     logging: {
