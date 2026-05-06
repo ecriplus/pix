@@ -60,11 +60,20 @@ export default defineConfig({
       extensions,
     }),
   ],
+  preview: {
+    port: 4201,
+    proxy: {
+      '/api': {
+        target: `http://localhost:${process.env.PIX_API_PORT ? process.env.PIX_API_PORT : 3000}`,
+        xfwd: true,
+      },
+    },
+  },
   server: {
     port: 4201,
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
+        target: `http://localhost:${process.env.PIX_API_PORT ? process.env.PIX_API_PORT : 3000}`,
         xfwd: true,
       },
     },
