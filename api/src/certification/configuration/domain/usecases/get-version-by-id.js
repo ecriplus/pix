@@ -5,7 +5,7 @@
  * @typedef {import ('./index.js').VersionRepository} VersionRepository
  */
 
-import { NotFoundError } from "../../../../shared/domain/errors.js";
+import { NotFoundError } from '../../../../shared/domain/errors.js';
 
 /**
  * @param {object} params

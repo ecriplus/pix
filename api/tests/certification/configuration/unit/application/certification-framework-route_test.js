@@ -59,54 +59,6 @@ describe('Unit | Certification | Configuration | Application | Router | certific
     });
   });
 
-  describe('GET /api/admin/certification-frameworks/{scope}/active-consolidated-framework', function () {
-    describe('when the user authenticated has no role', function () {
-      it('should return 403 HTTP status code', async function () {
-        // given
-        sinon
-          .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
-          .returns((request, h) => h.response().code(403).takeover());
-        sinon.stub(certificationFrameworkController, 'getActiveConsolidatedFramework').returns('ok');
-        const httpTestServer = new HttpTestServer();
-        await httpTestServer.register(moduleUnderTest);
-
-        // when
-        const response = await httpTestServer.request(
-          'GET',
-          `/api/admin/certification-frameworks/${SCOPES.CORE}/active-consolidated-framework`,
-        );
-
-        // then
-        expect(response.statusCode).to.equal(403);
-        sinon.assert.notCalled(certificationFrameworkController.getActiveConsolidatedFramework);
-      });
-    });
-
-    describe('when the user has an authorized role', function () {
-      const authorizedRoles = ['SuperAdmin', 'Support', 'Certif', 'Metier'];
-
-      authorizedRoles.forEach((role) => {
-        it(`should return 200 HTTP status code when user has ${role} role`, async function () {
-          // given
-          sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').callsFake(() => (request, h) => h.response(true));
-          sinon.stub(certificationFrameworkController, 'getActiveConsolidatedFramework').returns('ok');
-          const httpTestServer = new HttpTestServer();
-          await httpTestServer.register(moduleUnderTest);
-
-          // when
-          const response = await httpTestServer.request(
-            'GET',
-            `/api/admin/certification-frameworks/${SCOPES.CORE}/active-consolidated-framework`,
-          );
-
-          // then
-          expect(response.statusCode).to.equal(200);
-          sinon.assert.calledOnce(certificationFrameworkController.getActiveConsolidatedFramework);
-        });
-      });
-    });
-  });
-
   describe('GET /api/admin/certification-frameworks/{scope}/framework-history', function () {
     describe('when the user authenticated has no role', function () {
       it('should return 403 HTTP status code', async function () {
