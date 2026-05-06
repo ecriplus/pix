@@ -8,6 +8,7 @@ import QuitResults from '../../../campaigns/assessment/results/quit-results';
 import EvaluationResultsHeroRecommendationEngine from '../../../campaigns/assessment/results-recommendation-engine/evaluation-results-hero-recommendation-engine';
 
 export default class EvaluationResultsRecommendationEngine extends Component {
+  @service media;
   @service tabManager;
 
   get hasTrainings() {
@@ -40,7 +41,9 @@ export default class EvaluationResultsRecommendationEngine extends Component {
       <header class="evaluation-results__header">
         <img class="evaluation-results-header__logo" src="/images/pix-logo-dark.svg" alt="{{t 'common.pix'}}" />
         <h1 class="evaluation-results-header__title">
-          <span>{{@model.campaign.title}}</span>
+          {{#unless this.media.isMobile}}
+            <span>{{@model.campaign.title}}</span>
+          {{/unless}}
           <span class="sr-only">{{t "pages.skill-review.abstract-title"}}</span>
         </h1>
         <QuitResults />

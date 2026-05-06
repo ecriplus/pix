@@ -1,4 +1,5 @@
 import { visit } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 import { currentURL } from '@ember/test-helpers';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 import { setupApplicationTest } from 'ember-qunit';
@@ -62,6 +63,24 @@ module('Acceptance | Campaigns | Results | Recommendation Engine', function (hoo
 
       // then
       assert.dom('.evaluation-results:not(.evaluation-results-recommendation-engine)').doesNotExist();
+    });
+
+    module('when device is mobile', function () {
+      test('should not display campaign title', async function (assert) {
+        // given
+        this.owner.register(
+          'service:media',
+          class MediaService extends Service {
+            isMobile = true;
+          },
+        );
+
+        // when
+        const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
+
+        // then
+        assert.dom(screen.queryByText(campaign.title)).doesNotExist();
+      });
     });
   });
 
