@@ -113,6 +113,9 @@ export default function routes() {
       },
     });
   });
+  this.get('/admin/certification-versions/:id', (schema, request) => {
+    return schema.certificationVersions.find(request.params.id);
+  });
   this.patch('/admin/certification-versions/:id', (schema, request) => {
     const certificationVersionId = request.params.id;
     const certificationVersion = schema.certificationVersions.find(certificationVersionId);

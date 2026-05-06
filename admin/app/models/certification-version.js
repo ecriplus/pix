@@ -1,11 +1,11 @@
-import Model, { attr } from '@ember-data/model';
+import Model, { attr, hasMany } from '@ember-data/model';
 
 export default class CertificationVersion extends Model {
-  @attr('string') scope;
   @attr('date') startDate;
   @attr('date') expirationDate;
   @attr('number') assessmentDuration;
-  @attr() globalScoringConfiguration;
-  @attr() competencesScoringConfiguration;
-  @attr() challengesConfiguration;
+  @attr('number') minimumAnswersRequiredToValidateACertification;
+  @attr('number') maximumAssessmentLength;
+
+  @hasMany('area', { async: false, inverse: null }) areas;
 }
