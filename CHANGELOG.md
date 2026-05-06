@@ -1,5 +1,23 @@
 # Pix Changelog
 
+# [5.402.0](https://github.com/1024pix/pix/compare/v5.401.2...v5.402.0) (2026-05-06)
+
+### :rocket: Amélioration
+
+- [#16100](https://github.com/1024pix/pix/pull/16100) ia-droit-auteur-v2 
+- [#16098](https://github.com/1024pix/pix/pull/16098) MDX-232 Moteur_rech_info_nov2 modification avant envoi rele… 
+
+### :bug: Correction
+
+- [#16093](https://github.com/1024pix/pix/pull/16093) Afficher l'erreur dédiée si un utilisateur ajoute un email déjà existant (PIX-22271) 
+- [#16116](https://github.com/1024pix/pix/pull/16116) Déclencher les migrations pgboss 
+- [#16121](https://github.com/1024pix/pix/pull/16121) Ignorer un test flaky de high-level-tests/e2e-playwright/tests/pix-orga/sco-students-management.test.ts 
+
+### :arrow_up: Montée de version
+
+- [#16101](https://github.com/1024pix/pix/pull/16101) Update dependency eslint-plugin-ember to v13 (certif) 
+- [#16111](https://github.com/1024pix/pix/pull/16111) Update dependency tracked-toolbox to v3 (mon-pix)
+
 ## [5.401.2](https://github.com/1024pix/pix/compare/v5.401.1...v5.401.2) (2026-05-05)
 
 ### :bug: Correction
