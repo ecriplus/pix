@@ -101,18 +101,6 @@ export default function routes() {
     adminMember.destroy();
   });
 
-  this.get('/admin/certification-versions/:scope/active', (schema) => {
-    return schema.create('certification-version', {
-      scope: 'CORE',
-      challengesConfiguration: {
-        maximumAssessmentLength: 32,
-        challengesBetweenSameCompetence: 2,
-        variationPercent: 0.5,
-        limitToOneQuestionPerTube: true,
-        enablePassageByAllCompetences: false,
-      },
-    });
-  });
   this.get('/admin/certification-versions/:id', (schema, request) => {
     return schema.certificationVersions.find(request.params.id);
   });

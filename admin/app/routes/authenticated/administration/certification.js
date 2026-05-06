@@ -28,12 +28,8 @@ export default class CertificationRoute extends Route {
       dates = [];
     }
 
-    const version = await this.store.queryRecord('certification-version', {
-      scope: 'CORE',
-    });
     return {
       scoBlockedAccessDates: dates,
-      certificationVersion: version,
     };
   }
 }

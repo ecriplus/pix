@@ -1,6 +1,6 @@
-import PixModal from "@1024pix/pix-ui/components/pix-modal";
-import { t } from "ember-intl";
-import formatDate from "ember-intl/helpers/format-date";
+import PixModal from '@1024pix/pix-ui/components/pix-modal';
+import { t } from 'ember-intl';
+import formatDate from 'ember-intl/helpers/format-date';
 
 <template>
   <PixModal

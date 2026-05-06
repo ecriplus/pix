@@ -1,18 +1,18 @@
-import PixIcon from "@1024pix/pix-ui/components/pix-icon";
-import PixIconButton from "@1024pix/pix-ui/components/pix-icon-button";
-import PixTable from "@1024pix/pix-ui/components/pix-table";
-import PixTableColumn from "@1024pix/pix-ui/components/pix-table-column";
-import PixTag from "@1024pix/pix-ui/components/pix-tag";
-import { concat, fn, get } from "@ember/helper";
-import { action } from "@ember/object";
-import { service } from "@ember/service";
-import Component from "@glimmer/component";
-import { tracked } from "@glimmer/tracking";
-import { t } from "ember-intl";
-import formatDate from "ember-intl/helpers/format-date";
-import { eq, not } from "ember-truth-helpers";
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
+import PixTable from '@1024pix/pix-ui/components/pix-table';
+import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
+import PixTag from '@1024pix/pix-ui/components/pix-tag';
+import { concat, fn, get } from '@ember/helper';
+import { action } from '@ember/object';
+import { service } from '@ember/service';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { t } from 'ember-intl';
+import formatDate from 'ember-intl/helpers/format-date';
+import { eq, not } from 'ember-truth-helpers';
 
-import CertificationVersionDetailModal from "./certification-version-detail-modal";
+import CertificationVersionDetailModal from './certification-version-detail-modal';
 
 const STATUS_COLORS = { ACTIVE: 'success', DRAFT: 'tertiary', ARCHIVED: 'secondary' };
 
@@ -40,7 +40,7 @@ export default class FrameworkHistory extends Component {
     this.selectedVersion = null;
   }
 
-<template>
+  <template>
     <section class="framework-versions">
       <PixTable
         @variant="admin"
