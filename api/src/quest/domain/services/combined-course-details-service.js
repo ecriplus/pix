@@ -147,11 +147,11 @@ async function getCombinedCourseDetailsForMultipleLearners({
     const state = {
       id: combinedCourseDetails.id,
       status: combinedCourseDetails.status,
-      participation: combinedCourseDetails.participation,
+      participation,
       items: combinedCourseDetails.items,
     };
 
-    if (participation) {
+    if (combinedCourseDetails.hasParticipation) {
       state.participationDetails = combinedCourseDetails.participationDetails;
     }
 

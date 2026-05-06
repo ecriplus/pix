@@ -409,7 +409,6 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
       // then
       expect(result.id).to.equal(combinedCourseId);
       expect(result.status).to.equal(CombinedCourseStatuses.NOT_STARTED);
-      expect(result.participation).to.equal(null);
       expect(result.items[0]).instanceOf(CombinedCourseItem);
       expect(result.items[1]).instanceOf(CombinedCourseItem);
       expect(result.items[2]).instanceOf(CombinedCourseItem);

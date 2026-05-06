@@ -20,8 +20,9 @@ export class CombinedCourseDetails extends CombinedCourse {
   cryptoService = null;
   items = [];
   #combinedCourseUrl = null;
-  participation = null;
+  #participation = null;
   dataForQuest = null;
+  reward = null;
 
   constructor(
     { id, code, organizationId, name, description, illustration, questId },
@@ -54,7 +55,7 @@ export class CombinedCourseDetails extends CombinedCourse {
   }
 
   get hasParticipation() {
-    return this.participation !== null;
+    return this.#participation !== null;
   }
 
   get campaignIds() {
@@ -69,16 +70,20 @@ export class CombinedCourseDetails extends CombinedCourse {
       .map(({ data }) => data.moduleId.data);
   }
 
+  get participation() {
+    return this.#participation;
+  }
+
   get participationDetails() {
     return new CombinedCourseParticipationDetails({
-      id: this.participation.id,
+      id: this.#participation.id,
       status: this.status,
-      firstName: this.participation.firstName,
-      lastName: this.participation.lastName,
-      division: this.participation.division,
-      group: this.participation.group,
-      createdAt: this.participation.createdAt,
-      updatedAt: this.participation.updatedAt,
+      firstName: this.#participation.firstName,
+      lastName: this.#participation.lastName,
+      division: this.#participation.division,
+      group: this.#participation.group,
+      createdAt: this.#participation.createdAt,
+      updatedAt: this.#participation.updatedAt,
       hasFormationItem: this.items.some(({ type }) => type === COMBINED_COURSE_ITEM_TYPES.FORMATION),
       nbCampaigns: this.items.filter(({ type }) => type === COMBINED_COURSE_ITEM_TYPES.CAMPAIGN).length,
       nbModules: this.items.filter(
@@ -181,16 +186,16 @@ export class CombinedCourseDetails extends CombinedCourse {
     });
     this.#generateItems({
       dataForQuest: updatedDataForQuest,
-      participation: this.participation,
+      participation: this.#participation,
     });
     return this;
   }
 
   get status() {
-    if (!this.participation) {
+    if (!this.#participation) {
       return CombinedCourseStatuses.NOT_STARTED;
     } else {
-      return this.participation.status === CombinedCourseParticipationStatuses.STARTED
+      return this.#participation.status === CombinedCourseParticipationStatuses.STARTED
         ? CombinedCourseStatuses.STARTED
         : CombinedCourseStatuses.COMPLETED;
     }
@@ -280,7 +285,7 @@ export class CombinedCourseDetails extends CombinedCourse {
     reward = null,
   } = {}) {
     this.recommendedModuleIdsForUser = recommendedModuleIdsForUser;
-    this.participation = participation;
+    this.#participation = participation;
     this.#generateItems({ dataForQuest });
     this.reward = reward ? new CombinedCourseReward({ combinedCourseDetails: this, reward }) : null;
   }
