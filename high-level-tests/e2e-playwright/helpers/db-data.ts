@@ -55,6 +55,7 @@ export const CERTIFICATIONS_DATA = {
   EDU_1ER_DEGRE: 'EDU_1ER_DEGRE',
   DROIT: 'DROIT',
   PRO_SANTE: 'PRO_SANTE',
+  CORE: 'CORE',
 };
 
 export const PIX_CERTIF_PRO_DATA = {

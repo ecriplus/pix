@@ -77,7 +77,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
   enrollCandidate: async ({ pixCertifProPage }, use) => {
     const enrollCandidate = async ({
       testRef,
-      certificationKey = 'CORE',
+      certificationKey = CERTIFICATIONS_DATA.CORE,
       certifiableUserData,
     }: EnrollCandidateParams) => {
       let sessionNumber = '',

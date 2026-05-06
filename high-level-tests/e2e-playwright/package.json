@@ -27,6 +27,7 @@
     "test:certif:snapshot": "npm run test:base && UPDATE_SNAPSHOTS=true playwright test --config playwright.config.certif.ts --grep @snapshot",
     "test:certif:snapshot:testref": "npm run test:base && ts-node scripts/recette-certif/run-by-test-ref.ts --snapshot",
     "test:certif:ui": "npm run test:base && playwright test --config playwright.config.certif.ts --ui",
+    "test:certif:snapshot:ui": "npm run test:base && UPDATE_SNAPSHOTS=true playwright test --config playwright.config.certif.ts --ui",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "tsc": "tsc -b"

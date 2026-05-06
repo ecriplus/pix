@@ -20,7 +20,7 @@ export default defineConfig({
 
   use: {
     locale: 'fr-FR',
-    timezoneId: 'Europe/Paris',
+    timezoneId: 'UTC',
     screenshot: isCI ? 'only-on-failure' : 'off',
     ignoreHTTPSErrors: true,
   },

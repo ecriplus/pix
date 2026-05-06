@@ -33,4 +33,8 @@ export class InvigilatorOverviewPage {
       .getByText(`Succès ! Le test de ${firstName} ${lastName} est terminé.`)
       .waitFor({ state: 'visible' });
   }
+
+  async close() {
+    await this.page.close();
+  }
 }
