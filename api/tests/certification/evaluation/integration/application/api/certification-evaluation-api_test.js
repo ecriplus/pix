@@ -12,7 +12,6 @@ describe('Integration | Application | Certification | Evaluation | API', functio
   describe('#selectNextCertificationChallenge', function () {
     it('should call the next challenge selection usecase', async function () {
       // given
-      const locale = 'fr-fr';
       const certificationCenter = databaseBuilder.factory.buildCertificationCenter({
         id: 99,
       });
@@ -35,6 +34,7 @@ describe('Integration | Application | Certification | Evaluation | API', functio
         assessmentId: assessment.id,
         sessionId: session.id,
         version: AlgorithmEngineVersion.V3,
+        lang: 'fr-fr',
       });
 
       databaseBuilder.factory.buildCertificationCandidate({
@@ -51,13 +51,11 @@ describe('Integration | Application | Certification | Evaluation | API', functio
       // when
       await certificationEvaluationApi.selectNextCertificationChallenge({
         assessmentId: assessment.id,
-        locale,
       });
 
       // then
       expect(usecase).to.have.been.calledOnceWithExactly({
         assessmentId: assessment.id,
-        locale,
       });
     });
   });
