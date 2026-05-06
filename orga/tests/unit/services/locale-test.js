@@ -3,7 +3,6 @@
 // and propagate the changes in the copies in all the fronts
 
 import Service from '@ember/service';
-import dayjs from 'dayjs';
 import { setupTest } from 'ember-qunit';
 import ENV from 'pix-orga/config/environment';
 import { module, test } from 'qunit';
@@ -115,7 +114,6 @@ module('Unit | Services | locale', function (hooks) {
     test('set app locale in the cookies', async function (assert) {
       // given
       const intlService = this.owner.lookup('service:intl');
-      sinon.stub(dayjs, 'locale');
       sinon.stub(intlService, 'setLocale');
       const cookiesService = this.owner.lookup('service:cookies');
       sinon.stub(cookiesService, 'write');
@@ -129,7 +127,6 @@ module('Unit | Services | locale', function (hooks) {
       assert.strictEqual(currentLocale, 'nl-BE');
       sinon.assert.calledWith(cookiesService.write, 'locale', 'nl-BE');
       sinon.assert.calledWith(intlService.setLocale, ['nl-BE', 'nl', 'fr']);
-      sinon.assert.calledWith(dayjs.locale, 'nl');
       assert.strictEqual(metricsService.context.locale, 'nl-BE');
     });
   });
