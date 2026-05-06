@@ -213,7 +213,7 @@
               "element": {
                 "id": "976f51eb-420f-4ea3-aea9-a07f284a7ce1",
                 "type": "expand",
-                "title": "[🕹️ Simulateur Visio amélioré avec chat lisible uniquement ou chat lisible + bouton \"réagir\"]",
+                "title": "[🕹️ Simulateur Visio amélioré avec chat lisible]",
                 "content": "<p>3 messages dans le chat&nbsp;:</p><ul><li>Gaby&nbsp;: \"Le food truck de mes cousins @GastronoVan.\"</li><li>Gaby&nbsp;: \"insta.com/gastronovan\"</li><li>Inès&nbsp;: \"Ah ça ressemble un peu à ce que propose Bistro Mobile !\"</li><br></ul><p>Action attendue&nbsp;: l’utilisateur doit ouvrir le chat pour trouver l’information demandée.</p>"
               }
             },
@@ -325,7 +325,7 @@
               "element": {
                 "id": "65529006-fcdd-4b15-8dfc-7797cd1d3a0f",
                 "type": "expand",
-                "title": "[🕹️ Simulateur Visio : noms des personnages à modifier]",
+                "title": "[🕹️ Simulateur Visio]",
                 "content": "<ul><li>Inès partage son écran sur lequel on voit un tableur avec le budget.</li><br></ul>"
               }
             },
