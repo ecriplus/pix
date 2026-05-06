@@ -29,7 +29,7 @@ export function buildCertificationCourse({
   maxReachableLevelOnCertificationDate = 5,
   isRejectedForFraud = false,
   abortReason = null,
-  lang = null,
+  lang = 'fr-fr',
   versionId = null,
   candidateId = null,
   framework = Frameworks.CORE,

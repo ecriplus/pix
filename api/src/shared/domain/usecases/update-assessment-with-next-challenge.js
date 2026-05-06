@@ -29,7 +29,6 @@ export async function updateAssessmentWithNextChallenge({
       if (assessment.isStarted()) {
         nextChallenge = await certificationEvaluationRepository.selectNextCertificationChallenge({
           assessmentId: assessment.id,
-          locale,
         });
       }
     }

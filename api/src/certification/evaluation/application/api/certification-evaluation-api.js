@@ -45,14 +45,13 @@ export const rescoreV2Certification = async ({ event }) => {
  *
  * @param {object} params
  * @param {number} params.assessmentId
- * @param {string} params.locale
  *
  * @returns {Promise<Challenge>}
  * @throws {AssessmentEndedError} test ended or no next challenge available
  * @throws {AssessmentLackOfChallengesError} no eligible challenges remaining before reaching maximum assessment length
  */
-export const selectNextCertificationChallenge = withTransaction(async ({ assessmentId, locale }) => {
-  return usecases.getNextChallenge({ assessmentId, locale });
+export const selectNextCertificationChallenge = withTransaction(async ({ assessmentId }) => {
+  return usecases.getNextChallenge({ assessmentId });
 });
 
 /**

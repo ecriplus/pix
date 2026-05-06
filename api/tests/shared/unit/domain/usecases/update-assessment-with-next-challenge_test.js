@@ -443,7 +443,7 @@ describe('Shared | Unit | Domain | Use Cases | get-next-challenge', function () 
           assessmentRepository_updateWhenNewChallengeIsAskedStub.resolves();
           const challenge = domainBuilder.buildChallenge({ id: 'challengeForCertification' });
           certificationEvaluationRepository_selectNextCertificationChallengeStub
-            .withArgs({ assessmentId: assessment.id, locale })
+            .withArgs({ assessmentId: assessment.id })
             .resolves(challenge);
           const { assessment: assessmentWithNextChallenge, globalProgression } =
             await updateAssessmentWithNextChallenge(dependencies);

@@ -8,15 +8,13 @@
  * @function
  * @param {object} params
  * @param {number} params.assessmentId - certification assessment id
- * @param {string} params.locale - candidate locale
  * @param {CertificationEvaluationApi} params.certificationEvaluationApi
  *
  * @returns {Challenge}
  * @throws {AssessmentEndedError} test ended or no next challenge available
  */
-export const selectNextCertificationChallenge = async function ({ assessmentId, locale, certificationEvaluationApi }) {
+export const selectNextCertificationChallenge = async function ({ assessmentId, certificationEvaluationApi }) {
   return certificationEvaluationApi.selectNextCertificationChallenge({
     assessmentId,
-    locale,
   });
 };

@@ -18,7 +18,6 @@ import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js'
 /**
  * @param {object} params
  * @param {number} params.assessmentId
- * @param {string} params.locale
  * @param {AssessmentSheetRepository} params.assessmentSheetRepository
  * @param {CertificationChallengeLiveAlertRepository} params.certificationChallengeLiveAlertRepository
  * @param {SharedChallengeRepository} params.sharedChallengeRepository
@@ -30,7 +29,6 @@ import { FlashAssessmentAlgorithm } from '../models/FlashAssessmentAlgorithm.js'
  */
 const getNextChallenge = async function ({
   assessmentId,
-  locale,
   assessmentSheetRepository,
   certificationChallengeLiveAlertRepository,
   sessionManagementCertificationChallengeRepository,
@@ -69,7 +67,7 @@ const getNextChallenge = async function ({
   const version = await versionApi.getById({ id: assessmentSheet.versionId });
 
   const currentCalibratedChallenges = await calibratedChallengeRepository.findActiveFlashCompatible({
-    locale: assessmentSheet.lang || locale,
+    locale: assessmentSheet.lang,
     version,
   });
 
