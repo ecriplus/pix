@@ -336,7 +336,6 @@ describe('Unit | UseCase | process-auto-jury', function () {
           userId: 123,
           certificationCourseId: 123,
           createdAt: new Date('2020-01-01T00:00:00Z'),
-          endedAt: challengeNotToBeConsideredAsSkipped.createdAt,
           state: 'endedDueToFinalization',
           version: 2,
           certificationChallenges: [

@@ -4,7 +4,6 @@ export class V3CertificationCourseDetailsForAdministration {
     certificationChallengesForAdministration = [],
     isRejectedForFraud,
     createdAt,
-    endedAt = null,
     assessmentState,
     assessmentResultStatus,
     abortReason,
@@ -27,7 +26,6 @@ export class V3CertificationCourseDetailsForAdministration {
     this.reachedMeshIndex = reachedMeshIndex;
     this.eduV3ExternalJuryResult = eduV3ExternalJuryResult;
     this.numberOfChallenges = numberOfChallenges;
-    this.endedAt = endedAt;
     this.certificationFramework = certificationFramework;
     this.versionId = versionId;
     this.lastAnswerAt = lastAnswerAt;

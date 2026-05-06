@@ -1287,7 +1287,6 @@
         "CandidateEndScreenEvent": "Certification completed (end screen viewed)",
         "CandidateNotCertifiableEvent": "Candidate not certifiable (Pix Core)",
         "CandidateReconciledEvent": "Candidate reconciled to a user",
-        "CertificationEndedEvent": "Certification ended",
         "CertificationStartedEvent": "Certification started"
       },
       "metadata": "Metadata",

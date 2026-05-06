@@ -33,7 +33,6 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
         // given
         const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
           updatedAt: new Date('2021-01-01'),
-          endedAt: null,
         }).id;
         const assessmentId = databaseBuilder.factory.buildAssessment({
           updatedAt: new Date('2022-01-01'),
@@ -45,10 +44,8 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
           id: certificationCourseId,
           version: 3,
           updatedAt: new Date('2021-01-01'),
-          endedAt: null,
           assessmentId,
           assessmentState: Assessment.states.STARTED,
-          assessmentLatestActivityAt: new Date('2022-01-01'),
         });
         const session = domainBuilder.certification.sessionManagement.buildSession({
           certificationCourses: [certificationCourse],
@@ -60,13 +57,12 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
 
         // then
         const certificationCourseData = await knex('certification-courses')
-          .select(['updatedAt', 'endedAt'])
+          .select('updatedAt')
           .where({ id: certificationCourseId })
           .first();
         const assessmentData = await knex('assessments').select(['state']).where({ id: assessmentId }).first();
         expect(certificationCourseData).to.deep.equal({
           updatedAt: now,
-          endedAt: new Date('2022-01-01'),
         });
         expect(assessmentData).to.deep.equal({
           state: Assessment.states.ENDED_DUE_TO_FINALIZATION,
@@ -84,7 +80,6 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
         // given
         const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
           updatedAt: new Date('2021-01-01'),
-          endedAt: null,
         }).id;
         const assessmentId = databaseBuilder.factory.buildAssessment({
           updatedAt: new Date('2022-01-01'),
@@ -96,10 +91,8 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
           id: certificationCourseId,
           version: 3,
           updatedAt: new Date('2021-01-01'),
-          endedAt: null,
           assessmentId,
           assessmentState: Assessment.states.ENDED_BY_INVIGILATOR,
-          assessmentLatestActivityAt: new Date('2022-01-01'),
         });
         const session = domainBuilder.certification.sessionManagement.buildSession({
           certificationCourses: [certificationCourse],
@@ -111,13 +104,12 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
 
         // then
         const certificationCourseData = await knex('certification-courses')
-          .select(['updatedAt', 'endedAt'])
+          .select('updatedAt')
           .where({ id: certificationCourseId })
           .first();
         const assessmentData = await knex('assessments').select(['state']).where({ id: assessmentId }).first();
         expect(certificationCourseData).to.deep.equal({
           updatedAt: new Date('2021-01-01'),
-          endedAt: null,
         });
         expect(assessmentData).to.deep.equal({
           state: Assessment.states.ENDED_BY_INVIGILATOR,
@@ -135,7 +127,6 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
         // given
         const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
           updatedAt: new Date('2021-01-01'),
-          endedAt: null,
         }).id;
         const assessmentId = databaseBuilder.factory.buildAssessment({
           updatedAt: new Date('2022-01-01'),
@@ -147,10 +138,8 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
           id: certificationCourseId,
           version: 3,
           updatedAt: new Date('2021-01-01'),
-          endedAt: null,
           assessmentId,
           assessmentState: Assessment.states.COMPLETED,
-          assessmentLatestActivityAt: new Date('2022-01-01'),
         });
         const session = domainBuilder.certification.sessionManagement.buildSession({
           certificationCourses: [certificationCourse],
@@ -161,13 +150,12 @@ describe('Certification | Session Management | Integration | Domain | UseCase | 
 
         // then
         const certificationCourseData = await knex('certification-courses')
-          .select(['updatedAt', 'endedAt'])
+          .select('updatedAt')
           .where({ id: certificationCourseId })
           .first();
         const assessmentData = await knex('assessments').select(['state']).where({ id: assessmentId }).first();
         expect(certificationCourseData).to.deep.equal({
           updatedAt: new Date('2021-01-01'),
-          endedAt: null,
         });
         expect(assessmentData).to.deep.equal({
           state: Assessment.states.COMPLETED,

@@ -15,7 +15,6 @@ export async function getByCertificationCourseId({ certificationCourseId }) {
       userId: 'assessments.userId',
       certificationCourseId: 'certification-courses.id',
       createdAt: 'certification-courses.createdAt',
-      endedAt: 'certification-courses.endedAt',
       version: 'certification-courses.version',
       state: 'assessments.state',
     })
@@ -48,7 +47,6 @@ export async function getByCertificationCandidateId({ certificationCandidateId }
       userId: 'assessments.userId',
       certificationCourseId: 'certification-courses.id',
       createdAt: 'certification-courses.createdAt',
-      endedAt: 'certification-courses.endedAt',
       state: 'assessments.state',
       version: 'certification-courses.version',
     })
@@ -98,10 +96,6 @@ export async function save(certificationAssessment) {
   await knexConn('assessments')
     .where({ certificationCourseId: certificationAssessment.certificationCourseId })
     .update({ state: certificationAssessment.state });
-
-  await knexConn('certification-courses')
-    .where({ id: certificationAssessment.certificationCourseId })
-    .update({ endedAt: certificationAssessment.endedAt });
 }
 
 async function _getCertificationChallenges(certificationCourseId, knexConn) {

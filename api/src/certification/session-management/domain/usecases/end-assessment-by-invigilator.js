@@ -7,7 +7,7 @@ const endAssessmentByInvigilator = async function ({ certificationCandidateId, c
     return;
   }
 
-  certificationAssessment.endByInvigilator({ now: new Date() });
+  certificationAssessment.endByInvigilator();
   await certificationAssessmentRepository.save(certificationAssessment);
 };
 

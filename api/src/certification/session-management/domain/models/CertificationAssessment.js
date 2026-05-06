@@ -20,7 +20,6 @@ const certificationAssessmentSchema = Joi.object({
   certificationCourseId: Joi.number().integer().required(),
   createdAt: Joi.date().required(),
   lastAnswerAt: Joi.date().allow(null),
-  endedAt: Joi.date().allow(null),
   state: Joi.string()
     .valid(
       Assessment.states.COMPLETED,
@@ -55,14 +54,12 @@ export class CertificationAssessment {
     version,
     certificationChallenges,
     certificationAnswersByDate,
-    endedAt,
   }) {
     this.id = id;
     this.userId = userId;
     this.certificationCourseId = certificationCourseId;
     this.createdAt = createdAt;
     this.lastAnswerAt = lastAnswerAt;
-    this.endedAt = endedAt;
     this.state = state;
     this.version = version;
     this.certificationChallenges = certificationChallenges;
@@ -91,13 +88,11 @@ export class CertificationAssessment {
   endDueToFinalization() {
     if (this.state === Assessment.states.STARTED) {
       this.state = Assessment.states.ENDED_DUE_TO_FINALIZATION;
-      this.endedAt = this._getLastChallengeCreatedAt();
     }
   }
 
-  endByInvigilator({ now }) {
+  endByInvigilator() {
     this.state = Assessment.states.ENDED_BY_INVIGILATOR;
-    this.endedAt = now;
   }
 
   neutralizeChallengeByNumberIfKoOrSkipped(questionNumber) {
@@ -194,18 +189,6 @@ export class CertificationAssessment {
       Assessment.states.ENDED_BY_INVIGILATOR,
       Assessment.states.ENDED_DUE_TO_FINALIZATION,
     ];
-  }
-
-  _getLastChallengeCreatedAt() {
-    if (this.certificationChallenges.length === 0) {
-      return this.createdAt;
-    }
-    return new Date(
-      this.certificationChallenges
-        .map((cc) => cc.createdAt.getTime())
-        .sort()
-        .at(-1),
-    );
   }
 }
 

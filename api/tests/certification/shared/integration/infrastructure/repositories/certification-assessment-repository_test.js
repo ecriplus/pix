@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import _ from 'lodash';
 
 import { CertificationAssessment } from '../../../../../../src/certification/session-management/domain/models/CertificationAssessment.js';
@@ -95,7 +94,6 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
     let expectedUserId;
     let expectedState;
     let expectedCreatedAt;
-    let expectedEndedAt;
 
     context('when the certification assessment exists', function () {
       let firstAnswerInTime;
@@ -104,14 +102,12 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
       beforeEach(function () {
         expectedState = Assessment.states.COMPLETED;
         expectedCreatedAt = new Date('2020-01-01T00:00:00Z');
-        expectedEndedAt = new Date('2020-01-02T00:00:00Z');
 
         const dbf = databaseBuilder.factory;
         expectedUserId = dbf.buildUser().id;
         certificationCourseId = dbf.buildCertificationCourse({
           userId: expectedUserId,
           createdAt: expectedCreatedAt,
-          endedAt: expectedEndedAt,
         }).id;
         expectedCertificationAssessmentId = dbf.buildAssessment({
           userId: expectedUserId,
@@ -156,7 +152,6 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
         expect(certificationAssessment.certificationCourseId).to.equal(certificationCourseId);
         expect(certificationAssessment.state).to.equal(expectedState);
         expect(certificationAssessment.version).to.equal(2);
-        expect(dayjs(certificationAssessment.endedAt).toISOString()).to.equal(dayjs(expectedEndedAt).toISOString());
 
         expect(certificationAssessment.certificationAnswersByDate).to.have.lengthOf(2);
         expect(certificationAssessment.certificationChallenges).to.have.lengthOf(2);
@@ -388,48 +383,12 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
       });
       expect(persistedCertificationAssessment.state).to.deep.equal(Assessment.states.ENDED_DUE_TO_FINALIZATION);
     });
-
-    it('persists the mutation of endedAt', async function () {
-      // given
-      const endedAt = new Date('2024-01-01');
-      const dbf = databaseBuilder.factory;
-      const userId = dbf.buildUser().id;
-      const certificationCourseId = dbf.buildCertificationCourse({ userId }).id;
-      dbf.buildAssessment({
-        userId,
-        certificationCourseId,
-        state: 'started',
-      }).id;
-
-      const certificationChallengeRecId = 'recChalB';
-
-      dbf.buildCertificationChallenge({
-        challengeId: certificationChallengeRecId,
-        courseId: certificationCourseId,
-      });
-
-      await databaseBuilder.commit();
-      const certificationAssessmentToBeSaved = await certificationAssessmentRepository.getByCertificationCourseId({
-        certificationCourseId,
-      });
-      certificationAssessmentToBeSaved.endedAt = endedAt;
-
-      // when
-      await certificationAssessmentRepository.save(certificationAssessmentToBeSaved);
-
-      // then
-      const persistedCertificationAssessment = await certificationAssessmentRepository.getByCertificationCourseId({
-        certificationCourseId,
-      });
-      expect(persistedCertificationAssessment.endedAt).to.deep.equal(endedAt);
-    });
   });
 
   describe('#getByCertificationCandidateId', function () {
     it("should return the user's assessment given its certification candidate id", async function () {
       // given
       const expectedState = Assessment.states.STARTED;
-      const expectedEndedAt = new Date('2020-01-02T00:00:00Z');
       const sessionId = databaseBuilder.factory.buildSession({}).id;
       const firstUserId = databaseBuilder.factory.buildUser({}).id;
       const secondUserId = databaseBuilder.factory.buildUser({}).id;
@@ -443,7 +402,6 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
       const firstUserCertificationCourseId = databaseBuilder.factory.buildCertificationCourse({
         sessionId,
         userId: firstUserId,
-        endedAt: expectedEndedAt,
       }).id;
       const secondUserCertificationCourse = databaseBuilder.factory.buildCertificationCourse({
         sessionId,
@@ -502,7 +460,6 @@ describe('Integration | Infrastructure | Repositories | certification-assessment
       expect(certificationAssessment.certificationCourseId).to.equal(firstUserCertificationCourseId);
       expect(certificationAssessment.state).to.equal(expectedState);
       expect(certificationAssessment.version).to.equal(2);
-      expect(dayjs(certificationAssessment.endedAt).toISOString()).to.equal(dayjs(expectedEndedAt).toISOString());
 
       expect(certificationAssessment.certificationAnswersByDate).to.have.lengthOf(2);
       expect(certificationAssessment.certificationChallenges).to.have.lengthOf(2);
