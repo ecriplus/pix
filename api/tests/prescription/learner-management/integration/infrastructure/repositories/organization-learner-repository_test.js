@@ -1915,9 +1915,11 @@ describe('Integration | Repository | Organization Learner Management | Organizat
     it('should return all the organizationLearners for a given user ID', async function () {
       // given
       const userId = databaseBuilder.factory.buildUser().id;
+      const otherUserId = databaseBuilder.factory.buildUser().id;
 
       const firstOrganizationLearner = databaseBuilder.factory.buildOrganizationLearner({ userId });
       const secondOrganizationLearner = databaseBuilder.factory.buildOrganizationLearner({ userId });
+      databaseBuilder.factory.buildOrganizationLearner({ userId: otherUserId });
 
       await databaseBuilder.commit();
 
@@ -1925,7 +1927,7 @@ describe('Integration | Repository | Organization Learner Management | Organizat
       const organizationLearners = await organizationLearnerRepository.findByUserId({ userId });
 
       // then
-      expect(_.map(organizationLearners, 'id')).to.have.members([
+      expect(_.map(organizationLearners, 'id')).to.deep.equal([
         firstOrganizationLearner.id,
         secondOrganizationLearner.id,
       ]);
