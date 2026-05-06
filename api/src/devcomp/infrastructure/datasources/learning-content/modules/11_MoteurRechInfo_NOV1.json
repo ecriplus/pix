@@ -1,7 +1,7 @@
 {
   "id": "f234d088-1f0e-44c4-8a43-b0153a2a1ddd",
   "shortId": "9a1559a3",
-  "slug": "moteur-recherche-nov1",
+  "slug": "faire-recherche",
   "title": "Faire une recherche sur internet",
   "isBeta": true,
   "visibility": "public",
@@ -12,7 +12,7 @@
     "level": "novice",
     "objectives": [
       "<p>Connaître l’utilité d’un moteur de recherche</p>",
-      "<p>Choisir des mots-clés pour faire une recherche web</p>",
+      "<p>Choisir des mots clés pour faire une recherche web</p>",
       "<p>Ajuster et affiner sa requête en fonction des résultats obtenus</p>"
     ],
     "tabletSupport": "comfortable"
@@ -32,8 +32,8 @@
               "element": {
                 "id": "a205446e-9b8c-4dc2-b06e-d4176fc18a18",
                 "type": "text",
-                "tag": " ",
-                "content": "<p>L'oncle d'Esther vient lui rendre visite à Grenoble ce week-end. Esther fait une recherche sur internet pour trouver un restaurant. Elle obtient la <strong>page de résultats</strong> suivante.</p><p>Observez cette page et répondez à la question.</p>"
+                "tag": "context",
+                "content": "<p>L'oncle d'Esther vient lui rendre visite à Grenoble ce week-end. Esther fait une recherche sur internet pour trouver un restaurant. Elle obtient les <strong>résultats</strong> suivants.</p><p>Observez ces résultats et répondez à la question qui suit.</p>"
               }
             },
             {
@@ -41,7 +41,7 @@
               "element": {
                 "id": "56f620c3-1f5b-4cdb-a88b-f7ab24c26067",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/11_MoteurRechInfo_NOV1/resto_indien.png",
+                "url": "https://assets.pix.org/draft/modules/11_MoteurRechInfo_NOV1/serp-bonjour.png",
                 "alt": "Page de résultat de recherche",
                 "alternativeText": "<p>à compléter<br></p>",
                 "legend": "",
@@ -130,7 +130,7 @@
                 "id": "f8d2156a-e84a-4d68-81f4-ed58a7280adb",
                 "type": "text",
                 "tag": "context",
-                "content": "<p>Théo est passionné de photographie. 📸 </p><p>Il cherche des informations sur internet. 🔍</p><br>"
+                "content": "<p>Intéressons-nous au cas de Théo.</p><p>Théo est passionné de photographie. 📸 </p><p>Il cherche des informations sur internet. 🔍</p>"
               }
             },
             {
@@ -380,7 +380,7 @@
                           "isAnonymizable": false
                         },
                         {
-                          "content": "photographes",
+                          "content": "personnes",
                           "isAnonymizable": false
                         },
                         {
@@ -412,7 +412,7 @@
                 "id": "f6ab76a6-1710-4db8-bf1f-a07a1df0d270",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Pour faire une recherche sur internet, il faut <strong>choisir quelques mots importants</strong>.&nbsp;</p>\n<p><strong>Certains de ces mots influencent la nature des résultats</strong> proposés par le moteur de recherche, comme par exemples :&nbsp;</p>\n<p> </p>\n<table>\n    <caption class=\"\\&quot;sr-only\\&quot;\">Nature des résultats selon le mot clé recherché</caption>\n    <thead>\n        <tr>\n            <th scope=\"\\&quot;col\\&quot;\">mot</th>\n            <th scope=\"\\&quot;col\\&quot;\">nature des résultats</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <th scope=\"\\&quot;row\\&quot;\">avis</th>\n            <td>sites de témoignages d'utilisateurs</td>\n        </tr>\n        <tr>\n            <th scope=\"\\&quot;row\\&quot;\">comparatif</th>\n            <td>sites de tests de produits</td>\n        </tr>\n        <tr>\n            <th scope=\"\\&quot;row\\&quot;\">tutoriel</th>\n            <td>sites d'entraide</td>\n        </tr>\n        <tr>\n            <th scope=\"\\&quot;row\\&quot;\">recette</th>\n            <td>sites spécialisés dans la cuisine</td>\n        </tr>\n        <tr>\n            <th scope=\"\\&quot;row\\&quot;\">histoire</th>\n            <td>sites encyclopédiques</td>\n        </tr>\n    </tbody>\n</table>"
+                "content": "<p>Pour faire une recherche sur internet, il faut <strong>choisir quelques mots importants</strong>.&nbsp;</p>\n<p>Certains de ces mots <strong>influencent la nature des résultats</strong> proposés par le moteur de recherche, comme par exemple&nbsp;:</p>\n<p> <br></p>\n<table>\n    <caption class=\"\\&quot;sr-only\\&quot;\">Nature des résultats selon le mot clé recherché</caption>\n    <thead>\n        <tr>\n            <th scope=\"\\&quot;col\\&quot;\">mot</th>\n            <th scope=\"\\&quot;col\\&quot;\">nature des résultats</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td scope=\"\\&quot;row\\&quot;\">avis</td>\n            <td>sites de témoignages d'utilisateurs</td>\n        </tr>\n        <tr>\n            <td scope=\"\\&quot;row\\&quot;\">comparatif</td>\n            <td>sites de tests de produits</td>\n        </tr>\n        <tr>\n            <td scope=\"\\&quot;row\\&quot;\">tutoriel</td>\n            <td>sites d'entraide</td>\n        </tr>\n        <tr>\n            <td scope=\"\\&quot;row\\&quot;\">recette</td>\n            <td>sites spécialisés dans la cuisine</td>\n        </tr>\n        <tr>\n            <td scope=\"\\&quot;row\\&quot;\">histoire</td>\n            <td>sites encyclopédiques</td>\n        </tr>\n    </tbody>\n</table>\n<p><br></p>"
               }
             }
           ]
@@ -486,8 +486,17 @@
           "title": "Découverte 2",
           "components": [
             {
+              "type": "element",
+              "element": {
+                "id": "a20ae5e2-8251-4d53-a4bb-408cfc20fcf6",
+                "type": "text",
+                "tag": "context",
+                "content": "<p>Intéressons-nous à la situaton d’Alex.<br></p>"
+              }
+            },
+            {
               "type": "stepper",
-              "instruction": "<p>Alex a invité ses amis et veut faire du guacamole, une recette avec de l’avocat. 🥑</p><p>Il se demande comment choisir un bon avocat. Il recherche sur internet : choisir avocat<br><br></p>",
+              "instruction": "<p>Alex a invité ses amis et veut faire du guacamole, une recette avec de l’avocat.&nbsp;🥑</p>\n<p>Il se demande comment choisir un bon avocat.</p>",
               "steps": [
                 {
                   "elements": [
@@ -495,21 +504,55 @@
                       "id": "ef193287-8deb-4d5a-b3e3-b604f8dba5d3",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Alex est surpris : les résultats proposés ne correspondent pas du tout à ce qu’il cherche. Les résultats concernent le métier d’avocat.&nbsp;<br><br></p>"
+                      "content": "<p>Voici la recherche faite par Alex : <strong>choisir avocat</strong></p>"
                     },
                     {
                       "id": "b2d5d35f-7109-4cbd-b2cc-122b4dbd91ff",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/11_MoteurRechInfo_NOV1/avocat_metier.png",
+                      "url": "https://assets.pix.org/draft/modules/11_MoteurRechInfo_NOV1/serp-choisir-avocat.png",
                       "alt": "",
                       "alternativeText": "<p>à compléter<br></p>",
                       "legend": "",
                       "licence": ""
                     },
                     {
+                      "id": "adcae361-827d-4ef8-b9b3-965b75da1da8",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>À votre avis, Alex a-t-il obtenu les résultats souhaités&nbsp;?</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Oui",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non. Les résultats portent sur le métier d'avocat : ce n'est pas ce qui intéresse Alex.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Non",
+                          "feedback": {
+                            "diagnosis": "<p>Effectivement. Les résultats portent sur le métier d'avocat : ce n'est pas ce qui intéresse Alex.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "Je ne sais pas.",
+                          "feedback": {
+                            "diagnosis": "<p>Les résultats portent sur le métier d'avocat : ce n'est pas ce qui intéresse Alex.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
                       "id": "3b0ea06f-31e3-4aa4-99d2-c3a1af63f162",
                       "type": "qcu-discovery",
-                      "instruction": "<p>À votre avis, que doit demander Alex pour obtenir de meilleurs résultats ?<br></p>",
+                      "instruction": "<p>Que doit écrire Alex pour obtenir de meilleurs résultats ?<br></p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
@@ -530,7 +573,7 @@
                           "id": "3",
                           "content": "<p>choisir bon avocat </p>",
                           "feedback": {
-                            "diagnosis": "<p>Pas tout-à-fait. Alex doit préciser qu’il s’intéresse au fruit, et pas au métier.</p>"
+                            "diagnosis": "<p>Pas tout-à-fait. Alex doit <strong>préciser</strong> qu’il s’intéresse au fruit, et pas au métier, en ajoutant le mot clé adapté.</p>"
                           }
                         }
                       ],
@@ -544,12 +587,12 @@
                       "id": "93573391-f5ee-4a83-9453-128e8ab2f0c0",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Voici la nouvelle recherche faite par Alex : choisir avocat fruit</p>"
+                      "content": "<p>Voici la nouvelle recherche faite par Alex : <strong>choisir avocat fruit</strong></p>"
                     },
                     {
                       "id": "874c4f7c-4a29-4601-9409-aa012e69bf37",
                       "type": "image",
-                      "url": "https://assets.pix.org/draft/modules/11_MoteurRechInfo_NOV1/avocat_fruit.png",
+                      "url": "https://assets.pix.org/draft/modules/11_MoteurRechInfo_NOV1/serp-choisir-avocat-fruit.png",
                       "alt": "",
                       "alternativeText": "<p>à compléter<br></p>",
                       "legend": "",
@@ -602,7 +645,7 @@
                 "id": "3282bf7c-e23a-4e07-8594-e2c9171e120f",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Si les résultats obtenus ne conviennent pas, il est utile de <strong>faire une nouvelle recherche</strong> en modifiant ou en complétant les mots-clés.</p><h5>Avez-vous remarqué ? </h5><p>Le moteur de recherche propose toujours <strong>plusieurs résultats</strong>. </p><p>Les résultats sont présentés sous la forme d’une <strong>liste de pages web</strong>.&nbsp;<br></p>"
+                "content": "<p>Si les résultats obtenus ne conviennent pas, il est utile de <strong>faire une nouvelle recherche</strong> en modifiant ou en complétant les mots clés.</p><h5>Avez-vous remarqué ? </h5><p>Le moteur de recherche propose toujours <strong>plusieurs résultats</strong>. </p><p>Les résultats sont présentés sous la forme d’une <strong>liste de pages web</strong>.&nbsp;<br></p>"
               }
             },
             {
@@ -635,7 +678,7 @@
               "element": {
                 "id": "cc4323b6-ab5a-4c57-9c41-1313a1761484",
                 "type": "qcm",
-                "instruction": "<p>Quels moteurs de recherche avez-vous déjà utilisés ? </p><p>(besoin d'un QCM déclaratif)</p>",
+                "instruction": "<p>Quels moteurs de recherche avez-vous déjà utilisé ? </p><p>(besoin d'un QCM déclaratif)</p>",
                 "hasShortProposals": true,
                 "proposals": [
                   {
@@ -717,7 +760,7 @@
                 "id": "4fc61b8d-d6bc-4af4-b623-3773d1179e0e",
                 "type": "text",
                 "tag": "tip",
-                "content": "<p>Il existe d’autres manières de d’envoyer une demande à un moteur : par exemple dans la barre de recherche d’un navigateur, sur une app sur téléphone, etc.</p>"
+                "content": "<p>Il existe d’autres manières d’envoyer une demande à un moteur : par exemple dans la barre de recherche d’un navigateur web, sur une application mobile, etc.</p>"
               }
             },
             {
@@ -748,7 +791,7 @@
                 "id": "aa907839-7cb7-4c69-8028-e45b6f0a28c7",
                 "type": "text",
                 "tag": " ",
-                "content": "<ul>\n    <li>Un <strong>moteur de recherche</strong> est un outil en ligne qui permet de <strong>rechercher des pages</strong> sur le web en utilisant des <strong>mots-clés</strong>.</li>\n    <li>Chaque mot-clé a une influence sur les résultats proposés. Choisir les bons mots-clés, c’est identifier les éléments importants de sa question, supprimer les mots inutiles mais rester précis.</li>\n    <li>Les résultats sont présentés sous forme d’une <strong>liste de pages web</strong>.&nbsp;</li>\n    <li>Il est parfois nécessaire <strong>d’ajuster et affiner sa recherche</strong> en ajoutant, remplaçant, enlevant certains mots.</li>\n</ul>"
+                "content": "<ul>\n    <li>Un <strong>moteur de recherche</strong> est un outil en ligne qui permet de <strong>rechercher des pages</strong> sur le web en utilisant des <strong>mots clés</strong>.&nbsp;🔤</li>\n    <li>Chaque mot clé a une <strong>influence</strong> sur les résultats proposés. Choisir les bons mots clés, c’est identifier les éléments importants de sa question, supprimer les mots inutiles mais rester précis.</li>\n    <li>Les résultats sont présentés sous forme d’une <strong>liste de pages web</strong>.&nbsp;</li>\n    <li>Il est parfois nécessaire <strong>d’ajuster et affiner sa recherche</strong> en ajoutant, remplaçant, enlevant certains mots.&nbsp;🪛</li>\n</ul>"
               }
             }
           ]
@@ -769,7 +812,7 @@
               "element": {
                 "id": "3d85cd86-ba37-4278-a817-6733273116a6",
                 "type": "qab",
-                "instruction": "<p>Pour chaque élément suivant, indiquez s’il s’agit d’un <strong>navigateur</strong> ou d’un <strong>moteur de recherche.</strong></p>",
+                "instruction": "<p>Pour chaque élément suivant, indiquez s’il s’agit d’un <strong>navigateur web</strong> ou d’un <strong>moteur de recherche.</strong></p>",
                 "cards": [
                   {
                     "id": "3e3a1f8b-d373-42ca-ad50-aa7c7b762a56",
@@ -778,7 +821,7 @@
                       "url": "https://assets.pix.org/draft/modules/11_MoteurRechInfo_NOV1/google_chrome_icon_-february_2022-svg.png",
                       "altText": ""
                     },
-                    "proposalA": "Navigateur",
+                    "proposalA": "Navigateur web",
                     "proposalB": "Moteur de recherche",
                     "solution": "A"
                   },
@@ -789,7 +832,7 @@
                       "url": "https://assets.pix.org/draft/modules/11_MoteurRechInfo_NOV1/duckduckgo.svg",
                       "altText": ""
                     },
-                    "proposalA": "Navigateur",
+                    "proposalA": "Navigateur web",
                     "proposalB": "Moteur de recherche",
                     "solution": "B"
                   },
@@ -800,7 +843,7 @@
                       "url": "https://assets.pix.org/draft/modules/11_MoteurRechInfo_NOV1/google_2015_logo-svg.png",
                       "altText": ""
                     },
-                    "proposalA": "Navigateur",
+                    "proposalA": "Navigateur web",
                     "proposalB": "Moteur de recherche",
                     "solution": "B"
                   },
@@ -811,7 +854,7 @@
                       "url": "https://assets.pix.org/draft/modules/11_MoteurRechInfo_NOV1/firefox_logo-_2019-svg.png",
                       "altText": ""
                     },
-                    "proposalA": "Navigateur",
+                    "proposalA": "Navigateur web",
                     "proposalB": "Moteur de recherche",
                     "solution": "A"
                   },
@@ -822,7 +865,7 @@
                       "url": "https://assets.pix.org/draft/modules/11_MoteurRechInfo_NOV1/qwant_new_logo_2018-svg.png",
                       "altText": ""
                     },
-                    "proposalA": "Navigateur",
+                    "proposalA": "Navigateur web",
                     "proposalB": "Moteur de recherche",
                     "solution": "B"
                   },
@@ -833,7 +876,7 @@
                       "url": "https://assets.pix.org/draft/modules/11_MoteurRechInfo_NOV1/1280px-microsoft_bing_logo-svg.png",
                       "altText": ""
                     },
-                    "proposalA": "Navigateur",
+                    "proposalA": "Navigateur web",
                     "proposalB": "Moteur de recherche",
                     "solution": "B"
                   }
@@ -869,23 +912,23 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Rome, mai, réserver</p>",
+                    "content": "<p>Rome mai réserver</p>",
                     "feedback": {
                       "state": "<p>Mauvaise réponse.</p>",
-                      "diagnosis": "<p>Choisissez précisément le lieu et essayez d’éviter les arnaques. Vous pouvez ré-essayer.</p>"
+                      "diagnosis": "<p>Choisissez précisément le lieu et essayez d’éviter les arnaques. Vous pouvez réessayer.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Colisée, informations, prix</p>",
+                    "content": "<p>Colisée informations prix</p>",
                     "feedback": {
                       "state": "<p>Mauvaise réponse.</p>",
-                      "diagnosis": "<p>Choisissez précisément le lieu et essayez d’éviter les arnaques. Vous pouvez ré-essayer.</p>"
+                      "diagnosis": "<p>Choisissez précisément le lieu et essayez d’éviter les arnaques. Vous pouvez réessayer.</p>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Site , officiel, colisée</p>",
+                    "content": "<p>Site officiel colisée</p>",
                     "feedback": {
                       "state": "<p>Bonne réponse !</p>",
                       "diagnosis": "<p>Le site officiel est https://colosseo.it/ et devrait sortir en tête de liste sur la plupart des moteurs de recherche. </p>"
@@ -918,23 +961,23 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>Je fais une nouvelle recherche avec d'autres mots clés.</p>",
+                    "content": "<p>Je fais une nouvelle recherche avec d’autres mots clés.</p>",
                     "feedback": {
-                      "diagnosis": "<p>à compléter<br></p>"
+                      "diagnosis": "<p>Très bon réflexe ! Vous pouvez aussi lire les différents résultats : peut-être que ce que vous cherchez se trouve un peu plus bs dans la liste de résultats.<br></p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Je descends plus bas dans la liste des résultats.<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>à compléter<br></p>"
+                      "diagnosis": "<p>C’est un bonne idée. Vous pouvez aussi faire une nouvelle recherche avec d’autres mots clés.<br></p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Je change de moteur de recherche.<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>à compléter<br></p>"
+                      "diagnosis": "<p>Pourquoi pas. Vous pouvez aussi faire une nouvelle recherche avec d’autres mots clés.<br></p>"
                     }
                   }
                 ]
