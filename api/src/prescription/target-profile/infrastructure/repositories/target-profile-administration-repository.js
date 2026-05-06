@@ -147,7 +147,7 @@ async function _toDomain(targetProfileDTO, tubesData, targetProfileEstimatedTime
     tubesData,
     locale,
   );
-  const badges = await _findBadges(targetProfileDTO.id);
+  const badges = await _findBadges(targetProfileDTO.id, locale);
   const stageCollection = await _getStageCollection(targetProfileDTO.id);
   const hasLinkedCampaign = await _hasLinkedCampaign(targetProfileDTO.id);
   const hasLinkedAutonomousCourse = await _hasLinkedAutonomousCourse(targetProfileDTO, hasLinkedCampaign);
@@ -205,7 +205,7 @@ async function _getLearningContent(targetProfileId, tubesData, locale) {
   };
 }
 
-async function _findBadges(targetProfileId) {
+async function _findBadges(targetProfileId, locale) {
   const knexConn = DomainTransaction.getConnection();
 
   const badgeDTOs = await knexConn('badges').select('*').where({ targetProfileId }).orderBy('id');
@@ -224,10 +224,19 @@ async function _findBadges(targetProfileId) {
       }
       if (badgeCriterionDTO.scope === SCOPES.CAPPED_TUBES) {
         const cappedTubes = [];
+        const tubes = await tubeRepository.findByRecordIds(
+          badgeCriterionDTO.cappedTubes.map(({ id }) => id),
+          locale,
+        );
+        const tubesById = tubes.reduce((map, tube) => {
+          map[tube.id] = tube;
+          return map;
+        }, {});
         for (const cappedTubeDTO of badgeCriterionDTO.cappedTubes) {
           cappedTubes.push(
             new CappedTube({
               tubeId: cappedTubeDTO.id,
+              name: tubesById[cappedTubeDTO.id].name,
               level: cappedTubeDTO.level,
             }),
           );
