@@ -35,7 +35,7 @@
     "db:create": "node --env-file-if-exists=.env scripts/database/create-database --name db",
     "db:delete": "node --env-file-if-exists=.env scripts/database/drop-database --name db",
     "db:empty": "node --env-file-if-exists=.env scripts/database/empty-database --name db",
-    "db:migrate": "knex --knexfile db/knexfile.js migrate:latest && node --env-file-if-exists=.env scripts/database/pg-boss-migration.js",
+    "db:migrate": "knex --knexfile db/knexfile.js migrate:latest",
     "db:rollback:latest": "knex --knexfile db/knexfile.js migrate:down",
     "db:rollback": "knex --knexfile db/knexfile.js migrate:down $migrationname",
     "db:prepare": "npm run db:delete && npm run db:create && npm run db:migrate",
