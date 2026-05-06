@@ -349,6 +349,32 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
       const result = await usecases.getCombinedCourseByCode({ code, userId: profileReward.userId });
       expect(result).to.be.instanceOf(CombinedCourseDetails);
       expect(result.reward).to.be.instanceOf(CombinedCourseReward);
+      expect(result.reward.data.key).to.equal(attestation.key);
+    });
+    it('should return a combined course details instance with a reward not obtained', async function () {
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+
+      const attestation = databaseBuilder.factory.buildAttestation();
+
+      const quest = databaseBuilder.factory.buildQuestForCombinedCourse({
+        rewardId: attestation.id,
+        rewardType: 'attestations',
+      });
+
+      databaseBuilder.factory.buildCombinedCourse({
+        code,
+        organizationId,
+        questId: quest.id,
+      });
+
+      databaseBuilder.factory.buildUser({ id: 123 });
+
+      await databaseBuilder.commit();
+
+      const result = await usecases.getCombinedCourseByCode({ code, userId: 123 });
+      expect(result).to.be.instanceOf(CombinedCourseDetails);
+      expect(result.reward).to.be.instanceOf(CombinedCourseReward);
+      expect(result.reward.data.key).to.equal(attestation.key);
     });
   });
 });
