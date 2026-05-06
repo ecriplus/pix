@@ -441,5 +441,41 @@ describe('Integration | Team | Infrastructure | Repository | OrganizationInvited
         expect(organizationInvitationUpdated.updatedAt).to.deep.equal(now);
       });
     });
+
+    describe(' when a concurrent insert already exists', function () {
+      it('does not throw and sets currentMembershipId', async function () {
+        // given
+        const organization = databaseBuilder.factory.buildOrganization();
+        const organizationInvitation = databaseBuilder.factory.buildOrganizationInvitation({
+          organizationId: organization.id,
+        });
+        const user = databaseBuilder.factory.buildUser();
+        const existingMembership = databaseBuilder.factory.buildMembership({
+          userId: user.id,
+          organizationId: organization.id,
+          organizationRole: 'MEMBER',
+        });
+        const organizationInvitedUser = new OrganizationInvitedUser({
+          userId: user.id,
+          invitation: organizationInvitation,
+          currentRole: 'MEMBER',
+          organizationHasMemberships: 0,
+          currentMembershipId: null,
+          status: OrganizationInvitation.StatusType.ACCEPTED,
+        });
+
+        await databaseBuilder.commit();
+
+        // when
+        await organizationInvitedUserRepository.save({ organizationInvitedUser });
+
+        // then
+        expect(organizationInvitedUser.currentMembershipId).to.equal(existingMembership.id);
+        const updatedInvitation = await knex('organization-invitations')
+          .where({ id: organizationInvitation.id })
+          .first();
+        expect(updatedInvitation.status).to.equal('accepted');
+      });
+    });
   });
 });
