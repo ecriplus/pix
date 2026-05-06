@@ -45,7 +45,3 @@ export const findAllByOrganizationId = async ({ organizationId }) => {
 export const getByRewardId = async ({ rewardId, rewardApi }) => {
   return rewardApi.getByIdAndType({ rewardId, rewardType: REWARD_TYPES.ATTESTATION });
 };
-
-export const findByUserIdAndRewardId = async ({ rewardId, userId, rewardApi }) => {
-  return rewardApi.findByUserIdAndRewardId({ rewardId, userId });
-};
