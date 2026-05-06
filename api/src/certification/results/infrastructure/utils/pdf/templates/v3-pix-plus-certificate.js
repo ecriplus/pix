@@ -6,28 +6,49 @@ import * as url from 'node:url';
 
 import dayjs from 'dayjs';
 
-import { ComplementaryCertificationKeys } from '../../../../../shared/domain/models/ComplementaryCertificationKeys.js';
-
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-const __badgesDirname = url.fileURLToPath(new URL('../badges/', import.meta.url));
 
 /**
  * @param {object} params
  * @param {Certificate} params.data
  */
-export default function generateV3AttestationTemplate({ pdf, data, translate }) {
+export default function generateV3PixPlusAttestationTemplate({ pdf, data, translate }) {
   // Global
-  pdf.image(path.resolve(__dirname, 'assets/v3-core-background.jpg'), 0, 0, {
+  pdf.image(path.resolve(__dirname, 'assets/v3-pix-plus-background.jpg'), 0, 0, {
     width: pdf.page.width,
     height: pdf.page.height,
   });
 
+  const pixPlusLogo = {
+    DROIT: 'pix-plus-droit.png',
+    PRO_SANTE: 'pix-plus-pro-sante.png',
+    EDU_1ER_DEGRE: 'pix-plus-edu.png',
+    EDU_2ND_DEGRE: 'pix-plus-edu.png',
+    EDU_CPE: 'pix-plus-edu.png',
+  }[data.certificationFramework];
+
+  if (pixPlusLogo) {
+    pdf.image(path.resolve(__dirname, `assets/${pixPlusLogo}`), 40, 10, {
+      width: 110,
+      height: 110,
+    });
+  }
+
   // Main content
   pdf
     .font('Nunito-Bold')
-    .fontSize(45)
+    .fontSize(32)
     .fillColor('#253858')
-    .text(translate('certification.certificate.v3.main-content.title'), 82, 150, { width: 380 });
+    .text(translate('certification.certificate.v3.main-content.title-pix-plus'), 82, 150, { width: 380 })
+    .moveUp(0.1);
+  pdf
+    .font('Nunito-Bold')
+    .fontSize(32)
+    .fillColor('#253858')
+    .text(_formatText(translate(`certification.certificate.v3.pix-plus-labels.${data.certificationFramework}`)), {
+      width: 380,
+    })
+    .moveDown(0.05);
   pdf
     .font('Roboto-Regular')
     .fontSize(11)
@@ -42,11 +63,11 @@ export default function generateV3AttestationTemplate({ pdf, data, translate }) 
         lineGap: 2,
       },
     )
-    .moveDown(0.5);
+    .moveDown(2);
   pdf
     .font('Roboto-Regular')
     .fontSize(11)
-    .text(translate('certification.certificate.v3.main-content.delivered-at.label'), 82, 249)
+    .text(translate('certification.certificate.v3.main-content.delivered-at.label'))
     .moveDown(0.5);
   pdf
     .font('Nunito-Bold')
@@ -100,55 +121,40 @@ export default function generateV3AttestationTemplate({ pdf, data, translate }) 
     });
 
   // Score content
-  pdf
-    .font('Nunito-Bold')
-    .fontSize(35)
-    .fillColor('#253858')
-    .text(data.pixScore, 611, 99, {
-      width: 84,
-      align: 'center',
-    })
-    .moveDown(0.05);
-  pdf.font('Roboto-Regular').fontSize(16).fillColor('#5e6c84').text(data.maxReachableScore, {
-    width: 84,
-    align: 'center',
-  });
-
   const globalLevel = data.globalLevel;
 
   if (data.globalLevel) {
-    pdf
-      .font('Roboto-Regular')
-      .fontSize(11)
-      .fillColor('#6b778b')
-      .text(translate('certification.certificate.v3.score-content.global-level'), 550, 195, {
-        width: 205,
-        align: 'center',
+    const globalLevelLabel = globalLevel.getLevelLabel(translate);
+
+    if (data.globalLevel.meshLevel === 'LEVEL_ADMISSIBLE') {
+      pdf.image(path.resolve(__dirname, 'assets/badges/pix-plus-edu-admissible.png'), 594, 80, {
+        width: 120,
+        height: 120,
       });
 
-    const globalLevelLabel = globalLevel.getLevelLabel(translate);
-    pdf
-      .roundedRect(
-        652 - (pdf.widthOfString(globalLevelLabel) * 2) / 2,
-        212,
-        pdf.widthOfString(globalLevelLabel) * 2,
-        24,
-        24,
-      )
-      .fill('#6712FF');
-    pdf
-      .font('Nunito-Bold')
-      .fontSize(14)
-      .fillColor('#FFFFFF')
-      .text(globalLevelLabel, 652 - (pdf.widthOfString(globalLevelLabel) * 2) / 2, 214, {
-        width: pdf.widthOfString(globalLevelLabel) * 2,
-        align: 'center',
-      });
+      pdf
+        .roundedRect(
+          652 - (pdf.widthOfString(globalLevelLabel) * 2) / 2,
+          202,
+          pdf.widthOfString(globalLevelLabel) * 2,
+          24,
+          24,
+        )
+        .fill('#B9D8CD');
+      pdf
+        .font('Roboto-Regular')
+        .fontSize(12)
+        .fillColor('#004726')
+        .text(globalLevelLabel, 652 - (pdf.widthOfString(globalLevelLabel) * 2) / 2, 207, {
+          width: pdf.widthOfString(globalLevelLabel) * 2,
+          align: 'center',
+        });
+    }
 
     const globalLevelSummary = globalLevel.getSummaryLabel(translate);
     const globalLevelDescription = globalLevel.getDescriptionLabel(translate);
     pdf
-      .font('Nunito-Bold')
+      .font('Roboto-Medium')
       .fontSize(11)
       .fillColor('#253858')
       .text(translate('certification.certificate.v3.score-content.level-explanation'), 530, 250, {
@@ -161,21 +167,7 @@ export default function generateV3AttestationTemplate({ pdf, data, translate }) 
       .moveDown(0.5)
       .font('Roboto-Regular')
       .fontSize(9.5)
-      .text(globalLevelDescription);
-  }
-
-  if (data.acquiredComplementaryCertification) {
-    pdf
-      .font('Nunito-Bold')
-      .fontSize(11)
-      .fillColor('#253858')
-      .text(translate('certification.certificate.v3.complementary-content.title'), 530, 470, {
-        width: 250,
-      });
-    pdf.image(path.resolve(__badgesDirname, `${ComplementaryCertificationKeys.CLEA}.png`), 628, 490, {
-      width: 50,
-      height: 50,
-    });
+      .text(globalLevelDescription, { lineGap: 5 });
   }
 }
 

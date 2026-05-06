@@ -5,7 +5,9 @@ import url from 'node:url';
 
 import PDFDocument from 'pdfkit';
 
+import { hasCoreScope } from '../../../../shared/domain/models/Frameworks.js';
 import generateV3AttestationTemplate from './templates/v3-certificate.js';
+import generateV3PixPlusAttestationTemplate from './templates/v3-pix-plus-certificate.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -41,11 +43,19 @@ const generate = ({ certificates, i18n }) => {
       doc.addPage();
     }
 
-    generateV3AttestationTemplate({
-      pdf: doc,
-      data: certificate,
-      translate: i18n.__,
-    });
+    if (hasCoreScope(certificate.certificationFramework)) {
+      generateV3AttestationTemplate({
+        pdf: doc,
+        data: certificate,
+        translate: i18n.__,
+      });
+    } else {
+      generateV3PixPlusAttestationTemplate({
+        pdf: doc,
+        data: certificate,
+        translate: i18n.__,
+      });
+    }
   });
 
   doc.end();

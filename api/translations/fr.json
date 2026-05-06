@@ -204,7 +204,15 @@
             "label": "délivrée à"
           },
           "signature": "Benjamin Marteau, directeur du GIP Pix",
-          "title": "Certification Pix"
+          "title": "Certification Pix",
+          "title-pix-plus": "Certification Pix+"
+        },
+        "pix-plus-labels": {
+          "DROIT": "Droit",
+          "EDU_1ER_DEGRE": "Édu 1er degré",
+          "EDU_2ND_DEGRE": "Édu 2nd degré",
+          "EDU_CPE": "Édu CPE",
+          "PRO_SANTE": "Pro Santé"
         },
         "qr-code-content": {
           "explanation": "Pour vérifier l’authenticité de cette attestation, utilisez ce code sur ",
@@ -222,7 +230,7 @@
     "global": {
       "meshlevel": {
         "LEVEL_ADMISSIBLE": {
-          "description": "La certification se déroule en deux étapes :\n 1. Épreuve Pix : Il vient de la passer.\n 2. Épreuve orale : organisée en dehors de Pix devant un jury.\n À l’issue de cet oral, votre niveau de certification définitif sera attribué (Expert, Avancé, etc.).Rapprochez-vous de votre centre de certification pour organiser le passage de l’oral.",
+          "description": "La certification se déroule en deux étapes :\n 1.\u00A0Épreuve Pix\u00A0: Il vient de la passer.\n 2.\u00A0Épreuve orale\u00A0: organisée en dehors de Pix devant un\u00A0jury.\nÀ l’issue de cet oral, votre niveau de certification définitif sera attribué (Expert, Avancé,\u00A0etc.).\nRapprochez-vous de votre centre de certification pour organiser le passage de\u00A0l’oral.",
           "label": "Admissible",
           "summary": "Le candidat est admissible à la certification Pix+ Edu."
         },

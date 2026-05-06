@@ -10,7 +10,7 @@ const __badgesDirname = url.fileURLToPath(new URL('../badges/', import.meta.url)
 
 export default function generateV2AttestationTemplate({ pdf, data, translate, isFrenchDomainExtension }) {
   // Global
-  pdf.image(path.resolve(__dirname, 'v2-background.png'), 0, 0, {
+  pdf.image(path.resolve(__dirname, 'assets/v2-background.png'), 0, 0, {
     width: pdf.page.width,
     height: pdf.page.height,
   });
