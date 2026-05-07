@@ -344,7 +344,7 @@
                 "id": "0ea11031-0120-4e7a-ab3d-77c028a6363f",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>La base de signatures est une liste des signatures des logiciels malveillants déjà connus par l’antivirus.<br>🚨 Lorsque l’antivirus détecte une correspondance entre une des signatures connues et les caractéristiques d’un fichier ou un programme, il peut&nbsp;:</p><ul><li>le <strong>bloquer</strong>, c’est-à-dire l’empêcher de s’installer ou de fonctionner sur l’appareil,</li><li>ou <strong>le supprimer</strong> de l’appareil.</li></ul><p><br>Ce mécanisme permet de détecter rapidement les logiciels malveillants déjà recensés.</p>"
+                "content": "<p>La base de signatures est une liste des signatures des logiciels malveillants déjà connus par l’antivirus.<br>🚨 Lorsque l’antivirus détecte une correspondance entre une des signatures connues et les caractéristiques d’un fichier ou d’un programme, il peut&nbsp;:</p><ul><li>le <strong>bloquer</strong>, c’est-à-dire l’empêcher de s’installer ou de fonctionner sur l’appareil,</li><li>ou <strong>le supprimer</strong> de l’appareil.</li></ul><p><br>Ce mécanisme permet de détecter rapidement les logiciels malveillants déjà recensés.</p>"
               }
             }
           ]
@@ -406,7 +406,7 @@
                 "id": "0fee0aa5-3408-47c2-81a6-1fce8b187903",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>En cas de doute (après le téléchargement d’un fichier ou l’utilisation d’un support externe par exemple), il est possible de<strong> lancer une analyse manuelle</strong>.&nbsp;</p><br><p>Lancer une analyse manuelle consiste à demander explicitement à l’antivirus d’examiner&nbsp;:</p><ul>    <li>l’ensemble de l’appareil,</li>    <li>ou un élément précis (dossier, disque dur, clé USB).</li></ul><p>Cela permet de vérifier qu’aucun logiciel malveillant ne s’est installé.&nbsp;🕵️‍♀<br></p>"
+                "content": "<p>En cas de doute (après le téléchargement d’un fichier ou l’utilisation d’un support externe par exemple), il est possible de<strong> lancer une analyse manuelle</strong>.&nbsp;</p><br><p>Lancer une analyse manuelle consiste à demander explicitement à l’antivirus d’examiner&nbsp;:</p><ul>    <li>l’ensemble de l’appareil,</li>    <li>ou un élément précis (dossier, disque dur, clé USB).</li></ul><p>Cela permet de vérifier qu’aucun logiciel malveillant ne s’est installé.&nbsp;🕵️‍♀</p>"
               }
             }
           ]
@@ -516,7 +516,7 @@
                 "id": "8b661573-da41-43c2-ac3f-bd147e37f702",
                 "type": "text",
                 "tag": " ",
-                "content": "<ul><li>Un <strong>antivirus </strong>est un logiciel qui protège un appareil contre les <strong>logiciels malveillants</strong>. Il est nécessaire d’installer un antivirus sur chaque appareil pour mieux le <strong>protéger</strong>. 🛡️</li></ul><br><ul><li>Un antivirus fonctionne<strong> en permanence</strong> et surveille les fichiers et programmes de l’appareil. 👀</li></ul><br><ul><li>Un antivirus compare les fichiers et les programmes à une<strong> base de signatures</strong> recensant les logiciels malveillants connus. S’il détecte un logiciel malveillant, il peut le <strong> bloquer ou le supprimer</strong>, puis informe l’utilisateur via une notification. 🙅</li></ul><br><ul><li>De nouveaux logiciels malveillants sont inventés tous les jours. Pour rester efficace, l’antivirus doit être <strong>mis à jour régulièrement </strong>afin d’intégrer les nouveaux logiciels malveillants recensés.⚙️</li></ul>"
+                "content": "<ul><li>Un <strong>antivirus </strong>est un logiciel qui protège un appareil contre les <strong>logiciels malveillants</strong>. Il est nécessaire d’installer un antivirus sur chaque appareil pour mieux le <strong>protéger</strong>. 🛡️</li></ul><br><ul><li>Un antivirus fonctionne<strong> en permanence</strong> et surveille les fichiers et programmes de l’appareil. 👀</li></ul><br><ul><li>Un antivirus compare les fichiers et les programmes à une<strong> base de signatures</strong> recensant les logiciels malveillants connus. S’il détecte un logiciel malveillant, il peut le <strong> bloquer ou le supprimer</strong>, puis informe l’utilisateur via une notification. 🙅</li></ul><br><ul><li>De nouveaux logiciels malveillants sont créés tous les jours. Pour rester efficace, l’antivirus doit être <strong>mis à jour régulièrement </strong>afin d’intégrer les nouveaux logiciels malveillants recensés.⚙️</li></ul>"
               }
             }
           ]
@@ -576,7 +576,7 @@
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Bonne réponse ! 🎉</p>",
-                    "diagnosis": "<p>Un antivirus est conçu pour protéger un  appareil&nbsp;: il surveille en continu ce qu’il s’y passe, repère les logiciels potentiellement malveillants puis les bloque ou les supprime en informant l’utilisateur.</p>"
+                    "diagnosis": "<p>Un antivirus est conçu pour protéger un appareil&nbsp;: il surveille en continu ce qui s’y passe, repère les logiciels potentiellement malveillants puis les bloque ou les supprime en informant l’utilisateur.</p>"
                   },
                   "invalid": {
                     "state": "<p>Mauvaise réponse.</p>",
@@ -628,7 +628,7 @@
                   },
                   {
                     "id": "e8be05f6-a45e-4e23-8a39-38317ad23bcc",
-                    "text": "Marius arrête d’utiliser une clé USB que son antivirus a désignée comme étant infectée. ",
+                    "text": "Marius arrête d’utiliser une clé USB que son antivirus a désignée comme étant infectée.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -639,7 +639,7 @@
                   },
                   {
                     "id": "2f1690eb-6e3d-43a2-aa78-b917cc625bd5",
-                    "text": "Bao ferme les notifications de son antivirus sans les lire, ça ne sert à rien. ",
+                    "text": "Bao ferme les notifications de son antivirus sans les lire, ça ne sert à rien.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -743,7 +743,7 @@
                     "id": "1",
                     "content": "<p>Installer un logiciel antivirus sur un de mes appareils qui n’en a pas encore.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Très bon premier pas !  Installer un logiciel antivirus complète efficacement la protection de vos appareils. N’oubliez pas d’installer les mises à jour pour rester à la pointe de la protection.</p>"
+                      "diagnosis": "<p>Très bon premier pas ! Installer un logiciel antivirus complète efficacement la protection de vos appareils. N’oubliez pas d’installer les mises à jour pour rester à la pointe de la protection.</p>"
                     }
                   },
                   {
