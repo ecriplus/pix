@@ -1186,7 +1186,7 @@
                   },
                   "invalid": {
                     "state": "<p>Mauvaise réponse.<br></p>",
-                    "diagnosis": "<p>Avez-vous trouvé dans l’étude, disponible en pdf à télécharger, la section consacrée au télétravail ?</p>"
+                    "diagnosis": "<p>Avez-vous trouvé dans l’étude la section consacrée au télétravail ?</p>"
                   }
                 },
                 "solutions": [
