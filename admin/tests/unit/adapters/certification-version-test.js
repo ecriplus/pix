@@ -6,46 +6,35 @@ import sinon from 'sinon';
 module('Unit | Adapters | certification-version', function (hooks) {
   setupTest(hooks);
 
-  module('#queryRecord', () => {
-    test('should call certification-versions CORE active endpoint', async function (assert) {
+  module('#findRecord', () => {
+    test('should call certification-versions endpoint with the given id', async function (assert) {
+      // given
       const adapter = this.owner.lookup('adapter:certification-version');
-      const certificationVersionResponse = {
+      const response = {
         data: {
-          id: '123',
+          id: '42',
           type: 'certification-versions',
           attributes: {
-            scope: 'CORE',
             'start-date': '2024-01-01',
             'expiration-date': null,
-            'assessment-duration': 120,
-            'challenges-configuration': {
-              maximumAssessmentLength: 32,
-              challengesBetweenSameCompetence: 2,
-              variationPercent: 0.5,
-              limitToOneQuestionPerTube: true,
-              enablePassageByAllCompetences: false,
-            },
+            'assessment-duration': 105,
+            'minimum-answers': 20,
+            'maximum-assessment-length': 32,
+          },
+          relationships: {
+            areas: { data: [] },
           },
         },
       };
-      sinon.stub(adapter, 'ajax').resolves(certificationVersionResponse);
+      sinon.stub(adapter, 'ajax').resolves(response);
 
-      const result = await adapter.queryRecord(null, null, { scope: 'CORE' });
+      // when
+      const result = await adapter.findRecord(null, null, '42');
 
-      const expectedUrl = `${ENV.APP.API_HOST}/api/admin/certification-versions/CORE/active`;
+      // then
+      const expectedUrl = `${ENV.APP.API_HOST}/api/admin/certification-versions/42`;
       sinon.assert.calledWith(adapter.ajax, expectedUrl, 'GET');
-      assert.deepEqual(result, certificationVersionResponse);
-    });
-
-    test('should default to CORE scope if not provided', async function (assert) {
-      const adapter = this.owner.lookup('adapter:certification-version');
-      sinon.stub(adapter, 'ajax').resolves({});
-
-      await adapter.queryRecord(null, null, {});
-
-      const expectedUrl = `${ENV.APP.API_HOST}/api/admin/certification-versions/CORE/active`;
-      sinon.assert.calledWith(adapter.ajax, expectedUrl, 'GET');
-      assert.ok(adapter);
+      assert.deepEqual(result, response);
     });
   });
 

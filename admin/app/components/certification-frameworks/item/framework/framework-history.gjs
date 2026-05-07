@@ -11,33 +11,28 @@ import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import formatDate from 'ember-intl/helpers/format-date';
 import { eq, not } from 'ember-truth-helpers';
+import { formatMinutes } from 'pix-admin/utils/date';
 
 import CertificationVersionDetailModal from './certification-version-detail-modal';
 
 const STATUS_COLORS = { ACTIVE: 'success', DRAFT: 'tertiary', ARCHIVED: 'secondary' };
 
-function formatDuration(minutes) {
-  if (!minutes) return '-';
-  const h = Math.floor(minutes / 60);
-  const m = minutes % 60;
-  if (h === 0) return `${m}min`;
-  if (m === 0) return `${h}h`;
-  return `${h}h ${m}min`;
-}
-
 export default class FrameworkHistory extends Component {
   @service store;
 
   @tracked selectedVersion = null;
+  @tracked selectedVersionStatus = null;
 
   @action
-  async viewVersion(id) {
+  async viewVersion(id, status) {
+    this.selectedVersionStatus = status;
     this.selectedVersion = await this.store.findRecord('certification-version', id);
   }
 
   @action
   closeModal() {
     this.selectedVersion = null;
+    this.selectedVersionStatus = null;
   }
 
   <template>
@@ -72,7 +67,7 @@ export default class FrameworkHistory extends Component {
               {{t "components.complementary-certifications.item.framework.history.table.columns.assessment-duration"}}
             </:header>
             <:cell>
-              {{formatDuration version.assessmentDuration}}
+              {{formatMinutes version.assessmentDuration}}
             </:cell>
           </PixTableColumn>
           <PixTableColumn @context={{context}}>
@@ -109,7 +104,7 @@ export default class FrameworkHistory extends Component {
             </:header>
             <:cell>
               <PixIconButton
-                @triggerAction={{fn this.viewVersion version.id}}
+                @triggerAction={{fn this.viewVersion version.id version.status}}
                 @ariaLabel={{t "components.complementary-certifications.item.framework.history.table.actions.view"}}
                 @iconName="eye"
               />
@@ -132,7 +127,12 @@ export default class FrameworkHistory extends Component {
     </section>
 
     {{#if this.selectedVersion}}
-      <CertificationVersionDetailModal @version={{this.selectedVersion}} @onClose={{this.closeModal}} />
+      <CertificationVersionDetailModal
+        @version={{this.selectedVersion}}
+        @status={{this.selectedVersionStatus}}
+        @scope={{@scope}}
+        @onClose={{this.closeModal}}
+      />
     {{/if}}
   </template>
 }

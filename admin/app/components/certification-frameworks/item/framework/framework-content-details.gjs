@@ -1,14 +1,11 @@
-import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import Component from '@glimmer/component';
-import { t } from 'ember-intl';
 import sortBy from 'lodash/sortBy';
 
 import Area from '../../../common/tubes-details/area';
 
-export default class FrameworkDetails extends Component {
+export default class FrameworkContentDetails extends Component {
   get areas() {
-    const areas = this.args.currentConsolidatedFramework.hasMany('areas').value();
-    return sortBy(areas, ['frameworkId', 'code']).map((area) => this.buildAreaViewModel(area));
+    return sortBy(Array.from(this.args.areas), ['frameworkId', 'code']).map((area) => this.buildAreaViewModel(area));
   }
 
   buildAreaViewModel(area) {
@@ -43,7 +40,7 @@ export default class FrameworkDetails extends Component {
     return {
       id: tube.id,
       title: `${tube.name} : ${tube.practicalTitle}`,
-      level: undefined, // To prevent tube level display
+      level: undefined,
       mobile: tube.mobile,
       tablet: tube.tablet,
       skills: sortBy(tube.hasMany('skills').value(), 'difficulty').map((skill) => this.buildSkillViewModel(skill)),
@@ -58,22 +55,14 @@ export default class FrameworkDetails extends Component {
   }
 
   <template>
-    <section class="framework-details">
-      <h2 class="framework-details__title">
-        {{t "components.complementary-certifications.item.framework.details.title"}}
-      </h2>
-
-      <PixBlock @variant="admin">
-        {{#each this.areas as |area|}}
-          <Area
-            @title={{area.title}}
-            @color={{area.color}}
-            @competences={{area.competences}}
-            @displayDeviceCompatibility={{true}}
-            @displaySkillDifficultyAvailability={{true}}
-          />
-        {{/each}}
-      </PixBlock>
-    </section>
+    {{#each this.areas as |area|}}
+      <Area
+        @title={{area.title}}
+        @color={{area.color}}
+        @competences={{area.competences}}
+        @displayDeviceCompatibility={{true}}
+        @displaySkillDifficultyAvailability={{true}}
+      />
+    {{/each}}
   </template>
 }
