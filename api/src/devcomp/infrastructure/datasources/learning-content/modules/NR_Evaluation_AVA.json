@@ -33,35 +33,41 @@
                 "id": "37a9e342-ceee-494e-ae50-1690aea3b6bb",
                 "type": "custom",
                 "title": "",
-                "instruction": "<p>Paul et Martine s'interrogent à propos des compteurs électriques connectés.</p>",
+                "instruction": "<p>Olivier et Alise s’interrogent sur l’impact environnemental des smartphones.</p>",
                 "functionalInstruction": "",
                 "tagName": "message-conversation",
                 "props": {
                   "conversationTitle": "",
                   "messages": [
                     {
-                      "userName": "Paul",
+                      "userName": "Olivier",
                       "direction": "outgoing",
                       "type": "Texte",
-                      "content": "Mon fournisseur d’électricité vient d’annoncer qu’il allait installer des compteurs électriques connectés chez tous ses clients ! C’est terrible ! 😱"
+                      "content": "C’est vraiment pratique les smartphones, ça remplace plein d’objets !"
                     },
                     {
-                      "userName": "Martine",
-                      "direction": "incoming",
-                      "type": "Texte",
-                      "content": "Pourquoi est-ce que tu trouves ça terrible ?"
-                    },
-                    {
-                      "userName": "Paul",
+                      "userName": "Olivier",
                       "direction": "outgoing",
                       "type": "Texte",
-                      "content": "Il faut plein de métaux rares pour construire le matériel électronique. Avec tous ces compteurs, l’impact sur l’environnement va être énorme !"
+                      "content": "📱= ☎️+ 📻 +🗺️+⏰..."
                     },
                     {
-                      "userName": "Martine",
+                      "userName": "Olivier",
+                      "direction": "outgoing",
+                      "type": "Texte",
+                      "content": "C'est bien mieux pour l'environnement ! 🌏"
+                    },
+                    {
+                      "userName": "Alise",
                       "direction": "incoming",
                       "type": "Texte",
-                      "content": "Au contraire, je pense que ces compteurs vont permettre de faire des économies d’électricité, donc d’avoir moins d’impacts négatifs sur l’environnement."
+                      "content": "Tu es sûr de ça ? 🤔"
+                    },
+                    {
+                      "userName": "Alise",
+                      "direction": "incoming",
+                      "type": "Texte",
+                      "content": "La fabrication d’un smartphone est particulièrement polluante, peut-être plus que celle des GPS, des réveils, et tous les appareils remplacés réunis !"
                     }
                   ],
                   "animationSpeed": 0
@@ -85,30 +91,30 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "Paul",
+                    "content": "Olivier",
                     "feedback": {
-                      "diagnosis": "<p>En fait, les deux ont raison. </p>\n<p>Le numérique a des <strong>effets directs</strong> sur l'environnement, produits notamment par la fabrication des appareils et leur consommation d'énergie, mais aussi des <strong>effets indirects</strong>.<br>Paul parle d'effets directs, Martine d'effets indirects.</p>"
+                      "diagnosis": "<p><strong>Difficile de dire qui a raison ! </strong></p>\n<p>Le remplacement d’une technologie par une autre a un <strong>effet indirect </strong>sur l’environnement. Cet effet est très <strong>difficile à quantifier.</strong></p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "Martine",
+                    "content": "Alise",
                     "feedback": {
-                      "diagnosis": "<p>En fait, les deux ont raison. </p>\n<p>Le numérique a des <strong>effets directs</strong> sur l'environnement, produits notamment par la fabrication des appareils et leur consommation d'énergie, mais aussi des <strong>effets indirects</strong>.<br>Paul parle d'effets directs, Martine d'effets indirects.</p>"
-                    }
-                  },
-                  {
-                    "id": "3",
-                    "content": "les deux",
-                    "feedback": {
-                      "diagnosis": "<p>Bien vu !</p>\n<p>Le numérique a des <strong>effets directs </strong>sur l'environnement, produits notamment par la fabrication des appareils et leur consommation d'énergie, mais aussi des <strong>effets indirects.</strong><br>Paul parle d'effets directs, Martine d'effets indirects.</p>\n"
+                      "diagnosis": "<p><strong>Difficile de dire qui a raison ! </strong></p>\n<p>Le remplacement d’une technologie par une autre a un <strong>effet indirect </strong>sur l’environnement. Cet effet est très <strong>difficile à quantifier.</strong></p>"
                     }
                   },
                   {
                     "id": "4",
-                    "content": "aucun",
+                    "content": "aucun des deux",
                     "feedback": {
-                      "diagnosis": "<p>En fait, les deux ont raison.</p>\n<p>Le numérique a des <strong>effets directs</strong> sur l'environnement, produits notamment par la fabrication des appareils et leur consommation d'énergie, mais aussi des <strong>effets indirects</strong>.<br>Paul parle d'effets directs, Martine d'effets indirects.</p>"
+                      "diagnosis": "<p><strong>Effectivement, difficile de dire qui a raison ! </strong></p>\n<p>Le remplacement d’une technologie par une autre a un <strong>effet indirect </strong>sur l’environnement. Cet effet est très <strong>difficile à quantifier.</strong></p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "Je ne sais pas.",
+                    "feedback": {
+                      "diagnosis": "<p><strong>Effectivement, difficile de dire qui a raison ! </strong></p>\n<p>Le remplacement d’une technologie par une autre a un <strong>effet indirect </strong>sur l’environnement. Cet effet est très <strong>difficile à quantifier.</strong></p>"
                     }
                   }
                 ],
@@ -128,7 +134,7 @@
                 "id": "a8a69700-d558-4d44-91b7-b4d1b009f3d1",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Voyons ensemble ce que sont les <strong>effets indirects du numérique</strong>.</p>"
+                "content": "<p>Le numérique a des <strong>effets directs</strong> sur l’environnement, mais aussi des <strong>effets indirects</strong>. Voyons cela de plus près.</p>"
               }
             }
           ]
