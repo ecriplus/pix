@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/deepfakes/picto-deepfakes.svg",
-    "description": "<p>Le numérique a d’importants effets directs sur l’environnement, mais provoque aussi de nombreux changements de comportements individuels et collectifs. Ce sont des effets indirects, et ils peuvent aussi avoir des impacts sur l’environnement. Dans ce module, vous allez découvrir comment il est possible de les évaluer et de les limiter s’ils sont négatifs.</p>",
+    "description": "<p>Le numérique a d’importants effets directs sur l’environnement, mais provoque aussi de nombreux changements de comportements individuels et collectifs. Ce sont des effets indirects, et ils peuvent aussi avoir des impacts sur l’environnement.<br> Dans ce module, vous allez découvrir comment il est possible de les évaluer et de les limiter s’ils sont négatifs.</p>",
     "duration": 10,
     "level": "advanced",
     "objectives": [
