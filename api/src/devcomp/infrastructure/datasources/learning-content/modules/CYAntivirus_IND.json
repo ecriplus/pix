@@ -62,14 +62,14 @@
                     "id": "3",
                     "content": "<p>Acheter un nouvel ordinateur.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non.&nbsp;Pas besoin d ‘en arriver là ! Tout le monde peut se faire piéger sans s’en rendre compte mais heureusement, il existe des logiciels qui renforcent la protection de vos appareils&nbsp;: les logiciels <strong>antivirus</strong>.</p>"
+                      "diagnosis": "<p>Eh non.&nbsp;Pas besoin d’en arriver là ! Tout le monde peut se faire piéger sans s’en rendre compte.<br>Heureusement, il existe des logiciels qui renforcent la protection de vos appareils&nbsp;: les logiciels <strong>antivirus</strong>.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Éviter d’aller sur internet.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non.&nbsp;Pas besoin d ‘en arriver là ! Tout le monde peut se faire piéger sans s’en rendre compte mais heureusement, il existe des logiciels qui renforcent la protection de vos appareils&nbsp;: les logiciels <strong>antivirus</strong>.</p>"
+                      "diagnosis": "<p>Eh non.&nbsp;Pas besoin d’en arriver là ! Tout le monde peut se faire piéger sans s’en rendre compte.<br>Heureusement, il existe des logiciels qui renforcent la protection de vos appareils&nbsp;: les logiciels <strong>antivirus</strong>.</p>"
                     }
                   },
                   {
@@ -158,7 +158,7 @@
                     }
                   },
                   {
-                    "id": "4",
+                    "id": "5",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
                       "diagnosis": "<p>Un antivirus est un <strong>logiciel spécialisé contre les logiciels malveillants</strong>. <br>Son rôle principal est de <strong>détecter</strong> la présence de logiciels malveillants sur un appareil et de prévenir l’utilisateur.</p>"
@@ -181,7 +181,7 @@
                 "id": "911286d9-f015-40a7-8150-c0a961f329cd",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Pour détecter la présence des logiciels malveillants, l’antivirus va surveiller les fichiers et les programmes de l’ordinateur de Philippe.</p>"
+                "content": "<p>Pour détecter la présence de logiciels malveillants, l’antivirus va surveiller les fichiers et les programmes de l’ordinateur de Philippe.</p>"
               }
             },
             {
@@ -226,7 +226,7 @@
                   },
                   {
                     "id": "5360a3a5-f829-4069-9638-78a4a34b7966",
-                    "text": "Branchement d’une clé usb à l’ordinateur",
+                    "text": "Branchement d’une clé USB à l’ordinateur",
                     "image": {
                       "url": "https://assets.pix.org/modules/CYAntivirus_IND/cy_antivirus_usb.svg",
                       "altText": ""
@@ -248,7 +248,7 @@
                   }
                 ],
                 "feedback": {
-                  "diagnosis": "<p>Le logiciel antivirus ne surveille pas vraiment les actions de Philippe. Par contre il <strong>surveille en permanence</strong> l’ensemble des <strong>fichiers et programmes</strong> présents, téléchargés ou encore exécutés sur l’ordinateur, pour <strong>vérifier qu’ils ne cachent pas de logiciels malveillants</strong>.</p>"
+                  "diagnosis": "<p>Le logiciel antivirus ne surveille pas vraiment les actions de Philippe. Par contre, il <strong>surveille en permanence</strong> l’ensemble des <strong>fichiers et programmes</strong> présents, téléchargés ou encore exécutés sur l’ordinateur, pour <strong>vérifier qu’ils ne cachent pas de logiciels malveillants</strong>.</p>"
                 }
               }
             }
@@ -296,7 +296,7 @@
                     "id": "1",
                     "content": "<p>En comparant les caractéristiques des fichiers et programmes aux caractéristiques des logiciels malveillants déjà identifiés.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement, chaque logiciel malveillant possède des caractéristiques et un code qui lui sont propres, appelées <strong>signatures </strong>(virales).</p><p>Lorsqu’un fichier est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une base contenant les signatures des logiciels malveillants déjà connus par l’antivirus)&nbsp;: la <strong>base de signature</strong>.</p>"
+                      "diagnosis": "<p>Effectivement, chaque logiciel malveillant possède des caractéristiques et un code qui lui sont propres, appelées <strong>signatures </strong>(virales).</p><p>Lorsqu’un fichier est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une base contenant les signatures des logiciels malveillants déjà connus par l’antivirus&nbsp;: la <strong>base de signatures</strong>.</p>"
                     }
                   },
                   {
@@ -324,7 +324,7 @@
                     "id": "5",
                     "content": "<p>Je ne sais pas.<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Chaque logiciel malveillant possède des caractéristiques et un code qui lui sont propres, appelées <strong>signatures&nbsp;</strong>(virales).<br><br>Lorsqu’un fichier ou un programme est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une une base contenant des signatures des logiciels malveillants déjà connus par l’antivirus&nbsp;: la <strong>base de signatures</strong>.</p>"
+                      "diagnosis": "<p>Chaque logiciel malveillant possède des caractéristiques et un code qui lui sont propres, appelées <strong>signatures&nbsp;</strong>(virales).<br><br>Lorsqu’un fichier ou un programme est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une base contenant des signatures des logiciels malveillants déjà connus par l’antivirus&nbsp;: la <strong>base de signatures</strong>.</p>"
                     }
                   }
                 ],
