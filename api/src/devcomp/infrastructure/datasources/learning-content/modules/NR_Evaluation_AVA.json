@@ -715,21 +715,21 @@
                     "id": "1",
                     "content": "<p>L’impact est positif.<br></p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>C’est possible, mais ce n’est pas sûr.&nbsp;</strong></p><p>Même si ce système optimise et réduit la consommation électrique, il utilise du matériel électronique polluant et des logiciels qui nécessitent beaucoup de calculs, donc la production de matériel et d’électricité … </p><p>Sans une étude scientifique rigoureuse, on ne peut pas savoir si son impact total sur l’environnement est meilleur des cartes en papier.</p>"
+                      "diagnosis": "<p><strong>C’est possible, mais ce n’est pas sûr.&nbsp;</strong></p><p>Même si ce système optimise et réduit la consommation électrique, il utilise du matériel électronique polluant et des logiciels qui nécessitent beaucoup de calculs, donc la production de matériel et d’électricité … </p><p>Sans une étude scientifique rigoureuse, on ne peut pas savoir si son impact total sur l’environnement est positif.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>L’impact est négatif.<br></p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>C’est possible, mais ce n’est pas sûr.&nbsp;</strong></p><p>Même si ce système optimise et réduit la consommation électrique, il utilise du matériel électronique polluant et des logiciels qui nécessitent beaucoup de calculs, donc de matériel et d’électricité … </p><p>Sans une étude scientifique rigoureuse, on ne peut pas savoir si son impact total sur l’environnement est meilleur des cartes en papier.</p>"
+                      "diagnosis": "<p><strong>C’est possible, mais ce n’est pas sûr.&nbsp;</strong></p><p>Même si ce système optimise et réduit la consommation électrique, il utilise du matériel électronique polluant et des logiciels qui nécessitent beaucoup de calculs, donc de matériel et d’électricité … </p><p>Sans une étude scientifique rigoureuse, on ne peut pas savoir si son impact total sur l’environnement est positif.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Je ne peux pas savoir.</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Effectivement !&nbsp;</strong></p><p>Même si ce système optimise et réduit la consommation électrique, il utilise du matériel électronique polluant et des logiciels qui nécessitent beaucoup de calculs, donc de matériel et d’électricité … </p><p>Sans une étude scientifique rigoureuse, on ne peut pas savoir si son impact total sur l’environnement est meilleur des cartes en papier.</p>"
+                      "diagnosis": "<p><strong>Effectivement !&nbsp;</strong></p><p>Même si ce système optimise et réduit la consommation électrique, il utilise du matériel électronique polluant et des logiciels qui nécessitent beaucoup de calculs, donc de matériel et d’électricité … </p><p>Sans une étude scientifique rigoureuse, on ne peut pas savoir si son impact total sur l’environnement est positif.</p>"
                     }
                   }
                 ],
