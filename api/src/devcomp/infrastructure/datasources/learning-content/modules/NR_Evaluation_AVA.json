@@ -210,21 +210,21 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Effet direct<br></p>",
+                          "content": "Effet direct",
                           "feedback": {
                             "diagnosis": "<p>Bien vu !</p><p>Les serveurs consomment forcément de l’électricité pour fonctionner.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Effet indirect<br></p>",
+                          "content": "Effet indirect",
                           "feedback": {
                             "diagnosis": "<p>Eh non !</p><p>Il s’agit d’un <strong>effet direct</strong> sur l’environnement&nbsp;: les serveurs consomment forcément de l’électricité pour fonctionner.</p>"
                           }
                         },
                         {
                           "id": "3",
-                          "content": "<p>Je ne sais pas.</p>",
+                          "content": "Je ne sais pas.",
                           "feedback": {
                             "diagnosis": "<p>Il s’agit d’un <strong>effet direct</strong> sur l’environnement&nbsp;: les serveurs consomment forcément de l’électricité pour fonctionner.</p>"
                           }
