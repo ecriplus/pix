@@ -55,42 +55,36 @@ export default class List extends Component {
 
   get filteredItems() {
     const { type = 'all', search = '', category, areas, competences } = this.args;
+    const filterByType = (item) => (type && type !== 'all' ? item.type === type : true);
+    const filterByName = (item) => (search.length > 0 ? item.name.toLowerCase().includes(search.toLowerCase()) : true);
+    const filterByCategory = (item) => (category ? category === item.category : true);
 
-    return this.args.courses
-      .filter((item) => {
-        if (type && type !== 'all') {
-          return item.type === type;
-        }
-        return true;
-      })
-      .filter((item) => {
-        if (search.length > 0) {
-          return item.name.toLowerCase().includes(search.toLowerCase());
-        }
-        return true;
-      })
-      .filter((item) => {
-        if (category) {
-          return category === item.category;
-        }
-        return true;
-      })
-      .filter((item) => {
-        if (areas?.length > 0) {
-          const itemAreaIds = item.areas.map((area) => area.id);
-          return areas.every((area) => itemAreaIds.includes(area));
-        }
-        return true;
-      })
-      .filter((item) => {
-        if (competences?.length > 0) {
-          const itemCompetenceIds = item.areas
-            .flatMap((area) => (area.competences ? area.get('competences') : []))
-            .map((competence) => competence.id);
-          return competences.every((competence) => itemCompetenceIds.includes(competence));
-        }
-        return true;
-      });
+    const filterByArea = (item) => {
+      if (areas?.length > 0) {
+        const itemAreaIds = item.areas.map((area) => area.id);
+        return areas.every((area) => itemAreaIds.includes(area));
+      }
+      return true;
+    };
+
+    const filterByCompetence = (item) => {
+      if (competences?.length > 0) {
+        const itemCompetenceIds = item.areas
+          .flatMap((area) => (area.competences ? area.competences : []))
+          .map((competence) => competence.id);
+        return competences.every((competence) => itemCompetenceIds.includes(competence));
+      }
+      return true;
+    };
+
+    return this.args.courses.filter(
+      (item) =>
+        filterByType(item) &&
+        filterByName(item) &&
+        filterByCategory(item) &&
+        filterByArea(item) &&
+        filterByCompetence(item),
+    );
   }
 
   <template>
