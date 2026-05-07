@@ -1,6 +1,7 @@
 import { Campaign } from '../../../../src/quest/domain/models/Campaign.js';
-import { CombinedCourse, CombinedCourseDetails } from '../../../../src/quest/domain/models/CombinedCourse.js';
+import { CombinedCourse } from '../../../../src/quest/domain/models/CombinedCourse.js';
 import { CombinedCourseBlueprint } from '../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
+import { CombinedCourseDetails } from '../../../../src/quest/domain/models/CombinedCourseDetails.js';
 import { DataForQuest } from '../../../../src/quest/domain/models/DataForQuest.js';
 import { Eligibility } from '../../../../src/quest/domain/models/Eligibility.js';
 import { Module } from '../../../../src/quest/domain/models/Module.js';
@@ -18,7 +19,16 @@ function buildCombinedCourse({ name, code, organizationId, questId } = {}) {
   });
 }
 
-function buildCombinedCourseDetails({ name, code, organizationId, questId, combinedCourseItems, cryptoService } = {}) {
+function buildCombinedCourseDetails({
+  name,
+  code,
+  organizationId,
+  questId,
+  combinedCourseItems,
+  cryptoService,
+  rewardId = null,
+  rewardType = null,
+} = {}) {
   const combinedCourse = buildCombinedCourse({ name, code, organizationId, questId });
 
   const campaigns = [];
@@ -52,8 +62,8 @@ function buildCombinedCourseDetails({ name, code, organizationId, questId, combi
 
   const quest = new Quest({
     id: combinedCourse.questId,
-    rewardId: null,
-    rewardType: null,
+    rewardId,
+    rewardType,
     eligibilityRequirements: [],
     successRequirements: successRequirementsFromContents,
   });

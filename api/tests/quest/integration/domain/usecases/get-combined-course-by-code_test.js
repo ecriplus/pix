@@ -4,10 +4,12 @@ import sinon from 'sinon';
 import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { CombinedCourse } from '../../../../../src/quest/domain/models/CombinedCourse.js';
 import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
+import { CombinedCourseDetails } from '../../../../../src/quest/domain/models/CombinedCourseDetails.js';
 import {
   COMBINED_COURSE_ITEM_TYPES,
   CombinedCourseItem,
 } from '../../../../../src/quest/domain/models/CombinedCourseItem.js';
+import { CombinedCourseReward } from '../../../../../src/quest/domain/models/CombinedCourseReward.js';
 import { OrganizationLearnerParticipationStatuses } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
@@ -321,6 +323,58 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-by-code'
       const result = await usecases.getCombinedCourseByCode({ code, userId: null });
       expect(result).to.be.instanceOf(CombinedCourse);
       expect(result.id).to.equal(combinedCourseId);
+    });
+  });
+  describe('when there is a reward', function () {
+    it('should return a combined course details instance with a reward attribute', async function () {
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+
+      const attestation = databaseBuilder.factory.buildAttestation();
+
+      const quest = databaseBuilder.factory.buildQuestForCombinedCourse({
+        rewardId: attestation.id,
+        rewardType: 'attestations',
+      });
+
+      databaseBuilder.factory.buildCombinedCourse({
+        code,
+        organizationId,
+        questId: quest.id,
+      });
+
+      const profileReward = databaseBuilder.factory.buildProfileReward({ rewardId: attestation.id });
+
+      await databaseBuilder.commit();
+
+      const result = await usecases.getCombinedCourseByCode({ code, userId: profileReward.userId });
+      expect(result).to.be.instanceOf(CombinedCourseDetails);
+      expect(result.reward).to.be.instanceOf(CombinedCourseReward);
+      expect(result.reward.data.key).to.equal(attestation.key);
+    });
+    it('should return a combined course details instance with a reward not obtained', async function () {
+      const organizationId = databaseBuilder.factory.buildOrganization().id;
+
+      const attestation = databaseBuilder.factory.buildAttestation();
+
+      const quest = databaseBuilder.factory.buildQuestForCombinedCourse({
+        rewardId: attestation.id,
+        rewardType: 'attestations',
+      });
+
+      databaseBuilder.factory.buildCombinedCourse({
+        code,
+        organizationId,
+        questId: quest.id,
+      });
+
+      databaseBuilder.factory.buildUser({ id: 123 });
+
+      await databaseBuilder.commit();
+
+      const result = await usecases.getCombinedCourseByCode({ code, userId: 123 });
+      expect(result).to.be.instanceOf(CombinedCourseDetails);
+      expect(result.reward).to.be.instanceOf(CombinedCourseReward);
+      expect(result.reward.data.key).to.equal(attestation.key);
     });
   });
 });

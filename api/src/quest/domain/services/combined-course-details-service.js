@@ -1,4 +1,4 @@
-import { CombinedCourseDetails } from '../models/CombinedCourse.js';
+import { CombinedCourseDetails } from '../models/CombinedCourseDetails.js';
 import { DataForQuest } from '../models/DataForQuest.js';
 
 async function instantiateCombinedCourseDetails({
@@ -43,6 +43,7 @@ async function getCombinedCourseDetails({
   combinedCourseParticipationRepository,
   eligibilityRepository,
   recommendedModuleRepository,
+  reward,
 }) {
   const participation = await combinedCourseParticipationRepository.findByLearnerId({
     organizationLearnerId,
@@ -75,6 +76,7 @@ async function getCombinedCourseDetails({
     participation,
     recommendedModuleIdsForUser,
     dataForQuest,
+    reward,
   });
 
   return combinedCourseDetails;
@@ -145,11 +147,11 @@ async function getCombinedCourseDetailsForMultipleLearners({
     const state = {
       id: combinedCourseDetails.id,
       status: combinedCourseDetails.status,
-      participation: combinedCourseDetails.participation,
+      participation,
       items: combinedCourseDetails.items,
     };
 
-    if (participation) {
+    if (combinedCourseDetails.hasParticipation) {
       state.participationDetails = combinedCourseDetails.participationDetails;
     }
 

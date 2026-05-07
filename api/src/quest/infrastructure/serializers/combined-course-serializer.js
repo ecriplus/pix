@@ -4,7 +4,7 @@ const { Serializer } = jsonapiSerializer;
 
 const serialize = function (combinedCourse) {
   return new Serializer('combined-courses', {
-    attributes: ['name', 'code', 'organizationId', 'status', 'description', 'illustration', 'items'],
+    attributes: ['name', 'code', 'organizationId', 'status', 'description', 'illustration', 'items', 'reward'],
     items: {
       ref: 'id',
       included: true,
@@ -22,9 +22,15 @@ const serialize = function (combinedCourse) {
         'image',
       ],
     },
+    reward: {
+      ref: 'id',
+      included: true,
+      attributes: ['status', 'type', 'data'],
+    },
     typeForAttribute: (attribute) => {
       if (attribute === 'items') return 'combined-course-items';
-      else return attribute;
+      if (attribute === 'reward') return 'combined-course-rewards';
+      return attribute;
     },
   }).serialize(combinedCourse);
 };

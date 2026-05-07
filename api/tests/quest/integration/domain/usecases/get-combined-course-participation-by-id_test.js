@@ -1,4 +1,4 @@
-import { CombinedCourseDetails } from '../../../../../src/quest/domain/models/CombinedCourse.js';
+import { CombinedCourseDetails } from '../../../../../src/quest/domain/models/CombinedCourseDetails.js';
 import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,

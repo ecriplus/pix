@@ -42,6 +42,7 @@ const dependencies = {
   combinedCourseBlueprintRepository,
   courseRepository: repositories.courseRepository,
   campaignParticipationRepository: repositories.campaignParticipationRepository,
+  profileRewardRepository: repositories.profileRewardRepository,
   codeGenerator,
   logger,
 };

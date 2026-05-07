@@ -118,6 +118,7 @@ import { buildPoleEmploiSending } from './build-pole-emploi-sending.js';
 import { buildPrescriber } from './build-prescriber.js';
 import { buildPrivateCertificate } from './build-private-certificate.js';
 import { buildPrivateCertificate as buildPrivateCertificateWithCompetenceTree } from './build-private-certificate-with-competence-tree.js';
+import { buildProfileReward } from './build-profile-reward.js';
 import { buildProgression } from './build-progression.js';
 import { buildQuest } from './build-quest.js';
 import { buildReproducibilityRate } from './build-reproducibility-rate.js';
@@ -489,6 +490,7 @@ export {
   buildPrescriber,
   buildPrivateCertificate,
   buildPrivateCertificateWithCompetenceTree,
+  buildProfileReward,
   buildProgression,
   buildQuest,
   buildReproducibilityRate,

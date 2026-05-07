@@ -76,6 +76,14 @@ export const getByAttestationKeyAndUserIds = async ({ attestationKey, userIds })
   return profileRewards.map(toDomain);
 };
 
+export const findByUserIdAndRewardId = async ({ rewardId, userId }) => {
+  const knexConn = DomainTransaction.getConnection();
+
+  const profileReward = await knexConn('profile-rewards').where({ rewardId, userId }).first();
+
+  return profileReward ? toDomain(profileReward) : null;
+};
+
 const toDomain = (profileReward) => {
   return new ProfileReward(profileReward);
 };

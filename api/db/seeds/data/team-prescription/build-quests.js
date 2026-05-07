@@ -25,7 +25,11 @@ import {
 import { createAssessmentCampaign } from '../common/tooling/campaign-tooling.js';
 import { createTargetProfile } from '../common/tooling/target-profile-tooling.js';
 import { ADMINISTRATION_TEAM_SOLO_ID, ORGANIZATION_LEARNER_TYPE_STUDENT_ID } from '../team-acquisition/constants.js';
-import { TARGET_PROFILE_BADGES_STAGES_ID, TARGET_PROFILE_NO_BADGES_NO_STAGES_ID } from './constants.js';
+import {
+  SIXTH_GRADE_REWARD_ID,
+  TARGET_PROFILE_BADGES_STAGES_ID,
+  TARGET_PROFILE_NO_BADGES_NO_STAGES_ID,
+} from './constants.js';
 
 const profileRewardTemporaryStorage = temporaryStorage.withPrefix('profile-rewards:');
 
@@ -413,6 +417,7 @@ export const buildQuests = async (databaseBuilder) => {
 
   // Create attestation quest
   const { id: rewardId } = databaseBuilder.factory.buildAttestation({
+    id: SIXTH_GRADE_REWARD_ID,
     templateName: 'sixth-grade-attestation-template',
     key: ATTESTATIONS.SIXTH_GRADE,
     label: '6ème',

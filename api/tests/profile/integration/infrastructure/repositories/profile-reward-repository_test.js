@@ -2,6 +2,7 @@ import { PROFILE_REWARDS_TABLE_NAME } from '../../../../../db/migrations/2024082
 import { ATTESTATIONS } from '../../../../../src/profile/domain/constants.js';
 import { ProfileReward } from '../../../../../src/profile/domain/models/ProfileReward.js';
 import {
+  findByUserIdAndRewardId,
   getByAttestationKeyAndUserIds,
   getById,
   getByIds,
@@ -291,6 +292,55 @@ describe('Profile | Integration | Repository | profile-reward', function () {
 
       // then
       expect(result).to.have.lengthOf(0);
+    });
+  });
+
+  describe('#findByUserIdAndRewardId', function () {
+    it('should return null if the reward does not exist', async function () {
+      // given
+      const notExistingRewardId = 12;
+      const userId = 34;
+
+      // when
+      const result = await findByUserIdAndRewardId({ rewardId: notExistingRewardId, userId });
+
+      // then
+      expect(result).to.be.null;
+    });
+
+    it('should return null if the profile reward does not exist', async function () {
+      // given
+      const rewardId = databaseBuilder.factory.buildAttestation().id;
+      const userId = databaseBuilder.factory.buildUser().id;
+      await databaseBuilder.commit();
+
+      //when
+      const result = await findByUserIdAndRewardId({ rewardId, userId });
+
+      // then
+      expect(result).to.be.null;
+    });
+
+    it('should return the expected profile reward', async function () {
+      // given
+      const attestation = databaseBuilder.factory.buildAttestation({ key: 'key' });
+      databaseBuilder.factory.buildProfileReward({ rewardId: attestation.id });
+      const user = databaseBuilder.factory.buildUser();
+
+      const expectedProfileReward = databaseBuilder.factory.buildProfileReward({
+        rewardId: attestation.id,
+        userId: user.id,
+      });
+
+      await databaseBuilder.commit();
+
+      // when
+      const result = await findByUserIdAndRewardId({ rewardId: expectedProfileReward.rewardId, userId: user.id });
+
+      // then
+      expect(result).to.be.an.instanceof(ProfileReward);
+      expect(result.id).to.equal(expectedProfileReward.id);
+      expect(result.rewardType).to.equal(REWARD_TYPES.ATTESTATION);
     });
   });
 });
