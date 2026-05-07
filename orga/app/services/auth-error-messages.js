@@ -11,12 +11,14 @@ const AUTHENTICATION_DEFAULT_MESSAGE = {
 const HTTP_STATUS_MAPPING = {
   400: { i18nKey: 'common.api-error-messages.bad-request-error' },
   401: { i18nKey: 'common.api-error-messages.login-unauthorized-error' },
-  409: { i18nKey: 'common.api-error-messages.account-conflict' },
   422: { i18nKey: 'common.api-error-messages.bad-request-error' },
   504: { i18nKey: 'common.api-error-messages.internal-server-error' },
 };
 
 const AUTHENTICATION_ERROR_CODES_MAPPING = {
+  SSO_PROVIDER_ALREADY_LINKED_TO_USER: {
+    i18nKey: 'common.api-error-messages.account-conflict',
+  },
   EXPIRED_AUTHENTICATION_KEY: {
     i18nKey: 'common.api-error-messages.expired-authentication-key',
   },

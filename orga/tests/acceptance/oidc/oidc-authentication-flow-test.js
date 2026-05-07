@@ -284,6 +284,37 @@ module('Acceptance | OIDC | authentication flow', function (hooks) {
             });
           });
         });
+
+        module('when the SSO provider is already linked to the user', function () {
+          test('the confirmation page displays a dedicated error message', async function (assert) {
+            // given
+            const user = createUserWithMembership();
+            createPrescriberByUser({ user });
+
+            this.server.post(
+              '/oidc/user/reconcile',
+              {
+                errors: [{ code: 'SSO_PROVIDER_ALREADY_LINKED_TO_USER' }],
+              },
+              412,
+            );
+
+            const screen = await visit('/connexion/oidc-partner?code=code&state=state');
+            await click(await screen.getByRole('link', { name: t('pages.oidc.signup.login-button') }));
+            await fillIn(await screen.getByRole('textbox', { name: t('pages.login-form.email.label') }), user.email);
+            await fillIn(await screen.getByLabelText(t('pages.login-form.password')), 'pix123');
+            const loginButton = screen.getByRole('button', { name: t('pages.login-form.associate-account') });
+            await click(loginButton);
+
+            // when
+            await click(await screen.findByText(t('components.authentication.oidc-association-confirmation.confirm')));
+            // eslint-disable-next-line ember/no-settled-after-test-helper
+            await settled();
+
+            // then
+            assert.ok(screen.getByText(t('common.api-error-messages.account-conflict')));
+          });
+        });
       });
     });
 
