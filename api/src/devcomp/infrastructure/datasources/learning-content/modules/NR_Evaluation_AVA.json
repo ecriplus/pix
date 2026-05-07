@@ -285,7 +285,7 @@
           "components": [
             {
               "type": "stepper",
-              "instruction": "<p><br></p>",
+              "instruction": "",
               "steps": [
                 {
                   "elements": [
@@ -352,33 +352,42 @@
                       "id": "5d14295a-486a-45dc-b965-61256248e92b",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>En 1945, le premier ordinateur, l'ENIAC, voyait le jour. </p><p>Il est célèbre pour ses dimensions exceptionnelle : plus de 30 tonnes et 167 m² !<br></p>"
+                      "content": "<p>En 1945, le premier ordinateur, l’ENIAC, voyait le jour. </p><p>Il est célèbre pour ses dimensions exceptionnelle&nbsp;: plus de 30 tonnes et 167 m² !</p>"
+                    },
+                    {
+                      "id": "0636bcfb-6aa2-4f43-9ead-b70ce64cb8c9",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/NR_Eval_Ava/eniac.jpg",
+                      "alt": "Une photographie de l’ENIAC",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": "U.S. Army Photo, Public domain, via Wikimedia Commons"
                     },
                     {
                       "id": "6ab4e662-9a2c-4564-9954-46d29b309563",
                       "type": "qcu-discovery",
-                      "instruction": "<p>A votre avis,&nbsp; quel était la puissance électrique&nbsp; du premier ordinateur ?<br></p>",
+                      "instruction": "<p>A votre avis, quel était la puissance électrique du premier ordinateur ?</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>160 kW, soit environ 2 500 fois plus qu’un PC portable actuel</p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien vu !</p>"
+                            "diagnosis": "<p>Bien vu !</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>6 kW, soit environ 100 fois plus qu’un PC actuel</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non !</p><p>Cet ordinateur avait une puissance de 160 kW, soit environ 2 500 fois plus qu’un PC portable actuel.</p>"
+                            "diagnosis": "<p>Eh non !</p><p>Cet ordinateur avait une puissance de 160 kW, soit environ 2 500 fois plus qu’un PC portable actuel.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>60 W, soit environ autant qu’un PC actuel</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! Cet ordinateur avait une puissance de 160 kW, soit environ 2 500 fois plus qu’un PC portable actuel.</p>"
+                            "diagnosis": "<p>Eh non ! Cet ordinateur avait une puissance de 160 kW, soit environ 2 500 fois plus qu’un PC portable actuel.</p>"
                           }
                         },
                         {
@@ -399,40 +408,49 @@
                       "id": "0f220daf-360e-48ff-961a-dc5f56e78374",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Les chercheurs et les ingénieurs ont travaillé à améliorer les performances des ordinateurs. </p>\n<p>Dans les années 70, les « mini-ordinateurs » sont populaires. </p>\n<p>Par exemple, le Data General Nova a une puissance de 1kW, soit 160 fois moins que l’ENIAC.</p>"
+                      "content": "<p>Les chercheurs et les ingénieurs ont travaillé à améliorer les performances des ordinateurs. </p><p>Dans les années 70, les «&nbsp;mini-ordinateurs&nbsp;» sont populaires. </p><p>Par exemple, le Data General Nova a une puissance de 1kW, soit 160 fois moins que l’ENIAC.</p>"
+                    },
+                    {
+                      "id": "ad1954e0-6dc0-484a-ad04-4744a5f31305",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/NR_Eval_Ava/data_general_nova_system.jpg",
+                      "alt": "Une photographie d'un General Nova",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": "Jeff Keyzer from Austin, TX, USA, CC BY 2.0, via Wikimedia Commons"
                     },
                     {
                       "id": "1cc1aae7-4f83-4a4d-a53c-e2799a9a079b",
                       "type": "qcu-discovery",
-                      "instruction": "<p>A votre avis, à combien d'exemplaires a été vendu le Data General Nova ?</p>",
+                      "instruction": "<p>A votre avis, à combien d’exemplaires a été vendu le Data General Nova ?</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "1",
                           "content": "<p>500 exemplaires</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non ! </p><p>Le Data General Nova a été vendu à 50 000 exemplaires. Pour l’époque, c’est un succès commercial !</p>"
+                            "diagnosis": "<p>Eh non ! </p><p>Le Data General Nova a été vendu à 50 000 exemplaires. Pour l’époque, c’est un succès commercial !</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "<p>50 000 exemplaires</p>",
                           "feedback": {
-                            "diagnosis": "<p>Bien&nbsp; vu ! </p><p> Pour l’époque, c’est un succès commercial !</p>"
+                            "diagnosis": "<p>Bien&nbsp; vu ! </p><p> Pour l’époque, c’est un succès commercial !</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>5 millions d’exemplaires</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non !</p><p>Le Data General Nova a été vendu à 50 000 exemplaires. Pour l’époque, c’est un succès commercial !</p>"
+                            "diagnosis": "<p>Eh non !</p><p>Le Data General Nova a été vendu à 50 000 exemplaires. Pour l’époque, c’est un succès commercial !</p>"
                           }
                         },
                         {
                           "id": "4",
                           "content": "<p>Je ne sais pas.<br></p>",
                           "feedback": {
-                            "diagnosis": "<p>Le Data General Nova a été vendu à 50 000 exemplaires. Pour l’époque, c’est un succès commercial !</p>"
+                            "diagnosis": "<p>Le Data General Nova a été vendu à 50 000 exemplaires. Pour l’époque, c’est un succès commercial !</p>"
                           }
                         }
                       ],
@@ -446,7 +464,16 @@
                       "id": "89821a3c-5b6f-419f-b028-f04f243a4f56",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Et aujourd'hui ?<br></p>"
+                      "content": "<p>Et aujourd’hui ?<br></p>"
+                    },
+                    {
+                      "id": "a92a9ac3-0080-43c2-9242-2464b493118f",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/NR_Eval_Ava/christopher-gower-m_h-rf-lhg-a-bo-unsplash.jpg",
+                      "alt": "Une photographie d'un ordinateur actuel",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": "Photo de Christopher Gower sur Unsplash"
                     },
                     {
                       "id": "380d4129-39fa-4b83-8a62-d38664048404",
@@ -497,11 +524,11 @@
                       ],
                       "feedbacks": {
                         "valid": {
-                          "state": "<p>Bien vu !<br></p>",
+                          "state": "<p>Bien vu !<br></p>",
                           "diagnosis": "<p>Un ordinateur a une puissance d’environ 50W, soit 20 fois moins que l’ordinateur des années 70.<br></p>"
                         },
                         "invalid": {
-                          "state": "<p>Eh non !<br></p>",
+                          "state": "<p>Eh non !<br></p>",
                           "diagnosis": "<p>Un ordinateur a une puissance d’environ 50W, soit 20 fois moins que l’ordinateur des années 70.<br></p>"
                         }
                       }
@@ -509,7 +536,7 @@
                     {
                       "id": "b712b6cc-5dd8-40fb-90cf-fe69dcc578af",
                       "type": "qrocm",
-                      "instruction": "<p><br></p>",
+                      "instruction": "",
                       "proposals": [
                         {
                           "type": "text",
@@ -543,19 +570,19 @@
                       ],
                       "feedbacks": {
                         "valid": {
-                          "state": "<p>Bien vu !<br></p>",
-                          "diagnosis": "<p>Les ordinateurs sont devenus <strong>incontournables </strong>: en 2002, le milliardième ordinateur personnel aurait été livré. La barre des deux milliards aurait été atteinte en 2007 !</p><p> Plus de 270 millions d’ordinateurs auraient été vendus rien qu’en 2025.<br></p>"
+                          "state": "<p>Bien vu !<br></p>",
+                          "diagnosis": "<p>Les ordinateurs sont devenus <strong>incontournables </strong>: en 2002, le milliardième ordinateur personnel aurait été livré. La barre des deux milliards aurait été atteinte en 2007 !</p><p> Plus de 270 millions d’ordinateurs auraient été vendus rien qu’en 2025.<br></p>"
                         },
                         "invalid": {
-                          "state": "<p>Eh non !<br></p>",
-                          "diagnosis": "<p>Les ordinateurs sont devenus <strong>incontournables </strong>: en 2002, le milliardième ordinateur personnel aurait été livré. La barre des deux milliards aurait été atteinte en 2007 !</p><p>  Plus de 270 millions d’ordinateurs auraient été vendus rien qu’en 2025.</p>"
+                          "state": "<p>Eh non !<br></p>",
+                          "diagnosis": "<p>Les ordinateurs sont devenus <strong>incontournables </strong>: en 2002, le milliardième ordinateur personnel aurait été livré. La barre des deux milliards aurait été atteinte en 2007 !</p><p>  Plus de 270 millions d’ordinateurs auraient été vendus rien qu’en 2025.</p>"
                         }
                       }
                     },
                     {
                       "id": "a299262d-b5aa-43dd-aa1f-d977dc655756",
                       "type": "qrocm",
-                      "instruction": "<p><br></p>",
+                      "instruction": "",
                       "proposals": [
                         {
                           "type": "text",
@@ -589,20 +616,14 @@
                       ],
                       "feedbacks": {
                         "valid": {
-                          "state": "<p>Bien vu !<br></p>",
+                          "state": "<p>Bien vu !<br></p>",
                           "diagnosis": "<p>Ce phénomène de compensation du gain unitaire par une augmentation des usages s’appelle l’<strong>effet rebond.</strong><br></p>"
                         },
                         "invalid": {
-                          "state": "<p>Eh non&nbsp; !<br></p>",
+                          "state": "<p>Eh non&nbsp; !<br></p>",
                           "diagnosis": "<p>Au global, la consommation d’énergie par les ordinateurs a explosé.<br>Ce phénomène de compensation du gain unitaire par une augmentation des usages s’appelle l’<strong>effet rebond.</strong><br></p>"
                         }
                       }
-                    },
-                    {
-                      "id": "a92a9ac3-0080-43c2-9242-2464b493118f",
-                      "type": "text",
-                      "tag": " ",
-                      "content": ""
                     }
                   ]
                 }
@@ -625,7 +646,7 @@
                       "id": "f03f5137-a79c-41a0-a2d7-69019d815759",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>L'amélioration de l'efficacité d'une technologie peut sembler être une bonne chose, mais elle provoque parfois une augmentation de son usage ou une augmentation de l'usage d'autres technologies.</p>"
+                      "content": "<p>L’amélioration de l’efficacité d’une technologie peut sembler être une bonne chose, mais elle provoque parfois une augmentation de son usage ou une augmentation de l’usage d’autres technologies.</p>"
                     }
                   ]
                 },
@@ -635,7 +656,7 @@
                       "id": "96f917f3-39ae-42d6-9b1d-94ee179a7b0f",
                       "type": "text",
                       "tag": " ",
-                      "content": "<h5>C’est un peu paradoxal, non ?</h5><p>Effectivement, ça peut être contre-intuitif. Ces augmentations annulent une partie, voire tout ce qui a été gagné avec l'amélioration. D’où le nom de ce phénomène : l’<strong>effet rebond.</strong><br></p>"
+                      "content": "<h5>C’est un peu paradoxal, non ?</h5><p>Effectivement, ça peut être contre-intuitif. Ces augmentations annulent une partie, voire tout ce qui a été gagné avec l’amélioration. D’où le nom de ce phénomène&nbsp;: l’<strong>effet rebond.</strong><br></p>"
                     }
                   ]
                 },
@@ -667,7 +688,7 @@
                 "id": "1d708f09-ff47-4585-8292-6e4504d31f2a",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Olivier voit cette publicité par le système Domotico qui permet l'optimisation de la consommation électrique grâce à l’IA. Il s’interroge.&nbsp;<br></p>"
+                "content": "<p>Olivier voit cette publicité par le système Domotico qui permet l’optimisation de la consommation électrique grâce à l’IA. Il s’interroge.&nbsp;<br></p>"
               }
             },
             {
@@ -677,7 +698,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/NR_Eval_Ava/nr-eval-ava-publicite-domotico.png",
                 "alt": "Une publicité pour le système de domotique Domotico",
-                "alternativeText": "<p>Une publicité pour un système de domotique boosté avec l'intelligence artificielle :&nbsp;</p><ul><li>Domoticio : optimisation de votre consommation électrique par IA.</li><li>- 34 % d'émission de CO2 sur votre chauffage.</li></ul>",
+                "alternativeText": "<p>Une publicité pour un système de domotique boosté avec l’intelligence artificielle&nbsp;:&nbsp;</p><ul><li>Domoticio&nbsp;: optimisation de votre consommation électrique par IA.</li><li>- 34 % d’émission de CO2 sur votre chauffage.</li></ul>",
                 "legend": "Image brouillon",
                 "licence": ""
               }
@@ -687,28 +708,28 @@
               "element": {
                 "id": "0b350beb-139d-4a38-ab89-eb7ba2fe23bc",
                 "type": "qcu-discovery",
-                "instruction": "<p>À votre avis, ce système domotique a-t-il un effet positif ou négatif sur l’environnement ?<br></p>",
+                "instruction": "<p>À votre avis, ce système domotique a-t-il un effet positif ou négatif sur l’environnement ?<br></p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>L’impact est positif.<br></p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>C’est possible, mais ce n’est pas sûr.&nbsp;</strong></p><p>Même si ce système optimise et réduit la consommation électrique, il utilise du matériel électronique polluant et des logiciels qui nécessitent beaucoup de calculs, donc la production de matériel et d’électricité … </p><p>Sans une étude scientifique rigoureuse, on ne peut pas savoir si son impact total sur l’environnement est meilleur des cartes en papier.</p>"
+                      "diagnosis": "<p><strong>C’est possible, mais ce n’est pas sûr.&nbsp;</strong></p><p>Même si ce système optimise et réduit la consommation électrique, il utilise du matériel électronique polluant et des logiciels qui nécessitent beaucoup de calculs, donc la production de matériel et d’électricité … </p><p>Sans une étude scientifique rigoureuse, on ne peut pas savoir si son impact total sur l’environnement est meilleur des cartes en papier.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>L’impact est négatif.<br></p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>C’est possible, mais ce n’est pas sûr.&nbsp;</strong></p><p>Même si ce système optimise et réduit la consommation électrique, il utilise du matériel électronique polluant et des logiciels qui nécessitent beaucoup de calculs, donc de matériel et d’électricité … </p><p>Sans une étude scientifique rigoureuse, on ne peut pas savoir si son impact total sur l’environnement est meilleur des cartes en papier.</p>"
+                      "diagnosis": "<p><strong>C’est possible, mais ce n’est pas sûr.&nbsp;</strong></p><p>Même si ce système optimise et réduit la consommation électrique, il utilise du matériel électronique polluant et des logiciels qui nécessitent beaucoup de calculs, donc de matériel et d’électricité … </p><p>Sans une étude scientifique rigoureuse, on ne peut pas savoir si son impact total sur l’environnement est meilleur des cartes en papier.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Je ne peux pas savoir.</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Effectivement !&nbsp;</strong></p><p>Même si ce système optimise et réduit la consommation électrique, il utilise du matériel électronique polluant et des logiciels qui nécessitent beaucoup de calculs, donc de matériel et d’électricité … </p><p>Sans une étude scientifique rigoureuse, on ne peut pas savoir si son impact total sur l’environnement est meilleur des cartes en papier.</p>"
+                      "diagnosis": "<p><strong>Effectivement !&nbsp;</strong></p><p>Même si ce système optimise et réduit la consommation électrique, il utilise du matériel électronique polluant et des logiciels qui nécessitent beaucoup de calculs, donc de matériel et d’électricité … </p><p>Sans une étude scientifique rigoureuse, on ne peut pas savoir si son impact total sur l’environnement est meilleur des cartes en papier.</p>"
                     }
                   }
                 ],
@@ -732,7 +753,7 @@
                       "id": "80274868-d57d-4afc-983b-44731965ec87",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Certains industriels ne mentionnent <strong>que les effets positifs</strong> de leurs produits, pour se donner une meilleure image. C'est ce qu'on appelle du <strong>greenwashing</strong>, ou écoblanchiment en français. Pourtant, l'amélioration d'une technologie peut avoir des effets indirects négatifs sur l'environnement, comme des effets rebond. </p><p>Il faut donc garder un <strong>esprit critique</strong> sur les nouvelles technologies et leurs améliorations.</p>"
+                      "content": "<p>Certains industriels ne mentionnent <strong>que les effets positifs</strong> de leurs produits, pour se donner une meilleure image. C’est ce qu’on appelle du <strong>greenwashing</strong>, ou écoblanchiment en français. Pourtant, l’amélioration d’une technologie peut avoir des effets indirects négatifs sur l’environnement, comme des effets rebond. </p><p>Il faut donc garder un <strong>esprit critique</strong> sur les nouvelles technologies et leurs améliorations.</p>"
                     }
                   ]
                 },
@@ -742,7 +763,7 @@
                       "id": "71741a0f-9a72-4a76-8f0e-f4e58c7d09f3",
                       "type": "text",
                       "tag": " ",
-                      "content": "<h5> Au final, comment peut-on vérifier si les effets sont positifs ou négatifs ? </h5><p>Il existe des méthodes scientifiques pour mesurer les effets indirects du numérique comme l'Analyse de Cycle de Vie conséquentielle. C'est une méthode de mesure normée qui prend en compte les effets directs et indirects sur l'environnement, sur plusieurs critères environnementaux et pour l'ensemble du cycle de vie.<br></p>"
+                      "content": "<h5> Au final, comment peut-on vérifier si les effets sont positifs ou négatifs ? </h5><p>Il existe des méthodes scientifiques pour mesurer les effets indirects du numérique comme l’Analyse de Cycle de Vie conséquentielle. C’est une méthode de mesure normée qui prend en compte les effets directs et indirects sur l’environnement, sur plusieurs critères environnementaux et pour l’ensemble du cycle de vie.<br></p>"
                     }
                   ]
                 },
@@ -972,7 +993,7 @@
                       },
                       {
                         "id": "5",
-                        "content": "l'effet rebond"
+                        "content": "l’effet rebond"
                       },
                       {
                         "id": "6",
@@ -1062,7 +1083,7 @@
                 "id": "0af3aa8d-4e6e-47eb-9892-ac43febde2bb",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Dans cette publicité, le constructeur ne parle que des effets positifs sur l'environnement de son produit mais passe sous silence les effets négatifs.</p>"
+                "content": "<p>Dans cette publicité, le constructeur ne parle que des effets positifs sur l’environnement de son produit mais passe sous silence les effets négatifs.</p>"
               }
             },
             {
@@ -1070,7 +1091,7 @@
               "element": {
                 "id": "4d607d31-ce42-47b6-8ce9-4b928cda9609",
                 "type": "qrocm",
-                "instruction": "<p>Comment appelle-t-on cette pratique ?</p>",
+                "instruction": "<p>Comment appelle-t-on cette pratique ?</p>",
                 "proposals": [
                   {
                     "input": "publicite-nom-pratique",
@@ -1093,12 +1114,12 @@
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "<p>Bravo !<br></p>",
-                    "diagnosis": "<p>La publicité met en avant le plastique recyclé car beaucoup d'autres métaux qui entrent dans la composition du téléphone, dont l'extraction est polluante, ne sont pas mentionnés.<br></p>"
+                    "state": "<p>Bravo !<br></p>",
+                    "diagnosis": "<p>La publicité met en avant le plastique recyclé car beaucoup d’autres métaux qui entrent dans la composition du téléphone, dont l’extraction est polluante, ne sont pas mentionnés.<br></p>"
                   },
                   "invalid": {
-                    "state": "<p>N'hésitez pas réessayer !<br></p>",
-                    "diagnosis": "<p>En mettant en avant le plastique recyclé utilisé dans le smartphone, que cherche à faire le constructeur ?<br></p>"
+                    "state": "<p>N’hésitez pas réessayer !<br></p>",
+                    "diagnosis": "<p>En mettant en avant le plastique recyclé utilisé dans le smartphone, que cherche à faire le constructeur ?<br></p>"
                   }
                 }
               }
