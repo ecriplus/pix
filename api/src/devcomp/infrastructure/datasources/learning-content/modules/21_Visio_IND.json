@@ -88,66 +88,41 @@
                   ]
                 },
                 {
-                  "elements": [
-                    {
-                      "id": "38093c3b-2fd1-422f-b4e4-a5d6fe8f0810",
-                      "type": "qcu-discovery",
-                      "instruction": "<p>Qui a le micro fermé&nbsp;?</p>",
-                      "hasShortProposals": true,
-                      "proposals": [
-                        {
-                          "id": "0",
-                          "content": "Inès",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non&nbsp;!</p><p>Pendant une visioconférence, un symbole de <strong>micro barré</strong> indique qui a le micro fermé.</p>"
-                          }
-                        },
-                        {
-                          "id": "1",
-                          "content": "Samuel",
-                          "feedback": {
-                            "diagnosis": "<p>Eh non&nbsp;!</p><p>Pendant une visioconférence, un symbole de <strong>micro barré</strong> indique qui a le micro fermé.</p>"
-                          }
-                        },
-                        {
-                          "id": "2",
-                          "content": "Gaby",
-                          "feedback": {
-                            "diagnosis": "<p>Exactement&nbsp;!</p><p>Pendant une visioconférence, un symbole de <strong>micro barré</strong> indique qui a le micro fermé.</p>"
-                          }
-                        }
-                      ],
-                      "solution": "2"
-                    }
-                  ]
+                  "elements": []
                 },
                 {
                   "elements": [
                     {
+                      "id": "af059184-6aa4-4542-8b5c-664ac6f53920",
+                      "type": "text",
+                      "tag": "context",
+                      "content": "<p>Samuel parle depuis plusieurs minutes de ses idées.\n</p>\n<p>Roy souhaite poser une question, mais hésite&nbsp;: il ne sait pas vraiment comment s’y prendre pour ne pas couper la parole de Samuel.</p>"
+                    },
+                    {
                       "id": "176fdf66-11b9-4e5d-bf41-c0187d26ee26",
                       "type": "qcu-discovery",
                       "instruction": "<p>Comment Roy peut-il faire pour donner son avis&nbsp;?</p>",
-                      "hasShortProposals": true,
+                      "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "0",
-                          "content": "Lever la main",
+                          "content": "<p>Lever la main</p>",
                           "feedback": {
-                            "diagnosis": "<p>Exactement&nbsp;!</p><p>Pendant une visioconférence, il est recommandé de <strong>lever la main</strong> avant de prendre la parole.</p>"
+                            "diagnosis": "<p>Exactement&nbsp;!</p>\n<p>Pour indiquer aux autres participants qu’il souhaite intervenir, Roy peut utiliser la fonctionnalité «&nbsp;<strong>lever la main</strong>&nbsp;» de l’outil de visioconférence.</p>"
                           }
                         },
                         {
                           "id": "1",
-                          "content": "Ouvrir sa caméra",
+                          "content": "<p>Ouvrir son micro</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non&nbsp;!</p><p>Pendant une visioconférence, il est recommandé de <strong>lever la main</strong> avant de prendre la parole.</p>"
+                            "diagnosis": "<p>Ce n’est pas nécessaire&nbsp;: le micro de Roy est déjà ouvert&nbsp;!</p>\n<p>Pour indiquer aux autres participants qu’il souhaite intervenir, Roy peut utiliser la fonctionnalité «&nbsp;<strong>lever la main</strong>&nbsp;» de l’outil de visioconférence.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "Fermer son micro",
+                          "content": "<p>Attendre que Samuel ait terminé</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non&nbsp;!</p><p>Pendant une visioconférence, il est recommandé de <strong>lever la main</strong> avant de prendre la parole.</p>"
+                            "diagnosis": "<p>C’est possible mais cela peut prendre du temps… </p>\n<p>Pour indiquer aux autres participants qu’il souhaite intervenir, Roy peut utiliser la fonctionnalité «&nbsp;<strong>lever la main</strong>&nbsp;» de l’outil de visioconférence.</p>"
                           }
                         }
                       ],
@@ -170,7 +145,7 @@
                 "id": "737f5bee-1378-4db2-88f8-1d24b7889160",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Dans une visioconférence, l’oral n’est parfois pas suffisant pour s’exprimer. Ça tombe bien, les outils de visioconférence intègrent de nombreuses fonctionnalités pour faciliter les échanges&nbsp;!</p>"
+                "content": "<p>Les outils de visioconférence intègrent de nombreuses fonctionnalités pour faciliter les échanges.</p><p>Voyons plus en détail les fonctionnalités que peuvent utiliser Roy et les membres de son association pour leurs réunions.</p>"
               }
             }
           ]
