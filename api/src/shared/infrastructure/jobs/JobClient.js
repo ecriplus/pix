@@ -44,7 +44,12 @@ export class JobClient {
     if (worker) {
       this.#pgBoss = pgBossFactory
         ? pgBossFactory()
-        : new PgBoss({ connectionString, max: config.pgBoss.workerConnexionPoolMaxSize });
+        : new PgBoss({
+            connectionString,
+            max: config.pgBoss.workerConnexionPoolMaxSize,
+            persistWarnings: config.pgBoss.persistWarnings,
+            warningRetentionDays: 30,
+          });
 
       this.#pgBoss.on('error', (err) => {
         logger.error({ event: 'pg-boss-error', err }, 'PGBOSS ERROR');
@@ -180,6 +185,7 @@ export class JobClient {
 
   async send(name, payload, options) {
     this.#assertIsInitialized();
+    logger.info({ type: 'JOB_LOG', handlerName: name }, 'PGBOSS JOB CREATED');
     await this.#pgBoss.send(name, payload, options);
   }
 
