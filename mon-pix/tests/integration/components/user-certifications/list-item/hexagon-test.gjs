@@ -172,6 +172,7 @@ module('Integration | Component | User certifications | List item | Hexagon', fu
             @framework="EDU_2ND_DEGRE"
             @reachedMeshLevel="EXPERT"
             @certificateType="CERTIFICATE"
+            @badgeUrl="https://exmaple-asset.org/badges-certifies/v3/edu_2nd_degre/expert.svg"
           />
         </template>,
       );
@@ -191,6 +192,7 @@ module('Integration | Component | User certifications | List item | Hexagon', fu
             @framework="DROIT"
             @reachedMeshLevel="INDEPENDENT"
             @certificateType="CERTIFICATE"
+            @badgeUrl="super-url"
           />
         </template>,
       );

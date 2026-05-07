@@ -108,6 +108,7 @@ export default class ListItem extends Component {
           @reachedMeshLevel={{@certificateSummary.reachedMeshLevel}}
           @framework={{@certificateSummary.certificationFramework}}
           @certificateType={{@certificateSummary.certificateType}}
+          @badgeUrl={{@certificateSummary.badgeUrl}}
         />
       </div>
       {{#if this.notObtainedCertificationWithComment}}

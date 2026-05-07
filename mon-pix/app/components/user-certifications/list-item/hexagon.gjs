@@ -1,6 +1,5 @@
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
-import ENV from 'mon-pix/config/environment';
 import { CERTIFICATE_TYPES } from 'mon-pix/models/certificate-summary';
 
 export default class Hexagon extends Component {
@@ -48,20 +47,9 @@ export default class Hexagon extends Component {
     return this.args.isValidated ? this.args.pixScore : '-';
   }
 
-  get badgeUrl() {
-    if (!this.isPixPlusV3 || !this.args.reachedMeshLevel || this.args.reachedMeshLevel === 'ADMISSIBLE') {
-      return null;
-    }
-
-    const framework = this.args.framework.toLowerCase();
-    const meshLevel = this.args.reachedMeshLevel.toLowerCase();
-
-    return `${ENV.APP.PIX_ASSETS_MANAGER_URL}/badges-certifies/v3/${framework}/${meshLevel}.svg`;
-  }
-
   <template>
-    {{#if this.badgeUrl}}
-      <img class={{this.badgeClassNames}} src={{this.badgeUrl}} alt="" />
+    {{#if @badgeUrl}}
+      <img class={{this.badgeClassNames}} src={{@badgeUrl}} alt="" />
     {{else}}
       <div data-testid="pw-certification-card-result" class={{this.hexagonClassNames}}>
         <strong class="score">{{this.score}}</strong>
