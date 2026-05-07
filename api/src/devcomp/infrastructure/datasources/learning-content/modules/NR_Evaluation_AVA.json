@@ -160,7 +160,7 @@
                       "id": "38c04097-96ce-430a-9350-0ccde106a9bc",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>La construction du matériel informatique nécessite d’extraire beaucoup de ressources minérales, ce qui pollue l’environnement.<br></p>"
+                      "content": "<p>La <strong>construction du matériel informatique </strong>nécessite d’extraire beaucoup de ressources minérales, ce qui pollue l’environnement.<br></p>"
                     },
                     {
                       "id": "4d9696fa-083f-4f3c-8354-b1c259e0046e",
@@ -200,7 +200,7 @@
                       "id": "766b1dbd-00ed-404b-b202-c4ded882a002",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Les serveurs informatiques consomment de l’électricité, et la production de cette électricité émet des gaz à effet de serre.</p>"
+                      "content": "<p>Les <strong>serveurs informatiques</strong> consomment de l’électricité, et la production de cette électricité émet des gaz à effet de serre.</p>"
                     },
                     {
                       "id": "17dee555-4c04-4121-bb5f-3707ae6c600e",
@@ -240,7 +240,7 @@
                       "id": "ed766469-ad4f-4484-b16c-24f267894f97",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Dans certaines entreprises, des réunions qui avaient lieu physiquement se tiennent maintenant en visioconférence. Les employés de ces entreprises ne se rendent donc plus au bureau pour ces réunions, donc utilisent moins leur voiture.</p>"
+                      "content": "<p>Dans certaines entreprises, des réunions qui avaient lieu physiquement se tiennent maintenant en <strong>visioconférence.</strong> Les employés de ces entreprises ne se rendent donc plus au bureau pour ces réunions, donc utilisent moins leur voiture.</p>"
                     },
                     {
                       "id": "85bba006-de87-43c1-aa3a-f6e1617bc642",
@@ -284,13 +284,40 @@
           "title": "Leçon 1 : les effets indirects du numérique",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "7220f599-478a-4942-8950-9ae3503dbf38",
-                "type": "text",
-                "tag": " ",
-                "content": "<p>L’usage du numérique peut provoquer des <strong>changements de comportements</strong>, individuels ou collectifs. Ces nouveaux comportements peuvent avoir des effets sur l’environnement, on parle donc d’<strong>effets indirects du numérique</strong> sur l’environnement.</p><h5>Est-ce que les effets indirects sont positifs ou négatifs ?</h5><p>Ça dépend. Certains effets indirects peuvent être <strong>positifs</strong> pour l’environnement, d’autres peuvent être <strong>négatifs</strong>.</p>"
-              }
+              "type": "stepper",
+              "instruction": "<p><br></p>",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "b60da4bd-2370-43a4-91c4-7a32dcf36561",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p>L’usage du numérique peut provoquer des changements de comportements, individuels ou collectifs. Ces nouveaux comportements peuvent avoir des effets sur l’environnement, on parle donc d’effets indirects du numérique sur l’environnement.</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "7342c038-5818-4eef-ae13-94ca1f99e496",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p>                <br></p><table><thead><tr><th scope=\"\\&quot;col\\&quot;\" class=\"\\&quot;width-15\\&quot;\">Type</th><th scope=\"\\&quot;col\\&quot;\">Description</th><th scope=\"\\&quot;col\\&quot;\">Exemples pour un smartphone</th></tr></thead><tbody><tr><th>Effet direct</th><td>Impact de la fabrication et de l’utilisation des appareils numériques<br></td><td>- Consommation d’énergie pour recharger le smartphone<br>- Consommation de métaux pour fabriquer le smartphone<br>- Déchets électronique en fin de vie du smartphone<br></td></tr><tr><th>Effet indirect</th><td>Changements de comportement des utilisateurs ayant eux même des effets sur l’environnement<br></td><td>-&nbsp;L’ utilisateur du smartphone n’achète pas de radio (effet de substitution)<br>- L’utilisateur du smartphone se perd moins en voiture et économise du carburant (effet d’efficacité)</td></tr></tbody></table>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "15ce0cd9-4ec6-4d1a-ae0a-dcf54307c153",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<h5>Est-ce que les effets indirects sont positifs ou négatifs ? </h5><p> Ça dépend. Certains effets indirects peuvent être positifs pour l’environnement, d’autres peuvent être négatifs.</p>"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
