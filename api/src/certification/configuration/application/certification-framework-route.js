@@ -95,6 +95,37 @@ const register = async function (server) {
       },
     },
     {
+      method: 'GET',
+      path: '/api/admin/certification-frameworks/{scope}/target-profiles',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+                securityPreHandlers.checkAdminMemberHasRoleCertif,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+              ])(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            scope: Joi.string()
+              .required()
+              .valid(...Object.values(SCOPES).filter((s) => s !== SCOPES.CORE)),
+          }),
+        },
+        handler: certificationFrameworkController.getTargetProfileHistory,
+        tags: ['api', 'admin'],
+        notes: [
+          'Cette route est restreinte aux utilisateurs authentifiés avec le rôle Super Admin, Support, Certif et Métier',
+          "Elle renvoie l'historique des profils cibles rattachés à un référentiel de certification.",
+        ],
+      },
+    },
+    {
       method: 'POST',
       path: '/api/admin/frameworks/{scope}/new-version',
       config: {

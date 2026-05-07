@@ -12,10 +12,7 @@ import List from 'pix-admin/components/certification-frameworks/list';
 
     <main class="page-body">
       <section class="page-section">
-        <List
-          @certificationFrameworks={{@model.certificationFrameworks}}
-          @complementaryCertifications={{@model.complementaryCertifications}}
-        />
+        <List @certificationFrameworks={{@model.certificationFrameworks}} />
       </section>
     </main>
   </div>

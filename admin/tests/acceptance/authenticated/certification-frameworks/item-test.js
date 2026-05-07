@@ -18,6 +18,7 @@ module('Acceptance | Complementary certifications | Complementary certification 
       key: 'KEY',
       label: 'MARIANNE CERTIF',
     });
+    server.create('certification-framework', { id: 'KEY' });
     server.create('certification-consolidated-framework', {
       id: 'KEY',
     });
@@ -33,6 +34,7 @@ module('Acceptance | Complementary certifications | Complementary certification 
     // given
     await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
 
+    server.create('certification-framework', { id: 'CLEA' });
     server.create('complementary-certification', {
       id: 1,
       hasComplementaryReferential: false,

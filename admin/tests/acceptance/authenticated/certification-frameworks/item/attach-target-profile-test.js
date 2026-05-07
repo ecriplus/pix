@@ -15,9 +15,10 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
         test('should display complementary certification and current target profile name', async function (assert) {
           // given
           await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+          server.create('certification-framework', { id: 'CLEA', name: 'CLEA' });
           server.create('complementary-certification', {
             id: 1,
-            key: 'KEY',
+            key: 'CLEA',
             label: 'MARIANNE CERTIF',
             targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3, attachedAt: new Date('2023-10-10T10:50:00Z') }],
           });
@@ -25,7 +26,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
             id: 3,
             name: 'ALEX TARGET',
           });
-          const screen = await visit('/certification-frameworks/KEY/target-profile/3');
+          const screen = await visit('/certification-frameworks/CLEA/target-profile/3');
 
           // then
           assert
@@ -42,9 +43,10 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
           test('it should redirect to target profile details page', async function (assert) {
             // given
             await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+            server.create('certification-framework', { id: 'CLEA', name: 'CLEA' });
             server.create('complementary-certification', {
               id: 1,
-              key: 'KEY',
+              key: 'CLEA',
               label: 'MARIANNE CERTIF',
               targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3, attachedAt: new Date('2023-10-10T10:50:00Z') }],
             });
@@ -52,7 +54,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
               id: 3,
               name: 'ALEX TARGET',
             });
-            const screen = await visit('/certification-frameworks/KEY/target-profile/3');
+            const screen = await visit('/certification-frameworks/CLEA/target-profile/3');
 
             const currentTargetProfileLinks = screen.getAllByRole('link', { name: 'ALEX TARGET' });
 
@@ -69,13 +71,14 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
         test('should not display current target profile name', async function (assert) {
           // given
           await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+          server.create('certification-framework', { id: 'CLEA', name: 'CLEA' });
           server.create('complementary-certification', {
             id: 1,
-            key: 'KEY',
+            key: 'CLEA',
             label: 'MARIANNE CERTIF',
             targetProfilesHistory: [],
           });
-          const screen = await visit('/certification-frameworks/KEY/target-profile/-1');
+          const screen = await visit('/certification-frameworks/CLEA/target-profile/-1');
 
           // then
           assert
@@ -93,9 +96,10 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
         test('it should display the link of the selected target profile with a change button', async function (assert) {
           // given
           await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+          server.create('certification-framework', { id: 'CLEA', name: 'CLEA' });
           server.create('complementary-certification', {
             id: 1,
-            key: 'KEY',
+            key: 'CLEA',
             label: 'MARIANNE CERTIF',
             targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3, attachedAt: new Date('2023-10-10T10:50:00Z') }],
           });
@@ -108,7 +112,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
             name: 'ALEX TARGET',
             badges: [],
           });
-          const screen = await visit('/certification-frameworks/KEY/target-profile/3');
+          const screen = await visit('/certification-frameworks/CLEA/target-profile/3');
           const input = screen.getByRole('textbox', { name: 'ID du profil cible' });
           await fillIn(input, '3');
 
@@ -127,9 +131,10 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
           test('it should display Notify organisations checkbox', async function (assert) {
             // given
             await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+            server.create('certification-framework', { id: 'CLEA', name: 'CLEA' });
             server.create('complementary-certification', {
               id: 1,
-              key: 'KEY',
+              key: 'CLEA',
               label: 'MARIANNE CERTIF',
               targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3, attachedAt: new Date('2023-10-10T10:50:00Z') }],
             });
@@ -147,7 +152,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
               name: 'ALEX TARGET',
               badges: [badge],
             });
-            const screen = await visit('/certification-frameworks/KEY/target-profile/3');
+            const screen = await visit('/certification-frameworks/CLEA/target-profile/3');
             const input = screen.getByRole('textbox', { name: 'ID du profil cible' });
             await fillIn(input, '5');
             await screen.findByRole('listbox');
@@ -171,9 +176,10 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
           test('it should not display Notify organisations checkbox', async function (assert) {
             // given
             await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+            server.create('certification-framework', { id: 'CLEA', name: 'CLEA' });
             server.create('complementary-certification', {
               id: 1,
-              key: 'KEY',
+              key: 'CLEA',
               label: 'MARIANNE CERTIF',
               targetProfilesHistory: [],
             });
@@ -191,7 +197,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
               name: 'ALEX TARGET',
               badges: [badge],
             });
-            const screen = await visit('/certification-frameworks/KEY/target-profile/3');
+            const screen = await visit('/certification-frameworks/CLEA/target-profile/3');
             const input = screen.getByRole('textbox', { name: 'ID du profil cible' });
             await fillIn(input, '5');
             await screen.findByRole('listbox');
@@ -216,9 +222,10 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
         test('it should save the new attached target profile and redirect to complementary certification details', async function (assert) {
           // given
           await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+          server.create('certification-framework', { id: 'CLEA', name: 'CLEA' });
           server.create('complementary-certification', {
             id: 1,
-            key: 'KEY',
+            key: 'CLEA',
             hasExternalJury: true,
             label: 'MARIANNE CERTIF',
             targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3, attachedAt: new Date('2023-10-10T10:50:00Z') }],
@@ -237,7 +244,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
             name: 'ALEX TARGET',
             badges: [badge],
           });
-          const screen = await visit('/certification-frameworks/KEY/target-profile/3');
+          const screen = await visit('/certification-frameworks/CLEA/target-profile/3');
           const input = screen.getByRole('textbox', { name: 'ID du profil cible' });
           await fillIn(input, '5');
           await screen.findByRole('listbox');
@@ -284,7 +291,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
               ),
             )
             .exists();
-          assert.strictEqual(currentURL(), '/certification-frameworks/KEY/target-profile');
+          assert.strictEqual(currentURL(), '/certification-frameworks/CLEA/target-profile');
         });
       });
 
@@ -292,9 +299,10 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
         test('it should save the level to 1 by default', async function (assert) {
           // given
           await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
+          server.create('certification-framework', { id: 'CLEA', name: 'CLEA' });
           server.create('complementary-certification', {
             id: 1,
-            key: 'KEY',
+            key: 'CLEA',
             hasExternalJury: true,
             label: 'MARIANNE CERTIF',
             targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3, attachedAt: new Date('2023-10-10T10:50:00Z') }],
@@ -313,7 +321,7 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
             name: 'ALEX TARGET',
             badges: [badge],
           });
-          const screen = await visit('/certification-frameworks/KEY/target-profile/3');
+          const screen = await visit('/certification-frameworks/CLEA/target-profile/3');
           const input = screen.getByRole('textbox', { name: 'ID du profil cible' });
           await fillIn(input, '5');
           await screen.findByRole('listbox');
@@ -358,9 +366,10 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
       test('it should not allow user to create or update target profile attachment', async function (assert) {
         // given
         await authenticateAdminMemberWithRole({ [role]: hasAccess })(server);
+        server.create('certification-framework', { id: 'CLEA', name: 'CLEA' });
         server.create('complementary-certification', {
           id: 1,
-          key: 'KEY',
+          key: 'CLEA',
           label: 'MARIANNE CERTIF',
           targetProfilesHistory: [{ name: 'ALEX TARGET', id: 3, attachedAt: new Date('2023-10-10T10:50:00Z') }],
         });
@@ -368,10 +377,10 @@ module('Acceptance | Complementary certifications | item | attach-target-profile
           id: 3,
           name: 'ALEX TARGET',
         });
-        await visit('/certification-frameworks/KEY/target-profile/3');
+        await visit('/certification-frameworks/CLEA/target-profile/3');
 
         // then
-        assert.strictEqual(currentURL(), '/certification-frameworks/KEY/target-profile');
+        assert.strictEqual(currentURL(), '/certification-frameworks/CLEA/target-profile');
       });
     });
   });

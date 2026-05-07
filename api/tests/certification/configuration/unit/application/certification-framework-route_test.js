@@ -107,7 +107,7 @@ describe('Unit | Certification | Configuration | Application | Router | certific
     });
   });
 
-  describe('GET /api/admin/certification-frameworks/{complementaryCertificationKey}/framework-history', function () {
+  describe('GET /api/admin/certification-frameworks/{scope}/framework-history', function () {
     describe('when the user authenticated has no role', function () {
       it('should return 403 HTTP status code', async function () {
         // given
@@ -150,6 +150,54 @@ describe('Unit | Certification | Configuration | Application | Router | certific
           // then
           expect(response.statusCode).to.equal(200);
           sinon.assert.calledOnce(certificationFrameworkController.getFrameworkHistory);
+        });
+      });
+    });
+  });
+
+  describe('GET /api/admin/certification-frameworks/{scope}/target-profiles', function () {
+    describe('when the user authenticated has no role', function () {
+      it('should return 403 HTTP status code', async function () {
+        // given
+        sinon
+          .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
+          .returns((request, h) => h.response().code(403).takeover());
+        sinon.stub(certificationFrameworkController, 'getTargetProfileHistory').returns('ok');
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        const response = await httpTestServer.request(
+          'GET',
+          `/api/admin/certification-frameworks/${SCOPES.PIX_PLUS_DROIT}/target-profiles`,
+        );
+
+        // then
+        expect(response.statusCode).to.equal(403);
+        sinon.assert.notCalled(certificationFrameworkController.getTargetProfileHistory);
+      });
+    });
+
+    const authorizedRoles = ['SuperAdmin', 'Certif', 'Metier', 'Support'];
+    authorizedRoles.forEach((role) => {
+      describe(`when the user has ${role} role`, function () {
+        it('should return 200 HTTP status code', async function () {
+          // given
+          sinon.stub(securityPreHandlers, `checkAdminMemberHasRole${role}`).returns(true);
+          sinon.stub(certificationFrameworkController, 'getTargetProfileHistory').returns('ok');
+
+          const httpTestServer = new HttpTestServer();
+          await httpTestServer.register(moduleUnderTest);
+
+          // when
+          const response = await httpTestServer.request(
+            'GET',
+            `/api/admin/certification-frameworks/${SCOPES.PIX_PLUS_DROIT}/target-profiles`,
+          );
+
+          // then
+          expect(response.statusCode).to.equal(200);
+          sinon.assert.calledOnce(certificationFrameworkController.getTargetProfileHistory);
         });
       });
     });

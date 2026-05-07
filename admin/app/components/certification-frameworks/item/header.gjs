@@ -1,13 +1,19 @@
 import PixBreadcrumb from '@1024pix/pix-ui/components/pix-breadcrumb';
+import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
 export default class Header extends Component {
   @service intl;
+  @service currentUser;
 
-  get isComplementaryCertification() {
-    return this.args.complementaryCertification;
+  get frameworkLabel() {
+    return this.intl.t(`components.certification-frameworks.labels.${this.args.certificationFramework.name}`);
+  }
+
+  get canCreateVersion() {
+    return this.currentUser.adminMember.isSuperAdmin && this.args.certificationFramework?.name !== 'CLEA';
   }
 
   get links() {
@@ -17,8 +23,7 @@ export default class Header extends Component {
         label: this.intl.t('components.layout.sidebar.certification-frameworks'),
       },
       {
-        label:
-          this.args.complementaryCertification?.label || this.intl.t('components.certification-frameworks.labels.CORE'),
+        label: this.frameworkLabel,
       },
     ];
   }
@@ -30,25 +35,20 @@ export default class Header extends Component {
 
     <div class="certification-framework-header">
       <h1 class="certification-framework-header__title">
-        <small>
-          {{#if this.isComplementaryCertification}}
-            {{#if @complementaryCertification.hasComplementaryReferential}}
-              {{t "components.complementary-certifications.item.certification-framework"}}
-            {{else}}
-              {{t "components.complementary-certifications.item.target-profile"}}
-            {{/if}}
-          {{else}}
-            {{t "components.complementary-certifications.item.certification-framework"}}
-          {{/if}}
-        </small>
         <span>
-          {{#if this.isComplementaryCertification}}
-            {{@complementaryCertification.label}}
-          {{else}}
-            {{t "components.certification-frameworks.labels.CORE"}}
-          {{/if}}
+          {{this.frameworkLabel}}
         </span>
       </h1>
+
+      {{#if this.canCreateVersion}}
+        <PixButtonLink
+          class="framework__creation-button"
+          @route="authenticated.certification-frameworks.item.framework.new-version"
+          @iconBefore="add"
+        >
+          {{t "components.complementary-certifications.item.framework.create-button"}}
+        </PixButtonLink>
+      {{/if}}
     </div>
   </template>
 }

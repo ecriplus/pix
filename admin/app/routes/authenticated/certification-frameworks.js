@@ -9,12 +9,8 @@ export default class CertificationFrameworksRoute extends Route {
   async model() {
     try {
       const certificationFrameworks = await this.store.findAll('certification-framework');
-      const complementaryCertifications = await this.store.findAll('complementary-certification');
 
-      return {
-        certificationFrameworks,
-        complementaryCertifications,
-      };
+      return { certificationFrameworks };
     } catch (errorResponse) {
       if (!isEmpty(errorResponse)) {
         errorResponse.errors.forEach((error) => this.pixToast.sendErrorNotification({ message: error.detail }));
@@ -22,6 +18,6 @@ export default class CertificationFrameworksRoute extends Route {
         this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
       }
     }
-    return { certificationFrameworks: [], complementaryCertifications: [] };
+    return { certificationFrameworks: [] };
   }
 }
