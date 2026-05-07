@@ -399,7 +399,7 @@ test.describe('SCO import does not auto-reconcile a learner when the user alread
       );
     });
 
-    test.skip("Remove user reconciliation when the user is already in the target organization with a different INE,  (is it ok, i don't know, but it's here since the beginning of the time)", async ({
+    test("Remove user reconciliation when the user is already in the target organization with a different INE,  (is it ok, i don't know, but it's here since the beginning of the time)", async ({
       page,
     }) => {
       test.slow();
@@ -435,6 +435,7 @@ test.describe('SCO import does not auto-reconcile a learner when the user alread
         }
         await orgaPage.waitForTheImportToComplete(page);
         await page.getByRole('link', { name: 'Se déconnecter' }).click();
+        await page.getByRole('button', { name: 'Je me connecte' }).waitFor();
       });
 
       await test.step('A user creates an account and reconciles with Jean Michel from Org A (INE 12)', async () => {
@@ -476,6 +477,7 @@ test.describe('SCO import does not auto-reconcile a learner when the user alread
         }
         await orgaPage.waitForTheImportToComplete(page);
         await page.getByRole('link', { name: 'Se déconnecter' }).click();
+        await page.getByRole('button', { name: 'Je me connecte' }).waitFor();
       });
 
       await test.step('Jean Michel manually reconciles with Org B (INE 13) via the campaign', async () => {
