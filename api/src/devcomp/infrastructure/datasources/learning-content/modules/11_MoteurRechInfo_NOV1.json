@@ -345,10 +345,14 @@
                         },
                         {
                           "content": "zoom",
+                          "isAnonymizable": false
+                        },
+                        {
+                          "content": "Macropix",
                           "isAnonymizable": true
                         },
                         {
-                          "content": "Macropix 12.",
+                          "content": "12.",
                           "isAnonymizable": true
                         },
                         {
