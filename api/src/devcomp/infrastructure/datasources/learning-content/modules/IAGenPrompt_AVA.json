@@ -135,7 +135,7 @@
               "element": {
                 "id": "c3a632eb-020a-4e7a-bc3c-4035f5601f3d",
                 "type": "custom",
-                "title": "Simu 2",
+                "title": " ",
                 "instruction": "<p>Dans le simulateur, sélectionnez les prompts pour découper votre tâche.</p>",
                 "functionalInstruction": "",
                 "tagName": "llm-prompt-select",
@@ -482,7 +482,7 @@
               "element": {
                 "id": "6066c086-fa6b-4dc2-aced-43ab736fb6ca",
                 "type": "qcu-discovery",
-                "instruction": "<p>Quel est l’utilité l’exemple fourni à l’IA dans cette activité&nbsp;?</p>",
+                "instruction": "<p>Quel est l’utilité de l’exemple fourni à l’IA dans cette activité&nbsp;?</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
@@ -532,7 +532,7 @@
                 "id": "eb52f337-184a-4422-ad7b-5c9b04f930b9",
                 "type": "text",
                 "tag": "did-you-know",
-                "content": "<p>Vous pouvez mettre des exemples sous forme de documents en pièce jointe de votre prompt mais également en tant que texte dans votre prompt en mettrant les exemples en guillemets ou entres des balises &lt;exemple&gt; pour que le logiciel les interprète bien comme tel.&nbsp;<br></p>"
+                "content": "<p>Vous pouvez mettre des exemples sous forme de documents en pièce jointe de votre prompt mais également en tant que texte dans votre prompt en mettant les exemples en guillemets ou entres des balises &lt;exemple&gt; pour que le logiciel les interprète bien comme tel.&nbsp;<br></p>"
               }
             }
           ]
