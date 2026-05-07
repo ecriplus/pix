@@ -538,7 +538,7 @@
       "catalogue": "Catalogus",
       "certifications": "Certificeringen",
       "close": "Sluit de navigatie",
-      "combined-courses": "Leetrajecten",
+      "combined-courses": "Leertrajecten",
       "documentation": "Documentatie",
       "home": "Home",
       "missions": "Opdrachten",
@@ -674,7 +674,7 @@
       "name": "Naam Campagne",
       "tab": {
         "activity": "Activiteit",
-        "combined-courses": "Leetrajecten",
+        "combined-courses": "Leertrajecten",
         "results": "Resultaten ({count, number})",
         "review": "Analyse",
         "settings": "Instellingen"
@@ -1654,9 +1654,9 @@
     },
     "sco-organization-participants": {
       "action-bar": {
-        "generate-username-password-button": "Aanmeldingen en/of wachtwoorden genereren voor geselecteerde studenten",
-        "information": "{count, plural, =1 {{count} geselecteerde student} other {{count} geselecteerde studenten}}",
-        "reset-password-button": "Reset de wachtwoorden van geselecteerde studenten"
+        "generate-username-password-button": "Aanmeldingen en/of wachtwoorden genereren voor geselecteerde leerlingen",
+        "information": "{count, plural, =1 {{count} geselecteerde leerling} other {{count} geselecteerde leerlingen}}",
+        "reset-password-button": "Reset de wachtwoorden van geselecteerde leerlingen"
       },
       "actions": {
         "manage-account": "Account beheren",
@@ -1671,7 +1671,7 @@
         "without-mediacentre": "Zonder mediacentrum"
       },
       "filter": {
-        "aria-label": "Filters voor studenten",
+        "aria-label": "Filters voor leerlingen",
         "certificability": {
           "label": "Zoeken op certificeerbaarheid",
           "placeholder": "Certificeerbaarheid"
@@ -1690,14 +1690,14 @@
           "empty-option": "Inlogmethode",
           "label": "Zoeken op inlogmethode"
         },
-        "students-count": "{count, plural, =0 {0 studenten} =1 {1 student} other {{count} studenten}}"
+        "students-count": "{count, plural, =0 {0 leerlingen} =1 {1 leerling} other {{count} leerlingen}}"
       },
       "generate-username-password-modal": {
-        "content-message-1": "Studenten die nog geen inlogmethode hebben, moeten een campagne op jouw school doorlopen om hun PIX-account aan te maken.",
+        "content-message-1": "Leerlingen die nog geen inlogmethode hebben, moeten een campagne op jouw school doorlopen om hun PIX-account aan te maken.",
         "content-message-2": "Er wordt een CSV-bestand gegenereerd met de gebruikersnamen en eenmalige wachtwoorden.",
         "content-message-3": "Deel deze nieuwe eenmalige wachtwoorden met je leerlingen. Wanneer ze inloggen met dit wachtwoord, zal Pix hen vragen een nieuw wachtwoord in te voeren.",
-        "title": "Aanmeldingen en/of wachtwoorden genereren voor geselecteerde studenten",
-        "warning-message": "Een login en wachtwoord worden gegenereerd voor studenten die toegang hebben tot het Mediacenter en/of een e-mailadres. Studenten die al een login hebben, krijgen een nieuw wachtwoord."
+        "title": "Aanmeldingen en/of wachtwoorden genereren voor geselecteerde leerlingen",
+        "warning-message": "Een login en wachtwoord worden gegenereerd voor leerlingen die toegang hebben tot het Mediacenter en/of een e-mailadres. Leerlingen die al een login hebben, krijgen een nieuw wachtwoord."
       },
       "manage-authentication-method-modal": {
         "authentication-methods": "Inlogmethoden",
@@ -1721,8 +1721,8 @@
           "password": {
             "copy": "Het unieke wachtwoord kopiëren",
             "label": "Nieuw eenmalig wachtwoord",
-            "warning-1": "Geef dit nieuwe wachtwoord door aan je student.",
-            "warning-2": "De student logt in met dit eenmalige wachtwoord.",
+            "warning-1": "Geef dit nieuwe wachtwoord door aan je leerling.",
+            "warning-2": "De leerling logt in met dit eenmalige wachtwoord.",
             "warning-3": "Pix vraagt een nieuw wachtwoord te kiezen."
           },
           "reset-password": {
@@ -1739,19 +1739,19 @@
             "label": "Gebruikersnaam"
           }
         },
-        "title": "Het Pix-account van de student beheren"
+        "title": "Het Pix-account van de leerling beheren"
       },
       "messages": {
-        "password-reset-success": "De wachtwoorden van de geselecteerde studenten zijn gereset."
+        "password-reset-success": "De wachtwoorden van de geselecteerde leerlingen zijn gereset."
       },
-      "no-participants": "Tot nu toe geen studenten!",
-      "no-participants-action": "De beheerder moet de studentendatabase importeren door op de knop importeren te klikken.",
+      "no-participants": "Tot nu toe geen leerlingen!",
+      "no-participants-action": "De beheerder moet de leerlingendatabase importeren door op de knop importeren te klikken.",
       "page-title": "Leerlingen",
       "reset-password-modal": {
-        "content-message-1": "Voor {totalSelectedStudents, plural, =1 {<strong>{totalSelectedStudents} student</strong> geselecteerd} other {<strong>{totalSelectedStudents} studenten</strong> geselecteerd}}, {totalAffectedStudents, plural, =0 {<strong>zal het wachtwoord</strong> niet worden gereset} =1 {het wachtwoord van <strong>{totalAffectedStudents} student</strong> zal worden gereset} other {de wachtwoorden van <strong>{totalAffectedStudents} studenten</strong> zullen worden gereset}}.\n\n\n",
+        "content-message-1": "Voor {totalSelectedStudents, plural, =1 {<strong>{totalSelectedStudents} leerling</strong> geselecteerd} other {<strong>{totalSelectedStudents} leerlingen</strong> geselecteerd}}, {totalAffectedStudents, plural, =0 {<strong>zal het wachtwoord</strong> niet worden gereset} =1 {het wachtwoord van <strong>{totalAffectedStudents} leerling</strong> zal worden gereset} other {de wachtwoorden van <strong>{totalAffectedStudents} leerlingen</strong> zullen worden gereset}}.\n\n\n",
         "content-message-2": "Er wordt een CSV-bestand gegenereerd met de gebruikersnamen en eenmalige wachtwoorden.",
-        "content-message-3": "Communiceer deze nieuwe eenmalige wachtwoorden aan de studenten. Wanneer ze inloggen met dit wachtwoord, zal Pix hen vragen een nieuw wachtwoord in te voeren.",
-        "title": "<strong>Wachtwoorden</strong> van studenten opnieuw instellen met <strong>gebruikersnaam</strong>.",
+        "content-message-3": "Communiceer deze nieuwe eenmalige wachtwoorden aan de leerlingen. Wanneer ze inloggen met dit wachtwoord, zal Pix hen vragen een nieuw wachtwoord in te voeren.",
+        "title": "<strong>Wachtwoorden</strong> van leerlingen opnieuw instellen met <strong>gebruikersnaam</strong>.",
         "warning-message": "Alleen inlogwachtwoorden kunnen opnieuw worden ingesteld. Toegang via e-mailadres en Mediacentrum worden niet beïnvloed."
       },
       "table": {
@@ -1787,10 +1787,10 @@
             "label": "Aantal deelnames"
           }
         },
-        "description": "Studententabel gesorteerd op naam. Voor studenten die een inlogmethode hebben opgegeven, kun je een menu in de kolom 'Acties' gebruiken om de geautoriseerde inlogmethoden te beheren en het wachtwoord van de student opnieuw in te stellen.",
-        "empty": "Geen studenten."
+        "description": "Leerlingentabel gesorteerd op naam. Voor leerlingen die een inlogmethode hebben opgegeven, kun je een menu in de kolom 'Acties' gebruiken om de geautoriseerde inlogmethoden te beheren en het wachtwoord van de leerling opnieuw in te stellen.",
+        "empty": "Geen leerlingen."
       },
-      "title": "{count, plural, =0 {Studenten} =1 {Studenten ({count})} other {studenten ({count})}}",
+      "title": "{count, plural, =0 {Leerlingen} =1 {Leerling ({count})} other {Leerlingen ({count})}}",
       "user-account-blocking-types": {
         "blocked": "Geblokkeerd account",
         "temporarily-blocked": "Tijdelijk geblokkeerd account"
