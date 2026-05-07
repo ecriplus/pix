@@ -4,6 +4,7 @@ import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
 import ResultsDetails from '../../../campaigns/assessment/results/evaluation-results-tabs/results-details';
+import Rewards from '../../../campaigns/assessment/results/evaluation-results-tabs/rewards';
 import Trainings from '../../../campaigns/assessment/results/evaluation-results-tabs/trainings';
 import QuitResults from '../../../campaigns/assessment/results/quit-results';
 import EvaluationResultsHeroRecommendationEngine from '../../../campaigns/assessment/results-recommendation-engine/evaluation-results-hero-recommendation-engine';
@@ -35,6 +36,12 @@ export default class EvaluationResultsRecommendationEngine extends Component {
     });
 
     this.tabManager.setActiveTab(2);
+  }
+
+  get showBadges() {
+    const badges = this.args.model.campaignParticipationResult.campaignParticipationBadges;
+
+    return badges.some((badge) => badge.isAcquired || badge.isAlwaysVisible);
   }
 
   <template>
@@ -70,6 +77,10 @@ export default class EvaluationResultsRecommendationEngine extends Component {
         @competenceResults={{@model.campaignParticipationResult.competenceResults}}
         @totalStage={{@model.campaignParticipationResult.reachedStage.totalStage}}
       />
+
+      {{#if this.showBadges}}
+        <Rewards @badges={{@model.campaignParticipationResult.campaignParticipationBadges}} />
+      {{/if}}
     </main>
   </template>
 }
