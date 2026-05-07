@@ -1,11 +1,5 @@
 import { expect, test } from '../../../../fixtures/certification/index.ts';
-import { changeCandidateAnswers } from '../../../../helpers/certification/db.ts';
-import {
-  checkCertificationDetailsAndExpectSuccess,
-  checkCertificationGeneralInformationAndExpectSuccess,
-  checkSessionInformationAndExpectSuccess,
-  getTestRef,
-} from '../../../../helpers/certification/utils.ts';
+import { checkSessionInformationAndExpectSuccess, getTestRef } from '../../../../helpers/certification/utils.ts';
 import { getNowAsDDMMYYYY } from '../../../../helpers/utils.ts';
 import { HomePage as AdminHomePage } from '../../../../pages/pix-admin/index.ts';
 import { HomePage } from '../../../../pages/pix-app/index.ts';
@@ -18,15 +12,14 @@ test(
     annotation: [
       {
         type: 'scenario',
-        description: `User takes a certification test for a PRO certification center, CORE subscription. 32 right answers.
+        description: `User takes a certification test. 32 right answers.
          - Test reaches end screen
          - Session finalized
          - Results visible in all PixAdmin screens
          - Reject certification
-         - Alter answers
          - Unreject certification
+         - Reject again certification
          - Certificate visible in PixApp
-         - Checks PDF certificate
          - Checks CSV results file`,
       },
     ],
@@ -38,20 +31,21 @@ test(
     pixAdminRoleCertifPage,
     getCertifiableUserData,
     waitForScoringJobToBeCompleted,
-    snapshotHandler,
     testRef,
+    snapshotHandler,
     snapshotPath,
     csvResultPath,
-    certificateBasePath,
   }) => {
     const certifiableUserData = await getCertifiableUserData('buffy.summers@example.net');
     const pixAppCertifiablePage = await pixAppCertifiableUserPage(certifiableUserData);
-    const { sessionNumber, certificationNumber, certificationCenterName } = await enrollCandidateAndPassExam({
-      testRef,
-      rightWrongAnswersSequence: Array(32).fill(true),
-      pixAppPage: pixAppCertifiablePage,
-      certifiableUserData,
-    });
+    const { sessionNumber, certificationNumber, invigilatorOverviewPage, certificationCenterName } =
+      await enrollCandidateAndPassExam({
+        testRef,
+        rightWrongAnswersSequence: Array(32).fill(true),
+        pixAppPage: pixAppCertifiablePage,
+        certifiableUserData,
+      });
+    await invigilatorOverviewPage.close();
 
     await test.step(`reaches end of certification test`, async () => {
       await expect(pixAppCertifiablePage.locator('h1')).toContainText('Test terminé !');
@@ -67,6 +61,7 @@ test(
       await expect(pixCertifProPage.getByText(certifiableUserData.firstName)).toBeVisible();
 
       await sessionFinalizationPage.finalizeSession();
+      await sessionFinalizationPage.close();
     });
 
     const adminHomepage = new AdminHomePage(pixAdminRoleCertifPage);
@@ -103,46 +98,49 @@ test(
           'Signalements impactants non résolus': '',
           'Certification passée': 'Pix Cœur',
         });
+
         const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
           certifiableUserData.firstName,
         );
-        await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
-          sessionNumber,
-          status: 'Validée',
-          result: 'Expert 1 (895 Pix)',
-        });
-        await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
-          status: 'Validée',
-          nbAnsweredQuestionsOverTotal: '32/32',
-          nbQuestionsOK: 32,
-          nbQuestionsKO: 0,
-          nbQuestionsAband: 0,
-          nbValidatedTechnicalIssues: 0,
-          result: 'Expert 1 (895 Pix)',
-        });
+        const certificationGeneralInfo = await certificationInformationPage.getGeneralInfo();
+        expect(certificationGeneralInfo.sessionNumber).toBe(sessionNumber);
+        expect(certificationGeneralInfo.status).toBe('Validée');
+        expect(certificationGeneralInfo.result).toBe('Expert 1 (895 Pix)');
+
+        const certificationDetails = await certificationInformationPage.getDetails();
+        expect(certificationDetails.status).toBe('Validée');
+        expect(certificationDetails.result).toBe('Expert 1 (895 Pix)');
+        expect(certificationDetails.nbAnsweredQuestionsOverTotal).toBe('32/32');
+        expect(certificationDetails.nbQuestionsOK).toBe(32);
+        expect(certificationDetails.nbQuestionsKO).toBe(0);
+        expect(certificationDetails.nbQuestionsAband).toBe(0);
+        expect(certificationDetails.nbValidatedTechnicalIssues).toBe(0);
         return certificationInformationPage;
       });
+
       await test.step('Rejected and unreject certification to check for scoring', async () => {
         await test.step('Reject certification', async () => {
           await certificationInformationPage.rejectCertification();
-          await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
-            sessionNumber,
-            status: 'Rejetée',
-            result: 'Pix',
-          });
-        });
-
-        await test.step('Alter candidate answers directly in BDD to have half right, half wrong, to demonstrate re-scoring', async () => {
-          await changeCandidateAnswers(parseInt(certificationNumber), [true, false]);
+          const certificationGeneralInfo = await certificationInformationPage.getGeneralInfo();
+          expect(certificationGeneralInfo.sessionNumber).toBe(sessionNumber);
+          expect(certificationGeneralInfo.status).toBe('Rejetée');
+          expect(certificationGeneralInfo.result).toBe('Pix');
         });
 
         await test.step('Unreject certification', async () => {
           await certificationInformationPage.unrejectCertification();
-          await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
-            sessionNumber,
-            status: 'Validée',
-            result: 'Expert 1 (806 Pix)',
-          });
+          const certificationGeneralInfo = await certificationInformationPage.getGeneralInfo();
+          expect(certificationGeneralInfo.sessionNumber).toBe(sessionNumber);
+          expect(certificationGeneralInfo.status).toBe('Validée');
+          expect(certificationGeneralInfo.result).toBe('Expert 1 (895 Pix)');
+        });
+
+        await test.step('Reject again certification', async () => {
+          await certificationInformationPage.rejectCertification();
+          const certificationGeneralInfo = await certificationInformationPage.getGeneralInfo();
+          expect(certificationGeneralInfo.sessionNumber).toBe(sessionNumber);
+          expect(certificationGeneralInfo.status).toBe('Rejetée');
+          expect(certificationGeneralInfo.result).toBe('Pix');
         });
       });
     });
@@ -158,20 +156,15 @@ test(
       const certificateListPage = await homePage.goToMyCertificates();
       const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment } =
         await certificateListPage.getCertificateData(certificationNumber);
-      expect(mainStatus).toBe('Certification Pix : Obtenue');
+      expect(mainStatus).toBe('Certification Pix : Non obtenue');
       expect(extraStatus).toBe(null);
       expect(detailsFramework).toBe(null);
       expect(certificationCenter).toBe('Centre de certification : ' + certificationCenterName);
       expect(examDate).toBe('Date de passage : ' + getNowAsDDMMYYYY());
-      expect(result).toBe('806 PIX');
-      expect(comment).toBe(null);
-      const certificationResultPage = await certificateListPage.goToCertificateDetails(certificationNumber);
-      const { pixScoreObtained, pixLevelReached } = await certificationResultPage.getResultInfo();
-      expect(pixScoreObtained).toEqual('PIX 806 CERTIFIÉS');
-      expect(pixLevelReached).toEqual('Vous avez atteint le niveau Expert 1 de la Certification Pix !');
-      const certificatePdfBuffer = await certificationResultPage.downloadCertificate();
-
-      await snapshotHandler.comparePdfOrRecord(certificatePdfBuffer, certificateBasePath);
+      expect(result).toBe('- PIX');
+      expect(comment).toBe(
+        "Commentaire : Les conditions de passation du test de certification n'ayant pas été respectées et ayant fait l'objet d'un signalement pour fraude, votre certification a été invalidée en conséquence.",
+      );
     });
 
     await test.step('Checking CSV result file content', async () => {

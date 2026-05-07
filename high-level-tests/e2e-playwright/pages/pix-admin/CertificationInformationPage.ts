@@ -140,5 +140,7 @@ export class CertificationInformationPage {
     await this.page.getByRole('button', { name: 'Sélectionner un niveau' }).click();
     await this.page.getByRole('option', { name: externalJuryChoice }).click();
     await this.page.getByRole('button', { name: 'Enregistrer' }).click();
+    await this.page.getByText('Le résultat du volet jury externe a bien été enregistré').waitFor({ state: 'visible' });
+    await this.page.getByRole('button', { name: 'Fermer la notification' }).click();
   }
 }

@@ -1,15 +1,10 @@
-import { expect, test } from '../../../../../fixtures/certification/index.ts';
-import {
-  checkCertificationDetailsAndExpectSuccess,
-  checkCertificationGeneralInformationAndExpectSuccess,
-  checkSessionInformationAndExpectSuccess,
-  getTestRef,
-} from '../../../../../helpers/certification/utils.ts';
-import { CERTIFICATIONS_DATA } from '../../../../../helpers/db-data.ts';
-import { getNowAsDDMMYYYY } from '../../../../../helpers/utils.ts';
-import { HomePage as AdminHomePage } from '../../../../../pages/pix-admin/index.ts';
-import { HomePage } from '../../../../../pages/pix-app/index.ts';
-import { SessionManagementPage } from '../../../../../pages/pix-certif/index.ts';
+import { expect, test } from '../../../../fixtures/certification/index.ts';
+import { checkSessionInformationAndExpectSuccess, getTestRef } from '../../../../helpers/certification/utils.ts';
+import { CERTIFICATIONS_DATA } from '../../../../helpers/db-data.ts';
+import { getNowAsDDMMYYYY } from '../../../../helpers/utils.ts';
+import { HomePage as AdminHomePage } from '../../../../pages/pix-admin/index.ts';
+import { HomePage } from '../../../../pages/pix-app/index.ts';
+import { SessionManagementPage } from '../../../../pages/pix-certif/index.ts';
 
 test(
   `${getTestRef(import.meta.url)}`,
@@ -18,7 +13,7 @@ test(
     annotation: [
       {
         type: 'scenario',
-        description: `User takes a certification test for a PRO certification center, EDU subscription. 32 right answers.
+        description: `User takes an EDU certification test. 32 right answers.
          - Test reaches end screen
          - Session finalized
          - Results visible in all PixAdmin screens
@@ -42,13 +37,15 @@ test(
   }) => {
     const certifiableUserData = await getCertifiableUserData('buffy.summers@example.net');
     const pixAppCertifiablePage = await pixAppCertifiableUserPage(certifiableUserData);
-    const { sessionNumber, certificationNumber, certificationCenterName } = await enrollCandidateAndPassExam({
-      testRef,
-      certificationKey: CERTIFICATIONS_DATA.EDU_1ER_DEGRE,
-      rightWrongAnswersSequence: Array(32).fill(true),
-      pixAppPage: pixAppCertifiablePage,
-      certifiableUserData,
-    });
+    const { sessionNumber, certificationNumber, certificationCenterName, invigilatorOverviewPage } =
+      await enrollCandidateAndPassExam({
+        testRef,
+        certificationKey: CERTIFICATIONS_DATA.EDU_1ER_DEGRE,
+        rightWrongAnswersSequence: Array(32).fill(true),
+        pixAppPage: pixAppCertifiablePage,
+        certifiableUserData,
+      });
+    await invigilatorOverviewPage.close();
 
     await test.step(`reaches end of certification test`, async () => {
       await expect(pixAppCertifiablePage.locator('h1')).toContainText('Test terminé !');
@@ -64,6 +61,7 @@ test(
       await expect(pixCertifProPage.getByText(certifiableUserData.firstName)).toBeVisible();
 
       await sessionFinalizationPage.finalizeSession();
+      await sessionFinalizationPage.close();
     });
 
     const adminHomepage = new AdminHomePage(pixAdminRoleCertifPage);
@@ -101,23 +99,23 @@ test(
           'Signalements impactants non résolus': '',
           'Certification passée': 'Pix+ Édu 1er degré',
         });
+
         const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
           certifiableUserData.firstName,
         );
-        await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
-          sessionNumber,
-          status: 'Validée',
-          result: 'Admissible',
-        });
-        await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
-          status: 'Validée',
-          nbAnsweredQuestionsOverTotal: '32/32',
-          nbQuestionsOK: 32,
-          nbQuestionsKO: 0,
-          nbQuestionsAband: 0,
-          nbValidatedTechnicalIssues: 0,
-          result: 'Admissible',
-        });
+        const certificationGeneralInfo = await certificationInformationPage.getGeneralInfo();
+        expect(certificationGeneralInfo.sessionNumber).toBe(sessionNumber);
+        expect(certificationGeneralInfo.status).toBe('Validée');
+        expect(certificationGeneralInfo.result).toBe('Admissible');
+
+        const certificationDetails = await certificationInformationPage.getDetails();
+        expect(certificationDetails.status).toBe('Validée');
+        expect(certificationDetails.result).toBe('Admissible');
+        expect(certificationDetails.nbAnsweredQuestionsOverTotal).toBe('32/32');
+        expect(certificationDetails.nbQuestionsOK).toBe(32);
+        expect(certificationDetails.nbQuestionsKO).toBe(0);
+        expect(certificationDetails.nbQuestionsAband).toBe(0);
+        expect(certificationDetails.nbValidatedTechnicalIssues).toBe(0);
       });
     });
 
@@ -160,10 +158,6 @@ test(
         const sessionsMainPage = await adminHomepage.goToCertificationSessionsTab();
         const certificationInformationPage = await sessionsMainPage.goToCertificationWithSearchBar(certificationNumber);
         await certificationInformationPage.setExternalJuryResult('Expert');
-        await pixAdminRoleCertifPage
-          .getByText('Le résultat du volet jury externe a bien été enregistré')
-          .waitFor({ state: 'visible' });
-        await pixAdminRoleCertifPage.getByRole('button', { name: 'Fermer la notification' }).click();
       });
 
       await test.step('Check result is impacted everywhere', async () => {
@@ -184,20 +178,19 @@ test(
         const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
           certifiableUserData.firstName,
         );
-        await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
-          sessionNumber,
-          status: 'Validée',
-          result: 'Expert',
-        });
-        await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
-          status: 'Validée',
-          nbAnsweredQuestionsOverTotal: '32/32',
-          nbQuestionsOK: 32,
-          nbQuestionsKO: 0,
-          nbQuestionsAband: 0,
-          nbValidatedTechnicalIssues: 0,
-          result: 'Expert',
-        });
+        const certificationGeneralInfo = await certificationInformationPage.getGeneralInfo();
+        expect(certificationGeneralInfo.sessionNumber).toBe(sessionNumber);
+        expect(certificationGeneralInfo.status).toBe('Validée');
+        expect(certificationGeneralInfo.result).toBe('Expert');
+
+        const certificationDetails = await certificationInformationPage.getDetails();
+        expect(certificationDetails.status).toBe('Validée');
+        expect(certificationDetails.result).toBe('Expert');
+        expect(certificationDetails.nbAnsweredQuestionsOverTotal).toBe('32/32');
+        expect(certificationDetails.nbQuestionsOK).toBe(32);
+        expect(certificationDetails.nbQuestionsKO).toBe(0);
+        expect(certificationDetails.nbQuestionsAband).toBe(0);
+        expect(certificationDetails.nbValidatedTechnicalIssues).toBe(0);
       });
     });
 
@@ -208,10 +201,6 @@ test(
         const sessionsMainPage = await adminHomepage.goToCertificationSessionsTab();
         const certificationInformationPage = await sessionsMainPage.goToCertificationWithSearchBar(certificationNumber);
         await certificationInformationPage.setExternalJuryResult('En attente');
-        await pixAdminRoleCertifPage
-          .getByText('Le résultat du volet jury externe a bien été enregistré')
-          .waitFor({ state: 'visible' });
-        await pixAdminRoleCertifPage.getByRole('button', { name: 'Fermer la notification' }).click();
       });
 
       await test.step('Check result is impacted everywhere', async () => {
@@ -232,20 +221,19 @@ test(
         const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
           certifiableUserData.firstName,
         );
-        await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
-          sessionNumber,
-          status: 'Validée',
-          result: 'Admissible',
-        });
-        await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
-          status: 'Validée',
-          nbAnsweredQuestionsOverTotal: '32/32',
-          nbQuestionsOK: 32,
-          nbQuestionsKO: 0,
-          nbQuestionsAband: 0,
-          nbValidatedTechnicalIssues: 0,
-          result: 'Admissible',
-        });
+        const certificationGeneralInfo = await certificationInformationPage.getGeneralInfo();
+        expect(certificationGeneralInfo.sessionNumber).toBe(sessionNumber);
+        expect(certificationGeneralInfo.status).toBe('Validée');
+        expect(certificationGeneralInfo.result).toBe('Admissible');
+
+        const certificationDetails = await certificationInformationPage.getDetails();
+        expect(certificationDetails.status).toBe('Validée');
+        expect(certificationDetails.result).toBe('Admissible');
+        expect(certificationDetails.nbAnsweredQuestionsOverTotal).toBe('32/32');
+        expect(certificationDetails.nbQuestionsOK).toBe(32);
+        expect(certificationDetails.nbQuestionsKO).toBe(0);
+        expect(certificationDetails.nbQuestionsAband).toBe(0);
+        expect(certificationDetails.nbValidatedTechnicalIssues).toBe(0);
       });
     });
 
