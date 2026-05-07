@@ -124,13 +124,16 @@ test(
 
         await test.step('Rescore certification twice in a row to demonstrate idempotency', async () => {
           await certificationInformationPage.rescoreCertification();
-          // todo alert flaky : le front n'pas le temps de mettre à jour les données de rescoring
+          await waitForScoringJobToBeCompleted(certificationNumber);
+          await certificationInformationPage.page.reload();
           let certificationGeneralInfo = await certificationInformationPage.getGeneralInfo();
           expect(certificationGeneralInfo.sessionNumber).toBe(sessionNumber);
           expect(certificationGeneralInfo.status).toBe('Validée');
           expect(certificationGeneralInfo.result).toBe('Expert 1 (804 Pix)');
 
           await certificationInformationPage.rescoreCertification();
+          await waitForScoringJobToBeCompleted(certificationNumber);
+          await certificationInformationPage.page.reload();
           certificationGeneralInfo = await certificationInformationPage.getGeneralInfo();
           expect(certificationGeneralInfo.sessionNumber).toBe(sessionNumber);
           expect(certificationGeneralInfo.status).toBe('Validée');

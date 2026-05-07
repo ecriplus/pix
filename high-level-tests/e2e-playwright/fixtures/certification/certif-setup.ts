@@ -303,6 +303,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
             name: 'CertificationCompletedJob',
           })
           .whereRaw(`data @> ?::jsonb`, [JSON.stringify({ certificationCourseId: parseInt(certificationNumber) })])
+          .orderBy('created_on', 'desc')
           .first();
 
         if (job?.state === 'completed') {
