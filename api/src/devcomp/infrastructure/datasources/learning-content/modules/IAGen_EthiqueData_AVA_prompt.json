@@ -2,7 +2,7 @@
   "id": "eb919a5a-23e2-4d9f-92a7-12b3265874ba",
   "shortId": "df76d3d5",
   "slug": "ia-droit-auteur-creer-diffuser",
-  "title": "IA générative et droits d’auteur : créer et diffuser… en toute conformité.",
+  "title": "IA générative et droits d’auteur : créer et diffuser… en toute conformité",
   "isBeta": true,
   "visibility": "public",
   "details": {
@@ -111,17 +111,8 @@
           "title": "Découverte 1",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "0cdcab2e-95e3-4f07-99f4-cba40648acd5",
-                "type": "text",
-                "tag": " ",
-                "content": "<p>Voici plusieurs situations&nbsp;:<br></p>"
-              }
-            },
-            {
               "type": "stepper",
-              "instruction": "<p>Voici plusieurs situations. Pour chacune de ces situations, dites si, selon vous, l’utilisateur montre un choix créatif&nbsp;:&nbsp;<br></p>",
+              "instruction": "<p>Voici plusieurs situations. Pour chacune de ces situations, dites si, selon vous, l’utilisateur montre un choix créatif.</p>",
               "steps": [
                 {
                   "elements": [
@@ -129,7 +120,7 @@
                       "id": "fcf2a3b9-1ac6-4ffc-99cb-60ec3908fbe1",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Romain souhaite créer un logo. Il utilise un logiciel d’IA générative et prompte&nbsp;: \"Crée un logo pour une association de jeux de rôle nommé \"L’atelier des mondes\". Il utilise le logo créé par l’IA générative pour le site web de l’association.</p>"
+                      "content": "<p>Romain souhaite créer un logo. Il utilise un logiciel d’IA générative et prompte&nbsp;: «&nbsp;Crée un logo pour une association de jeux de rôle nommé \"L’atelier des mondes\"&nbsp;».<br>Il utilise le logo créé par l’IA générative pour le site web de l’association.</p>"
                     },
                     {
                       "id": "8cd4b444-1da3-41b9-a8bc-40ab0272cfef",
@@ -162,7 +153,7 @@
                       "id": "bf11665e-cef9-4d62-b15c-78be69b8e4d1",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Jeanne souhaite créer une image pour son site web. Elle utilise un logiciel d’IA générative et prompte&nbsp;: «&nbsp;Génère une image d’un paysage de montagne au lever du soleil, avec une lumière dorée, un lac paisible au premier plan et une atmosphère légèrement brumeuse.&nbsp;La scène est traitée dans un style réaliste, avec une composition soignée et une profondeur de champ subtile, enrichie d’une esthétique cinématographique (jeu de lumière dramatique, contraste maîtrisé, légère granulation)&nbsp;» Satisfaite du résultat, elle décide d’utiliser l’image sur son site web.</p>"
+                      "content": "<p>Jeanne souhaite créer une image pour son site web. Elle utilise un logiciel d’IA générative et prompte&nbsp;: «&nbsp;Génère une image d’un paysage de montagne au lever du soleil, avec une lumière dorée, un lac paisible au premier plan et une atmosphère légèrement brumeuse.&nbsp;La scène est traitée dans un style réaliste, avec une composition soignée et une profondeur de champ subtile, enrichie d’une esthétique cinématographique (jeu de lumière dramatique, contraste maîtrisé, légère granulation)&nbsp;».<br>Satisfaite du résultat, elle décide d’utiliser l’image sur son site web.</p>"
                     },
                     {
                       "id": "bdc43e6a-b205-4b23-9f25-b42c70546330",
@@ -195,7 +186,7 @@
                       "id": "dd4a5df4-38d0-40cb-a214-f317640296d2",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Maé aimerait refaire le logo de son équipe de roller. Il utilise un logiciel d’IA générative et prompte&nbsp;: \"Génère cinq images d’un logo pour une association de roller derby\". Maé en sélectionne une qu’il retouche en modifiant la taille.</p>"
+                      "content": "<p>Maé aimerait refaire le logo de son équipe de roller. Il utilise un logiciel d’IA générative et prompte&nbsp;: «&nbsp;Génère cinq images d’un logo pour une association de roller derby&nbsp;».<br>Maé en sélectionne une qu’il retouche en modifiant la taille.</p>"
                     },
                     {
                       "id": "2786c781-131e-4669-b158-36c1fd00e07a",
@@ -241,7 +232,7 @@
                       "id": "56d6de2c-b52e-4fa2-b524-6586883c87fa",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Dans le droit européen, une œuvre de l’esprit est une création  produite par un <strong>humain</strong> et originale (c’est à dire <strong>empreinte de la personnalité</strong> de l’auteur).<br><br>Pour savoir si un contenu produit avec une IA est une œuvre, on va chercher à savoir quelle est <strong>la part d’effort créatif de l’humain</strong> dans la création. Cela peut être par exemple&nbsp;:&nbsp;</p><ul><li>Un travail de <strong>réécriture</strong> ou de <strong>retouche</strong> sur le contenu généré.</li><li>Un choix de point de vue, une <strong>contrainte stylistique</strong>, une <strong>orientation esthétique </strong>ou <strong>intellectuelle</strong> au sein du prompt. </li></ul>"
+                      "content": "<p>Dans le droit européen, une œuvre de l’esprit est une création produite par un <strong>humain</strong> et originale (c’est-à-dire <strong>empreinte de la personnalité</strong> de l’auteur).<br><br>Pour savoir si un contenu produit avec une IA est une œuvre, on va chercher à savoir quelle est <strong>la part d’effort créatif de l’humain</strong> dans la création. Cela peut être par exemple&nbsp;:&nbsp;</p><ul><li>Un travail de <strong>réécriture</strong> ou de <strong>retouche</strong> sur le contenu généré.</li><li>Un choix de point de vue, une <strong>contrainte stylistique</strong>, une <strong>orientation esthétique </strong>ou <strong>intellectuelle</strong> au sein du prompt. </li></ul>"
                     }
                   ]
                 },
