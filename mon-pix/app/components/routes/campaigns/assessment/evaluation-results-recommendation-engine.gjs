@@ -3,7 +3,7 @@ import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
-import EvaluationResultsTabs from '../../../campaigns/assessment/results/evaluation-results-tabs';
+import Trainings from '../../../campaigns/assessment/results/evaluation-results-tabs/trainings';
 import QuitResults from '../../../campaigns/assessment/results/quit-results';
 import EvaluationResultsHeroRecommendationEngine from '../../../campaigns/assessment/results-recommendation-engine/evaluation-results-hero-recommendation-engine';
 
@@ -55,12 +55,15 @@ export default class EvaluationResultsRecommendationEngine extends Component {
         @hasTrainings={{this.hasTrainings}}
         @showTrainings={{this.showTrainings}}
       />
-      <EvaluationResultsTabs
-        @campaign={{@model.campaign}}
-        @campaignParticipationResult={{@model.campaignParticipationResult}}
-        @questResults={{@model.questResults}}
-        @trainings={{this.trainings}}
-      />
+
+      {{#if this.hasTrainings}}
+        <Trainings
+          @trainings={{this.trainings}}
+          @questResults={{@model.questResults}}
+          @campaignParticipationResult={{@model.campaignParticipationResult}}
+          @campaignId={{@model.campaign.id}}
+        />
+      {{/if}}
     </main>
   </template>
 }
