@@ -343,65 +343,104 @@
           "title": "Découverte 2 : Les effets rebonds",
           "components": [
             {
-              "type": "element",
-              "element": {
-                "id": "c6e4f6f0-76d7-4ff5-84fb-bacb1902d2dd",
-                "type": "text",
-                "tag": " ",
-                "content": "<p>Ces dernières décennies, les technologies de batteries ont été grandement améliorées. Pour la même taille, une batterie moderne coûte moins cher et stocke plus d’énergie qu’une batterie ancienne.</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "0117d5dc-b950-479c-8c51-d4b58a43547e",
-                "type": "image",
-                "url": "https://assets.pix.org/draft/modules/NR_Eval_Ava/batteries.png",
-                "alt": "Une photo qui montre une diversité de batterie",
-                "alternativeText": "",
-                "legend": "Image brouillon ",
-                "licence": ""
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "10eb3f27-86a8-45e8-8043-f35a558c6de3",
-                "type": "qcu-discovery",
-                "instruction": "<p>Selon-vous, quels ont été les effets de cette amélioration ?</p>",
-                "hasShortProposals": false,
-                "proposals": [
-                  {
-                    "id": "1",
-                    "content": "<p>Au total, on utilise moins de batteries qu’avant, car elles sont plus performantes.</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Eh non ! </p><p>L’amélioration des batteries a rendu possible de nouveaux usages. Or, avec le développement de ces nouveaux usages, la consommation totale de batterie à augmentée.</p>"
+              "type": "stepper",
+              "instruction": "",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "5d14295a-486a-45dc-b965-61256248e92b",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p>En 1945, le premier ordinateur, l'ENIAC, voyait le jour. </p><p>Il est célèbre pour ses dimensions exceptionnelle : plus de 30 tonnes et 167 m² !<br></p>"
+                    },
+                    {
+                      "id": "6ab4e662-9a2c-4564-9954-46d29b309563",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>A votre avis,&nbsp; quel était la puissance électrique&nbsp; du premier ordinateur ?<br></p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>160 kW, soit environ 2 500 fois plus qu’un PC portable actuel</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien vu !</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>6 kW, soit environ 100 fois plus qu’un PC actuel</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non !</p><p>Cet ordinateur avait une puissance de 160 kW, soit environ 2 500 fois plus qu’un PC portable actuel.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>60 W, soit environ autant qu’un PC actuel</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non ! Cet ordinateur avait une puissance de 160 kW, soit environ 2 500 fois plus qu’un PC portable actuel.</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Je ne sais pas.<br></p>",
+                          "feedback": {
+                            "diagnosis": "<p> Cet ordinateur avait une puissance de 160 kW, soit environ 2 500 fois plus qu’un PC portable actuel.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
                     }
-                  },
-                  {
-                    "id": "2",
-                    "content": "<p>Au total, on utilise autant de batteries qu’avant, mais elles permettent de faire plus.</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Eh non !</p><p>L’amélioration des batteries a rendu possible de nouveaux usages. Or, avec le développement de ces nouveaux usages, la consommation totale de batterie à augmentée.</p>"
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "0f220daf-360e-48ff-961a-dc5f56e78374",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p>Les chercheurs et les ingénieurs ont travaillé à améliorer les performances des ordinateurs. </p>\n<p>Dans les années 70, les « mini-ordinateurs » sont populaires. </p>\n<p>Par exemple, le Data General Nova a une puissance de 1kW, soit 160 fois moins que l’ENIAC.</p>"
+                    },
+                    {
+                      "id": "1cc1aae7-4f83-4a4d-a53c-e2799a9a079b",
+                      "type": "qcu-discovery",
+                      "instruction": "<p>A votre avis, à combien d'exemplaires a été vendu le Data General Nova ?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "<p>500 exemplaires</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non ! </p><p>Le Data General Nova a été vendu à 50 000 exemplaires. Pour l’époque, c’est un succès commercial !</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>50 000 exemplaires</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Bien&nbsp; vu ! </p><p> Pour l’époque, c’est un succès commercial !</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>5 millions d’exemplaires</p>",
+                          "feedback": {
+                            "diagnosis": "<p>Eh non !</p><p>Le Data General Nova a été vendu à 50 000 exemplaires. Pour l’époque, c’est un succès commercial !</p>"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Je ne sais pas.<br></p>",
+                          "feedback": {
+                            "diagnosis": "<p>Le Data General Nova a été vendu à 50 000 exemplaires. Pour l’époque, c’est un succès commercial !</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
                     }
-                  },
-                  {
-                    "id": "3",
-                    "content": "<p>Au total, on utilise plus de batteries car leur faible coût et leur bonne performance ont permis de nouveaux usages.</p>",
-                    "feedback": {
-                      "diagnosis": "<p>Bien vu ! </p><p>L’amélioration des batteries a rendu possible de nouveaux usages. Or, avec le développement de ces nouveaux usages, la consommation totale de batterie à augmentée.</p>"
-                    }
-                  },
-                  {
-                    "id": "4",
-                    "content": "<p>Je ne sais pas.<br></p>",
-                    "feedback": {
-                      "diagnosis": "<p>En fait, l’amélioration des batteries a rendu possible de nouveaux usages. Or, avec le développement de ces nouveaux usages, la consommation totale de batterie à augmentée.</p>"
-                    }
-                  }
-                ],
-                "solution": "3"
-              }
+                  ]
+                }
+              ]
             }
           ]
         },
