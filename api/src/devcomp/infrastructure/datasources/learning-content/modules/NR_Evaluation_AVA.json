@@ -659,7 +659,7 @@
         {
           "id": "a7412205-6211-4488-b0e6-d266f512ec78",
           "type": "discovery",
-          "title": "Découverte 3 - Le GPS",
+          "title": "Découverte 3 - Esprit critique vis à vis du green washing",
           "components": [
             {
               "type": "element",
@@ -718,22 +718,6 @@
           ]
         },
         {
-          "id": "e8ba773f-b682-475a-8faa-903fc270dc9a",
-          "type": "transition",
-          "title": "Transition vers la leçon 3",
-          "components": [
-            {
-              "type": "element",
-              "element": {
-                "id": "25b0d11a-ac23-4edc-9642-db3c9d1b6f6c",
-                "type": "text",
-                "tag": " ",
-                "content": "<p>Certains industriels ne mentionnent que les effets indirects positifs de leurs produits, pour se donner une meilleure image. C’est ce qu’on appelle du greenwashing, ou écoblanchiment en français. Pourtant, l’amélioration d’une technologie peut avoir des effets indirects négatifs sur l’environnement, comme des effets rebond.</p>"
-              }
-            }
-          ]
-        },
-        {
           "id": "fbae7bd8-35ae-4ea4-bbdb-01162afa95cb",
           "type": "short-lesson",
           "title": "Leçon 3 : éveiller son esprit critique et encourager la sobriété",
@@ -748,7 +732,7 @@
                       "id": "80274868-d57d-4afc-983b-44731965ec87",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Comme nous l’avons vu, il faut gardr un esprit critique sur les nouvelles technologies et leurs améliorations,  pour éviter de se faire avoir par le greenwashing.</p>"
+                      "content": "<p>Certains industriels ne mentionnent <strong>que les effets positifs</strong> de leurs produits, pour se donner une meilleure image. C'est ce qu'on appelle du <strong>greenwashing</strong>, ou écoblanchiment en français. Pourtant, l'amélioration d'une technologie peut avoir des effets indirects négatifs sur l'environnement, comme des effets rebond. </p><p>Il faut donc garder un <strong>esprit critique</strong> sur les nouvelles technologies et leurs améliorations.</p>"
                     }
                   ]
                 },
@@ -758,7 +742,7 @@
                       "id": "71741a0f-9a72-4a76-8f0e-f4e58c7d09f3",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Chercher à mesurer les effets indirects du numérique est aussi une bonne manière de les anticiper et de les limiter. Pour cela, il existe des méthodes scientifiques comme l’<strong>ACV conséquentielle</strong>. C’est une <strong>méthode de mesure </strong>normée qui prend en compte les <strong>effets directs et indirects </strong>sur l’environnement, sur plusieurs <strong>critères </strong>environnementaux et pour l’ensemble du <strong>cycle de vie</strong>.</p>"
+                      "content": "<h5> Au final, comment peut-on vérifier si les effets sont positifs ou négatifs ? </h5><p>Il existe des méthodes scientifiques pour mesurer les effets indirects du numérique comme l'Analyse de Cycle de Vie conséquentielle. C'est une méthode de mesure normée qui prend en compte les effets directs et indirects sur l'environnement, sur plusieurs critères environnementaux et pour l'ensemble du cycle de vie.<br></p>"
                     }
                   ]
                 },
@@ -834,18 +818,18 @@
                 "cards": [
                   {
                     "id": "5c72ec41-1f17-40e0-ad63-4bf867fbe896",
-                    "text": "\"La fabrication des équipements numériques nécessite l’extraction intensive de métaux rares",
+                    "text": "Le commerce en ligne modifie les habitudes de consommation et les flux logistiques.",
                     "image": {
                       "url": "",
                       "altText": ""
                     },
                     "proposalA": "Effet direct",
                     "proposalB": "Effet indirect",
-                    "solution": "A"
+                    "solution": "B"
                   },
                   {
                     "id": "346880e1-e3ee-4385-abca-4acf92635e2e",
-                    "text": "Les infrastructures numériques génèrent des émissions de gaz à effet de serre.",
+                    "text": "Les équipements informatiques génèrent des déchets électroniques difficiles à recycler.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -856,7 +840,18 @@
                   },
                   {
                     "id": "ae24ed0e-6901-4e27-a814-d6694e65bf81",
-                    "text": "Le commerce en ligne modifie les flux logistiques et les transports.",
+                    "text": "Les centres de données consomment de l’eau douce pour refroidir les serveurs",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Effet direct",
+                    "proposalB": "Effet indirect",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "c7fab8d2-485a-44f3-966e-f73944457340",
+                    "text": "La généralisation des smartphones amène à remplacer les billets de train en papier par des billets électroniques.",
                     "image": {
                       "url": "",
                       "altText": ""
