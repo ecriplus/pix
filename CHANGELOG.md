@@ -1,5 +1,24 @@
 # Pix Changelog
 
+# [5.403.0](https://github.com/1024pix/pix/compare/v5.402.0...v5.403.0) (2026-05-07)
+
+### :rocket: Amélioration
+
+- [#16065](https://github.com/1024pix/pix/pull/16065) Ajouter une page "intercalaire" listant les versions d'un réf de certif (PIX-21480) 
+- [#16120](https://github.com/1024pix/pix/pull/16120) Corrections diverses MoteurRech_Info NOV_1 
+- [#15628](https://github.com/1024pix/pix/pull/15628) Création d'un job de suppression des conversations avec le LLM âgées de plus de N jours (PIX-21105) 
+- [#16141](https://github.com/1024pix/pix/pull/16141) FRI MoteurRechInfo_NOV1 modif decouverte 1 
+- [#16073](https://github.com/1024pix/pix/pull/16073) Supprimer physiquement les invitations en BDD lors de l'archivage de centre de certification (PIX-22087) 
+
+### :building_construction: Tech
+
+- [#16123](https://github.com/1024pix/pix/pull/16123) :broom: Supprime l'utilisation de `certificationCourse.endedAt` (PIX-22462) 
+- [#16125](https://github.com/1024pix/pix/pull/16125) Corriger le test e2e flaky de gestion des élèves SCO (PIX-22391) 
+- [#16132](https://github.com/1024pix/pix/pull/16132) Mise à jour du package epreuve componente vers la version v4.5.0  
+- [#16097](https://github.com/1024pix/pix/pull/16097) Refactoriser l'envoi d'invitation à rejoindre une organisation sur Pix Admin (PIX-21415) 
+- [#16128](https://github.com/1024pix/pix/pull/16128) Suppression de la fallback de locale pour le get-next (PIX-22666). 
+- [#16088](https://github.com/1024pix/pix/pull/16088) Supprimer le lien erroné memberships du sérialiseur non-admin des organisations (PIX-22626)
+
 # [5.402.0](https://github.com/1024pix/pix/compare/v5.401.2...v5.402.0) (2026-05-06)
 
 ### :rocket: Amélioration
