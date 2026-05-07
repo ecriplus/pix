@@ -2,7 +2,7 @@ import sinon from 'sinon';
 
 import { OrganizationImportStatus } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationImportStatus.js';
 import { importOrganizationLearnersFromSIECLECSVFormat } from '../../../../../../src/prescription/learner-management/domain/usecases/import-organization-learners-from-siecle-csv-format.js';
-import { OrganizationLearnerParser } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/organization-learner-parser.js';
+import { FregataParser } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/fregata-parser.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
@@ -53,7 +53,7 @@ describe('Unit | UseCase | importOrganizationLearnersFromSIECLECSVFormat', funct
       parse: sinon.stub(),
     };
 
-    OrganizationLearnerParser.buildParser = sinon.stub();
+    FregataParser.buildParser = sinon.stub();
 
     sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
       return callback();
@@ -63,7 +63,7 @@ describe('Unit | UseCase | importOrganizationLearnersFromSIECLECSVFormat', funct
 
     organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImport);
     importStorageStub.getParser
-      .withArgs({ Parser: OrganizationLearnerParser, filename: s3Filename }, organizationId, i18n)
+      .withArgs({ Parser: FregataParser, filename: s3Filename }, organizationId, i18n)
       .resolves(parserStub);
 
     parserStub.parse.withArgs(encoding).returns({ learners });

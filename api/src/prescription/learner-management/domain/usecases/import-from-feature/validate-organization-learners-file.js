@@ -1,4 +1,4 @@
-import { CommonCsvLearnerParser } from '../../../infrastructure/serializers/csv/common-csv-learner-parser.js';
+import { GenericParser } from '../../../infrastructure/serializers/csv/generic-parser.js';
 import { getDataBuffer } from '../../../infrastructure/utils/bufferize/get-data-buffer.js';
 import { AggregateImportError } from '../../errors.js';
 import { ImportCommonOrganizationLearnersJob } from '../../models/ImportCommonOrganizationLearnersJob.js';
@@ -22,7 +22,7 @@ const validateOrganizationLearnersFile = async function ({
     const readableStream = await importStorage.readFile({ filename: organizationImport.filename });
     const buffer = await dependencies.getDataBuffer(readableStream);
 
-    const parser = CommonCsvLearnerParser.buildParser({ buffer, importFormat });
+    const parser = GenericParser.buildParser({ buffer, importFormat });
 
     const learners = parser.parse(organizationImport.encoding);
 

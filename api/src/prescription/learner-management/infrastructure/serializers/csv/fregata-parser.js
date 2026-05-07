@@ -1,8 +1,8 @@
 import { CsvImportError, DomainError } from '../../../../../shared/domain/errors.js';
 import { OrganizationLearner } from '../../../domain/models/OrganizationLearner.js';
 import { checkValidation } from '../../../domain/validators/organization-learner-validator.js';
-import { CsvOrganizationLearnerParser } from './csv-organization-learner-parser.js';
 import { OrganizationLearnerImportHeader } from './organization-learner-import-header.js';
+import { SharedCsvParser } from './shared-csv-parser.js';
 
 const ERRORS = {
   IDENTIFIER_UNIQUE: 'IDENTIFIER_UNIQUE',
@@ -70,7 +70,7 @@ function _convertSexCodeToLabel(sexCode) {
   return sexPossibleValues[sexCode.toUpperCase().charAt(0)];
 }
 
-class OrganizationLearnerParser extends CsvOrganizationLearnerParser {
+class FregataParser extends SharedCsvParser {
   constructor(input, organizationId, i18n) {
     const learnerSet = new OrganizationLearnerSet();
     const columns = new OrganizationLearnerImportHeader(i18n).columns;
@@ -99,8 +99,8 @@ class OrganizationLearnerParser extends CsvOrganizationLearnerParser {
   }
 
   static buildParser() {
-    return new OrganizationLearnerParser(...arguments);
+    return new FregataParser(...arguments);
   }
 }
 
-export { OrganizationLearnerParser };
+export { FregataParser };

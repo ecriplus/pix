@@ -4,7 +4,7 @@ import lodash from 'lodash';
 
 import { withTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { ORGANIZATION_LEARNER_CHUNK_SIZE } from '../../../../shared/infrastructure/constants.js';
-import { OrganizationLearnerParser } from '../../infrastructure/serializers/csv/organization-learner-parser.js';
+import { FregataParser } from '../../infrastructure/serializers/csv/fregata-parser.js';
 
 const importOrganizationLearnersFromSIECLECSVFormat = withTransaction(async function ({
   organizationImportId,
@@ -22,7 +22,7 @@ const importOrganizationLearnersFromSIECLECSVFormat = withTransaction(async func
 
     const parser = await importStorage.getParser(
       {
-        Parser: OrganizationLearnerParser,
+        Parser: FregataParser,
         filename: organizationImport.filename,
       },
       organizationId,

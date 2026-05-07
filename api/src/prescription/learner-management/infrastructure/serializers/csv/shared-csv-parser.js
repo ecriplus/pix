@@ -31,7 +31,7 @@ const PARSING_OPTIONS = {
   },
 };
 
-class CsvOrganizationLearnerParser {
+class SharedCsvParser {
   constructor(input, organizationId, columns, learnerSet) {
     this._input = input;
     this._organizationId = organizationId;
@@ -206,4 +206,4 @@ class CsvOrganizationLearnerParser {
   }
 }
 
-export { CsvOrganizationLearnerParser };
+export { SharedCsvParser };

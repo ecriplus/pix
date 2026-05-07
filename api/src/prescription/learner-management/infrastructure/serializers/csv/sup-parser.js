@@ -1,6 +1,6 @@
 import { CsvImportError } from '../../../../../shared/domain/errors.js';
 import { SupOrganizationLearnerSet } from '../../../domain/models/SupOrganizationLearnerSet.js';
-import { CsvOrganizationLearnerParser } from './csv-organization-learner-parser.js';
+import { SharedCsvParser } from './shared-csv-parser.js';
 import { SupOrganizationLearnerImportHeader } from './sup-organization-learner-import-header.js';
 
 const ERRORS = {
@@ -8,9 +8,9 @@ const ERRORS = {
   STUDENT_NUMBER_FORMAT: 'STUDENT_NUMBER_FORMAT',
 };
 
-class SupOrganizationLearnerParser extends CsvOrganizationLearnerParser {
+class SupParser extends SharedCsvParser {
   static buildParser(input, organizationId, i18n) {
-    return new SupOrganizationLearnerParser(input, organizationId, i18n);
+    return new SupParser(input, organizationId, i18n);
   }
 
   constructor(input, organizationId, i18n) {
@@ -37,4 +37,4 @@ class SupOrganizationLearnerParser extends CsvOrganizationLearnerParser {
   }
 }
 
-export { SupOrganizationLearnerParser };
+export { SupParser };

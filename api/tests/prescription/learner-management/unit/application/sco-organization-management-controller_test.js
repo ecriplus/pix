@@ -4,7 +4,7 @@ import sinon from 'sinon';
 
 import { scoOrganizationManagementController } from '../../../../../src/prescription/learner-management/application/sco-organization-management-controller.js';
 import { usecases } from '../../../../../src/prescription/learner-management/domain/usecases/index.js';
-import { OrganizationLearnerParser } from '../../../../../src/prescription/learner-management/infrastructure/serializers/csv/organization-learner-parser.js';
+import { FregataParser } from '../../../../../src/prescription/learner-management/infrastructure/serializers/csv/fregata-parser.js';
 import { FileValidationError } from '../../../../../src/shared/domain/errors.js';
 import { getI18nFromRequest } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { expect } from '../../../../test-helper.js';
@@ -122,7 +122,7 @@ describe('Unit | Application | Organizations | organization-controller', functio
 
       // then
       expect(usecases.uploadCsvFile).to.have.been.calledWithExactly({
-        Parser: OrganizationLearnerParser,
+        Parser: FregataParser,
         userId,
         organizationId,
         type: 'FREGATA',

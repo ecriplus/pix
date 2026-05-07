@@ -8,7 +8,7 @@ import { ImportSupOrganizationLearnersJob } from '../../../../../../src/prescrip
 import { OrganizationImportStatus } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationImportStatus.js';
 import { validateCsvFile } from '../../../../../../src/prescription/learner-management/domain/usecases/validate-csv-file.js';
 import { SupOrganizationLearnerImportHeader } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/sup-organization-learner-import-header.js';
-import { SupOrganizationLearnerParser } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/sup-organization-learner-parser.js';
+import { SupParser } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/sup-parser.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
@@ -86,12 +86,12 @@ describe('Unit | UseCase | validateCsvFile', function () {
       organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImport);
 
       importStorageStub.getParser
-        .withArgs({ Parser: SupOrganizationLearnerParser, filename: organizationImport.filename }, organizationId, i18n)
-        .resolves(SupOrganizationLearnerParser.buildParser(csvContent, organizationId, i18n));
+        .withArgs({ Parser: SupParser, filename: organizationImport.filename }, organizationId, i18n)
+        .resolves(SupParser.buildParser(csvContent, organizationId, i18n));
 
       // when
       await validateCsvFile({
-        Parser: SupOrganizationLearnerParser,
+        Parser: SupParser,
         organizationImportId,
         i18n,
         organizationImportRepository: organizationImportRepositoryStub,
@@ -111,16 +111,12 @@ describe('Unit | UseCase | validateCsvFile', function () {
         organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImport);
 
         importStorageStub.getParser
-          .withArgs(
-            { Parser: SupOrganizationLearnerParser, filename: organizationImport.filename },
-            organizationId,
-            i18n,
-          )
-          .resolves(SupOrganizationLearnerParser.buildParser(csvContent, organizationId, i18n));
+          .withArgs({ Parser: SupParser, filename: organizationImport.filename }, organizationId, i18n)
+          .resolves(SupParser.buildParser(csvContent, organizationId, i18n));
 
         // when
         await validateCsvFile({
-          Parser: SupOrganizationLearnerParser,
+          Parser: SupParser,
           type,
           organizationImportId,
           importSupOrganizationLearnersJobRepository: importSupOrganizationLearnersJobRepositoryStub,
@@ -145,16 +141,12 @@ describe('Unit | UseCase | validateCsvFile', function () {
         organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImport);
 
         importStorageStub.getParser
-          .withArgs(
-            { Parser: SupOrganizationLearnerParser, filename: organizationImport.filename },
-            organizationId,
-            i18n,
-          )
-          .resolves(SupOrganizationLearnerParser.buildParser(csvContent, organizationId, i18n));
+          .withArgs({ Parser: SupParser, filename: organizationImport.filename }, organizationId, i18n)
+          .resolves(SupParser.buildParser(csvContent, organizationId, i18n));
 
         // when
         await validateCsvFile({
-          Parser: SupOrganizationLearnerParser,
+          Parser: SupParser,
           type,
           organizationImportId,
           importScoCsvOrganizationLearnersJobRepository: importScoCsvOrganizationLearnersJobRepositoryStub,
@@ -216,11 +208,7 @@ describe('Unit | UseCase | validateCsvFile', function () {
       it('should save error when there is an error deleting file from S3', async function () {
         const parserStub = { parse: sinon.stub() };
         importStorageStub.getParser
-          .withArgs(
-            { Parser: SupOrganizationLearnerParser, filename: organizationImport.filename },
-            organizationId,
-            i18n,
-          )
+          .withArgs({ Parser: SupParser, filename: organizationImport.filename }, organizationId, i18n)
           .resolves(parserStub);
         parserStub.parse.rejects(new AggregateImportError([new Error('parsing')]));
         const s3Error = new Error('s3 error');
@@ -251,12 +239,12 @@ describe('Unit | UseCase | validateCsvFile', function () {
         'utf-8',
       );
       importStorageStub.getParser
-        .withArgs({ Parser: SupOrganizationLearnerParser, filename: organizationImport.filename }, organizationId, i18n)
-        .resolves(SupOrganizationLearnerParser.buildParser(csvContent, organizationId, i18n));
+        .withArgs({ Parser: SupParser, filename: organizationImport.filename }, organizationId, i18n)
+        .resolves(SupParser.buildParser(csvContent, organizationId, i18n));
 
       // when
       await catchErr(validateCsvFile)({
-        Parser: SupOrganizationLearnerParser,
+        Parser: SupParser,
         organizationImportId,
         i18n,
         organizationImportRepository: organizationImportRepositoryStub,
