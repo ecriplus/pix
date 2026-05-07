@@ -1,7 +1,7 @@
-import { CsvImportError } from '../../../../../shared/domain/errors.js';
-import { SupOrganizationLearnerSet } from '../../../domain/models/SupOrganizationLearnerSet.js';
+import { CsvImportError } from '../../../../../../shared/domain/errors.js';
+import { SupOrganizationLearnerSet } from '../../../../domain/models/SupOrganizationLearnerSet.js';
+import { SupHeader } from '../headers/sup-header.js';
 import { SharedCsvParser } from './shared-csv-parser.js';
-import { SupOrganizationLearnerImportHeader } from './sup-organization-learner-import-header.js';
 
 const ERRORS = {
   STUDENT_NUMBER_UNIQUE: 'STUDENT_NUMBER_UNIQUE',
@@ -16,7 +16,7 @@ class SupParser extends SharedCsvParser {
   constructor(input, organizationId, i18n) {
     const LearnerSet = new SupOrganizationLearnerSet(i18n);
 
-    const columns = new SupOrganizationLearnerImportHeader(i18n).columns;
+    const columns = new SupHeader(i18n).columns;
     super(input, organizationId, columns, LearnerSet);
     this._supportedErrors.push('uniqueness', 'student_number_format');
   }

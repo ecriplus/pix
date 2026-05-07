@@ -433,7 +433,7 @@
     }
   },
   "csv-template": {
-    "organization-learners": {
+    "fregata-organization-learners": {
       "birth-city": "Nome del comune di nascita** (in francese)",
       "birth-city-code": "Codice del luogo di nascita** (comune)",
       "birth-country-code": "Codice del paese di nascita",
@@ -460,7 +460,7 @@
       "group": "Gruppo",
       "last-name": "Nome della famiglia",
       "middle-name": "Secondo nome",
-      "preferred-lastname": "Nome in uso",
+      "preferred-last-name": "Nome in uso",
       "student-number": "Numero dello studente",
       "study-scheme": "Dieta",
       "third-name": "Terzo nome"

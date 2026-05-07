@@ -429,7 +429,7 @@
     }
   },
   "csv-template": {
-    "organization-learners": {
+    "fregata-organization-learners": {
       "birth-city": "Naam van geboortegemeente** (in het Frans)",
       "birth-city-code": "Geboorteplaatscode** (gemeente)",
       "birth-country-code": "Code geboorteland",
@@ -456,7 +456,7 @@
       "group": "Groep",
       "last-name": "Achternaam",
       "middle-name": "Middelste naam",
-      "preferred-lastname": "Naam in gebruik",
+      "preferred-last-name": "Naam in gebruik",
       "student-number": "Studentennummer",
       "study-scheme": "Dieet",
       "third-name": "Derde naam"

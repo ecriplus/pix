@@ -1,7 +1,7 @@
-import { CsvImportError, DomainError } from '../../../../../shared/domain/errors.js';
-import { OrganizationLearner } from '../../../domain/models/OrganizationLearner.js';
-import { checkValidation } from '../../../domain/validators/organization-learner-validator.js';
-import { OrganizationLearnerImportHeader } from './organization-learner-import-header.js';
+import { CsvImportError, DomainError } from '../../../../../../shared/domain/errors.js';
+import { OrganizationLearner } from '../../../../domain/models/OrganizationLearner.js';
+import { checkValidation } from '../../../../domain/validators/organization-learner-validator.js';
+import { FregataHeader } from '../headers/fregata-header.js';
 import { SharedCsvParser } from './shared-csv-parser.js';
 
 const ERRORS = {
@@ -73,7 +73,7 @@ function _convertSexCodeToLabel(sexCode) {
 class FregataParser extends SharedCsvParser {
   constructor(input, organizationId, i18n) {
     const learnerSet = new OrganizationLearnerSet();
-    const columns = new OrganizationLearnerImportHeader(i18n).columns;
+    const columns = new FregataHeader(i18n).columns;
 
     super(input, organizationId, columns, learnerSet);
     this._supportedErrors.push('uniqueness', 'not_valid_insee_code');

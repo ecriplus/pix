@@ -1,5 +1,5 @@
 import { DomainTransaction } from '../../../../../shared/domain/DomainTransaction.js';
-import { GenericParser } from '../../../infrastructure/serializers/csv/generic-parser.js';
+import { GenericParser } from '../../../infrastructure/serializers/csv/parsers/generic-parser.js';
 import { getDataBuffer } from '../../../infrastructure/utils/bufferize/get-data-buffer.js';
 import { AggregateImportError } from '../../errors.js';
 import { ImportOrganizationLearnerSet } from '../../models/ImportOrganizationLearnerSet.js';

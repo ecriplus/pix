@@ -433,7 +433,7 @@
     }
   },
   "csv-template": {
-    "organization-learners": {
+    "fregata-organization-learners": {
       "birth-city": "Bezeichnung Geburtsgemeinde**",
       "birth-city-code": "Code Geburtsgemeinde**",
       "birth-country-code": "Code Geburtsland*",
@@ -460,7 +460,7 @@
       "group": "Gruppe",
       "last-name": "Nachname",
       "middle-name": "Zweiter Vorname",
-      "preferred-lastname": "Gebrauchsname",
+      "preferred-last-name": "Gebrauchsname",
       "student-number": "Studentennummer",
       "study-scheme": "Diät",
       "third-name": "Dritter Vorname"

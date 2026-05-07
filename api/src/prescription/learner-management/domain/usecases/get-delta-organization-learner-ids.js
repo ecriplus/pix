@@ -1,4 +1,4 @@
-import { SupParser } from '../../infrastructure/serializers/csv/sup-parser.js';
+import { SupParser } from '../../infrastructure/serializers/csv/parsers/sup-parser.js';
 import { getDataBuffer } from '../../infrastructure/utils/bufferize/get-data-buffer.js';
 
 const getDeltaOrganizationLearnerIds = async function ({

@@ -2,7 +2,7 @@ import sinon from 'sinon';
 
 import { OrganizationImportStatus } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationImportStatus.js';
 import { importOrganizationLearnersFromSIECLECSVFormat } from '../../../../../../src/prescription/learner-management/domain/usecases/import-organization-learners-from-siecle-csv-format.js';
-import { FregataParser } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/fregata-parser.js';
+import { FregataParser } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/parsers/fregata-parser.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';

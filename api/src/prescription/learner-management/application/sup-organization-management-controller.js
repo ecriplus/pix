@@ -4,7 +4,7 @@ import { tokenService } from '../../../shared/domain/services/token-service.js';
 import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { usecases } from '../domain/usecases/index.js';
-import { SupParser } from '../infrastructure/serializers/csv/sup-parser.js';
+import { SupParser } from '../infrastructure/serializers/csv/parsers/sup-parser.js';
 
 const importSupOrganizationLearners = async function (request, h, dependencies = { logger, unlink: fs.unlink }) {
   const i18n = getI18nFromRequest(request);

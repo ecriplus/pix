@@ -1,8 +1,8 @@
 import iconv from 'iconv-lite';
 
 import { AggregateImportError } from '../../../../../../../src/prescription/learner-management/domain/errors.js';
-import { FregataParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/fregata-parser.js';
-import { OrganizationLearnerImportHeader } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/organization-learner-import-header.js';
+import { FregataHeader } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/headers/fregata-header.js';
+import { FregataParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/parsers/fregata-parser.js';
 import { CsvImportError } from '../../../../../../../src/shared/domain/errors.js';
 import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { expect } from '../../../../../../test-helper.js';
@@ -10,9 +10,7 @@ import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
 const i18n = getI18n();
 
-const organizationLearnerCsvColumns = new OrganizationLearnerImportHeader(i18n).columns
-  .map((column) => column.name)
-  .join(';');
+const organizationLearnerCsvColumns = new FregataHeader(i18n).columns.map((column) => column.name).join(';');
 
 describe('Unit | Infrastructure | FregataParser', function () {
   context('when the header is not correctly formed', function () {

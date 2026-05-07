@@ -3,7 +3,7 @@ import { Readable } from 'node:stream';
 import sinon from 'sinon';
 
 import { ImportSupOrganizationLearnersJobController } from '../../../../../../src/prescription/learner-management/application/jobs/import-sup-organization-learners-job-controller.js';
-import { SupOrganizationLearnerImportHeader } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/sup-organization-learner-import-header.js';
+import { SupHeader } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/headers/sup-header.js';
 import { importStorage } from '../../../../../../src/prescription/learner-management/infrastructure/storage/import-storage.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { expect } from '../../../../../test-helper.js';
@@ -17,9 +17,7 @@ describe('Integration | Infrastructure | Jobs | ImportSupOrganizationLearnersJob
   context('#handle', function () {
     beforeEach(async function () {
       i18n = getI18n();
-      const supOrganizationLearnerImportHeader = new SupOrganizationLearnerImportHeader(i18n).columns
-        .map((column) => column.name)
-        .join(';');
+      const supOrganizationLearnerImportHeader = new SupHeader(i18n).columns.map((column) => column.name).join(';');
 
       user = databaseBuilder.factory.buildUser();
       organizationId = databaseBuilder.factory.buildOrganization().id;

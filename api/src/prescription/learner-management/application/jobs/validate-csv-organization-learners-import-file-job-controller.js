@@ -5,8 +5,8 @@ import { getI18n } from '../../../../shared/infrastructure/i18n/i18n.js';
 import { logger as l } from '../../../../shared/infrastructure/utils/logger.js';
 import { ValidateCsvOrganizationImportFileJob } from '../../domain/models/ValidateCsvOrganizationImportFileJob.js';
 import { usecases } from '../../domain/usecases/index.js';
-import { FregataParser } from '../../infrastructure/serializers/csv/fregata-parser.js';
-import { SupParser } from '../../infrastructure/serializers/csv/sup-parser.js';
+import { FregataParser } from '../../infrastructure/serializers/csv/parsers/fregata-parser.js';
+import { SupParser } from '../../infrastructure/serializers/csv/parsers/sup-parser.js';
 
 class ValidateCsvOrganizationLearnersImportFileJobController extends JobController {
   #logger;
