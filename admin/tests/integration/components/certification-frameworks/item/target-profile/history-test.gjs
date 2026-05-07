@@ -1,9 +1,9 @@
-import { render, within } from "@1024pix/ember-testing-library";
-import { click } from "@ember/test-helpers";
-import History from "pix-admin/components/certification-frameworks/item/target-profile/history";
-import { module, test } from "qunit";
+import { render, within } from '@1024pix/ember-testing-library';
+import { click } from '@ember/test-helpers';
+import History from 'pix-admin/components/certification-frameworks/item/target-profile/history';
+import { module, test } from 'qunit';
 
-import setupIntlRenderingTest, { t } from "../../../../../helpers/setup-intl-rendering";
+import setupIntlRenderingTest, { t } from '../../../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | certification-frameworks/item/target-profile/history', function (hooks) {
   setupIntlRenderingTest(hooks);

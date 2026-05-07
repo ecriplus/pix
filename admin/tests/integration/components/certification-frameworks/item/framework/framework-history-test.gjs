@@ -1,8 +1,8 @@
-import { render } from "@1024pix/ember-testing-library";
-import FrameworkHistory from "pix-admin/components/certification-frameworks/item/framework/framework-history";
-import { module, test } from "qunit";
+import { render } from '@1024pix/ember-testing-library';
+import FrameworkHistory from 'pix-admin/components/certification-frameworks/item/framework/framework-history';
+import { module, test } from 'qunit';
 
-import setupIntlRenderingTest, { t } from "../../../../../helpers/setup-intl-rendering";
+import setupIntlRenderingTest, { t } from '../../../../../helpers/setup-intl-rendering';
 
 module('Integration | Component | Complementary certifications/Item/Framework | Framework history', function (hooks) {
   setupIntlRenderingTest(hooks);

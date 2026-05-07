@@ -3,10 +3,10 @@ import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
 import PixTable from '@1024pix/pix-ui/components/pix-table';
 import PixTableColumn from '@1024pix/pix-ui/components/pix-table-column';
+import { fn } from '@ember/helper';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import { fn } from '@ember/helper';
 import { t } from 'ember-intl';
 import formatDate from 'ember-intl/helpers/format-date';
 
