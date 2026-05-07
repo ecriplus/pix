@@ -206,7 +206,7 @@
                       "id": "17dee555-4c04-4121-bb5f-3707ae6c600e",
                       "type": "qcu-discovery",
                       "instruction": "<p>S’agit-il d’un effet direct ou indirect sur l’environnement ?</p>",
-                      "hasShortProposals": false,
+                      "hasShortProposals": true,
                       "proposals": [
                         {
                           "id": "1",
