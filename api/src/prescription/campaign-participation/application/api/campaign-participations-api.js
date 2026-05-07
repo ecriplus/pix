@@ -1,4 +1,5 @@
 import { usecases } from '../../domain/usecases/index.js';
+import { CampaignParticipation } from './read-models/CampaignParticipation.js';
 
 /**
  * @function
@@ -16,6 +17,18 @@ export const getCampaignParticipationsByLearnerIdAndCampaignId = async ({ organi
     organizationLearnerId,
     campaignId,
   });
+};
+
+/**
+ * @function
+ * @name findByUserId
+ *
+ * @param {number} userId
+ * @returns {Promise<Array<{id: number, campaignId: number, targetProfileId: number}>>}
+ */
+export const findByUserId = async ({ userId }) => {
+  const participations = await usecases.findCampaignParticipationsByUserId({ userId });
+  return participations.map((participation) => new CampaignParticipation(participation));
 };
 
 export const deleteCampaignParticipations = async ({
