@@ -1,4 +1,3 @@
-import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
@@ -11,7 +10,6 @@ import EvaluationResultsHeroRecommendationEngine from '../../../campaigns/assess
 
 export default class EvaluationResultsRecommendationEngine extends Component {
   @service media;
-  @service tabManager;
 
   get hasTrainings() {
     return Boolean(this.trainings.length);
@@ -23,19 +21,6 @@ export default class EvaluationResultsRecommendationEngine extends Component {
     } else {
       return this.args.model.trainings;
     }
-  }
-
-  @action
-  showTrainings() {
-    const tabElement = document.querySelector('[role="tablist"]');
-    const tabElementTopPosition = tabElement.getBoundingClientRect().top;
-
-    window.scrollTo({
-      top: tabElementTopPosition,
-      behavior: 'smooth',
-    });
-
-    this.tabManager.setActiveTab(2);
   }
 
   get showBadges() {
@@ -60,8 +45,6 @@ export default class EvaluationResultsRecommendationEngine extends Component {
         @campaign={{@model.campaign}}
         @campaignParticipationResult={{@model.campaignParticipationResult}}
         @questResults={{@model.questResults}}
-        @hasTrainings={{this.hasTrainings}}
-        @showTrainings={{this.showTrainings}}
       />
 
       {{#if this.hasTrainings}}

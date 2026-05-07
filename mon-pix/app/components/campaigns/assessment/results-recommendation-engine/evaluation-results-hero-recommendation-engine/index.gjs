@@ -59,10 +59,6 @@ export default class EvaluationResultsHeroRecommendationEngine extends Component
     this.stagedMessageContentShowMoreEnabled = !this.stagedMessageContentShowMoreEnabled;
   }
 
-  @action handleSeeTrainingsClick() {
-    this.args.showTrainings();
-  }
-
   @action handleBackToHomepageDisplay() {
     this.pixMetrics.trackEvent(
       "Affichage du bouton 'Revenir à la page d'accueil dans le cadre du moteur de recommandation'",
@@ -129,21 +125,15 @@ export default class EvaluationResultsHeroRecommendationEngine extends Component
         {{/if}}
 
         <div class="evaluation-results-hero-recommendation-engine__actions">
-          {{#if @hasTrainings}}
-            <PixButton @triggerAction={{this.handleSeeTrainingsClick}} @size="medium" @variant="secondary">
-              {{t "pages.skill-review.hero.see-trainings"}}
-            </PixButton>
-          {{else}}
-            {{this.handleBackToHomepageDisplay}}
-            <PixButtonLink
-              @route="authentication.login"
-              @size="small"
-              @variant="secondary-white"
-              onclick={{this.handleBackToHomepageClick}}
-            >
-              {{t "pages.skill-review.actions.back-to-pix"}}
-            </PixButtonLink>
-          {{/if}}
+          {{this.handleBackToHomepageDisplay}}
+          <PixButtonLink
+            @route="authentication.login"
+            @size="small"
+            @variant="secondary-white"
+            onclick={{this.handleBackToHomepageClick}}
+          >
+            {{t "pages.skill-review.actions.back-to-pix"}}
+          </PixButtonLink>
         </div>
       </div>
     </div>
