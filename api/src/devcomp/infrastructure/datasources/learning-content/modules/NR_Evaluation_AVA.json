@@ -536,7 +536,7 @@
                     {
                       "id": "b712b6cc-5dd8-40fb-90cf-fe69dcc578af",
                       "type": "qrocm",
-                      "instruction": "",
+                      "instruction": "Complètez la phrase",
                       "proposals": [
                         {
                           "type": "text",
@@ -582,7 +582,7 @@
                     {
                       "id": "a299262d-b5aa-43dd-aa1f-d977dc655756",
                       "type": "qrocm",
-                      "instruction": "",
+                      "instruction": "Complètez la phrase",
                       "proposals": [
                         {
                           "type": "text",
@@ -1100,7 +1100,7 @@
                     "size": 15,
                     "display": "inline",
                     "placeholder": "",
-                    "ariaLabel": "",
+                    "ariaLabel": "Complétez",
                     "tolerances": [
                       "t1",
                       "t2",
