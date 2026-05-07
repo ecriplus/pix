@@ -1,10 +1,11 @@
+import { action } from '@ember/object';
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-import RSVP from 'rsvp';
 
 export default class OrganizationTeamRoute extends Route {
   @service router;
   @service pixToast;
+  @service store;
 
   queryParams = {
     pageNumber: { refreshModel: true },
@@ -29,25 +30,28 @@ export default class OrganizationTeamRoute extends Route {
 
   async model(params) {
     const organization = this.modelFor('authenticated.organizations.get');
+    let organizationMemberships = [];
     try {
-      await organization.hasMany('organizationMemberships').reload({
-        adapterOptions: {
-          'page[size]': params.pageSize,
-          'page[number]': params.pageNumber,
-          'filter[firstName]': params.firstName,
-          'filter[lastName]': params.lastName,
-          'filter[email]': params.email,
-          'filter[organizationRole]': params.organizationRole,
+      organizationMemberships = await this.store.query('organization-membership', {
+        filter: {
+          organizationId: organization.id,
+          firstName: params.firstName,
+          lastName: params.lastName,
+          email: params.email,
+          organizationRole: params.organizationRole,
         },
+        page: { size: params.pageSize, number: params.pageNumber },
       });
     } catch (errorResponse) {
       this._handleResponseError(errorResponse);
     }
 
-    return RSVP.hash({
-      organization,
-      organizationMemberships: organization.organizationMemberships,
-    });
+    return { organization, organizationMemberships };
+  }
+
+  @action
+  refreshModel() {
+    this.refresh();
   }
 
   resetController(controller, isExiting) {

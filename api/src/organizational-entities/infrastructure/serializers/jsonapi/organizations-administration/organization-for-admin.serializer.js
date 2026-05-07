@@ -73,7 +73,7 @@ const serialize = function (organizations, meta) {
       nullIfMissing: true,
       relationshipLinks: {
         related(record, current, parent) {
-          return `/api/organizations/${parent.id}/memberships`;
+          return `/api/admin/organizations/${parent.id}/memberships`;
         },
       },
     },

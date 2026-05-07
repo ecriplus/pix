@@ -16,7 +16,6 @@ const serialize = function (organizations, meta) {
       'isManagingStudents',
       'credit',
       'email',
-      'memberships',
       'targetProfiles',
       'tags',
       'createdBy',
@@ -26,16 +25,6 @@ const serialize = function (organizations, meta) {
       'showSkills',
       'administrationTeamName',
     ],
-    memberships: {
-      ref: 'id',
-      ignoreRelationshipData: true,
-      nullIfMissing: true,
-      relationshipLinks: {
-        related(record, current, parent) {
-          return `/api/organizations/${parent.id}/memberships`;
-        },
-      },
-    },
     targetProfiles: {
       ref: 'id',
       ignoreRelationshipData: true,

@@ -3,22 +3,6 @@ import ApplicationAdapter from './application';
 export default class OrganizationAdapter extends ApplicationAdapter {
   namespace = 'api/admin';
 
-  findHasMany(store, snapshot, url, relationship) {
-    url = this.urlPrefix(url, this.buildURL(snapshot.modelName, snapshot.id, null, 'findHasMany'));
-
-    if (relationship.type === 'organization-membership') {
-      const params = new URLSearchParams();
-      if (snapshot.adapterOptions) {
-        for (const [key, value] of Object.entries(snapshot.adapterOptions)) {
-          if (value) params.append(key, value);
-        }
-      }
-      url = `${this.host}/${this.namespace}/organizations/${snapshot.id}/memberships${params.toString() ? '?' + params.toString() : ''}`;
-    }
-
-    return this.ajax(url, 'GET');
-  }
-
   updateRecord(store, type, snapshot) {
     if (snapshot?.adapterOptions?.archiveOrganization) {
       const url = `${this.host}/${this.namespace}/organizations/${snapshot.id}/archive`;

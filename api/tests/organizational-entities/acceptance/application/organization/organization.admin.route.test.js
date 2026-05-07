@@ -227,7 +227,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         context(`when user has role ${role}`, function () {
           it('returns child organizations list with a 200 HTTP status code', async function () {
             // given
-            const userId = databaseBuilder.factory.buildUser.withRole({ role }).id;
+            const userId = databaseBuilder.factory.buildUser.withRole({
+              role,
+            }).id;
 
             const {
               organization: parentOrganization,
@@ -438,7 +440,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         method: 'POST',
         url: '/api/admin/organizations',
         payload,
-        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+        headers: generateAuthenticatedUserRequestHeaders({
+          userId: superAdmin.id,
+        }),
       };
     });
 
@@ -675,7 +679,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
           tagId: tag.id,
           organizationId: organization.id,
         });
-        const network = databaseBuilder.factory.buildNetwork({ name: 'Réseau Académique' });
+        const network = databaseBuilder.factory.buildNetwork({
+          name: 'Réseau Académique',
+        });
         const structure = databaseBuilder.factory.buildStructure();
         databaseBuilder.factory.buildFactStructure({
           structureId: structure.id,
@@ -759,7 +765,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
               },
               'organization-memberships': {
                 links: {
-                  related: `/api/organizations/${organization.id}/memberships`,
+                  related: `/api/admin/organizations/${organization.id}/memberships`,
                 },
               },
               tags: {
@@ -923,7 +929,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
         method: 'PATCH',
         url: `/api/admin/organizations/${organization.id}`,
         payload,
-        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+        headers: generateAuthenticatedUserRequestHeaders({
+          userId: superAdmin.id,
+        }),
       };
 
       // when
@@ -1594,7 +1602,9 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       const options = {
         method: 'GET',
         url: `/api/admin/organizations/${organizationId}/places-statistics`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+        headers: generateAuthenticatedUserRequestHeaders({
+          userId: superAdmin.id,
+        }),
       };
 
       // when

@@ -3,6 +3,15 @@ import ApplicationAdapter from './application';
 export default class OrganizationMembershipAdapter extends ApplicationAdapter {
   namespace = 'api/admin';
 
+  urlForQuery(query) {
+    if (query.filter?.organizationId) {
+      const { organizationId } = query.filter;
+      delete query.filter.organizationId;
+      return `${this.host}/${this.namespace}/organizations/${organizationId}/memberships`;
+    }
+    return super.urlForQuery(...arguments);
+  }
+
   urlForCreateRecord() {
     return `${this.host}/${this.namespace}/memberships`;
   }

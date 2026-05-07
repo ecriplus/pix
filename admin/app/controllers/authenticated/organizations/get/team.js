@@ -63,19 +63,8 @@ export default class GetTeamController extends Controller {
 
     try {
       await this.store.createRecord('organization-membership', { organization, user }).save();
-
-      await this.model.organizationMemberships.reload({
-        adapterOptions: {
-          'page[size]': this.pageSize,
-          'page[number]': this.pageNumber,
-          'filter[firstName]': this.firstName,
-          'filter[lastName]': this.lastName,
-          'filter[email]': this.email,
-          'filter[organizationRole]': this.organizationRole,
-        },
-      });
-
       this.userEmailToAdd = null;
+      this.send('refreshModel');
       this.pixToast.sendSuccessNotification({ message: 'Accès attribué avec succès.' });
     } catch {
       this.pixToast.sendErrorNotification({ message: 'Une erreur est survenue.' });
