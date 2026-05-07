@@ -44,7 +44,12 @@ export class JobClient {
     if (worker) {
       this.#pgBoss = pgBossFactory
         ? pgBossFactory()
-        : new PgBoss({ connectionString, max: config.pgBoss.workerConnexionPoolMaxSize });
+        : new PgBoss({
+            connectionString,
+            max: config.pgBoss.workerConnexionPoolMaxSize,
+            persistWarnings: config.pgBoss.persistWarnings,
+            warningRetentionDays: 30,
+          });
 
       this.#pgBoss.on('error', (err) => {
         logger.error({ event: 'pg-boss-error', err }, 'PGBOSS ERROR');
