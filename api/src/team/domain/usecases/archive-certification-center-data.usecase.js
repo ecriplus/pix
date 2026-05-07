@@ -12,8 +12,7 @@ export const archiveCertificationCenterData = withTransaction(async function ({
     updatedByUserId: archivedBy,
     disabledAt: archiveDate,
   });
-  await certificationCenterInvitationRepository.markAsCancelledByCertificationCenter({
+  await certificationCenterInvitationRepository.deleteInvitationsByCertificationCenterId({
     certificationCenterId,
-    updatedAt: archiveDate,
   });
 });

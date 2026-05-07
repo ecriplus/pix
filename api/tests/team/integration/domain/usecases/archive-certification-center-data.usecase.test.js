@@ -6,7 +6,7 @@ import { databaseBuilder } from '../../../../tooling/databases.js';
 
 describe('Integration | Team | Domain | UseCase | archive-certification-center-data', function () {
   describe('#archiveCertificationCenterData', function () {
-    it('archives memberships and invitations related to a certification center', async function () {
+    it('archives memberships and delete invitations related to a certification center', async function () {
       //given
       const archiveDate = new Date(2023, 3, 14);
       const certificationCenterId = databaseBuilder.factory.buildCertificationCenter().id;
@@ -35,15 +35,15 @@ describe('Integration | Team | Domain | UseCase | archive-certification-center-d
       const disabledCertificationCenterMembership = await knex('certification-center-memberships')
         .where({ certificationCenterId })
         .first();
-      const cancelledCertificationCenterInvitation = await knex('certification-center-invitations')
-        .where({ certificationCenterId })
-        .first();
+
+      const certificationCenterInvitation = await knex('certification-center-invitations').where({
+        certificationCenterId,
+      });
 
       expect(disabledCertificationCenterMembership.disabledAt).to.deep.equal(archiveDate);
       expect(disabledCertificationCenterMembership.updatedByUserId).to.deep.equal(superAdminUser.id);
 
-      expect(cancelledCertificationCenterInvitation.status).to.deep.equal('cancelled');
-      expect(cancelledCertificationCenterInvitation.updatedAt).to.deep.equal(archiveDate);
+      expect(certificationCenterInvitation).to.be.empty;
     });
   });
 });

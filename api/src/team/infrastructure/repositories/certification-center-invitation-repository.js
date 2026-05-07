@@ -170,6 +170,15 @@ const markAsCancelledByCertificationCenter = async function ({ certificationCent
 };
 
 /**
+ * @param {Object} params
+ * @param {number} params.certificationCenterId
+ */
+const deleteInvitationsByCertificationCenterId = async function ({ certificationCenterId }) {
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn.from(CERTIFICATION_CENTER_INVITATIONS).where({ certificationCenterId }).delete();
+};
+
+/**
  * @callback updateModificationDate
  * @param {string} certificationCenterInvitationId
  * @returns {Promise<void>}
@@ -193,6 +202,7 @@ const updateModificationDate = async function (certificationCenterInvitationId) 
  */
 export {
   create,
+  deleteInvitationsByCertificationCenterId,
   findOnePendingByEmailAndCertificationCenterId,
   findPendingByCertificationCenterId,
   get,

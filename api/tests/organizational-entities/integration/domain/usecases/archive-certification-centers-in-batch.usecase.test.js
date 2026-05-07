@@ -70,9 +70,9 @@ describe('Integration | Organizational Entities | Domain | UseCase | archive-cer
     const disabledCertificationCenter1Membership = await knex('certification-center-memberships')
       .where({ certificationCenterId: certificationCenter1.id })
       .first();
-    const cancelledCertificationCenter1Invitation = await knex('certification-center-invitations')
-      .where({ certificationCenterId: certificationCenter1.id })
-      .first();
+    const deletedCertificationCenter1Invitation = await knex('certification-center-invitations').where({
+      certificationCenterId: certificationCenter1.id,
+    });
 
     const archivedCertificationCenter2 = await knex('certification-centers')
       .where({ id: certificationCenter2.id })
@@ -80,9 +80,9 @@ describe('Integration | Organizational Entities | Domain | UseCase | archive-cer
     const disabledCertificationCenter2Membership = await knex('certification-center-memberships')
       .where({ certificationCenterId: certificationCenter2.id })
       .first();
-    const cancelledCertificationCenter2Invitation = await knex('certification-center-invitations')
-      .where({ certificationCenterId: certificationCenter2.id })
-      .first();
+    const deletedCertificationCenter2Invitation = await knex('certification-center-invitations').where({
+      certificationCenterId: certificationCenter2.id,
+    });
 
     expect(archivedCertificationCenter1.archivedAt).to.deep.equal(now);
     expect(archivedCertificationCenter1.archivedBy).to.deep.equal(superAdminUser.id);
@@ -92,8 +92,7 @@ describe('Integration | Organizational Entities | Domain | UseCase | archive-cer
     expect(disabledCertificationCenter1Membership.updatedByUserId).to.deep.equal(superAdminUser.id);
     expect(disabledCertificationCenter1Membership.updatedAt).to.deep.equal(lastUpdateBeforeArchive);
 
-    expect(cancelledCertificationCenter1Invitation.status).to.deep.equal('cancelled');
-    expect(cancelledCertificationCenter1Invitation.updatedAt).to.deep.equal(now);
+    expect(deletedCertificationCenter1Invitation).to.be.empty;
 
     expect(archivedCertificationCenter2.archivedAt).to.deep.equal(now);
     expect(archivedCertificationCenter2.archivedBy).to.deep.equal(superAdminUser.id);
@@ -103,8 +102,7 @@ describe('Integration | Organizational Entities | Domain | UseCase | archive-cer
     expect(disabledCertificationCenter2Membership.updatedByUserId).to.deep.equal(superAdminUser.id);
     expect(disabledCertificationCenter2Membership.updatedAt).to.deep.equal(lastUpdateBeforeArchive);
 
-    expect(cancelledCertificationCenter2Invitation.status).to.deep.equal('cancelled');
-    expect(cancelledCertificationCenter2Invitation.updatedAt).to.deep.equal(now);
+    expect(deletedCertificationCenter2Invitation).to.be.empty;
 
     clock.restore();
   });
