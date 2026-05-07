@@ -439,6 +439,172 @@
                       "solution": "2"
                     }
                   ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "89821a3c-5b6f-419f-b028-f04f243a4f56",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p>Et aujourd'hui ?<br></p>"
+                    },
+                    {
+                      "id": "380d4129-39fa-4b83-8a62-d38664048404",
+                      "type": "qrocm",
+                      "instruction": "<p>Complètez le texte suivant.</p>",
+                      "proposals": [
+                        {
+                          "type": "text",
+                          "content": "<p>Un ordinateur actuel est consomme</p>"
+                        },
+                        {
+                          "type": "select",
+                          "input": "ordi-énergie",
+                          "display": "inline",
+                          "placeholder": "- Sélectionner -",
+                          "ariaLabel": "- Sélectionner -",
+                          "tolerances": [],
+                          "options": [
+                            {
+                              "id": "1",
+                              "content": "beaucoup plus"
+                            },
+                            {
+                              "id": "2",
+                              "content": "plus"
+                            },
+                            {
+                              "id": "3",
+                              "content": "autant"
+                            },
+                            {
+                              "id": "4",
+                              "content": "moins"
+                            },
+                            {
+                              "id": "5",
+                              "content": "beaucoup moins"
+                            }
+                          ],
+                          "solutions": [
+                            "5"
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "content": "<p>d’énergie que le premier ordinateur.</p>"
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Bien vu !<br></p>",
+                          "diagnosis": "<p>Un ordinateur a une puissance d’environ 50W, soit 20 fois moins que l’ordinateur des années 70.<br></p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Eh non !<br></p>",
+                          "diagnosis": "<p>Un ordinateur a une puissance d’environ 50W, soit 20 fois moins que l’ordinateur des années 70.<br></p>"
+                        }
+                      }
+                    },
+                    {
+                      "id": "b712b6cc-5dd8-40fb-90cf-fe69dcc578af",
+                      "type": "qrocm",
+                      "instruction": "<p><br></p>",
+                      "proposals": [
+                        {
+                          "type": "text",
+                          "content": "<p>Les améliorations technologiques liés aux ordinateurs les ont </p>"
+                        },
+                        {
+                          "type": "select",
+                          "input": "ordi-diffusion",
+                          "display": "inline",
+                          "placeholder": "- Sélectionner -",
+                          "ariaLabel": "- Sélectionner -",
+                          "tolerances": [],
+                          "options": [
+                            {
+                              "id": "1",
+                              "content": "rendus inutiles et obsolètes."
+                            },
+                            {
+                              "id": "2",
+                              "content": "réservés à des usages précis."
+                            },
+                            {
+                              "id": "3",
+                              "content": "rendus incontournables au quotidien."
+                            }
+                          ],
+                          "solutions": [
+                            "3"
+                          ]
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Bien vu !<br></p>",
+                          "diagnosis": "<p>Les ordinateurs sont devenus <strong>incontournables </strong>: en 2002, le milliardième ordinateur personnel aurait été livré. La barre des deux milliards aurait été atteinte en 2007 !</p><p> Plus de 270 millions d’ordinateurs auraient été vendus rien qu’en 2025.<br></p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Eh non !<br></p>",
+                          "diagnosis": "<p>Les ordinateurs sont devenus <strong>incontournables </strong>: en 2002, le milliardième ordinateur personnel aurait été livré. La barre des deux milliards aurait été atteinte en 2007 !</p><p>  Plus de 270 millions d’ordinateurs auraient été vendus rien qu’en 2025.</p>"
+                        }
+                      }
+                    },
+                    {
+                      "id": "a299262d-b5aa-43dd-aa1f-d977dc655756",
+                      "type": "qrocm",
+                      "instruction": "<p><br></p>",
+                      "proposals": [
+                        {
+                          "type": "text",
+                          "content": "<p>Au global, l’électricité consommée par des ordinateurs dans le monde</p>"
+                        },
+                        {
+                          "type": "select",
+                          "input": "global-ordi-énergie",
+                          "display": "inline",
+                          "placeholder": "- Sélectionner -",
+                          "ariaLabel": "- Sélectionner -",
+                          "tolerances": [],
+                          "options": [
+                            {
+                              "id": "1",
+                              "content": "est restée stable."
+                            },
+                            {
+                              "id": "2",
+                              "content": "a diminuée."
+                            },
+                            {
+                              "id": "3",
+                              "content": "a explosé."
+                            }
+                          ],
+                          "solutions": [
+                            "3"
+                          ]
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Bien vu !<br></p>",
+                          "diagnosis": "<p>Ce phénomène de compensation du gain unitaire par une augmentation des usages s’appelle l’<strong>effet rebond.</strong><br></p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Eh non&nbsp; !<br></p>",
+                          "diagnosis": "<p>Au global, la consommation d’énergie par les ordinateurs a explosé.<br>Ce phénomène de compensation du gain unitaire par une augmentation des usages s’appelle l’<strong>effet rebond.</strong><br></p>"
+                        }
+                      }
+                    },
+                    {
+                      "id": "a92a9ac3-0080-43c2-9242-2464b493118f",
+                      "type": "text",
+                      "tag": " ",
+                      "content": ""
+                    }
+                  ]
                 }
               ]
             }
@@ -459,7 +625,7 @@
                       "id": "f03f5137-a79c-41a0-a2d7-69019d815759",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Dans certains cas, des effets positifs peuvent entraîner une hausse de la consommation globale&nbsp;: c’est l’<strong>effet rebond.</strong></p>"
+                      "content": "<p>L'amélioration de l'efficacité d'une technologie peut sembler être une bonne chose, mais elle provoque parfois une augmentation de son usage ou une augmentation de l'usage d'autres technologies.</p>"
                     }
                   ]
                 },
@@ -469,7 +635,7 @@
                       "id": "96f917f3-39ae-42d6-9b1d-94ee179a7b0f",
                       "type": "text",
                       "tag": " ",
-                      "content": "<h5>C’est un peu paradoxal, non ?</h5><p>Effectivement, ça peut être contre-intuitif. L’amélioration de l’<strong>efficacité</strong> d’une technologie peut sembler être une bonne chose, mais elle provoque parfois une <strong>augmentation de son usage</strong> ou une <strong>augmentation de l’usage d’autres technologies</strong>. Ces augmentations annulent une partie, voire tout ce qui a été gagné avec l’amélioration.</p>"
+                      "content": "<h5>C’est un peu paradoxal, non ?</h5><p>Effectivement, ça peut être contre-intuitif. Ces augmentations annulent une partie, voire tout ce qui a été gagné avec l'amélioration. D’où le nom de ce phénomène : l’<strong>effet rebond.</strong><br></p>"
                     }
                   ]
                 },
@@ -501,7 +667,7 @@
                 "id": "1d708f09-ff47-4585-8292-6e4504d31f2a",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Poursuivons avec un autre exemple&nbsp;: celui de ce GPS.</p>"
+                "content": "<p>Olivier voit cette publicité par le système Domotico qui permet l'optimisation de la consommation électrique grâce à l’IA. Il s’interroge.&nbsp;<br></p>"
               }
             },
             {
@@ -511,7 +677,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/draft/modules/NR_Eval_Ava/gps.png",
                 "alt": "Une publicité pour un GPS",
-                "alternativeText": "<p>Une publicité pour un GPS&nbsp;:&nbsp;</p><p>- Le GPS qui vous emmène à bon port.</p><p>- Moins de détours, moins de carburant.</p><p>- Moins de cartes, moins de papier.</p>",
+                "alternativeText": "<p>Une publicité pour un système de domotique boosté avec l'intelligence artificielle :&nbsp;</p><ul><li>Domoticio : optimisation de votre consommation électrique par IA.</li><li>- 34 % d'émission de CO2 sur votre chauffage.</li></ul>",
                 "legend": "Image brouillon",
                 "licence": ""
               }
@@ -521,28 +687,28 @@
               "element": {
                 "id": "0b350beb-139d-4a38-ab89-eb7ba2fe23bc",
                 "type": "qcu-discovery",
-                "instruction": "<p>À votre avis, ce GPS a-t-il un impact positif ou négatif sur l’environnement ?</p>",
+                "instruction": "<p>À votre avis, ce système domotique a-t-il un effet positif ou négatif sur l’environnement ?<br></p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
                     "content": "<p>L’impact est positif.<br></p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>C’est possible, mais ce n’est pas sûr.&nbsp;</strong></p><p>Même si cet appareil évite la fabrication de nombreuses cartes en papie et qu’il promet des économies de carburant,&nbsp; sa fabrication est polluante … Sans une étude scientifique rigoureuse, on ne peut pas savoir si son impact total sur l’environnement est meilleur des cartes en papier.</p>"
+                      "diagnosis": "<p><strong>C’est possible, mais ce n’est pas sûr.&nbsp;</strong></p><p>Même si ce système optimise et réduit la consommation électrique, il utilise du matériel électronique polluant et des logiciels qui nécessitent beaucoup de calculs, donc la production de matériel et d’électricité … </p><p>Sans une étude scientifique rigoureuse, on ne peut pas savoir si son impact total sur l’environnement est meilleur des cartes en papier.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>L’impact est négatif.<br></p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>C’est possible, mais ce n’est pas sûr.&nbsp;</strong></p><p>Même si cet appareil évite la fabrication de nombreuses cartes en papier et qu’il promet des économies de carburant, sa fabrication est polluante … Sans une étude scientifique rigoureuse, on ne peut pas savoir si son impact total sur l’environnement est meilleur des cartes en papier.</p>"
+                      "diagnosis": "<p><strong>C’est possible, mais ce n’est pas sûr.&nbsp;</strong></p><p>Même si ce système optimise et réduit la consommation électrique, il utilise du matériel électronique polluant et des logiciels qui nécessitent beaucoup de calculs, donc de matériel et d’électricité … </p><p>Sans une étude scientifique rigoureuse, on ne peut pas savoir si son impact total sur l’environnement est meilleur des cartes en papier.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Je ne peux pas savoir.</p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>Effectivement !&nbsp;</strong></p><p>Même si cet appareil évite la fabrication de nombreuses cartes en papier et qu’il promet des économies de carburant, sa fabrication est polluante … Sans une étude scientifique rigoureuse, on ne peut pas savoir si son impact total sur l’environnement est meilleur des cartes en papier.<br></p>"
+                      "diagnosis": "<p><strong>Effectivement !&nbsp;</strong></p><p>Même si ce système optimise et réduit la consommation électrique, il utilise du matériel électronique polluant et des logiciels qui nécessitent beaucoup de calculs, donc de matériel et d’électricité … </p><p>Sans une étude scientifique rigoureuse, on ne peut pas savoir si son impact total sur l’environnement est meilleur des cartes en papier.</p>"
                     }
                   }
                 ],
