@@ -1,6 +1,7 @@
-import { clickByName, render, waitForElementToBeRemoved } from '@1024pix/ember-testing-library';
+import { clickByName, render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click } from '@ember/test-helpers';
+import { waitForElementToBeRemoved } from '@testing-library/dom';
 import { t } from 'ember-intl/test-support';
 import TeamMembersListItem from 'pix-orga/components/team/members-list-item';
 import { module, test } from 'qunit';

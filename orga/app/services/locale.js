@@ -1,11 +1,9 @@
 // This file is a COPY of an original file from mon-pix.
 // If you need a change, as much as possible modify the original file
 // and propagate the changes in the copies in all the fronts
-
 import { getOwner } from '@ember/application';
 import Service, { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
-import dayjs from 'dayjs';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import ENV from 'pix-orga/config/environment';
 
@@ -97,14 +95,18 @@ export default class LocaleService extends Service {
 
     this.intl.setLocale([nearestLocale, language, DEFAULT_LANGUAGE]);
 
+    // dayjsService may not be available for the different front apps
+    const dayjsService = getOwner(this).lookup('service:dayjs');
+    if (dayjsService) {
+      // dayjs supports locale fallback to baseLocale, but dayjsService does not
+      dayjsService.setLocale(language);
+    }
+
     // metricsService may not be available for the different front apps
     const metricsService = getOwner(this).lookup('service:metrics');
     if (metricsService) {
       metricsService.context.locale = nearestLocale;
     }
-
-    // temporary before removing dayjs
-    return import(`dayjs/locale/${language}.js`).then(() => dayjs.locale(language));
   }
 
   setBestLocale({ queryParams }) {

@@ -1,6 +1,7 @@
-import { render, waitForElementToBeRemoved } from '@1024pix/ember-testing-library';
+import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
 import { click, triggerEvent } from '@ember/test-helpers';
+import { waitForElementToBeRemoved } from '@testing-library/dom';
 import { t } from 'ember-intl/test-support';
 import Import from 'pix-orga/components/import/index';
 import ENV from 'pix-orga/config/environment';

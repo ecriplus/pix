@@ -1120,7 +1120,7 @@ jobs:
       - run:
           name: Start Pix Orga
           working_directory: ~/pix/orga
-          command: npx ember serve --path=./dist --proxy=http://localhost:3000
+          command: npx vite preview
           background: true
       - run:
           name: Run tests
@@ -1194,7 +1194,7 @@ jobs:
       - run:
           name: Start Pix Orga
           working_directory: ~/pix/orga
-          command: npx ember serve --path=./dist --proxy=http://localhost:3000
+          command: npx vite preview
           background: true
       - run:
           name: Start Pix App
