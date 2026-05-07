@@ -324,35 +324,15 @@
         {
           "id": "17684cad-e1eb-49b4-a8dc-f575c77c9897",
           "type": "transition",
-          "title": "Transition , suite de la conversation",
+          "title": "Transition",
           "components": [
             {
               "type": "element",
               "element": {
-                "id": "8c4658b0-3daf-40b2-9a62-a3cccb9073a9",
-                "type": "custom",
-                "title": "",
-                "instruction": "",
-                "functionalInstruction": "",
-                "tagName": "message-conversation",
-                "props": {
-                  "conversationTitle": "",
-                  "messages": [
-                    {
-                      "userName": "Martine",
-                      "direction": "incoming",
-                      "type": "Texte",
-                      "content": "Tu vois ! Certes, ce nouveau compteur est un peu plus polluant à fabriquer, mais il va te permettre de réduire ta consommation d’électricité, donc de moins polluer au final."
-                    },
-                    {
-                      "userName": "Paul",
-                      "direction": "outgoing",
-                      "type": "Texte",
-                      "content": "Okay, ce compteur a des effets indirects positifs ... mais peut-être qu’il provoque aussi d’autres effets indirects, plus difficiles à voir, et qui sont négatifs !"
-                    }
-                  ],
-                  "animationSpeed": 0
-                }
+                "id": "758f542b-4d48-42d7-b788-a1e33b150052",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Prenons l’exemple des ordinateurs pour voir quels changements les effets indirects peuvent produire.</p>"
               }
             }
           ]
