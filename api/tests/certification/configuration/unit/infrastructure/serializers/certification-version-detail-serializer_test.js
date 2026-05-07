@@ -30,7 +30,7 @@ describe('Certification | Configuration | Unit | Serializer | certification-vers
           'start-date': new Date('2024-01-01T00:00:00Z'),
           'expiration-date': new Date('2025-12-31T00:00:00Z'),
           'assessment-duration': 105,
-          'minimum-answers-required-to-validate-a-certification': 20,
+          'minimum-answers': 20,
           'maximum-assessment-length': 32,
         },
       });

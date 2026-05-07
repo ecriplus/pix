@@ -54,7 +54,7 @@ describe('Acceptance | Certification | Configuration | API | certification-versi
           'start-date': new Date('2025-01-11'),
           'expiration-date': new Date('2026-01-01'),
           'assessment-duration': 100,
-          'minimum-answers-required-to-validate-a-certification': 20,
+          'minimum-answers': 20,
           'maximum-assessment-length': 32,
         },
         relationships: {
