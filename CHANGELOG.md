@@ -1,5 +1,25 @@
 # Pix Changelog
 
+# [5.404.0](https://github.com/1024pix/pix/compare/v5.403.0...v5.404.0) (2026-05-08)
+
+### :rocket: Amélioration
+
+- [#16145](https://github.com/1024pix/pix/pull/16145) : retrait Stepper notification Antivirus IND 
+- [#16109](https://github.com/1024pix/pix/pull/16109) Ajouter le feature toggle newPixAppLegalDocumentsVersioning (PIX-21742) 
+- [#16126](https://github.com/1024pix/pix/pull/16126) Intégrer des corrections suite aux relectures 
+- [#16142](https://github.com/1024pix/pix/pull/16142) MDX-138 Prompt_ava modif avant relecture PYO 
+- [#16127](https://github.com/1024pix/pix/pull/16127) Remonter la récompense liée à la participation à un parcours combiné (PIX-21721). 
+- [#16152](https://github.com/1024pix/pix/pull/16152) Update NR_Evaluation_AVA.json 
+
+### :building_construction: Tech
+
+- [#16155](https://github.com/1024pix/pix/pull/16155) Ajout de log pour les jobs et workers 
+- [#16108](https://github.com/1024pix/pix/pull/16108) Ajoute une API interne pour récupérer les learners d'un utilisateur (PIX-22576) 
+- [#16107](https://github.com/1024pix/pix/pull/16107) Ajoute une API interne pour récupérer les participations d'un utilisateur (PIX-22575) 
+- [#16144](https://github.com/1024pix/pix/pull/16144) Corrige les traductions nl élèves (PIX-22659) 
+- [#15941](https://github.com/1024pix/pix/pull/15941) Passer pixOrga sous vite (PIX-22391) 
+- [#16138](https://github.com/1024pix/pix/pull/16138) Supprime les scripts pg-boss désormais inutiles.
+
 # [5.403.0](https://github.com/1024pix/pix/compare/v5.402.0...v5.403.0) (2026-05-07)
 
 ### :rocket: Amélioration
