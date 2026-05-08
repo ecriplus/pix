@@ -1,9 +1,19 @@
+import { fileURLToPath } from 'node:url';
+
 import { classicEmberSupport, ember, extensions } from '@embroider/vite';
 import { babel } from '@rollup/plugin-babel';
 import url from 'postcss-url';
 import sassEmbedded, { NodePackageImporter } from 'sass-embedded';
 import { defineConfig } from 'vite';
 export default defineConfig({
+  resolve: {
+    alias: [
+      {
+        find: /^@1024pix\/ember-testing-library$/,
+        replacement: fileURLToPath(import.meta.resolve('@1024pix/ember-testing-library/addon/index.js')),
+      },
+    ],
+  },
   build: {
     sourcemap: true,
   },
@@ -47,6 +57,9 @@ export default defineConfig({
   esbuild: {
     sourcemap: true,
     sourcesContent: true,
+  },
+  optimizeDeps: {
+    exclude: ['ember-exam'],
   },
   test: {
     sourcemap: true,
