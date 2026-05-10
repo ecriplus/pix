@@ -633,7 +633,7 @@
         "retry": "Reintentar",
         "see-more": "Ver el detalle",
         "stages": "{count} { count, plural, =0 {estrellas} =1 {estrella} other {estrellas} } de {total}",
-        "started-at": "Empezado el {fecha}",
+        "started-at": "Empezado el {date}",
         "tag": {
           "deleted": "Eliminado",
           "disabled": "Inactivo",
@@ -649,8 +649,8 @@
       "attestation": "Descargar mi certificado",
       "back-link": "Volver a mis certificaciones",
       "candidate": "Candidato :",
-      "candidate-birth": "Nacido/a el {fecha de nacimiento}",
-      "candidate-birth-complete": "Nacido/a el {fecha de nacimiento} en {lugar de nacimiento}",
+      "candidate-birth": "Nacido/a el {birthdate}",
+      "candidate-birth-complete": "Nacido/a el {birthdate} en {birthplace}",
       "certification-center": "Centro de certificación :",
       "certification-date": "Fecha de examen :",
       "certification-value": {
@@ -980,7 +980,7 @@
       },
       "already-answered": "Ya has respondido a esta pregunta",
       "answer-input": {
-        "numbered-label": "Respuesta {número}"
+        "numbered-label": "Respuesta {number}"
       },
       "certification": {
         "banner": {
