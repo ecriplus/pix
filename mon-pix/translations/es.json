@@ -1874,7 +1874,8 @@
       "signup-form": {
         "button": "Creo una cuenta",
         "description": "Se va a crear una cuenta utilizando la información facilitada por la organización",
-        "error": "No hemos podido recuperar tu información de identificación del servicio utilizado. Te invitamos a que te pongas en contacto con el servicio de asistencia informática de esta organización.": "Nombre: {firstName}",
+        "error": "No hemos podido recuperar tu información de identificación del servicio utilizado. Te invitamos a que te pongas en contacto con el servicio de asistencia informática de esta organización.",
+        "first-name-label-and-value": "Nombre: {firstName}",
         "last-name-label-and-value": "Apellidos: {lastName}",
         "title": "No tengo una cuenta Pix"
       },
