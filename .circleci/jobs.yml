@@ -1209,6 +1209,7 @@ jobs:
             AUTH_SECRET: 'secret'
             LCMS_API_RELEASE_ID: '2360?forCI'
             IS_RUNNING_PLAYWRIGHT: 'true'
+            PIX_ASSETS_MANAGER_URL: 'https://assets.pix.org'
       - run:
           name: Start Pix Orga
           working_directory: ~/pix/orga
@@ -1338,6 +1339,7 @@ jobs:
             LCMS_API_RELEASE_ID: '2360?forCI'
             IS_RUNNING_PLAYWRIGHT: 'true'
             PIX_ADMIN_LOGIN_FROM_PASSWORD_ENABLED: 'true'
+            PIX_ASSETS_MANAGER_URL: 'https://assets.pix.org'
       - run:
           name: Start Pix App
           working_directory: ~/pix/mon-pix
