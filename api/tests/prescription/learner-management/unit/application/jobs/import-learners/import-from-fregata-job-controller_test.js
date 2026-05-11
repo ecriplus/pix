@@ -1,21 +1,21 @@
 import sinon from 'sinon';
 
-import { ImportScoCsvOrganizationLearnersJobController } from '../../../../../../src/prescription/learner-management/application/jobs/import-sco-csv-organization-learners-job-controller.js';
-import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
-import { config } from '../../../../../../src/shared/config.js';
-import { OrganizationLearnersCouldNotBeSavedError } from '../../../../../../src/shared/domain/errors.js';
-import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { expect } from '../../../../../test-helper.js';
-import { catchErr } from '../../../../../tooling/test-utils/error.js';
+import { ImportFromFregataJobController } from '../../../../../../../src/prescription/learner-management/application/jobs/import-learners/import-from-fregata-job-controller.js';
+import { usecases } from '../../../../../../../src/prescription/learner-management/domain/usecases/index.js';
+import { config } from '../../../../../../../src/shared/config.js';
+import { OrganizationLearnersCouldNotBeSavedError } from '../../../../../../../src/shared/domain/errors.js';
+import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
+import { expect } from '../../../../../../test-helper.js';
+import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
-describe('Unit | Prescription | Application | Jobs | importSupOrganizationLearnersJobController', function () {
+describe('Unit | Prescription | Application | Jobs | ImportFromFregataJobController', function () {
   describe('#isJobEnabled', function () {
     it('return true when job is enabled', function () {
       //given
       sinon.stub(config.pgBoss, 'importFileJobEnabled').value(true);
 
       // when
-      const handler = new ImportScoCsvOrganizationLearnersJobController();
+      const handler = new ImportFromFregataJobController();
 
       // then
       expect(handler.isJobEnabled).to.be.true;
@@ -26,7 +26,7 @@ describe('Unit | Prescription | Application | Jobs | importSupOrganizationLearne
       sinon.stub(config.pgBoss, 'importFileJobEnabled').value(false);
 
       //when
-      const handler = new ImportScoCsvOrganizationLearnersJobController();
+      const handler = new ImportFromFregataJobController();
 
       //then
       expect(handler.isJobEnabled).to.be.false;
@@ -38,7 +38,7 @@ describe('Unit | Prescription | Application | Jobs | importSupOrganizationLearne
       sinon.stub(usecases, 'importOrganizationLearnersFromSIECLECSVFormat');
 
       // given
-      const handler = new ImportScoCsvOrganizationLearnersJobController();
+      const handler = new ImportFromFregataJobController();
       const data = { organizationImportId: Symbol('organizationImportId'), locale: 'en', type: 'REPLACE_STUDENT' };
 
       // when
@@ -58,7 +58,7 @@ describe('Unit | Prescription | Application | Jobs | importSupOrganizationLearne
 
       // given
       const errorStub = sinon.stub();
-      const handler = new ImportScoCsvOrganizationLearnersJobController({ logger: { error: errorStub } });
+      const handler = new ImportFromFregataJobController({ logger: { error: errorStub } });
       const data = { organizationImportId: Symbol('organizationImportId'), locale: 'en', type: 'REPLACE_STUDENT' };
 
       // when & then
@@ -72,7 +72,7 @@ describe('Unit | Prescription | Application | Jobs | importSupOrganizationLearne
       sinon.stub(usecases, 'importOrganizationLearnersFromSIECLECSVFormat').rejects(error);
 
       // given
-      const handler = new ImportScoCsvOrganizationLearnersJobController();
+      const handler = new ImportFromFregataJobController();
       const data = { organizationImportId: Symbol('organizationImportId'), locale: 'en', type: 'REPLACE_STUDENT' };
 
       // when

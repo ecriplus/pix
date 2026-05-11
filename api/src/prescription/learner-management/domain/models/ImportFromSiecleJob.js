@@ -1,4 +1,4 @@
-export class ImportOrganizationLearnersJob {
+export class ImportFromSiecleJob {
   constructor({ organizationImportId }) {
     this.organizationImportId = organizationImportId;
   }

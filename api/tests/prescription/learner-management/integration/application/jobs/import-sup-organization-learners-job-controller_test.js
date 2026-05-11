@@ -2,14 +2,14 @@ import { Readable } from 'node:stream';
 
 import sinon from 'sinon';
 
-import { ImportSupOrganizationLearnersJobController } from '../../../../../../src/prescription/learner-management/application/jobs/import-sup-organization-learners-job-controller.js';
+import { ImportFromSupJobController } from '../../../../../../src/prescription/learner-management/application/jobs/import-learners/import-from-sup-job-controller.js';
 import { SupHeader } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/headers/sup-header.js';
 import { importStorage } from '../../../../../../src/prescription/learner-management/infrastructure/storage/import-storage.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { expect } from '../../../../../test-helper.js';
 import { databaseBuilder, knex } from '../../../../../tooling/databases.js';
 
-describe('Integration | Infrastructure | Jobs | ImportSupOrganizationLearnersJobController', function () {
+describe('Integration | Infrastructure | Jobs | ImportFromSupJobController', function () {
   let organizationId, user, organizationImport, i18n;
   const locale = 'fr';
   let beatrixStudentId, orenStudentId;
@@ -50,7 +50,7 @@ O-Ren;;;Ishii;Cottonmouth;01/01/1980;ishii@example.net;${orenStudentId};Assassin
     context('add students', function () {
       it('should add students from file', async function () {
         // given
-        const handler = new ImportSupOrganizationLearnersJobController();
+        const handler = new ImportFromSupJobController();
 
         // when
         await handler.handle({
@@ -73,7 +73,7 @@ O-Ren;;;Ishii;Cottonmouth;01/01/1980;ishii@example.net;${orenStudentId};Assassin
     context('replace students', function () {
       it('should replace students from file', async function () {
         // given
-        const handler = new ImportSupOrganizationLearnersJobController();
+        const handler = new ImportFromSupJobController();
 
         databaseBuilder.factory.buildOrganizationLearner({
           organizationId,
@@ -102,7 +102,7 @@ O-Ren;;;Ishii;Cottonmouth;01/01/1980;ishii@example.net;${orenStudentId};Assassin
 
       it('should delete active learners not present in file', async function () {
         // given
-        const handler = new ImportSupOrganizationLearnersJobController();
+        const handler = new ImportFromSupJobController();
 
         const activeOrganizationLearner = databaseBuilder.factory.buildOrganizationLearner({
           organizationId,

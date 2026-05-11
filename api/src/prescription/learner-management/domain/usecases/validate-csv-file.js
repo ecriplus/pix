@@ -1,6 +1,6 @@
 import { AggregateImportError } from '../errors.js';
-import { ImportScoCsvOrganizationLearnersJob } from '../models/ImportScoCsvOrganizationLearnersJob.js';
-import { ImportSupOrganizationLearnersJob } from '../models/ImportSupOrganizationLearnersJob.js';
+import { ImportFromFregataJob } from '../models/ImportFromFregataJob.js';
+import { ImportFromSupJob } from '../models/ImportFromSupJob.js';
 
 const validateCsvFile = async function ({
   Parser,
@@ -30,14 +30,14 @@ const validateCsvFile = async function ({
     if (type) {
       if (type === 'FREGATA') {
         await importScoCsvOrganizationLearnersJobRepository.performAsync(
-          new ImportScoCsvOrganizationLearnersJob({
+          new ImportFromFregataJob({
             organizationImportId: organizationImport.id,
             locale: i18n.getLocale(),
           }),
         );
       } else {
         await importSupOrganizationLearnersJobRepository.performAsync(
-          new ImportSupOrganizationLearnersJob({
+          new ImportFromSupJob({
             organizationImportId: organizationImport.id,
             type,
             locale: i18n.getLocale(),

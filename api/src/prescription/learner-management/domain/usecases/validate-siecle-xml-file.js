@@ -7,7 +7,7 @@ const { isEmpty } = lodash;
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { SiecleParser } from '../../infrastructure/serializers/xml/siecle-parser.js';
 import { SiecleFileStreamer } from '../../infrastructure/utils/xml/siecle-file-streamer.js';
-import { ImportOrganizationLearnersJob } from '../models/ImportOrganizationLearnersJob.js';
+import { ImportFromSiecleJob } from '../models/ImportFromSiecleJob.js';
 
 const ERRORS = {
   EMPTY: 'EMPTY',
@@ -62,7 +62,7 @@ const validateSiecleXmlFile = async function ({
   });
 
   await importOrganizationLearnersJobRepository.performAsync(
-    new ImportOrganizationLearnersJob({ organizationImportId: organizationImport.id }),
+    new ImportFromSiecleJob({ organizationImportId: organizationImport.id }),
   );
 };
 

@@ -8,7 +8,7 @@ import { ORGANIZATION_FEATURE } from '../../../../../../../src/shared/domain/con
 import { expect } from '../../../../../../test-helper.js';
 import { databaseBuilder, knex } from '../../../../../../tooling/databases.js';
 
-describe('Integration | Infrastructure | Jobs | ImportSupOrganizationLearnersJobController', function () {
+describe('Integration | Infrastructure | Jobs | ImportFromSupJobController', function () {
   let organizationId, user, organizationImport;
 
   beforeEach(async function () {
