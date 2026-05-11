@@ -1,4 +1,6 @@
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import Component from '@glimmer/component';
+import { t } from 'ember-intl';
 import sortBy from 'lodash/sortBy';
 
 import Area from '../../../common/tubes-details/area';
@@ -55,14 +57,19 @@ export default class FrameworkContentDetails extends Component {
   }
 
   <template>
-    {{#each this.areas as |area|}}
-      <Area
-        @title={{area.title}}
-        @color={{area.color}}
-        @competences={{area.competences}}
-        @displayDeviceCompatibility={{true}}
-        @displaySkillDifficultyAvailability={{true}}
-      />
-    {{/each}}
+    <h2 class="certification-version-detail-modal__subtitle">{{t
+        "components.complementary-certifications.item.framework.version-detail-modal.content"
+      }}</h2>
+    <PixBlock class="certification-version-detail-modal__content">
+      {{#each this.areas as |area|}}
+        <Area
+          @title={{area.title}}
+          @color={{area.color}}
+          @competences={{area.competences}}
+          @displayDeviceCompatibility={{true}}
+          @displaySkillDifficultyAvailability={{true}}
+        />
+      {{/each}}
+    </PixBlock>
   </template>
 }

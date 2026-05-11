@@ -97,18 +97,9 @@ export default class CertificationVersionDetailModal extends Component {
           </dl>
         </PixBlock>
 
-        <h2 class="certification-version-detail-modal__subtitle">{{t
-            "components.complementary-certifications.item.framework.version-detail-modal.content"
-          }}</h2>
-        <PixBlock class="certification-version-detail-modal__content">
-          <FrameworkContentDetails @areas={{@version.areas}} />
-        </PixBlock>
-        <h2 class="certification-version-detail-modal__subtitle">{{t
-            "components.complementary-certifications.item.framework.version-detail-modal.comment"
-          }}</h2>
-        <PixBlock class="certification-version-detail-modal__comment">
-          <VersionComment @version={{@version}} />
-        </PixBlock>
+        <FrameworkContentDetails @areas={{@version.areas}} />
+
+        <VersionComment @version={{@version}} />
       </:content>
     </PixModal>
   </template>

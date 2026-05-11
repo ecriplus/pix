@@ -1,3 +1,4 @@
+import PixBlock from '@1024pix/pix-ui/components/pix-block';
 import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
 import { on } from '@ember/modifier';
@@ -25,16 +26,21 @@ export default class VersionComment extends Component {
   }
 
   <template>
-    <PixTextarea
-      id="version-comment"
-      @value={{this.comment}}
-      @maxlength={{MAX_COMMENT_LENGTH}}
-      {{on "input" this.onCommentChange}}
-    />
-    <div class="version-comment__actions">
-      <PixButton @size="small" @variant="secondary" @triggerAction={{this.saveComment}}>
-        {{t "common.actions.save"}}
-      </PixButton>
-    </div>
+    <h2 class="certification-version-detail-modal__subtitle">{{t
+        "components.complementary-certifications.item.framework.version-detail-modal.comment"
+      }}</h2>
+    <PixBlock class="certification-version-detail-modal__comment">
+      <PixTextarea
+        id="version-comment"
+        @value={{this.comment}}
+        @maxlength={{MAX_COMMENT_LENGTH}}
+        {{on "input" this.onCommentChange}}
+      />
+      <div class="version-comment__actions">
+        <PixButton @size="small" @variant="secondary" @triggerAction={{this.saveComment}}>
+          {{t "common.actions.save"}}
+        </PixButton>
+      </div>
+    </PixBlock>
   </template>
 }
