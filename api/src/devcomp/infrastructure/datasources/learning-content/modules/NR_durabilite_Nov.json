@@ -117,35 +117,43 @@
               "element": {
                 "id": "742aed22-b878-4e9f-806e-76e03acfd5b4",
                 "type": "qcu",
-                "instruction": "<p>Vrai ou faux : un smartphone contient, entre autre, du cobalt.</p>",
+                "instruction": "<p>D'après vous, combien de matériaux différents y a-t-il dans un smartphone ?</p>",
                 "hasShortProposals": true,
                 "proposals": [
                   {
                     "id": "0",
-                    "content": "Vrai.",
+                    "content": "Moins de 10",
                     "feedback": {
-                      "state": "<p>Bien vu !</p>",
-                      "diagnosis": "<p>Un smartphone contient bien du cobalt.</p>"
+                      "state": "<p>Eh non !</p>",
+                      "diagnosis": "<p>Il y en a beaucoup plus !&nbsp;Un smartphone contient plusieurs dizaines de matériaux différents.</p>"
                     }
                   },
                   {
                     "id": "1",
-                    "content": "Faux.",
+                    "content": "Plusieurs dizaines",
                     "feedback": {
-                      "state": "<p>Eh non !</p>",
-                      "diagnosis": "<p>Un smartphone contient bien du cobalt.</p>"
+                      "state": "<p>Eh oui&nbsp;!</p>",
+                      "diagnosis": "<p>Un smartphone contient effectivement plusieurs dizaines de matériaux différents.</p>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "Je ne sais pas.",
+                    "content": "Une centaine",
                     "feedback": {
-                      "state": "<p>Cette affirmation est vraie !</p>",
-                      "diagnosis": "<p>Un smartphone contient bien du cobalt.</p>"
+                      "state": "<p>Presque !</p>",
+                      "diagnosis": "<p>Un smartphone contient plusieurs dizaines de matériaux différents.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "Je ne sais pas",
+                    "feedback": {
+                      "state": "<p>Plusieurs dizaines !<br></p>",
+                      "diagnosis": "<p>Un smartphone contient plusieurs dizaines de matériaux différents.</p>"
                     }
                   }
                 ],
-                "solution": "0"
+                "solution": "1"
               }
             }
           ]
