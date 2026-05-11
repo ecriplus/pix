@@ -5,9 +5,11 @@ export default class Training extends Model {
   @attr('string') title;
   @attr('string') link;
   @attr('string') type;
+  // eslint-disable-next-line ember/no-empty-attrs
   @attr() locales;
   @attr('string') editorName;
   @attr('string') editorLogoUrl;
+  // eslint-disable-next-line ember/no-empty-attrs
   @attr() duration;
 
   @belongsTo('campaign-participation', { async: true, inverse: 'trainings' }) campaignParticipation;

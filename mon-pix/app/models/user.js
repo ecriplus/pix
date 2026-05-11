@@ -22,6 +22,7 @@ export default class User extends Model {
   @attr('string') anonymousUserToken;
   @attr('boolean') shouldSeeDataProtectionPolicyInformationBanner;
   @attr('boolean') emailConfirmed;
+  // eslint-disable-next-line ember/no-empty-attrs
   @attr() lastDataProtectionPolicySeenAt;
 
   // includes

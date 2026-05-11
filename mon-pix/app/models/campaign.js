@@ -13,10 +13,12 @@ export default class Campaign extends Model {
   @attr('boolean') isSimplifiedAccess;
   @attr('boolean') isForAbsoluteNovice;
   @attr('boolean') isAccessible;
+  // eslint-disable-next-line ember/no-empty-attrs
   @attr() organizationId;
   @attr('string') organizationName;
   @attr('string') organizationType;
   @attr('string') organizationLogoUrl;
+  // eslint-disable-next-line ember/no-empty-attrs
   @attr() identityProvider;
   @attr('boolean') organizationShowNPS;
   @attr('string') organizationFormNPSUrl;
@@ -29,6 +31,7 @@ export default class Campaign extends Model {
   @attr('boolean') recommendationEngine;
 
   @attr('boolean') isReconciliationRequired;
+  // eslint-disable-next-line ember/no-empty-attrs
   @attr() reconciliationFields;
 
   get isAssessment() {

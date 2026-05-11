@@ -5,6 +5,7 @@ export default class Module extends Model {
   @attr('string') slug;
   @attr('string') title;
   @attr('boolean') isBeta;
+  // eslint-disable-next-line ember/no-empty-attrs
   @attr() details;
   @attr('string') version;
   @attr('string') redirectionUrl;
