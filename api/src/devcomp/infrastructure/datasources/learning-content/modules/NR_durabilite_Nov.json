@@ -194,7 +194,7 @@
                     },
                     {
                       "id": "4fb251cd-751f-43da-b1ba-0b2b2320062f",
-                      "type": "qcu",
+                      "type": "qcu-discovery",
                       "instruction": "<p>Un métal extrait principalement en République Démocratique du Congo, souvent dans de mauvaises conditions de travail, et parfois par des enfants.</p>",
                       "hasShortProposals": true,
                       "proposals": [
@@ -202,31 +202,27 @@
                           "id": "0",
                           "content": "Le fer",
                           "feedback": {
-                            "state": "<p>Eh non !</p>",
-                            "diagnosis": "<p>Il s'agit du <strong>cobalt</strong>.</p>"
+                            "diagnosis": "<p>Eh non ! Il s'agit du <strong>cobalt</strong>.</p>"
                           }
                         },
                         {
                           "id": "1",
                           "content": "Le lithium",
                           "feedback": {
-                            "state": "<p>Eh non !<br></p>",
-                            "diagnosis": "<p>Il s'agit du <strong>cobalt</strong>.</p>"
+                            "diagnosis": "<p>Eh non ! Il s'agit du <strong>cobalt</strong>.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "Le cobalt",
                           "feedback": {
-                            "state": "<p>Bonne réponse !<br></p>",
                             "diagnosis": "<p>Il s'agit effectivement du <strong>cobalt</strong>.</p>"
                           }
                         },
                         {
                           "id": "3",
-                          "content": "L'or",
+                          "content": "Je ne sais pas",
                           "feedback": {
-                            "state": "<p>Eh non !<br></p>",
                             "diagnosis": "<p>Il s'agit du <strong>cobalt</strong>.</p>"
                           }
                         }
@@ -248,7 +244,7 @@
                     },
                     {
                       "id": "2dde8880-120d-4ba9-a6d2-1013874cfb4c",
-                      "type": "qcu",
+                      "type": "qcu-discovery",
                       "instruction": "<p>Un métal très présent dans les batteries, dont l'extraction pollue beaucoup les sols et les eaux à proximité.</p>",
                       "hasShortProposals": true,
                       "proposals": [
@@ -256,7 +252,6 @@
                           "id": "0",
                           "content": "Le lithium",
                           "feedback": {
-                            "state": "<p>Bonne réponse !<br></p>",
                             "diagnosis": "<p>Il s'agit effectivement du <strong>lithium</strong>.<br></p>"
                           }
                         },
@@ -264,23 +259,20 @@
                           "id": "1",
                           "content": "L'aluminium",
                           "feedback": {
-                            "state": "<p>Eh non !</p>",
-                            "diagnosis": "<p>Il s'agit du <strong>lithium</strong>.</p>"
+                            "diagnosis": "<p>Eh non ! Il s'agit du <strong>lithium</strong>.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "L'or",
                           "feedback": {
-                            "state": "<p>Eh non !<br></p>",
-                            "diagnosis": "<p>Il s'agit du <strong>lithium</strong>.</p>"
+                            "diagnosis": "<p>Eh non ! Il s'agit du lithium.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "L'argent",
+                          "content": "Je ne sais pas",
                           "feedback": {
-                            "state": "<p>Eh non !<br></p>",
                             "diagnosis": "<p>Il s'agit du <strong>lithium</strong>.</p>"
                           }
                         }
@@ -302,7 +294,7 @@
                     },
                     {
                       "id": "45948196-92cf-4ffd-a2c8-a6a228b4cd34",
-                      "type": "qcu",
+                      "type": "qcu-declarative",
                       "instruction": "<p>Un métal précieux, utilisé pour ses capacités à conduire l'électricité.</p>",
                       "hasShortProposals": true,
                       "proposals": [
@@ -310,36 +302,31 @@
                           "id": "0",
                           "content": "Le cobalt",
                           "feedback": {
-                            "state": "<p>Eh non !<br></p>",
-                            "diagnosis": "<p>Il s'agit de l'<strong>or</strong> ou de l'<strong>argent</strong>.</p>"
+                            "diagnosis": "<p>Eh non ! Il s'agit de l'<strong>or</strong> ou de l'<strong>argent</strong>.</p>"
                           }
                         },
                         {
                           "id": "1",
-                          "content": "L'aluminium",
+                          "content": "L'or ou l'argent",
                           "feedback": {
-                            "state": "<p>Eh non !<br></p>",
-                            "diagnosis": "<p>Il s'agit de l'<strong>or</strong> ou de l'<strong>argent</strong>.</p>"
+                            "diagnosis": "<p>Il s'agit effectivement de l'or ou de l'argent.</p>"
                           }
                         },
                         {
                           "id": "2",
                           "content": "Le cobalt",
                           "feedback": {
-                            "state": "<p>Eh non !<br></p>",
-                            "diagnosis": "<p>Il s'agit de l'<strong>or</strong> ou de l'<strong>argent</strong>.</p>"
+                            "diagnosis": "<p>Eh non ! Il s'agit de l'or ou de l'argent.</p>"
                           }
                         },
                         {
                           "id": "3",
-                          "content": "L'or ou l'argent",
+                          "content": "Je ne sais pas",
                           "feedback": {
-                            "state": "<p>Bonne réponse !<br></p>",
-                            "diagnosis": "<p>Il s'agit effectivement de l'<strong>or</strong> ou de l'<strong>argent</strong>.</p>"
+                            "diagnosis": "<p>Il s'agit  de l'<strong>or</strong> ou de l'<strong>argent</strong>.</p>"
                           }
                         }
-                      ],
-                      "solution": "3"
+                      ]
                     }
                   ]
                 }
