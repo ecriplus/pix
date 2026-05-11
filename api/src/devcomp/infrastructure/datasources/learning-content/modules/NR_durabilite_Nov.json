@@ -389,7 +389,7 @@
               "element": {
                 "id": "5fc90905-6385-40f4-880f-5c836fd721bb",
                 "type": "custom",
-                "title": "Carrousel voyage des matériaux",
+                "title": "Parcourez les différentes étapes de fabrication d'un smartphone.",
                 "instruction": "",
                 "functionalInstruction": "",
                 "tagName": "pix-carousel",
