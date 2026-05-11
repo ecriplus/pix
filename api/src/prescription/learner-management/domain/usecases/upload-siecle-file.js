@@ -5,7 +5,7 @@ import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import { detectEncoding } from '../../infrastructure/utils/xml/detect-encoding.js';
 import * as zip from '../../infrastructure/utils/xml/zip.js';
 import { OrganizationImportStatus } from '../models/OrganizationImportStatus.js';
-import { ValidateOrganizationImportFileJob } from '../models/ValidateOrganizationImportFileJob.js';
+import { ValidateSiecleFileJob } from '../models/ValidateSiecleFileJob.js';
 
 const uploadSiecleFile = async function ({
   userId,
@@ -53,7 +53,7 @@ const uploadSiecleFile = async function ({
   });
 
   await validateOrganizationImportFileJobRepository.performAsync(
-    new ValidateOrganizationImportFileJob({ organizationImportId: organizationImport.id }),
+    new ValidateSiecleFileJob({ organizationImportId: organizationImport.id }),
   );
 };
 

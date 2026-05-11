@@ -1,20 +1,20 @@
 import sinon from 'sinon';
 
-import { ValidateOrganizationLearnersImportFileJobController } from '../../../../../../src/prescription/learner-management/application/jobs/validate-organization-learners-import-file-job-controller.js';
-import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
-import { S3FileDoesNotExistError } from '../../../../../../src/prescription/learner-management/infrastructure/storage/import-storage.js';
-import { config } from '../../../../../../src/shared/config.js';
-import { expect } from '../../../../../test-helper.js';
-import { catchErr } from '../../../../../tooling/test-utils/error.js';
+import { ValidateSiecleFileJobController } from '../../../../../../../src/prescription/learner-management/application/jobs/validate-learners-file/validate-siecle-file-job-controller.js';
+import { usecases } from '../../../../../../../src/prescription/learner-management/domain/usecases/index.js';
+import { S3FileDoesNotExistError } from '../../../../../../../src/prescription/learner-management/infrastructure/storage/import-storage.js';
+import { config } from '../../../../../../../src/shared/config.js';
+import { expect } from '../../../../../../test-helper.js';
+import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
-describe('Unit | Prescription | Application | Jobs | validateOrganizationLearnersImportFileJobController', function () {
+describe('Unit | Prescription | Application | Jobs | ValidateSiecleFileJobController', function () {
   describe('#isJobEnabled', function () {
     it('return true when job is enabled', function () {
       //given
       sinon.stub(config.pgBoss, 'validationFileJobEnabled').value(true);
 
       // when
-      const handler = new ValidateOrganizationLearnersImportFileJobController();
+      const handler = new ValidateSiecleFileJobController();
 
       // then
       expect(handler.isJobEnabled).to.be.true;
@@ -25,7 +25,7 @@ describe('Unit | Prescription | Application | Jobs | validateOrganizationLearner
       sinon.stub(config.pgBoss, 'validationFileJobEnabled').value(false);
 
       //when
-      const handler = new ValidateOrganizationLearnersImportFileJobController();
+      const handler = new ValidateSiecleFileJobController();
 
       //then
       expect(handler.isJobEnabled).to.be.false;
@@ -36,15 +36,16 @@ describe('Unit | Prescription | Application | Jobs | validateOrganizationLearner
     it('should call usecase', async function () {
       sinon.stub(usecases, 'validateSiecleXmlFile');
       // given
-      const handler = new ValidateOrganizationLearnersImportFileJobController();
+      const handler = new ValidateSiecleFileJobController();
       const data = { organizationImportId: Symbol('organizationImportId') };
 
       // when
       await handler.handle({ data });
 
       // then
-      expect(usecases.validateSiecleXmlFile).to.have.been.calledOnce;
-      expect(usecases.validateSiecleXmlFile).to.have.been.calledWithExactly(data);
+      expect(usecases.validateSiecleXmlFile).to.have.been.calledOnceWithExactly({
+        organizationImportId: data.organizationImportId,
+      });
     });
 
     it('should not throw when error is from domain', async function () {
@@ -53,7 +54,7 @@ describe('Unit | Prescription | Application | Jobs | validateOrganizationLearner
 
       // given
       const warnStub = sinon.stub();
-      const handler = new ValidateOrganizationLearnersImportFileJobController({ logger: { warn: warnStub } });
+      const handler = new ValidateSiecleFileJobController({ logger: { warn: warnStub } });
       const data = { organizationImportId: Symbol('organizationImportId') };
 
       // when
@@ -68,7 +69,7 @@ describe('Unit | Prescription | Application | Jobs | validateOrganizationLearner
       sinon.stub(usecases, 'validateSiecleXmlFile').rejects(error);
 
       // given
-      const handler = new ValidateOrganizationLearnersImportFileJobController();
+      const handler = new ValidateSiecleFileJobController();
       const data = { organizationImportId: Symbol('organizationImportId') };
 
       // when

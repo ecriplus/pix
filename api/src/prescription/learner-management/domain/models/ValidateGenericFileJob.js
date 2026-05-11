@@ -1,4 +1,4 @@
-export class ValidateCommonOrganizationImportFileJob {
+export class ValidateGenericFileJob {
   constructor({ organizationImportId }) {
     this.organizationImportId = organizationImportId;
   }

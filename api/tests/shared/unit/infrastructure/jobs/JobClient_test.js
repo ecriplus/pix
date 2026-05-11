@@ -1,7 +1,7 @@
 import sinon from 'sinon';
 
 import { ScheduleComputeOrganizationLearnersCertificabilityJobController } from '../../../../../src/prescription/learner-management/application/jobs/schedule-compute-organization-learners-certificability-job-controller.js';
-import { ValidateOrganizationImportFileJob } from '../../../../../src/prescription/learner-management/domain/models/ValidateOrganizationImportFileJob.js';
+import { ValidateSiecleFileJob } from '../../../../../src/prescription/learner-management/domain/models/ValidateSiecleFileJob.js';
 import { AuditLoggingJobController } from '../../../../../src/shared/application/jobs/audit-logging.job-controller.js';
 import { JobGroup } from '../../../../../src/shared/application/jobs/job-controller.js';
 import { config } from '../../../../../src/shared/config.js';
@@ -84,7 +84,7 @@ describe('Unit | JobClient', function () {
       expect(pgBossStub.work).to.have.been.calledWith('legacyNameForAuditLoggingJobController');
     });
 
-    it('should register ValidateOrganizationImportFileJob when job is enabled', async function () {
+    it('should register ValidateSiecleFileJob when job is enabled', async function () {
       //given
       const pgBossStub = new FakePgBoss();
       sinon.stub(pgBossStub, 'work');
@@ -101,10 +101,10 @@ describe('Unit | JobClient', function () {
       );
 
       // then
-      expect(pgBossStub.work).to.have.been.calledWith(ValidateOrganizationImportFileJob.name);
+      expect(pgBossStub.work).to.have.been.calledWith(ValidateSiecleFileJob.name);
     });
 
-    it('should not register ValidateOrganizationImportFileJob when job is disabled', async function () {
+    it('should not register ValidateSiecleFileJob when job is disabled', async function () {
       //given
       const pgBossStub = new FakePgBoss();
       sinon.stub(pgBossStub, 'work');
@@ -121,7 +121,7 @@ describe('Unit | JobClient', function () {
       );
 
       // then
-      expect(pgBossStub.work).to.not.have.been.calledWith(ValidateOrganizationImportFileJob.name);
+      expect(pgBossStub.work).to.not.have.been.calledWith(ValidateSiecleFileJob.name);
     });
 
     describe('cron Job', function () {

@@ -4,7 +4,7 @@ import { GenericParser } from '../../../infrastructure/serializers/csv/parsers/g
 import { getDataBuffer } from '../../../infrastructure/utils/bufferize/get-data-buffer.js';
 import { AggregateImportError, OrganizationLearnerImportFormatNotFoundError } from '../../errors.js';
 import { OrganizationImportStatus } from '../../models/OrganizationImportStatus.js';
-import { ValidateCommonOrganizationImportFileJob } from '../../models/ValidateCommonOrganizationImportFileJob.js';
+import { ValidateGenericFileJob } from '../../models/ValidateGenericFileJob.js';
 
 const sendOrganizationLearnersFile = async function ({
   payload,
@@ -43,7 +43,7 @@ const sendOrganizationLearnersFile = async function ({
 
     filename = await importStorage.sendFile({ filepath: payload.path });
     await validateCommonOrganizationImportFileJobRepository.performAsync(
-      new ValidateCommonOrganizationImportFileJob({ organizationImportId: organizationImport.id }),
+      new ValidateGenericFileJob({ organizationImportId: organizationImport.id }),
     );
   } catch (error) {
     if (Array.isArray(error)) {
