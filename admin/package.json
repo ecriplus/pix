@@ -113,7 +113,8 @@
     "xss": "^1.0.15"
   },
   "overrides": {
-    "flatted": ">=3.4.2"
+    "flatted": ">=3.4.2",
+    "@xmldom/xmldom": ">=0.8.13"
   },
   "exports": {
     "./tests/*": "./tests/*",

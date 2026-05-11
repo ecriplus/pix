@@ -68,7 +68,7 @@
     "dayjs": "^1.11.13",
     "decorator-transforms": "^2.3.1",
     "ember-auto-import": "^2.12.1",
-    "ember-cli": "^6.11.0",
+    "ember-cli": "^6.12.0",
     "ember-cli-babel": "^8.3.1",
     "ember-cli-htmlbars": "^7.0.0",
     "ember-click-outside": "^6.1.1",
@@ -121,7 +121,8 @@
       "ember-source": "$ember-source"
     },
     "flatted": ">=3.4.2",
-    "handlebars": ">=4.7.9"
+    "handlebars": ">=4.7.9",
+    "@xmldom/xmldom": ">=0.8.13"
   },
   "engines": {
     "node": "^24.15.0"

@@ -46,7 +46,8 @@
       "ember-source": "$ember-source"
     },
     "handlebars": ">=4.7.9",
-    "flatted": ">=3.4.2"
+    "flatted": ">=3.4.2",
+    "@xmldom/xmldom": ">=0.8.13"
   },
   "devDependencies": {
     "@1024pix/ember-api-actions": "^1.1.0",

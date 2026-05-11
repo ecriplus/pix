@@ -137,7 +137,8 @@
       "ember-source": "$ember-source"
     },
     "handlebars": ">=4.7.9",
-    "flatted": ">=3.4.2"
+    "flatted": ">=3.4.2",
+    "@xmldom/xmldom": ">=0.8.13"
   },
   "engines": {
     "node": "^24.15.0"
