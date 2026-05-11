@@ -85,19 +85,16 @@ module('Unit | Model | v3-certification-course-details-for-administration', func
       {
         assessmentState: 'completed',
         lastAnswerAt: new Date('2023-01-13T08:05:00Z'),
-        endedAt: null,
       },
       {
         assessmentState: 'endedByInvigilator',
-        endedAt: new Date('2023-01-13T08:05:00Z'),
         lastAnswerAt: new Date('2023-01-13T08:05:00Z'),
       },
       {
         assessmentState: 'endedDueToFinalization',
-        endedAt: new Date('2023-01-13T08:05:00Z'),
         lastAnswerAt: new Date('2023-01-13T08:05:00Z'),
       },
-    ].forEach(({ assessmentState, endedAt, lastAnswerAt }) => {
+    ].forEach(({ assessmentState, lastAnswerAt }) => {
       module(`when session is ${assessmentState}`, function () {
         test('it should return the duration based on completion time', function (assert) {
           // given
@@ -107,7 +104,6 @@ module('Unit | Model | v3-certification-course-details-for-administration', func
             {
               assessmentState,
               createdAt: new Date('2023-01-13T08:00:00Z'),
-              endedAt,
               lastAnswerAt,
             },
           );
