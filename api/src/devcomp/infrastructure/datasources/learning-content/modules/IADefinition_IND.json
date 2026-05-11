@@ -948,7 +948,7 @@
                       "id": "a041b7dc-9566-4bee-aaf4-106de9a98662",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>L’apprentissage supervisé ne sert pas uniquement à reconnaître des images.</p><p> Par exemple, les logiciels d<strong>’IA générative</strong> peuvent aussi être entraînés à produire du texte selon un <strong>principe similaire</strong>&nbsp;: </p><ul>    <li>Il faut leur <strong>fournit des textes</strong> dans lesquels certains mots sont volontairement masqués. 🙈 </li>    <li>Chaque <strong>mot manquant</strong> est alors considéré comme une <strong>étiquette.&nbsp;</strong>🏷️ </li>    <li>En étudiant les caractéristiques des textes, le logiciel d’IA apprend à prédire le mot manquant. 📃</li></ul><p>C’est ainsi que les logiciels d’IA acquièrent la capacité de générer du texte.</p>"
+                      "content": "<p>L’apprentissage supervisé ne sert pas uniquement à reconnaître des images.</p><p> Par exemple, les logiciels d<strong>’IA générative</strong> peuvent aussi être entraînés à produire du texte selon un <strong>principe similaire</strong>&nbsp;: </p><ul>    <li>Il faut leur <strong>fournir des textes</strong> dans lesquels certains mots sont volontairement masqués. 🙈 </li>    <li>Chaque <strong>mot manquant</strong> est alors considéré comme une <strong>étiquette.&nbsp;</strong>🏷️ </li>    <li>En étudiant les caractéristiques des textes, le logiciel d’IA apprend à prédire le mot manquant. 📃</li></ul><p>C’est ainsi que les logiciels d’IA acquièrent la capacité de générer du texte.</p>"
                     }
                   ]
                 },
@@ -1165,7 +1165,7 @@
                     "content": "<p>le jeu de données n°2</p>",
                     "feedback": {
                       "state": "<p>Et non !<br></p>",
-                      "diagnosis": "<p>Les photographies de ce jeu de données ne sont pas suffisament variées. Pour entraîner correctement un logiciel de reconnaissance d’image, il faut donner des exemples très variés afin qu’il aprenne à généraliser.</p>"
+                      "diagnosis": "<p>Les photographies de ce jeu de données ne sont pas suffisament variées. Pour entraîner correctement un logiciel de reconnaissance d’image, il faut donner des exemples très variés afin qu’il apprenne à généraliser.</p>"
                     }
                   },
                   {
