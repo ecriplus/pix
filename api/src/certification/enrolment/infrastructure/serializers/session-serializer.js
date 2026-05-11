@@ -4,7 +4,7 @@ import { SessionEnrolment } from '../../domain/models/SessionEnrolment.js';
 
 const { Serializer } = jsonapiSerializer;
 
-const serialize = function (session) {
+export function serialize(session) {
   return new Serializer('session-enrolment', {
     transform: function (session) {
       return { ...session, status: session.status, invigilatorPassword: session.invigilatorPassword };
@@ -32,9 +32,9 @@ const serialize = function (session) {
       },
     },
   }).serialize(session);
-};
+}
 
-const deserialize = function (json) {
+export function deserialize(json) {
   const attributes = json.data.attributes;
 
   return new SessionEnrolment({
@@ -48,6 +48,4 @@ const deserialize = function (json) {
     status: attributes.status,
     description: attributes.description,
   });
-};
-
-export { deserialize, serialize };
+}

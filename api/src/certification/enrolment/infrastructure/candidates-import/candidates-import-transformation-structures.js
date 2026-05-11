@@ -1,4 +1,5 @@
 import { convertDateValue } from '../../../../shared/infrastructure/utils/date-utils.js';
+import isEmpty from '../../../../shared/infrastructure/utils/is-empty.js';
 
 // These are transformation structures. They provide all the necessary info
 // on how to transform cell values in an attendance sheet into a target JS object.
@@ -112,14 +113,10 @@ function _includeBillingColumns({ transformationStruct, translate }) {
   });
 }
 
-function _isEmpty(obj) {
-  return [Object, Array].includes((obj || {}).constructor) && !Object.entries(obj || {}).length;
-}
-
 function _toNotEmptyTrimmedStringOrNull(val) {
   const value = String(val ?? '');
   const trimmedValue = value.trim();
-  return _isEmpty(trimmedValue) ? null : trimmedValue;
+  return isEmpty(trimmedValue) ? null : trimmedValue;
 }
 
 function _toNonZeroValueOrNull(val) {

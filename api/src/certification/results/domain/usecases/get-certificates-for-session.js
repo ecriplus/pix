@@ -1,4 +1,5 @@
 import { NotFoundError } from '../../../../shared/domain/errors.js';
+import isEmpty from '../../../../shared/infrastructure/utils/is-empty.js';
 import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
 
 export async function getCertificatesForSession({
@@ -34,5 +35,3 @@ export async function getCertificatesForSession({
 
   return certificates;
 }
-
-const isEmpty = (obj) => [Object, Array].includes((obj || {}).constructor) && !Object.entries(obj || {}).length;

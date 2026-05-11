@@ -8,6 +8,7 @@ import * as url from 'node:url';
 
 import _ from 'lodash';
 
+import isEmpty from '../../../../shared/infrastructure/utils/is-empty.js';
 import { CertificationCandidate } from '../../../shared/domain/models/CertificationCandidate.js';
 import * as readOdsUtils from '../utils/ods/read-ods-utils.js';
 import { OdsUtilsBuilder } from '../utils/ods/write-ods-utils.js';
@@ -128,7 +129,7 @@ function _addColumns({ odsBuilder, certificationCenterHabilitations, isScoCertif
 }
 
 function _addComplementaryCertificationColumns({ odsBuilder, certificationCenterHabilitations, translate }) {
-  if (!_.isEmpty(certificationCenterHabilitations)) {
+  if (!isEmpty(certificationCenterHabilitations)) {
     const habilitationColumns = certificationCenterHabilitations.map(({ key, label }) => ({
       headerLabel: [label, translate('candidate-list-template.yes-or-empty')],
       placeholder: [key],

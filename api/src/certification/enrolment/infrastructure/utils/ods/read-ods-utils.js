@@ -1,6 +1,7 @@
 import XLSX from 'xlsx';
 
 import { UnprocessableEntityError } from '../../../../../shared/application/http-errors.js';
+import isEmpty from '../../../../../shared/infrastructure/utils/is-empty.js';
 import { loadOdsZip } from './common-ods-utils.js';
 
 const CONTENT_XML_IN_ODS = 'content.xml';
@@ -118,5 +119,3 @@ function _transformSheetDataRow(sheetDataRow, sheetHeaderPropertyMap) {
     return target;
   }, {});
 }
-
-const isEmpty = (obj) => [Object, Array].includes((obj || {}).constructor) && !Object.entries(obj || {}).length;

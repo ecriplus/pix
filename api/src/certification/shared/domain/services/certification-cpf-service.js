@@ -1,14 +1,13 @@
+import isEmpty from '../../../../shared/infrastructure/utils/is-empty.js';
 import { normalizeAndSortChars } from '../../../../shared/infrastructure/utils/string-utils.js';
 import { CERTIFICATION_CANDIDATES_ERRORS } from '../constants/certification-candidates-errors.js';
 
-const isEmpty = (obj) => [Object, Array].includes((obj || {}).constructor) && !Object.entries(obj || {}).length;
-
-const CpfValidationStatus = {
+export const CpfValidationStatus = {
   FAILURE: 'FAILURE',
   SUCCESS: 'SUCCESS',
 };
 
-class CpfBirthInformationValidation {
+export class CpfBirthInformationValidation {
   constructor({ birthCountry, birthINSEECode, birthPostalCode, birthCity, errors = [] } = { errors: [] }) {
     this.birthCountry = birthCountry;
     this.birthINSEECode = birthINSEECode;
@@ -142,7 +141,7 @@ async function _getBirthInformationByPostalCode({
   }
 }
 
-async function getBirthInformation({
+export async function getBirthInformation({
   birthCountry,
   birthCity,
   birthPostalCode,
@@ -247,5 +246,3 @@ function _getActualCity(cities) {
   const actualCity = cities.find((city) => city.isActualName);
   return actualCity.name;
 }
-
-export { CpfBirthInformationValidation, CpfValidationStatus, getBirthInformation };

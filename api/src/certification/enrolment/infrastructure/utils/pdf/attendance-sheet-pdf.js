@@ -8,6 +8,7 @@ import { PDFDocument, rgb } from 'pdf-lib';
 dayjs.extend(localizedFormat);
 
 import { ENGLISH_SPOKEN, FRENCH_SPOKEN } from '../../../../../shared/domain/services/locale-service.js';
+import chunk from '../../../../../shared/infrastructure/utils/chunk.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -413,10 +414,4 @@ function _getSessionStartTimeFormat({ lang }) {
     return 'HH:mm';
   }
   return 'LT';
-}
-
-function chunk(input, size) {
-  return input.reduce((arr, item, idx) => {
-    return idx % size === 0 ? [...arr, [item]] : [...arr.slice(0, -1), [...arr.slice(-1)[0], item]];
-  }, []);
 }
