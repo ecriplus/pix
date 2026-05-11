@@ -1,5 +1,26 @@
 # Pix Changelog
 
+# [5.405.0](https://github.com/1024pix/pix/compare/v5.404.0...v5.405.0) (2026-05-11)
+
+### :rocket: Amélioration
+
+- [#16071](https://github.com/1024pix/pix/pull/16071) Ajouter les filtres nom, domaines, compétences (pix-22347)  
+
+### :building_construction: Tech
+
+- [#16137](https://github.com/1024pix/pix/pull/16137) :package: mise à jour de la bibiliothèque `xmldom` 
+- [#16124](https://github.com/1024pix/pix/pull/16124) Ajoute une API interne pour récupérer les informations des learners à partir d'une liste d'ids (PIX-22586) 
+- [#16158](https://github.com/1024pix/pix/pull/16158) Corrige la configuration des tests ember sur orga 
+- [#16157](https://github.com/1024pix/pix/pull/16157) Corriger la lenteur des tests unitaires 
+
+### :arrow_up: Montée de version
+
+- [#16149](https://github.com/1024pix/pix/pull/16149) Update dependency @rollup/plugin-babel to v7 (orga) 
+- [#16161](https://github.com/1024pix/pix/pull/16161) Update dependency axios to v1.16.0 (api) 
+- [#16150](https://github.com/1024pix/pix/pull/16150) Update dependency babel-plugin-ember-template-compilation to v4 (orga) 
+- [#16162](https://github.com/1024pix/pix/pull/16162) Update dependency vite to v8 (orga) 
+- [#16159](https://github.com/1024pix/pix/pull/16159) Update slackapi/slack-github-action action to v3.0.3 (workflows)
+
 # [5.404.0](https://github.com/1024pix/pix/compare/v5.403.0...v5.404.0) (2026-05-08)
 
 ### :rocket: Amélioration
