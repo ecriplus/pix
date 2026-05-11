@@ -1016,6 +1016,29 @@
         "tubes-count": "{count, plural, =0 {Aucun sujet} =1 {{count} sujet} other {{count} sujets}}"
       },
       "empty-state": "Aucun parcours disponible pour l'instant. Contactez Pix pour en obtenir.",
+      "filters": {
+        "areas": {
+          "empty": "Aucun domaine",
+          "label": "Domaines",
+          "placeholder": "{count, plural, =0 {Domaines} =1 {Domaine ({count})} other {Domaines ({count})}}"
+        },
+        "aria-label": "Filtres sur les parcours",
+        "categories": {
+          "all": "Toutes les catégories",
+          "empty": "Aucune catégorie",
+          "label": "Catégories"
+        },
+        "competences": {
+          "empty": "Aucune compétence",
+          "label": "Compétences",
+          "placeholder": "{count, plural, =0 {Compétences} =1 {Compétence ({count})} other {Compétences ({count})}}"
+        },
+        "name": {
+          "label": "Nom du parcours",
+          "placeholder": "Rechercher par titre"
+        },
+        "nb-result": "{count, plural, =0 {Aucun parcours} =1 {{count} parcours} other {{count} parcours}}"
+      },
       "tab-filters": {
         "all": "Tous",
         "blueprints": "Parcours apprenants",

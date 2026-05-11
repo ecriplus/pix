@@ -9,6 +9,7 @@ module('Integration | Template | authenticated/catalogue/list', function (hooks)
 
   test('it renders template', async function (assert) {
     // given
+    const controller = { updateFilter: () => {}, resetFilters: () => {} };
     const model = {
       courses: [
         {
@@ -18,7 +19,7 @@ module('Integration | Template | authenticated/catalogue/list', function (hooks)
       type: 'all',
     };
     // when
-    const screen = await render(<template><List @model={{model}} /></template>);
+    const screen = await render(<template><List @controller={{controller}} @model={{model}} /></template>);
 
     // then
     assert.ok(screen.getByText('Combinix'));

@@ -1018,6 +1018,29 @@
         "tubes-count": "{count, plural, =0 {Kein Thema} =1 {{count} thema} other {{count} themen}}"
       },
       "empty-state": "Derzeit sind keine Kurse verfügbar. Kontaktieren Sie Pix, um welche zu erhalten.",
+      "filters": {
+        "areas": {
+          "empty": "Kein Bereich",
+          "label": "Bereiche",
+          "placeholder": "{count, plural, =0 {Bereiche} =1 {Bereich ({count})} other {Bereiche ({count})}}"
+        },
+        "aria-label": "Filter nach Kursen",
+        "categories": {
+          "all": "Alle Kategorien",
+          "empty": "Keine Kategorie",
+          "label": "Kategorien"
+        },
+        "competences": {
+          "empty": "Keine Kompetenz",
+          "label": "Kompetenzen",
+          "placeholder": "{count, plural, =0 {Kompetenzen} =1 {Kompetenz ({count})} other {Kompetenzen ({count})}}"
+        },
+        "name": {
+          "label": "Name des Kurses",
+          "placeholder": "Nach Titel suchen"
+        },
+        "nb-result": "{count, plural, =0 {Kein Kurs} =1 {{count} Kurs} other {{count} Kurse}}"
+      },
       "tab-filters": {
         "all": "Alle",
         "blueprints": "Lernpfade",

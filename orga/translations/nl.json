@@ -1015,6 +1015,29 @@
         "tubes-count": "{count, plural, =0 {Geen onderwerp} =1 {{count} onderwerp} other {{count} onderwerpen}}"
       },
       "empty-state": "Er zijn momenteel geen traject beschikbaar. Neem contact op met Pix om er enkele te verkrijgen.",
+      "filters": {
+        "areas": {
+          "empty": "Geen domein",
+          "label": "Domeinen",
+          "placeholder": "{count, plural, =0 {Domeinen} =1 {Domein ({count})} other {Domeinen ({count})}}"
+        },
+        "aria-label": "Filters op trajecten",
+        "categories": {
+          "all": "Alle categorieën",
+          "empty": "Geen categorie",
+          "label": "Categorieën"
+        },
+        "competences": {
+          "empty": "Geen competentie",
+          "label": "Competenties",
+          "placeholder": "{count, plural, =0 {Competenties} =1 {Competentie ({count})} other {Competenties ({count})}}"
+        },
+        "name": {
+          "label": "Naam van het traject",
+          "placeholder": "Zoeken op titel"
+        },
+        "nb-result": "{count, plural, =0 {Geen traject} =1 {{count} traject} other {{count} trajecten}}"
+      },
       "tab-filters": {
         "all": "Alle",
         "blueprints": "Leertrajecten",
