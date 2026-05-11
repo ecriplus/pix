@@ -4,7 +4,9 @@ import * as certificationVersionDetailSerializer from '../infrastructure/seriali
 const getVersionById = async function (request) {
   const certificationVersionId = request.params.certificationVersionId;
 
-  const certificationVersion = await usecases.getVersionById({ id: certificationVersionId });
+  const certificationVersion = await usecases.getVersionById({
+    id: certificationVersionId,
+  });
 
   return certificationVersionDetailSerializer.serialize(certificationVersion);
 };

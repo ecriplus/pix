@@ -34,6 +34,8 @@ describe('Acceptance | Certification | Configuration | API | certification-versi
         },
       });
 
+      databaseBuilder.factory.buildCertificationFrameworksChallenge({ versionId: version.id });
+
       await databaseBuilder.commit();
 
       const options = {
