@@ -480,64 +480,54 @@
               "type": "element",
               "element": {
                 "id": "7d6a59d1-65e5-47b2-ad28-efc2a8d63d71",
-                "type": "custom",
-                "title": "",
-                "instruction": "<p>Combien de tours du monde ont parcouru les éléments d'un smartphone entre sa conception et sa distribution ?</p>",
-                "functionalInstruction": "",
-                "tagName": "pix-cursor",
-                "props": {
-                  "options": [
-                    {
-                      "label": "0",
-                      "feedback": {
-                        "type": "bad",
-                        "text": "Eh non !  On estime que les éléments d'un smartphone ont parcouru environ 4 fois le tour de la Terre entre sa conception et sa distribution!"
-                      }
-                    },
-                    {
-                      "label": "1",
-                      "feedback": {
-                        "type": "bad",
-                        "text": "Eh non !  On estime que les éléments d'un smartphone ont parcouru environ 4 fois le tour de la Terre entre sa conception et sa distribution!"
-                      }
-                    },
-                    {
-                      "label": "2",
-                      "feedback": {
-                        "type": "bad",
-                        "text": "Eh non !  On estime que les éléments d'un smartphone ont parcouru environ 4 fois le tour de la Terre entre sa conception et sa distribution!"
-                      }
-                    },
-                    {
-                      "label": "3",
-                      "feedback": {
-                        "type": "close",
-                        "text": "Presque !  On estime que les éléments d'un smartphone ont parcouru environ 4 fois le tour de la Terre entre sa conception et sa distribution!"
-                      }
-                    },
-                    {
-                      "label": "4",
-                      "feedback": {
-                        "type": "good",
-                        "text": "Exactement ! On estime qu’on doit faire environ 4 fois le tour de la Terre pour fabriquer un seul smartphone ! "
-                      }
-                    },
-                    {
-                      "label": "5",
-                      "feedback": {
-                        "type": "close",
-                        "text": "Presque ! On estime qu’on doit faire environ 4 fois le tour de la Terre pour fabriquer un seul smartphone ! "
-                      }
-                    },
-                    {
-                      "label": "6",
-                      "feedback": {
-                        "type": "bad",
-                        "text": "Eh non ! On estime qu’on doit faire environ 4 fois le tour de la Terre pour fabriquer un seul smartphone ! "
-                      }
+                "type": "qcu-discovery",
+                "instruction": "<p>D'après vous, combien de tours du monde ont parcouru les éléments d'un smartphone entre sa conception et sa distribution ?</p>",
+                "hasShortProposals": true,
+                "proposals": [
+                  {
+                    "id": "0",
+                    "content": "1",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non ! On estime que les éléments d'un smartphone ont parcouru environ 4 fois le tour de la Terre entre sa conception et sa distribution !</p>"
                     }
-                  ]
-                }
+                  },
+                  {
+                    "id": "1",
+                    "content": "2",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non ! On estime que les éléments d'un smartphone ont parcouru environ 4 fois le tour de la Terre entre sa conception et sa distribution !</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "3",
+                    "feedback": {
+                      "diagnosis": "<p>Presque ! On estime que les éléments d'un smartphone ont parcouru environ 4 fois le tour de la Terre entre sa conception et sa distribution !</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "4",
+                    "feedback": {
+                      "diagnosis": "<p>Exact ! On estime que les éléments d'un smartphone ont parcouru environ 4 fois le tour de la Terre entre sa conception et sa distribution !</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "5",
+                    "feedback": {
+                      "diagnosis": "<p>Presque ! On estime que les éléments d'un smartphone ont parcouru environ 4 fois le tour de la Terre entre sa conception et sa distribution !</p>"
+                    }
+                  },
+                  {
+                    "id": "5",
+                    "content": "6",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non ! On estime que les éléments d'un smartphone ont parcouru environ 4 fois le tour de la Terre entre sa conception et sa distribution !</p>"
+                    }
+                  }
+                ],
+                "solution": ""
               }
             }
           ]
