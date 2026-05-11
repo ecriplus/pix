@@ -35,10 +35,9 @@
     "preinstall": "npx check-engine",
     "dev": "vite",
     "start": "vite",
-    "test": "NODE_ENV=development vite build --mode development && ember exam --path dist --config-file ./testem.cjs",
+    "test": "ember exam --path dist --config-file ./testem.cjs",
     "test:ci": "vite build --mode test && ember exam --path dist --config-file ./testem.cjs --split=$CIRCLE_NODE_TOTAL --partition=$((1 + CIRCLE_NODE_INDEX))",
-    "test:lint": "npm test && npm run lint",
-    "test:ember": "vite build --mode development && ember exam --path dist"
+    "test:lint": "npm test && npm run lint"
   },
   "devDependencies": {
     "@1024pix/ember-testing-library": "^3.0.27",
