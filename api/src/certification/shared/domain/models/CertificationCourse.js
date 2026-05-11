@@ -9,6 +9,7 @@ import JoiDate from '@joi/date';
 import BaseJoi from 'joi';
 
 import { EntityValidationError } from '../../../../shared/domain/errors.js';
+import isEmpty from '../../../../shared/infrastructure/utils/is-empty.js';
 import { ABORT_REASONS } from '../constants/abort-reasons.js';
 import { AlgorithmEngineVersion } from './AlgorithmEngineVersion.js';
 
@@ -193,7 +194,7 @@ export class CertificationCourse {
 
   correctFirstName(modifiedFirstName) {
     const sanitizedString = _sanitizedString(modifiedFirstName);
-    if (_isEmpty(sanitizedString)) {
+    if (isEmpty(sanitizedString)) {
       throw new EntityValidationError({
         invalidAttributes: [{ attribute: 'firstName', message: "Candidate's first name must not be blank or empty" }],
       });
@@ -203,7 +204,7 @@ export class CertificationCourse {
 
   correctLastName(modifiedLastName) {
     const sanitizedString = _sanitizedString(modifiedLastName);
-    if (_isEmpty(sanitizedString)) {
+    if (isEmpty(sanitizedString)) {
       throw new EntityValidationError({
         invalidAttributes: [{ attribute: 'lastName', message: "Candidate's last name must not be blank or empty" }],
       });
@@ -213,14 +214,14 @@ export class CertificationCourse {
 
   correctBirthplace(modifiedBirthplace) {
     const sanitizedString = _sanitizedString(modifiedBirthplace);
-    if (!_isEmpty(sanitizedString?.trim())) {
+    if (!isEmpty(sanitizedString?.trim())) {
       this._birthplace = sanitizedString;
     }
   }
 
   correctSex(modifiedSex) {
     const sanitizedString = _sanitizedString(modifiedSex);
-    if (!_isEmpty(sanitizedString) && !['M', 'F'].includes(sanitizedString)) {
+    if (!isEmpty(sanitizedString) && !['M', 'F'].includes(sanitizedString)) {
       throw new EntityValidationError({
         invalidAttributes: [{ attribute: 'sex', message: "Candidate's sex must be M or F" }],
       });
@@ -365,8 +366,4 @@ function _sanitizedString(string) {
   const withUnifiedWithSpaces = trimmedString?.replace(multipleWhiteSpacesInARow, ' ');
 
   return withUnifiedWithSpaces;
-}
-
-function _isEmpty(obj) {
-  return [Object, Array].includes((obj || {}).constructor) && !Object.entries(obj || {}).length;
 }

@@ -7,9 +7,8 @@ import localizedFormat from 'dayjs/plugin/localizedFormat.js';
 import { PDFDocument, rgb } from 'pdf-lib';
 dayjs.extend(localizedFormat);
 
-import _ from 'lodash';
-
 import { ENGLISH_SPOKEN, FRENCH_SPOKEN } from '../../../../../shared/domain/services/locale-service.js';
+import chunk from '../../../../../shared/infrastructure/utils/chunk.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -18,7 +17,7 @@ const CANDIDATES_PER_PAGE = 20;
 const SESSION_DETAIL_DEFAULT_COLOR = rgb(0, 0, 0);
 const DATE_OF_BIRTH_DEFAULT_X = 239;
 
-async function getAttendanceSheetPdfBuffer({
+export async function getAttendanceSheetPdfBuffer({
   dirname = __dirname,
   fontkit = pdfLibFontkit,
   creationDate = new Date(),
@@ -46,7 +45,7 @@ async function getAttendanceSheetPdfBuffer({
   const pageInformationFont = await _embedFontIntoPdf({ pdfDoc, dirname, font: 'Nunito-Regular.ttf' });
 
   const certificationCandidates = session.certificationCandidates;
-  const certificationCandidatesSplitByPage = _.chunk(certificationCandidates, CANDIDATES_PER_PAGE);
+  const certificationCandidatesSplitByPage = chunk(certificationCandidates, CANDIDATES_PER_PAGE);
 
   for (const [index, candidatesGroup] of certificationCandidatesSplitByPage.entries()) {
     const page = pdfDoc.addPage();
@@ -416,5 +415,3 @@ function _getSessionStartTimeFormat({ lang }) {
   }
   return 'LT';
 }
-
-export { getAttendanceSheetPdfBuffer };

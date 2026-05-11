@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { config } from '../../../../shared/config.js';
 import { CertificateVerificationCodeGenerationTooManyTrials } from '../../../../shared/domain/errors.js';
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
@@ -11,11 +9,12 @@ const NB_CHAR = 8;
 const NB_OF_TRIALS = 1000;
 
 function _generateCode() {
-  return 'P-' + _.times(NB_CHAR, _randomCharacter).join('');
-}
-
-function _randomCharacter() {
-  return _.sample(availableCharacters);
+  const chars = Array.from(availableCharacters);
+  for (let i = NB_CHAR; i >= 0; i--) {
+    const j = Math.floor(Math.random() * (chars.length - 1));
+    [chars[i], chars[j]] = [chars[j], chars[i]];
+  }
+  return 'P-' + chars.slice(0, NB_CHAR).join('');
 }
 
 const generateCertificateVerificationCode = async function ({

@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { AssessmentResult } from '../../../../shared/domain/models/AssessmentResult.js';
@@ -13,7 +11,7 @@ import { Certificate } from '../../domain/models/v3/Certificate.js';
 import { CertifiedBadge } from '../../domain/read-models/CertifiedBadge.js';
 import * as competenceTreeRepository from './competence-tree-repository.js';
 
-const findByDivisionForScoIsManagingStudentsOrganization = async function ({ organizationId, division, locale }) {
+export async function findByDivisionForScoIsManagingStudentsOrganization({ organizationId, division, locale }) {
   const knexConn = DomainTransaction.getConnection();
   const certificationCourseDTOs = await _selectCertificationCourseDTOs(knexConn)
     .select({ organizationLearnerId: 'view-active-organization-learners.id' })
@@ -43,17 +41,21 @@ const findByDivisionForScoIsManagingStudentsOrganization = async function ({ org
 
   const mostRecentCertificationsPerOrganizationLearner =
     _filterMostRecentCertificationCoursePerOrganizationLearner(certificationCourseDTOs);
-  return Promise.all(
-    _(mostRecentCertificationsPerOrganizationLearner)
-      .orderBy(['lastName', 'firstName'], ['asc', 'asc'])
+
+  return await Promise.all(
+    mostRecentCertificationsPerOrganizationLearner
+      .sort((a, b) => {
+        const akey = a.lastName + a.firstName;
+        const bkey = b.lastName + b.firstName;
+        return akey > bkey ? 1 : bkey > akey ? -1 : 0;
+      })
       .map((certificationCourseDTO) => {
         return _toDomainForCertificationAttestation({ certificationCourseDTO, competenceTree, certifiedBadges: [] });
-      })
-      .value(),
+      }),
   );
-};
+}
 
-const getCertificate = async function ({ certificationCourseId, locale }) {
+export async function getCertificate({ certificationCourseId, locale }) {
   const knexConn = DomainTransaction.getConnection();
   const certificationCourseDTO = await _selectCertificationCourseDTOs(knexConn)
     .where('certification-courses.id', '=', certificationCourseId)
@@ -68,9 +70,9 @@ const getCertificate = async function ({ certificationCourseId, locale }) {
   const certifiedBadges = await _getCertifiedBadges(knexConn, certificationCourseDTO.id);
 
   return _toDomainForCertificationAttestation({ certificationCourseDTO, competenceTree, certifiedBadges });
-};
+}
 
-const getPrivateCertificate = async function (id, { locale } = {}) {
+export async function getPrivateCertificate(id, { locale } = {}) {
   const knexConn = DomainTransaction.getConnection();
   const certificationCourseDTO = await _selectPrivateCertificates(knexConn)
     .where('certification-courses.id', '=', id)
@@ -92,9 +94,9 @@ const getPrivateCertificate = async function (id, { locale } = {}) {
     competenceTree,
     certifiedBadges,
   });
-};
+}
 
-const getShareableCertificate = async function ({ certificationCourseId, locale }) {
+export async function getShareableCertificate({ certificationCourseId, locale }) {
   const knexConn = DomainTransaction.getConnection();
   const shareableCertificateDTO = await _selectShareableCertificates(knexConn)
     .groupBy('certification-courses.id', 'sessions.id', 'assessment-results.id')
@@ -110,14 +112,7 @@ const getShareableCertificate = async function ({ certificationCourseId, locale 
   const certifiedBadges = await _getCertifiedBadges(knexConn, shareableCertificateDTO.id);
 
   return _toDomainForShareableCertificate({ shareableCertificateDTO, competenceTree, certifiedBadges });
-};
-
-export {
-  findByDivisionForScoIsManagingStudentsOrganization,
-  getCertificate,
-  getPrivateCertificate,
-  getShareableCertificate,
-};
+}
 
 function _selectCertificationCourseDTOs(knexConn) {
   return _getCertificateQuery(knexConn)

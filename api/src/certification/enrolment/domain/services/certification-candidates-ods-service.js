@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { CertificationCandidatesError } from '../../../../shared/domain/errors.js';
 import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
 import * as mailCheckImplementation from '../../../../shared/mail/infrastructure/services/mail-check.js';
@@ -152,19 +150,15 @@ export async function extractCertificationCandidatesFromCandidatesImportSheet({
 }
 
 function _filterOutEmptyCandidateData(certificationCandidatesData) {
-  return _(certificationCandidatesData)
-    .mapValues(_nullifyObjectWithOnlyNilValues)
-    .pickBy((value) => value !== null)
-    .value();
-}
-
-function _nullifyObjectWithOnlyNilValues(data) {
-  for (const propName in data) {
-    if (data[propName] != null) {
-      return data;
+  const filteredData = {};
+  Object.keys(certificationCandidatesData).forEach((certificationCandidateId) => {
+    const certificationCandidateData = certificationCandidatesData[certificationCandidateId];
+    const values = Object.values(certificationCandidateData);
+    if (values.filter(Boolean).length !== 0) {
+      filteredData[certificationCandidateId] = certificationCandidateData;
     }
-  }
-  return null;
+  });
+  return filteredData;
 }
 
 function _handleBirthInformationValidationError(cpfBirthInformation, line) {

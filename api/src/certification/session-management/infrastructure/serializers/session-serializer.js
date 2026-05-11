@@ -1,11 +1,12 @@
 import jsonapiSerializer from 'jsonapi-serializer';
 import _ from 'lodash';
 
+import isEmpty from '../../../../shared/infrastructure/utils/is-empty.js';
 import { SessionManagement } from '../../domain/models/SessionManagement.js';
 
 const { Serializer } = jsonapiSerializer;
 
-const serialize = function ({ session, hasSomeCleaAcquired }) {
+export function serialize({ session, hasSomeCleaAcquired }) {
   const attributes = [
     'status',
     'examinerGlobalComment',
@@ -37,9 +38,9 @@ const serialize = function ({ session, hasSomeCleaAcquired }) {
       },
     },
   }).serialize(session);
-};
+}
 
-const deserialize = function (json) {
+export function deserialize(json) {
   const attributes = json.data.attributes;
 
   const result = new SessionManagement({
@@ -52,11 +53,9 @@ const deserialize = function (json) {
     version: attributes['version'],
   });
 
-  if (_.isEmpty(_.trim(result.examinerGlobalComment))) {
+  if (isEmpty(_.trim(result.examinerGlobalComment))) {
     result.examinerGlobalComment = SessionManagement.NO_EXAMINER_GLOBAL_COMMENT;
   }
 
   return result;
-};
-
-export { deserialize, serialize };
+}

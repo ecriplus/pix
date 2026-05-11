@@ -1,5 +1,4 @@
 import xmldom from '@xmldom/xmldom';
-import _ from 'lodash';
 
 import { AddedCellOption } from './added-cell-option.js';
 import { loadOdsZip } from './common-ods-utils.js';
@@ -202,9 +201,9 @@ class OdsUtilsBuilder {
     const cloneRowElement = _deepCloneDomElement(referenceRowElement);
     rowsContainerElement.removeChild(referenceRowElement);
 
-    _.each(dataToInject, (rowDataToInject) => {
+    dataToInject.forEach(function (data) {
       const currentCloneRowElement = _deepCloneDomElement(cloneRowElement);
-      _updateXmlElementWithData(currentCloneRowElement, rowDataToInject, rowTemplateValues);
+      _updateXmlElementWithData(currentCloneRowElement, data, rowTemplateValues);
       rowsContainerElement.appendChild(currentCloneRowElement);
     });
 
@@ -240,10 +239,9 @@ function updateXmlRows({ stringifiedXml, rowMarkerPlaceholder, rowTemplateValues
 
   const cloneRowElement = _deepCloneDomElement(referenceRowElement);
   rowsContainerElement.removeChild(referenceRowElement);
-
-  _.each(dataToInject, (rowDataToInject) => {
+  dataToInject.forEach(function (data) {
     const currentCloneRowElement = _deepCloneDomElement(cloneRowElement);
-    _updateXmlElementWithData(currentCloneRowElement, rowDataToInject, rowTemplateValues);
+    _updateXmlElementWithData(currentCloneRowElement, data, rowTemplateValues);
     rowsContainerElement.appendChild(currentCloneRowElement);
   });
 

@@ -1,10 +1,8 @@
-import compact from 'lodash/compact.js';
-import isEmpty from 'lodash/isEmpty.js';
-
 import { NotFoundError } from '../../../../shared/domain/errors.js';
+import isEmpty from '../../../../shared/infrastructure/utils/is-empty.js';
 import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
 
-const getCertificatesForSession = async function ({
+export async function getCertificatesForSession({
   sessionId,
   certificateRepository,
   sharedCertificationCourseRepository,
@@ -17,7 +15,7 @@ const getCertificatesForSession = async function ({
     throw new NotFoundError();
   }
 
-  const certificates = compact(
+  const certificates = (
     await PromiseUtils.mapSeries(certificationCourses, async (certificationCourse) => {
       try {
         return await certificateRepository.getCertificate({
@@ -28,14 +26,12 @@ const getCertificatesForSession = async function ({
           throw error;
         }
       }
-    }),
-  );
+    })
+  ).filter(Boolean);
 
   if (isEmpty(certificates)) {
     throw new NotFoundError('No certificats found');
   }
 
   return certificates;
-};
-
-export { getCertificatesForSession };
+}

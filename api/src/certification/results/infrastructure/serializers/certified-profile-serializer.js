@@ -1,16 +1,15 @@
 import jsonapiSerializer from 'jsonapi-serializer';
 
-const { kebabCase } = lodash;
-
 const { Serializer } = jsonapiSerializer;
 
-import lodash from 'lodash';
-
 const typeForAttribute = (attribute) => {
-  return kebabCase(attribute);
+  return attribute
+    .replace(/([a-z])([A-Z])/g, '$1-$2')
+    .replace(/[\s_]+/g, '-')
+    .toLowerCase();
 };
 
-const serialize = function (certifiedProfile) {
+export function serialize(certifiedProfile) {
   return new Serializer('certified-profiles', {
     typeForAttribute,
     attributes: ['userId', 'certifiedSkills', 'certifiedTubes', 'certifiedCompetences', 'certifiedAreas'],
@@ -35,6 +34,4 @@ const serialize = function (certifiedProfile) {
       attributes: ['name', 'color'],
     },
   }).serialize(certifiedProfile);
-};
-
-export { serialize };
+}

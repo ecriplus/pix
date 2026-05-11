@@ -3,8 +3,8 @@
  * @typedef {import('../../../../../src/certification/session-management/domain/usecases/index.js').MailService} MailService
  * @typedef {import('../../../../../src/certification/session-management/domain/usecases/index.js').SessionManagementRepository} SessionManagementRepository
  */
-import lodash from 'lodash';
-
+import { AssessmentResult } from '../../../../shared/domain/models/AssessmentResult.js';
+import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import {
   CertificationCourseNotPublishableError,
   SendingEmailToRefererError,
@@ -12,11 +12,6 @@ import {
 } from '../errors.js';
 import { SessionAlreadyPublishedError } from '../errors.js';
 import { mailService } from './mail-service.js';
-
-const { some, uniqBy } = lodash;
-
-import { AssessmentResult } from '../../../../shared/domain/models/AssessmentResult.js';
-import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 
 /**
  * @param {object} params
@@ -166,22 +161,22 @@ function _distinctCandidatesResultRecipientEmails(certificationCandidates, start
   const candidatesWithStartedCertificationCourse = certificationCandidates.filter((candidate) =>
     userIdsSet.has(candidate.userId),
   );
-
-  return uniqBy(candidatesWithStartedCertificationCourse, (candidate) => candidate.resultRecipientEmail?.toLowerCase())
-    .map((candidate) => candidate.resultRecipientEmail)
+  const recipientEmails = candidatesWithStartedCertificationCourse
+    .map((candidate) => candidate.resultRecipientEmail?.toLowerCase())
     .filter(Boolean);
+  return [...new Set(recipientEmails)];
 }
 
 function _someHaveSucceeded(emailingAttempts) {
-  return some(emailingAttempts, (emailAttempt) => emailAttempt.hasSucceeded());
+  return emailingAttempts?.some((emailAttempt) => emailAttempt.hasSucceeded());
 }
 
 function _noneHaveFailed(emailingAttempts) {
-  return !some(emailingAttempts, (emailAttempt) => emailAttempt.hasFailed());
+  return !emailingAttempts?.some((emailAttempt) => emailAttempt.hasFailed());
 }
 
 function _someHaveFailed(emailingAttempts) {
-  return some(emailingAttempts, (emailAttempt) => emailAttempt.hasFailed());
+  return emailingAttempts?.some((emailAttempt) => emailAttempt.hasFailed());
 }
 
 function _failedAttemptsEmail(emailingAttempts) {
