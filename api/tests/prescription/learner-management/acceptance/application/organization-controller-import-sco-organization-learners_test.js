@@ -3,7 +3,7 @@ import { EventEmitter } from 'node:events';
 import iconv from 'iconv-lite';
 
 import { createServer } from '../../../../../server.js';
-import { OrganizationLearnerImportHeader } from '../../../../../src/prescription/learner-management/infrastructure/serializers/csv/organization-learner-import-header.js';
+import { FregataHeader } from '../../../../../src/prescription/learner-management/infrastructure/serializers/csv/headers/fregata-header.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import { getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { expect } from '../../../../test-helper.js';
@@ -14,9 +14,7 @@ EventEmitter.defaultMaxListeners = 60;
 
 const i18n = getI18n();
 
-const organizationLearnerCsvColumns = new OrganizationLearnerImportHeader(i18n).columns
-  .map((column) => column.name)
-  .join(';');
+const organizationLearnerCsvColumns = new FregataHeader(i18n).columns.map((column) => column.name).join(';');
 
 describe('Acceptance | Application | organization-controller-import-sco-organization-learners', function () {
   let server;

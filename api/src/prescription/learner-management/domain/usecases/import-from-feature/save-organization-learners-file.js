@@ -1,5 +1,5 @@
 import { DomainTransaction } from '../../../../../shared/domain/DomainTransaction.js';
-import { CommonCsvLearnerParser } from '../../../infrastructure/serializers/csv/common-csv-learner-parser.js';
+import { GenericParser } from '../../../infrastructure/serializers/csv/parsers/generic-parser.js';
 import { getDataBuffer } from '../../../infrastructure/utils/bufferize/get-data-buffer.js';
 import { AggregateImportError } from '../../errors.js';
 import { ImportOrganizationLearnerSet } from '../../models/ImportOrganizationLearnerSet.js';
@@ -23,7 +23,7 @@ const saveOrganizationLearnersFile = async function ({
     const readableStream = await importStorage.readFile({ filename: organizationImport.filename });
     const buffer = await dependencies.getDataBuffer(readableStream);
 
-    const parser = CommonCsvLearnerParser.buildParser({ buffer, importFormat });
+    const parser = GenericParser.buildParser({ buffer, importFormat });
 
     const learnersData = parser.parse(organizationImport.encoding);
 

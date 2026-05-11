@@ -1,8 +1,8 @@
 import iconv from 'iconv-lite';
 
 import { AggregateImportError } from '../../../../../../../src/prescription/learner-management/domain/errors.js';
-import { SupOrganizationLearnerImportHeader } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/sup-organization-learner-import-header.js';
-import { SupOrganizationLearnerParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/sup-organization-learner-parser.js';
+import { SupHeader } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/headers/sup-header.js';
+import { SupParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/parsers/sup-parser.js';
 import { CsvImportError } from '../../../../../../../src/shared/domain/errors.js';
 import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { expect } from '../../../../../../test-helper.js';
@@ -10,11 +10,9 @@ import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
 const i18n = getI18n();
 
-const supOrganizationLearnerCsvColumns = new SupOrganizationLearnerImportHeader(i18n).columns
-  .map((column) => column.name)
-  .join(';');
+const supOrganizationLearnerCsvColumns = new SupHeader(i18n).columns.map((column) => column.name).join(';');
 
-describe('Unit | Infrastructure | SupOrganizationLearnerParser', function () {
+describe('Unit | Infrastructure | SupParser', function () {
   context('when the header is not correctly formed', function () {
     const organizationId = 123;
 
@@ -24,7 +22,7 @@ describe('Unit | Infrastructure | SupOrganizationLearnerParser', function () {
         it('should throw an CsvImportError', async function () {
           const input = supOrganizationLearnerCsvColumns.replace(`${field}`, '').replace(';;', ';');
           const encodedInput = iconv.encode(input, 'utf8');
-          const parser = new SupOrganizationLearnerParser(encodedInput, organizationId, i18n);
+          const parser = new SupParser(encodedInput, organizationId, i18n);
 
           const error = await catchErr(parser.parse, parser)(parser.getFileEncoding());
           expect(error.meta[0]).to.be.an.instanceOf(CsvImportError);
@@ -37,7 +35,7 @@ describe('Unit | Infrastructure | SupOrganizationLearnerParser', function () {
       it('should throw an CsvImportError', async function () {
         const input = supOrganizationLearnerCsvColumns.replace('Premier prénom;', '').replace('Numéro étudiant;', '');
         const encodedInput = iconv.encode(input, 'utf8');
-        const parser = new SupOrganizationLearnerParser(encodedInput, organizationId, i18n);
+        const parser = new SupParser(encodedInput, organizationId, i18n);
 
         const error = await catchErr(parser.parse, parser)(parser.getFileEncoding());
 
@@ -51,7 +49,7 @@ describe('Unit | Infrastructure | SupOrganizationLearnerParser', function () {
       it('returns no organization learners', function () {
         const input = supOrganizationLearnerCsvColumns;
         const encodedInput = iconv.encode(input, 'utf8');
-        const parser = new SupOrganizationLearnerParser(encodedInput, 123, i18n);
+        const parser = new SupParser(encodedInput, 123, i18n);
 
         const { learners } = parser.parse(parser.getFileEncoding());
 
@@ -68,7 +66,7 @@ describe('Unit | Infrastructure | SupOrganizationLearnerParser', function () {
           `;
           const organizationId = 789;
           const encodedInput = iconv.encode(input, 'utf8');
-          const parser = new SupOrganizationLearnerParser(encodedInput, organizationId, i18n);
+          const parser = new SupParser(encodedInput, organizationId, i18n);
 
           const { learners } = parser.parse(parser.getFileEncoding());
           expect(learners).to.eql([
@@ -116,7 +114,7 @@ describe('Unit | Infrastructure | SupOrganizationLearnerParser', function () {
           Richard;;;;;${invalidDate};richard@example.net;etu123;;;;Boxe;Paléo;
           `;
           const encodedInput = iconv.encode(input, 'utf8');
-          const parser = new SupOrganizationLearnerParser(encodedInput, 123, i18n);
+          const parser = new SupParser(encodedInput, 123, i18n);
 
           const error = await catchErr(parser.parse, parser)(parser.getFileEncoding());
 
@@ -132,7 +130,7 @@ describe('Unit | Infrastructure | SupOrganizationLearnerParser', function () {
           `;
 
           const encodedInput = iconv.encode(input, 'utf8');
-          const parser = new SupOrganizationLearnerParser(encodedInput, 123, i18n);
+          const parser = new SupParser(encodedInput, 123, i18n);
 
           const error = await catchErr(parser.parse, parser)(parser.getFileEncoding());
 
@@ -149,7 +147,7 @@ describe('Unit | Infrastructure | SupOrganizationLearnerParser', function () {
 `;
 
           const encodedInput = iconv.encode(input, 'utf8');
-          const parser = new SupOrganizationLearnerParser(encodedInput, 123, i18n);
+          const parser = new SupParser(encodedInput, 123, i18n);
 
           const error = await catchErr(parser.parse, parser)(parser.getFileEncoding());
 

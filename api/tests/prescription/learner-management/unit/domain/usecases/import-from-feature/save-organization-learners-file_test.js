@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import { AggregateImportError } from '../../../../../../../src/prescription/learner-management/domain/errors.js';
 import { ImportOrganizationLearnerSet } from '../../../../../../../src/prescription/learner-management/domain/models/ImportOrganizationLearnerSet.js';
 import { saveOrganizationLearnersFile } from '../../../../../../../src/prescription/learner-management/domain/usecases/import-from-feature/save-organization-learners-file.js';
-import { CommonCsvLearnerParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/common-csv-learner-parser.js';
+import { GenericParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/parsers/generic-parser.js';
 import { expect } from '../../../../../../test-helper.js';
 import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
@@ -64,7 +64,7 @@ describe('Unit | UseCase | saveOrganizationLearnersFile', function () {
       findAllCommonLearnersFromOrganizationId: sinon.stub(),
     };
 
-    sinon.stub(CommonCsvLearnerParser, 'buildParser');
+    sinon.stub(GenericParser, 'buildParser');
 
     commonCsvLearnerParserStub = {
       parse: sinon.stub(),
@@ -100,9 +100,7 @@ describe('Unit | UseCase | saveOrganizationLearnersFile', function () {
     dependencieStub.getDataBuffer.withArgs(dataStream).resolves(dataBuffer);
 
     // parse the buffer
-    CommonCsvLearnerParser.buildParser
-      .withArgs({ buffer: dataBuffer, importFormat })
-      .returns(commonCsvLearnerParserStub);
+    GenericParser.buildParser.withArgs({ buffer: dataBuffer, importFormat }).returns(commonCsvLearnerParserStub);
     commonCsvLearnerParserStub.parse.withArgs(fileEncoding).returns(parsedLearners);
 
     organizationLearnerRepositoryStub.findAllCommonLearnersFromOrganizationId

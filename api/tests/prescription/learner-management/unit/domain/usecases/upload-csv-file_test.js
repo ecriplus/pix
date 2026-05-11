@@ -4,8 +4,8 @@ import sinon from 'sinon';
 import { OrganizationImportStatus } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationImportStatus.js';
 import { ValidateCsvOrganizationImportFileJob } from '../../../../../../src/prescription/learner-management/domain/models/ValidateCsvOrganizationImportFileJob.js';
 import { uploadCsvFile } from '../../../../../../src/prescription/learner-management/domain/usecases/upload-csv-file.js';
-import { SupOrganizationLearnerImportHeader } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/sup-organization-learner-import-header.js';
-import { SupOrganizationLearnerParser } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/sup-organization-learner-parser.js';
+import { SupHeader } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/headers/sup-header.js';
+import { SupParser } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/parsers/sup-parser.js';
 import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { expect } from '../../../../../test-helper.js';
@@ -14,9 +14,7 @@ import { createTempFile, removeTempFile } from '../../../../../tooling/test-util
 
 const i18n = getI18n();
 
-const supOrganizationLearnerImportHeader = new SupOrganizationLearnerImportHeader(i18n).columns
-  .map((column) => column.name)
-  .join(';');
+const supOrganizationLearnerImportHeader = new SupHeader(i18n).columns.map((column) => column.name).join(';');
 
 describe('Unit | UseCase | uploadCsvFile', function () {
   const organizationId = 1;
@@ -95,12 +93,12 @@ describe('Unit | UseCase | uploadCsvFile', function () {
       importStorageStub.sendFile.withArgs({ filepath: payload.path }).resolves(s3Filename);
 
       importStorageStub.getParser
-        .withArgs({ Parser: SupOrganizationLearnerParser, filename: s3Filename }, organizationId, i18n)
-        .resolves(SupOrganizationLearnerParser.buildParser(csvContent, organizationId, i18n));
+        .withArgs({ Parser: SupParser, filename: s3Filename }, organizationId, i18n)
+        .resolves(SupParser.buildParser(csvContent, organizationId, i18n));
 
       // when
       await uploadCsvFile({
-        Parser: SupOrganizationLearnerParser,
+        Parser: SupParser,
         payload,
         userId,
         organizationId,
@@ -133,12 +131,12 @@ describe('Unit | UseCase | uploadCsvFile', function () {
       importStorageStub.sendFile.withArgs({ filepath: payload.path }).rejects(errorS3);
 
       importStorageStub.getParser
-        .withArgs({ Parser: SupOrganizationLearnerParser, filename: s3Filename }, organizationId, i18n)
-        .resolves(SupOrganizationLearnerParser.buildParser(csvContent, organizationId, i18n));
+        .withArgs({ Parser: SupParser, filename: s3Filename }, organizationId, i18n)
+        .resolves(SupParser.buildParser(csvContent, organizationId, i18n));
 
       // when
       await catchErr(uploadCsvFile)({
-        Parser: SupOrganizationLearnerParser,
+        Parser: SupParser,
         payload,
         userId,
         organizationId,

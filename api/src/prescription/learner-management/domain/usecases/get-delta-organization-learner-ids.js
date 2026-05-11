@@ -1,4 +1,4 @@
-import { SupOrganizationLearnerParser } from '../../infrastructure/serializers/csv/sup-organization-learner-parser.js';
+import { SupParser } from '../../infrastructure/serializers/csv/parsers/sup-parser.js';
 import { getDataBuffer } from '../../infrastructure/utils/bufferize/get-data-buffer.js';
 
 const getDeltaOrganizationLearnerIds = async function ({
@@ -12,7 +12,7 @@ const getDeltaOrganizationLearnerIds = async function ({
 
   const readableStream = await importStorage.readFile({ filename: organizationImport.filename });
   const buffer = await getDataBuffer(readableStream);
-  const parser = SupOrganizationLearnerParser.buildParser(buffer, organizationImport.organizationId, i18n);
+  const parser = SupParser.buildParser(buffer, organizationImport.organizationId, i18n);
 
   const { learners } = parser.parse(parser.getFileEncoding());
 

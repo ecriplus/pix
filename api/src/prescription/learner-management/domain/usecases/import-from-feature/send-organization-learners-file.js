@@ -1,6 +1,6 @@
 import { createReadStream } from 'node:fs';
 
-import { CommonCsvLearnerParser } from '../../../infrastructure/serializers/csv/common-csv-learner-parser.js';
+import { GenericParser } from '../../../infrastructure/serializers/csv/parsers/generic-parser.js';
 import { getDataBuffer } from '../../../infrastructure/utils/bufferize/get-data-buffer.js';
 import { AggregateImportError, OrganizationLearnerImportFormatNotFoundError } from '../../errors.js';
 import { OrganizationImportStatus } from '../../models/OrganizationImportStatus.js';
@@ -34,7 +34,7 @@ const sendOrganizationLearnersFile = async function ({
     const readableStreamEncoding = dependencies.createReadStream(payload.path);
     const bufferEncoding = await dependencies.getDataBuffer(readableStreamEncoding);
 
-    const parser = CommonCsvLearnerParser.buildParser({
+    const parser = GenericParser.buildParser({
       buffer: bufferEncoding,
       importFormat: organizationLearnerImportFormat,
     });

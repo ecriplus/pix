@@ -1,8 +1,8 @@
 import iconv from 'iconv-lite';
 
 import { AggregateImportError } from '../../../../../../../src/prescription/learner-management/domain/errors.js';
-import { OrganizationLearnerImportHeader } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/organization-learner-import-header.js';
-import { OrganizationLearnerParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/organization-learner-parser.js';
+import { FregataHeader } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/headers/fregata-header.js';
+import { FregataParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/parsers/fregata-parser.js';
 import { CsvImportError } from '../../../../../../../src/shared/domain/errors.js';
 import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { expect } from '../../../../../../test-helper.js';
@@ -10,11 +10,9 @@ import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
 const i18n = getI18n();
 
-const organizationLearnerCsvColumns = new OrganizationLearnerImportHeader(i18n).columns
-  .map((column) => column.name)
-  .join(';');
+const organizationLearnerCsvColumns = new FregataHeader(i18n).columns.map((column) => column.name).join(';');
 
-describe('Unit | Infrastructure | OrganizationLearnerParser', function () {
+describe('Unit | Infrastructure | FregataParser', function () {
   context('when the header is not correctly formed', function () {
     const organizationId = 123;
 
@@ -36,7 +34,7 @@ describe('Unit | Infrastructure | OrganizationLearnerParser', function () {
           let input = organizationLearnerCsvColumns.replace(`${field}`, '');
           input = input.replace(';;', ';');
           const encodedInput = iconv.encode(input, 'utf8');
-          const parser = new OrganizationLearnerParser(encodedInput, organizationId, i18n);
+          const parser = new FregataParser(encodedInput, organizationId, i18n);
 
           const error = await catchErr(parser.parse, parser)(parser.getFileEncoding());
 
@@ -49,7 +47,7 @@ describe('Unit | Infrastructure | OrganizationLearnerParser', function () {
       it('should throw an CsvImportError', async function () {
         const input = organizationLearnerCsvColumns.replace('Premier prénom*;', '');
         const encodedInput = iconv.encode(input, 'utf8');
-        const parser = new OrganizationLearnerParser(encodedInput, organizationId, i18n);
+        const parser = new FregataParser(encodedInput, organizationId, i18n);
 
         const error = await catchErr(parser.parse, parser)(parser.getFileEncoding());
 
@@ -63,7 +61,7 @@ describe('Unit | Infrastructure | OrganizationLearnerParser', function () {
       it('returns no organization learners', function () {
         const input = organizationLearnerCsvColumns;
         const encodedInput = iconv.encode(input, 'utf8');
-        const parser = new OrganizationLearnerParser(encodedInput, 123, i18n);
+        const parser = new FregataParser(encodedInput, 123, i18n);
 
         const { learners } = parser.parse(parser.getFileEncoding());
 
@@ -79,7 +77,7 @@ describe('Unit | Infrastructure | OrganizationLearnerParser', function () {
           456F;O-Ren;;;Ishii;Cottonmouth;Masculin;01/01/1980;;Shangai;99;99132;ST;MEF1;Division 2;
           `;
           const encodedInput = iconv.encode(input, 'utf8');
-          const parser = new OrganizationLearnerParser(encodedInput, 456, i18n);
+          const parser = new FregataParser(encodedInput, 456, i18n);
 
           const { learners } = parser.parse(parser.getFileEncoding());
           expect(learners).to.have.lengthOf(2);
@@ -92,7 +90,7 @@ describe('Unit | Infrastructure | OrganizationLearnerParser', function () {
           `;
           const organizationId = 789;
           const encodedInput = iconv.encode(input, 'utf8');
-          const parser = new OrganizationLearnerParser(encodedInput, organizationId, i18n);
+          const parser = new FregataParser(encodedInput, organizationId, i18n);
 
           const { learners } = parser.parse(parser.getFileEncoding());
           expect(learners[0]).to.includes({
@@ -136,7 +134,7 @@ describe('Unit | Infrastructure | OrganizationLearnerParser', function () {
             123F;Beatrix;The;Bride;Kiddo;Black Mamba;Féminin;01/01/1970;97422;;200;99100;ST;MEF1;  Division 1 ;
             `;
             const encodedInput = iconv.encode(input, 'utf8');
-            const parser = new OrganizationLearnerParser(encodedInput, 456, i18n);
+            const parser = new FregataParser(encodedInput, 456, i18n);
 
             const { learners } = parser.parse(parser.getFileEncoding());
             expect(learners[0].division).to.equal('Division 1');
@@ -147,7 +145,7 @@ describe('Unit | Infrastructure | OrganizationLearnerParser', function () {
             123F;Beatrix;The;Bride;Kiddo;Black Mamba;Féminin;01/01/1970;97422;;200;99100;ST;MEF1;Division     1;
             `;
             const encodedInput = iconv.encode(input, 'utf8');
-            const parser = new OrganizationLearnerParser(encodedInput, 456, i18n);
+            const parser = new FregataParser(encodedInput, 456, i18n);
 
             const { learners } = parser.parse(parser.getFileEncoding());
             expect(learners[0].division).to.equal('Division 1');
@@ -160,7 +158,7 @@ describe('Unit | Infrastructure | OrganizationLearnerParser', function () {
             0123456789F;Beatrix;The;Bride;Kiddo;Black Mamba;Féminin;01/01/1970;97422;;974;99100;AP;MEF1;Division 1;
             `;
             const encodedInput = iconv.encode(input, 'utf8');
-            const parser = new OrganizationLearnerParser(encodedInput, 123, i18n);
+            const parser = new FregataParser(encodedInput, 123, i18n);
 
             const { learners } = parser.parse(parser.getFileEncoding());
             expect(learners[0]).to.includes({
@@ -179,7 +177,7 @@ describe('Unit | Infrastructure | OrganizationLearnerParser', function () {
           123F;Beatrix;The;Bride;Kiddo;Black Mamba;Féminin;01/01/1980;97422;;200;${wrongData};ST;MEF1;Division 1;
           `;
           const encodedInput = iconv.encode(input, 'utf8');
-          const parser = new OrganizationLearnerParser(encodedInput, 123, i18n);
+          const parser = new FregataParser(encodedInput, 123, i18n);
 
           const error = await catchErr(parser.parse, parser)(parser.getFileEncoding());
 
@@ -195,7 +193,7 @@ describe('Unit | Infrastructure | OrganizationLearnerParser', function () {
           123F;Beatrix;The;Bride;Kiddo;Black Mamba;Féminin;01/01/1980;${wrongData};;974;99100;ST;MEF1;Division 1;
           `;
           const encodedInput = iconv.encode(input, 'utf8');
-          const parser = new OrganizationLearnerParser(encodedInput, 123, i18n);
+          const parser = new FregataParser(encodedInput, 123, i18n);
 
           const error = await catchErr(parser.parse, parser)(parser.getFileEncoding());
 
@@ -212,7 +210,7 @@ describe('Unit | Infrastructure | OrganizationLearnerParser', function () {
           123F;Beatrix;The;Bride;Kiddo;Black Mamba;Féminin;01/01/1980;${wrongData};;974;99100;AT;MEF1;Division 1;
           `;
           const encodedInput = iconv.encode(input, 'utf8');
-          const parser = new OrganizationLearnerParser(encodedInput, 123, i18n);
+          const parser = new FregataParser(encodedInput, 123, i18n);
 
           const error = await catchErr(parser.parse, parser)(parser.getFileEncoding());
 
@@ -227,7 +225,7 @@ describe('Unit | Infrastructure | OrganizationLearnerParser', function () {
             0123456789F;Beatrix;The;Bride;Kiddo;Black Mamba;Féminin;01/01/1970;97422;;974;99100;AP;MEF1;Division 1;
             `;
             const encodedInput = iconv.encode(input, 'utf8');
-            const parser = new OrganizationLearnerParser(encodedInput, 123, i18n);
+            const parser = new FregataParser(encodedInput, 123, i18n);
 
             const { learners } = parser.parse(parser.getFileEncoding());
             expect(learners[0]).to.includes({
@@ -241,7 +239,7 @@ describe('Unit | Infrastructure | OrganizationLearnerParser', function () {
             ;Beatrix;The;Bride;Kiddo;Black Mamba;Féminin;01/01/1970;97422;;974;99100;AP;MEF1;Division 1;
             `;
             const encodedInput = iconv.encode(input, 'utf8');
-            const parser = new OrganizationLearnerParser(encodedInput, 123, i18n);
+            const parser = new FregataParser(encodedInput, 123, i18n);
             const error = await catchErr(parser.parse, parser)(parser.getFileEncoding());
             expect(error.meta[0].code).to.equal('FIELD_REQUIRED');
             expect(error.meta[0].meta).to.deep.equal({ field: 'Identifiant unique*', line: 2 });
@@ -257,7 +255,7 @@ describe('Unit | Infrastructure | OrganizationLearnerParser', function () {
               `;
 
               const encodedInput = iconv.encode(input, 'utf8');
-              const parser = new OrganizationLearnerParser(encodedInput, 123, i18n);
+              const parser = new FregataParser(encodedInput, 123, i18n);
 
               const error = await catchErr(parser.parse, parser)(parser.getFileEncoding());
 

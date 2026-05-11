@@ -1,12 +1,12 @@
 import iconv from 'iconv-lite';
 
-import { CommonCsvLearnerParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/common-csv-learner-parser.js';
+import { GenericParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/parsers/generic-parser.js';
 import { expect } from '../../../../../../test-helper.js';
 import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
-describe('Unit | Infrastructure | CommonCsvLearnerParser', function () {
+describe('Unit | Infrastructure | GenericParser', function () {
   context('buildParser', function () {
-    it('returns an instance of CommonCsvLearnerParser', function () {
+    it('returns an instance of GenericParser', function () {
       const input = `prénom
       Éçéà niño véga`;
       const encodedInput = iconv.encode(input, 'utf8');
@@ -32,9 +32,9 @@ describe('Unit | Infrastructure | CommonCsvLearnerParser', function () {
           acceptedEncoding: ['utf8'],
         },
       };
-      const parser = CommonCsvLearnerParser.buildParser({ buffer: encodedInput, importFormat });
+      const parser = GenericParser.buildParser({ buffer: encodedInput, importFormat });
 
-      expect(parser).to.be.instanceOf(CommonCsvLearnerParser);
+      expect(parser).to.be.instanceOf(GenericParser);
     });
   });
 
@@ -59,7 +59,7 @@ describe('Unit | Infrastructure | CommonCsvLearnerParser', function () {
     it('should throw an error if there is no acceptedEncoding', async function () {
       // given
       const encodedInput = iconv.encode(input, 'win1252');
-      const parser = CommonCsvLearnerParser.buildParser({ buffer: encodedInput, importFormat });
+      const parser = GenericParser.buildParser({ buffer: encodedInput, importFormat });
 
       // when
       const error = await catchErr(parser.getEncoding, parser)();
@@ -71,7 +71,7 @@ describe('Unit | Infrastructure | CommonCsvLearnerParser', function () {
     it('should not throw an error if encoding is supported', async function () {
       // given
       const encodedInput = iconv.encode(input, 'utf8');
-      const parser = CommonCsvLearnerParser.buildParser({ buffer: encodedInput, importFormat });
+      const parser = GenericParser.buildParser({ buffer: encodedInput, importFormat });
 
       // when
       const call = () => parser.getEncoding();
@@ -82,7 +82,7 @@ describe('Unit | Infrastructure | CommonCsvLearnerParser', function () {
     it('should not throw an error if encoding is included in multiple supported encoding', async function () {
       // given
       const encodedInput = iconv.encode(input, 'utf8');
-      const parser = CommonCsvLearnerParser.buildParser({
+      const parser = GenericParser.buildParser({
         buffer: encodedInput,
         importFormat: {
           config: {
@@ -128,7 +128,7 @@ describe('Unit | Infrastructure | CommonCsvLearnerParser', function () {
       const input = `nom\\prénom\\
       Beatrix\\The\\`;
       const encodedInput = iconv.encode(input, 'utf8');
-      const parser = CommonCsvLearnerParser.buildParser({ buffer: encodedInput, importFormat });
+      const parser = GenericParser.buildParser({ buffer: encodedInput, importFormat });
 
       // when
       const error = await catchErr(parser.parse, parser)('utf8');
@@ -143,7 +143,7 @@ describe('Unit | Infrastructure | CommonCsvLearnerParser', function () {
         const input = `nom;prénom;GodZilla
       Beatrix;The;cheese;of;truth`;
         const encodedInput = iconv.encode(input, 'utf8');
-        const parser = CommonCsvLearnerParser.buildParser({ buffer: encodedInput, importFormat });
+        const parser = GenericParser.buildParser({ buffer: encodedInput, importFormat });
         // when
         const error = await catchErr(parser.parse, parser)('utf8');
 
@@ -156,7 +156,7 @@ describe('Unit | Infrastructure | CommonCsvLearnerParser', function () {
         const input = `nom;GodZilla;prénom
         Beatrix;`;
         const encodedInput = iconv.encode(input, 'utf8');
-        const parser = CommonCsvLearnerParser.buildParser({ buffer: encodedInput, importFormat });
+        const parser = GenericParser.buildParser({ buffer: encodedInput, importFormat });
         // when
         const error = await catchErr(parser.parse, parser)('utf8');
 
@@ -170,7 +170,7 @@ describe('Unit | Infrastructure | CommonCsvLearnerParser', function () {
       const input = `prénom;
       The;`;
       const encodedInput = iconv.encode(input, 'utf8');
-      const parser = CommonCsvLearnerParser.buildParser({ buffer: encodedInput, importFormat });
+      const parser = GenericParser.buildParser({ buffer: encodedInput, importFormat });
 
       // when
       const errors = await catchErr(parser.parse, parser)('utf8');
@@ -188,7 +188,7 @@ describe('Unit | Infrastructure | CommonCsvLearnerParser', function () {
       const input = `nom;Gidorah;King Kong;GodZilla
       The;Best;Of;All`;
       const encodedInput = iconv.encode(input, 'utf8');
-      const parser = CommonCsvLearnerParser.buildParser({ buffer: encodedInput, importFormat });
+      const parser = GenericParser.buildParser({ buffer: encodedInput, importFormat });
 
       // when
       const result = parser.parse('utf8');
@@ -234,7 +234,7 @@ describe('Unit | Infrastructure | CommonCsvLearnerParser', function () {
         Beatrix;The
         `;
         const encodedInput = iconv.encode(input, 'utf8');
-        const parser = CommonCsvLearnerParser.buildParser({ buffer: encodedInput, importFormat });
+        const parser = GenericParser.buildParser({ buffer: encodedInput, importFormat });
 
         // when
         const call = () => parser.parse('utf8');
@@ -249,7 +249,7 @@ describe('Unit | Infrastructure | CommonCsvLearnerParser', function () {
         `;
 
         const encodedInput = iconv.encode(input, 'utf8');
-        const parser = CommonCsvLearnerParser.buildParser({ buffer: encodedInput, importFormat });
+        const parser = GenericParser.buildParser({ buffer: encodedInput, importFormat });
 
         // when
         const result = parser.parse('utf8');
@@ -268,7 +268,7 @@ describe('Unit | Infrastructure | CommonCsvLearnerParser', function () {
         Godzilla;King of monsters
         `;
         const encodedInput = iconv.encode(input, 'utf8');
-        const parser = CommonCsvLearnerParser.buildParser({ buffer: encodedInput, importFormat });
+        const parser = GenericParser.buildParser({ buffer: encodedInput, importFormat });
 
         // when
         const result = parser.parse('utf8');

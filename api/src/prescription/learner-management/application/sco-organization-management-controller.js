@@ -4,7 +4,7 @@ import { FileValidationError } from '../../../../src/shared/domain/errors.js';
 import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { usecases } from '../domain/usecases/index.js';
-import { OrganizationLearnerParser } from '../infrastructure/serializers/csv/organization-learner-parser.js';
+import { FregataParser } from '../infrastructure/serializers/csv/parsers/fregata-parser.js';
 import * as scoOrganizationLearnerSerializer from '../infrastructure/serializers/jsonapi/sco-organization-learner-serializer.js';
 
 const INVALID_FILE_EXTENSION_ERROR = 'INVALID_FILE_EXTENSION';
@@ -28,7 +28,7 @@ const importOrganizationLearnersFromSIECLE = async function (request, h, depende
       });
     } else if (format === 'csv') {
       await usecases.uploadCsvFile({
-        Parser: OrganizationLearnerParser,
+        Parser: FregataParser,
         payload: request.payload,
         organizationId,
         userId,

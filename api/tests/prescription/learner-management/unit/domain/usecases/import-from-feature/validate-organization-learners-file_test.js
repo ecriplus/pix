@@ -4,7 +4,7 @@ import { AggregateImportError } from '../../../../../../../src/prescription/lear
 import { ImportCommonOrganizationLearnersJob } from '../../../../../../../src/prescription/learner-management/domain/models/ImportCommonOrganizationLearnersJob.js';
 import { ImportOrganizationLearnerSet } from '../../../../../../../src/prescription/learner-management/domain/models/ImportOrganizationLearnerSet.js';
 import { validateOrganizationLearnersFile } from '../../../../../../../src/prescription/learner-management/domain/usecases/import-from-feature/validate-organization-learners-file.js';
-import { CommonCsvLearnerParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/common-csv-learner-parser.js';
+import { GenericParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/parsers/generic-parser.js';
 import { expect } from '../../../../../../test-helper.js';
 import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
@@ -59,7 +59,7 @@ describe('Unit | UseCase | validateOrganizationLearnersFile', function () {
       save: sinon.stub(),
     };
 
-    sinon.stub(CommonCsvLearnerParser, 'buildParser');
+    sinon.stub(GenericParser, 'buildParser');
 
     commonCsvLearnerParserStub = {
       parse: sinon.stub(),
@@ -93,9 +93,7 @@ describe('Unit | UseCase | validateOrganizationLearnersFile', function () {
 
       dependencieStub.getDataBuffer.withArgs(dataStream).resolves(dataBuffer);
 
-      CommonCsvLearnerParser.buildParser
-        .withArgs({ buffer: dataBuffer, importFormat })
-        .returns(commonCsvLearnerParserStub);
+      GenericParser.buildParser.withArgs({ buffer: dataBuffer, importFormat }).returns(commonCsvLearnerParserStub);
 
       commonCsvLearnerParserStub.parse.withArgs(fileEncoding).returns(parsedLearners);
 

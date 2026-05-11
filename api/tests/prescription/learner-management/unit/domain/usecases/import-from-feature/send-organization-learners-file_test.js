@@ -4,7 +4,7 @@ import { AggregateImportError } from '../../../../../../../src/prescription/lear
 import { OrganizationImportStatus } from '../../../../../../../src/prescription/learner-management/domain/models/OrganizationImportStatus.js';
 import { ValidateCommonOrganizationImportFileJob } from '../../../../../../../src/prescription/learner-management/domain/models/ValidateCommonOrganizationImportFileJob.js';
 import { sendOrganizationLearnersFile } from '../../../../../../../src/prescription/learner-management/domain/usecases/import-from-feature/send-organization-learners-file.js';
-import { CommonCsvLearnerParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/common-csv-learner-parser.js';
+import { GenericParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/parsers/generic-parser.js';
 import { expect } from '../../../../../../test-helper.js';
 import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
@@ -78,7 +78,7 @@ describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
       upload: sinon.stub(),
     };
 
-    sinon.stub(CommonCsvLearnerParser, 'buildParser');
+    sinon.stub(GenericParser, 'buildParser');
     sinon
       .stub(OrganizationImportStatus, 'create')
       .withArgs({ createdBy: userId, organizationId })
@@ -97,9 +97,7 @@ describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
       dependencieStub.createReadStream.withArgs(uploadedFilepath).returns(dataStream);
       dependencieStub.getDataBuffer.withArgs(dataStream).resolves(dataBuffer);
 
-      CommonCsvLearnerParser.buildParser
-        .withArgs({ buffer: dataBuffer, importFormat })
-        .returns(commonCsvLearnerParserStub);
+      GenericParser.buildParser.withArgs({ buffer: dataBuffer, importFormat }).returns(commonCsvLearnerParserStub);
 
       commonCsvLearnerParserStub.getEncoding.returns(fileEncoding);
 
@@ -229,9 +227,7 @@ describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
         dependencieStub.createReadStream.withArgs(uploadedFilepath).returns(dataStream);
         dependencieStub.getDataBuffer.withArgs(dataStream).resolves(dataBuffer);
 
-        CommonCsvLearnerParser.buildParser
-          .withArgs({ buffer: dataBuffer, importFormat })
-          .returns(commonCsvLearnerParserStub);
+        GenericParser.buildParser.withArgs({ buffer: dataBuffer, importFormat }).returns(commonCsvLearnerParserStub);
 
         commonCsvLearnerParserStub.getEncoding.returns(fileEncoding);
 

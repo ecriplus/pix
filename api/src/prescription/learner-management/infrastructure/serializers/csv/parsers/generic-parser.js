@@ -1,7 +1,7 @@
 import iconv from 'iconv-lite';
 import papa from 'papaparse';
 
-import { CsvImportError } from '../../../../../shared/domain/errors.js';
+import { CsvImportError } from '../../../../../../shared/domain/errors.js';
 
 const ERRORS = {
   ENCODING_NOT_SUPPORTED: 'ENCODING_NOT_SUPPORTED',
@@ -22,13 +22,13 @@ const PARSING_OPTIONS = {
   transformHeader: (header) => header.trim(),
 };
 
-class CommonCsvLearnerParser {
+class GenericParser {
   #input;
   #errors;
 
   // compute heading
   #columns;
-  // compute support_enconding
+  // compute support_encoding
   #supportedEncodings;
 
   constructor({ buffer, importFormat = {} }) {
@@ -38,13 +38,13 @@ class CommonCsvLearnerParser {
     // compute heading
     this.#columns = importFormat.config.headers;
 
-    // compute support_enconding
+    // compute support_encoding
     this.#supportedEncodings = importFormat.config.acceptedEncoding;
     this.#supportedEncodings.sort((encoding) => (encoding === 'utf8' ? -1 : 1));
   }
 
   static buildParser() {
-    return new CommonCsvLearnerParser(...arguments);
+    return new GenericParser(...arguments);
   }
 
   parse(encoding) {
@@ -114,4 +114,4 @@ class CommonCsvLearnerParser {
   }
 }
 
-export { CommonCsvLearnerParser };
+export { GenericParser };

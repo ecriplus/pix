@@ -1,9 +1,9 @@
 import iconv from 'iconv-lite';
 import papa from 'papaparse';
 
-import { CsvImportError } from '../../../../../shared/domain/errors.js';
-import { convertDateValue } from '../../../../../shared/infrastructure/utils/date-utils.js';
-import { AggregateImportError } from '../../../domain/errors.js';
+import { CsvImportError } from '../../../../../../shared/domain/errors.js';
+import { convertDateValue } from '../../../../../../shared/infrastructure/utils/date-utils.js';
+import { AggregateImportError } from '../../../../domain/errors.js';
 
 const ERRORS = {
   ENCODING_NOT_SUPPORTED: 'ENCODING_NOT_SUPPORTED',
@@ -31,7 +31,7 @@ const PARSING_OPTIONS = {
   },
 };
 
-class CsvOrganizationLearnerParser {
+class SharedCsvParser {
   constructor(input, organizationId, columns, learnerSet) {
     this._input = input;
     this._organizationId = organizationId;
@@ -206,4 +206,4 @@ class CsvOrganizationLearnerParser {
   }
 }
 
-export { CsvOrganizationLearnerParser };
+export { SharedCsvParser };
