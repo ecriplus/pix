@@ -173,6 +173,7 @@ async function createStages({
   includeFirstSkill = false,
   countStages,
   shouldInsertPrescriberTitleAndDescription,
+  customMessage,
 }) {
   const values = [0];
   const stageIds = [];
@@ -186,6 +187,7 @@ async function createStages({
         value: null,
         isFirstSkill: true,
         shouldInsertPrescriberTitleAndDescription,
+        customMessage,
       }),
     );
     --currentCountStages;
@@ -210,6 +212,7 @@ async function createStages({
         value,
         isFirstSkill: false,
         shouldInsertPrescriberTitleAndDescription,
+        customMessage,
       }),
     );
   }
@@ -283,11 +286,12 @@ function _createStage({
   value,
   isFirstSkill,
   shouldInsertPrescriberTitleAndDescription,
+  customMessage,
 }) {
   const stageValueStr = isFirstSkill ? 'premier acquis' : `"${value}"`;
   return databaseBuilder.factory.buildStage({
     targetProfileId,
-    message: `Message du palier ${stageValueStr} pour le profil cible ${targetProfileId}`,
+    message: customMessage ?? `Message du palier ${stageValueStr} pour le profil cible ${targetProfileId}`,
     title: `Titre du palier ${stageValueStr} pour le profil cible ${targetProfileId}`,
     level: isFirstSkill ? null : type === 'LEVEL' ? value : null,
     threshold: isFirstSkill ? null : type === 'LEVEL' ? null : value,

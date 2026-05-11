@@ -2159,7 +2159,11 @@
         },
         "see-trainings": "Ver los cursos",
         "shared-message": "Tus resultados se enviaron el {date} a las {time}.",
-        "thanks": "¡Gracias, {name}, por participar!"
+        "staged-message": {
+          "show-less": "Reducir",
+          "show-more": "Ver más"
+        },
+        "thanks": "¡Gracias {name}\n por participar!"
       },
       "improve": {
         "description": "Puedes volver a intentar algunas de las preguntas",

@@ -2178,7 +2178,11 @@
         },
         "see-trainings": "Voir les formations",
         "shared-message": "Vos résultats ont été envoyés le {date} à {time}.",
-        "thanks": "Merci {name} pour votre participation !"
+        "staged-message": {
+          "show-less": "Replier",
+          "show-more": "Afficher plus"
+        },
+        "thanks": "Merci {name}\n pour votre participation !"
       },
       "improve": {
         "description": "Vous pouvez retenter certaines questions",

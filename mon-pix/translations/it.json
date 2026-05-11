@@ -2170,7 +2170,11 @@
         },
         "see-trainings": "Vedere i corsi",
         "shared-message": "I risultati sono stati inviati da {date} a {time}.",
-        "thanks": "Grazie {name} per la vostra partecipazione!"
+        "staged-message": {
+          "show-less": "Riduci",
+          "show-more": "Mostra di più"
+        },
+        "thanks": "Grazie {name}\n per la vostra partecipazione!"
       },
       "improve": {
         "description": "È possibile riprovare alcune delle domande",

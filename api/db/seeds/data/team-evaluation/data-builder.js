@@ -144,6 +144,69 @@ async function createCoreTargetProfile(databaseBuilder) {
       ],
     },
   });
+  await tooling.targetProfile.createBadge({
+    databaseBuilder,
+    targetProfileId,
+    cappedTubesDTO,
+    badgeId: 703,
+    altMessage: '1 RT certifiable, acquis',
+    imageUrl: 'https://assets.pix.org/badges/Production-de-ressources.svg',
+    message: '1 RT certifiable, acquis',
+    title: '1 RT certifiable, acquis',
+    key: 'SOME_KEY_FOR_RT_703',
+    isCertifiable: true,
+    isAlwaysVisible: true,
+    configBadge: {
+      criteria: [
+        {
+          scope: 'CampaignParticipation',
+          threshold: 0,
+        },
+      ],
+    },
+  });
+  await tooling.targetProfile.createBadge({
+    databaseBuilder,
+    targetProfileId,
+    cappedTubesDTO,
+    badgeId: 704,
+    altMessage: '1 RT certifiable, acquis',
+    imageUrl: 'https://assets.pix.org/badges/ML_navigation.svg',
+    message: '1 RT certifiable, acquis',
+    title: '1 RT certifiable, acquis',
+    key: 'SOME_KEY_FOR_RT_704',
+    isCertifiable: true,
+    isAlwaysVisible: true,
+    configBadge: {
+      criteria: [
+        {
+          scope: 'CampaignParticipation',
+          threshold: 0,
+        },
+      ],
+    },
+  });
+  await tooling.targetProfile.createBadge({
+    databaseBuilder,
+    targetProfileId,
+    cappedTubesDTO,
+    badgeId: 705,
+    altMessage: '1 RT certifiable, acquis',
+    imageUrl: 'https://assets.pix.org/badges/Ma%C3%AEtre%20de%20la%20collaboration.svg',
+    message: '1 RT certifiable, acquis',
+    title: '1 RT certifiable, acquis',
+    key: 'SOME_KEY_FOR_RT_705',
+    isCertifiable: true,
+    isAlwaysVisible: true,
+    configBadge: {
+      criteria: [
+        {
+          scope: 'CampaignParticipation',
+          threshold: 0,
+        },
+      ],
+    },
+  });
   await tooling.targetProfile.createStages({
     databaseBuilder,
     targetProfileId,
@@ -151,6 +214,8 @@ async function createCoreTargetProfile(databaseBuilder) {
     type: 'LEVEL',
     countStages: 4,
     includeFirstSkill: true,
+    customMessage:
+      "Vous avez acquis une bonne compréhension des fondamentaux de l’intelligence artificielle. Quelques points restent à améliorer pour renforcer pour mieux utiliser cette nouvelle technologie. Votre score montre une bonne compréhension que vous avez de bonnes pratiques. Avec un peu plus d'entraînement, vous serez prêt à mieux communiquer avec une intelligence artificielle ",
   });
 }
 

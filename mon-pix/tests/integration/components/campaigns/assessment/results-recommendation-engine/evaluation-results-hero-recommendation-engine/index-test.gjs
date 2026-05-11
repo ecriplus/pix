@@ -1,4 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
+import { click, settled } from '@ember/test-helpers';
+import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl/test-support';
 import EvaluationResultsHeroRecommendationEngine from 'mon-pix/components/campaigns/assessment/results-recommendation-engine/evaluation-results-hero-recommendation-engine/index';
 import { module, test } from 'qunit';
@@ -12,16 +15,73 @@ module(
     setupIntlRenderingTest(hooks);
 
     module('global behaviour', function (hooks) {
-      let screen;
-
       hooks.beforeEach(async function () {
+        stubCurrentUserService(this.owner, { id: 1, firstName: 'Hermione' });
+      });
+
+      module('when screen is mobile', function () {
+        test('it display a separator', async function (assert) {
+          // given
+          const campaign = { organizationId: 1 };
+          const campaignParticipationResult = { masteryRate: 0.755 };
+
+          this.owner.register(
+            'service:media',
+            class MediaService extends Service {
+              isMobile = true;
+            },
+          );
+
+          // when
+          const screen = await render(
+            <template>
+              <EvaluationResultsHeroRecommendationEngine
+                @campaign={{campaign}}
+                @campaignParticipationResult={{campaignParticipationResult}}
+              />
+            </template>,
+          );
+
+          // then
+          assert.dom(screen.getByRole('separator')).exists();
+        });
+      });
+
+      module('when screen is not mobile', function () {
+        test('it does not display a separator', async function (assert) {
+          // given
+          const campaign = { organizationId: 1 };
+          const campaignParticipationResult = { masteryRate: 0.755 };
+
+          this.owner.register(
+            'service:media',
+            class MediaService extends Service {
+              isMobile = false;
+            },
+          );
+
+          // when
+          const screen = await render(
+            <template>
+              <EvaluationResultsHeroRecommendationEngine
+                @campaign={{campaign}}
+                @campaignParticipationResult={{campaignParticipationResult}}
+              />
+            </template>,
+          );
+
+          // then
+          assert.dom(screen.queryByRole('separator')).doesNotExist();
+        });
+      });
+
+      test('it displays a congratulation title', async function (assert) {
         // given
         const campaign = { organizationId: 1 };
         const campaignParticipationResult = { masteryRate: 0.755 };
-        stubCurrentUserService(this.owner, { id: 1, firstName: 'Hermione' });
 
         // when
-        screen = await render(
+        const screen = await render(
           <template>
             <EvaluationResultsHeroRecommendationEngine
               @campaign={{campaign}}
@@ -29,16 +89,32 @@ module(
             />
           </template>,
         );
-      });
 
-      test('it displays a congratulation title', async function (assert) {
         // then
         assert
-          .dom(screen.getByRole('heading', { name: t('pages.skill-review.hero.thanks', { name: 'Hermione' }) }))
+          .dom(
+            screen.getByRole('heading', {
+              name: t('pages.skill-review.hero.thanks', { name: 'Hermione' }).replace('\n', ''),
+            }),
+          )
           .exists();
       });
 
       test('it displays a rounded mastery rate', async function (assert) {
+        // given
+        const campaign = { organizationId: 1 };
+        const campaignParticipationResult = { masteryRate: 0.755 };
+
+        // when
+        const screen = await render(
+          <template>
+            <EvaluationResultsHeroRecommendationEngine
+              @campaign={{campaign}}
+              @campaignParticipationResult={{campaignParticipationResult}}
+            />
+          </template>,
+        );
+
         // then
         const masteryRateElementWithoutWhiteSpaceTrimmed = screen.getByText('76').textContent.replace(/\s/g, '').trim();
         assert.strictEqual(masteryRateElementWithoutWhiteSpaceTrimmed, '76%');
@@ -48,12 +124,17 @@ module(
 
     module('stages', function () {
       module('when there are multiple stages', function () {
-        test('it displays reached stage stars', async function (assert) {
+        test('it displays reached stage stars and message', async function (assert) {
           // given
           const campaign = { organizationId: 1 };
           const campaignParticipationResult = {
             hasReachedStage: true,
-            reachedStage: { reachedStage: 4, totalStage: 5 },
+            reachedStage: {
+              reachedStage: 4,
+              totalStage: 5,
+              message: 'existing message stages',
+              title: 'existing title stages',
+            },
           };
 
           // when
@@ -70,6 +151,9 @@ module(
           const stars = { acquired: 3, total: 4 };
           assert.dom(screen.getByText(t('pages.skill-review.stage.starsAcquired', stars))).exists();
           assert.dom(screen.getByText(t('pages.skill-review.stage.recommendedEngine.starsAcquired', stars))).exists();
+
+          assert.dom(screen.getByText(campaignParticipationResult.reachedStage.title)).exists();
+          assert.dom(screen.getByText(campaignParticipationResult.reachedStage.message)).exists();
         });
       });
 
@@ -178,6 +262,87 @@ module(
       });
     });
 
+    module('staged message toggle button', function (hooks) {
+      hooks.beforeEach(async function () {
+        // given
+        stubCurrentUserService(this.owner, { id: 1, firstName: 'Hermione' });
+
+        this.owner.register(
+          'service:media',
+          class MediaService extends Service {
+            @tracked isMobile = false;
+          },
+        );
+
+        const campaign = { organizationId: 1 };
+        const campaignParticipationResult = {
+          hasReachedStage: true,
+          reachedStage: {
+            reachedStage: 4,
+            totalStage: 5,
+            message: 'existing message',
+            title: 'existing title',
+          },
+        };
+
+        // when
+        this.screen = await render(
+          <template>
+            <EvaluationResultsHeroRecommendationEngine
+              @campaign={{campaign}}
+              @campaignParticipationResult={{campaignParticipationResult}}
+            />
+          </template>,
+        );
+      });
+
+      test('it does not display the toggle button when not on mobile', async function (assert) {
+        // then
+        assert
+          .dom(this.screen.queryByRole('button', { name: t('pages.skill-review.hero.staged-message.show-more') }))
+          .doesNotExist();
+      });
+
+      module('when on mobile and content overflows', function (hooks) {
+        hooks.beforeEach(async function () {
+          const contentEl = document.getElementById(
+            'evaluation-results-hero-recommendation-engine-staged-message-content',
+          );
+          Object.defineProperty(contentEl, 'scrollHeight', { value: 200, configurable: true });
+
+          const mediaService = this.owner.lookup('service:media');
+          mediaService.isMobile = true;
+          await settled();
+        });
+
+        test('it displays the "show-more" button', async function (assert) {
+          // then
+          assert
+            .dom(this.screen.getByRole('button', { name: t('pages.skill-review.hero.staged-message.show-more') }))
+            .exists();
+        });
+
+        test('clicking the button changes its label to "show-less"', async function (assert) {
+          // then
+          await click(this.screen.getByRole('button', { name: t('pages.skill-review.hero.staged-message.show-more') }));
+
+          assert
+            .dom(this.screen.getByRole('button', { name: t('pages.skill-review.hero.staged-message.show-less') }))
+            .exists();
+        });
+
+        test('clicking "show-less" toggles back to "show-more"', async function (assert) {
+          // then
+          await click(this.screen.getByRole('button', { name: t('pages.skill-review.hero.staged-message.show-more') }));
+          await click(this.screen.getByRole('button', { name: t('pages.skill-review.hero.staged-message.show-less') }));
+
+          assert
+            .dom(this.screen.getByRole('button', { name: t('pages.skill-review.hero.staged-message.show-more') }))
+            .exists();
+        });
+      });
+    });
+
     module('when campaign is a regular campaign', function () {
       module('when there are trainings', function () {
         test('it displays a see-trainings button', async function (assert) {
@@ -223,7 +388,7 @@ module(
             );
 
             // then
-            assert.dom(screen.getByRole('link', { name: t('navigation.back-to-homepage') })).exists();
+            assert.dom(screen.getByRole('link', { name: t('pages.skill-review.actions.back-to-pix') })).exists();
             assert
               .dom(screen.queryByRole('button', { name: t('pages.skill-review.hero.see-trainings') }))
               .doesNotExist();
