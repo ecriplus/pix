@@ -8,6 +8,10 @@
   margin: 0;
   padding: 0;
 
+  &__item, &__overflow {
+    margin-left: calc(var(--pix-spacing-4x) * -1);
+  }
+
   &__item {
     display: flex;
   }
@@ -23,10 +27,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 3.5rem;
+    width: 3.2rem;
     height: 3.5rem;
     color: var(--pix-primary-300);
     font-weight: var(--pix-font-bold);
-    background: url('/images/background/badge-overflow.svg') center no-repeat;
+    background-image: url('/images/background/badge-overflow.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
   }
 }

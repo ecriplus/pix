@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
-const MAX_VISIBLE_BADGES = 2;
+const MAX_VISIBLE_BADGES = 5;
 
 export default class AcquiredBadgesCompact extends Component {
   get visibleBadges() {

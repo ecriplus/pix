@@ -9,12 +9,15 @@ module(
   function (hooks) {
     setupIntlRenderingTest(hooks);
 
-    module('when there are 2 badges or fewer', function () {
+    module('when there are 5 badges or fewer', function () {
       test('it displays all badge icons', async function (assert) {
         // given
         const badges = [
           { altMessage: 'Badge 1', imageUrl: '/images/background/hexa-pix.svg', title: 'Badge 1' },
           { altMessage: 'Badge 2', imageUrl: '/images/background/hexa-pix.svg', title: 'Badge 2' },
+          { altMessage: 'Badge 3', imageUrl: '/images/background/hexa-pix.svg', title: 'Badge 3' },
+          { altMessage: 'Badge 4', imageUrl: '/images/background/hexa-pix.svg', title: 'Badge 4' },
+          { altMessage: 'Badge 5', imageUrl: '/images/background/hexa-pix.svg', title: 'Badge 5' },
         ];
 
         // when
@@ -23,7 +26,7 @@ module(
         // then
         assert.dom(screen.getByRole('img', { name: 'Badge 1' })).exists();
         assert.dom(screen.getByRole('img', { name: 'Badge 2' })).exists();
-        assert.strictEqual(screen.getAllByRole('listitem').length, 2);
+        assert.strictEqual(screen.getAllByRole('listitem').length, 5);
       });
 
       test('it does not display an overflow counter', async function (assert) {
@@ -31,6 +34,9 @@ module(
         const badges = [
           { altMessage: 'Badge 1', imageUrl: '/images/background/hexa-pix.svg', title: 'Badge 1' },
           { altMessage: 'Badge 2', imageUrl: '/images/background/hexa-pix.svg', title: 'Badge 2' },
+          { altMessage: 'Badge 3', imageUrl: '/images/background/hexa-pix.svg', title: 'Badge 3' },
+          { altMessage: 'Badge 4', imageUrl: '/images/background/hexa-pix.svg', title: 'Badge 4' },
+          { altMessage: 'Badge 5', imageUrl: '/images/background/hexa-pix.svg', title: 'Badge 5' },
         ];
 
         // when
@@ -38,18 +44,20 @@ module(
 
         // then
         assert.dom(screen.queryByText('+0')).doesNotExist();
-        assert.strictEqual(screen.getAllByRole('listitem').length, 2);
+        assert.strictEqual(screen.getAllByRole('listitem').length, 5);
       });
     });
 
-    module('when there are more than 2 badges', function () {
-      test('it displays only the first 2 badge icons', async function (assert) {
+    module('when there are more than 5 badges', function () {
+      test('it displays only the first 3 badge icons', async function (assert) {
         // given
         const badges = [
           { altMessage: 'Badge 1', imageUrl: '/images/background/hexa-pix.svg', title: 'Badge 1' },
           { altMessage: 'Badge 2', imageUrl: '/images/background/hexa-pix.svg', title: 'Badge 2' },
           { altMessage: 'Badge 3', imageUrl: '/images/background/hexa-pix.svg', title: 'Badge 3' },
           { altMessage: 'Badge 4', imageUrl: '/images/background/hexa-pix.svg', title: 'Badge 4' },
+          { altMessage: 'Badge 5', imageUrl: '/images/background/hexa-pix.svg', title: 'Badge 5' },
+          { altMessage: 'Badge 6', imageUrl: '/images/background/hexa-pix.svg', title: 'Badge 6' },
         ];
 
         // when
@@ -58,8 +66,10 @@ module(
         // then
         assert.dom(screen.getByRole('img', { name: 'Badge 1' })).exists();
         assert.dom(screen.getByRole('img', { name: 'Badge 2' })).exists();
-        assert.dom(screen.queryByRole('img', { name: 'Badge 3' })).doesNotExist();
-        assert.dom(screen.queryByRole('img', { name: 'Badge 4' })).doesNotExist();
+        assert.dom(screen.getByRole('img', { name: 'Badge 3' })).exists();
+        assert.dom(screen.getByRole('img', { name: 'Badge 4' })).exists();
+        assert.dom(screen.getByRole('img', { name: 'Badge 5' })).exists();
+        assert.dom(screen.queryByRole('img', { name: 'Badge 6' })).doesNotExist();
       });
 
       test('it displays an overflow counter with the remaining count', async function (assert) {
@@ -69,13 +79,15 @@ module(
           { altMessage: 'Badge 2', imageUrl: '/images/background/hexa-pix.svg', title: 'Badge 2' },
           { altMessage: 'Badge 3', imageUrl: '/images/background/hexa-pix.svg', title: 'Badge 3' },
           { altMessage: 'Badge 4', imageUrl: '/images/background/hexa-pix.svg', title: 'Badge 4' },
+          { altMessage: 'Badge 5', imageUrl: '/images/background/hexa-pix.svg', title: 'Badge 5' },
+          { altMessage: 'Badge 6', imageUrl: '/images/background/hexa-pix.svg', title: 'Badge 6' },
         ];
 
         // when
         const screen = await render(<template><AcquiredBadgesCompact @acquiredBadges={{badges}} /></template>);
 
         // then
-        assert.dom(screen.getByText('+2')).exists();
+        assert.dom(screen.getByText('+1')).exists();
       });
     });
   },
