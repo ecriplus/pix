@@ -1,4 +1,4 @@
-import { ImportFromSupJob } from '../../../../../../../src/prescription/learner-management/domain/models/ImportFromSupJob.js';
+import { ImportFromSupJob } from '../../../../../../../src/prescription/learner-management/domain/models/jobs/ImportFromSupJob.js';
 import { importSupOrganizationLearnersJobRepository } from '../../../../../../../src/prescription/learner-management/infrastructure/repositories/jobs/import-sup-organization-learners-job-repository.js';
 import { EMPTY_CORRELATION_INFO } from '../../../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { JobRetry } from '../../../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';

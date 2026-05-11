@@ -1,4 +1,4 @@
-import { ImportFromSiecleJob } from '../../../../../../../src/prescription/learner-management/domain/models/ImportFromSiecleJob.js';
+import { ImportFromSiecleJob } from '../../../../../../../src/prescription/learner-management/domain/models/jobs/ImportFromSiecleJob.js';
 import { importOrganizationLearnersJobRepository } from '../../../../../../../src/prescription/learner-management/infrastructure/repositories/jobs/import-organization-learners-job-repository.js';
 import { EMPTY_CORRELATION_INFO } from '../../../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { JobRetry } from '../../../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';

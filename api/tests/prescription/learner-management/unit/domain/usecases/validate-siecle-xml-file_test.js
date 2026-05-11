@@ -4,7 +4,7 @@ import {
   AggregateImportError,
   SiecleXmlImportError,
 } from '../../../../../../src/prescription/learner-management/domain/errors.js';
-import { ImportFromSiecleJob } from '../../../../../../src/prescription/learner-management/domain/models/ImportFromSiecleJob.js';
+import { ImportFromSiecleJob } from '../../../../../../src/prescription/learner-management/domain/models/jobs/ImportFromSiecleJob.js';
 import { validateSiecleXmlFile } from '../../../../../../src/prescription/learner-management/domain/usecases/validate-siecle-xml-file.js';
 import { SiecleParser } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/xml/siecle-parser.js';
 import { SiecleFileStreamer } from '../../../../../../src/prescription/learner-management/infrastructure/utils/xml/siecle-file-streamer.js';

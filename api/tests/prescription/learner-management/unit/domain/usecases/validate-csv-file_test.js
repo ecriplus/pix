@@ -3,8 +3,8 @@ import sinon from 'sinon';
 
 import { IMPORT_STATUSES } from '../../../../../../src/prescription/learner-management/domain/constants.js';
 import { AggregateImportError } from '../../../../../../src/prescription/learner-management/domain/errors.js';
-import { ImportFromFregataJob } from '../../../../../../src/prescription/learner-management/domain/models/ImportFromFregataJob.js';
-import { ImportFromSupJob } from '../../../../../../src/prescription/learner-management/domain/models/ImportFromSupJob.js';
+import { ImportFromFregataJob } from '../../../../../../src/prescription/learner-management/domain/models/jobs/ImportFromFregataJob.js';
+import { ImportFromSupJob } from '../../../../../../src/prescription/learner-management/domain/models/jobs/ImportFromSupJob.js';
 import { OrganizationImportStatus } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationImportStatus.js';
 import { validateCsvFile } from '../../../../../../src/prescription/learner-management/domain/usecases/validate-csv-file.js';
 import { SupHeader } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/headers/sup-header.js';

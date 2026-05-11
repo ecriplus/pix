@@ -1,7 +1,7 @@
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { OrganizationImportStatus } from '../models/OrganizationImportStatus.js';
-import { ValidateFregataFileJob } from '../models/ValidateFregataFileJob.js';
-import { ValidateSupFileJob } from '../models/ValidateSupFileJob.js';
+import { ValidateFregataFileJob } from '../models/jobs/ValidateFregataFileJob.js';
+import { ValidateSupFileJob } from '../models/jobs/ValidateSupFileJob.js';
 
 const uploadCsvFile = async function ({
   payload,

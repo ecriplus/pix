@@ -1,5 +1,5 @@
 import { JobRepository, JobRetry } from '../../../../../shared/infrastructure/repositories/jobs/job-repository.js';
-import { ValidateSupFileJob } from '../../../domain/models/ValidateSupFileJob.js';
+import { ValidateSupFileJob } from '../../../domain/models/jobs/ValidateSupFileJob.js';
 
 class ValidateSupFileJobRepository extends JobRepository {
   constructor() {

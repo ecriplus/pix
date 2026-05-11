@@ -4,7 +4,7 @@ import { withTransaction } from '../../../../../shared/domain/DomainTransaction.
 import { DomainError } from '../../../../../shared/domain/errors.js';
 import { getI18n } from '../../../../../shared/infrastructure/i18n/i18n.js';
 import { logger as l } from '../../../../../shared/infrastructure/utils/logger.js';
-import { ImportFromSupJob } from '../../../domain/models/ImportFromSupJob.js';
+import { ImportFromSupJob } from '../../../domain/models/jobs/ImportFromSupJob.js';
 import { usecases } from '../../../domain/usecases/index.js';
 
 class ImportFromSupJobController extends JobController {

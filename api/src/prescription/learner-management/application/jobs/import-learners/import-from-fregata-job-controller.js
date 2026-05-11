@@ -3,7 +3,7 @@ import { config } from '../../../../../shared/config.js';
 import { DomainError } from '../../../../../shared/domain/errors.js';
 import { getI18n } from '../../../../../shared/infrastructure/i18n/i18n.js';
 import { logger as l } from '../../../../../shared/infrastructure/utils/logger.js';
-import { ImportFromFregataJob } from '../../../domain/models/ImportFromFregataJob.js';
+import { ImportFromFregataJob } from '../../../domain/models/jobs/ImportFromFregataJob.js';
 import { usecases } from '../../../domain/usecases/index.js';
 
 class ImportFromFregataJobController extends JobController {

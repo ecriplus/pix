@@ -3,7 +3,7 @@ import { config } from '../../../../../shared/config.js';
 import { DomainError } from '../../../../../shared/domain/errors.js';
 import { getI18n } from '../../../../../shared/infrastructure/i18n/i18n.js';
 import { logger as l } from '../../../../../shared/infrastructure/utils/logger.js';
-import { ValidateSupFileJob } from '../../../domain/models/ValidateSupFileJob.js';
+import { ValidateSupFileJob } from '../../../domain/models/jobs/ValidateSupFileJob.js';
 import { usecases } from '../../../domain/usecases/index.js';
 import { SupParser } from '../../../infrastructure/serializers/csv/parsers/sup-parser.js';
 

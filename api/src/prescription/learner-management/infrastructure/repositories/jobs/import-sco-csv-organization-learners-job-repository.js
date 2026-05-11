@@ -1,5 +1,5 @@
 import { JobRepository, JobRetry } from '../../../../../shared/infrastructure/repositories/jobs/job-repository.js';
-import { ImportFromFregataJob } from '../../../domain/models/ImportFromFregataJob.js';
+import { ImportFromFregataJob } from '../../../domain/models/jobs/ImportFromFregataJob.js';
 
 class ImportFromFregataJobRepository extends JobRepository {
   constructor() {

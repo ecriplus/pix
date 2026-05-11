@@ -1,4 +1,4 @@
-import { ValidateSiecleFileJob } from '../../../../../../../src/prescription/learner-management/domain/models/ValidateSiecleFileJob.js';
+import { ValidateSiecleFileJob } from '../../../../../../../src/prescription/learner-management/domain/models/jobs/ValidateSiecleFileJob.js';
 import { validateOrganizationImportFileJobRepository } from '../../../../../../../src/prescription/learner-management/infrastructure/repositories/jobs/validate-organization-learners-import-file-job-repository.js';
 import { EMPTY_CORRELATION_INFO } from '../../../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { JobRetry } from '../../../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';

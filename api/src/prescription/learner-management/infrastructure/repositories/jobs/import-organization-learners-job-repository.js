@@ -1,5 +1,5 @@
 import { JobRepository, JobRetry } from '../../../../../shared/infrastructure/repositories/jobs/job-repository.js';
-import { ImportFromSiecleJob } from '../../../domain/models/ImportFromSiecleJob.js';
+import { ImportFromSiecleJob } from '../../../domain/models/jobs/ImportFromSiecleJob.js';
 
 class ImportFromSiecleJobRepository extends JobRepository {
   constructor() {

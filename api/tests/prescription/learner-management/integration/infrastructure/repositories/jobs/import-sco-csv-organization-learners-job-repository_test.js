@@ -1,4 +1,4 @@
-import { ImportFromFregataJob } from '../../../../../../../src/prescription/learner-management/domain/models/ImportFromFregataJob.js';
+import { ImportFromFregataJob } from '../../../../../../../src/prescription/learner-management/domain/models/jobs/ImportFromFregataJob.js';
 import { importScoCsvOrganizationLearnersJobRepository } from '../../../../../../../src/prescription/learner-management/infrastructure/repositories/jobs/import-sco-csv-organization-learners-job-repository.js';
 import { EMPTY_CORRELATION_INFO } from '../../../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { JobRetry } from '../../../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';

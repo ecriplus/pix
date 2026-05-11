@@ -2,7 +2,7 @@ import { JobController } from '../../../../../shared/application/jobs/job-contro
 import { config } from '../../../../../shared/config.js';
 import { DomainError } from '../../../../../shared/domain/errors.js';
 import { logger as l } from '../../../../../shared/infrastructure/utils/logger.js';
-import { ImportFromSiecleJob } from '../../../domain/models/ImportFromSiecleJob.js';
+import { ImportFromSiecleJob } from '../../../domain/models/jobs/ImportFromSiecleJob.js';
 import { usecases } from '../../../domain/usecases/index.js';
 
 class ImportFromSiecleJobController extends JobController {

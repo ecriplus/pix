@@ -4,7 +4,7 @@ import { GenericParser } from '../../../infrastructure/serializers/csv/parsers/g
 import { getDataBuffer } from '../../../infrastructure/utils/bufferize/get-data-buffer.js';
 import { AggregateImportError, OrganizationLearnerImportFormatNotFoundError } from '../../errors.js';
 import { OrganizationImportStatus } from '../../models/OrganizationImportStatus.js';
-import { ValidateGenericFileJob } from '../../models/ValidateGenericFileJob.js';
+import { ValidateGenericFileJob } from '../../models/jobs/ValidateGenericFileJob.js';
 
 const sendOrganizationLearnersFile = async function ({
   payload,

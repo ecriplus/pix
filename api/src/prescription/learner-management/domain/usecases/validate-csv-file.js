@@ -1,6 +1,6 @@
 import { AggregateImportError } from '../errors.js';
-import { ImportFromFregataJob } from '../models/ImportFromFregataJob.js';
-import { ImportFromSupJob } from '../models/ImportFromSupJob.js';
+import { ImportFromFregataJob } from '../models/jobs/ImportFromFregataJob.js';
+import { ImportFromSupJob } from '../models/jobs/ImportFromSupJob.js';
 
 const validateCsvFile = async function ({
   Parser,
