@@ -8,156 +8,294 @@ import setupIntlRenderingTest from '../../../../helpers/setup-intl-rendering';
 module('Integration | Component | User certifications | List item | Hexagon', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  module('when certification is validated', function () {
-    test('displays the pix score and pix label', async function (assert) {
-      // given
-      const pixScore = 654;
-      const isValidated = true;
-      const framework = 'CORE';
-      const reachedMeshLevel = 'LEVEL_PRE_BEGINNER';
+  module('when the score hexagon is displayed', function () {
+    module('score', function () {
+      test('displays the pix score and the pix label when certification is validated', async function (assert) {
+        // given
+        const pixScore = 654;
 
-      // when
-      const screen = await render(
-        <template>
-          <Hexagon
-            @pixScore={{pixScore}}
-            @isValidated={{isValidated}}
-            @framework={{framework}}
-            @reachedMeshLevel={{reachedMeshLevel}}
-          />
-        </template>,
-      );
+        // when
+        const screen = await render(
+          <template>
+            <Hexagon @pixScore={{pixScore}} @isValidated={{true}} @framework="CORE" @certificateType="CERTIFICATE" />
+          </template>,
+        );
 
-      // then
-      assert.dom(screen.getByText('654')).exists();
-      assert.dom(screen.getByText(t('common.pix'))).exists();
+        // then
+        assert.dom(screen.getByText('654')).exists();
+        assert.dom(screen.getByText(t('common.pix'))).exists();
+      });
+
+      test('displays a dash and the pix label when certification is not validated', async function (assert) {
+        // given
+        const pixScore = 654;
+
+        // when
+        const screen = await render(
+          <template>
+            <Hexagon @pixScore={{pixScore}} @isValidated={{false}} @framework="CORE" @certificateType="CERTIFICATE" />
+          </template>,
+        );
+
+        // then
+        assert.dom(screen.getByText('-')).exists();
+        assert.dom(screen.getByText(t('common.pix'))).exists();
+      });
+    });
+
+    module('CSS classes', function () {
+      module('when framework is CORE', function () {
+        test('applies only the base hexagon class', async function (assert) {
+          // when
+          await render(
+            <template>
+              <Hexagon @pixScore={{500}} @isValidated={{true}} @framework="CORE" @certificateType="CERTIFICATE" />
+            </template>,
+          );
+
+          // then
+          assert.dom('[data-testid="pw-certification-card-result"]').hasClass('certification-result-hexagon');
+          assert
+            .dom('[data-testid="pw-certification-card-result"]')
+            .doesNotHaveClass('certification-result-hexagon--pix-plus-validated');
+          assert
+            .dom('[data-testid="pw-certification-card-result"]')
+            .doesNotHaveClass('certification-result-hexagon--pix-plus-not-validated');
+        });
+      });
+
+      module('when framework is CLEA', function () {
+        test('applies only the base hexagon class', async function (assert) {
+          // when
+          await render(
+            <template>
+              <Hexagon @pixScore={{500}} @isValidated={{true}} @framework="CLEA" @certificateType="CERTIFICATE" />
+            </template>,
+          );
+
+          // then
+          assert.dom('[data-testid="pw-certification-card-result"]').hasClass('certification-result-hexagon');
+          assert
+            .dom('[data-testid="pw-certification-card-result"]')
+            .doesNotHaveClass('certification-result-hexagon--pix-plus-validated');
+          assert
+            .dom('[data-testid="pw-certification-card-result"]')
+            .doesNotHaveClass('certification-result-hexagon--pix-plus-not-validated');
+        });
+      });
+
+      module('when certificate is an ATTESTATION', function () {
+        test('applies only the base hexagon class even with a Pix+ framework', async function (assert) {
+          // when
+          await render(
+            <template>
+              <Hexagon
+                @pixScore={{500}}
+                @isValidated={{true}}
+                @framework="DROIT"
+                @reachedMeshLevel="INDEPENDENT"
+                @certificateType="ATTESTATION"
+              />
+            </template>,
+          );
+
+          // then
+          assert.dom('[data-testid="pw-certification-card-result"]').hasClass('certification-result-hexagon');
+          assert
+            .dom('[data-testid="pw-certification-card-result"]')
+            .doesNotHaveClass('certification-result-hexagon--pix-plus-validated');
+          assert
+            .dom('[data-testid="pw-certification-card-result"]')
+            .doesNotHaveClass('certification-result-hexagon--pix-plus-not-validated');
+        });
+      });
+
+      module('when certificate is a Pix+ V3 with the ADMISSIBLE mesh level', function () {
+        test('applies the pix-plus-validated modifier', async function (assert) {
+          // when
+          await render(
+            <template>
+              <Hexagon
+                @pixScore={{500}}
+                @isValidated={{true}}
+                @framework="DROIT"
+                @reachedMeshLevel="ADMISSIBLE"
+                @certificateType="CERTIFICATE"
+              />
+            </template>,
+          );
+
+          // then
+          assert
+            .dom('[data-testid="pw-certification-card-result"]')
+            .hasClass('certification-result-hexagon--pix-plus-validated');
+          assert
+            .dom('[data-testid="pw-certification-card-result"]')
+            .doesNotHaveClass('certification-result-hexagon--pix-plus-not-validated');
+        });
+      });
+
+      module('when certificate is a Pix+ V3 with no reached mesh level', function () {
+        test('applies the pix-plus-not-validated modifier', async function (assert) {
+          // when
+          await render(
+            <template>
+              <Hexagon
+                @pixScore={{500}}
+                @isValidated={{false}}
+                @framework="DROIT"
+                @reachedMeshLevel={{null}}
+                @certificateType="CERTIFICATE"
+              />
+            </template>,
+          );
+
+          // then
+          assert
+            .dom('[data-testid="pw-certification-card-result"]')
+            .hasClass('certification-result-hexagon--pix-plus-not-validated');
+          assert
+            .dom('[data-testid="pw-certification-card-result"]')
+            .doesNotHaveClass('certification-result-hexagon--pix-plus-validated');
+        });
+      });
     });
   });
 
-  module('when certification is not validated', function () {
-    test('displays a dash and pix label for core scope', async function (assert) {
-      // given
-      const pixScore = 654;
-      const isValidated = false;
-      const framework = 'CORE';
-      const reachedMeshLevel = 'LEVEL_PRE_BEGINNER';
-
-      // when
-      const screen = await render(
-        <template>
-          <Hexagon
-            @pixScore={{pixScore}}
-            @isValidated={{isValidated}}
-            @framework={{framework}}
-            @reachedMeshLevel={{reachedMeshLevel}}
-          />
-        </template>,
-      );
-
-      // then
-      assert.dom(screen.getByText('-')).exists();
-      assert.dom(screen.getByText(t('common.pix'))).exists();
-    });
-  });
-
-  module('hexagon CSS classes', function () {
-    test('has only base class for CORE framework', async function (assert) {
-      // given
-      const framework = 'CORE';
-      const reachedMeshLevel = 'LEVEL_PRE_BEGINNER';
-      const isValidated = true;
-      const pixScore = 500;
-
-      // when
-      await render(
-        <template>
-          <Hexagon
-            @pixScore={{pixScore}}
-            @isValidated={{isValidated}}
-            @framework={{framework}}
-            @reachedMeshLevel={{reachedMeshLevel}}
-          />
-        </template>,
-      );
-
-      // then
-      assert.dom('[data-testid="pw-certification-card-result"]').hasClass('certification-item__hexagon');
-      assert
-        .dom('[data-testid="pw-certification-card-result"]')
-        .doesNotHaveClass('certification-item__hexagon--pix-plus-validated');
-      assert
-        .dom('[data-testid="pw-certification-card-result"]')
-        .doesNotHaveClass('certification-item__hexagon--pix-plus-not-validated');
-    });
-
-    test('has only base class for CLEA framework', async function (assert) {
-      // given
-      const framework = 'CLEA';
-      const reachedMeshLevel = 'LEVEL_ADVANCED_5';
-      const isValidated = true;
-      const pixScore = 500;
-
-      // when
-      await render(
-        <template>
-          <Hexagon
-            @pixScore={{pixScore}}
-            @isValidated={{isValidated}}
-            @framework={{framework}}
-            @reachedMeshLevel={{reachedMeshLevel}}
-          />
-        </template>,
-      );
-
-      // then
-      assert.dom('[data-testid="pw-certification-card-result"]').hasClass('certification-item__hexagon');
-      assert
-        .dom('[data-testid="pw-certification-card-result"]')
-        .doesNotHaveClass('certification-item__hexagon--pix-plus-validated');
-      assert
-        .dom('[data-testid="pw-certification-card-result"]')
-        .doesNotHaveClass('certification-item__hexagon--pix-plus-not-validated');
-    });
-
-    test('has validated class for Pix+ v3 with a reachedMeshLevel', async function (assert) {
+  module('when the badge image is displayed', function () {
+    test('renders the badge image with the framework and reached mesh level in the URL', async function (assert) {
       // when
       await render(
         <template>
           <Hexagon
             @isValidated={{true}}
+            @framework="EDU_2ND_DEGRE"
+            @reachedMeshLevel="EXPERT"
+            @certificateType="CERTIFICATE"
+            @badgeUrl="https://exmaple-asset.org/badges-certifies/v3/edu_2nd_degre/expert.svg"
+          />
+        </template>,
+      );
+
+      // then
+      assert.dom('img').exists();
+      assert.dom('img').hasAttribute('src', /\/badges-certifies\/v3\/edu_2nd_degre\/expert\.svg$/);
+    });
+
+    test('does not render the score hexagon', async function (assert) {
+      // when
+      await render(
+        <template>
+          <Hexagon
+            @pixScore={{500}}
+            @isValidated={{true}}
             @framework="DROIT"
-            @reachedMeshLevel="LEVEL_INDEPENDENT"
+            @reachedMeshLevel="INDEPENDENT"
+            @certificateType="CERTIFICATE"
+            @badgeUrl="super-url"
+          />
+        </template>,
+      );
+
+      // then
+      assert.dom('[data-testid="pw-certification-card-result"]').doesNotExist();
+    });
+  });
+
+  module('when the badge image is not displayed', function () {
+    test('falls back to the score hexagon for an ATTESTATION', async function (assert) {
+      // when
+      await render(
+        <template>
+          <Hexagon
+            @pixScore={{500}}
+            @isValidated={{true}}
+            @framework="DROIT"
+            @reachedMeshLevel="INDEPENDENT"
+            @certificateType="ATTESTATION"
+          />
+        </template>,
+      );
+
+      // then
+      assert.dom('img').doesNotExist();
+      assert.dom('[data-testid="pw-certification-card-result"]').exists();
+    });
+
+    test('falls back to the score hexagon for a CORE framework', async function (assert) {
+      // when
+      await render(
+        <template>
+          <Hexagon
+            @pixScore={{500}}
+            @isValidated={{true}}
+            @framework="CORE"
+            @reachedMeshLevel="INDEPENDENT"
             @certificateType="CERTIFICATE"
           />
         </template>,
       );
 
       // then
-      assert
-        .dom('[data-testid="pw-certification-card-result"]')
-        .hasClass('certification-item__hexagon--pix-plus-validated');
+      assert.dom('img').doesNotExist();
+      assert.dom('[data-testid="pw-certification-card-result"]').exists();
     });
 
-    test('has not-validated class for Pix+ v3 with null reachedMeshLevel', async function (assert) {
-      // given
-      const reachedMeshLevel = null;
-
+    test('falls back to the score hexagon for a CLEA framework', async function (assert) {
       // when
       await render(
         <template>
           <Hexagon
+            @pixScore={{500}}
             @isValidated={{true}}
-            @framework="DROIT"
-            @reachedMeshLevel={{reachedMeshLevel}}
+            @framework="CLEA"
+            @reachedMeshLevel="INDEPENDENT"
             @certificateType="CERTIFICATE"
           />
         </template>,
       );
 
       // then
-      assert
-        .dom('[data-testid="pw-certification-card-result"]')
-        .hasClass('certification-item__hexagon--pix-plus-not-validated');
+      assert.dom('img').doesNotExist();
+      assert.dom('[data-testid="pw-certification-card-result"]').exists();
+    });
+
+    test('falls back to the score hexagon when reachedMeshLevel is null', async function (assert) {
+      // when
+      await render(
+        <template>
+          <Hexagon
+            @pixScore={{500}}
+            @isValidated={{true}}
+            @framework="DROIT"
+            @reachedMeshLevel={{null}}
+            @certificateType="CERTIFICATE"
+          />
+        </template>,
+      );
+
+      // then
+      assert.dom('img').doesNotExist();
+      assert.dom('[data-testid="pw-certification-card-result"]').exists();
+    });
+
+    test('falls back to the score hexagon when reachedMeshLevel is ADMISSIBLE', async function (assert) {
+      // when
+      await render(
+        <template>
+          <Hexagon
+            @pixScore={{500}}
+            @isValidated={{true}}
+            @framework="DROIT"
+            @reachedMeshLevel="ADMISSIBLE"
+            @certificateType="CERTIFICATE"
+          />
+        </template>,
+      );
+
+      // then
+      assert.dom('img').doesNotExist();
+      assert.dom('[data-testid="pw-certification-card-result"]').exists();
     });
   });
 });

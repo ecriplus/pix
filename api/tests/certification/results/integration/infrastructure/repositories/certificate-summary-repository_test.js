@@ -268,6 +268,56 @@ describe('Integration | Infrastructure | Repository | Certification summary', fu
         });
       });
 
+      describe('when the user has a Pix+ EDU certification with an external jury result', function () {
+        it('should return an array with the certificate summary using the external jury level', async function () {
+          // given
+          const session = databaseBuilder.factory.buildSession({
+            certificationCenter: 'Centre de certif pix',
+          });
+          const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
+            sessionId: session.id,
+            framework: Frameworks.EDU_2ND_DEGRE,
+            version: AlgorithmEngineVersion.V3,
+          });
+          const assessmentResult = databaseBuilder.factory.buildAssessmentResult({
+            status: AssessmentResult.status.VALIDATED,
+            commentForCandidate: 'blabla',
+            reachedMeshIndex: 0,
+            eduV3ExternalJuryResult: 'EXPERT',
+          });
+          databaseBuilder.factory.buildCertificationCourseLastAssessmentResult({
+            certificationCourseId: certificationCourse.id,
+            lastAssessmentResultId: assessmentResult.id,
+          });
+          await databaseBuilder.commit();
+
+          // when
+          const certificationTaken = await certificateSummaryRepository.findByUserId({
+            userId: certificationCourse.userId,
+          });
+
+          // then
+          expect(certificationTaken).to.deepEqualArray([
+            domainBuilder.certification.results.buildCertificateSummary({
+              id: certificationCourse.id,
+              certificationCenterName: session.certificationCenter,
+              certificationFramework: certificationCourse.framework,
+              certificationStartedAt: certificationCourse.createdAt,
+              extraCertificationStatus: EXTRA_CERTIFICATE_STATUSES.NOT_APPLICABLE,
+              juryComment: {
+                commentByAutoJury: undefined,
+                fallbackComment: assessmentResult.commentForCandidate,
+              },
+              pixScore: assessmentResult.pixScore,
+              status: CERTIFICATE_STATUSES.VALIDATED,
+              verificationCode: certificationCourse.verificationCode,
+              certificateType: CERTIFICATE_TYPES.CERTIFICATE,
+              reachedMeshLevel: 'LEVEL_EXPERT',
+            }),
+          ]);
+        });
+      });
+
       describe('when the user has a double certifications taken', function () {
         it('should return an array with the certificate summary', async function () {
           // given

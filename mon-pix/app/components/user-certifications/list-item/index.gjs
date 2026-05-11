@@ -100,6 +100,7 @@ export default class ListItem extends Component {
           </p>
         </div>
         <Hexagon
+          @size="small"
           @isValidated={{@certificateSummary.isValidated}}
           @pixScore={{@certificateSummary.pixScore}}
           @status={{@certificateSummary.status}}
@@ -107,6 +108,7 @@ export default class ListItem extends Component {
           @reachedMeshLevel={{@certificateSummary.reachedMeshLevel}}
           @framework={{@certificateSummary.certificationFramework}}
           @certificateType={{@certificateSummary.certificateType}}
+          @badgeUrl={{@certificateSummary.badgeUrl}}
         />
       </div>
       {{#if this.notObtainedCertificationWithComment}}

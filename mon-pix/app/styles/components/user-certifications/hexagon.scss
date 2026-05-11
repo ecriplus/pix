@@ -1,0 +1,58 @@
+@use 'pix-design-tokens/typography';
+
+.certification-result-hexagon {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  background-image: url('/images/certificate/pix-score-hexagon.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+
+  &--small {
+    width: 120px;
+    height: 120px;
+  }
+
+  &--pix-plus-validated {
+    background-image: url('/images/certificate/pix-plus-hexagon-validated.svg');
+  }
+
+  &--pix-plus-not-validated {
+    background-image: url('/images/certificate/pix-plus-hexagon-not-validated.svg');
+  }
+
+  .score {
+    @extend %pix-title-xs;
+
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .pix {
+    @extend %pix-body-xs;
+
+    position: absolute;
+    top: 22%;
+    left: 50%;
+    text-transform: uppercase;
+    transform: translateX(-50%);
+  }
+
+  &--pix-plus-validated,
+  &--pix-plus-not-validated {
+    .pix {
+      display: none;
+    }
+  }
+}
+
+.certification-result-badge {
+  width: 120px;
+
+  &--small {
+    width: 90px;
+  }
+}

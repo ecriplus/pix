@@ -4,9 +4,10 @@
 
 .v3-pix-plus-certificate__infos-block {
   display: grid;
-    grid-template-columns: 1fr auto;
-    gap: var(--pix-spacing-12x);
-    align-items: center;
+  grid-template-columns: 1fr auto;
+  gap: var(--pix-spacing-12x);
+  align-items: center;
+  padding-right: max(var(--pix-spacing-6x), 4vw);
 
   @include breakpoints.device-is('mobile') {
     display: flex;
@@ -68,29 +69,11 @@
 }
 
 .v3-pix-plus-certificate__score {
-  text-align: center;
-}
-
-.v3-pix-plus-certificate-score__hexagon {
-  position: relative;
-  width: 11rem;
-  height: 12rem;
-  margin-bottom: var(--pix-spacing-1x);
-  background-image: url('/images/certificate/pix-plus-hexagon-validated.svg');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: contain;
-
-  .dash {
-    @extend %pix-title-l;
-
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    color: var(--pix-certif-500);
-    transform: translateY(-50%);
-  }
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: var(--pix-spacing-2x);
+  align-items: center;
 }
 
 .v3-pix-plus-certificate__results-infos-block {

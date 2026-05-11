@@ -4,11 +4,18 @@ import PixStepper from '@1024pix/pix-ui/components/pix-stepper';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
+import { eq } from 'ember-truth-helpers';
+import { CERTIFICATE_TYPES } from 'mon-pix/models/certificate-summary';
+
+import Hexagon from '../../user-certifications/list-item/hexagon';
 
 export default class PixPlusCertificate extends Component {
   @service intl;
+
+  @tracked eduCurrentStep = this.args.certificate.level === 'ADMISSIBLE' ? 2 : 3;
 
   get isEduCertification() {
     return this.args.certificate.certificationFramework.includes('EDU');
@@ -62,7 +69,11 @@ export default class PixPlusCertificate extends Component {
         </h2>
 
         {{#if this.isEduCertification}}
-          <PixStepper class="v3-pix-plus-certificate__stepper" @steps={{this.steps}} @currentStep={{2}} />
+          <PixStepper
+            class="v3-pix-plus-certificate__stepper"
+            @steps={{this.steps}}
+            @currentStep={{this.eduCurrentStep}}
+          />
         {{/if}}
 
         <div class="v3-pix-plus-certificate__details">
@@ -91,10 +102,14 @@ export default class PixPlusCertificate extends Component {
         </div>
       </div>
       <div class="v3-pix-plus-certificate__score">
-        <div class="v3-pix-plus-certificate-score__hexagon">
-          <strong class="dash">-</strong>
-        </div>
-        <PixTag @color="green">{{this.reachedMeshLabel}}</PixTag>
+        <Hexagon
+          @framework={{@certificate.certificationFramework}}
+          @certificateType={{CERTIFICATE_TYPES.CERTIFICATE}}
+          @reachedMeshLevel={{@certificate.level}}
+        />
+        {{#if (eq this.eduCurrentStep 2)}}
+          <PixTag @color="green">{{this.reachedMeshLabel}}</PixTag>
+        {{/if}}
       </div>
     </PixBlock>
 

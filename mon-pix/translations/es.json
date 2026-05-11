@@ -2413,15 +2413,21 @@
         },
         "EDU_1ER_DEGRE": {
           "ADMISSIBLE": "Admisible",
-          "BELOW_MINIMUM": "No admisible"
+          "ADVANCED": "Avanzado",
+          "BELOW_MINIMUM": "No admisible",
+          "EXPERT": "Experto"
         },
         "EDU_2ND_DEGRE": {
           "ADMISSIBLE": "Admisible",
-          "BELOW_MINIMUM": "No admisible"
+          "ADVANCED": "Avanzado",
+          "BELOW_MINIMUM": "No admisible",
+          "EXPERT": "Experto"
         },
         "EDU_CPE": {
           "ADMISSIBLE": "Admisible",
-          "BELOW_MINIMUM": "No admisible"
+          "ADVANCED": "Avanzado",
+          "BELOW_MINIMUM": "No admisible",
+          "EXPERT": "Experto"
         },
         "PRO_SANTE": {
           "ADVANCED": "Avanzado",

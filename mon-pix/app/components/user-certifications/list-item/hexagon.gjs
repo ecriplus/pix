@@ -11,15 +11,33 @@ export default class Hexagon extends Component {
     return !this.hasCoreScope && this.args.certificateType === CERTIFICATE_TYPES.CERTIFICATE;
   }
 
-  get classNames() {
-    const classes = ['certification-item__hexagon'];
+  get isSmall() {
+    return this.args.size === 'small';
+  }
+
+  get hexagonClassNames() {
+    const classes = ['certification-result-hexagon'];
 
     if (this.isPixPlusV3 && this.args.reachedMeshLevel != null) {
-      classes.push('certification-item__hexagon--pix-plus-validated');
+      classes.push('certification-result-hexagon--pix-plus-validated');
     }
 
     if (this.isPixPlusV3 && this.args.reachedMeshLevel === null) {
-      classes.push('certification-item__hexagon--pix-plus-not-validated');
+      classes.push('certification-result-hexagon--pix-plus-not-validated');
+    }
+
+    if (this.isSmall) {
+      classes.push('certification-result-hexagon--small');
+    }
+
+    return classes.join(' ');
+  }
+
+  get badgeClassNames() {
+    const classes = ['certification-result-badge'];
+
+    if (this.isSmall) {
+      classes.push('certification-result-badge--small');
     }
 
     return classes.join(' ');
@@ -30,9 +48,13 @@ export default class Hexagon extends Component {
   }
 
   <template>
-    <div data-testid="pw-certification-card-result" class={{this.classNames}}>
-      <strong class="score">{{this.score}}</strong>
-      <span class="pix">{{t "common.pix"}}</span>
-    </div>
+    {{#if @badgeUrl}}
+      <img class={{this.badgeClassNames}} src={{@badgeUrl}} alt="" />
+    {{else}}
+      <div data-testid="pw-certification-card-result" class={{this.hexagonClassNames}}>
+        <strong class="score">{{this.score}}</strong>
+        <span class="pix">{{t "common.pix"}}</span>
+      </div>
+    {{/if}}
   </template>
 }

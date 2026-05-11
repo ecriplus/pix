@@ -2431,15 +2431,21 @@
         },
         "EDU_1ER_DEGRE": {
           "ADMISSIBLE": "Zulässig",
-          "BELOW_MINIMUM": "Nicht zulässig"
+          "ADVANCED": "Fortgeschrittene",
+          "BELOW_MINIMUM": "Nicht zulässig",
+          "EXPERT": "Experte"
         },
         "EDU_2ND_DEGRE": {
           "ADMISSIBLE": "Zulässig",
-          "BELOW_MINIMUM": "Nicht zulässig"
+          "ADVANCED": "Fortgeschrittene",
+          "BELOW_MINIMUM": "Nicht zulässig",
+          "EXPERT": "Experte"
         },
         "EDU_CPE": {
           "ADMISSIBLE": "Zulässig",
-          "BELOW_MINIMUM": "Nicht zulässig"
+          "ADVANCED": "Fortgeschrittene",
+          "BELOW_MINIMUM": "Nicht zulässig",
+          "EXPERT": "Experte"
         },
         "PRO_SANTE": {
           "ADVANCED": "Fortgeschrittene",
