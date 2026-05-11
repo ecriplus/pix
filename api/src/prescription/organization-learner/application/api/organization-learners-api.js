@@ -1,4 +1,8 @@
+import { tagRepository } from '../../../../organizational-entities/infrastructure/repositories/tag.repository.js';
+import * as organizationRepository from '../../../../shared/infrastructure/repositories/organization-repository.js';
+import { findOrganizationLearnersWithOrganizationByIds } from '../../domain/usecases/find-organization-learners-with-organization-by-ids.js';
 import { usecases } from '../../domain/usecases/index.js';
+import * as libOrganizationLearnerRepository from '../../infrastructure/repositories/organization-learner-repository.js';
 import { OrganizationLearner } from './models/OrganizationLearner.js';
 import { OrganizationLearnerWithOrganization } from './read-models/OrganizationLearnerWithOrganization.js';
 
@@ -144,5 +148,16 @@ export const findByUserId = async (userId) => {
 
 export const findWithOrganizationByUserId = async ({ userId }) => {
   const learners = await usecases.findOrganizationLearnersWithOrganizationByUserId({ userId });
+  return learners.map((learner) => new OrganizationLearnerWithOrganization(learner));
+};
+
+export const findWithOrganizationByIds = async ({ organizationLearnerIds, organizationId }) => {
+  const learners = await findOrganizationLearnersWithOrganizationByIds({
+    organizationLearnerIds,
+    organizationId,
+    libOrganizationLearnerRepository,
+    organizationRepository,
+    tagRepository,
+  });
   return learners.map((learner) => new OrganizationLearnerWithOrganization(learner));
 };
