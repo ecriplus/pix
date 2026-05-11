@@ -104,6 +104,17 @@ const _reconcileOrganizationLearners = async function (studentsToImport, allOrga
   const organizationLearnersWithSameNationalStudentIdsAsImported =
     await studentRepository.findReconciledStudentsByNationalStudentId(nationalStudentIdsFromFile);
 
+  const userIdsWithMultipleNationalStudentIds = new Set(
+    organizationLearnersWithSameNationalStudentIdsAsImported
+      .filter((learner) =>
+        organizationLearnersWithSameNationalStudentIdsAsImported.some(
+          (other) =>
+            other.account.userId === learner.account.userId && other.nationalStudentId !== learner.nationalStudentId,
+        ),
+      )
+      .map((learner) => learner.account.userId),
+  );
+
   organizationLearnersWithSameNationalStudentIdsAsImported.forEach((organizationLearner) => {
     const alreadyReconciledStudentToImport = studentsToImport.find(
       (studentToImport) => studentToImport.userId === organizationLearner.account.userId,
@@ -111,6 +122,10 @@ const _reconcileOrganizationLearners = async function (studentsToImport, allOrga
 
     if (alreadyReconciledStudentToImport) {
       alreadyReconciledStudentToImport.userId = null;
+      return;
+    }
+
+    if (userIdsWithMultipleNationalStudentIds.has(organizationLearner.account.userId)) {
       return;
     }
 

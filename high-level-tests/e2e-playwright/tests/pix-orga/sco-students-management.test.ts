@@ -399,7 +399,7 @@ test.describe('SCO import does not auto-reconcile a learner when the user alread
       );
     });
 
-    test("Remove user reconciliation when the user is already in the target organization with a different INE,  (is it ok, i don't know, but it's here since the beginning of the time)", async ({
+    test("Remove user reconciliation when the user is already in the target organization with a different INE, (is it ok, i don't know, but it's here since the beginning of the time)", async ({
       page,
     }) => {
       test.slow();
