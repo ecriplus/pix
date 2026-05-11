@@ -8,7 +8,7 @@ export const serialize = ({ version, areas }) => {
     startDate: version.startDate,
     expirationDate: version.expirationDate,
     assessmentDuration: version.assessmentDuration,
-    minimumAnswers: version.minimumAnswersRequiredToValidateACertification,
+    minimumAnswersRequiredForValidation: version.minimumAnswersRequiredToValidateACertification,
     maximumAssessmentLength: version.challengesConfiguration?.maximumAssessmentLength,
     areas,
   };
@@ -18,7 +18,7 @@ export const serialize = ({ version, areas }) => {
       'startDate',
       'expirationDate',
       'assessmentDuration',
-      'minimumAnswers',
+      'minimumAnswersRequiredForValidation',
       'maximumAssessmentLength',
       'areas',
     ],

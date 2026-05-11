@@ -4,7 +4,7 @@ export default class CertificationVersion extends Model {
   @attr('date') startDate;
   @attr('date') expirationDate;
   @attr('number') assessmentDuration;
-  @attr('number') minimumAnswers;
+  @attr('number') minimumAnswersRequiredForValidation;
   @attr('number') maximumAssessmentLength;
   @attr('string') comment;
 

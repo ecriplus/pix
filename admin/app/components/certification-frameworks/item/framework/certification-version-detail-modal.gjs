@@ -93,7 +93,7 @@ export default class CertificationVersionDetailModal extends Component {
             <dt>{{t
                 "components.complementary-certifications.item.framework.version-detail-modal.minimum-answers-required"
               }}</dt>
-            <dd>{{@version.minimumAnswers}}</dd>
+            <dd>{{@version.minimumAnswersRequiredForValidation}}</dd>
           </dl>
         </PixBlock>
 

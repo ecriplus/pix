@@ -20,7 +20,7 @@ module(
         startDate: new Date('2024-01-01'),
         expirationDate: null,
         assessmentDuration: 105,
-        minimumAnswers: 20,
+        minimumAnswersRequiredForValidation: 20,
         maximumAssessmentLength: 32,
         comment: '',
         areas: [],
