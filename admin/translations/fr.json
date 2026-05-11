@@ -664,7 +664,19 @@
             "title": "Historique des versions du référentiel"
           },
           "no-current-framework": "Aucun référentiel de certification n'est utilisé actuellement.",
-          "tab": "Référentiel de certification"
+          "tab": "Référentiel de certification",
+          "version-detail-modal": {
+            "assessment-duration": "Durée (min) :",
+            "comment": "Commentaire :",
+            "content": "Contenu du référentiel :",
+            "expiration-date": "Date d'expiration :",
+            "locales": "Locale :",
+            "maximum-assessment-length": "Nombre max de questions :",
+            "minimum-answers-required": "Nombre min de réponses :",
+            "parameters": "Paramètres du référentiel :",
+            "start-date": "Date d'activation :",
+            "status": "Statut :"
+          }
         },
         "navigation": {
           "aria-label": "Navigation de la section certification complémentaire"

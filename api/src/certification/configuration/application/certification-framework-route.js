@@ -33,38 +33,6 @@ const register = async function (server) {
     },
     {
       method: 'GET',
-      path: '/api/admin/certification-frameworks/{scope}/active-consolidated-framework',
-      config: {
-        pre: [
-          {
-            method: (request, h) =>
-              securityPreHandlers.hasAtLeastOneAccessOf([
-                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
-                securityPreHandlers.checkAdminMemberHasRoleSupport,
-                securityPreHandlers.checkAdminMemberHasRoleCertif,
-                securityPreHandlers.checkAdminMemberHasRoleMetier,
-              ])(request, h),
-            assign: 'hasAuthorizationToAccessAdminScope',
-          },
-        ],
-        validate: {
-          params: Joi.object({
-            scope: Joi.string()
-              .required()
-              .valid(...Object.values(SCOPES)),
-          }),
-        },
-        handler: certificationFrameworkController.getActiveConsolidatedFramework,
-        tags: ['api', 'admin'],
-        notes: [
-          'Cette route est restreinte aux utilisateurs authentifiés avec le rôle Super Admin, Support, Certif et Métier',
-          'Elle renvoie le référentiel cadre actif pour un scope donné (CORE, DROIT, EDU_1ER_DEGRE, EDU_2ND_DEGRE, EDU_CPE, PRO_SANTE).',
-          'Le référentiel cadre contient la hiérarchie complète du contenu formatif : areas → competences → thematics → tubes → skills.',
-        ],
-      },
-    },
-    {
-      method: 'GET',
       path: '/api/admin/certification-frameworks/{scope}/framework-history',
       config: {
         pre: [

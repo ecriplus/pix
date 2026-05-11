@@ -1,3 +1,5 @@
-import { Model } from 'miragejs';
+import { hasMany, Model } from 'miragejs';
 
-export default Model.extend();
+export default Model.extend({
+  areas: hasMany('area'),
+});

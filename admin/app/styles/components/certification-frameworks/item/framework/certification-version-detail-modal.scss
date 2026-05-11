@@ -1,0 +1,73 @@
+@use 'pix-design-tokens/typography';
+
+.certification-version-detail-modal {
+  width: 60vw;
+  max-width: 1000px;
+
+  .pix-modal__content {
+    max-height: 70vh;
+    overflow-y: auto;
+    font-size: 1rem;
+  }
+
+  &__parameters,
+  &__content,
+  &__comment {
+    margin-bottom: var(--pix-spacing-6x);
+    background-color: var(--pix-primary-10);
+    border: none;
+
+    .pix-icon {
+      margin-right: var(--pix-spacing-1x);
+      vertical-align: middle;
+    }
+  }
+
+  &__comment {
+    padding-inline: var(--pix-spacing-8x);
+  }
+
+  &__subtitle {
+    @extend %pix-title-xxs;
+  }
+
+  dl {
+    margin-block: var(--pix-spacing-3x);
+    line-height: 2;
+  }
+
+  dt {
+    display: inline;
+
+    @extend %pix-title-xxs;
+
+    font-size: inherit;
+    line-height: inherit;
+
+    &::after {
+      content: ' ';
+    }
+  }
+
+  dd {
+    display: inline;
+    margin: 0;
+
+    &::after {
+      display: block;
+      content: '';
+    }
+  }
+
+  .version-comment__actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: var(--pix-spacing-3x);
+  }
+
+  .pix-tag {
+    font-size: 0.875rem;
+    padding-block: 1px;
+    vertical-align: middle;
+  }
+}

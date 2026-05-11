@@ -656,7 +656,19 @@
             "title": "Framework versions history"
           },
           "no-current-framework": "No certification framework is currently used.",
-          "tab": "Certification framework"
+          "tab": "Certification framework",
+          "version-detail-modal": {
+            "assessment-duration": "Duration:",
+            "comment": "Comment:",
+            "content": "Framework content:",
+            "expiration-date": "Expiration date:",
+            "locales": "Languages:",
+            "maximum-assessment-length": "Max nb of questions:",
+            "minimum-answers-required": "Min nb of answers:",
+            "parameters": "Framework parameters:",
+            "start-date": "Start date:",
+            "status": "Status:"
+          }
         },
         "navigation": {
           "aria-label": "Navigation of the complementary certification section"

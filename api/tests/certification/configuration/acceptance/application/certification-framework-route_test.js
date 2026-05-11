@@ -6,7 +6,6 @@ import { Frameworks } from '../../../../../src/certification/shared/domain/model
 import { SCOPES } from '../../../../../src/certification/shared/domain/models/Scopes.js';
 import { expect } from '../../../../test-helper.js';
 import { databaseBuilder, knex } from '../../../../tooling/databases.js';
-import { buildLearningContent as learningContentBuilder } from '../../../../tooling/learning-content-builder/index.js';
 import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Acceptance | Application | Certification | Configuration | certification-framework-route', function () {
@@ -101,90 +100,6 @@ describe('Acceptance | Application | Certification | Configuration | certificati
           },
         },
       ]);
-    });
-  });
-
-  describe('GET /api/admin/certification-frameworks/{scope}/active-consolidated-framework', function () {
-    it('should return the active consolidated framework', async function () {
-      // given
-      const minimalLearningContent = [
-        {
-          id: 'recAreaCore',
-          competences: [
-            {
-              id: 'recCompCore',
-              thematics: [
-                {
-                  id: 'recThemCore',
-                  tubes: [
-                    {
-                      id: 'recTubeCore',
-                      skills: [
-                        { id: 'skillCore@web1', challenges: [{ id: 'recChallenge1', langues: ['Franco Français'] }] },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      ];
-
-      const learningContentObjects = learningContentBuilder.fromAreas(minimalLearningContent);
-      databaseBuilder.factory.learningContent.build(learningContentObjects);
-
-      const certificationVersion = databaseBuilder.factory.buildCertificationVersion({
-        scope: SCOPES.CORE,
-        startDate: new Date('2025-01-15'),
-        expirationDate: null,
-      });
-
-      databaseBuilder.factory.buildCertificationFrameworksChallenge({
-        challengeId: 'recChallenge1',
-        discriminant: 1.5,
-        difficulty: 2.3,
-        createdAt: new Date('2025-01-15'),
-        versionId: certificationVersion.id,
-      });
-
-      databaseBuilder.factory.buildCertificationFrameworksChallenge({
-        challengeId: 'anotherScopeChallenge',
-        versionId: databaseBuilder.factory.buildCertificationVersion({ scope: SCOPES.DROIT }).id,
-      });
-
-      await databaseBuilder.commit();
-
-      const options = {
-        method: 'GET',
-        url: `/api/admin/certification-frameworks/${SCOPES.CORE}/active-consolidated-framework`,
-        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
-      };
-
-      // when
-      const response = await server.inject(options);
-
-      // then
-      expect(response.statusCode).to.equal(200);
-      expect(response.result.data).to.deep.equal({
-        id: SCOPES.CORE,
-        type: 'certification-consolidated-frameworks',
-        attributes: {
-          'complementary-certification-key': SCOPES.CORE,
-          version: String(certificationVersion.id),
-        },
-        relationships: {
-          areas: {
-            data: [
-              {
-                id: 'recAreaCore',
-                type: 'areas',
-              },
-            ],
-          },
-        },
-      });
-      expect(response.result.included).to.have.lengthOf(5);
     });
   });
 

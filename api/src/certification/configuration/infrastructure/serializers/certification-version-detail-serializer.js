@@ -2,17 +2,26 @@ import jsonapiSerializer from 'jsonapi-serializer';
 
 const { Serializer } = jsonapiSerializer;
 
-const serialize = function (currentConsolidatedFramework) {
-  return new Serializer('certification-consolidated-framework', {
-    transform: (record) => {
-      return {
-        ...record,
-        complementaryCertificationKey: record.scope,
-        version: String(record.versionId),
-      };
-    },
-    id: 'complementaryCertificationKey',
-    attributes: ['complementaryCertificationKey', 'version', 'areas'],
+export const serialize = ({ version, areas }) => {
+  const data = {
+    id: version.id,
+    startDate: version.startDate,
+    expirationDate: version.expirationDate,
+    assessmentDuration: version.assessmentDuration,
+    minimumAnswersRequiredForValidation: version.minimumAnswersRequiredToValidateACertification,
+    maximumAssessmentLength: version.challengesConfiguration?.maximumAssessmentLength,
+    areas,
+  };
+
+  return new Serializer('certification-versions', {
+    attributes: [
+      'startDate',
+      'expirationDate',
+      'assessmentDuration',
+      'minimumAnswersRequiredForValidation',
+      'maximumAssessmentLength',
+      'areas',
+    ],
     areas: {
       ref: 'id',
       included: true,
@@ -38,7 +47,5 @@ const serialize = function (currentConsolidatedFramework) {
         },
       },
     },
-  }).serialize(currentConsolidatedFramework);
+  }).serialize(data);
 };
-
-export { serialize };

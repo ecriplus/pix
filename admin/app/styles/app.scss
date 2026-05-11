@@ -59,6 +59,7 @@
 @use 'components/certification-frameworks/header' as *;
 @use 'components/certification-frameworks/item' as *;
 @use 'components/certification-frameworks/item/framework' as *;
+@use 'components/certification-frameworks/item/framework/certification-version-detail-modal' as *;
 @use 'components/certification-frameworks/link-to-current-target-profile' as *;
 @use 'components/certification-frameworks/search-bar' as *;
 @use 'components/certification-frameworks/selected-target-profile' as *;

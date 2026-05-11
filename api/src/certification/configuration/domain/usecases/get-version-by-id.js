@@ -1,5 +1,5 @@
 /**
- * @typedef {import ('../../../shared/domain/models/ComplementaryCertificationKeys.js').ComplementaryCertificationKeys} ComplementaryCertificationKeys
+ * @typedef {import('../../domain/models/Version.js').Version} Version
  * @typedef {import ('./index.js').FrameworkChallengesRepository} FrameworkChallengesRepository
  * @typedef {import ('./index.js').LearningContentRepository} LearningContentRepository
  * @typedef {import ('./index.js').VersionRepository} VersionRepository
@@ -9,25 +9,25 @@ import { NotFoundError } from '../../../../shared/domain/errors.js';
 
 /**
  * @param {object} params
- * @param {Scope} params.scope
+ * @param {number} params.id
  * @param {FrameworkChallengesRepository} params.frameworkChallengesRepository
  * @param {LearningContentRepository} params.learningContentRepository
  * @param {VersionRepository} params.versionRepository
  */
-export const getCurrentFrameworkVersion = async ({
-  scope,
+export const getVersionById = async ({
+  id,
   frameworkChallengesRepository,
   learningContentRepository,
   versionRepository,
 }) => {
-  const activeVersion = await versionRepository.findActiveByScope({ scope });
+  const version = await versionRepository.getById({ id });
 
-  if (!activeVersion) {
-    throw new NotFoundError(`There is no framework for complementary ${scope}`);
+  if (!version) {
+    throw new NotFoundError(`No certification version found for id: ${id}`);
   }
 
   const challenges = await frameworkChallengesRepository.getByVersionId({
-    versionId: activeVersion.id,
+    versionId: version.id,
   });
 
   const frameworkAreas = await learningContentRepository.getFrameworkReferential({
@@ -35,8 +35,7 @@ export const getCurrentFrameworkVersion = async ({
   });
 
   return {
-    scope: activeVersion.scope,
-    versionId: activeVersion.id,
+    version,
     areas: frameworkAreas,
   };
 };

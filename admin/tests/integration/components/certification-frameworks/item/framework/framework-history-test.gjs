@@ -1,6 +1,8 @@
 import { render } from '@1024pix/ember-testing-library';
+import { click } from '@ember/test-helpers';
 import FrameworkHistory from 'pix-admin/components/certification-frameworks/item/framework/framework-history';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest, { t } from '../../../../../helpers/setup-intl-rendering';
 
@@ -9,8 +11,11 @@ module('Integration | Component | Complementary certifications/Item/Framework | 
 
   let intl;
 
+  let store;
+
   hooks.beforeEach(function () {
     intl = this.owner.lookup('service:intl');
+    store = this.owner.lookup('service:store');
   });
 
   test('it should display the framework history', async function (assert) {
@@ -59,5 +64,40 @@ module('Integration | Component | Complementary certifications/Item/Framework | 
     assert
       .dom(screen.getByText(t('components.complementary-certifications.item.framework.history.statuses.ARCHIVED')))
       .hasClass('pix-tag--secondary');
+  });
+
+  test('it opens the detail modal when clicking the view button', async function (assert) {
+    // given
+    const frameworkHistory = [
+      {
+        id: 456,
+        startDate: new Date('2023-10-10'),
+        expirationDate: null,
+        assessmentDuration: 90,
+        maximumAssessmentLength: 32,
+        status: 'ACTIVE',
+      },
+    ];
+
+    const certificationVersion = store.createRecord('certification-version', {
+      id: '456',
+      startDate: new Date('2023-10-10'),
+      assessmentDuration: 90,
+      areas: [],
+    });
+    sinon.stub(store, 'findRecord').resolves(certificationVersion);
+
+    // when
+    const screen = await render(<template><FrameworkHistory @history={{frameworkHistory}} @scope="CORE" /></template>);
+
+    await click(
+      screen.getByRole('button', {
+        name: t('components.complementary-certifications.item.framework.history.table.actions.view'),
+      }),
+    );
+
+    // then
+    sinon.assert.calledOnceWithExactly(store.findRecord, 'certification-version', 456);
+    assert.dom(screen.getByRole('dialog')).exists();
   });
 });
