@@ -16,7 +16,7 @@
   },
   "scripts": {
     "codegen": "playwright codegen",
-    "test:base": "rm -rf ./.auth/* && npm run domains:start --prefix ../../",
+    "test:base": "rm -rf ./.auth/* && npm run domains:stop --prefix ../../ && npm run domains:start --prefix ../../",
     "test": "npm run test:base && playwright test",
     "test:snapshot": "npm run test:base && UPDATE_SNAPSHOTS=true playwright test --grep @snapshot",
     "test:ui": "npm run test:base && playwright test --ui",
