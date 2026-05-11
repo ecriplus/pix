@@ -144,7 +144,9 @@ export default class CombinedCoursePresentation extends Component {
   }
 
   get surveyLink() {
-    return ENV.APP.COMBINIX_SURVEY_LINK;
+    return this.args.combinedCourse.organizationId === ENV.APP.FRANCE_TRAVAIL_ORGANIZATION_ID
+      ? ENV.APP.COMBINIX_FRANCE_TRAVAIL_SURVEY_LINK
+      : ENV.APP.COMBINIX_SURVEY_LINK;
   }
 
   get shouldDisplayRetryModulesText() {

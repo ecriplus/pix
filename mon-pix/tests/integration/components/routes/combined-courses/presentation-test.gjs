@@ -442,12 +442,32 @@ module('Integration | Component | Combined Courses | Presentation', function (ho
 
       // then
       const link = screen.getByRole('link', { name: t('pages.combined-courses.completed.survey-button') });
-      assert
-        .dom(link)
-        .hasAttribute(
-          'href',
-          'https://app-eu.123formbuilder.com/index.php?p=login&pactionafter=edit_fields%26id%3D86361%26startup_panel%3Deditor%26click_from%3Dyour_forms',
-        );
+      assert.dom(link).hasAttribute('href', 'combinix.survey.link');
+      assert.dom(link).hasAttribute('target', '_blank');
+      assert.dom(link).hasAttribute('rel', 'noopener noreferrer');
+    });
+
+    test('should display France Travail survey cta', async function (assert) {
+      // given
+      const FRANCE_TRAVAIL_ORGANIZATION_ID = 456;
+      const store = this.owner.lookup('service:store');
+      const featureToggles = this.owner.lookup('service:featureToggles');
+      sinon.stub(featureToggles, 'featureToggles').value({ isSurveyEnabledForCombinedCourses: true });
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        status: CombinedCourseStatuses.COMPLETED,
+        code: 'COMBINIX9',
+        organizationId: FRANCE_TRAVAIL_ORGANIZATION_ID,
+      });
+
+      // when
+      const screen = await render(
+        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+      );
+
+      // then
+      const link = screen.getByRole('link', { name: t('pages.combined-courses.completed.survey-button') });
+      assert.dom(link).hasAttribute('href', 'combinix.france-travail.survey.link');
       assert.dom(link).hasAttribute('target', '_blank');
       assert.dom(link).hasAttribute('rel', 'noopener noreferrer');
     });
