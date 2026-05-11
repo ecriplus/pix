@@ -13,6 +13,7 @@ import { CampaignParticipationStatuses, CampaignTypes } from '../../../shared/do
 import { KnowledgeElementCollection } from '../../../shared/domain/models/KnowledgeElementCollection.js';
 import { CampaignParticipation } from '../../domain/models/CampaignParticipation.js';
 import { AvailableCampaignParticipation } from '../../domain/read-models/AvailableCampaignParticipation.js';
+import { OrganizationLearnerCampaignParticipation } from '../../domain/read-models/OrganizationLearnerCampaignParticipation.js';
 
 const { STARTED, SHARED } = CampaignParticipationStatuses;
 
@@ -207,6 +208,60 @@ const findOneByCampaignIdAndUserId = async function ({ campaignId, userId }) {
   });
 };
 
+const findByOrganizationLearnerIds = async function ({ organizationLearnerIds }) {
+  const knexConn = DomainTransaction.getConnection();
+  const rows = await knexConn('campaign-participations')
+    .select({
+      id: 'campaign-participations.id',
+      campaignId: 'campaigns.id',
+      targetProfileId: 'campaigns.targetProfileId',
+      organizationLearnerId: 'campaign-participations.organizationLearnerId',
+      status: 'campaign-participations.status',
+      masteryRate: 'campaign-participations.masteryRate',
+      validatedSkillsCount: 'campaign-participations.validatedSkillsCount',
+    })
+    .select(
+      knexConn.raw('NULLIF(COUNT(DISTINCT stages.id), 0) as "totalStagesCount"'),
+      knexConn.raw(
+        'CASE WHEN COUNT(DISTINCT stages.id) = 0 THEN NULL ELSE COUNT(DISTINCT "stage-acquisitions".id) END as "validatedStagesCount"',
+      ),
+    )
+    .join('campaigns', 'campaigns.id', 'campaign-participations.campaignId')
+    .leftJoin('stages', 'stages.targetProfileId', 'campaigns.targetProfileId')
+    .leftJoin('stage-acquisitions', function () {
+      this.on('stage-acquisitions.stageId', '=', 'stages.id').andOn(
+        'stage-acquisitions.campaignParticipationId',
+        '=',
+        'campaign-participations.id',
+      );
+    })
+    .whereIn('campaign-participations.organizationLearnerId', organizationLearnerIds)
+    .whereNull('campaign-participations.deletedAt')
+    .groupBy(
+      'campaign-participations.id',
+      'campaigns.id',
+      'campaigns.targetProfileId',
+      'campaign-participations.organizationLearnerId',
+      'campaign-participations.status',
+      'campaign-participations.masteryRate',
+      'campaign-participations.validatedSkillsCount',
+    );
+  return rows.map(
+    (row) =>
+      new OrganizationLearnerCampaignParticipation({
+        id: row.id,
+        campaignId: row.campaignId,
+        targetProfileId: row.targetProfileId,
+        organizationLearnerId: row.organizationLearnerId,
+        status: row.status,
+        masteryRate: row.masteryRate != null ? Number(row.masteryRate) : null,
+        validatedSkillsCount: row.validatedSkillsCount ?? null,
+        totalStagesCount: row.totalStagesCount != null ? Number(row.totalStagesCount) : null,
+        validatedStagesCount: row.validatedStagesCount != null ? Number(row.validatedStagesCount) : null,
+      }),
+  );
+};
+
 const getCampaignParticipationsCountByUserId = async function ({ userId }) {
   const knexConn = DomainTransaction.getConnection();
   const result = await knexConn('campaign-participations')
@@ -317,6 +372,7 @@ async function getSharedParticipationIds(campaignId) {
 }
 
 export {
+  findByOrganizationLearnerIds,
   findInfoByCampaignId,
   findOneByCampaignIdAndUserId,
   get,

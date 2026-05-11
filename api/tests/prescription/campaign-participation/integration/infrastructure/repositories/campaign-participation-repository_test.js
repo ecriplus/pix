@@ -4,6 +4,7 @@ import sinon from 'sinon';
 import { CampaignParticipationInfo } from '../../../../../../src/prescription/campaign/domain/read-models/CampaignParticipationInfo.js';
 import { CampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipation.js';
 import { AvailableCampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/read-models/AvailableCampaignParticipation.js';
+import { OrganizationLearnerCampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/read-models/OrganizationLearnerCampaignParticipation.js';
 import * as campaignParticipationRepository from '../../../../../../src/prescription/campaign-participation/infrastructure/repositories/campaign-participation-repository.js';
 import {
   CampaignParticipationStatuses,
@@ -471,6 +472,151 @@ describe('Integration | Repository | Campaign Participation', function () {
         // then
         expect(participations).to.have.lengthOf(0);
       });
+    });
+  });
+
+  describe('#findByOrganizationLearnerIds', function () {
+    it('should return empty array when organizationLearner has no participations', async function () {
+      // given
+      const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner().id;
+      await databaseBuilder.commit();
+
+      // when
+      const results = await campaignParticipationRepository.findByOrganizationLearnerIds({
+        organizationLearnerIds: [organizationLearnerId],
+      });
+
+      // then
+      expect(results).to.deep.equal([]);
+    });
+
+    it('should return participations with all expected fields', async function () {
+      // given
+      const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner().id;
+      const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      const otherTargetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      const { id: campaignId } = databaseBuilder.factory.buildCampaign({ targetProfileId });
+      const otherCampaign = databaseBuilder.factory.buildCampaign({ targetProfileId: otherTargetProfileId });
+      const { id: participationId } = databaseBuilder.factory.buildCampaignParticipation({
+        organizationLearnerId,
+        campaignId,
+        status: SHARED,
+        masteryRate: '0.80',
+      });
+      const { id: participation2Id } = databaseBuilder.factory.buildCampaignParticipation({
+        organizationLearnerId,
+        campaignId: otherCampaign.id,
+        status: SHARED,
+        masteryRate: '0.80',
+      });
+      await databaseBuilder.commit();
+
+      // when
+      const results = await campaignParticipationRepository.findByOrganizationLearnerIds({
+        organizationLearnerIds: [organizationLearnerId],
+      });
+
+      // then
+      expect(results).to.have.lengthOf(2);
+      expect(results[0]).to.deep.equal({
+        id: participationId,
+        campaignId,
+        targetProfileId,
+        organizationLearnerId,
+        status: SHARED,
+        masteryRate: 0.8,
+        validatedSkillsCount: null,
+        totalStagesCount: null,
+        validatedStagesCount: null,
+      });
+      expect(results[1]).to.deep.equal({
+        id: participation2Id,
+        campaignId: otherCampaign.id,
+        targetProfileId: otherTargetProfileId,
+        organizationLearnerId,
+        status: SHARED,
+        masteryRate: 0.8,
+        validatedSkillsCount: null,
+        totalStagesCount: null,
+        validatedStagesCount: null,
+      });
+    });
+
+    it('should return participation for the exact learners in list', async function () {
+      const { id: participation1Id, organizationLearnerId: organizationLearner1Id } =
+        databaseBuilder.factory.buildCampaignParticipation();
+      const { id: participation2Id, organizationLearnerId: organizationLearner2Id } =
+        databaseBuilder.factory.buildCampaignParticipation();
+      databaseBuilder.factory.buildCampaignParticipation();
+      await databaseBuilder.commit();
+
+      // when
+      const results = await campaignParticipationRepository.findByOrganizationLearnerIds({
+        organizationLearnerIds: [organizationLearner1Id, organizationLearner2Id],
+      });
+
+      // then
+      expect(results[0]).to.be.instanceOf(OrganizationLearnerCampaignParticipation);
+      expect(results[1]).to.be.instanceOf(OrganizationLearnerCampaignParticipation);
+      expect(results[0].id).to.equal(participation1Id);
+      expect(results[1].id).to.equal(participation2Id);
+      expect(results).to.have.lengthOf(2);
+    });
+
+    it('should return null for totalStagesCount and validatedStagesCount when no stages configured', async function () {
+      // given
+      const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner().id;
+      const { id: campaignId } = databaseBuilder.factory.buildCampaign();
+      databaseBuilder.factory.buildCampaignParticipation({ organizationLearnerId, campaignId });
+      await databaseBuilder.commit();
+
+      // when
+      const results = await campaignParticipationRepository.findByOrganizationLearnerIds({
+        organizationLearnerIds: [organizationLearnerId],
+      });
+
+      // then
+      expect(results[0].totalStagesCount).to.be.null;
+      expect(results[0].validatedStagesCount).to.be.null;
+    });
+
+    it('should return stage counts when stages are configured', async function () {
+      // given
+      const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner().id;
+      const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+      const { id: campaignId } = databaseBuilder.factory.buildCampaign({ targetProfileId });
+      const { id: participationId } = databaseBuilder.factory.buildCampaignParticipation({
+        organizationLearnerId,
+        campaignId,
+      });
+      databaseBuilder.factory.buildStage({ targetProfileId });
+      const stage = databaseBuilder.factory.buildStage({ targetProfileId });
+      databaseBuilder.factory.buildStageAcquisition({ stageId: stage.id, campaignParticipationId: participationId });
+      await databaseBuilder.commit();
+
+      // when
+      const results = await campaignParticipationRepository.findByOrganizationLearnerIds({
+        organizationLearnerIds: [organizationLearnerId],
+      });
+
+      // then
+      expect(results[0].totalStagesCount).to.equal(2);
+      expect(results[0].validatedStagesCount).to.equal(1);
+    });
+
+    it('should not return deleted participations', async function () {
+      // given
+      const organizationLearnerId = databaseBuilder.factory.buildOrganizationLearner().id;
+      databaseBuilder.factory.buildCampaignParticipation({ organizationLearnerId, deletedAt: new Date() });
+      await databaseBuilder.commit();
+
+      // when
+      const results = await campaignParticipationRepository.findByOrganizationLearnerIds({
+        organizationLearnerIds: [organizationLearnerId],
+      });
+
+      // then
+      expect(results).to.deep.equal([]);
     });
   });
 

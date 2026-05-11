@@ -89,6 +89,7 @@ const dependencies = {
 
 import { checkUserHasAccessToCampaignParticipation } from './check-user-has-access-to-campaign-participation.js';
 import { deleteCampaignParticipation } from './delete-campaign-participation.js';
+import { findCampaignParticipationsByOrganizationLearnerIds } from './find-campaign-participations-by-organization-learner-ids.js';
 import { findCampaignParticipationsByUserId } from './find-campaign-participations-by-user-id.js';
 import { findCampaignParticipationsForUserManagement } from './find-campaign-participations-for-user-management.js';
 import { findPaginatedParticipationsForCampaignManagement } from './find-paginated-participations-for-campaign-management.js';
@@ -115,6 +116,7 @@ import { updateParticipantExternalId } from './update-participant-external-id.js
 const usecasesWithoutInjectedDependencies = {
   checkUserHasAccessToCampaignParticipation,
   deleteCampaignParticipation,
+  findCampaignParticipationsByOrganizationLearnerIds,
   findCampaignParticipationsByUserId,
   findCampaignParticipationsForUserManagement,
   findPaginatedParticipationsForCampaignManagement,

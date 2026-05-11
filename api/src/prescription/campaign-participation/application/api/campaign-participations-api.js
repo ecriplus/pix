@@ -31,6 +31,11 @@ export const findByUserId = async ({ userId }) => {
   return participations.map((participation) => new CampaignParticipation(participation));
 };
 
+export const findByOrganizationLearnerIds = async ({ organizationLearnerIds }) => {
+  const participations = await usecases.findCampaignParticipationsByOrganizationLearnerIds({ organizationLearnerIds });
+  return participations.map((participation) => new CampaignParticipation(participation));
+};
+
 export const deleteCampaignParticipations = async ({
   userId,
   campaignParticipationIds,
