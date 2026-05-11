@@ -35,7 +35,7 @@ const create = async function ({ authenticationMethod }) {
   } catch (err) {
     if (knexUtils.isUniqConstraintViolated(err)) {
       throw new AlreadyExistingEntityError(
-        `An authentication method already exists for the user ID ${authenticationMethod.userId} and the externalIdentifier ${authenticationMethod.externalIdentifier}.`,
+        `An authentication method already exists for the user ID ${authenticationMethod.userId} and the identityProvider ${authenticationMethod.identityProvider}.`,
       );
     }
 
