@@ -17,7 +17,6 @@ export default class CertificationFramework extends Component {
   }
 
   async #onMount() {
-    const frameworkKey = this.args.frameworkKey;
     const certificationFramework = this.args.certificationFramework;
 
     if (certificationFramework && this.args.hasTargetProfilesHistory) {
@@ -25,7 +24,7 @@ export default class CertificationFramework extends Component {
       this.targetProfilesHistory = certificationFramework.targetProfilesHistory;
     }
 
-    const frameworkHistory = await this.store.queryRecord('framework-history', frameworkKey);
+    const frameworkHistory = await this.store.queryRecord('framework-history', this.args.frameworkKey);
     this.frameworkHistory = frameworkHistory?.history;
   }
 
