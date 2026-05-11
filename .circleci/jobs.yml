@@ -151,42 +151,6 @@ executors:
           POSTGRES_HOST_AUTH_METHOD: trust
           POSTGRES_INITDB_ARGS: "--nosync"
       - image: redis:7.2.11-alpine
-      - image: caddy:latest
-        entrypoint:
-          - /bin/sh
-        command:
-          - -c
-          - |
-            cat > /etc/caddy/Caddyfile \<< 'EOF'
-            {
-              local_certs
-            }
-
-            (pix_proxy) {
-              reverse_proxy localhost:{args[0]}
-            }
-
-            app.dev.pix.fr, app.dev.pix.org {
-              import pix_proxy 4200
-            }
-
-            orga.dev.pix.fr, orga.dev.pix.org {
-              import pix_proxy 4201
-            }
-
-            admin.dev.pix.fr {
-              import pix_proxy 4202
-            }
-
-            certif.dev.pix.fr, certif.dev.pix.org {
-              import pix_proxy 4203
-            }
-
-            1d.dev.pix.fr, 1d.dev.pix.org {
-              import pix_proxy 4205
-            }
-            EOF
-            exec caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
       - image: adobe/s3mock:5.0.0
         environment:
           COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS: "pix-import-test"
@@ -204,42 +168,6 @@ executors:
           POSTGRES_HOST_AUTH_METHOD: trust
           POSTGRES_INITDB_ARGS: "--nosync"
       - image: redis:7.2.11-alpine
-      - image: caddy:latest
-        entrypoint:
-          - /bin/sh
-        command:
-          - -c
-          - |
-            cat > /etc/caddy/Caddyfile \<< 'EOF'
-            {
-              local_certs
-            }
-
-            (pix_proxy) {
-              reverse_proxy localhost:{args[0]}
-            }
-
-            app.dev.pix.fr, app.dev.pix.org {
-              import pix_proxy 4200
-            }
-
-            orga.dev.pix.fr, orga.dev.pix.org {
-              import pix_proxy 4201
-            }
-
-            admin.dev.pix.fr {
-              import pix_proxy 4202
-            }
-
-            certif.dev.pix.fr, certif.dev.pix.org {
-              import pix_proxy 4203
-            }
-
-            1d.dev.pix.fr, 1d.dev.pix.org {
-              import pix_proxy 4205
-            }
-            EOF
-            exec caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
       - image: adobe/s3mock:5.0.0
         environment:
           COM_ADOBE_TESTING_S3MOCK_STORE_INITIAL_BUCKETS: "pix-import-test"
@@ -1216,6 +1144,20 @@ jobs:
       - attach_workspace:
           at: ~/pix
       - run:
+          name: Install Caddy binary
+          command: |
+            sudo apt-get update
+            sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
+            curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+            curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+            sudo chmod o+r /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+            sudo chmod o+r /etc/apt/sources.list.d/caddy-stable.list
+            sudo apt update
+            sudo apt install caddy
+      - run:
+          name: Start Caddy
+          command: caddy start --config ./scripts/local-domains/Caddyfile --adapter caddyfile
+      - run:
           name: Configure local domains in /etc/hosts
           working_directory: ~/pix
           command: echo y | bash scripts/local-domains/install
@@ -1332,6 +1274,20 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/pix
+      - run:
+          name: Install Caddy binary
+          command: |
+            sudo apt-get update
+            sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
+            curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+            curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+            sudo chmod o+r /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+            sudo chmod o+r /etc/apt/sources.list.d/caddy-stable.list
+            sudo apt update
+            sudo apt install caddy
+      - run:
+          name: Start Caddy
+          command: caddy start --config ./scripts/local-domains/Caddyfile --adapter caddyfile
       - run:
           name: Configure local domains in /etc/hosts
           working_directory: ~/pix
