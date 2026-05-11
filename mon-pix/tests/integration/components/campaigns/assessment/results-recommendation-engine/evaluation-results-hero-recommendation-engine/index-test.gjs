@@ -1,5 +1,7 @@
 import { render } from '@1024pix/ember-testing-library';
 import Service from '@ember/service';
+import { click, settled } from '@ember/test-helpers';
+import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl/test-support';
 import EvaluationResultsHeroRecommendationEngine from 'mon-pix/components/campaigns/assessment/results-recommendation-engine/evaluation-results-hero-recommendation-engine/index';
 import { module, test } from 'qunit';
@@ -256,6 +258,87 @@ module(
 
           // then
           assert.dom(screen.queryByRole('list')).doesNotExist();
+        });
+      });
+    });
+
+    module('staged message toggle button', function (hooks) {
+      hooks.beforeEach(async function () {
+        // given
+        stubCurrentUserService(this.owner, { id: 1, firstName: 'Hermione' });
+
+        this.owner.register(
+          'service:media',
+          class MediaService extends Service {
+            @tracked isMobile = false;
+          },
+        );
+
+        const campaign = { organizationId: 1 };
+        const campaignParticipationResult = {
+          hasReachedStage: true,
+          reachedStage: {
+            reachedStage: 4,
+            totalStage: 5,
+            message: 'existing message',
+            title: 'existing title',
+          },
+        };
+
+        // when
+        this.screen = await render(
+          <template>
+            <EvaluationResultsHeroRecommendationEngine
+              @campaign={{campaign}}
+              @campaignParticipationResult={{campaignParticipationResult}}
+            />
+          </template>,
+        );
+      });
+
+      test('it does not display the toggle button when not on mobile', async function (assert) {
+        // then
+        assert
+          .dom(this.screen.queryByRole('button', { name: t('pages.skill-review.hero.staged-message.show-more') }))
+          .doesNotExist();
+      });
+
+      module('when on mobile and content overflows', function (hooks) {
+        hooks.beforeEach(async function () {
+          const contentEl = document.getElementById(
+            'evaluation-results-hero-recommendation-engine-staged-message-content',
+          );
+          Object.defineProperty(contentEl, 'scrollHeight', { value: 200, configurable: true });
+
+          const mediaService = this.owner.lookup('service:media');
+          mediaService.isMobile = true;
+          await settled();
+        });
+
+        test('it displays the "show-more" button', async function (assert) {
+          // then
+          assert
+            .dom(this.screen.getByRole('button', { name: t('pages.skill-review.hero.staged-message.show-more') }))
+            .exists();
+        });
+
+        test('clicking the button changes its label to "show-less"', async function (assert) {
+          // then
+          await click(this.screen.getByRole('button', { name: t('pages.skill-review.hero.staged-message.show-more') }));
+
+          assert
+            .dom(this.screen.getByRole('button', { name: t('pages.skill-review.hero.staged-message.show-less') }))
+            .exists();
+        });
+
+        test('clicking "show-less" toggles back to "show-more"', async function (assert) {
+          // then
+          await click(this.screen.getByRole('button', { name: t('pages.skill-review.hero.staged-message.show-more') }));
+          await click(this.screen.getByRole('button', { name: t('pages.skill-review.hero.staged-message.show-less') }));
+
+          assert
+            .dom(this.screen.getByRole('button', { name: t('pages.skill-review.hero.staged-message.show-more') }))
+            .exists();
         });
       });
     });

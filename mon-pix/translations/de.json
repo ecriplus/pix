@@ -2177,6 +2177,10 @@
         },
         "see-trainings": "Siehe Ausbildungen",
         "shared-message": "Ihre Ergebnisse wurden am {date} an {time} gesendet.",
+        "staged-message": {
+          "show-less": "Einklappen",
+          "show-more": "Mehr anzeigen"
+        },
         "thanks": "Vielen Dank {name}\n für Ihre Teilnahme!"
       },
       "improve": {

@@ -2168,6 +2168,10 @@
         },
         "see-trainings": "Bekijk de cursussen",
         "shared-message": "Je resultaten zijn verzonden op {date} om {time}.",
+        "staged-message": {
+          "show-less": "Inklappen",
+          "show-more": "Meer tonen"
+        },
         "thanks": "Bedankt {name}\n voor je deelname!"
       },
       "improve": {

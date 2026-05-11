@@ -4,6 +4,7 @@ import PixStars from '@1024pix/pix-ui/components/pix-stars';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
 import MarkdownToHtml from '../../../../markdown-to-html';
@@ -14,8 +15,16 @@ export default class EvaluationResultsHeroRecommendationEngine extends Component
   @service pixMetrics;
   @service media;
 
+  @tracked stagedMessageContentShowMoreEnabled = false;
+
   get masteryRatePercentage() {
     return Math.round(this.args.campaignParticipationResult.masteryRate * 100);
+  }
+
+  get stagedMessagebuttonLabel() {
+    return this.stagedMessageContentShowMoreEnabled
+      ? 'pages.skill-review.hero.staged-message.show-less'
+      : 'pages.skill-review.hero.staged-message.show-more';
   }
 
   get hasStagesStars() {
@@ -40,6 +49,18 @@ export default class EvaluationResultsHeroRecommendationEngine extends Component
     const baseStyle = 'evaluation-results-hero-recommendation-engine__title';
     const titleSize = this.media.isMobile ? 'extra-small-size' : 'small-size';
     return `${baseStyle} ${baseStyle}--${titleSize}`;
+  }
+
+  get stagedMessageContentShouldBeEllipsed() {
+    const container = document.getElementById('evaluation-results-hero-recommendation-engine-staged-message');
+    const content = document.getElementById('evaluation-results-hero-recommendation-engine-staged-message-content');
+    const isContentOverflowingContainer = content.scrollHeight > container?.offsetHeight;
+
+    return this.media.isMobile && isContentOverflowingContainer;
+  }
+
+  @action toggleStagedMessage() {
+    this.stagedMessageContentShowMoreEnabled = !this.stagedMessageContentShowMoreEnabled;
   }
 
   @action handleSeeTrainingsClick() {
@@ -131,12 +152,29 @@ export default class EvaluationResultsHeroRecommendationEngine extends Component
       </div>
     </div>
     {{#if @campaignParticipationResult.hasReachedStage}}
-      <section class="evaluation-results-hero-recommendation-engine-staged-message">
+      <section
+        id="evaluation-results-hero-recommendation-engine-staged-message"
+        class="evaluation-results-hero-recommendation-engine-staged-message"
+      >
         <h2 class="evaluation-results-hero-recommendation-engine-staged-message__title"><MarkdownToHtml
             @isInline={{true}}
             @markdown={{@campaignParticipationResult.reachedStage.title}}
           /></h2>
-        <MarkdownToHtml @isInline={{true}} @markdown={{@campaignParticipationResult.reachedStage.message}} />
+        <span
+          id="evaluation-results-hero-recommendation-engine-staged-message-content"
+          class="evaluation-results-hero-recommendation-engine-staged-message__content
+            {{unless
+              this.stagedMessageContentShowMoreEnabled
+              'evaluation-results-hero-recommendation-engine-staged-message__content--ellipsed'
+            }}"
+        >
+          <MarkdownToHtml @isInline={{true}} @markdown={{@campaignParticipationResult.reachedStage.message}} />
+        </span>
+        {{#if this.stagedMessageContentShouldBeEllipsed}}
+          <PixButton @triggerAction={{this.toggleStagedMessage}} @variant="tertiary">
+            {{t this.stagedMessagebuttonLabel}}
+          </PixButton>
+        {{/if}}
       </section>
     {{/if}}
   </template>

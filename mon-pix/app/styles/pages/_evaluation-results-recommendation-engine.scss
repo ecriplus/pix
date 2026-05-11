@@ -102,6 +102,7 @@
 .evaluation-results-hero-recommendation-engine-staged-message {
   @extend %pix-shadow-default;
 
+
   margin-bottom: var(--pix-spacing-4x);
   padding: var(--pix-spacing-6x);
   background-color: var(--pix-neutral-0);
@@ -111,6 +112,16 @@
     @extend %pix-title-xxs;
 
     color: var(--pix-neutral-900);
+  }
+
+  &__content {
+    &--ellipsed {
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 }
 
@@ -143,6 +154,17 @@
 
       .pix-button {
         width: auto;
+      }
+    }
+  }
+
+  .evaluation-results-hero-recommendation-engine-staged-message {
+    &__content {
+      // We are disabling ellipsis behaviour in tablet / desktop view
+      &--ellipsed {
+        display: initial;
+        overflow: initial;
+        text-overflow: initial;
       }
     }
   }
