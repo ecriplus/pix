@@ -1,9 +1,9 @@
 import iconv from 'iconv-lite';
 import sinon from 'sinon';
 
-import { OrganizationImportStatus } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationImportStatus.js';
 import { ValidateFregataFileJob } from '../../../../../../src/prescription/learner-management/domain/models/jobs/ValidateFregataFileJob.js';
 import { ValidateSupFileJob } from '../../../../../../src/prescription/learner-management/domain/models/jobs/ValidateSupFileJob.js';
+import { OrganizationImportStatus } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationImportStatus.js';
 import { uploadCsvFile } from '../../../../../../src/prescription/learner-management/domain/usecases/upload-csv-file.js';
 import { SupHeader } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/headers/sup-header.js';
 import { SupParser } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/parsers/sup-parser.js';
