@@ -1,7 +1,7 @@
 import sinon from 'sinon';
 
 import { AggregateImportError } from '../../../../../../../src/prescription/learner-management/domain/errors.js';
-import { ImportCommonOrganizationLearnersJob } from '../../../../../../../src/prescription/learner-management/domain/models/ImportCommonOrganizationLearnersJob.js';
+import { ImportFromGenericFileJob } from '../../../../../../../src/prescription/learner-management/domain/models/ImportFromGenericFileJob.js';
 import { ImportOrganizationLearnerSet } from '../../../../../../../src/prescription/learner-management/domain/models/ImportOrganizationLearnerSet.js';
 import { validateOrganizationLearnersFile } from '../../../../../../../src/prescription/learner-management/domain/usecases/import-from-feature/validate-organization-learners-file.js';
 import { GenericParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/parsers/generic-parser.js';
@@ -46,7 +46,7 @@ describe('Unit | UseCase | validateOrganizationLearnersFile', function () {
     importCommonOrganizationLearnersJobRepositoryStub = { performAsync: sinon.stub() };
 
     importCommonOrganizationLearnersJobRepositoryStub.performAsync
-      .withArgs(new ImportCommonOrganizationLearnersJob({ organizationImportId }))
+      .withArgs(new ImportFromGenericFileJob({ organizationImportId }))
       .resolves();
 
     dependencieStub = {

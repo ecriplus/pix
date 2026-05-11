@@ -3,8 +3,8 @@ import sinon from 'sinon';
 
 import { IMPORT_STATUSES } from '../../../../../../src/prescription/learner-management/domain/constants.js';
 import { AggregateImportError } from '../../../../../../src/prescription/learner-management/domain/errors.js';
-import { ImportScoCsvOrganizationLearnersJob } from '../../../../../../src/prescription/learner-management/domain/models/ImportScoCsvOrganizationLearnersJob.js';
-import { ImportSupOrganizationLearnersJob } from '../../../../../../src/prescription/learner-management/domain/models/ImportSupOrganizationLearnersJob.js';
+import { ImportFromFregataJob } from '../../../../../../src/prescription/learner-management/domain/models/ImportFromFregataJob.js';
+import { ImportFromSupJob } from '../../../../../../src/prescription/learner-management/domain/models/ImportFromSupJob.js';
 import { OrganizationImportStatus } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationImportStatus.js';
 import { validateCsvFile } from '../../../../../../src/prescription/learner-management/domain/usecases/validate-csv-file.js';
 import { SupHeader } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/headers/sup-header.js';
@@ -125,7 +125,7 @@ describe('Unit | UseCase | validateCsvFile', function () {
 
         // then
         expect(importSupOrganizationLearnersJobRepositoryStub.performAsync).to.have.been.calledOnceWithExactly(
-          new ImportSupOrganizationLearnersJob({
+          new ImportFromSupJob({
             type,
             locale: 'fr',
             organizationImportId,
@@ -155,7 +155,7 @@ describe('Unit | UseCase | validateCsvFile', function () {
 
         // then
         expect(importScoCsvOrganizationLearnersJobRepositoryStub.performAsync).to.have.been.calledOnceWithExactly(
-          new ImportScoCsvOrganizationLearnersJob({
+          new ImportFromFregataJob({
             locale: 'fr',
             organizationImportId,
           }),

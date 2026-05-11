@@ -2,7 +2,8 @@ import iconv from 'iconv-lite';
 import sinon from 'sinon';
 
 import { OrganizationImportStatus } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationImportStatus.js';
-import { ValidateCsvOrganizationImportFileJob } from '../../../../../../src/prescription/learner-management/domain/models/ValidateCsvOrganizationImportFileJob.js';
+import { ValidateFregataFileJob } from '../../../../../../src/prescription/learner-management/domain/models/ValidateFregataFileJob.js';
+import { ValidateSupFileJob } from '../../../../../../src/prescription/learner-management/domain/models/ValidateSupFileJob.js';
 import { uploadCsvFile } from '../../../../../../src/prescription/learner-management/domain/usecases/upload-csv-file.js';
 import { SupHeader } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/headers/sup-header.js';
 import { SupParser } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/parsers/sup-parser.js';
@@ -27,8 +28,8 @@ describe('Unit | UseCase | uploadCsvFile', function () {
     filepath,
     s3Filename,
     csvContent,
-    importType,
-    validateCsvOrganizationImportFileJobRepositoryStub,
+    validateFregataFileJobRepositoryStub,
+    validateSupFileJobRepositoryStub,
     organizationImportStub,
     organizationImportSavedStub,
     organizationImportId;
@@ -39,7 +40,6 @@ describe('Unit | UseCase | uploadCsvFile', function () {
     });
 
     organizationImportId = Symbol('organizationImportId');
-    importType = Symbol('FREGATA');
     s3Filename = Symbol('filename');
     csvContent = iconv.encode(
       `${supOrganizationLearnerImportHeader}
@@ -77,9 +77,8 @@ describe('Unit | UseCase | uploadCsvFile', function () {
       .withArgs(organizationId)
       .resolves(organizationImportSavedStub);
 
-    validateCsvOrganizationImportFileJobRepositoryStub = {
-      performAsync: sinon.stub(),
-    };
+    validateFregataFileJobRepositoryStub = { performAsync: sinon.stub() };
+    validateSupFileJobRepositoryStub = { performAsync: sinon.stub() };
   });
 
   afterEach(async function () {
@@ -88,10 +87,9 @@ describe('Unit | UseCase | uploadCsvFile', function () {
   });
 
   context('when there is no errors', function () {
-    it('save import state in database', async function () {
+    it('should trigger validateFregataFileJob when type is FREGATA', async function () {
       // given
       importStorageStub.sendFile.withArgs({ filepath: payload.path }).resolves(s3Filename);
-
       importStorageStub.getParser
         .withArgs({ Parser: SupParser, filename: s3Filename }, organizationId, i18n)
         .resolves(SupParser.buildParser(csvContent, organizationId, i18n));
@@ -103,10 +101,11 @@ describe('Unit | UseCase | uploadCsvFile', function () {
         userId,
         organizationId,
         i18n,
-        type: importType,
+        type: 'FREGATA',
         organizationImportRepository: organizationImportRepositoryStub,
         importStorage: importStorageStub,
-        validateCsvOrganizationImportFileJobRepository: validateCsvOrganizationImportFileJobRepositoryStub,
+        validateFregataFileJobRepository: validateFregataFileJobRepositoryStub,
+        validateSupFileJobRepository: validateSupFileJobRepositoryStub,
       });
 
       // then
@@ -114,13 +113,39 @@ describe('Unit | UseCase | uploadCsvFile', function () {
       expect(organizationImportRepositoryStub.save.getCall(1)).to.have.been.calledWithExactly(
         organizationImportSavedStub,
       );
-      expect(validateCsvOrganizationImportFileJobRepositoryStub.performAsync).to.have.been.calledWithExactly(
-        new ValidateCsvOrganizationImportFileJob({
-          organizationImportId,
-          type: importType,
-          locale: i18n.getLocale(),
-        }),
+      expect(validateFregataFileJobRepositoryStub.performAsync).to.have.been.calledWithExactly(
+        new ValidateFregataFileJob({ organizationImportId, locale: i18n.getLocale() }),
       );
+      expect(validateSupFileJobRepositoryStub.performAsync).not.called;
+    });
+
+    it('should trigger validateSupFileJob when type is not FREGATA', async function () {
+      // given
+      const type = 'ADDITIONAL_STUDENT';
+      importStorageStub.sendFile.withArgs({ filepath: payload.path }).resolves(s3Filename);
+      importStorageStub.getParser
+        .withArgs({ Parser: SupParser, filename: s3Filename }, organizationId, i18n)
+        .resolves(SupParser.buildParser(csvContent, organizationId, i18n));
+
+      // when
+      await uploadCsvFile({
+        Parser: SupParser,
+        payload,
+        userId,
+        organizationId,
+        i18n,
+        type,
+        organizationImportRepository: organizationImportRepositoryStub,
+        importStorage: importStorageStub,
+        validateFregataFileJobRepository: validateFregataFileJobRepositoryStub,
+        validateSupFileJobRepository: validateSupFileJobRepositoryStub,
+      });
+
+      // then
+      expect(validateSupFileJobRepositoryStub.performAsync).to.have.been.calledWithExactly(
+        new ValidateSupFileJob({ organizationImportId, type, locale: i18n.getLocale() }),
+      );
+      expect(validateFregataFileJobRepositoryStub.performAsync).not.called;
     });
   });
 
