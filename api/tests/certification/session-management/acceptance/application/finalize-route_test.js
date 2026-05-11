@@ -206,7 +206,6 @@ describe('Certification | Session Management | Acceptance | Application | Route 
           const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
             userId,
             sessionId: session.id,
-            completedAt: new Date(),
             candidateId: candidate.id,
           }).id;
           databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidate.id });
@@ -428,7 +427,6 @@ describe('Certification | Session Management | Acceptance | Application | Route 
           const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
             userId,
             sessionId: session.id,
-            completedAt: new Date(),
             version: AlgorithmEngineVersion.V3,
             versionId: certificationVersionId,
           }).id;
@@ -523,7 +521,6 @@ describe('Certification | Session Management | Acceptance | Application | Route 
           const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
             userId,
             sessionId: session.id,
-            completedAt: null,
             version: AlgorithmEngineVersion.V3,
             candidateId,
             versionId: certificationVersionId,
@@ -643,7 +640,6 @@ describe('Certification | Session Management | Acceptance | Application | Route 
             const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
               userId,
               sessionId: session.id,
-              completedAt: new Date(),
               version: AlgorithmEngineVersion.V3,
               candidateId,
               framework: Frameworks.CLEA,
@@ -961,7 +957,6 @@ const _createSessionWithoutChallenge = async () => {
   }).id;
   const certificationCourseId = databaseBuilder.factory.buildCertificationCourse({
     sessionId: session.id,
-    completedAt: null,
     version: 3,
     abortReason: 'technical',
     userId: candidateUserId,
