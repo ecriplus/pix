@@ -4,7 +4,7 @@ import { getDataBuffer } from '../../../infrastructure/utils/bufferize/get-data-
 import { AggregateImportError } from '../../errors.js';
 import { ImportOrganizationLearnerSet } from '../../models/ImportOrganizationLearnerSet.js';
 
-const saveOrganizationLearnersFile = async function ({
+const importLearnersFromGenericFile = async function ({
   organizationImportId,
   organizationLearnerImportFormatRepository,
   organizationLearnerRepository,
@@ -70,4 +70,4 @@ const saveOrganizationLearnersFile = async function ({
   }
 };
 
-export { saveOrganizationLearnersFile };
+export { importLearnersFromGenericFile };

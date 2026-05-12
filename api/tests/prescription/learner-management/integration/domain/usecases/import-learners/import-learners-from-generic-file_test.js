@@ -76,7 +76,7 @@ O-Ren;Ishii;5B;01/02/1980`,
 
   it('save two learner on organization', async function () {
     // when
-    await usecases.saveOrganizationLearnersFile({ organizationImportId: organizationImport.id });
+    await usecases.importLearnersFromGenericFile({ organizationImportId: organizationImport.id });
 
     const learners = await knex('organization-learners')
       .select('firstName', 'lastName', 'attributes')
@@ -96,7 +96,7 @@ O-Ren;Ishii;5B;01/02/1980`,
     await databaseBuilder.commit();
 
     // when
-    await usecases.saveOrganizationLearnersFile({ organizationImportId: organizationImport.id });
+    await usecases.importLearnersFromGenericFile({ organizationImportId: organizationImport.id });
 
     const filters = await knex('organization_learner_filters').where('organization_id', organizationId);
 

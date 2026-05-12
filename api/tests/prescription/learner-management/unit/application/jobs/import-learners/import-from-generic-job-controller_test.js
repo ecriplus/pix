@@ -34,7 +34,7 @@ describe('Unit | Prescription | Application | Jobs | ImportFromGenericJobControl
 
   describe('#handle', function () {
     it('should call usecase', async function () {
-      sinon.stub(usecases, 'saveOrganizationLearnersFile');
+      sinon.stub(usecases, 'importLearnersFromGenericFile');
 
       // given
       const handler = new ImportFromGenericJobController();
@@ -44,13 +44,13 @@ describe('Unit | Prescription | Application | Jobs | ImportFromGenericJobControl
       await handler.handle({ data });
 
       // then
-      expect(usecases.saveOrganizationLearnersFile).to.have.been.calledOnce;
-      expect(usecases.saveOrganizationLearnersFile).to.have.been.calledWithExactly(data);
+      expect(usecases.importLearnersFromGenericFile).to.have.been.calledOnce;
+      expect(usecases.importLearnersFromGenericFile).to.have.been.calledWithExactly(data);
     });
 
     it('should not throw when error is from domain', async function () {
       const error = new OrganizationLearnersCouldNotBeSavedError();
-      sinon.stub(usecases, 'saveOrganizationLearnersFile').rejects(error);
+      sinon.stub(usecases, 'importLearnersFromGenericFile').rejects(error);
 
       // given
       const errorStub = sinon.stub();
@@ -65,7 +65,7 @@ describe('Unit | Prescription | Application | Jobs | ImportFromGenericJobControl
 
     it('should throw when error is not from domain', async function () {
       const error = new Error();
-      sinon.stub(usecases, 'saveOrganizationLearnersFile').rejects(error);
+      sinon.stub(usecases, 'importLearnersFromGenericFile').rejects(error);
 
       // given
       const handler = new ImportFromGenericJobController();

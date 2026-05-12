@@ -23,7 +23,7 @@ class ImportFromFregataJobController extends JobController {
     const i18n = getI18n(locale);
 
     try {
-      await usecases.importOrganizationLearnersFromSIECLECSVFormat({
+      await usecases.importLearnersFromFregataFile({
         organizationImportId,
         i18n,
       });

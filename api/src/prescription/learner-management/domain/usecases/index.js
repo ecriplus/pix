@@ -76,7 +76,6 @@ const dependencies = {
   validateOrganizationImportFileJobRepository,
 };
 
-import { addOrUpdateOrganizationLearners } from './add-or-update-organization-learners.js';
 import { anonymizeUser } from './anonymize-user.js';
 import { computeOrganizationLearnerCertificability } from './compute-organization-learner-certificability.js';
 import { deleteOrganizationLearners } from './delete-organization-learners.js';
@@ -90,11 +89,12 @@ import { getOrganizationLearnerFilters } from './get-organization-learner-filter
 import { getOrganizationLearnersCsvTemplate } from './get-organization-learners-csv-template.js';
 import { handlePayloadTooLargeError } from './handle-payload-too-large-error.js';
 import { hasBeenLearner } from './has-been-learner.js';
-import { saveOrganizationLearnersFile } from './import-from-feature/save-organization-learners-file.js';
 import { sendOrganizationLearnersFile } from './import-from-feature/send-organization-learners-file.js';
 import { validateOrganizationLearnersFile } from './import-from-feature/validate-organization-learners-file.js';
-import { importOrganizationLearnersFromSIECLECSVFormat } from './import-organization-learners-from-siecle-csv-format.js';
-import { importSupOrganizationLearners } from './import-sup-organization-learners.js';
+import { importLearnersFromFregataFile } from './import-learners/import-learners-from-fregata-file.js';
+import { importLearnersFromGenericFile } from './import-learners/import-learners-from-generic-file.js';
+import { importLearnersFromSiecleFile } from './import-learners/import-learners-from-siecle-file.js';
+import { importLearnersFromSupFile } from './import-learners/import-learners-from-sup-file.js';
 import { reconcileCommonOrganizationLearner } from './reconcile-common-organization-learner.js';
 import { reconcileScoOrganizationLearnerAutomatically } from './reconcile-sco-organization-learner-automatically.js';
 import { reconcileScoOrganizationLearnerManually } from './reconcile-sco-organization-learner-manually.js';
@@ -108,10 +108,10 @@ import { validateCsvFile } from './validate-csv-file.js';
 import { validateSiecleXmlFile } from './validate-siecle-xml-file.js';
 
 const usecasesWithoutInjectedDependencies = {
-  saveOrganizationLearnersFile,
+  importLearnersFromGenericFile,
   sendOrganizationLearnersFile,
   validateOrganizationLearnersFile,
-  addOrUpdateOrganizationLearners,
+  importLearnersFromSiecleFile,
   anonymizeUser,
   computeOrganizationLearnerCertificability,
   deleteOrganizationLearners,
@@ -125,8 +125,8 @@ const usecasesWithoutInjectedDependencies = {
   getOrganizationLearnersCsvTemplate,
   handlePayloadTooLargeError,
   hasBeenLearner,
-  importOrganizationLearnersFromSIECLECSVFormat,
-  importSupOrganizationLearners,
+  importLearnersFromFregataFile,
+  importLearnersFromSupFile,
   reconcileCommonOrganizationLearner,
   reconcileScoOrganizationLearnerAutomatically,
   reconcileScoOrganizationLearnerManually,

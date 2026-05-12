@@ -2,12 +2,12 @@ import sinon from 'sinon';
 
 import { AggregateImportError } from '../../../../../../../src/prescription/learner-management/domain/errors.js';
 import { ImportOrganizationLearnerSet } from '../../../../../../../src/prescription/learner-management/domain/models/ImportOrganizationLearnerSet.js';
-import { saveOrganizationLearnersFile } from '../../../../../../../src/prescription/learner-management/domain/usecases/import-from-feature/save-organization-learners-file.js';
+import { importLearnersFromGenericFile } from '../../../../../../../src/prescription/learner-management/domain/usecases/import-learners/import-learners-from-generic-file.js';
 import { GenericParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/parsers/generic-parser.js';
 import { expect } from '../../../../../../test-helper.js';
 import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
-describe('Unit | UseCase | saveOrganizationLearnersFile', function () {
+describe('Unit | UseCase | importLearnersFromGenericFile', function () {
   let organizationImportRepositoryStub,
     organizationLearnerImportFormatRepositoryStub,
     commonCsvLearnerParserStub,
@@ -121,7 +121,7 @@ describe('Unit | UseCase | saveOrganizationLearnersFile', function () {
       organizationLearnerImportFormatRepositoryStub.get.withArgs(organizationId).rejects(error);
 
       // when
-      const saveError = await catchErr(saveOrganizationLearnersFile)({
+      const saveError = await catchErr(importLearnersFromGenericFile)({
         organizationImportId,
         importStorage: importStorageStub,
         organizationImportRepository: organizationImportRepositoryStub,
@@ -157,7 +157,7 @@ describe('Unit | UseCase | saveOrganizationLearnersFile', function () {
         organizationLearnerImportFormatRepositoryStub.get.withArgs(organizationId).rejects(error);
 
         // when
-        await catchErr(saveOrganizationLearnersFile)({
+        await catchErr(importLearnersFromGenericFile)({
           organizationImportId,
           importStorage: importStorageStub,
           organizationImportRepository: organizationImportRepositoryStub,
@@ -178,7 +178,7 @@ describe('Unit | UseCase | saveOrganizationLearnersFile', function () {
         organizationLearnerImportFormatRepositoryStub.get.withArgs(organizationId).rejects([error, error]);
 
         // when
-        await catchErr(saveOrganizationLearnersFile)({
+        await catchErr(importLearnersFromGenericFile)({
           organizationImportId,
           importStorage: importStorageStub,
           organizationImportRepository: organizationImportRepositoryStub,

@@ -1,13 +1,13 @@
 import sinon from 'sinon';
 
-import { OrganizationImportStatus } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationImportStatus.js';
-import { importOrganizationLearnersFromSIECLECSVFormat } from '../../../../../../src/prescription/learner-management/domain/usecases/import-organization-learners-from-siecle-csv-format.js';
-import { FregataParser } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/parsers/fregata-parser.js';
-import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import { expect } from '../../../../../test-helper.js';
-import { catchErr } from '../../../../../tooling/test-utils/error.js';
+import { OrganizationImportStatus } from '../../../../../../../src/prescription/learner-management/domain/models/OrganizationImportStatus.js';
+import { importLearnersFromFregataFile } from '../../../../../../../src/prescription/learner-management/domain/usecases/import-learners/import-learners-from-fregata-file.js';
+import { FregataParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/parsers/fregata-parser.js';
+import { DomainTransaction } from '../../../../../../../src/shared/domain/DomainTransaction.js';
+import { expect } from '../../../../../../test-helper.js';
+import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
-describe('Unit | UseCase | importOrganizationLearnersFromSIECLECSVFormat', function () {
+describe('Unit | UseCase | importLearnersFromFregataFile', function () {
   let organizationId,
     organizationImportId,
     learners,
@@ -71,7 +71,7 @@ describe('Unit | UseCase | importOrganizationLearnersFromSIECLECSVFormat', funct
 
   context('when there is no errors', function () {
     it('add learners from csv fivle', async function () {
-      await importOrganizationLearnersFromSIECLECSVFormat({
+      await importLearnersFromFregataFile({
         organizationImportId,
         i18n,
         organizationLearnerRepository: organizationLearnerRepositoryStub,
@@ -101,7 +101,7 @@ describe('Unit | UseCase | importOrganizationLearnersFromSIECLECSVFormat', funct
     });
 
     it('should chunk the called insertion', async function () {
-      await importOrganizationLearnersFromSIECLECSVFormat({
+      await importLearnersFromFregataFile({
         organizationImportId,
         i18n,
         organizationLearnerRepository: organizationLearnerRepositoryStub,
@@ -117,7 +117,7 @@ describe('Unit | UseCase | importOrganizationLearnersFromSIECLECSVFormat', funct
     });
 
     it('should delete file on s3', async function () {
-      await importOrganizationLearnersFromSIECLECSVFormat({
+      await importLearnersFromFregataFile({
         organizationImportId,
         i18n,
         organizationLearnerRepository: organizationLearnerRepositoryStub,
@@ -130,7 +130,7 @@ describe('Unit | UseCase | importOrganizationLearnersFromSIECLECSVFormat', funct
 
     it('should save imported state', async function () {
       // when
-      await importOrganizationLearnersFromSIECLECSVFormat({
+      await importLearnersFromFregataFile({
         organizationImportId,
         i18n,
         organizationLearnerRepository: organizationLearnerRepositoryStub,
@@ -151,7 +151,7 @@ describe('Unit | UseCase | importOrganizationLearnersFromSIECLECSVFormat', funct
 
     it('should save IMPORT_ERROR status with error', async function () {
       // when
-      const error = await catchErr(importOrganizationLearnersFromSIECLECSVFormat)({
+      const error = await catchErr(importLearnersFromFregataFile)({
         organizationImportId,
         i18n,
         organizationLearnerRepository: organizationLearnerRepositoryStub,
@@ -166,7 +166,7 @@ describe('Unit | UseCase | importOrganizationLearnersFromSIECLECSVFormat', funct
     });
 
     it('should delete file on s3', async function () {
-      await catchErr(importOrganizationLearnersFromSIECLECSVFormat)({
+      await catchErr(importLearnersFromFregataFile)({
         organizationImportId,
         i18n,
         organizationLearnerRepository: organizationLearnerRepositoryStub,

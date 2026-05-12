@@ -1,8 +1,8 @@
-import { SupParser } from '../../infrastructure/serializers/csv/parsers/sup-parser.js';
-import { getDataBuffer } from '../../infrastructure/utils/bufferize/get-data-buffer.js';
-import { AggregateImportError } from '../errors.js';
+import { SupParser } from '../../../infrastructure/serializers/csv/parsers/sup-parser.js';
+import { getDataBuffer } from '../../../infrastructure/utils/bufferize/get-data-buffer.js';
+import { AggregateImportError } from '../../errors.js';
 
-const importSupOrganizationLearners = async function ({
+const importLearnersFromSupFile = async function ({
   organizationImportId,
   i18n,
   supOrganizationLearnerRepository,
@@ -36,4 +36,4 @@ const importSupOrganizationLearners = async function ({
   }
 };
 
-export { importSupOrganizationLearners };
+export { importLearnersFromSupFile };
