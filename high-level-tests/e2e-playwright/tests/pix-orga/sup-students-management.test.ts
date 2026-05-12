@@ -20,7 +20,7 @@ test('Managing sup students', async ({ page }) => {
   const orgaPage = new PixOrgaPage(page);
 
   await test.step('Login to pixOrga', async () => {
-    await page.goto(process.env.PIX_ORGA_ORG_URL as string);
+    await page.goto(process.env.PIX_ORGA_URL as string);
     await orgaPage.login(`admin-${uid}@example.net`, 'pix123');
     await page.getByRole('button').filter({ hasText: 'Je me connecte' }).waitFor({ state: 'detached' });
     await orgaPage.acceptCGU();
@@ -43,7 +43,7 @@ test('Managing sup students', async ({ page }) => {
     await orgaPage.waitForTheImportToComplete(page);
   });
   await test.step('show learners', async () => {
-    await page.goto(process.env.PIX_ORGA_ORG_URL as string);
+    await page.goto(process.env.PIX_ORGA_URL as string);
     await page.getByRole('link', { name: 'Étudiants' }).click();
     await expect(
       page.getByRole('paragraph').filter({ hasText: 'Les participants ont bien été importés' }),

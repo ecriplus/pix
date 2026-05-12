@@ -37,7 +37,7 @@ test('Managing generic import learners', async ({ page }) => {
   const orgaPage = new PixOrgaPage(page);
 
   await test.step('Login to pixOrga', async () => {
-    await page.goto(process.env.PIX_ORGA_ORG_URL as string);
+    await page.goto(process.env.PIX_ORGA_URL as string);
     await orgaPage.login(`admin-${uid}@example.net`, 'pix123');
     await page.getByRole('button').filter({ hasText: 'Je me connecte' }).waitFor({ state: 'detached' });
     await orgaPage.acceptCGU();
@@ -54,14 +54,14 @@ test('Managing generic import learners', async ({ page }) => {
   });
 
   await test.step('Show learners', async () => {
-    await page.goto(process.env.PIX_ORGA_ORG_URL as string);
+    await page.goto(process.env.PIX_ORGA_URL as string);
     await page.getByRole('link', { name: 'Participants' }).click();
     await expect(page.getByRole('heading', { name: 'Participants (3)' })).toBeVisible();
   });
 
   await test.step('Access the campaign and reconcile a new user with an imported learner', async () => {
     // Access campaign
-    await page.goto(process.env.PIX_APP_ORG_URL as string);
+    await page.goto(process.env.PIX_APP_URL as string);
     const loginPage = new LoginPage(page);
     await loginPage.signup('Isaac', 'Asimov', `asimov.${uid}@example.net`, 'oaiejf*(Uo;aise9821');
     await page.getByRole('link', { name: "J'ai un code" }).click();

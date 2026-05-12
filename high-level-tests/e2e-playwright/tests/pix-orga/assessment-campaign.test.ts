@@ -30,7 +30,7 @@ test('Assessment campaign', async ({ page }) => {
   test.slow();
 
   await test.step('Login to pixOrga', async () => {
-    await page.goto(process.env.PIX_ORGA_ORG_URL as string);
+    await page.goto(process.env.PIX_ORGA_URL as string);
     await orgaPage.login(`admin-${uid}@example.net`, 'pix123');
     await page.getByRole('button').filter({ hasText: 'Je me connecte' }).waitFor({ state: 'detached' });
     await orgaPage.acceptCGU();
@@ -47,7 +47,7 @@ test('Assessment campaign', async ({ page }) => {
   });
 
   await test.step('plays campaign', async function () {
-    await page.goto(process.env.PIX_APP_ORG_URL as string);
+    await page.goto(process.env.PIX_APP_URL as string);
     const loginPage = new LoginPage(page);
     await loginPage.signup('Buffy', 'Summers', `buffy.summers.${uid}@example.net`, 'Coucoulesdevs66');
     const rightWrongAnswerCycleIter = rightWrongAnswerCycle({ numRight: 1, numWrong: 1 });
@@ -79,7 +79,7 @@ test('Assessment campaign', async ({ page }) => {
   });
 
   await test.step('view campaign results', async function () {
-    await page.goto(process.env.PIX_ORGA_ORG_URL as string);
+    await page.goto(process.env.PIX_ORGA_URL as string);
 
     await page.getByLabel('Navigation principale').getByRole('link', { name: 'Campagnes' }).click();
     await page.getByRole('link', { name: 'campagne pro', exact: true }).click();

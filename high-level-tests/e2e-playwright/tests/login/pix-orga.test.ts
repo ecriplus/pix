@@ -11,7 +11,7 @@ test('login, cgu and logout', async ({ page, globalTestId }: { page: Page; globa
     externalId: 'PROPRO',
     isManagingStudents: false,
   });
-  await page.goto(process.env.PIX_ORGA_ORG_URL as string);
+  await page.goto(process.env.PIX_ORGA_URL as string);
 
   await test.step('Login for the first time to PixOrga and accept CGUs', async () => {
     await expect(page).toHaveTitle('Connectez-vous | Pix Orga (hors France)');
@@ -24,7 +24,7 @@ test('login, cgu and logout', async ({ page, globalTestId }: { page: Page; globa
     await cgu.waitFor();
     await loginPage.acceptCGU();
 
-    await expect(page).toHaveURL(process.env.PIX_ORGA_ORG_URL as string);
+    await expect(page).toHaveURL(process.env.PIX_ORGA_URL as string);
   });
 
   await test.step('Logout and login, without having to accept CGU', async function () {
@@ -35,6 +35,6 @@ test('login, cgu and logout', async ({ page, globalTestId }: { page: Page; globa
     const loginPage = new PixOrgaPage(page);
     await loginPage.login(email, 'Coucoulesdevs66');
 
-    await expect(page).toHaveURL(process.env.PIX_ORGA_ORG_URL as string);
+    await expect(page).toHaveURL(process.env.PIX_ORGA_URL as string);
   });
 });

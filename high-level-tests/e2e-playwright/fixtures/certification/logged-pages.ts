@@ -38,25 +38,25 @@ export const loggedPagesFixtures = sharedTest.extend<
 >({
   pixAdminRoleCertifPage: async ({ pixAdminRoleCertifWorkerContext }, use) => {
     const page = await pixAdminRoleCertifWorkerContext.newPage();
-    await page.goto(process.env.PIX_ADMIN_FR_URL!);
+    await page.goto(process.env.PIX_ADMIN_URL!);
     await use(page);
     await page.close();
   },
   pixCertifProPage: async ({ pixCertifProWorkerContext }, use) => {
     const page = await pixCertifProWorkerContext.newPage();
-    await page.goto(process.env.PIX_CERTIF_FR_URL!);
+    await page.goto(process.env.PIX_CERTIF_URL!);
     await use(page);
     await page.close();
   },
   pixCertifScoPage: async ({ pixCertifScoWorkerContext }, use) => {
     const page = await pixCertifScoWorkerContext.newPage();
-    await page.goto(process.env.PIX_CERTIF_FR_URL!);
+    await page.goto(process.env.PIX_CERTIF_URL!);
     await use(page);
     await page.close();
   },
   pixCertifInvigilatorPage: async ({ pixCertifProWorkerContext }, use) => {
     const page = await pixCertifProWorkerContext.newPage();
-    await page.goto(process.env.PIX_CERTIF_FR_URL + '/connexion-espace-surveillant');
+    await page.goto(process.env.PIX_CERTIF_URL + '/connexion-espace-surveillant');
     await use(page);
     await page.close();
   },
@@ -72,7 +72,15 @@ export const loggedPagesFixtures = sharedTest.extend<
       const browser = await pixAppCertifiableUserContext(certifiableUserData);
       const page = await browser.newPage();
       pixAppPages.push(page);
-      await page.goto(process.env.PIX_APP_FR_URL!);
+      await page.route('**/api/**', (route) => {
+        route.continue({
+          headers: {
+            ...route.request().headers(),
+            origin: 'https://app.e2e.pix.fr',
+          },
+        });
+      });
+      await page.goto(process.env.PIX_APP_URL!);
       return page;
     };
     await use(createPageForUser);
@@ -182,7 +190,7 @@ export const loggedPagesFixtures = sharedTest.extend<
         lastName: pixAdminRoleCertifUserData.lastName,
         email: pixAdminRoleCertifUserData.email,
         rawPassword: pixAdminRoleCertifUserData.rawPassword,
-        appUrl: process.env.PIX_ADMIN_FR_URL!,
+        appUrl: process.env.PIX_ADMIN_URL!,
       };
       const context = await setupContext(browser, credentials);
       await use(context);
@@ -199,7 +207,7 @@ export const loggedPagesFixtures = sharedTest.extend<
         lastName: pixCertifProUserData.lastName,
         email: pixCertifProUserData.email,
         rawPassword: pixCertifProUserData.rawPassword,
-        appUrl: process.env.PIX_CERTIF_FR_URL!,
+        appUrl: process.env.PIX_CERTIF_URL!,
       };
       const context = await setupContext(browser, credentials);
       await use(context);
@@ -216,7 +224,7 @@ export const loggedPagesFixtures = sharedTest.extend<
         lastName: pixCertifScoUserData.lastName,
         email: pixCertifScoUserData.email,
         rawPassword: pixCertifScoUserData.rawPassword,
-        appUrl: process.env.PIX_CERTIF_FR_URL!,
+        appUrl: process.env.PIX_CERTIF_URL!,
       };
       const context = await setupContext(browser, credentials);
       await use(context);
@@ -237,7 +245,7 @@ export const loggedPagesFixtures = sharedTest.extend<
           lastName: certifiableUserData.lastName,
           email: certifiableUserData.email,
           rawPassword: certifiableUserData.rawPassword,
-          appUrl: process.env.PIX_APP_FR_URL!,
+          appUrl: process.env.PIX_APP_URL!,
         };
         const context = await setupContext(browser, credentials);
         pixAppBrowserContextsPerUser.set(certifiableUserData.id, context);

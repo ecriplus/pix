@@ -1143,24 +1143,6 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/pix
-      - run:
-          name: Install Caddy binary
-          command: |
-            sudo apt-get update
-            sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
-            curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
-            curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
-            sudo chmod o+r /usr/share/keyrings/caddy-stable-archive-keyring.gpg
-            sudo chmod o+r /etc/apt/sources.list.d/caddy-stable.list
-            sudo apt update
-            sudo apt install caddy
-      - run:
-          name: Start Caddy
-          command: caddy start --config ./scripts/local-domains/Caddyfile --adapter caddyfile
-      - run:
-          name: Configure local domains in /etc/hosts
-          working_directory: ~/pix
-          command: echo y | bash scripts/local-domains/install
       - npm_install_with_cache:
           cache_key: playwright
       - run:
@@ -1250,12 +1232,9 @@ jobs:
             fi
           environment:
             PIX_API_PORT: 3000
-            PIX_APP_FR_URL: 'https://app.dev.pix.fr'
-            PIX_APP_ORG_URL: 'https://app.dev.pix.org'
-            PIX_ORGA_ORG_URL: 'https://orga.dev.pix.org'
-            PIX_CERTIF_FR_URL: 'https://certif.dev.pix.fr'
-            PIX_CERTIF_ORG_URL: 'https://certif.dev.pix.org'
-            PIX_ADMIN_FR_URL: 'https://admin.dev.pix.fr'
+            PIX_APP_URL: http://localhost:4200
+            PIX_ORGA_URL: http://localhost:4201
+            PIX_CERTIF_URL: http://localhost:4203
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
             JOBS_DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
             AUTH_SECRET: 'secret'
@@ -1275,24 +1254,6 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/pix
-      - run:
-          name: Install Caddy binary
-          command: |
-            sudo apt-get update
-            sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
-            curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
-            curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
-            sudo chmod o+r /usr/share/keyrings/caddy-stable-archive-keyring.gpg
-            sudo chmod o+r /etc/apt/sources.list.d/caddy-stable.list
-            sudo apt update
-            sudo apt install caddy
-      - run:
-          name: Start Caddy
-          command: caddy start --config ./scripts/local-domains/Caddyfile --adapter caddyfile
-      - run:
-          name: Configure local domains in /etc/hosts
-          working_directory: ~/pix
-          command: echo y | bash scripts/local-domains/install
       - run: cat package*.json > cachekey
       - restore_cache:
           keys:
@@ -1371,11 +1332,9 @@ jobs:
             npx playwright test --config playwright.config.certif.ts --shard=${SHARD}/${CIRCLE_NODE_TOTAL}
           environment:
             PIX_API_PORT: 3000
-            PIX_APP_FR_URL: 'https://app.dev.pix.fr'
-            PIX_APP_ORG_URL: 'https://app.dev.pix.org'
-            PIX_CERTIF_FR_URL: 'https://certif.dev.pix.fr'
-            PIX_CERTIF_ORG_URL: 'https://certif.dev.pix.org'
-            PIX_ADMIN_FR_URL: 'https://admin.dev.pix.fr'
+            PIX_APP_URL: http://localhost:4200
+            PIX_ADMIN_URL: http://localhost:4202
+            PIX_CERTIF_URL: http://localhost:4203
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
             JOBS_DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
             AUTH_SECRET: 'secret'

@@ -18,7 +18,7 @@ test('Combined courses', async ({ page }) => {
   const orgaPage = new PixOrgaPage(page);
 
   await test.step('Login to pixOrga', async () => {
-    await page.goto(process.env.PIX_ORGA_ORG_URL as string);
+    await page.goto(process.env.PIX_ORGA_URL as string);
     await orgaPage.login(`admin-${uid}@example.net`, 'pix123');
     await page.getByRole('button').filter({ hasText: 'Je me connecte' }).waitFor({ state: 'detached' });
     await orgaPage.acceptCGU();
@@ -32,7 +32,7 @@ test('Combined courses', async ({ page }) => {
   });
 
   await test.step('Combined course', async () => {
-    await page.goto(process.env.PIX_APP_ORG_URL as string);
+    await page.goto(process.env.PIX_APP_URL as string);
     const loginPage = new LoginPage(page);
     await loginPage.signup('Buffy', 'Summers', `buffy.summers.${uid}@example.net`, 'Coucoulesdevs66');
     await page.getByRole('link', { name: "J'ai un code" }).click();
@@ -69,7 +69,7 @@ test('Combined courses', async ({ page }) => {
   });
 
   await test.step('Display combined course participation details', async () => {
-    await page.goto(process.env.PIX_ORGA_ORG_URL as string);
+    await page.goto(process.env.PIX_ORGA_URL as string);
     await page.getByLabel('Navigation principale').getByRole('link', { name: 'Campagnes' }).click();
     await page.getByRole('link', { name: 'Parcours apprenants' }).click();
     await page.getByRole('link', { name: 'Mon parcours combiné' }).click();
@@ -124,7 +124,7 @@ async function createDataForCombinedCourse(uid: string) {
       ownerId: userId,
       type: 'ASSESSMENT',
       customResultPageButtonText: 'Continuer',
-      customResultPageButtonUrl: `${process.env.PIX_APP_ORG_URL}/parcours/C${uid.toUpperCase()}`,
+      customResultPageButtonUrl: `${process.env.PIX_APP_URL}/parcours/C${uid.toUpperCase()}`,
     })
     .returning('id');
   await knex('campaign_skills').insert({ campaignId, skillId: CAMPAIGN_SKILLS[0] });

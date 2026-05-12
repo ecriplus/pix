@@ -125,7 +125,7 @@ test(
     });
 
     await test.step('User checks their certification result', async () => {
-      await pixAppCertifiablePage.goto(process.env.PIX_APP_FR_URL as string);
+      await pixAppCertifiablePage.goto(process.env.PIX_APP_URL as string);
       const homePage = new HomePage(pixAppCertifiablePage);
       const certificateListPage = await homePage.goToMyCertificates();
       const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment } =
@@ -155,7 +155,7 @@ test(
     await pixAppCertifiablePage.close();
 
     await test.step('Cannot set external jury result', async () => {
-      await pixAdminRoleCertifPage.goto(process.env.PIX_ADMIN_FR_URL!);
+      await pixAdminRoleCertifPage.goto(process.env.PIX_ADMIN_URL!);
       const adminHomepage = new AdminHomePage(pixAdminRoleCertifPage);
       const sessionsMainPage = await adminHomepage.goToCertificationSessionsTab();
       await sessionsMainPage.goToCertificationWithSearchBar(certificationNumber);

@@ -26,7 +26,7 @@ export const PIX_APP_USER_CREDENTIALS: Credentials = {
   lastName: PIX_APP_USER_DATA.lastName,
   email: PIX_APP_USER_DATA.email,
   rawPassword: PIX_APP_USER_DATA.rawPassword,
-  appUrl: process.env.PIX_APP_ORG_URL as string,
+  appUrl: process.env.PIX_APP_URL as string,
 };
 export const PIX_ORGA_ADMIN_CREDENTIALS: Credentials = {
   id: PIX_ORGA_ADMIN_DATA.id,
@@ -35,7 +35,7 @@ export const PIX_ORGA_ADMIN_CREDENTIALS: Credentials = {
   lastName: PIX_ORGA_ADMIN_DATA.lastName,
   email: PIX_ORGA_ADMIN_DATA.email,
   rawPassword: PIX_ORGA_ADMIN_DATA.rawPassword,
-  appUrl: process.env.PIX_ORGA_ORG_URL as string,
+  appUrl: process.env.PIX_ORGA_URL as string,
 };
 export const PIX_ORGA_MEMBER_CREDENTIALS: Credentials = {
   id: PIX_ORGA_MEMBER_DATA.id,
@@ -44,7 +44,7 @@ export const PIX_ORGA_MEMBER_CREDENTIALS: Credentials = {
   lastName: PIX_ORGA_MEMBER_DATA.lastName,
   email: PIX_ORGA_MEMBER_DATA.email,
   rawPassword: PIX_ORGA_MEMBER_DATA.rawPassword,
-  appUrl: process.env.PIX_ORGA_ORG_URL as string,
+  appUrl: process.env.PIX_ORGA_URL as string,
 };
 export const PIX_CERTIF_PRO_CREDENTIALS: Credentials = {
   id: PIX_CERTIF_PRO_DATA.id,
@@ -53,7 +53,7 @@ export const PIX_CERTIF_PRO_CREDENTIALS: Credentials = {
   lastName: PIX_CERTIF_PRO_DATA.lastName,
   email: PIX_CERTIF_PRO_DATA.email,
   rawPassword: PIX_CERTIF_PRO_DATA.rawPassword,
-  appUrl: process.env.PIX_CERTIF_FR_URL as string,
+  appUrl: process.env.PIX_CERTIF_URL as string,
 };
 
 export function getGarTokenForNewUser(firstName: string, lastName: string, expiresIn: ms.StringValue = '1h') {
@@ -71,7 +71,7 @@ export function getGarTokenForNewUser(firstName: string, lastName: string, expir
 
 export function getGarTokenForExistingUser(userId: number, expiresIn: ms.StringValue = '1h') {
   return jwt.sign(
-    { user_id: userId, source: 'external', aud: process.env.PIX_APP_ORG_URL },
+    { user_id: userId, source: 'external', aud: process.env.PIX_APP_URL },
     process.env.AUTH_SECRET || '',
     { expiresIn },
   );

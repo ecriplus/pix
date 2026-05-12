@@ -86,7 +86,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
         certificationCenterName = '';
 
       await certifSetupFixtures.step('Enrollment', async () => {
-        await pixCertifProPage.goto(process.env.PIX_CERTIF_FR_URL!);
+        await pixCertifProPage.goto(process.env.PIX_CERTIF_URL!);
 
         const sessionManagementPage = await certifSetupFixtures.step('Create session', async () => {
           const sessionListPage = new SessionListPage(pixCertifProPage);
@@ -137,7 +137,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
     }: PassCertificationExamParams) => {
       let certificationNumber: string = '';
       const invigilatorOverviewPage = await certifSetupFixtures.step('Evaluation', async () => {
-        await pixAppPage.goto(process.env.PIX_APP_FR_URL!);
+        await pixAppPage.goto(process.env.PIX_APP_URL!);
 
         const certificationAccessCodePage = await certifSetupFixtures.step(
           'Candidate join the session, awaiting to be authorized to start',
@@ -195,7 +195,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
       const certificationNumbers: string[] = [];
       const invigilatorOverviewPage = await certifSetupFixtures.step('Evaluation', async () => {
         const reachAccessCodePagePromises = examsData.map(async (examData) => {
-          await examData.pixAppPage.goto(process.env.PIX_APP_FR_URL!);
+          await examData.pixAppPage.goto(process.env.PIX_APP_URL!);
           return await certifSetupFixtures.step(
             `Candidate ${examData.certifiableUserData.firstName} join the session, awaiting to be authorized to start`,
             async () => {

@@ -9,7 +9,7 @@ test(`user is anonymized`, async ({ page: pixAppPage, pixOrgaMemberContext }) =>
   test.slow();
 
   await test.step('User can access to their account on PixApp', async function () {
-    await pixAppPage.goto(process.env.PIX_APP_ORG_URL as string);
+    await pixAppPage.goto(process.env.PIX_APP_URL as string);
     const loginPage = new AppLoginPage(pixAppPage);
     await loginPage.login(`jambon.beurre@example.net`, 'Coucoulesdevs44');
 
@@ -17,7 +17,7 @@ test(`user is anonymized`, async ({ page: pixAppPage, pixOrgaMemberContext }) =>
   });
 
   const pixAdminPage = pixAppPage;
-  await pixAdminPage.goto(process.env.PIX_ADMIN_FR_URL as string);
+  await pixAdminPage.goto(process.env.PIX_ADMIN_URL as string);
   const adminLoginPage = new AdminLoginPage(pixAdminPage);
   const adminHomepage = await adminLoginPage.login(PIX_ADMIN_SUPPORT_DATA.email, PIX_ADMIN_SUPPORT_DATA.rawPassword);
 
@@ -47,7 +47,7 @@ test(`user is anonymized`, async ({ page: pixAppPage, pixOrgaMemberContext }) =>
   // Impacts dans PixApp
   // TODO: Retirer le skip une fois le ticket correctif implémenté côté Accès
   await test.step.skip('User cannot access their account on PixApp anymore', async function () {
-    await pixAppPage.goto(process.env.PIX_APP_ORG_URL as string);
+    await pixAppPage.goto(process.env.PIX_APP_URL as string);
     const loginPage = new AppLoginPage(pixAppPage);
     await loginPage.login(`jambon.beurre@example.net`, 'Coucoulesdevs44');
     await expect(
@@ -58,7 +58,7 @@ test(`user is anonymized`, async ({ page: pixAppPage, pixOrgaMemberContext }) =>
   // Impacts dans PixOrga
   await test.step('Organization learner related to user should not be altered', async function () {
     const pixOrgaPage = await pixOrgaMemberContext.newPage();
-    await pixOrgaPage.goto(process.env.PIX_ORGA_ORG_URL as string);
+    await pixOrgaPage.goto(process.env.PIX_ORGA_URL as string);
     const homePage = new PixOrgaHomePage(pixOrgaPage);
 
     await homePage.goToParticipants();

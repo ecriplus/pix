@@ -32,7 +32,7 @@ export class HomePage {
   }
 
   async goToSession(sessionNumber: string) {
-    await this.page.goto(process.env.PIX_ADMIN_FR_URL + '/sessions/' + sessionNumber);
+    await this.page.goto(process.env.PIX_ADMIN_URL + '/sessions/' + sessionNumber);
     await this.page.getByText('Lien de téléchargement des résultats').waitFor({ state: 'visible' });
     return new CertificationSessionPage(this.page);
   }

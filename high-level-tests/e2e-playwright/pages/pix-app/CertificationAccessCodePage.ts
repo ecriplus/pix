@@ -4,9 +4,35 @@ import { ChallengePage } from './ChallengePage.ts';
 export class CertificationAccessCodePage {
   constructor(public readonly page: Page) {}
 
-  async fillAccessCodeAndStartCertificationTest(accessCode: string) {
+  async fillAccessCodeAndStartCertificationTest2(accessCode: string) {
     await this.page.getByLabel("Code d'accès communiqué").fill(accessCode);
     await this.page.getByRole('button', { name: 'Commencer mon test' }).click();
+    await this.page.waitForURL(/\/assessments\/\d+\/challenges\/\d+$/);
+
+    return new ChallengePage(this.page);
+  }
+
+  async fillAccessCodeAndStartCertificationTest(accessCode: string) {
+    const languageDropdown = this.page.getByRole('button', { name: 'Langue de certification' });
+
+    // Check if the dropdown exists before interacting with it
+    if (await languageDropdown.isVisible()) {
+      await languageDropdown.click();
+      await this.page.getByRole('option', { name: 'français - FR' }).click();
+
+      const languageConfirmationCheckbox = this.page.getByRole('checkbox', {
+        name: /Je confirme être à l'aise dans la langue sélectionnée/,
+      });
+
+      if (await languageConfirmationCheckbox.isVisible()) {
+        await languageConfirmationCheckbox.click();
+      }
+    }
+
+    // Proceed with the rest of the form
+    await this.page.getByLabel("Code d'accès communiqué").fill(accessCode);
+    await this.page.getByRole('button', { name: 'Commencer mon test' }).click();
+
     await this.page.waitForURL(/\/assessments\/\d+\/challenges\/\d+$/);
 
     return new ChallengePage(this.page);

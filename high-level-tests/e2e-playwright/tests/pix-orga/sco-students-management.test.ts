@@ -73,7 +73,7 @@ test('Managing sco learners', async ({ page }) => {
   const reconciliationPage = new ReconciliationPage(page);
 
   await test.step('Login to pixOrga', async () => {
-    await page.goto(process.env.PIX_ORGA_ORG_URL as string);
+    await page.goto(process.env.PIX_ORGA_URL as string);
     await orgaPage.login(`admin-${UAJ}@example.net`, 'pix123');
     await page.getByRole('button').filter({ hasText: 'Je me connecte' }).waitFor({ state: 'detached' });
     await orgaPage.acceptCGU();
@@ -107,7 +107,7 @@ test('Managing sco learners', async ({ page }) => {
   });
 
   await test.step('Can access campaign for re-enabled learner', async function () {
-    await page.goto(process.env.PIX_APP_ORG_URL + `/campagnes/${campaignCode}`);
+    await page.goto(process.env.PIX_APP_URL + `/campagnes/${campaignCode}`);
     await page.getByRole('button', { name: 'Je commence' }).click();
     await page.getByRole('button', { name: 'Se connecter' }).click();
     await reconciliationLoginPage.login(`katie-${UAJ}@veuns.io`, `katieveuns-password`);
@@ -118,7 +118,7 @@ test('Managing sco learners', async ({ page }) => {
   });
 
   await test.step('Can access campaign for auto-reconciled learner from another organization', async function () {
-    await page.goto(process.env.PIX_APP_ORG_URL + `/campagnes/${campaignCode}`);
+    await page.goto(process.env.PIX_APP_URL + `/campagnes/${campaignCode}`);
     await page.getByRole('button', { name: 'Je commence' }).click();
     await page.getByRole('button', { name: 'Se connecter' }).click();
     await reconciliationLoginPage.login(`alain-${UAJ}@deloin.io`, `alain-deloin-password`);
@@ -129,7 +129,7 @@ test('Managing sco learners', async ({ page }) => {
   });
 
   await test.step('Log in using the campaign code', async function () {
-    await page.goto(process.env.PIX_APP_ORG_URL + `/campagnes/${campaignCode}`);
+    await page.goto(process.env.PIX_APP_URL + `/campagnes/${campaignCode}`);
     await page.getByRole('button', { name: 'Je commence' }).click();
     await reconciliationPage.reconcile('Jaqueline', 'Colson', '03/09/1994', false);
     await expect(page.getByText('Mon identifiant *')).toBeVisible();
@@ -144,7 +144,7 @@ test('Managing sco learners', async ({ page }) => {
 
   await test.step('Log in using GAR', async function () {
     const token = getGarTokenForExistingUser(GARUserId);
-    await page.goto(process.env.PIX_APP_ORG_URL + `/connexion/gar#${token}`);
+    await page.goto(process.env.PIX_APP_URL + `/connexion/gar#${token}`);
     await expect(page.getByRole('link', { name: "J'ai un code" })).toBeVisible();
     await page.getByRole('link', { name: "J'ai un code" }).click();
     await page.getByLabel('Saisir votre code pour').fill(campaignCode);
@@ -159,7 +159,7 @@ test('Managing sco learners', async ({ page }) => {
   });
 
   await test.step('Show learners', async () => {
-    await page.goto(process.env.PIX_ORGA_ORG_URL as string);
+    await page.goto(process.env.PIX_ORGA_URL as string);
     await page.getByRole('link', { name: 'Élèves' }).click();
 
     await expect(
@@ -275,7 +275,7 @@ test.describe('SCO import does not auto-reconcile a learner when the user alread
       let campaignCodeB2: string;
 
       await test.step('Organization A: login, create a campaign and import Jean Michel (INE 12)', async () => {
-        await page.goto(process.env.PIX_ORGA_ORG_URL as string);
+        await page.goto(process.env.PIX_ORGA_URL as string);
         await orgaPage.login(`admin-fregata-a-${UAJ_FREGATA}@example.net`, 'pix123');
         await page.getByRole('button').filter({ hasText: 'Je me connecte' }).waitFor({ state: 'detached' });
         await orgaPage.acceptCGU();
@@ -302,7 +302,7 @@ test.describe('SCO import does not auto-reconcile a learner when the user alread
       });
 
       await test.step('A user creates an account and reconciles with Jean Michel from Org A (INE 12)', async () => {
-        await page.goto(process.env.PIX_APP_ORG_URL + `/campagnes/${campaignCodeA}`);
+        await page.goto(process.env.PIX_APP_URL + `/campagnes/${campaignCodeA}`);
         await page.getByRole('button', { name: 'Je commence' }).click();
         await reconciliationPage.reconcile('Jean', 'Michel', '01/01/1990', false);
         await expect(page.getByText('Mon identifiant *')).toBeVisible();
@@ -315,7 +315,7 @@ test.describe('SCO import does not auto-reconcile a learner when the user alread
       });
 
       await test.step('Org B: login, create a campaign and import Jean Michel (INE 13)', async () => {
-        await page.goto(process.env.PIX_ORGA_ORG_URL as string);
+        await page.goto(process.env.PIX_ORGA_URL as string);
         await page.getByRole('link', { name: 'Se déconnecter' }).click();
         await orgaPage.login(`admin-fregata-b-${UAJ_FREGATA}@example.net`, 'pix123');
         await page.getByRole('button').filter({ hasText: 'Je me connecte' }).waitFor({ state: 'detached' });
@@ -344,7 +344,7 @@ test.describe('SCO import does not auto-reconcile a learner when the user alread
 
       await test.step('Jean Michel manually reconciles with Org B (INE 13) via the campaign', async () => {
         // INE 13 est inconnu, pas d'auto-réconciliation à l'import : Jean Michel doit se réconcilier manuellement.
-        await page.goto(process.env.PIX_APP_ORG_URL + `/campagnes/${campaignCodeB}`);
+        await page.goto(process.env.PIX_APP_URL + `/campagnes/${campaignCodeB}`);
         await page.getByRole('button', { name: 'Je commence' }).click();
         await reconciliationPage.reconcile('Jean', 'Michel', '01/01/1990', true);
         await challengePage.leave();
@@ -354,7 +354,7 @@ test.describe('SCO import does not auto-reconcile a learner when the user alread
         // Après cet import : INE 13 sera disabled (absent du CSV), INE 12 sera créé.
         // On détecte que U1 est déjà dans Org B (via INE 13 disabled) avec un INE différent
         // → INE 12 reste sans userId.
-        await page.goto(process.env.PIX_ORGA_ORG_URL as string);
+        await page.goto(process.env.PIX_ORGA_URL as string);
         await page.getByRole('link', { name: 'Campagnes', exact: true }).click();
         await page.getByRole('link', { name: 'Créer une campagne' }).click();
         await orgaPage.createEvaluationCampaign({
@@ -377,7 +377,7 @@ test.describe('SCO import does not auto-reconcile a learner when the user alread
       });
 
       await test.step('Jean Michel cannot access the new Organization B campaign (INE 12 was not auto-reconciled)', async () => {
-        await page.goto(process.env.PIX_APP_ORG_URL + `/campagnes/${campaignCodeB2}`);
+        await page.goto(process.env.PIX_APP_URL + `/campagnes/${campaignCodeB2}`);
         // Jean Michel est connecté, mais n'est plus réconcilié avec Orga B :
         // - INE 13 est disabled : aucun learner actif avec userId=U1 dans Org B
         // - INE 12 a userId=null

@@ -12,7 +12,7 @@ test('A new user joins a new organization from an invitation link', async functi
   const invitation = databaseBuilder.factory.buildOrganizationInvitation();
   await databaseBuilder.commit();
 
-  await page.goto(process.env.PIX_ORGA_ORG_URL + `/rejoindre?invitationId=${invitation.id}&code=${invitation.code}`);
+  await page.goto(process.env.PIX_ORGA_URL + `/rejoindre?invitationId=${invitation.id}&code=${invitation.code}`);
   await expect(page.getByText('Vous êtes invité(e) à')).toBeVisible();
 
   await test.step('signup user', async () => {
@@ -34,7 +34,7 @@ test('An existing user joins a new organization from an invitation link', async 
   const invitation = databaseBuilder.factory.buildOrganizationInvitation();
   await databaseBuilder.commit();
 
-  await page.goto(process.env.PIX_ORGA_ORG_URL + `/rejoindre?invitationId=${invitation.id}&code=${invitation.code}`);
+  await page.goto(process.env.PIX_ORGA_URL + `/rejoindre?invitationId=${invitation.id}&code=${invitation.code}`);
   await expect(page.getByText('Vous êtes invité(e) à')).toBeVisible();
 
   await test.step('signin user', async () => {
@@ -56,7 +56,7 @@ test.describe('When user is already authenticated to Pix Orga', () => {
     await databaseBuilder.commit();
 
     const page = await pixOrgaMemberContext.newPage();
-    await page.goto(process.env.PIX_ORGA_ORG_URL + `/rejoindre?invitationId=${invitation.id}&code=${invitation.code}`);
+    await page.goto(process.env.PIX_ORGA_URL + `/rejoindre?invitationId=${invitation.id}&code=${invitation.code}`);
     await expect(page.getByText('Vous êtes invité(e) à')).toBeVisible();
 
     await test.step('signin user', async () => {

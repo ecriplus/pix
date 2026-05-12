@@ -138,7 +138,7 @@ test.describe('Happy paths on all certifications, 32 right answers, through app.
         });
 
         await test.step('User checks their certification result', async () => {
-          await pixAppCertifiablePage.goto(process.env.PIX_APP_FR_URL as string);
+          await pixAppCertifiablePage.goto(process.env.PIX_APP_URL as string);
           const homePage = new HomePage(pixAppCertifiablePage);
           const certificateListPage = await homePage.goToMyCertificates();
           const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment } =
