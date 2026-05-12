@@ -48,15 +48,29 @@ const save = async function ({ organizationInvitedUser }) {
       })
       .where({ id: organizationInvitedUser.currentMembershipId });
   } else {
-    const [{ id: membershipId }] = await knexConn('memberships')
+    const [result] = await knexConn('memberships')
       .insert({
         organizationRole: organizationInvitedUser.currentRole,
         organizationId: organizationInvitedUser.invitation.organizationId,
         userId: organizationInvitedUser.userId,
       })
+      .onConflict()
+      .ignore()
       .returning('id');
 
-    organizationInvitedUser.currentMembershipId = membershipId;
+    if (result) {
+      organizationInvitedUser.currentMembershipId = result.id;
+    } else {
+      const existing = await knexConn('memberships')
+        .select('id')
+        .where({
+          userId: organizationInvitedUser.userId,
+          organizationId: organizationInvitedUser.invitation.organizationId,
+          disabledAt: null,
+        })
+        .first();
+      organizationInvitedUser.currentMembershipId = existing.id;
+    }
   }
 
   await knexConn('user-orga-settings')
