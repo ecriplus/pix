@@ -1791,10 +1791,6 @@
       },
       "preview": {
         "elements-id-button": {
-          "choices": {
-            "no": "Nein",
-            "yes": "Ja"
-          },
           "label": "ID der Elemente anzeigen"
         },
         "elements-metadata-panel-label": "Metadaten anzeigen oder ausblenden",

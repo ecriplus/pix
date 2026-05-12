@@ -1801,10 +1801,6 @@
       },
       "preview": {
         "elements-id-button": {
-          "choices": {
-            "no": "Nee",
-            "yes": "Ja"
-          },
           "label": "De ID's van de elementen weergeven"
         },
         "elements-metadata-panel-label": "Metadata weergeven of verbergen",

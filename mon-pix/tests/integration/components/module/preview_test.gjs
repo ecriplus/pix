@@ -197,12 +197,8 @@ module('Integration | Component | Module | Preview', function (hooks) {
     // then
     const radioGroup = screen.getByRole('radiogroup', { name: t('pages.modulix.preview.elements-id-button.label') });
     assert.dom(radioGroup).exists();
-    assert
-      .dom(within(radioGroup).getByRole('radio', { name: t('pages.modulix.preview.elements-id-button.choices.yes') }))
-      .exists();
-    assert
-      .dom(within(radioGroup).getByRole('radio', { name: t('pages.modulix.preview.elements-id-button.choices.no') }))
-      .exists();
+    assert.dom(within(radioGroup).getByRole('radio', { name: t('common.yes') })).exists();
+    assert.dom(within(radioGroup).getByRole('radio', { name: t('common.no') })).exists();
   });
 
   module('grains title button', function () {

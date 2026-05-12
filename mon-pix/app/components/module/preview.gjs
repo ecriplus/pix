@@ -239,8 +239,8 @@ export default class ModulixPreview extends Component {
       >
         <PixSegmentedControl @onChange={{this.toggleElementIdButton}} @variant="primary" @toggled={{false}}>
           <:label>{{t "pages.modulix.preview.elements-id-button.label"}}</:label>
-          <:viewA>{{t "pages.modulix.preview.elements-id-button.choices.yes"}}</:viewA>
-          <:viewB>{{t "pages.modulix.preview.elements-id-button.choices.no"}}</:viewB>
+          <:viewA>{{t "common.yes"}}</:viewA>
+          <:viewB>{{t "common.no"}}</:viewB>
         </PixSegmentedControl>
         <PixSegmentedControl @onChange={{this.toggleGrainsTitleButton}} @variant="primary" @toggled={{true}}>
           <:label>{{t "pages.modulix.preview.grains-title-button.label"}}</:label>

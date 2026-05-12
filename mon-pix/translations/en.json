@@ -1802,10 +1802,6 @@
       },
       "preview": {
         "elements-id-button": {
-          "choices": {
-            "no": "No",
-            "yes": "Yes"
-          },
           "label": "Display elements ID"
         },
         "elements-metadata-panel-label": "Show or hide metadata",
