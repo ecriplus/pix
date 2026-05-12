@@ -2413,11 +2413,11 @@
     "user-certifications": {
       "meshes": {
         "DROIT": {
-          "0": "Selbstständig",
-          "1": "Bestätigt",
-          "2": "Fortgeschrittene",
-          "3": "Experte",
-          "BELOW_MINIMUM": "Nicht erlangt"
+          "ADVANCED": "Fortgeschrittene",
+          "BELOW_MINIMUM": "Nicht erlangt",
+          "CONFIRMED": "Bestätigt",
+          "EXPERT": "Experte",
+          "INDEPENDENT": "Selbstständig"
         },
         "EDU_1ER_DEGRE": {
           "ADMISSIBLE": "Zulässig",
@@ -2438,11 +2438,11 @@
           "EXPERT": "Experte"
         },
         "PRO_SANTE": {
-          "0": "Selbstständig",
-          "1": "Bestätigt",
-          "2": "Fortgeschrittene",
-          "3": "Experte",
-          "BELOW_MINIMUM": "Nicht erlangt"
+          "ADVANCED": "Fortgeschrittene",
+          "BELOW_MINIMUM": "Nicht erlangt",
+          "CONFIRMED": "Bestätigt",
+          "EXPERT": "Experte",
+          "INDEPENDENT": "Selbstständig"
         }
       }
     },
