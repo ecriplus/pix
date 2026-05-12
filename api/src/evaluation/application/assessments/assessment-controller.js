@@ -136,12 +136,25 @@ async function autoValidateNextChallenge(request, h) {
   return h.response().code(204);
 }
 
+async function updateLastChallengeState(request) {
+  const assessmentId = request.params.id;
+  const lastQuestionState = request.params.state;
+  const challengeId = request.payload?.data?.attributes?.['challenge-id'];
+
+  await DomainTransaction.execute(async () => {
+    await evaluationUsecases.updateLastQuestionState({ assessmentId, challengeId, lastQuestionState });
+  });
+
+  return null;
+}
+
 const assessmentController = {
   completeAssessment,
   promptToLLMChat,
   startEmbedLlmChat,
   save,
   autoValidateNextChallenge,
+  updateLastChallengeState,
 };
 
 export { assessmentController };

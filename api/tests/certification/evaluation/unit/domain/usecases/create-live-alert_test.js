@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import sinon from 'sinon';
 
-import { ChallengeAlreadyAnsweredError } from '../../../../../src/certification/evaluation/domain/errors.js';
-import { createLiveAlert } from '../../../../../src/certification/evaluation/domain/usecases/create-live-alert.js';
-import { expect } from '../../../../test-helper.js';
-import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
-import { catchErr } from '../../../../tooling/test-utils/error.js';
+import { ChallengeAlreadyAnsweredError } from '../../../../../../src/certification/evaluation/domain/errors.js';
+import { createLiveAlert } from '../../../../../../src/certification/evaluation/domain/usecases/create-live-alert.js';
+import { expect } from '../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Evaluation | Unit | UseCase | create-live-alert', function () {
   let certificationChallengeLiveAlertRepository;
