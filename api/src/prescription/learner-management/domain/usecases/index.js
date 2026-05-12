@@ -90,7 +90,6 @@ import { getOrganizationLearnersCsvTemplate } from './get-organization-learners-
 import { handlePayloadTooLargeError } from './handle-payload-too-large-error.js';
 import { hasBeenLearner } from './has-been-learner.js';
 import { sendOrganizationLearnersFile } from './import-from-feature/send-organization-learners-file.js';
-import { validateOrganizationLearnersFile } from './import-from-feature/validate-organization-learners-file.js';
 import { importLearnersFromFregataFile } from './import-learners/import-learners-from-fregata-file.js';
 import { importLearnersFromGenericFile } from './import-learners/import-learners-from-generic-file.js';
 import { importLearnersFromSiecleFile } from './import-learners/import-learners-from-siecle-file.js';
@@ -104,13 +103,15 @@ import { updateOrganizationLearnerName } from './update-organization-learner-nam
 import { updateStudentNumber } from './update-student-number.js';
 import { uploadCsvFile } from './upload-csv-file.js';
 import { uploadSiecleFile } from './upload-siecle-file.js';
-import { validateCsvFile } from './validate-csv-file.js';
-import { validateSiecleXmlFile } from './validate-siecle-xml-file.js';
+import { validateFregataFile } from './validate-learners-file/validate-fregata-file.js';
+import { validateGenericFile } from './validate-learners-file/validate-generic-file.js';
+import { validateSiecleFile } from './validate-learners-file/validate-siecle-file.js';
+import { validateSupFile } from './validate-learners-file/validate-sup-file.js';
 
 const usecasesWithoutInjectedDependencies = {
   importLearnersFromGenericFile,
   sendOrganizationLearnersFile,
-  validateOrganizationLearnersFile,
+  validateOrganizationLearnersFile: validateGenericFile,
   importLearnersFromSiecleFile,
   anonymizeUser,
   computeOrganizationLearnerCertificability,
@@ -136,8 +137,9 @@ const usecasesWithoutInjectedDependencies = {
   updateStudentNumber,
   uploadCsvFile,
   uploadSiecleFile,
-  validateCsvFile,
-  validateSiecleXmlFile,
+  validateFregataFile,
+  validateSupFile,
+  validateSiecleFile,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);

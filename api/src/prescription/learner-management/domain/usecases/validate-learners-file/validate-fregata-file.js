@@ -1,13 +1,10 @@
-import { AggregateImportError } from '../errors.js';
-import { ImportFromFregataJob } from '../models/jobs/ImportFromFregataJob.js';
-import { ImportFromSupJob } from '../models/jobs/ImportFromSupJob.js';
+import { AggregateImportError } from '../../errors.js';
+import { ImportFromFregataJob } from '../../models/jobs/ImportFromFregataJob.js';
 
-const validateCsvFile = async function ({
+const validateFregataFile = async function ({
   Parser,
   organizationImportId,
   i18n,
-  type,
-  importSupOrganizationLearnersJobRepository,
   importScoCsvOrganizationLearnersJobRepository,
   organizationImportRepository,
   importStorage,
@@ -27,24 +24,12 @@ const validateCsvFile = async function ({
 
     warningsData = warnings;
 
-    if (type) {
-      if (type === 'FREGATA') {
-        await importScoCsvOrganizationLearnersJobRepository.performAsync(
-          new ImportFromFregataJob({
-            organizationImportId: organizationImport.id,
-            locale: i18n.getLocale(),
-          }),
-        );
-      } else {
-        await importSupOrganizationLearnersJobRepository.performAsync(
-          new ImportFromSupJob({
-            organizationImportId: organizationImport.id,
-            type,
-            locale: i18n.getLocale(),
-          }),
-        );
-      }
-    }
+    await importScoCsvOrganizationLearnersJobRepository.performAsync(
+      new ImportFromFregataJob({
+        organizationImportId: organizationImport.id,
+        locale: i18n.getLocale(),
+      }),
+    );
   } catch (error) {
     if (error instanceof AggregateImportError) {
       errors.push(...error.meta);
@@ -61,4 +46,4 @@ const validateCsvFile = async function ({
   }
 };
 
-export { validateCsvFile };
+export { validateFregataFile };

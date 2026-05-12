@@ -3,12 +3,12 @@ import sinon from 'sinon';
 import { AggregateImportError } from '../../../../../../../src/prescription/learner-management/domain/errors.js';
 import { ImportOrganizationLearnerSet } from '../../../../../../../src/prescription/learner-management/domain/models/ImportOrganizationLearnerSet.js';
 import { ImportFromGenericFileJob } from '../../../../../../../src/prescription/learner-management/domain/models/jobs/ImportFromGenericFileJob.js';
-import { validateOrganizationLearnersFile } from '../../../../../../../src/prescription/learner-management/domain/usecases/import-from-feature/validate-organization-learners-file.js';
+import { validateGenericFile } from '../../../../../../../src/prescription/learner-management/domain/usecases/validate-learners-file/validate-generic-file.js';
 import { GenericParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/parsers/generic-parser.js';
 import { expect } from '../../../../../../test-helper.js';
 import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
-describe('Unit | UseCase | validateOrganizationLearnersFile', function () {
+describe('Unit | UseCase | validateGenericFile', function () {
   let organizationImportRepositoryStub,
     organizationLearnerImportFormatRepositoryStub,
     importCommonOrganizationLearnersJobRepositoryStub,
@@ -104,7 +104,7 @@ describe('Unit | UseCase | validateOrganizationLearnersFile', function () {
       importOrganizationLearnerSetStub.addLearners.withArgs(parsedLearners);
 
       // when
-      await validateOrganizationLearnersFile({
+      await validateGenericFile({
         organizationImportId,
         importStorage: importStorageStub,
         organizationImportRepository: organizationImportRepositoryStub,
@@ -134,7 +134,7 @@ describe('Unit | UseCase | validateOrganizationLearnersFile', function () {
         organizationLearnerImportFormatRepositoryStub.get.withArgs(organizationId).rejects(error);
 
         // when
-        const validateError = await catchErr(validateOrganizationLearnersFile)({
+        const validateError = await catchErr(validateGenericFile)({
           organizationImportId,
           importStorage: importStorageStub,
           organizationImportRepository: organizationImportRepositoryStub,
@@ -161,7 +161,7 @@ describe('Unit | UseCase | validateOrganizationLearnersFile', function () {
           organizationLearnerImportFormatRepositoryStub.get.withArgs(organizationId).rejects(error);
 
           // when
-          await catchErr(validateOrganizationLearnersFile)({
+          await catchErr(validateGenericFile)({
             organizationImportId,
             importStorage: importStorageStub,
             organizationImportRepository: organizationImportRepositoryStub,
@@ -184,7 +184,7 @@ describe('Unit | UseCase | validateOrganizationLearnersFile', function () {
           organizationLearnerImportFormatRepositoryStub.get.withArgs(organizationId).rejects([error, error]);
 
           // when
-          await catchErr(validateOrganizationLearnersFile)({
+          await catchErr(validateGenericFile)({
             organizationImportId,
             importStorage: importStorageStub,
             organizationImportRepository: organizationImportRepositoryStub,

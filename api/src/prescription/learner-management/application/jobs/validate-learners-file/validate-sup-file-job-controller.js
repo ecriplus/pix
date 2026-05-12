@@ -24,7 +24,7 @@ class ValidateSupFileJobController extends JobController {
     const i18n = getI18n(locale);
 
     try {
-      await usecases.validateCsvFile({ organizationImportId, i18n, type, Parser: SupParser });
+      await usecases.validateSupFile({ organizationImportId, i18n, type, Parser: SupParser });
     } catch (err) {
       if (!(err instanceof DomainError)) {
         throw err;

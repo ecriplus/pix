@@ -36,7 +36,7 @@ describe('Unit | Prescription | Application | Jobs | ValidateSupFileJobControlle
 
   describe('#handle', function () {
     it('should call usecase with SupParser on type `ADDITIONAL_STUDENT`', async function () {
-      sinon.stub(usecases, 'validateCsvFile');
+      sinon.stub(usecases, 'validateSupFile');
       // given
       const handler = new ValidateSupFileJobController();
       const data = { organizationImportId: Symbol('organizationImportId'), locale: 'en', type: 'ADDITIONAL_STUDENT' };
@@ -45,7 +45,7 @@ describe('Unit | Prescription | Application | Jobs | ValidateSupFileJobControlle
       await handler.handle({ data });
 
       // then
-      expect(usecases.validateCsvFile).to.have.been.calledOnceWithExactly({
+      expect(usecases.validateSupFile).to.have.been.calledOnceWithExactly({
         organizationImportId: data.organizationImportId,
         i18n: getI18n(data.locale),
         type: data.type,
@@ -54,7 +54,7 @@ describe('Unit | Prescription | Application | Jobs | ValidateSupFileJobControlle
     });
 
     it('should call usecase with SupParser on type `REPLACE_STUDENT`', async function () {
-      sinon.stub(usecases, 'validateCsvFile');
+      sinon.stub(usecases, 'validateSupFile');
       // given
       const handler = new ValidateSupFileJobController();
       const data = { organizationImportId: Symbol('organizationImportId'), locale: 'en', type: 'REPLACE_STUDENT' };
@@ -63,7 +63,7 @@ describe('Unit | Prescription | Application | Jobs | ValidateSupFileJobControlle
       await handler.handle({ data });
 
       // then
-      expect(usecases.validateCsvFile).to.have.been.calledOnceWithExactly({
+      expect(usecases.validateSupFile).to.have.been.calledOnceWithExactly({
         organizationImportId: data.organizationImportId,
         i18n: getI18n(data.locale),
         type: data.type,
@@ -73,7 +73,7 @@ describe('Unit | Prescription | Application | Jobs | ValidateSupFileJobControlle
 
     it('should not throw when error is from domain', async function () {
       const error = new S3FileDoesNotExistError();
-      sinon.stub(usecases, 'validateCsvFile').rejects(error);
+      sinon.stub(usecases, 'validateSupFile').rejects(error);
 
       // given
       const warnStub = sinon.stub();
@@ -89,7 +89,7 @@ describe('Unit | Prescription | Application | Jobs | ValidateSupFileJobControlle
 
     it('should throw when error is not from domain', async function () {
       const error = new Error();
-      sinon.stub(usecases, 'validateCsvFile').rejects(error);
+      sinon.stub(usecases, 'validateSupFile').rejects(error);
 
       // given
       const handler = new ValidateSupFileJobController();

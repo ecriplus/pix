@@ -4,7 +4,7 @@ import { AggregateImportError } from '../../errors.js';
 import { ImportOrganizationLearnerSet } from '../../models/ImportOrganizationLearnerSet.js';
 import { ImportFromGenericFileJob } from '../../models/jobs/ImportFromGenericFileJob.js';
 
-const validateOrganizationLearnersFile = async function ({
+const validateGenericFile = async function ({
   organizationImportId,
   organizationLearnerImportFormatRepository,
   importCommonOrganizationLearnersJobRepository,
@@ -50,4 +50,4 @@ const validateOrganizationLearnersFile = async function ({
   }
 };
 
-export { validateOrganizationLearnersFile };
+export { validateGenericFile };

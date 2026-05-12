@@ -3,14 +3,14 @@ import sinon from 'sinon';
 import {
   AggregateImportError,
   SiecleXmlImportError,
-} from '../../../../../../src/prescription/learner-management/domain/errors.js';
-import { ImportFromSiecleJob } from '../../../../../../src/prescription/learner-management/domain/models/jobs/ImportFromSiecleJob.js';
-import { validateSiecleXmlFile } from '../../../../../../src/prescription/learner-management/domain/usecases/validate-siecle-xml-file.js';
-import { SiecleParser } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/xml/siecle-parser.js';
-import { SiecleFileStreamer } from '../../../../../../src/prescription/learner-management/infrastructure/utils/xml/siecle-file-streamer.js';
-import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import { expect } from '../../../../../test-helper.js';
-import { catchErr } from '../../../../../tooling/test-utils/error.js';
+} from '../../../../../../../src/prescription/learner-management/domain/errors.js';
+import { ImportFromSiecleJob } from '../../../../../../../src/prescription/learner-management/domain/models/jobs/ImportFromSiecleJob.js';
+import { validateSiecleFile } from '../../../../../../../src/prescription/learner-management/domain/usecases/validate-learners-file/validate-siecle-file.js';
+import { SiecleParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/xml/siecle-parser.js';
+import { SiecleFileStreamer } from '../../../../../../../src/prescription/learner-management/infrastructure/utils/xml/siecle-file-streamer.js';
+import { DomainTransaction } from '../../../../../../../src/shared/domain/DomainTransaction.js';
+import { expect } from '../../../../../../test-helper.js';
+import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
 describe('Unit | UseCase | validate-siecle-xml-file', function () {
   const organizationId = 1234;
@@ -75,7 +75,7 @@ describe('Unit | UseCase | validate-siecle-xml-file', function () {
   });
 
   it('should validate the xml file', async function () {
-    await validateSiecleXmlFile({
+    await validateSiecleFile({
       organizationImportId,
       organizationImportRepository: organizationImportRepositoryStub,
       organizationRepository: organizationRepositoryStub,
@@ -93,7 +93,7 @@ describe('Unit | UseCase | validate-siecle-xml-file', function () {
       it('should save error when there is an error reading file from S3', async function () {
         const s3Error = new Error('s3 error');
         importStorageStub.readFile.rejects(s3Error);
-        const error = await catchErr(validateSiecleXmlFile)({
+        const error = await catchErr(validateSiecleFile)({
           organizationImportId,
           organizationImportRepository: organizationImportRepositoryStub,
           organizationRepository: organizationRepositoryStub,
@@ -113,7 +113,7 @@ describe('Unit | UseCase | validate-siecle-xml-file', function () {
         parserStub.parse.rejects(new AggregateImportError([new Error('parsing')]));
         const s3Error = new Error('s3 error');
         importStorageStub.deleteFile.rejects(s3Error);
-        const error = await catchErr(validateSiecleXmlFile)({
+        const error = await catchErr(validateSiecleFile)({
           organizationImportId,
           organizationImportRepository: organizationImportRepositoryStub,
           organizationRepository: organizationRepositoryStub,
@@ -133,7 +133,7 @@ describe('Unit | UseCase | validate-siecle-xml-file', function () {
       it('should save parsing errors', async function () {
         const parsingErrors = [new Error('parsing'), new Error('parsing2')];
         parserStub.parse.rejects(new AggregateImportError(parsingErrors));
-        const error = await catchErr(validateSiecleXmlFile)({
+        const error = await catchErr(validateSiecleFile)({
           organizationImportId,
           organizationImportRepository: organizationImportRepositoryStub,
           organizationRepository: organizationRepositoryStub,
@@ -152,7 +152,7 @@ describe('Unit | UseCase | validate-siecle-xml-file', function () {
       it('should save empty learner error', async function () {
         parserStub.parse.resolves([]);
 
-        const error = await catchErr(validateSiecleXmlFile)({
+        const error = await catchErr(validateSiecleFile)({
           organizationImportId,
           organizationImportRepository: organizationImportRepositoryStub,
           organizationRepository: organizationRepositoryStub,

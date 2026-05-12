@@ -20,7 +20,7 @@ class ValidateSiecleFileJobController extends JobController {
   async handle({ data }) {
     const { organizationImportId } = data;
     try {
-      await usecases.validateSiecleXmlFile({ organizationImportId });
+      await usecases.validateSiecleFile({ organizationImportId });
     } catch (err) {
       if (!(err instanceof DomainError)) {
         throw err;

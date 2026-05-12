@@ -24,7 +24,7 @@ class ValidateFregataFileJobController extends JobController {
     const i18n = getI18n(locale);
 
     try {
-      await usecases.validateCsvFile({ organizationImportId, i18n, type: 'FREGATA', Parser: FregataParser });
+      await usecases.validateFregataFile({ organizationImportId, i18n, Parser: FregataParser });
     } catch (err) {
       if (!(err instanceof DomainError)) {
         throw err;
