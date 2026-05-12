@@ -72,13 +72,8 @@ export const loggedPagesFixtures = sharedTest.extend<
       const browser = await pixAppCertifiableUserContext(certifiableUserData);
       const page = await browser.newPage();
       pixAppPages.push(page);
-      await page.route('**/api/**', (route) => {
-        route.continue({
-          headers: {
-            ...route.request().headers(),
-            origin: 'https://app.e2e.pix.fr',
-          },
-        });
+      await page.setExtraHTTPHeaders({
+        origin: 'https://app.e2e.pix.fr',
       });
       await page.goto(process.env.PIX_APP_URL!);
       return page;
