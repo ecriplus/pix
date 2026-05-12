@@ -646,7 +646,10 @@
       "title": "Test"
     },
     "certificate": {
-      "attestation": "Descargar mi certificado",
+      "actions": {
+        "download-attestation": "Descargar mi atestado",
+        "download-certificate": "Descargar mi certificado"
+      },
       "back-link": "Volver a mis certificaciones",
       "candidate": "Candidato :",
       "candidate-birth": "Nacido/a el {birthdate}",
@@ -688,6 +691,11 @@
         "EDU": {
           "results-infos": "'<p>'La certificación se desarrolla en dos etapas:'</p><ol><li>'Prueba Pix: acaba de realizarla.'</li><li>'Prueba oral: organizada fuera de Pix ante un tribunal.'</li></ol><p>'Al finalizar la prueba oral, se te otorgará tu nivel de certificación definitivo (Experto, Avanzado, etc.).'<br/>'Contacta con tu centro de certificación para organizar la prueba oral.'</p>'",
           "status": "Certificado válido",
+          "steps": {
+            "1": "Sección Pix",
+            "2": "Sección práctica'<br/>'profesional",
+            "3": "Resultado final"
+          },
           "sub-title": "¡El candidato es admisible para la 2.ª etapa!"
         }
       },
@@ -703,7 +711,10 @@
           "independent": "Independiente",
           "level": "Tu nivel"
         },
-        "progressbar-explanation": "Barra de progreso que indica el nivel que has alcanzado ({level}, es decir, el nivel {globalLevelLabel}) de un máximo de 7 niveles (nivel Experto 1)"
+        "progress-bar-explanation": {
+          "default": "Barra de progreso que indica el nivel que has alcanzado ({level}, es decir, el nivel {globalLevelLabel}) de un máximo de 7 niveles (nivel Experto 1)",
+          "pre-beginner-level": "Barra de progreso que indica el nivel máximo que se puede alcanzar en la certificación (es decir, 7 o el nivel Experto 1)"
+        }
       },
       "hexagon-score": {
         "certified": "certificados"
@@ -717,7 +728,6 @@
         "sub-title": "El candidato es admisible para la certificación {framework}.",
         "title": "Lectura del resultado:"
       },
-      "subtitle": "(niveles de {maxReachableLevel})",
       "title": "Certificado Pix",
       "verification-code": {
         "alt": "Copiar",
@@ -774,7 +784,8 @@
             "1": "La Certificación {certificationName} es un '<strong>'test adaptativo'</strong>' para evaluar tu nivel en el '<strong>'conjunto de 16 competencias digitales del marco de referencia Pix'</strong>'.",
             "2": "La '<strong>'dificultad de las preguntas se adapta en tiempo real'</strong>' en función de las respuestas dadas.",
             "3": "Si algunas preguntas le parecen difíciles, es porque la prueba de certificación pretende medir su nivel máximo. '<strong>'Si no puede responder a una pregunta, tiene la opción de \"saltársela\"'</strong>': no se le volverá a ofrecer durante la certificación y no será validada.",
-            "4": "Para obtener una puntuación lo más cercana posible a tu capacidad '<strong>'es necesario llegar hasta el final de la prueba'</strong>'."
+            "4": "Para obtener una puntuación lo más cercana posible a tu capacidad '<strong>'es necesario llegar hasta el final de la prueba'</strong>'.",
+            "pix-plus-1": "La Certificación {certificationName} es un '<strong>'test adaptativo'</strong>' para evaluar tu nivel en el '<strong>'conjunto de competencias del marco de certificación {certificationName}'</strong>'."
           },
           "question": "¿Cómo funciona la prueba de certificación?",
           "title": "Bienvenido a la certificación {certificationName}"
@@ -1238,7 +1249,7 @@
         "title": "¡Enhorabuena! ¡Ya has terminado!"
       },
       "content": {
-        "resume-course": "Reanudar mi curso",
+        "resume-button": "Reanudar mi curso",
         "start-button": "Iniciar el curso",
         "step": "Paso {stepNumber}"
       },
@@ -1872,6 +1883,15 @@
       },
       "signup-form": {
         "button": "Creo una cuenta",
+        "claims": {
+          "FrEduFonctAdm": "Función administrativa",
+          "FrEduNumenHash": "Identificador técnico",
+          "discipline": "Disciplina",
+          "employeeNumber": "Número de empleado",
+          "population": "Población",
+          "rne": "Centro de adscripción",
+          "title": "Función"
+        },
         "description": "Se va a crear una cuenta utilizando la información facilitada por la organización",
         "error": "No hemos podido recuperar tu información de identificación del servicio utilizado. Te invitamos a que te pongas en contacto con el servicio de asistencia informática de esta organización.",
         "first-name-label-and-value": "Nombre: {firstName}",
