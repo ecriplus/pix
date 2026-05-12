@@ -11,7 +11,7 @@ const sendOrganizationLearnersFile = async function ({
   userId,
   organizationId,
   organizationLearnerImportFormatRepository,
-  validateCommonOrganizationImportFileJobRepository,
+  validateGenericFileJobRepository,
   organizationImportRepository,
   importStorage,
   dependencies = { createReadStream, getDataBuffer },
@@ -42,7 +42,7 @@ const sendOrganizationLearnersFile = async function ({
     encoding = parser.getEncoding();
 
     filename = await importStorage.sendFile({ filepath: payload.path });
-    await validateCommonOrganizationImportFileJobRepository.performAsync(
+    await validateGenericFileJobRepository.performAsync(
       new ValidateGenericFileJob({ organizationImportId: organizationImport.id }),
     );
   } catch (error) {

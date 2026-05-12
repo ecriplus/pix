@@ -6,7 +6,7 @@ const validateSupFile = async function ({
   organizationImportId,
   i18n,
   type,
-  importSupOrganizationLearnersJobRepository,
+  importFromSupJobRepository,
   organizationImportRepository,
   importStorage,
 }) {
@@ -25,7 +25,7 @@ const validateSupFile = async function ({
 
     warningsData = warnings;
 
-    await importSupOrganizationLearnersJobRepository.performAsync(
+    await importFromSupJobRepository.performAsync(
       new ImportFromSupJob({
         organizationImportId: organizationImport.id,
         type,

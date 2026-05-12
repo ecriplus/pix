@@ -11,7 +11,7 @@ import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 describe('Unit | UseCase | validateGenericFile', function () {
   let organizationImportRepositoryStub,
     organizationLearnerImportFormatRepositoryStub,
-    importCommonOrganizationLearnersJobRepositoryStub,
+    importFromGenericFileJobRepositoryStub,
     commonCsvLearnerParserStub,
     importOrganizationLearnerSetStub,
     dependencieStub,
@@ -43,9 +43,9 @@ describe('Unit | UseCase | validateGenericFile', function () {
       deleteFile: sinon.stub(),
     };
 
-    importCommonOrganizationLearnersJobRepositoryStub = { performAsync: sinon.stub() };
+    importFromGenericFileJobRepositoryStub = { performAsync: sinon.stub() };
 
-    importCommonOrganizationLearnersJobRepositoryStub.performAsync
+    importFromGenericFileJobRepositoryStub.performAsync
       .withArgs(new ImportFromGenericFileJob({ organizationImportId }))
       .resolves();
 
@@ -109,7 +109,7 @@ describe('Unit | UseCase | validateGenericFile', function () {
         importStorage: importStorageStub,
         organizationImportRepository: organizationImportRepositoryStub,
         organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
-        importCommonOrganizationLearnersJobRepository: importCommonOrganizationLearnersJobRepositoryStub,
+        importFromGenericFileJobRepository: importFromGenericFileJobRepositoryStub,
         dependencies: dependencieStub,
       });
 
@@ -139,7 +139,7 @@ describe('Unit | UseCase | validateGenericFile', function () {
           importStorage: importStorageStub,
           organizationImportRepository: organizationImportRepositoryStub,
           organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
-          importCommonOrganizationLearnersJobRepository: importCommonOrganizationLearnersJobRepositoryStub,
+          importFromGenericFileJobRepository: importFromGenericFileJobRepositoryStub,
           dependencies: dependencieStub,
         });
 
@@ -166,7 +166,7 @@ describe('Unit | UseCase | validateGenericFile', function () {
             importStorage: importStorageStub,
             organizationImportRepository: organizationImportRepositoryStub,
             organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
-            importCommonOrganizationLearnersJobRepository: importCommonOrganizationLearnersJobRepositoryStub,
+            importFromGenericFileJobRepository: importFromGenericFileJobRepositoryStub,
             dependencies: dependencieStub,
           });
 
@@ -189,7 +189,7 @@ describe('Unit | UseCase | validateGenericFile', function () {
             importStorage: importStorageStub,
             organizationImportRepository: organizationImportRepositoryStub,
             organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
-            importCommonOrganizationLearnersJobRepository: importCommonOrganizationLearnersJobRepositoryStub,
+            importFromGenericFileJobRepository: importFromGenericFileJobRepositoryStub,
             dependencies: dependencieStub,
           });
 

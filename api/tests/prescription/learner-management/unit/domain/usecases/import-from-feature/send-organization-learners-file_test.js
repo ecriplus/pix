@@ -11,7 +11,7 @@ import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
   let organizationImportRepositoryStub,
     organizationLearnerImportFormatRepositoryStub,
-    validateCommonOrganizationImportFileJobRepositoryStub,
+    validateGenericFileJobRepositoryStub,
     organizationLearnerRepositoryStub,
     commonCsvLearnerParserStub,
     dependencieStub,
@@ -46,11 +46,11 @@ describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
       deleteFile: sinon.stub(),
     };
 
-    validateCommonOrganizationImportFileJobRepositoryStub = {
+    validateGenericFileJobRepositoryStub = {
       performAsync: sinon.stub(),
     };
 
-    validateCommonOrganizationImportFileJobRepositoryStub.performAsync
+    validateGenericFileJobRepositoryStub.performAsync
       .withArgs(new ValidateGenericFileJob({ organizationImportId }))
       .resolves();
 
@@ -112,7 +112,7 @@ describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
         organizationImportRepository: organizationImportRepositoryStub,
         organizationLearnerRepository: organizationLearnerRepositoryStub,
         organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
-        validateCommonOrganizationImportFileJobRepository: validateCommonOrganizationImportFileJobRepositoryStub,
+        validateGenericFileJobRepository: validateGenericFileJobRepositoryStub,
         dependencies: dependencieStub,
       });
 
@@ -139,7 +139,7 @@ describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
         organizationImportRepository: organizationImportRepositoryStub,
         organizationLearnerRepository: organizationLearnerRepositoryStub,
         organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
-        validateCommonOrganizationImportFileJobRepository: validateCommonOrganizationImportFileJobRepositoryStub,
+        validateGenericFileJobRepository: validateGenericFileJobRepositoryStub,
         dependencies: dependencieStub,
       });
 
@@ -175,7 +175,7 @@ describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
           organizationImportRepository: organizationImportRepositoryStub,
           organizationLearnerRepository: organizationLearnerRepositoryStub,
           organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
-          validateCommonOrganizationImportFileJobRepository: validateCommonOrganizationImportFileJobRepositoryStub,
+          validateGenericFileJobRepository: validateGenericFileJobRepositoryStub,
           dependencies: dependencieStub,
         });
 
@@ -204,7 +204,7 @@ describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
           organizationImportRepository: organizationImportRepositoryStub,
           organizationLearnerRepository: organizationLearnerRepositoryStub,
           organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
-          validateCommonOrganizationImportFileJobRepository: validateCommonOrganizationImportFileJobRepositoryStub,
+          validateGenericFileJobRepository: validateGenericFileJobRepositoryStub,
           dependencies: dependencieStub,
         });
 
@@ -245,7 +245,7 @@ describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
             organizationImportRepository: organizationImportRepositoryStub,
             organizationLearnerRepository: organizationLearnerRepositoryStub,
             organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
-            validateCommonOrganizationImportFileJobRepository: validateCommonOrganizationImportFileJobRepositoryStub,
+            validateGenericFileJobRepository: validateGenericFileJobRepositoryStub,
             dependencies: dependencieStub,
           });
         } catch {
@@ -270,7 +270,7 @@ describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
             organizationImportRepository: organizationImportRepositoryStub,
             organizationLearnerRepository: organizationLearnerRepositoryStub,
             organizationLearnerImportFormatRepository: organizationLearnerImportFormatRepositoryStub,
-            validateCommonOrganizationImportFileJobRepository: validateCommonOrganizationImportFileJobRepositoryStub,
+            validateGenericFileJobRepository: validateGenericFileJobRepositoryStub,
             dependencies: dependencieStub,
           });
         } catch {

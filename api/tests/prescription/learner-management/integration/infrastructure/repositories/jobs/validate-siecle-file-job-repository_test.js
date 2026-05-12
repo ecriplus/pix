@@ -1,14 +1,14 @@
 import { ValidateSiecleFileJob } from '../../../../../../../src/prescription/learner-management/domain/models/jobs/ValidateSiecleFileJob.js';
-import { validateOrganizationImportFileJobRepository } from '../../../../../../../src/prescription/learner-management/infrastructure/repositories/jobs/validate-organization-learners-import-file-job-repository.js';
+import { validateSiecleFileJobRepository } from '../../../../../../../src/prescription/learner-management/infrastructure/repositories/jobs/validate-siecle-file-job-repository.js';
 import { EMPTY_CORRELATION_INFO } from '../../../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { JobRetry } from '../../../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
 import { expect } from '../../../../../../test-helper.js';
 
-describe('Integration | Prescription | Infrastructure | Repository | Jobs | validateOrganizationImportFileJobRepository', function () {
+describe('Integration | Prescription | Infrastructure | Repository | Jobs | validateSiecleFileJobRepository', function () {
   describe('#performAsync', function () {
     it('publish a job', async function () {
       // when
-      await validateOrganizationImportFileJobRepository.performAsync(
+      await validateSiecleFileJobRepository.performAsync(
         new ValidateSiecleFileJob({ organizationImportId: 4123132 }),
       );
 

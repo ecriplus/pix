@@ -23,7 +23,7 @@ describe('Unit | UseCase | validateSupFile', function () {
     organizationImport,
     organizationImportRepositoryStub,
     importStorageStub,
-    importSupOrganizationLearnersJobRepositoryStub;
+    importFromSupJobRepositoryStub;
 
   beforeEach(function () {
     organizationImportId = Symbol('organizationImportId');
@@ -67,7 +67,7 @@ describe('Unit | UseCase | validateSupFile', function () {
       deleteFile: sinon.stub(),
     };
 
-    importSupOrganizationLearnersJobRepositoryStub = {
+    importFromSupJobRepositoryStub = {
       performAsync: sinon.stub(),
     };
   });
@@ -86,7 +86,7 @@ describe('Unit | UseCase | validateSupFile', function () {
         Parser: SupParser,
         organizationImportId,
         i18n,
-        importSupOrganizationLearnersJobRepository: importSupOrganizationLearnersJobRepositoryStub,
+        importFromSupJobRepository: importFromSupJobRepositoryStub,
         organizationImportRepository: organizationImportRepositoryStub,
         importStorage: importStorageStub,
       });
@@ -111,14 +111,14 @@ describe('Unit | UseCase | validateSupFile', function () {
         Parser: SupParser,
         type,
         organizationImportId,
-        importSupOrganizationLearnersJobRepository: importSupOrganizationLearnersJobRepositoryStub,
+        importFromSupJobRepository: importFromSupJobRepositoryStub,
         i18n,
         organizationImportRepository: organizationImportRepositoryStub,
         importStorage: importStorageStub,
       });
 
       // then
-      expect(importSupOrganizationLearnersJobRepositoryStub.performAsync).to.have.been.calledOnceWithExactly(
+      expect(importFromSupJobRepositoryStub.performAsync).to.have.been.calledOnceWithExactly(
         new ImportFromSupJob({
           type,
           locale: 'fr',
@@ -150,7 +150,7 @@ describe('Unit | UseCase | validateSupFile', function () {
           organizationImportId,
           organizationImportRepository: organizationImportRepositoryStub,
           importStorage: importStorageStub,
-          importSupOrganizationLearnersJobRepository: importSupOrganizationLearnersJobRepositoryStub,
+          importFromSupJobRepository: importFromSupJobRepositoryStub,
         });
         expect(error).to.eq(s3Error);
         expect(importStorageStub.deleteFile).to.have.been.calledWithExactly({
@@ -176,7 +176,7 @@ describe('Unit | UseCase | validateSupFile', function () {
           organizationImportId,
           organizationImportRepository: organizationImportRepositoryStub,
           importStorage: importStorageStub,
-          importSupOrganizationLearnersJobRepository: importSupOrganizationLearnersJobRepositoryStub,
+          importFromSupJobRepository: importFromSupJobRepositoryStub,
         });
         expect(error).to.eq(s3Error);
         expect(importStorageStub.deleteFile).to.have.been.calledWithExactly({
@@ -205,7 +205,7 @@ describe('Unit | UseCase | validateSupFile', function () {
         Parser: SupParser,
         organizationImportId,
         i18n,
-        importSupOrganizationLearnersJobRepository: importSupOrganizationLearnersJobRepositoryStub,
+        importFromSupJobRepository: importFromSupJobRepositoryStub,
         organizationImportRepository: organizationImportRepositoryStub,
         importStorage: importStorageStub,
       });

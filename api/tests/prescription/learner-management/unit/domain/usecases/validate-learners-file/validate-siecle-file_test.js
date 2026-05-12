@@ -25,13 +25,13 @@ describe('Unit | UseCase | validate-siecle-xml-file', function () {
   let dataStub;
   let externalIdSymbol;
   let domainTransactionStub;
-  let importOrganizationLearnersJobRepositoryStub;
+  let importFromSiecleJobRepositoryStub;
 
   beforeEach(function () {
     domainTransactionStub = Symbol('domainTransaction');
     sinon.stub(DomainTransaction, 'execute').callsFake((fn) => fn(domainTransactionStub));
 
-    importOrganizationLearnersJobRepositoryStub = {
+    importFromSiecleJobRepositoryStub = {
       performAsync: sinon.stub(),
     };
 
@@ -46,7 +46,7 @@ describe('Unit | UseCase | validate-siecle-xml-file', function () {
       validate: sinon.stub(),
     };
 
-    importOrganizationLearnersJobRepositoryStub.performAsync
+    importFromSiecleJobRepositoryStub.performAsync
       .withArgs(new ImportFromSiecleJob({ organizationLearnerId: 1 }))
       .resolves();
     organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImportStub);
@@ -80,7 +80,7 @@ describe('Unit | UseCase | validate-siecle-xml-file', function () {
       organizationImportRepository: organizationImportRepositoryStub,
       organizationRepository: organizationRepositoryStub,
       importStorage: importStorageStub,
-      importOrganizationLearnersJobRepository: importOrganizationLearnersJobRepositoryStub,
+      importFromSiecleJobRepository: importFromSiecleJobRepositoryStub,
     });
     expect(parserStub.parseUAJ).to.have.been.calledWithExactly(externalIdSymbol);
     expect(parserStub.parse).to.have.been.calledWithExactly();
@@ -98,7 +98,7 @@ describe('Unit | UseCase | validate-siecle-xml-file', function () {
           organizationImportRepository: organizationImportRepositoryStub,
           organizationRepository: organizationRepositoryStub,
           importStorage: importStorageStub,
-          importOrganizationLearnersJobRepository: importOrganizationLearnersJobRepositoryStub,
+          importFromSiecleJobRepository: importFromSiecleJobRepositoryStub,
         });
         expect(error).to.eq(s3Error);
         expect(organizationImportStub.validate).to.have.been.calledWith({ errors: [s3Error] });
@@ -106,7 +106,7 @@ describe('Unit | UseCase | validate-siecle-xml-file', function () {
           filename: organizationImportStub.filename,
         });
         expect(organizationImportRepositoryStub.save).to.have.been.calledWithExactly(organizationImportStub);
-        expect(importOrganizationLearnersJobRepositoryStub.performAsync).not.called;
+        expect(importFromSiecleJobRepositoryStub.performAsync).not.called;
       });
 
       it('should save error when there is an error deleting file from S3', async function () {
@@ -118,14 +118,14 @@ describe('Unit | UseCase | validate-siecle-xml-file', function () {
           organizationImportRepository: organizationImportRepositoryStub,
           organizationRepository: organizationRepositoryStub,
           importStorage: importStorageStub,
-          importOrganizationLearnersJobRepository: importOrganizationLearnersJobRepositoryStub,
+          importFromSiecleJobRepository: importFromSiecleJobRepositoryStub,
         });
         expect(error).to.eq(s3Error);
         expect(importStorageStub.deleteFile).to.have.been.calledWithExactly({
           filename: organizationImportStub.filename,
         });
         expect(organizationImportRepositoryStub.save).to.have.been.calledWithExactly(organizationImportStub);
-        expect(importOrganizationLearnersJobRepositoryStub.performAsync).not.called;
+        expect(importFromSiecleJobRepositoryStub.performAsync).not.called;
       });
     });
 
@@ -138,7 +138,7 @@ describe('Unit | UseCase | validate-siecle-xml-file', function () {
           organizationImportRepository: organizationImportRepositoryStub,
           organizationRepository: organizationRepositoryStub,
           importStorage: importStorageStub,
-          importOrganizationLearnersJobRepository: importOrganizationLearnersJobRepositoryStub,
+          importFromSiecleJobRepository: importFromSiecleJobRepositoryStub,
         });
         expect(importStorageStub.deleteFile).to.have.been.calledWithExactly({
           filename: organizationImportStub.filename,
@@ -146,7 +146,7 @@ describe('Unit | UseCase | validate-siecle-xml-file', function () {
         expect(error).to.be.instanceof(AggregateImportError);
         expect(organizationImportStub.validate).to.have.been.calledWith({ errors: parsingErrors });
         expect(organizationImportRepositoryStub.save).to.have.been.calledWithExactly(organizationImportStub);
-        expect(importOrganizationLearnersJobRepositoryStub.performAsync).not.called;
+        expect(importFromSiecleJobRepositoryStub.performAsync).not.called;
       });
 
       it('should save empty learner error', async function () {
@@ -157,7 +157,7 @@ describe('Unit | UseCase | validate-siecle-xml-file', function () {
           organizationImportRepository: organizationImportRepositoryStub,
           organizationRepository: organizationRepositoryStub,
           importStorage: importStorageStub,
-          importOrganizationLearnersJobRepository: importOrganizationLearnersJobRepositoryStub,
+          importFromSiecleJobRepository: importFromSiecleJobRepositoryStub,
         });
 
         expect(importStorageStub.deleteFile).to.have.been.calledWithExactly({
@@ -168,7 +168,7 @@ describe('Unit | UseCase | validate-siecle-xml-file', function () {
           true,
         );
         expect(organizationImportRepositoryStub.save).to.have.been.calledWithExactly(organizationImportStub);
-        expect(importOrganizationLearnersJobRepositoryStub.performAsync).not.called;
+        expect(importFromSiecleJobRepositoryStub.performAsync).not.called;
       });
     });
   });

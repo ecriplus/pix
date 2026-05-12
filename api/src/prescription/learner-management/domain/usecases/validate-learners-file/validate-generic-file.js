@@ -7,7 +7,7 @@ import { ImportFromGenericFileJob } from '../../models/jobs/ImportFromGenericFil
 const validateGenericFile = async function ({
   organizationImportId,
   organizationLearnerImportFormatRepository,
-  importCommonOrganizationLearnersJobRepository,
+  importFromGenericFileJobRepository,
   organizationImportRepository,
   importStorage,
   dependencies = { getDataBuffer },
@@ -32,7 +32,7 @@ const validateGenericFile = async function ({
     });
 
     learnerSet.addLearners(learners);
-    await importCommonOrganizationLearnersJobRepository.performAsync(
+    await importFromGenericFileJobRepository.performAsync(
       new ImportFromGenericFileJob({ organizationImportId }),
     );
   } catch (error) {

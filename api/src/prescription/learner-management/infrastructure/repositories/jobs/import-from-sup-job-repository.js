@@ -10,4 +10,4 @@ class ImportFromSupJobRepository extends JobRepository {
   }
 }
 
-export const importSupOrganizationLearnersJobRepository = new ImportFromSupJobRepository();
+export const importFromSupJobRepository = new ImportFromSupJobRepository();

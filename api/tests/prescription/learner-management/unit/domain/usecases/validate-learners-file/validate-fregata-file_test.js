@@ -23,7 +23,7 @@ describe('Unit | UseCase | validateFregataFile', function () {
     organizationImport,
     organizationImportRepositoryStub,
     importStorageStub,
-    importScoCsvOrganizationLearnersJobRepositoryStub;
+    importFromFregataJobRepositoryStub;
 
   beforeEach(function () {
     organizationImportId = Symbol('organizationImportId');
@@ -67,7 +67,7 @@ describe('Unit | UseCase | validateFregataFile', function () {
       deleteFile: sinon.stub(),
     };
 
-    importScoCsvOrganizationLearnersJobRepositoryStub = {
+    importFromFregataJobRepositoryStub = {
       performAsync: sinon.stub(),
     };
   });
@@ -86,7 +86,7 @@ describe('Unit | UseCase | validateFregataFile', function () {
         Parser: SupParser,
         organizationImportId,
         i18n,
-        importScoCsvOrganizationLearnersJobRepository: importScoCsvOrganizationLearnersJobRepositoryStub,
+        importFromFregataJobRepository: importFromFregataJobRepositoryStub,
         organizationImportRepository: organizationImportRepositoryStub,
         importStorage: importStorageStub,
       });
@@ -109,14 +109,14 @@ describe('Unit | UseCase | validateFregataFile', function () {
       await validateFregataFile({
         Parser: SupParser,
         organizationImportId,
-        importScoCsvOrganizationLearnersJobRepository: importScoCsvOrganizationLearnersJobRepositoryStub,
+        importFromFregataJobRepository: importFromFregataJobRepositoryStub,
         i18n,
         organizationImportRepository: organizationImportRepositoryStub,
         importStorage: importStorageStub,
       });
 
       // then
-      expect(importScoCsvOrganizationLearnersJobRepositoryStub.performAsync).to.have.been.calledOnceWithExactly(
+      expect(importFromFregataJobRepositoryStub.performAsync).to.have.been.calledOnceWithExactly(
         new ImportFromFregataJob({
           locale: 'fr',
           organizationImportId,
@@ -147,7 +147,7 @@ describe('Unit | UseCase | validateFregataFile', function () {
           organizationImportId,
           organizationImportRepository: organizationImportRepositoryStub,
           importStorage: importStorageStub,
-          importScoCsvOrganizationLearnersJobRepository: importScoCsvOrganizationLearnersJobRepositoryStub,
+          importFromFregataJobRepository: importFromFregataJobRepositoryStub,
         });
         expect(error).to.eq(s3Error);
         expect(importStorageStub.deleteFile).to.have.been.calledWithExactly({
@@ -173,7 +173,7 @@ describe('Unit | UseCase | validateFregataFile', function () {
           organizationImportId,
           organizationImportRepository: organizationImportRepositoryStub,
           importStorage: importStorageStub,
-          importScoCsvOrganizationLearnersJobRepository: importScoCsvOrganizationLearnersJobRepositoryStub,
+          importFromFregataJobRepository: importFromFregataJobRepositoryStub,
         });
         expect(error).to.eq(s3Error);
         expect(importStorageStub.deleteFile).to.have.been.calledWithExactly({
@@ -202,7 +202,7 @@ describe('Unit | UseCase | validateFregataFile', function () {
         Parser: SupParser,
         organizationImportId,
         i18n,
-        importScoCsvOrganizationLearnersJobRepository: importScoCsvOrganizationLearnersJobRepositoryStub,
+        importFromFregataJobRepository: importFromFregataJobRepositoryStub,
         organizationImportRepository: organizationImportRepositoryStub,
         importStorage: importStorageStub,
       });

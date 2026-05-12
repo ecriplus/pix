@@ -10,4 +10,4 @@ class ValidateGenericFileJobRepository extends JobRepository {
   }
 }
 
-export const validateCommonOrganizationImportFileJobRepository = new ValidateGenericFileJobRepository();
+export const validateGenericFileJobRepository = new ValidateGenericFileJobRepository();

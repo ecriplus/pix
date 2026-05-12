@@ -19,7 +19,7 @@ const validateSiecleFile = async function ({
   organizationRepository,
   organizationImportRepository,
   importStorage,
-  importOrganizationLearnersJobRepository,
+  importFromSiecleJobRepository,
 }) {
   const organizationImport = await DomainTransaction.execute(async () => {
     const organizationImport = await organizationImportRepository.get(organizationImportId);
@@ -61,7 +61,7 @@ const validateSiecleFile = async function ({
     }
   });
 
-  await importOrganizationLearnersJobRepository.performAsync(
+  await importFromSiecleJobRepository.performAsync(
     new ImportFromSiecleJob({ organizationImportId: organizationImport.id }),
   );
 };

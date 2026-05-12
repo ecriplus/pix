@@ -10,4 +10,4 @@ class ValidateSiecleFileJobRepository extends JobRepository {
   }
 }
 
-export const validateOrganizationImportFileJobRepository = new ValidateSiecleFileJobRepository();
+export const validateSiecleFileJobRepository = new ValidateSiecleFileJobRepository();

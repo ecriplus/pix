@@ -18,13 +18,13 @@ import * as campaignParticipationRepositoryFromBC from '../../../campaign-partic
 import * as libOrganizationLearnerRepository from '../../../organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import * as registrationOrganizationLearnerRepository from '../../../organization-learner/infrastructure/repositories/registration-organization-learner-repository.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
-import { importCommonOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-common-organization-learners-job-repository.js';
-import { importOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-organization-learners-job-repository.js';
-import { importScoCsvOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-sco-csv-organization-learners-job-repository.js';
-import { importSupOrganizationLearnersJobRepository } from '../../infrastructure/repositories/jobs/import-sup-organization-learners-job-repository.js';
-import { validateCommonOrganizationImportFileJobRepository } from '../../infrastructure/repositories/jobs/validate-common-organization-learners-import-file-job-repository.js';
+import { importFromFregataJobRepository } from '../../infrastructure/repositories/jobs/import-from-fregata-job-repository.js';
+import { importFromGenericFileJobRepository } from '../../infrastructure/repositories/jobs/import-from-generic-file-job-repository.js';
+import { importFromSiecleJobRepository } from '../../infrastructure/repositories/jobs/import-from-siecle-job-repository.js';
+import { importFromSupJobRepository } from '../../infrastructure/repositories/jobs/import-from-sup-job-repository.js';
 import { validateFregataFileJobRepository } from '../../infrastructure/repositories/jobs/validate-fregata-file-job-repository.js';
-import { validateOrganizationImportFileJobRepository } from '../../infrastructure/repositories/jobs/validate-organization-learners-import-file-job-repository.js';
+import { validateGenericFileJobRepository } from '../../infrastructure/repositories/jobs/validate-generic-file-job-repository.js';
+import { validateSiecleFileJobRepository } from '../../infrastructure/repositories/jobs/validate-siecle-file-job-repository.js';
 import { validateSupFileJobRepository } from '../../infrastructure/repositories/jobs/validate-sup-file-job-repository.js';
 import * as organizationImportRepository from '../../infrastructure/repositories/organization-import-repository.js';
 import * as organizationLearnerFilterRepository from '../../infrastructure/repositories/organization-learner-filter-repository.js';
@@ -46,11 +46,11 @@ const dependencies = {
   campaignRepository,
   auditLoggingJobRepository,
   featureToggles,
-  importCommonOrganizationLearnersJobRepository,
-  importOrganizationLearnersJobRepository,
-  importScoCsvOrganizationLearnersJobRepository,
+  importFromGenericFileJobRepository,
+  importFromSiecleJobRepository,
+  importFromFregataJobRepository,
   importStorage,
-  importSupOrganizationLearnersJobRepository,
+  importFromSupJobRepository,
   libOrganizationLearnerRepository,
   logger,
   membershipRepository,
@@ -70,10 +70,10 @@ const dependencies = {
   userRecommendedTrainingRepository,
   userReconciliationService,
   userRepository,
-  validateCommonOrganizationImportFileJobRepository,
+  validateGenericFileJobRepository,
   validateFregataFileJobRepository,
   validateSupFileJobRepository,
-  validateOrganizationImportFileJobRepository,
+  validateSiecleFileJobRepository,
 };
 
 import { anonymizeUser } from './anonymize-user.js';

@@ -13,7 +13,7 @@ const uploadSiecleFile = async function ({
   payload,
   importStorage,
   organizationImportRepository,
-  validateOrganizationImportFileJobRepository,
+  validateSiecleFileJobRepository,
   siecleService = {
     unzip: zip.unzip,
     detectEncoding,
@@ -52,7 +52,7 @@ const uploadSiecleFile = async function ({
     }
   });
 
-  await validateOrganizationImportFileJobRepository.performAsync(
+  await validateSiecleFileJobRepository.performAsync(
     new ValidateSiecleFileJob({ organizationImportId: organizationImport.id }),
   );
 };

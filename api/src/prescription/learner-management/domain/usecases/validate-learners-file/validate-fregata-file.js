@@ -5,7 +5,7 @@ const validateFregataFile = async function ({
   Parser,
   organizationImportId,
   i18n,
-  importScoCsvOrganizationLearnersJobRepository,
+  importFromFregataJobRepository,
   organizationImportRepository,
   importStorage,
 }) {
@@ -24,7 +24,7 @@ const validateFregataFile = async function ({
 
     warningsData = warnings;
 
-    await importScoCsvOrganizationLearnersJobRepository.performAsync(
+    await importFromFregataJobRepository.performAsync(
       new ImportFromFregataJob({
         organizationImportId: organizationImport.id,
         locale: i18n.getLocale(),
