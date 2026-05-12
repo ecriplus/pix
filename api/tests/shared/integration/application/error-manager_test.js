@@ -1,12 +1,27 @@
 import sinon from 'sinon';
 
 import {
+  SendingEmailToRefererError,
+  SendingEmailToResultRecipientError,
   SessionAlreadyFinalizedError,
   SessionWithoutStartedCertificationError,
 } from '../../../../src/certification/session-management/domain/errors.js';
+import { InvalidCertificationReportForFinalization } from '../../../../src/certification/shared/domain/errors.js';
+import * as EvaluationDomainErrors from '../../../../src/evaluation/domain/errors.js';
+import { AnswerEvaluationError, CompetenceResetError } from '../../../../src/evaluation/domain/errors.js';
+import {
+  MissingOrInvalidCredentialsError,
+  UserShouldChangePasswordError,
+} from '../../../../src/identity-access-management/domain/errors.js';
 import * as LLMDomainErrors from '../../../../src/llm/domain/errors.js';
+import { CampaignParticipationDeletedError } from '../../../../src/prescription/campaign-participation/domain/errors.js';
 import { SiecleXmlImportError } from '../../../../src/prescription/learner-management/domain/errors.js';
 import * as DomainErrors from '../../../../src/shared/domain/errors.js';
+import {
+  AlreadyAcceptedOrCancelledInvitationError,
+  UserHasNoOrganizationMembershipError,
+  UserNotMemberOfOrganizationError,
+} from '../../../../src/team/domain/errors.js';
 import { expect } from '../../../test-helper.js';
 import { HttpTestServer } from '../../../tooling/server/http-test-server.js';
 
@@ -24,6 +39,11 @@ describe('Integration | API | Controller Error', function () {
   function responseCode(response) {
     const payload = JSON.parse(response.payload);
     return payload.errors[0].code;
+  }
+
+  function responseTitle(response) {
+    const payload = JSON.parse(response.payload);
+    return payload.errors[0].title;
   }
 
   before(async function () {
@@ -56,6 +76,121 @@ describe('Integration | API | Controller Error', function () {
 
       expect(response.statusCode).to.equal(PRECONDITION_FAILED);
     });
+
+    it('responds Precondition Failed when a AlreadyExistingEntityError occurs', async function () {
+      routeHandler.throws(new DomainErrors.AlreadyExistingEntityError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(PRECONDITION_FAILED);
+      expect(responseDetail(response)).to.equal('L\u2019entité existe déjà.');
+    });
+
+    it('responds Precondition Failed when a AlreadyRatedAssessmentError error occurs', async function () {
+      routeHandler.throws(new EvaluationDomainErrors.AlreadyRatedAssessmentError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(PRECONDITION_FAILED);
+      expect(responseDetail(response)).to.equal('Assessment is already rated.');
+    });
+
+    it('responds Precondition Failed when a CompetenceResetError error occurs', async function () {
+      routeHandler.throws(new CompetenceResetError(2));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(PRECONDITION_FAILED);
+      expect(responseDetail(response)).to.equal('Il reste 2 jours avant de pouvoir réinitiliser la compétence.');
+    });
+
+    it('responds Precondition Failed when a AlreadyExistingMembershipError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.AlreadyExistingMembershipError('Le membership existe déjà.'));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(PRECONDITION_FAILED);
+      expect(responseDetail(response)).to.equal('Le membership existe déjà.');
+    });
+
+    it('responds Precondition Failed when a AlreadyExistingInvitationError error occurs', async function () {
+      routeHandler.throws(
+        new DomainErrors.AlreadyExistingInvitationError("L'invitation de l'organisation existe déjà."),
+      );
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(PRECONDITION_FAILED);
+      expect(responseDetail(response)).to.equal("L'invitation de l'organisation existe déjà.");
+    });
+
+    it('responds Precondition Failed when a AlreadySharedCampaignParticipationError error occurs', async function () {
+      routeHandler.throws(
+        new DomainErrors.AlreadySharedCampaignParticipationError('Ces résultats de campagne ont déjà été partagés.'),
+      );
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(PRECONDITION_FAILED);
+      expect(responseDetail(response)).to.equal('Ces résultats de campagne ont déjà été partagés.');
+    });
+
+    it('responds Precondition Failed when a AlreadyExistingCampaignParticipationError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.AlreadyExistingCampaignParticipationError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(PRECONDITION_FAILED);
+    });
+
+    it('responds Precondition Failed when a CsvImportError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.CsvImportError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(PRECONDITION_FAILED);
+    });
+
+    it('responds Precondition Failed when a TargetProfileInvalidError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.TargetProfileInvalidError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(PRECONDITION_FAILED);
+    });
+
+    it('responds Precondition Failed when a NoStagesForCampaign error occurs', async function () {
+      routeHandler.throws(new DomainErrors.NoStagesForCampaign());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(PRECONDITION_FAILED);
+    });
+
+    it('responds Precondition Failed when a NoCampaignParticipationForUserAndCampaign error occurs', async function () {
+      routeHandler.throws(new DomainErrors.NoCampaignParticipationForUserAndCampaign());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(PRECONDITION_FAILED);
+    });
+
+    it('responds Precondition Failed when a OrganizationLearnerDisabledError occurs', async function () {
+      routeHandler.throws(new DomainErrors.OrganizationLearnerDisabledError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(PRECONDITION_FAILED);
+    });
+
+    it('responds Precondition Failed when a NoOrganizationToAttach occurs', async function () {
+      routeHandler.throws(new DomainErrors.NoOrganizationToAttach());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(PRECONDITION_FAILED);
+    });
+
+    it('responds Precondition Failed when a OrganizationLearnerCannotBeDissociated occurs', async function () {
+      routeHandler.throws(new DomainErrors.OrganizationLearnerCannotBeDissociatedError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(PRECONDITION_FAILED);
+    });
+
+    it('responds Precondition Failed when a CampaignParticipationDeletedError occurs', async function () {
+      routeHandler.throws(new CampaignParticipationDeletedError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(PRECONDITION_FAILED);
+    });
   });
 
   context('409 Conflict', function () {
@@ -75,6 +210,68 @@ describe('Integration | API | Controller Error', function () {
 
       expect(response.statusCode).to.equal(CONFLICT_ERROR);
       expect(responseDetail(response)).to.equal('A prompt is already ongoing for chat with id chatId');
+    });
+
+    it('responds Conflict when a CertificationCandidateByPersonalInfoTooManyMatchesError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.CertificationCandidateByPersonalInfoTooManyMatchesError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(CONFLICT_ERROR);
+      expect(responseDetail(response)).to.equal(
+        "Plus d'un candidat de certification correspondent aux informations d'identité fournies.",
+      );
+    });
+
+    it('responds Conflict when a ChallengeAlreadyAnsweredError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.ChallengeAlreadyAnsweredError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(CONFLICT_ERROR);
+      expect(responseDetail(response)).to.equal('This challenge has already been answered.');
+    });
+
+    it('responds Conflict when a AssessmentNotCompletedError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.AssessmentNotCompletedError("Cette évaluation n'est pas terminée."));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(CONFLICT_ERROR);
+      expect(responseDetail(response)).to.equal("Cette évaluation n'est pas terminée.");
+    });
+
+    it('responds Conflict when a OrganizationLearnerAlreadyLinkedToUserError error occurs', async function () {
+      routeHandler.throws(
+        new DomainErrors.OrganizationLearnerAlreadyLinkedToUserError(
+          "L'élève est déjà rattaché à un compte utilisateur.",
+        ),
+      );
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(CONFLICT_ERROR);
+      expect(responseDetail(response)).to.equal("L'élève est déjà rattaché à un compte utilisateur.");
+    });
+
+    it('responds Conflict when a AccountRecoveryUserAlreadyConfirmEmail error occurs', async function () {
+      routeHandler.throws(new DomainErrors.AccountRecoveryUserAlreadyConfirmEmail());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(CONFLICT_ERROR);
+      expect(responseDetail(response)).to.equal('This user has already a confirmed email.');
+    });
+
+    it('responds Conflict when an AlreadyAcceptedOrCancelledInvitationError occurs', async function () {
+      routeHandler.throws(new AlreadyAcceptedOrCancelledInvitationError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(CONFLICT_ERROR);
+      expect(responseCode(response)).to.equal('INVITATION_ALREADY_ACCEPTED_OR_CANCELLED');
+    });
+
+    it('responds Conflict when a ChallengeNotAskedError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.ChallengeNotAskedError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(CONFLICT_ERROR);
+      expect(responseDetail(response)).to.equal('This challenge has not been asked to the user.');
     });
   });
 
@@ -136,6 +333,116 @@ describe('Integration | API | Controller Error', function () {
       expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
       expect(responseDetail(response)).to.equal('At least a message or an attachment, if applicable, must be provided');
     });
+
+    it('responds Bad Request when a CertificationCandidatePersonalInfoFieldMissingError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.CertificationCandidatePersonalInfoFieldMissingError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
+      expect(responseDetail(response)).to.equal("Un ou plusieurs champs d'informations d'identité sont manquants.");
+    });
+
+    it('responds Bad Request when a CertificationCandidatePersonalInfoWrongFormat error occurs', async function () {
+      routeHandler.throws(new DomainErrors.CertificationCandidatePersonalInfoWrongFormat());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
+      expect(responseDetail(response)).to.equal(
+        "Un ou plusieurs champs d'informations d'identité sont au mauvais format.",
+      );
+    });
+
+    it('responds Bad Request when a CertificationCenterMembershipCreationError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.CertificationCenterMembershipCreationError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
+      expect(responseDetail(response)).to.equal("Le membre ou le centre de certification n'existe pas.");
+    });
+
+    it('responds Bad Request when a InvalidCertificationReportForFinalization error occurs', async function () {
+      routeHandler.throws(
+        new InvalidCertificationReportForFinalization('Echec lors de la validation du certification course'),
+      );
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
+      expect(responseDetail(response)).to.equal('Echec lors de la validation du certification course');
+    });
+
+    it('responds Bad Request when a MembershipCreationError error occurs', async function () {
+      routeHandler.throws(
+        new DomainErrors.MembershipCreationError('Erreur lors de la création du membership à une organisation.'),
+      );
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
+      expect(responseDetail(response)).to.equal('Erreur lors de la création du membership à une organisation.');
+    });
+
+    it('responds Bad Request when a MembershipUpdateError error occurs', async function () {
+      routeHandler.throws(
+        new DomainErrors.MembershipUpdateError('Erreur lors de la mise à jour du membership à une organisation.'),
+      );
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
+      expect(responseDetail(response)).to.equal('Erreur lors de la mise à jour du membership à une organisation.');
+    });
+
+    it('responds Bad Request when a OrganizationLearnersCouldNotBeSavedError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.OrganizationLearnersCouldNotBeSavedError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
+      expect(responseDetail(response)).to.equal('An error occurred during process');
+    });
+
+    it('responds Bad Request when a WrongDateFormatError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.WrongDateFormatError('Format de date invalide.'));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
+      expect(responseDetail(response)).to.equal('Format de date invalide.');
+    });
+
+    it('responds Bad Request when a UserOrgaSettingsCreationError error occurs', async function () {
+      routeHandler.throws(
+        new DomainErrors.UserOrgaSettingsCreationError(
+          'Erreur lors de la création des paramètres utilisateur relatifs à Pix Orga.',
+        ),
+      );
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
+      expect(responseDetail(response)).to.equal(
+        'Erreur lors de la création des paramètres utilisateur relatifs à Pix Orga.',
+      );
+    });
+
+    it('responds Bad Request when a AssessmentEndedError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.AssessmentEndedError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
+      expect(responseDetail(response)).to.equal('Evaluation terminée.');
+    });
+
+    it('responds Bad Request when a SendingEmailToInvalidDomainError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.SendingEmailToInvalidDomainError('invalid@baddomain.xyz'));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
+      expect(responseCode(response)).to.equal('SENDING_EMAIL_TO_INVALID_DOMAIN');
+    });
+
+    it('responds Bad Request when a SendingEmailToInvalidEmailAddressError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.SendingEmailToInvalidEmailAddressError('notanemail', 'invalid format'));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
+      expect(responseCode(response)).to.equal('SENDING_EMAIL_TO_INVALID_EMAIL_ADDRESS');
+    });
   });
 
   context('403 Forbidden', function () {
@@ -178,9 +485,118 @@ describe('Integration | API | Controller Error', function () {
       expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
       expect(responseDetail(response)).to.equal('User has not the right to use this chat');
     });
+
+    it('responds Forbidden when a UserNotAuthorizedToUpdateResourceError error occurs', async function () {
+      routeHandler.throws(
+        new DomainErrors.UserNotAuthorizedToUpdateResourceError(
+          'Utilisateur non autorisé à mettre à jour à la ressource',
+        ),
+      );
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
+      expect(responseDetail(response)).to.equal('Utilisateur non autorisé à mettre à jour à la ressource');
+    });
+
+    it('responds Forbidden when a CandidateAlreadyLinkedToUserError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.CandidateAlreadyLinkedToUserError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
+      expect(responseCode(response)).to.equal('SESSION_STARTED_CANDIDATE_ALREADY_LINKED_TO_USER');
+    });
+
+    it('responds Forbidden when a ForbiddenAccess error occurs', async function () {
+      routeHandler.throws(new DomainErrors.ForbiddenAccess('Accès non autorisé.', 'FORBIDDEN_ACCESS'));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
+      expect(responseDetail(response)).to.equal('Accès non autorisé.');
+      expect(responseCode(response)).to.equal('FORBIDDEN_ACCESS');
+    });
+
+    it('responds Forbidden when a UserAlreadyLinkedToCandidateInSessionError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.UserAlreadyLinkedToCandidateInSessionError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
+      expect(responseDetail(response)).to.equal("L'utilisateur est déjà lié à un candidat dans cette session.");
+    });
+
+    it('responds Forbidden when a UserNotAuthorizedToCertifyError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.UserNotAuthorizedToCertifyError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
+      expect(responseDetail(response)).to.equal('The user cannot be certified.');
+    });
+
+    it('responds Forbidden when a UserNotAuthorizedToGetCampaignResultsError error occurs', async function () {
+      routeHandler.throws(
+        new DomainErrors.UserNotAuthorizedToGetCampaignResultsError(
+          "Cet utilisateur n'est pas autorisé à récupérer les résultats de la campagne.",
+        ),
+      );
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
+      expect(responseDetail(response)).to.equal(
+        "Cet utilisateur n'est pas autorisé à récupérer les résultats de la campagne.",
+      );
+    });
+
+    it('responds Forbidden when a UserNotAuthorizedToCreateResourceError error occurs', async function () {
+      routeHandler.throws(
+        new DomainErrors.UserNotAuthorizedToCreateResourceError(
+          "Cet utilisateur n'est pas autorisé à créer la ressource.",
+        ),
+      );
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
+      expect(responseDetail(response)).to.equal("Cet utilisateur n'est pas autorisé à créer la ressource.");
+    });
+
+    it('responds Forbidden when a ImproveCompetenceEvaluationForbiddenError error occurs', async function () {
+      routeHandler.throws(new EvaluationDomainErrors.ImproveCompetenceEvaluationForbiddenError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
+      expect(responseDetail(response)).to.equal('Le niveau maximum est déjà atteint pour cette compétence.');
+      expect(responseTitle(response)).to.equal('Forbidden');
+      expect(responseCode(response)).to.equal('IMPROVE_COMPETENCE_EVALUATION_FORBIDDEN');
+    });
+
+    it('responds Forbidden when a ApplicationScopeNotAllowedError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.ApplicationScopeNotAllowedError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
+      expect(responseDetail(response)).to.equal('The scope is not allowed.');
+      expect(responseTitle(response)).to.equal('Forbidden');
+    });
+
+    it('responds Forbidden when a CancelledInvitationError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.CancelledInvitationError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
+      expect(responseDetail(response)).to.equal("L'invitation à cette organisation a été annulée.");
+      expect(responseTitle(response)).to.equal('Forbidden');
+    });
+
+    it('responds Forbidden when a UserHasNoOrganizationMembershipError error occurs', async function () {
+      routeHandler.throws(new UserHasNoOrganizationMembershipError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
+      expect(responseDetail(response)).to.equal('User is not member of any organization');
+      expect(responseCode(response)).to.equal('USER_HAS_NO_ORGANIZATION_MEMBERSHIP');
+      expect(responseTitle(response)).to.equal('Forbidden');
+    });
   });
 
-  context('404 Not found', function () {
+  context('404 Not Found', function () {
     const NOT_FOUND_ERROR = 404;
 
     it('responds Not Found when a LLMDomainErrors.ChatNotFoundError error occurs', async function () {
@@ -190,10 +606,311 @@ describe('Integration | API | Controller Error', function () {
       expect(response.statusCode).to.equal(NOT_FOUND_ERROR);
       expect(responseDetail(response)).to.equal('The chat of id "someChatId" does not exist');
     });
+
+    it('responds Not Found when a DomainError.NotFoundError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.NotFoundError('Entity Not Found'));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(NOT_FOUND_ERROR);
+      expect(responseDetail(response)).to.equal('Entity Not Found');
+    });
+
+    it('responds Not Found when a CampaignCodeError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.CampaignCodeError('Campaign Code Error'));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(NOT_FOUND_ERROR);
+      expect(responseDetail(response)).to.equal('Campaign Code Error');
+    });
+
+    it('responds Not Found when a CertificationCandidateByPersonalInfoNotFoundError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.CertificationCandidateByPersonalInfoNotFoundError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(NOT_FOUND_ERROR);
+      expect(responseDetail(response)).to.equal(
+        "Aucun candidat de certification ne correspond aux informations d'identité fournies.",
+      );
+    });
+
+    it('responds Not Found when a UserNotFoundError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.UserNotFoundError('Ce compte est introuvable.'));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(NOT_FOUND_ERROR);
+      expect(responseDetail(response)).to.equal('Ce compte est introuvable.');
+    });
+
+    it('responds NotFoundError when a CertificationCandidateNotFoundError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.CertificationCandidateNotFoundError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(NOT_FOUND_ERROR);
+      expect(responseDetail(response)).to.equal('No candidate found');
+      expect(responseCode(response)).to.equal('CANDIDATE_NOT_FOUND');
+    });
   });
 
-  context('500 Internal server error', function () {
+  context('422 Unprocessable Entity', function () {
+    const UNPROCESSABLE_ENTITY_ERROR = 422;
+
+    it('responds Unprocessable Entity when a ObjectValidationError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.ObjectValidationError('Erreur, objet non valide.'));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(UNPROCESSABLE_ENTITY_ERROR);
+      expect(responseDetail(response)).to.equal('Erreur, objet non valide.');
+    });
+
+    it('responds Unprocessable Entity when a FileValidationError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.FileValidationError('Erreur, fichier non valide.'));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(UNPROCESSABLE_ENTITY_ERROR);
+      expect(responseDetail(response)).to.equal('An error occurred, file is invalid');
+    });
+
+    it('responds Unprocessable Entity when a UserNotMemberOfOrganizationError error occurs', async function () {
+      routeHandler.throws(new UserNotMemberOfOrganizationError("L'utilisateur n'est pas membre de l'organisation."));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(UNPROCESSABLE_ENTITY_ERROR);
+      expect(responseDetail(response)).to.equal("L'utilisateur n'est pas membre de l'organisation.");
+    });
+
+    it('responds Unprocessable Entity with invalid data attribute', async function () {
+      // given
+      const invalidAttributes = [
+        {
+          attribute: 'firstname',
+          message: "Le prénom n'est pas renseigné.",
+        },
+      ];
+      routeHandler.throws(new DomainErrors.EntityValidationError({ invalidAttributes }));
+
+      // when
+      const response = await server.requestObject(request);
+
+      // then
+      expect(response.statusCode).to.equal(UNPROCESSABLE_ENTITY_ERROR);
+
+      const payload = JSON.parse(response.payload);
+      expect(payload.errors).to.have.lengthOf(1);
+
+      const unprocessableErrorOnFirstname = payload.errors[0];
+      expect(unprocessableErrorOnFirstname.status).to.equal('422');
+      expect(unprocessableErrorOnFirstname.source.pointer).to.equal('/data/attributes/firstname');
+      expect(unprocessableErrorOnFirstname.title).to.equal('Invalid data attribute "firstname"');
+      expect(unprocessableErrorOnFirstname.detail).to.equal("Le prénom n'est pas renseigné.");
+    });
+
+    it('responds Unprocessable Entity with invalid relationships if name ends with Id', async function () {
+      // given
+      const invalidAttributes = [
+        {
+          attribute: 'targetProfileId',
+          message: "Le profile cible n'est pas renseigné.",
+        },
+      ];
+      routeHandler.throws(new DomainErrors.EntityValidationError({ invalidAttributes }));
+
+      // when
+      const response = await server.requestObject(request);
+
+      // then
+      expect(response.statusCode).to.equal(UNPROCESSABLE_ENTITY_ERROR);
+
+      const payload = JSON.parse(response.payload);
+      expect(payload.errors).to.have.lengthOf(1);
+
+      const unprocessableErrorOnFirstname = payload.errors[0];
+      expect(unprocessableErrorOnFirstname.status).to.equal('422');
+      expect(unprocessableErrorOnFirstname.source.pointer).to.equal('/data/relationships/target-profile');
+      expect(unprocessableErrorOnFirstname.title).to.equal('Invalid relationship "targetProfile"');
+      expect(unprocessableErrorOnFirstname.detail).to.equal("Le profile cible n'est pas renseigné.");
+    });
+
+    it('responds Unprocessable Entity with invalid data attribute with name ends with Id', async function () {
+      // given
+      const invalidAttributes = [
+        {
+          attribute: 'participantExternalId',
+          message: 'Un identifiant externe est requis pour accèder à la campagne.',
+        },
+      ];
+      routeHandler.throws(new DomainErrors.EntityValidationError({ invalidAttributes }));
+
+      // when
+      const response = await server.requestObject(request);
+
+      // then
+      expect(response.statusCode).to.equal(UNPROCESSABLE_ENTITY_ERROR);
+
+      const payload = JSON.parse(response.payload);
+      expect(payload.errors).to.have.lengthOf(1);
+
+      const unprocessableErrorOnFirstname = payload.errors[0];
+      expect(unprocessableErrorOnFirstname.status).to.equal('422');
+      expect(unprocessableErrorOnFirstname.source.pointer).to.equal('/data/attributes/participant-external-id');
+      expect(unprocessableErrorOnFirstname.title).to.equal('Invalid data attribute "participantExternalId"');
+      expect(unprocessableErrorOnFirstname.detail).to.equal(
+        'Un identifiant externe est requis pour accèder à la campagne.',
+      );
+    });
+
+    it('responds Unprocessable Entity with invalid data attribute, if attribute is undefined', async function () {
+      // given
+      const invalidAttributes = [
+        {
+          attribute: undefined,
+          message: 'Vous devez renseigner une adresse e-mail et/ou un identifiant.',
+        },
+      ];
+      routeHandler.throws(new DomainErrors.EntityValidationError({ invalidAttributes }));
+
+      // when
+      const response = await server.requestObject(request);
+
+      // then
+      expect(response.statusCode).to.equal(UNPROCESSABLE_ENTITY_ERROR);
+
+      const payload = JSON.parse(response.payload);
+      expect(payload.errors).to.have.lengthOf(1);
+
+      const unprocessableErrorOnFirstname = payload.errors[0];
+      expect(unprocessableErrorOnFirstname.status).to.equal('422');
+      expect(unprocessableErrorOnFirstname.source).to.be.undefined;
+      expect(unprocessableErrorOnFirstname.title).to.equal('Invalid data attributes');
+      expect(unprocessableErrorOnFirstname.detail).to.equal(
+        'Vous devez renseigner une adresse e-mail et/ou un identifiant.',
+      );
+    });
+
+    it('should create a new JSONAPI unprocessable with multiple invalid attributes', async function () {
+      // given
+      const invalidAttributes = [
+        {
+          attribute: 'firstname',
+          message: "Le prénom n'est pas renseigné.",
+        },
+        {
+          attribute: 'lastname',
+          message: "Le nom n'est pas renseigné.",
+        },
+        {
+          attribute: 'targetProfileId',
+          message: "Le profile cible n'est pas renseigné.",
+        },
+      ];
+      routeHandler.throws(new DomainErrors.EntityValidationError({ invalidAttributes }));
+
+      // when
+      const response = await server.requestObject(request);
+
+      // then
+      expect(response.statusCode).to.equal(UNPROCESSABLE_ENTITY_ERROR);
+
+      const payload = JSON.parse(response.payload);
+      expect(payload.errors).to.have.lengthOf(3);
+    });
+
+    it('responds UnprocessableEntity when a CertificationCandidatesError occurs', async function () {
+      routeHandler.throws(new DomainErrors.CertificationCandidatesError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(UNPROCESSABLE_ENTITY_ERROR);
+    });
+
+    it('responds UnprocessableEntity when a AuthenticationMethodAlreadyExistsError occurs', async function () {
+      routeHandler.throws(new DomainErrors.AuthenticationMethodAlreadyExistsError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(UNPROCESSABLE_ENTITY_ERROR);
+      expect(responseDetail(response)).to.equal('Authentication method already exists.');
+    });
+
+    it('responds UnprocessableEntityError when an MissingAttributes error occurs', async function () {
+      routeHandler.throws(new DomainErrors.MissingAttributesError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(UNPROCESSABLE_ENTITY_ERROR);
+      expect(responseDetail(response)).to.equal('Attributs manquants.');
+    });
+  });
+
+  context('401 Unauthorized', function () {
+    const UNAUTHORIZED_ERROR = 401;
+
+    it('responds Unauthorized when a MissingOrInvalidCredentialsError error occurs', async function () {
+      routeHandler.throws(new MissingOrInvalidCredentialsError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(UNAUTHORIZED_ERROR);
+      expect(responseDetail(response)).to.equal('Missing or invalid credentials');
+    });
+
+    it('responds Unauthorized when a InvalidTemporaryKeyError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.InvalidTemporaryKeyError('Demande de réinitialisation invalide.'));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(UNAUTHORIZED_ERROR);
+      expect(responseDetail(response)).to.equal('Demande de réinitialisation invalide.');
+    });
+
+    it('responds Unauthorized when a InvalidResultRecipientTokenError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.InvalidResultRecipientTokenError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(UNAUTHORIZED_ERROR);
+      expect(responseDetail(response)).to.equal(
+        'Le token de récupération des résultats de la session de certification est invalide.',
+      );
+    });
+
+    it('responds Unauthorized when a UserShouldChangePasswordError error occurs', async function () {
+      routeHandler.throws(new UserShouldChangePasswordError('Erreur, vous devez changer votre mot de passe.'));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(UNAUTHORIZED_ERROR);
+      expect(responseDetail(response)).to.equal('Erreur, vous devez changer votre mot de passe.');
+    });
+
+    it('responds Unauthorized when a ApplicationWithInvalidCredentialsError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.ApplicationWithInvalidCredentialsError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(UNAUTHORIZED_ERROR);
+      expect(responseDetail(response)).to.equal('The client ID and/or secret are invalid.');
+    });
+  });
+
+  context('500 Internal Server Error', function () {
     const INTERNAL_SERVER_ERROR = 500;
+
+    it('responds Internal Server Error error when another error occurs', async function () {
+      // given
+      routeHandler.throws(new Error('Unexpected Error'));
+
+      // when
+      const response = await server.requestObject(request);
+
+      // then
+      const payload = JSON.parse(response.payload);
+      expect(response.statusCode).to.equal(INTERNAL_SERVER_ERROR);
+      expect(payload.message).to.equal('An internal server error occurred');
+    });
+
+    it('responds InternalServerError when a AnswerEvaluationError error occurs', async function () {
+      const challenge = {
+        id: 123456,
+      };
+      routeHandler.throws(new AnswerEvaluationError(challenge));
+
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(INTERNAL_SERVER_ERROR);
+      expect(responseDetail(response)).to.equal('Problème lors de l\'évaluation de la réponse du challenge: "123456"');
+    });
 
     it('responds Internal server error when a LLMDomainErrors.IncorrectMessagesOrderingError error occurs', async function () {
       routeHandler.throws(new LLMDomainErrors.IncorrectMessagesOrderingError());
@@ -213,6 +930,34 @@ describe('Integration | API | Controller Error', function () {
 
       expect(response.statusCode).to.equal(SERVICE_UNAVAILABLE_ERROR);
       expect(responseDetail(response)).to.equal('Something went wrong when reaching the LLM Api : some error message');
+    });
+
+    it('responds ServiceUnavailable when a SendingEmailError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.SendingEmailError('toto@pix.fr'));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(SERVICE_UNAVAILABLE_ERROR);
+      expect(responseDetail(response)).to.equal('Failed to send email to "toto@pix.fr" for some unknown reason.');
+    });
+
+    it('responds ServiceUnavailable when a SendingEmailToResultRecipientError error occurs', async function () {
+      routeHandler.throws(new SendingEmailToResultRecipientError(['toto@pix.fr', 'titi@pix.fr']));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(SERVICE_UNAVAILABLE_ERROR);
+      expect(responseDetail(response)).to.equal(
+        "Échec lors de l'envoi des résultats au(x) destinataire(s) : toto@pix.fr, titi@pix.fr",
+      );
+    });
+
+    it('responds ServiceUnavailable when a SendingEmailToRefererError error occurs', async function () {
+      routeHandler.throws(new SendingEmailToRefererError(['toto@pix.fr', 'titi@pix.fr']));
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(SERVICE_UNAVAILABLE_ERROR);
+      expect(responseDetail(response)).to.equal(
+        "Échec lors de l'envoi du mail au(x) référent(s) du centre de certification : toto@pix.fr, titi@pix.fr",
+      );
     });
   });
 
