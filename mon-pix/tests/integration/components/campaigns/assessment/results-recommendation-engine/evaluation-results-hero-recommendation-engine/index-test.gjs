@@ -343,58 +343,26 @@ module(
       });
     });
 
-    module('when campaign is a regular campaign', function () {
-      module('when there are trainings', function () {
-        test('it displays a see-trainings button', async function (assert) {
-          // given
-          stubCurrentUserService(this.owner, { firstName: 'Hermione' });
-          const campaign = { organizationId: 1 };
-          const campaignParticipationResult = { masteryRate: 0.75 };
+    test('it displays a back-to-homepage link', async function (assert) {
+      // given
+      stubCurrentUserService(this.owner, { firstName: 'Hermione' });
+      const campaign = { organizationId: 1, hasCustomResultPageButton: false };
+      const campaignParticipationResult = { masteryRate: 0.75 };
 
-          // when
-          const screen = await render(
-            <template>
-              <EvaluationResultsHeroRecommendationEngine
-                @campaign={{campaign}}
-                @campaignParticipationResult={{campaignParticipationResult}}
-                @hasTrainings={{true}}
-              />
-            </template>,
-          );
+      // when
+      const screen = await render(
+        <template>
+          <EvaluationResultsHeroRecommendationEngine
+            @campaign={{campaign}}
+            @campaignParticipationResult={{campaignParticipationResult}}
+            @hasTrainings={{false}}
+          />
+        </template>,
+      );
 
-          // then
-          assert.dom(screen.getByRole('button', { name: t('pages.skill-review.hero.see-trainings') })).exists();
-          assert.dom(screen.queryByRole('link', { name: t('navigation.back-to-homepage') })).doesNotExist();
-        });
-      });
-
-      module('when there are no trainings', function () {
-        module('when there is no custom result page button', function () {
-          test('it displays a back-to-homepage link', async function (assert) {
-            // given
-            stubCurrentUserService(this.owner, { firstName: 'Hermione' });
-            const campaign = { organizationId: 1, hasCustomResultPageButton: false };
-            const campaignParticipationResult = { masteryRate: 0.75 };
-
-            // when
-            const screen = await render(
-              <template>
-                <EvaluationResultsHeroRecommendationEngine
-                  @campaign={{campaign}}
-                  @campaignParticipationResult={{campaignParticipationResult}}
-                  @hasTrainings={{false}}
-                />
-              </template>,
-            );
-
-            // then
-            assert.dom(screen.getByRole('link', { name: t('pages.skill-review.actions.back-to-pix') })).exists();
-            assert
-              .dom(screen.queryByRole('button', { name: t('pages.skill-review.hero.see-trainings') }))
-              .doesNotExist();
-          });
-        });
-      });
+      // then
+      assert.dom(screen.getByRole('link', { name: t('pages.skill-review.actions.back-to-pix') })).exists();
+      assert.dom(screen.queryByRole('button', { name: t('pages.skill-review.hero.see-trainings') })).doesNotExist();
     });
   },
 );

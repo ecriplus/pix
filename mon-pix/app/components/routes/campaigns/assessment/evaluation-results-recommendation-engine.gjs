@@ -1,15 +1,15 @@
-import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 
-import EvaluationResultsTabs from '../../../campaigns/assessment/results/evaluation-results-tabs';
+import ResultsDetails from '../../../campaigns/assessment/results/evaluation-results-tabs/results-details';
+import Rewards from '../../../campaigns/assessment/results/evaluation-results-tabs/rewards';
+import Trainings from '../../../campaigns/assessment/results/evaluation-results-tabs/trainings';
 import QuitResults from '../../../campaigns/assessment/results/quit-results';
 import EvaluationResultsHeroRecommendationEngine from '../../../campaigns/assessment/results-recommendation-engine/evaluation-results-hero-recommendation-engine';
 
 export default class EvaluationResultsRecommendationEngine extends Component {
   @service media;
-  @service tabManager;
 
   get hasTrainings() {
     return Boolean(this.trainings.length);
@@ -23,17 +23,10 @@ export default class EvaluationResultsRecommendationEngine extends Component {
     }
   }
 
-  @action
-  showTrainings() {
-    const tabElement = document.querySelector('[role="tablist"]');
-    const tabElementTopPosition = tabElement.getBoundingClientRect().top;
+  get showBadges() {
+    const badges = this.args.model.campaignParticipationResult.campaignParticipationBadges;
 
-    window.scrollTo({
-      top: tabElementTopPosition,
-      behavior: 'smooth',
-    });
-
-    this.tabManager.setActiveTab(2);
+    return badges.some((badge) => badge.isAcquired || badge.isAlwaysVisible);
   }
 
   <template>
@@ -52,15 +45,25 @@ export default class EvaluationResultsRecommendationEngine extends Component {
         @campaign={{@model.campaign}}
         @campaignParticipationResult={{@model.campaignParticipationResult}}
         @questResults={{@model.questResults}}
-        @hasTrainings={{this.hasTrainings}}
-        @showTrainings={{this.showTrainings}}
       />
-      <EvaluationResultsTabs
-        @campaign={{@model.campaign}}
-        @campaignParticipationResult={{@model.campaignParticipationResult}}
-        @questResults={{@model.questResults}}
-        @trainings={{this.trainings}}
+
+      {{#if this.hasTrainings}}
+        <Trainings
+          @trainings={{this.trainings}}
+          @questResults={{@model.questResults}}
+          @campaignParticipationResult={{@model.campaignParticipationResult}}
+          @campaignId={{@model.campaign.id}}
+        />
+      {{/if}}
+
+      <ResultsDetails
+        @competenceResults={{@model.campaignParticipationResult.competenceResults}}
+        @totalStage={{@model.campaignParticipationResult.reachedStage.totalStage}}
       />
+
+      {{#if this.showBadges}}
+        <Rewards @badges={{@model.campaignParticipationResult.campaignParticipationBadges}} />
+      {{/if}}
     </main>
   </template>
 }
