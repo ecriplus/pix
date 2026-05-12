@@ -20,8 +20,9 @@ export default defineConfig({
 
   use: {
     locale: 'fr-FR',
-    timezoneId: 'Europe/Paris',
+    timezoneId: 'UTC',
     screenshot: isCI ? 'only-on-failure' : 'off',
+    ignoreHTTPSErrors: true,
   },
 });
 
@@ -62,12 +63,14 @@ export function setupWebServer(app: App, reuseExistingServer: boolean): WebServe
           DATABASE_URL: process.env.DATABASE_URL ?? '',
           DATAMART_DATABASE_URL: process.env.DATAMART_DATABASE_URL ?? '',
           DATAWAREHOUSE_DATABASE_URL: process.env.DATAWAREHOUSE_DATABASE_URL ?? '',
+          JOBS_DATABASE_URL: process.env.JOBS_DATABASE_URL ?? '',
           REDIS_URL: process.env.REDIS_URL ?? '',
           START_JOB_IN_WEB_PROCESS: 'true',
           MAILING_ENABLED: 'false',
           LCMS_API_URL: process.env.LCMS_API_URL ?? '',
           LCMS_API_KEY: process.env.LCMS_API_KEY ?? '',
           LCMS_API_RELEASE_ID: process.env.LCMS_API_RELEASE_ID ?? '',
+          PIX_ASSETS_MANAGER_URL: process.env.PIX_ASSETS_MANAGER_URL ?? '',
         },
       };
     }

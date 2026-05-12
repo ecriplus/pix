@@ -30,4 +30,8 @@ export class SessionFinalizationPage {
     await row.locator('.pix-select-button').click();
     await row.getByRole('option', { name: 'Abandon : Manque de temps ou départ prématuré' }).click();
   }
+
+  async close() {
+    await this.page.close();
+  }
 }

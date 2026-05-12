@@ -12,7 +12,6 @@ import { knex } from '../../helpers/db.ts';
 import { test as sharedTest } from '../index.ts';
 
 const pixAppBrowserContextsPerUser = new Map<number, BrowserContext>();
-const pixAppPages: Page[] = [];
 
 export const loggedPagesFixtures = sharedTest.extend<
   // test scoped fixtures
@@ -21,6 +20,7 @@ export const loggedPagesFixtures = sharedTest.extend<
     pixCertifProPage: Page;
     pixCertifScoPage: Page;
     pixCertifInvigilatorPage: Page;
+    pixAppCertifiableUserPage: (p: PixCertifiableUserData) => Promise<Page>;
     getCertifiableUserData: (firstName: string) => Promise<PixCertifiableUserData>;
   },
   // worker scoped fixtures (run max once per worker)
@@ -34,7 +34,6 @@ export const loggedPagesFixtures = sharedTest.extend<
     pixCertifProWorkerContext: BrowserContext;
     pixCertifScoWorkerContext: BrowserContext;
     pixAppCertifiableUserContext: (p: PixCertifiableUserData) => Promise<BrowserContext>;
-    pixAppCertifiableUserPage: (p: PixCertifiableUserData) => Promise<Page>;
   }
 >({
   pixAdminRoleCertifPage: async ({ pixAdminRoleCertifWorkerContext }, use) => {
@@ -66,6 +65,28 @@ export const loggedPagesFixtures = sharedTest.extend<
       return userDataMap.get(searchedEmail) as PixCertifiableUserData;
     };
     await use(getByFirstName);
+  },
+  pixAppCertifiableUserPage: async ({ pixAppCertifiableUserContext }, use) => {
+    const pixAppPages: Page[] = [];
+    const createPageForUser = async (certifiableUserData: PixCertifiableUserData) => {
+      const browser = await pixAppCertifiableUserContext(certifiableUserData);
+      const page = await browser.newPage();
+      pixAppPages.push(page);
+      await page.route('**/api/**', (route) => {
+        route.continue({
+          headers: {
+            ...route.request().headers(),
+            origin: 'https://app.e2e.pix.fr',
+          },
+        });
+      });
+      await page.goto(process.env.PIX_APP_URL!);
+      return page;
+    };
+    await use(createPageForUser);
+    for (const page of pixAppPages) {
+      await page.close();
+    }
   },
   nextId: [
     // eslint-disable-next-line no-empty-pattern
@@ -233,30 +254,6 @@ export const loggedPagesFixtures = sharedTest.extend<
       await use(createContextForUser);
       for (const browser of pixAppBrowserContextsPerUser.values()) {
         await browser.close();
-      }
-    },
-    { scope: 'worker' },
-  ],
-  pixAppCertifiableUserPage: [
-    async ({ pixAppCertifiableUserContext }, use) => {
-      const createPageForUser = async (certifiableUserData: PixCertifiableUserData) => {
-        const browser = await pixAppCertifiableUserContext(certifiableUserData);
-        const page = await browser.newPage();
-        pixAppPages.push(page);
-        await page.route('**/api/**', (route) => {
-          route.continue({
-            headers: {
-              ...route.request().headers(),
-              origin: 'https://app.e2e.pix.fr',
-            },
-          });
-        });
-        await page.goto(process.env.PIX_APP_URL!);
-        return page;
-      };
-      await use(createPageForUser);
-      for (const page of pixAppPages) {
-        await page.close();
       }
     },
     { scope: 'worker' },

@@ -16,39 +16,30 @@ export class ChallengePage {
   }
 
   async skip() {
-    const previousUrl = this.page.url();
-    const challengeNumber = await this.getChallengeImprint();
-    const validateAnswerButton = this.page.getByRole('button', {
-      name: 'Je passe et je vais à la prochaine question',
-    });
-    // Forces to wait until next challenge is loaded
-    const selector = `p:has-text("ninaimprint ${challengeNumber}")`;
-    await validateAnswerButton.click();
-    await this.page.waitForSelector(selector, { state: 'detached' });
-    const hasLoader = await this.page.locator('.app-loader').isVisible();
-    if (hasLoader) {
-      await this.page.waitForSelector('.app-loader', { state: 'detached' });
-    }
-    await this.page.waitForURL((url) => url.toString() !== previousUrl);
-    await this.page.waitForLoadState('domcontentloaded');
+    await this.#next('Je passe et je vais à la prochaine question');
   }
 
   async validateAnswer() {
+    await this.#next('Je valide et je vais à la prochaine question');
+  }
+
+  async #next(buttonName: string) {
     const previousUrl = this.page.url();
-    const challengeNumber = await this.getChallengeImprint();
+    const oldChallengeNumber = await this.getChallengeImprint();
     const validateAnswerButton = this.page.getByRole('button', {
-      name: 'Je valide et je vais à la prochaine question',
+      name: buttonName,
     });
-    // Forces to wait until next challenge is loaded
-    const selector = `p:has-text("ninaimprint ${challengeNumber}")`;
     await validateAnswerButton.click();
-    await this.page.waitForSelector(selector, { state: 'detached' });
-    const hasLoader = await this.page.locator('.app-loader').isVisible();
-    if (hasLoader) {
-      await this.page.waitForSelector('.app-loader', { state: 'detached' });
-    }
+
     await this.page.waitForURL((url) => url.toString() !== previousUrl);
-    await this.page.waitForLoadState('domcontentloaded');
+
+    const oldImprint = this.page.locator(`p:has-text("ninaimprint ${oldChallengeNumber}")`);
+    await oldImprint.waitFor({ state: 'detached' });
+
+    const loader = this.page.locator('.app-loader');
+    await loader.waitFor({ state: 'hidden' });
+
+    await this.page.waitForLoadState('load');
   }
 
   async hasUserLeveledUp() {

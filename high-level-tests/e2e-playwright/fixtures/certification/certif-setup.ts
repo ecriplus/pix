@@ -77,7 +77,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
   enrollCandidate: async ({ pixCertifProPage }, use) => {
     const enrollCandidate = async ({
       testRef,
-      certificationKey = 'CORE',
+      certificationKey = CERTIFICATIONS_DATA.CORE,
       certifiableUserData,
     }: EnrollCandidateParams) => {
       let sessionNumber = '',
@@ -303,6 +303,7 @@ export const certifSetupFixtures = baseCertifTest.extend<{
             name: 'CertificationCompletedJob',
           })
           .whereRaw(`data @> ?::jsonb`, [JSON.stringify({ certificationCourseId: parseInt(certificationNumber) })])
+          .orderBy('created_on', 'desc')
           .first();
 
         if (job?.state === 'completed') {

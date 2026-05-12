@@ -124,7 +124,7 @@ async function createDataForCombinedCourse(uid: string) {
       ownerId: userId,
       type: 'ASSESSMENT',
       customResultPageButtonText: 'Continuer',
-      customResultPageButtonUrl: `http://localhost:4200/parcours/C${uid.toUpperCase()}`,
+      customResultPageButtonUrl: `${process.env.PIX_APP_URL}/parcours/C${uid.toUpperCase()}`,
     })
     .returning('id');
   await knex('campaign_skills').insert({ campaignId, skillId: CAMPAIGN_SKILLS[0] });

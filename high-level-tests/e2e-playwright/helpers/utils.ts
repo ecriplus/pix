@@ -68,7 +68,8 @@ async function getLocatorFromDescriptionList(
   throw new Error(`No dt found with label: "${dtLabel}"`);
 }
 
-export function normalizeWhitespace(str: string): string {
+export function normalizeWhitespace(str: string | null): string | null {
+  if (!str) return str;
   return str.replace(/\s+/g, ' ').trim();
 }
 

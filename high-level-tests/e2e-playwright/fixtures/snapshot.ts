@@ -19,14 +19,14 @@ export const snapshotFixtures = base.extend<{
 });
 
 class SnapshotHandler {
-  private readonly results: { label: string; value: number | string }[];
+  private readonly results: { label: string; value: number | string | null }[];
   private readonly shouldUpdateSnapshots: boolean;
   constructor({ shouldUpdateSnapshots }: { shouldUpdateSnapshots: boolean }) {
     this.results = [];
     this.shouldUpdateSnapshots = shouldUpdateSnapshots;
   }
 
-  push(label: string, value: number | string) {
+  push(label: string, value: number | string | null) {
     this.results.push({ label, value });
   }
 
@@ -96,6 +96,7 @@ class SnapshotHandler {
       }
     }
     if (this.shouldUpdateSnapshots) {
+      await mkdir(path.dirname(resultFilePath), { recursive: true });
       await writeFile(resultFilePath, JSON.stringify(parsedCsvData));
     } else {
       const refData = JSON.parse(await readFile(resultFilePath, 'utf8'));

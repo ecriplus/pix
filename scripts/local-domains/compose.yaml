@@ -13,6 +13,8 @@ services:
       - caddy_config:/config
     extra_hosts:
       - 'host.docker.internal:host-gateway'
+    environment:
+      - API_HOST=host.docker.internal
 volumes:
   caddy_data:
     external: false

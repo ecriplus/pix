@@ -26,8 +26,9 @@ export class CertificateListPage {
     );
     const certificationCenter = await card.getByTestId('pw-certification-card-certification-center').innerText();
     const examDate = await card.getByTestId('pw-certification-card-exam-date').innerText();
-    const result = await card.getByTestId('pw-certification-card-result').innerText();
+    const result = await getInnerTextOrDefault(card.getByTestId('pw-certification-card-result'), null);
     const comment = await getInnerTextOrDefault(card.getByTestId('pw-certification-card-comment'), null);
+    const hasBadge = await card.getByTestId('pw-certification-card-badge').isVisible();
 
     return {
       mainStatus: normalizeWhitespace(mainStatus),
@@ -37,6 +38,7 @@ export class CertificateListPage {
       examDate: normalizeWhitespace(examDate),
       result: normalizeWhitespace(result),
       comment: comment ? normalizeWhitespace(comment) : null,
+      hasBadge,
     };
   }
 }
