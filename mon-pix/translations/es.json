@@ -2220,6 +2220,9 @@
       "stage": {
         "caption": "Detalles de tus resultados en porcentaje y estrellas según las competencias",
         "masteryPercentage": "{rate, number, ::percent} de éxito",
+        "recommendedEngine": {
+          "starsAcquired": "{acquired}/{total, plural, =0 {estrella} =1 {# estrella} other {# estrellas}}"
+        },
         "starsAcquired": "{acquired, plural, =0 {ninguna estrella obtenida} =1 {# estrella obtenida} other {# estrellas obtenidas}} de {total}",
         "title": "Detalles de las competencias"
       },
