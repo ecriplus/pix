@@ -6,8 +6,8 @@ import { usecases as profileUsecases } from '../../../profile/domain/usecases/in
 import { usecases as questUsecases } from '../../../quest/domain/usecases/index.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { featureToggles } from '../../../shared/infrastructure/feature-toggles/index.js';
-import * as assessmentRepository from '../../../shared/infrastructure/repositories/assessment-repository.js'; // todo me déplacer ?
-import * as assessmentSerializer from '../../../shared/infrastructure/serializers/jsonapi/assessment-serializer.js'; // todo me déplacer
+import * as assessmentRepository from '../../../shared/infrastructure/repositories/assessment-repository.js';
+import * as assessmentSerializer from '../../../shared/infrastructure/serializers/jsonapi/assessment-serializer.js';
 import * as llmChatSerializer from '../../../shared/infrastructure/serializers/llm-chat-serializer.js';
 import {
   extractUserIdFromRequest,
