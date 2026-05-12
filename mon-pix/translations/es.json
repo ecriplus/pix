@@ -1265,6 +1265,13 @@
         "start-button": "Iniciar el curso",
         "step": "Paso {stepNumber}"
       },
+      "errors": {
+        "disabled": {
+          "content": "Debido a la gran afluencia de público, el acceso a este curso queda suspendido temporalmente.",
+          "instructions": "Por favor, inténtalo de nuevo más tarde.",
+          "title": "Este curso no está disponible por el momento"
+        }
+      },
       "items": {
         "aria-label-completed-campaign": "Este elemento se completa con una tasa de éxito del {value, number, ::percent}",
         "aria-label-completed-campaign-with-stages": "Ha obtenido {acquired, plural, =0 {no estrella} =1 {# estrella} other {# estrellas}} de {total}",

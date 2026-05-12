@@ -8,7 +8,7 @@ export default class CombinedCoursePresentationRoute extends Route {
   @service metrics;
 
   async beforeModel(transition) {
-    const { code } = this.paramsFor('combined-courses');
+    const { code } = transition.to.params;
 
     if (!transition.from) {
       return this.router.replaceWith('organizations.access', code, { queryParams: { from: 'parcours' } });
@@ -24,17 +24,16 @@ export default class CombinedCoursePresentationRoute extends Route {
     });
   }
 
-  async model() {
+  async model(params) {
+    const { code } = params;
     try {
-      const { code } = this.paramsFor('combined-courses');
       await this.store.adapterFor('combined-course').reassessStatus(code);
       return this.store.queryRecord('combined-course', { filter: { code } });
     } catch (err) {
       if (err.errors[0].code === 403) {
-        this.router.replaceWith('campaigns.archived-error');
-      } else {
-        throw err;
+        this.router.replaceWith('combined-courses.generic-error');
       }
+      throw err;
     }
   }
 
@@ -43,7 +42,7 @@ export default class CombinedCoursePresentationRoute extends Route {
   }
 
   activate() {
-    this.metrics.context.code = this.paramsFor('combined-courses').code;
+    this.metrics.context.code = this.paramsFor('combined-courses.presentation').code;
     this.metrics.context.type = 'combined-course';
   }
 

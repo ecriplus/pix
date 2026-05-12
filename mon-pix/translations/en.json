@@ -1265,6 +1265,13 @@
         "start-button": "Start course",
         "step": "Step {stepNumber}"
       },
+      "errors": {
+        "disabled": {
+          "content": "Due to high traffic, access to this course has been temporarily suspended.",
+          "instructions": "Please try again later.",
+          "title": "This course is not available at the moment."
+        }
+      },
       "items": {
         "aria-label-completed-campaign": "This element is completed with a success rate of {value, number, ::percent}",
         "aria-label-completed-campaign-with-stages": "You have acquired {acquired, plural, =0 {no star} =1 {# star} other {# stars}} out of {total}",

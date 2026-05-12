@@ -1264,6 +1264,13 @@
         "start-button": "Cursus starten",
         "step": "Stap {stepNumber}"
       },
+      "errors": {
+        "disabled": {
+          "content": "Vanwege de grote drukte is de toegang tot dit cursus tijdelijk gesloten.",
+          "instructions": "Probeer het later nog eens.",
+          "title": "Deze cursus is momenteel niet beschikbaar"
+        }
+      },
       "items": {
         "aria-label-completed-campaign": "Dit element wordt aangevuld met een slagingspercentage van {value, number, ::percent}",
         "aria-label-completed-campaign-with-stages": "Je hebt {acquired, plural, =0 {gen ster} =1 {# ster} other {# strerren}} van de {total}",

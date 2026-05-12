@@ -4,16 +4,14 @@ export default class CombinedCoursePresentationRoute extends Route {
   @service router;
 
   async beforeModel(transition) {
-    const { code } = this.paramsFor('combined-courses');
+    const { code } = transition.to.params;
 
     if (!transition.from || transition.from.name !== 'campaigns.assessment.results') {
-      return this.router.replaceWith('combined-courses', code);
+      return this.router.replaceWith('combined-courses.presentation', code);
     }
   }
 
-  model() {
-    const { code } = this.paramsFor('combined-courses');
-
-    return code;
+  model(params) {
+    return params.code;
   }
 }

@@ -1265,6 +1265,13 @@
         "start-button": "Commencer mon parcours",
         "step": "Étape {stepNumber}"
       },
+      "errors": {
+        "disabled": {
+          "content": "En raison d'une forte affluence, l'accès à ce parcours est temporairement suspendu.",
+          "instructions": "Merci de réessayer un peu plus tard.",
+          "title": "Ce parcours n'est pas disponible pour le moment"
+        }
+      },
       "items": {
         "aria-label-completed-campaign": "Cet élément est complété avec un taux de réussite de {value, number, ::percent}",
         "aria-label-completed-campaign-with-stages": "Vous avez obtenu {acquired, plural, =0 {aucune étoile} =1 {# étoile} other {# étoiles}} sur {total}",

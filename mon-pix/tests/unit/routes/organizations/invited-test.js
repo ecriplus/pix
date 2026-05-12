@@ -102,7 +102,10 @@ module('Unit | Route | Invited', function (hooks) {
           await route.afterModel({ verifiedCode, organizationToJoin });
 
           //then
-          const expectedResult = route.router.replaceWith.calledWithExactly('combined-courses', verifiedCode.id);
+          const expectedResult = route.router.replaceWith.calledWithExactly(
+            'combined-courses.presentation',
+            verifiedCode.id,
+          );
           assert.true(expectedResult);
         });
       });
@@ -195,7 +198,10 @@ module('Unit | Route | Invited', function (hooks) {
         await route.afterModel({ verifiedCode, organizationToJoin });
 
         //then
-        const expectedResult = route.router.replaceWith.calledWithExactly('combined-courses', verifiedCode.id);
+        const expectedResult = route.router.replaceWith.calledWithExactly(
+          'combined-courses.presentation',
+          verifiedCode.id,
+        );
         assert.true(expectedResult);
       });
     });

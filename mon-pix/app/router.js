@@ -105,9 +105,11 @@ Router.map(function () {
     });
     this.route('existing-participation', { path: '/participation-existante' });
   });
-  this.route('combined-courses', { path: '/parcours/:code' }, function () {
-    this.route('presentation', { path: '/' });
-    this.route('process-custom-passages', { path: '/chargement' });
+  this.route('combined-courses', { path: '/parcours' }, function () {
+    this.route('presentation', { path: '/:code' });
+    this.route('generic-error', { path: '/oups' });
+    this.route('disabled-feature-error', { path: '/erreur' });
+    this.route('process-custom-passages', { path: '/:code/chargement' });
   });
 
   this.route('module-preview-existing', { path: '/modules/preview/:slug' });

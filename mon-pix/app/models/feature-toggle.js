@@ -5,6 +5,7 @@ export default class FeatureToggle extends Model {
   @attr('boolean') isQuestEnabled;
   @attr('boolean') isSurveyEnabledForCombinedCourses;
   @attr('boolean') areModuleShortIdUrlsEnabled;
+  @attr('boolean') areCombinedCoursesEnabled;
   @attr('array') disabledLocalesInFrontend;
   @attr('boolean') addEmailConnectionMethodEnabled;
   @attr('array') userCertificationsActionsDisabledFrameworks;
