@@ -84,7 +84,7 @@ async function getPDFCertificate(
   if (certificate instanceof Certificate) {
     return h
       .response(
-        dependencies.v3CertificationAttestationPdf.generate({
+        await dependencies.v3CertificationAttestationPdf.generate({
           certificates: [certificate],
           i18n,
         }),
@@ -127,7 +127,7 @@ async function getSessionCertificates(
   if (certificates.every((certificate) => certificate instanceof Certificate)) {
     return h
       .response(
-        dependencies.v3CertificationAttestationPdf.generate({
+        await dependencies.v3CertificationAttestationPdf.generate({
           certificates,
           i18n,
         }),
@@ -175,7 +175,7 @@ async function downloadDivisionCertificates(
 
     return h
       .response(
-        dependencies.v3CertificationAttestationPdf.generate({
+        await dependencies.v3CertificationAttestationPdf.generate({
           certificates: v3Certificates,
           i18n,
         }),

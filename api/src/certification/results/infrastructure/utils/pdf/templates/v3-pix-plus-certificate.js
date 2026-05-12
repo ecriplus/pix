@@ -12,7 +12,7 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
  * @param {object} params
  * @param {Certificate} params.data
  */
-export default function generateV3PixPlusAttestationTemplate({ pdf, data, translate }) {
+export default async function generateV3PixPlusAttestationTemplate({ pdf, data, translate }) {
   // Global
   pdf.image(path.resolve(__dirname, 'assets/v3-pix-plus-background.jpg'), 0, 0, {
     width: pdf.page.width,
@@ -107,7 +107,7 @@ export default function generateV3PixPlusAttestationTemplate({ pdf, data, transl
     .fillColor('#6b778b')
     .text(translate('certification.certificate.v3.main-content.signature'), 82, 440);
 
-  // QR code content
+  // QR code
   pdf.font('Roboto-Medium').fontSize(11).fillColor('#5e6c84').text(data.verificationCode, 142, 467).moveDown(0.25);
   pdf
     .font('Roboto-Regular')
@@ -120,11 +120,9 @@ export default function generateV3PixPlusAttestationTemplate({ pdf, data, transl
       link: translate('certification.certificate.v3.qr-code-content.link.url'),
     });
 
-  // Score content
-  const globalLevel = data.globalLevel;
-
+  // Result
   if (data.globalLevel) {
-    const globalLevelLabel = globalLevel.getLevelLabel(translate);
+    const globalLevelLabel = data.globalLevel.getLevelLabel(translate);
 
     if (data.globalLevel.meshLevel === 'LEVEL_ADMISSIBLE') {
       pdf.image(path.resolve(__dirname, 'assets/badges/pix-plus-edu-admissible.png'), 594, 80, {
@@ -149,10 +147,20 @@ export default function generateV3PixPlusAttestationTemplate({ pdf, data, transl
           width: pdf.widthOfString(globalLevelLabel) * 2,
           align: 'center',
         });
+    } else {
+      const framework = data.certificationFramework.toLowerCase();
+      const level = data.globalLevel.meshLevel.replace('LEVEL_', '').toLowerCase();
+      const badgeUrl = `${process.env.PIX_ASSETS_MANAGER_URL}/badges-certifies/v3/${framework}/${level}.png`;
+      const response = await fetch(badgeUrl);
+      const buffer = Buffer.from(await response.arrayBuffer());
+      pdf.image(buffer, 594, 80, {
+        width: 120,
+        height: 120,
+      });
     }
 
-    const globalLevelSummary = globalLevel.getSummaryLabel(translate);
-    const globalLevelDescription = globalLevel.getDescriptionLabel(translate);
+    const globalLevelSummary = data.globalLevel.getSummaryLabel(translate);
+    const globalLevelDescription = data.globalLevel.getDescriptionLabel(translate);
     pdf
       .font('Roboto-Medium')
       .fontSize(11)

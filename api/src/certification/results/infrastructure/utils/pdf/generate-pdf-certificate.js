@@ -15,7 +15,7 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
  * @param {object} params
  * @param {Array<Certificate>} params.certificates
  */
-const generate = ({ certificates, i18n }) => {
+const generate = async ({ certificates, i18n }) => {
   const doc = new PDFDocument({
     size: 'A4',
     layout: 'landscape',
@@ -38,7 +38,7 @@ const generate = ({ certificates, i18n }) => {
     `${__dirname}/../../../../../shared/infrastructure/utils/pdf/fonts/Roboto-Medium.ttf`,
   );
 
-  certificates.forEach((certificate, index) => {
+  for (const [index, certificate] of certificates.entries()) {
     if (index > 0) {
       doc.addPage();
     }
@@ -50,13 +50,13 @@ const generate = ({ certificates, i18n }) => {
         translate: i18n.__,
       });
     } else {
-      generateV3PixPlusAttestationTemplate({
+      await generateV3PixPlusAttestationTemplate({
         pdf: doc,
         data: certificate,
         translate: i18n.__,
       });
     }
-  });
+  }
 
   doc.end();
 
