@@ -826,6 +826,48 @@ describe('Integration | Repository | Organization Learner Management | Organizat
         expect(expected1.userId).to.be.null;
         expect(expected2.userId).to.be.null;
       });
+
+      it('should save both organization learners with userId as null when one is already reconciled in the target organization', async function () {
+        // - Org A already has INE1 reconciled with userId (existing reconciliation)
+        // - Org B has INE2 reconciled with the same userId
+        // - Importing both INE1 and INE2 into Org A should remove reconciliation from both
+        const { id: orgAId } = databaseBuilder.factory.buildOrganization();
+        const { id: orgBId } = databaseBuilder.factory.buildOrganization();
+        const { id: userId } = databaseBuilder.factory.buildUser();
+        databaseBuilder.factory.buildOrganizationLearner({
+          nationalStudentId: 'INE2',
+          organizationId: orgBId,
+          userId,
+        });
+        databaseBuilder.factory.buildOrganizationLearner({
+          nationalStudentId: 'INE1',
+          organizationId: orgAId,
+          userId,
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const organizationLearner1 = domainBuilder.buildOrganizationLearner({ nationalStudentId: 'INE1' });
+        const organizationLearner2 = domainBuilder.buildOrganizationLearner({ nationalStudentId: 'INE2' });
+        await DomainTransaction.execute((domainTransaction) => {
+          return addOrUpdateOrganizationOfOrganizationLearners(
+            [organizationLearner1, organizationLearner2],
+            orgAId,
+            domainTransaction,
+          );
+        });
+
+        // then
+        const expected1 = await knex('organization-learners')
+          .where({ nationalStudentId: 'INE1', organizationId: orgAId })
+          .first();
+        const expected2 = await knex('organization-learners')
+          .where({ nationalStudentId: 'INE2', organizationId: orgAId })
+          .first();
+
+        expect(expected1.userId).to.be.null;
+        expect(expected2.userId).to.be.null;
+      });
     });
 
     context('when there are organizationLearners in another organization', function () {
