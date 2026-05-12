@@ -37,9 +37,13 @@ describe('LLM | Integration | Infrastructure | Repositories | configuration', fu
       });
 
       context('when something went wrong when reaching LLM Api to get configuration', function () {
-        it('should throw a LLMApiError', async function () {
+        it('should retry the request 2 more times before throwing a LLMApiError', async function () {
           // given
           const llmApiScope = nock('https://llm-test.pix.fr/api')
+            .get('/configurations/unIdDeConfiguration')
+            .reply(422, { err: 'some error occurred' })
+            .get('/configurations/unIdDeConfiguration')
+            .reply(422, { err: 'some error occurred' })
             .get('/configurations/unIdDeConfiguration')
             .reply(422, { err: 'some error occurred' });
 
