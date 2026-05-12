@@ -1,3 +1,4 @@
+import * as certificationEvaluationApi from '../../../certification/evaluation/application/api/certification-evaluation-api.js';
 import { usecases as devcompUsecases } from '../../../devcomp/domain/usecases/index.js';
 import { usecases as prescriptionUsecases } from '../../../prescription/campaign-participation/domain/usecases/index.js';
 import { stageUsecases } from '../../../prescription/stages/domain/usecases/index.js';
@@ -12,6 +13,7 @@ import {
   extractUserIdFromRequest,
   getChallengeLocale,
 } from '../../../shared/infrastructure/utils/request-response-utils.js';
+import { Answer } from '../../domain/models/Answer.js';
 import { evaluationUsecases } from '../../domain/usecases/index.js';
 
 async function shareProfileRewardWithOrganization(campaignParticipationId, userId) {
@@ -88,11 +90,58 @@ async function save(request, h, dependencies = { assessmentRepository }) {
   return h.response(assessmentSerializer.serialize(createdAssessment.toDto())).created();
 }
 
+async function autoValidateNextChallenge(request, h) {
+  const assessmentId = request.params.id;
+  const locale = getChallengeLocale(request);
+  const assessment = await assessmentRepository.getWithAnswers(assessmentId);
+  const userId = assessment.userId;
+  const fakeAnswer = new Answer({
+    assessmentId,
+    challengeId: assessment.lastChallengeId,
+    value: 'FAKE_ANSWER_WITH_AUTO_VALIDATE_NEXT_CHALLENGE',
+  });
+  if (assessment.isCompetenceEvaluation()) {
+    await evaluationUsecases.saveAndCorrectAnswerForCompetenceEvaluation({
+      answer: fakeAnswer,
+      assessment,
+      userId,
+      locale,
+      forceOKAnswer: true,
+    });
+  } else if (assessment.isForCampaign()) {
+    await evaluationUsecases.saveAndCorrectAnswerForCampaign({
+      answer: fakeAnswer,
+      assessment,
+      userId,
+      locale,
+      forceOKAnswer: true,
+    });
+  } else if (assessment.isCertification()) {
+    await certificationEvaluationApi.evaluateAndSaveAnswer({
+      answer: fakeAnswer,
+      userId,
+      certificationCourseId: assessment.certificationCourseId,
+      forceOKAnswer: true,
+    });
+  } else {
+    await evaluationUsecases.saveAndCorrectAnswerForDemoAndPreview({
+      answer: fakeAnswer,
+      assessment,
+      userId,
+      locale,
+      forceOKAnswer: true,
+    });
+  }
+  await questUsecases.rewardUser({ userId });
+  return h.response().code(204);
+}
+
 const assessmentController = {
   completeAssessment,
   promptToLLMChat,
   startEmbedLlmChat,
   save,
+  autoValidateNextChallenge,
 };
 
 export { assessmentController };

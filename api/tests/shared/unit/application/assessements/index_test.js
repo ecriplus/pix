@@ -3,8 +3,6 @@ import sinon from 'sinon';
 import { assessmentAuthorization } from '../../../../../src/evaluation/application/pre-handlers/assessment-authorization.js';
 import { assessmentController } from '../../../../../src/shared/application/assessments/assessment-controller.js';
 import * as moduleUnderTest from '../../../../../src/shared/application/assessments/index.js';
-import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { config as settings } from '../../../../../src/shared/config.js';
 import { expect } from '../../../../test-helper.js';
 import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 
@@ -70,42 +68,6 @@ describe('Unit | Application | Router | assessment-router', function () {
 
       // then
       expect(response.statusCode).to.equal(400);
-    });
-  });
-
-  describe('POST /api/admin/assessments/{id}/always-ok-validate-next-challenge', function () {
-    let originalEnvValue;
-
-    beforeEach(async function () {
-      originalEnvValue = settings.featureToggles.isAlwaysOkValidateNextChallengeEndpointEnabled;
-      settings.featureToggles.isAlwaysOkValidateNextChallengeEndpointEnabled = true;
-    });
-
-    afterEach(function () {
-      settings.featureToggles.isAlwaysOkValidateNextChallengeEndpointEnabled = originalEnvValue;
-    });
-
-    it('should return a response with an HTTP status code 403 if user does not have the rights', async function () {
-      // given
-      sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').returns((request, h) =>
-        h
-          .response({ errors: new Error('Unauthorized') })
-          .code(403)
-          .takeover(),
-      );
-
-      const httpTestServer = new HttpTestServer();
-      await httpTestServer.register(moduleUnderTest);
-
-      // when
-      const { statusCode } = await httpTestServer.request(
-        'POST',
-        `/api/admin/assessments/123/always-ok-validate-next-challenge`,
-      );
-
-      // then
-      expect(securityPreHandlers.hasAtLeastOneAccessOf).to.have.be.called;
-      expect(statusCode).to.equal(403);
     });
   });
 });

@@ -40,7 +40,7 @@ const learningContent = [
   },
 ];
 
-describe('Acceptance | API | assessment-controller-auto-validate-next-challenge', function () {
+describe('Evaluation | Acceptance | Assessment | assessment-controller-auto-validate-next-challenge', function () {
   let originalEnvValue;
   let server;
   let assessmentId;

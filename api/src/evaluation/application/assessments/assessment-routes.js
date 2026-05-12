@@ -1,9 +1,13 @@
 import Joi from 'joi';
 
 import { checkLLMChatIsEnabled } from '../../../llm/application/pre-handlers/index.js';
+import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
+import { config } from '../../../shared/config.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { assessmentAuthorization } from '../pre-handlers/assessment-authorization.js';
 import { assessmentController } from './assessment-controller.js';
+
+const { featureToggles } = config;
 
 const register = async function (server) {
   const routes = [
@@ -105,6 +109,34 @@ const register = async function (server) {
       },
     },
   ];
+
+  if (featureToggles.isAlwaysOkValidateNextChallengeEndpointEnabled) {
+    routes.push({
+      method: 'POST',
+      path: '/api/admin/assessments/{id}/always-ok-validate-next-challenge',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleCertif,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+              ])(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            id: identifiersType.assessmentId,
+          }),
+        },
+        handler: assessmentController.autoValidateNextChallenge,
+        tags: ['api'],
+      },
+    });
+  }
   server.route(routes);
 };
 
