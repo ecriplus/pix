@@ -8,29 +8,39 @@ import {
 import { KnowledgeElementCollection } from '../../../../../../src/prescription/shared/domain/models/KnowledgeElementCollection.js';
 import { PIX_COUNT_BY_LEVEL } from '../../../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
+import { SCOPES } from '../../../../../../src/shared/domain/models/BadgeDetails.js';
 import { KnowledgeElement } from '../../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { expect } from '../../../../../test-helper.js';
 import { databaseBuilder } from '../../../../../tooling/databases.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Prescription Integration | UseCase | get-user-campaign-assessment-result', function () {
-  let skillIds, userId;
+  let areaId, thematicId, competenceId, skillIds, tubeId, userId;
 
   beforeEach(async function () {
     skillIds = ['acquisA', 'acquisB'];
     userId = databaseBuilder.factory.buildUser().id;
-    databaseBuilder.factory.learningContent.buildArea({
+    areaId = databaseBuilder.factory.learningContent.buildArea({
       id: 'monAreaId',
-    });
-    databaseBuilder.factory.learningContent.buildCompetence({
+    }).id;
+    competenceId = databaseBuilder.factory.learningContent.buildCompetence({
       id: 'maCompetenceId',
-      areaId: 'monAreaId',
+      areaId,
       name_i18n: {
         fr: 'nom de la compétence',
       },
       skillIds,
-    });
-
+    }).id;
+    thematicId = databaseBuilder.factory.learningContent.buildThematic({
+      id: 'thematic1',
+      competenceId,
+      tubes: ['tubeId1', 'tubeId2'],
+    }).id;
+    tubeId = databaseBuilder.factory.learningContent.buildTube({
+      id: 'tube1',
+      competenceId,
+      thematicId,
+    }).id;
     await databaseBuilder.commit();
   });
 
@@ -89,6 +99,83 @@ describe('Prescription Integration | UseCase | get-user-campaign-assessment-resu
       expect(participantAssessmentResult.competenceResults.length).to.equal(1);
       sinon.assert.match(participantAssessmentResult.competenceResults[0], {
         id: 'maCompetenceId',
+      });
+    });
+
+    context('badges', function () {
+      it('returns only badges that match target profile tubes', async function () {
+        const phantomTube = databaseBuilder.factory.learningContent.buildTube({
+          id: 'phantomTube',
+          competenceId,
+          thematicId,
+        });
+        databaseBuilder.factory.learningContent.buildSkill({
+          id: 'phantomSkill',
+          tubeId: phantomTube.id,
+          level: 4,
+        });
+
+        const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
+        databaseBuilder.factory.buildTargetProfileTube({ targetProfileId, tubeId, level: 1 });
+
+        const badgeId = databaseBuilder.factory.buildBadge({ targetProfileId }).id;
+        databaseBuilder.factory.buildBadgeCriterion({
+          badgeId,
+          scope: SCOPES.CAPPED_TUBES,
+          cappedTubes: JSON.stringify([{ id: tubeId, level: 2 }]),
+        });
+        databaseBuilder.factory.buildBadgeCriterion({
+          badgeId,
+          scope: SCOPES.CAPPED_TUBES,
+          cappedTubes: JSON.stringify([{ id: phantomTube.id, level: 4 }]),
+        });
+
+        const campaignId = databaseBuilder.factory.buildCampaign({
+          type: CampaignTypes.ASSESSMENT,
+          targetProfileId,
+        }).id;
+
+        skillIds.forEach((skillId, index) => {
+          databaseBuilder.factory.learningContent.buildSkill({
+            id: skillId,
+            tubeId,
+            level: index + 1,
+          });
+        });
+        const campaignParticipationId = databaseBuilder.factory.buildCampaignParticipation({
+          campaignId,
+          userId,
+          sharedAt: new Date(),
+          status: CampaignParticipationStatuses.SHARED,
+        }).id;
+
+        const assessmentDB = databaseBuilder.factory.buildAssessment({
+          userId,
+          campaignParticipationId,
+          type: Assessment.types.CAMPAIGN,
+        });
+
+        skillIds.map((id) => {
+          databaseBuilder.factory.buildKnowledgeElement({
+            skillId: id,
+            status: KnowledgeElement.StatusType.INVALIDATED,
+            source: KnowledgeElement.SourceType.DIRECT,
+            userId,
+            assessmentId: assessmentDB.id,
+          });
+        });
+        await databaseBuilder.commit();
+
+        // when
+        const participantAssessmentResult = await usecases.getUserCampaignAssessmentResult({
+          userId,
+          campaignId,
+          locale: 'fr',
+        });
+
+        expect(participantAssessmentResult.badgeResults).lengthOf(1);
+        expect(participantAssessmentResult.badgeResults[0].isValid).false;
+        expect(participantAssessmentResult.badgeResults[0].acquisitionPercentage).null;
       });
     });
 

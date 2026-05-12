@@ -45,9 +45,9 @@ const getUserCampaignAssessmentResult = async function ({
     const badgesWithValidity = badges.map((badge) => ({
       ...badge,
       isValid: stillValidBadgeIds.includes(badge.id),
-      acquisitionPercentage: badgeWithAcquisitionPercentage.find(
-        (badgeForCalculation) => badgeForCalculation.id === badge.id,
-      ).acquisitionPercentage,
+      acquisitionPercentage:
+        badgeWithAcquisitionPercentage.find((badgeForCalculation) => badgeForCalculation.id === badge.id)
+          ?.acquisitionPercentage ?? null,
     }));
 
     const stages = await stageRepository.getByCampaignId(campaignId);
