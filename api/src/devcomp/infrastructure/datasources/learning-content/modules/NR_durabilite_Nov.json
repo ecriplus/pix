@@ -331,7 +331,7 @@
                           "id": "3",
                           "content": "Je ne sais pas",
                           "feedback": {
-                            "diagnosis": "<p>Il s’agit  de l’<strong>or</strong> ou de l’<strong>argent</strong>.</p>"
+                            "diagnosis": "<p>Il s’agit de l’<strong>or</strong> ou de l’<strong>argent</strong>.</p>"
                           }
                         }
                       ],
