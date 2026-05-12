@@ -408,6 +408,7 @@ describe('Certification | Configuration | Integration | Repository | Version', f
         globalScoringConfiguration: [{ config: 'testDroit' }],
         competencesScoringConfiguration: [{ config: 'testDroit' }],
         challengesConfiguration: expectedConfigDroit,
+        comments: 'versionDroit',
       }).id;
       const scopeCoreOld = Frameworks.CORE;
       const expectedConfigCoreOld = {
@@ -429,6 +430,7 @@ describe('Certification | Configuration | Integration | Repository | Version', f
         globalScoringConfiguration: [{ config: 'testCoreOld' }],
         competencesScoringConfiguration: [{ config: 'testCoreOld' }],
         challengesConfiguration: expectedConfigCoreOld,
+        comments: 'versionCoreOld',
       }).id;
       const scopeCoreNew = Frameworks.CORE;
       const expectedConfigCoreNew = {
@@ -450,6 +452,7 @@ describe('Certification | Configuration | Integration | Repository | Version', f
         globalScoringConfiguration: [{ config: 'testCoreNew' }],
         competencesScoringConfiguration: [{ config: 'testCoreNew' }],
         challengesConfiguration: expectedConfigCoreNew,
+        comments: 'versionCoreNew',
       }).id;
       await databaseBuilder.commit();
 
@@ -468,6 +471,7 @@ describe('Certification | Configuration | Integration | Repository | Version', f
           globalScoringConfiguration: [{ config: 'testCoreNew' }],
           competencesScoringConfiguration: [{ config: 'testCoreNew' }],
           challengesConfiguration: expectedConfigCoreNew,
+          comments: 'versionCoreNew',
         }),
         domainBuilder.certification.configuration.buildVersion({
           id: versionIdCoreOld,
@@ -479,6 +483,7 @@ describe('Certification | Configuration | Integration | Repository | Version', f
           globalScoringConfiguration: [{ config: 'testCoreOld' }],
           competencesScoringConfiguration: [{ config: 'testCoreOld' }],
           challengesConfiguration: expectedConfigCoreOld,
+          comments: 'versionCoreOld',
         }),
         domainBuilder.certification.configuration.buildVersion({
           id: versionIdDroit,
@@ -490,6 +495,7 @@ describe('Certification | Configuration | Integration | Repository | Version', f
           globalScoringConfiguration: [{ config: 'testDroit' }],
           competencesScoringConfiguration: [{ config: 'testDroit' }],
           challengesConfiguration: expectedConfigDroit,
+          comments: 'versionDroit',
         }),
       ]);
     });

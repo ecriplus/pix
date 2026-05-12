@@ -147,6 +147,7 @@ const _toDomain = ({
   globalScoringConfiguration,
   competencesScoringConfiguration,
   challengesConfiguration,
+  comments,
 }) => {
   return new Version({
     id,
@@ -157,6 +158,7 @@ const _toDomain = ({
     assessmentDuration,
     globalScoringConfiguration,
     competencesScoringConfiguration,
+    comments,
     challengesConfiguration: new FlashAssessmentAlgorithmConfiguration({
       maximumAssessmentLength: challengesConfiguration.maximumAssessmentLength,
       challengesBetweenSameCompetence: challengesConfiguration.challengesBetweenSameCompetence,
