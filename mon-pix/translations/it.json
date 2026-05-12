@@ -23,11 +23,11 @@
     },
     "register-error": {
       "s50": "Questo identificatore esiste già",
-      "s51": "Hai già un account Pix con l'indirizzo e-mail '<br>'{valore }'<br><br>'Per continuare, accedi a questo account o chiedi aiuto a un insegnante.'<br><br>' (Per l'insegnante: vedi il 'Kit per la risoluzione dei problemi' in Pix Orga > Documentation - Code R51).",
-      "s52": "Hai già un account Pix utilizzato con l'identificativo nella forma nome.cognome seguito da 4 cifre:'<br>'{valore }'<br><br>'Per continuare, accedi a questo account o chiedi aiuto a un insegnante.'<br><br>'(Per l'insegnante: vedi il 'Kit per la risoluzione dei problemi' in Pix Orga > Documentation - Code R52)",
+      "s51": "Hai già un account Pix con l'indirizzo e-mail '<br>'{ value }'<br><br>'Per continuare, accedi a questo account o chiedi aiuto a un insegnante.'<br><br>' (Per l'insegnante: vedi il 'Kit per la risoluzione dei problemi' in Pix Orga > Documentation - Code R51).",
+      "s52": "Hai già un account Pix utilizzato con l'identificativo nella forma nome.cognome seguito da 4 cifre:'<br>'{ value }'<br><br>'Per continuare, accedi a questo account o chiedi aiuto a un insegnante.'<br><br>'(Per l'insegnante: vedi il 'Kit per la risoluzione dei problemi' in Pix Orga > Documentation - Code R52)",
       "s53": "Hai già un account Pix tramite ENT.'<br> 'Usalo per iscriverti al corso.",
-      "s61": "Hai già un account Pix con l'indirizzo e-mail '<br>'{valore }'<br><br>'Per continuare, accedi a questo account o chiedi aiuto a un insegnante.'<br><br>' (Per l'insegnante: vedi il 'Kit per la risoluzione dei problemi' in Pix Orga > Documentation - Code R61).",
-      "s62": "Si dispone già di un account Pix utilizzato con l'identificativo nella forma nome.cognome seguito da 4 cifre:'<br>'{valore }'<br><br>'Per continuare, accedere a questo account o chiedere aiuto a un insegnante.'<br><br>'(Per l'insegnante: vedere il 'Kit per la risoluzione dei problemi' in Pix Orga > Documentation - Code R62)",
+      "s61": "Hai già un account Pix con l'indirizzo e-mail '<br>'{ value }'<br><br>'Per continuare, accedi a questo account o chiedi aiuto a un insegnante.'<br><br>' (Per l'insegnante: vedi il 'Kit per la risoluzione dei problemi' in Pix Orga > Documentation - Code R61).",
+      "s62": "Si dispone già di un account Pix utilizzato con l'identificativo nella forma nome.cognome seguito da 4 cifre:'<br>'{ value }'<br><br>'Per continuare, accedere a questo account o chiedere aiuto a un insegnante.'<br><br>'(Per l'insegnante: vedere il 'Kit per la risoluzione dei problemi' in Pix Orga > Documentation - Code R62)",
       "s63": "Hai già un account Pix tramite l'ENT di un'altra scuola.'<br><br>'Per continuare, contatta un insegnante che può darti accesso a questo account usando Pix Orga. '<br><br>' (Per l'insegnante: vedi il 'Kit di risoluzione dei problemi' in Pix Orga > Documentazione - Codice R63)"
     }
   },
