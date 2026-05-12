@@ -68,6 +68,7 @@ export async function prompt({ messages, configuration, chatId }) {
             chatId,
             configurationContext: configuration.context,
             configurationName: configurationDTO.name,
+            retryCount: currentRetryCount,
           },
         },
         'fetch error when trying to reach LLM API',
