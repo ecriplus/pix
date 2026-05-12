@@ -83,4 +83,31 @@ describe('Evaluation | Unit | Application | assessment-routes', function () {
       expect(statusCode).to.equal(403);
     });
   });
+
+  describe('GET /api/assessments/{id}/competence-evaluations', function () {
+    it('should return 200', async function () {
+      // given
+      sinon.stub(assessmentController, 'findCompetenceEvaluations').returns('ok');
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      // when
+      const response = await httpTestServer.request('GET', '/api/assessments/123/competence-evaluations');
+
+      // then
+      expect(response.statusCode).to.equal(200);
+    });
+
+    it('should do throw a 400 status code when assessmentId provided is not a number', async function () {
+      // given
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      // when
+      const response = await httpTestServer.request('GET', '/api/assessments/not_a_number/competence-evaluations');
+
+      // then
+      expect(response.statusCode).to.equal(400);
+    });
+  });
 });

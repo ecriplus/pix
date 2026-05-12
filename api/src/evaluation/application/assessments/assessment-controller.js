@@ -15,6 +15,7 @@ import {
 } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { Answer } from '../../domain/models/Answer.js';
 import { evaluationUsecases } from '../../domain/usecases/index.js';
+import * as competenceEvaluationSerializer from '../../infrastructure/serializers/jsonapi/competence-evaluation-serializer.js';
 
 async function shareProfileRewardWithOrganization(campaignParticipationId, userId) {
   const questResults = await questUsecases.getQuestResultsForCampaignParticipation({
@@ -148,6 +149,18 @@ async function updateLastChallengeState(request) {
   return null;
 }
 
+async function findCompetenceEvaluations(request) {
+  const userId = request.auth.credentials.userId;
+  const assessmentId = request.params.id;
+
+  const competenceEvaluations = await evaluationUsecases.findCompetenceEvaluationsByAssessment({
+    userId,
+    assessmentId,
+  });
+
+  return competenceEvaluationSerializer.serialize(competenceEvaluations);
+}
+
 const assessmentController = {
   completeAssessment,
   promptToLLMChat,
@@ -155,6 +168,7 @@ const assessmentController = {
   save,
   autoValidateNextChallenge,
   updateLastChallengeState,
+  findCompetenceEvaluations,
 };
 
 export { assessmentController };

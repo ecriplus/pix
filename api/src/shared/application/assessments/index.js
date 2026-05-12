@@ -26,23 +26,6 @@ const register = async function (server) {
         tags: ['api'],
       },
     },
-    {
-      method: 'GET',
-      path: '/api/assessments/{id}/competence-evaluations',
-      config: {
-        validate: {
-          params: Joi.object({
-            id: identifiersType.assessmentId,
-          }),
-        },
-        handler: assessmentController.findCompetenceEvaluations,
-        notes: [
-          '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
-            "- Récupération des competence-evaluations d'un assessment",
-        ],
-        tags: ['api', 'competence-evaluations'],
-      },
-    },
   ];
 
   server.route(routes);
