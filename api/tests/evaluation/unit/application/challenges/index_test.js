@@ -1,11 +1,11 @@
 import sinon from 'sinon';
 
-import { challengeController } from '../../../../../src/shared/application/challenges/challenge-controller.js';
-import * as moduleUnderTest from '../../../../../src/shared/application/challenges/index.js';
+import { challengeController } from '../../../../../src/evaluation/application/challenges/challenge-controller.js';
+import * as moduleUnderTest from '../../../../../src/evaluation/application/challenges/index.js';
 import { expect } from '../../../../test-helper.js';
 import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
 
-describe('Unit | Router | challenge-router', function () {
+describe('Evaluation Unit | Application | challenge-routes', function () {
   describe('GET /api/challenges/{id}', function () {
     it('should exist', async function () {
       // given
