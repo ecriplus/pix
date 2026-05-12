@@ -10,9 +10,12 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 /**
  * @param {object} params
+ * @param {import('pdfkit')} params.pdf
  * @param {Certificate} params.data
+ * @param {Function} params.translate
+ * @param {Map<string, Buffer>} params.imageCache
  */
-export default async function generateV3PixPlusAttestationTemplate({ pdf, data, translate }) {
+export default async function generateV3PixPlusAttestationTemplate({ pdf, data, translate, imageCache }) {
   // Global
   pdf.image(path.resolve(__dirname, 'assets/v3-pix-plus-background.jpg'), 0, 0, {
     width: pdf.page.width,
@@ -151,12 +154,13 @@ export default async function generateV3PixPlusAttestationTemplate({ pdf, data, 
       const framework = data.certificationFramework.toLowerCase();
       const level = data.globalLevel.meshLevel.replace('LEVEL_', '').toLowerCase();
       const badgeUrl = `${process.env.PIX_ASSETS_MANAGER_URL}/badges-certifies/v3/${framework}/${level}.png`;
-      const response = await fetch(badgeUrl);
-      const buffer = Buffer.from(await response.arrayBuffer());
-      pdf.image(buffer, 594, 80, {
-        width: 120,
-        height: 120,
-      });
+      const badgeBuffer = await _fetchImage(badgeUrl, imageCache);
+      if (badgeBuffer) {
+        pdf.image(badgeBuffer, 594, 80, {
+          width: 120,
+          height: 120,
+        });
+      }
     }
 
     const globalLevelSummary = data.globalLevel.getSummaryLabel(translate);
@@ -176,6 +180,21 @@ export default async function generateV3PixPlusAttestationTemplate({ pdf, data, 
       .font('Roboto-Regular')
       .fontSize(9.5)
       .text(globalLevelDescription, { lineGap: 5 });
+  }
+}
+
+async function _fetchImage(url, imageCache) {
+  if (imageCache.has(url)) return imageCache.get(url);
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) return null;
+
+    const buffer = Buffer.from(await response.arrayBuffer());
+    imageCache.set(url, buffer);
+    return buffer;
+  } catch {
+    return null;
   }
 }
 

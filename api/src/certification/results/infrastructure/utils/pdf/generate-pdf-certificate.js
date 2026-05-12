@@ -38,6 +38,8 @@ const generate = async ({ certificates, i18n }) => {
     `${__dirname}/../../../../../shared/infrastructure/utils/pdf/fonts/Roboto-Medium.ttf`,
   );
 
+  const imageCache = new Map();
+
   for (const [index, certificate] of certificates.entries()) {
     if (index > 0) {
       doc.addPage();
@@ -54,6 +56,7 @@ const generate = async ({ certificates, i18n }) => {
         pdf: doc,
         data: certificate,
         translate: i18n.__,
+        imageCache,
       });
     }
   }
