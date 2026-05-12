@@ -18,6 +18,7 @@ const buildCertificate = function ({
   certificationDate = new Date('2015-10-03T01:02:03Z'),
   acquiredComplementaryCertification = null,
   certificationFramework = Frameworks.CORE,
+  eduV3ExternalJuryResult = null,
 } = {}) {
   return new Certificate({
     id,
@@ -35,6 +36,7 @@ const buildCertificate = function ({
     certificationDate,
     acquiredComplementaryCertification,
     certificationFramework,
+    eduV3ExternalJuryResult,
   });
 };
 

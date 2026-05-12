@@ -669,6 +669,56 @@ describe('Certification | Results | Acceptance | Application | Certification', f
           expect(fileFormat).to.equal('PDF');
         });
       });
+
+      context('when certification is Pix+', function () {
+        it('should return 200 HTTP status code and a PDF', async function () {
+          // given
+          const userId = databaseBuilder.factory.buildUser().id;
+
+          const session = databaseBuilder.factory.buildSession({
+            publishedAt: new Date('2024-02-10T01:02:03Z'),
+            version: AlgorithmEngineVersion.V3,
+          });
+          const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
+            sessionId: session.id,
+            userId,
+            isPublished: true,
+            framework: Frameworks.DROIT,
+            verificationCode: await generateCertificateVerificationCode(),
+          });
+          const assessment = databaseBuilder.factory.buildAssessment({
+            userId,
+            certificationCourseId: certificationCourse.id,
+            type: Assessment.types.CERTIFICATION,
+            state: Assessment.states.COMPLETED,
+          });
+          databaseBuilder.factory.buildAssessmentResult.last({
+            certificationCourseId: certificationCourse.id,
+            assessmentId: assessment.id,
+            pixScore: 300,
+            reachedMeshIndex: 1,
+            status: AssessmentResult.status.VALIDATED,
+          });
+
+          await databaseBuilder.commit();
+
+          const server = await createServer();
+
+          // when
+          const response = await server.inject({
+            method: 'GET',
+            url: `/api/attestation/${certificationCourse.id}?isFrenchDomainExtension=true&lang=fr`,
+            headers: generateAuthenticatedUserRequestHeaders({ userId }),
+          });
+
+          // then
+          expect(response.statusCode).to.equal(200);
+          expect(response.headers['content-type']).to.equal('application/pdf');
+
+          const fileFormat = response.result.substring(1, 4);
+          expect(fileFormat).to.equal('PDF');
+        });
+      });
     });
 
     context('when session version is V2', function () {

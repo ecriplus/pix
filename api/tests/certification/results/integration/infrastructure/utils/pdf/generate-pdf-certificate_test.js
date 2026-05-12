@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs';
 
 import { generate } from '../../../../../../../src/certification/results/infrastructure/utils/pdf/generate-pdf-certificate.js';
+import { Frameworks } from '../../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { expect } from '../../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../../tooling/domain-builder/domain-builder.js';
@@ -265,6 +266,141 @@ describe('Integration | Infrastructure | Utils | Pdf | V3 Certification Attestat
 
         expect(content).to.include(translate('certification.certificate.v3.complementary-content.title'));
       });
+    });
+  });
+
+  for (const { framework, reachedMeshIndex, expectedLevel } of [
+    { framework: Frameworks.DROIT, reachedMeshIndex: 1, expectedLevel: 'LEVEL_CONFIRMED' },
+    { framework: Frameworks.PRO_SANTE, reachedMeshIndex: 2, expectedLevel: 'LEVEL_ADVANCED' },
+  ]) {
+    describe(`for a Pix+ ${framework} certification`, function () {
+      it('should display Pix+ title, framework label, and level', async function () {
+        // given
+        const certificates = [
+          domainBuilder.certification.results.buildCertificate({
+            firstName: 'Marie',
+            lastName: 'Durand',
+            birthdate: '1985-03-21',
+            birthplace: 'Lyon',
+            verificationCode: 'P-PIXPLUS',
+            deliveredAt: new Date('2024-02-10'),
+            certificationCenter: 'Centre de certification',
+            pixScore: 300,
+            reachedMeshIndex,
+            certificationFramework: framework,
+          }),
+        ];
+
+        // when
+        const pdfStream = await generate({ certificates, i18n });
+        const pdfBuffer = await _convertStreamToBuffer(pdfStream);
+
+        // then
+        const parsedPdf = await getDocument({ data: new Uint8Array(pdfBuffer) }).promise;
+        const page = await parsedPdf.getPage(1);
+        const text = await page.getTextContent();
+        const content = text.items.map((item) => item.str).join(' ');
+
+        expect(content).to.include(translate('certification.certificate.v3.main-content.title-pix-plus'));
+        expect(content).to.include(translate(`certification.certificate.v3.pix-plus-labels.${framework}`));
+        expect(content).to.include('Marie DURAND');
+        expect(content).to.include('P-PIXPLUS');
+        expect(content).to.include(translate('certification.certificate.v3.score-content.level-explanation'));
+        expect(content).to.include(translate(`certification.meshlevel.${framework}.${expectedLevel}.label`));
+        expect(content).to.include(translate(`certification.meshlevel.${framework}.${expectedLevel}.summary`));
+        expect(content).to.not.include(translate('certification.certificate.v3.complementary-content.title'));
+      });
+    });
+  }
+
+  describe('for a Pix+ EDU certification', function () {
+    for (const { framework, eduV3ExternalJuryResult, expectedLevel } of [
+      { framework: Frameworks.EDU_1ER_DEGRE, eduV3ExternalJuryResult: null, expectedLevel: 'LEVEL_ADMISSIBLE' },
+      { framework: Frameworks.EDU_2ND_DEGRE, eduV3ExternalJuryResult: 'ADVANCED', expectedLevel: 'LEVEL_ADVANCED' },
+      { framework: Frameworks.EDU_CPE, eduV3ExternalJuryResult: 'EXPERT', expectedLevel: 'LEVEL_EXPERT' },
+    ]) {
+      it(`should display the ${expectedLevel} level for ${framework}`, async function () {
+        // given
+        const certificates = [
+          domainBuilder.certification.results.buildCertificate({
+            firstName: 'Sophie',
+            lastName: 'Leroy',
+            birthdate: '1988-11-05',
+            birthplace: 'Toulouse',
+            verificationCode: 'P-EDUPIX',
+            deliveredAt: new Date('2024-02-10'),
+            certificationCenter: 'INSPE de Toulouse',
+            pixScore: 280,
+            reachedMeshIndex: 0,
+            certificationFramework: framework,
+            eduV3ExternalJuryResult,
+          }),
+        ];
+
+        // when
+        const pdfStream = await generate({ certificates, i18n });
+        const pdfBuffer = await _convertStreamToBuffer(pdfStream);
+
+        // then
+        const parsedPdf = await getDocument({ data: new Uint8Array(pdfBuffer) }).promise;
+        const page = await parsedPdf.getPage(1);
+        const text = await page.getTextContent();
+        const content = text.items.map((item) => item.str).join(' ');
+
+        expect(content).to.include(translate('certification.certificate.v3.main-content.title-pix-plus'));
+        expect(content).to.include(translate(`certification.certificate.v3.pix-plus-labels.${framework}`));
+        expect(content).to.include('Sophie LEROY');
+        expect(content).to.include(translate(`certification.meshlevel.${framework}.${expectedLevel}.label`));
+        expect(content).to.include(translate(`certification.meshlevel.${framework}.${expectedLevel}.summary`));
+      });
+    }
+  });
+
+  describe('Pix+ snapshot', function () {
+    it('snapshot', async function () {
+      // given
+      const certificates = [
+        domainBuilder.certification.results.buildCertificate({
+          id: 300,
+          firstName: 'Marie',
+          lastName: 'Durand',
+          birthdate: '1985-03-21',
+          birthplace: 'Lyon',
+          verificationCode: 'P-PIXPLUS',
+          deliveredAt: new Date('2024-02-10'),
+          certificationCenter: "L'université du Pix /",
+          pixScore: 300,
+          reachedMeshIndex: 1,
+          certificationFramework: Frameworks.DROIT,
+        }),
+      ];
+      const referencePdfPath = 'pix-plus-certificate-test.pdf';
+      const pdfStream = await generate({ certificates, i18n });
+      const pdfBuffer = await _convertStreamToBuffer(pdfStream);
+      await _writeFile(pdfBuffer, referencePdfPath);
+
+      // when
+      const parsedPdf = await getDocument({ data: new Uint8Array(pdfBuffer) }).promise;
+      const page = await parsedPdf.getPage(1);
+      const text = await page.getTextContent();
+
+      text.items.forEach((item) => {
+        delete item.fontName;
+      });
+      text.styles = Object.values(text.styles);
+
+      const expectedBuffer = await readFile(`${__dirname}${referencePdfPath}`);
+      const expectedParsedPdf = await getDocument({ data: new Uint8Array(expectedBuffer) }).promise;
+      const expectedPage = await expectedParsedPdf.getPage(1);
+      const expectedText = await expectedPage.getTextContent();
+
+      expectedText.items.forEach((item) => {
+        delete item.fontName;
+      });
+      expectedText.styles = Object.values(expectedText.styles);
+
+      // then
+      expect(text).to.deep.equal(expectedText);
     });
   });
 });
