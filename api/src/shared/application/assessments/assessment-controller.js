@@ -1,7 +1,6 @@
 /**
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationEvaluationRepository} CertificationEvaluationRepository
  */
-import { usecases as certificationUsecases } from '../../../certification/session-management/domain/usecases/index.js';
 import { evaluationUsecases } from '../../../evaluation/domain/usecases/index.js';
 import * as competenceEvaluationSerializer from '../../../evaluation/infrastructure/serializers/jsonapi/competence-evaluation-serializer.js';
 import { DomainTransaction } from '../../domain/DomainTransaction.js';
@@ -51,18 +50,10 @@ const findCompetenceEvaluations = async function (request) {
   return competenceEvaluationSerializer.serialize(competenceEvaluations);
 };
 
-const createCertificationChallengeLiveAlert = async function (request, h) {
-  const assessmentId = request.params.id;
-  const challengeId = request.payload?.data?.attributes?.['challenge-id'];
-  await certificationUsecases.createCertificationChallengeLiveAlert({ assessmentId, challengeId });
-  return h.response().code(204);
-};
-
 const assessmentController = {
   getAssessmentWithNextChallenge,
   updateLastChallengeState,
   findCompetenceEvaluations,
-  createCertificationChallengeLiveAlert,
 };
 
 export { assessmentController };

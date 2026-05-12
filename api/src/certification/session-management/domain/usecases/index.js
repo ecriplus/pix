@@ -137,6 +137,7 @@ const dependencies = {
   userRepository,
 };
 
+import { createLiveAlert } from '../../../evaluation/domain/usecases/create-live-alert.js';
 import { abortCertificationCourse } from './abort-certification-course.js';
 import { assignCertificationOfficerToJurySession } from './assign-certification-officer-to-jury-session.js';
 import { authorizeCertificationCandidateToResume } from './authorize-certification-candidate-to-resume.js';
@@ -145,7 +146,6 @@ import { cancel } from './cancel.js';
 import { clearCompanionAlert } from './clear-companion-alert.js';
 import { commentSessionAsJury } from './comment-session-as-jury.js';
 import { correctCandidateIdentityInCertificationCourse } from './correct-candidate-identity-in-certification-course.js';
-import { createCertificationChallengeLiveAlert } from './create-certification-challenge-live-alert.js';
 import { deleteCertificationIssueReport } from './delete-certification-issue-report.js';
 import { deleteSessionJuryComment } from './delete-session-jury-comment.js';
 import { dismissLiveAlert } from './dismiss-live-alert.js';
@@ -190,7 +190,7 @@ const usecasesWithoutInjectedDependencies = {
   clearCompanionAlert,
   commentSessionAsJury,
   correctCandidateIdentityInCertificationCourse,
-  createCertificationChallengeLiveAlert,
+  createCertificationChallengeLiveAlert: createLiveAlert,
   deleteCertificationIssueReport,
   deleteSessionJuryComment,
   dismissLiveAlert,

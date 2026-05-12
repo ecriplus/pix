@@ -1,6 +1,5 @@
 import sinon from 'sinon';
 
-import { usecases as certificationUsecases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
 import { evaluationUsecases } from '../../../../../src/evaluation/domain/usecases/index.js';
 import { assessmentController } from '../../../../../src/shared/application/assessments/assessment-controller.js';
 import { expect } from '../../../../test-helper.js';
@@ -80,28 +79,6 @@ describe('Unit | Controller | assessment-controller', function () {
           },
         },
       ]);
-    });
-  });
-
-  describe('#createCertificationChallengeLiveAlert', function () {
-    it('should call the createCertificationChallengeLiveAlert use case', async function () {
-      // given
-      const assessmentId = 2;
-      const challengeId = '123';
-      sinon.stub(certificationUsecases, 'createCertificationChallengeLiveAlert');
-      certificationUsecases.createCertificationChallengeLiveAlert.resolves();
-      const payload = { data: { attributes: { 'challenge-id': challengeId } } };
-      const request = { params: { id: assessmentId }, payload };
-
-      // when
-      const response = await assessmentController.createCertificationChallengeLiveAlert(request, hFake);
-
-      // then
-      expect(response.statusCode).to.be.equal(204);
-      expect(certificationUsecases.createCertificationChallengeLiveAlert).to.have.been.calledWithExactly({
-        assessmentId,
-        challengeId,
-      });
     });
   });
 });
