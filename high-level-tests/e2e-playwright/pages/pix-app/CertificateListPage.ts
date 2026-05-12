@@ -28,7 +28,13 @@ export class CertificateListPage {
     const examDate = await card.getByTestId('pw-certification-card-exam-date').innerText();
     const result = await getInnerTextOrDefault(card.getByTestId('pw-certification-card-result'), null);
     const comment = await getInnerTextOrDefault(card.getByTestId('pw-certification-card-comment'), null);
-    const hasBadge = await card.getByTestId('pw-certification-card-badge').isVisible();
+    let hasBadge;
+    try {
+      await card.getByTestId('pw-certification-card-badge').waitFor({ state: 'visible', timeout: 5_000 });
+      hasBadge = true;
+    } catch {
+      hasBadge = false;
+    }
 
     return {
       mainStatus: normalizeWhitespace(mainStatus),
