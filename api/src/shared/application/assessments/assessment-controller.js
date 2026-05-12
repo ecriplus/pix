@@ -13,14 +13,6 @@ import * as assessmentRepository from '../../infrastructure/repositories/assessm
 import * as assessmentSerializer from '../../infrastructure/serializers/jsonapi/assessment-serializer.js';
 import { extractUserIdFromRequest, getChallengeLocale } from '../../infrastructure/utils/request-response-utils.js';
 
-const save = async function (request, h, dependencies = { assessmentRepository }) {
-  const assessment = assessmentSerializer.deserialize(request.payload);
-  assessment.userId = extractUserIdFromRequest(request);
-  assessment.state = 'started';
-  const createdAssessment = await dependencies.assessmentRepository.save({ assessment });
-  return h.response(assessmentSerializer.serialize(createdAssessment.toDto())).created();
-};
-
 const getAssessmentWithNextChallenge = async function (
   request,
   h,
@@ -117,7 +109,6 @@ const createCertificationChallengeLiveAlert = async function (request, h) {
 };
 
 const assessmentController = {
-  save,
   getAssessmentWithNextChallenge,
   updateLastChallengeState,
   findCompetenceEvaluations,

@@ -11,27 +11,6 @@ const { featureToggles } = config;
 const register = async function (server) {
   const routes = [
     {
-      method: 'POST',
-      path: '/api/assessments',
-      config: {
-        auth: false,
-        validate: {
-          options: {
-            allowUnknown: true,
-          },
-          payload: Joi.object({
-            data: Joi.object({
-              attributes: Joi.object({
-                type: Joi.string().required(),
-              }).required(),
-            }).required(),
-          }).required(),
-        },
-        handler: assessmentController.save,
-        tags: ['api'],
-      },
-    },
-    {
       method: 'GET',
       path: '/api/assessments/{id}',
       config: {
