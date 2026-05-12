@@ -564,4 +564,4 @@ function handle(request, h, error) {
   return HttpErrors.sendJsonApiError(httpError, h);
 }
 
-export { _mapToHttpError, handle };
+export { handle };
