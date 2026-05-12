@@ -13,6 +13,7 @@ import * as checkParticipationBelongsToCombinedCourseUsecase from '../../quest/a
 import * as checkUserCanManageCombinedCourseUsecase from '../../quest/application/usecases/check-user-can-manage-combined-course.js';
 import * as isSchoolSessionActive from '../../school/application/usecases/is-school-session-active.js';
 import { ForbiddenAccess, NotFoundError } from '../domain/errors.js';
+import { featureToggles } from '../infrastructure/feature-toggles/index.js';
 import * as organizationRepository from '../infrastructure/repositories/organization-repository.js';
 import { PromiseUtils } from '../infrastructure/utils/promise-utils.js';
 import * as checkOrganizationAccessUseCase from './usecases/check-organization-access.js';
@@ -735,6 +736,14 @@ async function checkParticipationBelongsToCombinedCourse(
   }
 }
 
+async function checkCombinedCoursesFeatureIsEnabled(request, h) {
+  const areCombinedCoursesEnabled = await featureToggles.get('areCombinedCoursesEnabled');
+  if (!areCombinedCoursesEnabled) {
+    return h.response('Combined courses feature is disabled').code(422).takeover();
+  }
+  return h.response(true);
+}
+
 function hasAtLeastOneAccessOf(securityChecks) {
   return async (request, h) => {
     const responses = await PromiseUtils.map(securityChecks, (securityCheck) => securityCheck(request, h));
@@ -980,4 +989,5 @@ export const securityPreHandlers = {
   makeCheckOrganizationHasFeature,
   checkOrganizationAccess,
   checkParticipationBelongsToCombinedCourse,
+  checkCombinedCoursesFeatureIsEnabled,
 };

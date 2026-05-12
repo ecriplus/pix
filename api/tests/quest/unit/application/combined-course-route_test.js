@@ -117,6 +117,7 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
     it('should call prehandler', async function () {
       // given
       sinon.stub(securityPreHandlers, 'checkAuthorizationToAccessCombinedCourse').returns(() => true);
+      sinon.stub(securityPreHandlers, 'checkCombinedCoursesFeatureIsEnabled').returns(() => true);
       sinon.stub(combinedCourseController, 'start').callsFake((_, h) => h.response());
 
       const httpTestServer = new HttpTestServer();
@@ -134,6 +135,7 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
 
       // then
       expect(securityPreHandlers.checkAuthorizationToAccessCombinedCourse).to.have.been.called;
+      expect(securityPreHandlers.checkCombinedCoursesFeatureIsEnabled).to.have.been.called;
     });
   });
 
@@ -141,6 +143,7 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
     it('should call prehandler', async function () {
       // given
       sinon.stub(securityPreHandlers, 'checkAuthorizationToAccessCombinedCourse').returns(() => true);
+      sinon.stub(securityPreHandlers, 'checkCombinedCoursesFeatureIsEnabled').returns(() => true);
       sinon.stub(combinedCourseController, 'reassessStatus').callsFake((_, h) => h.response());
 
       const httpTestServer = new HttpTestServer();
@@ -158,6 +161,7 @@ describe('Quest | Unit | Routes | combined-course-route', function () {
 
       // then
       expect(securityPreHandlers.checkAuthorizationToAccessCombinedCourse).to.have.been.called;
+      expect(securityPreHandlers.checkCombinedCoursesFeatureIsEnabled).to.have.been.called;
     });
   });
 

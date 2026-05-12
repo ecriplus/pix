@@ -1053,6 +1053,13 @@ class S3UploadError extends DomainError {
   }
 }
 
+class FeatureDisabledError extends DomainError {
+  constructor(message = 'Feature is disabled.', code = 'DISABLED_FEATURE') {
+    super(message);
+    this.code = code;
+  }
+}
+
 export {
   AccountRecoveryDemandExpired,
   AccountRecoveryUserAlreadyConfirmEmail,
@@ -1109,6 +1116,7 @@ export {
   DomainError,
   EmailModificationDemandNotFoundOrExpiredError,
   EntityValidationError,
+  FeatureDisabledError,
   FileValidationError,
   ForbiddenAccess,
   ImportLearnerConfigurationError,
