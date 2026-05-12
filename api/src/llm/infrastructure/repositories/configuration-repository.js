@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import { Agent, fetch } from 'undici';
 
 import { config } from '../../../shared/config.js';
 import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
@@ -27,6 +28,9 @@ export async function get(id) {
         headers: {
           authorization: `Bearer ${jwt.sign('foo', config.llm.configurationEditorApi.authSecret)}`,
         },
+        dispatcher: new Agent({
+          connectTimeout: config.llm.configurationEditorApi.fetchConnectionTimeoutMs,
+        }),
       });
     } catch (err) {
       logger.error(
