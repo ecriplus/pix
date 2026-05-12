@@ -1,6 +1,7 @@
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { ValidateFregataFileJob } from '../models/jobs/ValidateFregataFileJob.js';
+import { ValidateSupFileJob } from '../models/jobs/ValidateSupFileJob.js';
 import { OrganizationImportStatus } from '../models/OrganizationImportStatus.js';
-import { ValidateCsvOrganizationImportFileJob } from '../models/ValidateCsvOrganizationImportFileJob.js';
 
 const uploadCsvFile = async function ({
   payload,
@@ -9,7 +10,8 @@ const uploadCsvFile = async function ({
   type,
   i18n,
   organizationImportRepository,
-  validateCsvOrganizationImportFileJobRepository,
+  validateFregataFileJobRepository,
+  validateSupFileJobRepository,
   importStorage,
   Parser,
 }) {
@@ -39,13 +41,15 @@ const uploadCsvFile = async function ({
     }
   });
 
-  await validateCsvOrganizationImportFileJobRepository.performAsync(
-    new ValidateCsvOrganizationImportFileJob({
-      organizationImportId,
-      type,
-      locale: i18n.getLocale(),
-    }),
-  );
+  if (type === 'FREGATA') {
+    await validateFregataFileJobRepository.performAsync(
+      new ValidateFregataFileJob({ organizationImportId, locale: i18n.getLocale() }),
+    );
+  } else {
+    await validateSupFileJobRepository.performAsync(
+      new ValidateSupFileJob({ organizationImportId, type, locale: i18n.getLocale() }),
+    );
+  }
 };
 
 export { uploadCsvFile };

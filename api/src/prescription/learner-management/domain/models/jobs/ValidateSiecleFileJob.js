@@ -1,4 +1,4 @@
-export class ValidateOrganizationImportFileJob {
+export class ValidateSiecleFileJob {
   constructor({ organizationImportId }) {
     this.organizationImportId = organizationImportId;
   }

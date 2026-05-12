@@ -1,17 +1,17 @@
-import { JobController } from '../../../../shared/application/jobs/job-controller.js';
-import { config } from '../../../../shared/config.js';
-import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { DomainError } from '../../../../shared/domain/errors.js';
-import { getI18n } from '../../../../shared/infrastructure/i18n/i18n.js';
-import { logger as l } from '../../../../shared/infrastructure/utils/logger.js';
-import { ImportSupOrganizationLearnersJob } from '../../domain/models/ImportSupOrganizationLearnersJob.js';
-import { usecases } from '../../domain/usecases/index.js';
+import { JobController } from '../../../../../shared/application/jobs/job-controller.js';
+import { config } from '../../../../../shared/config.js';
+import { withTransaction } from '../../../../../shared/domain/DomainTransaction.js';
+import { DomainError } from '../../../../../shared/domain/errors.js';
+import { getI18n } from '../../../../../shared/infrastructure/i18n/i18n.js';
+import { logger as l } from '../../../../../shared/infrastructure/utils/logger.js';
+import { ImportFromSupJob } from '../../../domain/models/jobs/ImportFromSupJob.js';
+import { usecases } from '../../../domain/usecases/index.js';
 
-class ImportSupOrganizationLearnersJobController extends JobController {
+class ImportFromSupJobController extends JobController {
   #logger;
 
   constructor({ logger = l } = {}) {
-    super(ImportSupOrganizationLearnersJob.name);
+    super(ImportFromSupJob.name);
     this.#logger = logger;
   }
 
@@ -52,4 +52,4 @@ class ImportSupOrganizationLearnersJobController extends JobController {
   });
 }
 
-export { ImportSupOrganizationLearnersJobController };
+export { ImportFromSupJobController };

@@ -1,21 +1,21 @@
 import sinon from 'sinon';
 
-import { ImportSupOrganizationLearnersJobController } from '../../../../../../src/prescription/learner-management/application/jobs/import-sup-organization-learners-job-controller.js';
-import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
-import { config } from '../../../../../../src/shared/config.js';
-import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import { OrganizationLearnersCouldNotBeSavedError } from '../../../../../../src/shared/domain/errors.js';
-import { expect } from '../../../../../test-helper.js';
-import { catchErr } from '../../../../../tooling/test-utils/error.js';
+import { ImportFromSupJobController } from '../../../../../../../src/prescription/learner-management/application/jobs/import-learners/import-from-sup-job-controller.js';
+import { usecases } from '../../../../../../../src/prescription/learner-management/domain/usecases/index.js';
+import { config } from '../../../../../../../src/shared/config.js';
+import { DomainTransaction } from '../../../../../../../src/shared/domain/DomainTransaction.js';
+import { OrganizationLearnersCouldNotBeSavedError } from '../../../../../../../src/shared/domain/errors.js';
+import { expect } from '../../../../../../test-helper.js';
+import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
-describe('Unit | Prescription | Application | Jobs | importSupOrganizationLearnersJobController', function () {
+describe('Unit | Prescription | Application | Jobs | ImportFromSupJobController', function () {
   describe('#isJobEnabled', function () {
     it('return true when job is enabled', function () {
       //given
       sinon.stub(config.pgBoss, 'importFileJobEnabled').value(true);
 
       // when
-      const handler = new ImportSupOrganizationLearnersJobController();
+      const handler = new ImportFromSupJobController();
 
       // then
       expect(handler.isJobEnabled).to.be.true;
@@ -26,7 +26,7 @@ describe('Unit | Prescription | Application | Jobs | importSupOrganizationLearne
       sinon.stub(config.pgBoss, 'importFileJobEnabled').value(false);
 
       //when
-      const handler = new ImportSupOrganizationLearnersJobController();
+      const handler = new ImportFromSupJobController();
 
       //then
       expect(handler.isJobEnabled).to.be.false;
@@ -47,7 +47,7 @@ describe('Unit | Prescription | Application | Jobs | importSupOrganizationLearne
 
       // given
       const errorStub = sinon.stub();
-      const handler = new ImportSupOrganizationLearnersJobController({ logger: { error: errorStub } });
+      const handler = new ImportFromSupJobController({ logger: { error: errorStub } });
       const data = { organizationImportId: Symbol('organizationImportId'), locale: 'en', type: 'ADDITIONAL_STUDENT' };
 
       // when & then
@@ -61,7 +61,7 @@ describe('Unit | Prescription | Application | Jobs | importSupOrganizationLearne
 
       // given
       const errorStub = sinon.stub();
-      const handler = new ImportSupOrganizationLearnersJobController({ logger: { error: errorStub } });
+      const handler = new ImportFromSupJobController({ logger: { error: errorStub } });
       const data = { organizationImportId: Symbol('organizationImportId'), locale: 'en', type: 'ADDITIONAL_STUDENT' };
 
       // when

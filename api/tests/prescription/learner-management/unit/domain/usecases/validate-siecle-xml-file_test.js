@@ -4,7 +4,7 @@ import {
   AggregateImportError,
   SiecleXmlImportError,
 } from '../../../../../../src/prescription/learner-management/domain/errors.js';
-import { ImportOrganizationLearnersJob } from '../../../../../../src/prescription/learner-management/domain/models/ImportOrganizationLearnersJob.js';
+import { ImportFromSiecleJob } from '../../../../../../src/prescription/learner-management/domain/models/jobs/ImportFromSiecleJob.js';
 import { validateSiecleXmlFile } from '../../../../../../src/prescription/learner-management/domain/usecases/validate-siecle-xml-file.js';
 import { SiecleParser } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/xml/siecle-parser.js';
 import { SiecleFileStreamer } from '../../../../../../src/prescription/learner-management/infrastructure/utils/xml/siecle-file-streamer.js';
@@ -47,7 +47,7 @@ describe('Unit | UseCase | validate-siecle-xml-file', function () {
     };
 
     importOrganizationLearnersJobRepositoryStub.performAsync
-      .withArgs(new ImportOrganizationLearnersJob({ organizationLearnerId: 1 }))
+      .withArgs(new ImportFromSiecleJob({ organizationLearnerId: 1 }))
       .resolves();
     organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImportStub);
     externalIdSymbol = Symbol('externalId');

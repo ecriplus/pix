@@ -1,13 +1,13 @@
 import { JobRepository, JobRetry } from '../../../../../shared/infrastructure/repositories/jobs/job-repository.js';
-import { ImportOrganizationLearnersJob } from '../../../domain/models/ImportOrganizationLearnersJob.js';
+import { ImportFromSiecleJob } from '../../../domain/models/jobs/ImportFromSiecleJob.js';
 
-class ImportOrganizationLearnersJobRepository extends JobRepository {
+class ImportFromSiecleJobRepository extends JobRepository {
   constructor() {
     super({
-      name: ImportOrganizationLearnersJob.name,
+      name: ImportFromSiecleJob.name,
       retry: JobRetry.FEW_RETRY,
     });
   }
 }
 
-export const importOrganizationLearnersJobRepository = new ImportOrganizationLearnersJobRepository();
+export const importOrganizationLearnersJobRepository = new ImportFromSiecleJobRepository();

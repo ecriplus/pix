@@ -1,7 +1,7 @@
 import { usecases } from '../../../../../src/prescription/learner-management/domain/usecases/index.js';
 import { JobController } from '../../../../shared/application/jobs/job-controller.js';
 import { config } from '../../../../shared/config.js';
-import { ComputeCertificabilityJob } from '../../domain/models/ComputeCertificabilityJob.js';
+import { ComputeCertificabilityJob } from '../../domain/models/jobs/ComputeCertificabilityJob.js';
 
 class ComputeCertificabilityJobController extends JobController {
   constructor() {

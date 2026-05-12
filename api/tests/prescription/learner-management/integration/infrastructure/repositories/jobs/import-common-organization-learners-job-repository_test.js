@@ -1,4 +1,4 @@
-import { ImportCommonOrganizationLearnersJob } from '../../../../../../../src/prescription/learner-management/domain/models/ImportCommonOrganizationLearnersJob.js';
+import { ImportFromGenericFileJob } from '../../../../../../../src/prescription/learner-management/domain/models/jobs/ImportFromGenericFileJob.js';
 import { importCommonOrganizationLearnersJobRepository } from '../../../../../../../src/prescription/learner-management/infrastructure/repositories/jobs/import-common-organization-learners-job-repository.js';
 import { EMPTY_CORRELATION_INFO } from '../../../../../../../src/shared/infrastructure/execution-context-manager.js';
 import { JobRetry } from '../../../../../../../src/shared/infrastructure/repositories/jobs/job-repository.js';
@@ -9,11 +9,11 @@ describe('Integration | Prescription | Infrastructure | Repository | Jobs | impo
     it('publish a job', async function () {
       // when
       await importCommonOrganizationLearnersJobRepository.performAsync(
-        new ImportCommonOrganizationLearnersJob({ organizationImportId: 4123132 }),
+        new ImportFromGenericFileJob({ organizationImportId: 4123132 }),
       );
 
       // then
-      await expect(ImportCommonOrganizationLearnersJob.name).to.have.have.been.performed.withJob({
+      await expect(ImportFromGenericFileJob.name).to.have.have.been.performed.withJob({
         retryLimit: JobRetry.FEW_RETRY.retryLimit,
         retryDelay: JobRetry.FEW_RETRY.retryDelay,
         retryBackoff: JobRetry.FEW_RETRY.retryBackoff,

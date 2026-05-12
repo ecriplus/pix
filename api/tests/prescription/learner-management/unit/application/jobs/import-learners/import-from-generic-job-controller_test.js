@@ -1,20 +1,20 @@
 import sinon from 'sinon';
 
-import { ImportCommonOrganizationLearnersJobController } from '../../../../../../src/prescription/learner-management/application/jobs/import-common-organization-learners-job-controller.js';
-import { usecases } from '../../../../../../src/prescription/learner-management/domain/usecases/index.js';
-import { config } from '../../../../../../src/shared/config.js';
-import { OrganizationLearnersCouldNotBeSavedError } from '../../../../../../src/shared/domain/errors.js';
-import { expect } from '../../../../../test-helper.js';
-import { catchErr } from '../../../../../tooling/test-utils/error.js';
+import { ImportFromGenericJobController } from '../../../../../../../src/prescription/learner-management/application/jobs/import-learners/import-from-generic-job-controller.js';
+import { usecases } from '../../../../../../../src/prescription/learner-management/domain/usecases/index.js';
+import { config } from '../../../../../../../src/shared/config.js';
+import { OrganizationLearnersCouldNotBeSavedError } from '../../../../../../../src/shared/domain/errors.js';
+import { expect } from '../../../../../../test-helper.js';
+import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
-describe('Unit | Prescription | Application | Jobs | importOrganizationLearnersJobController', function () {
+describe('Unit | Prescription | Application | Jobs | ImportFromGenericJobController', function () {
   describe('#isJobEnabled', function () {
     it('return true when job is enabled', function () {
       //given
       sinon.stub(config.pgBoss, 'importFileJobEnabled').value(true);
 
       // when
-      const handler = new ImportCommonOrganizationLearnersJobController();
+      const handler = new ImportFromGenericJobController();
 
       // then
       expect(handler.isJobEnabled).to.be.true;
@@ -25,7 +25,7 @@ describe('Unit | Prescription | Application | Jobs | importOrganizationLearnersJ
       sinon.stub(config.pgBoss, 'importFileJobEnabled').value(false);
 
       //when
-      const handler = new ImportCommonOrganizationLearnersJobController();
+      const handler = new ImportFromGenericJobController();
 
       //then
       expect(handler.isJobEnabled).to.be.false;
@@ -37,7 +37,7 @@ describe('Unit | Prescription | Application | Jobs | importOrganizationLearnersJ
       sinon.stub(usecases, 'saveOrganizationLearnersFile');
 
       // given
-      const handler = new ImportCommonOrganizationLearnersJobController();
+      const handler = new ImportFromGenericJobController();
       const data = { organizationImportId: Symbol('organizationImportId') };
 
       // when
@@ -54,7 +54,7 @@ describe('Unit | Prescription | Application | Jobs | importOrganizationLearnersJ
 
       // given
       const errorStub = sinon.stub();
-      const handler = new ImportCommonOrganizationLearnersJobController({ logger: { error: errorStub } });
+      const handler = new ImportFromGenericJobController({ logger: { error: errorStub } });
       const data = { organizationImportId: Symbol('organizationImportId') };
 
       // when & then
@@ -68,7 +68,7 @@ describe('Unit | Prescription | Application | Jobs | importOrganizationLearnersJ
       sinon.stub(usecases, 'saveOrganizationLearnersFile').rejects(error);
 
       // given
-      const handler = new ImportCommonOrganizationLearnersJobController();
+      const handler = new ImportFromGenericJobController();
       const data = { organizationImportId: Symbol('organizationImportId') };
 
       // when

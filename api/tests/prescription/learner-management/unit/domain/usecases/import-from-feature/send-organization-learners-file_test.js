@@ -1,8 +1,8 @@
 import sinon from 'sinon';
 
 import { AggregateImportError } from '../../../../../../../src/prescription/learner-management/domain/errors.js';
+import { ValidateGenericFileJob } from '../../../../../../../src/prescription/learner-management/domain/models/jobs/ValidateGenericFileJob.js';
 import { OrganizationImportStatus } from '../../../../../../../src/prescription/learner-management/domain/models/OrganizationImportStatus.js';
-import { ValidateCommonOrganizationImportFileJob } from '../../../../../../../src/prescription/learner-management/domain/models/ValidateCommonOrganizationImportFileJob.js';
 import { sendOrganizationLearnersFile } from '../../../../../../../src/prescription/learner-management/domain/usecases/import-from-feature/send-organization-learners-file.js';
 import { GenericParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/parsers/generic-parser.js';
 import { expect } from '../../../../../../test-helper.js';
@@ -51,7 +51,7 @@ describe('Unit | UseCase | sendOrganizationLearnersFile', function () {
     };
 
     validateCommonOrganizationImportFileJobRepositoryStub.performAsync
-      .withArgs(new ValidateCommonOrganizationImportFileJob({ organizationImportId }))
+      .withArgs(new ValidateGenericFileJob({ organizationImportId }))
       .resolves();
 
     dependencieStub = {

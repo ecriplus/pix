@@ -1,8 +1,8 @@
 import { GenericParser } from '../../../infrastructure/serializers/csv/parsers/generic-parser.js';
 import { getDataBuffer } from '../../../infrastructure/utils/bufferize/get-data-buffer.js';
 import { AggregateImportError } from '../../errors.js';
-import { ImportCommonOrganizationLearnersJob } from '../../models/ImportCommonOrganizationLearnersJob.js';
 import { ImportOrganizationLearnerSet } from '../../models/ImportOrganizationLearnerSet.js';
+import { ImportFromGenericFileJob } from '../../models/jobs/ImportFromGenericFileJob.js';
 
 const validateOrganizationLearnersFile = async function ({
   organizationImportId,
@@ -33,7 +33,7 @@ const validateOrganizationLearnersFile = async function ({
 
     learnerSet.addLearners(learners);
     await importCommonOrganizationLearnersJobRepository.performAsync(
-      new ImportCommonOrganizationLearnersJob({ organizationImportId }),
+      new ImportFromGenericFileJob({ organizationImportId }),
     );
   } catch (error) {
     if (Array.isArray(error)) {

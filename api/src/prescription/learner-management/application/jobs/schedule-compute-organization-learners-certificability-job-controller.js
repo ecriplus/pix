@@ -1,7 +1,7 @@
 import { CronExpressionParser } from 'cron-parser';
 import dayjs from 'dayjs';
 
-import { ComputeCertificabilityJob } from '../../../../prescription/learner-management/domain/models/ComputeCertificabilityJob.js';
+import { ComputeCertificabilityJob } from '../../../../prescription/learner-management/domain/models/jobs/ComputeCertificabilityJob.js';
 import { JobScheduleController } from '../../../../shared/application/jobs/job-schedule-controller.js';
 import { config } from '../../../../shared/config.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
