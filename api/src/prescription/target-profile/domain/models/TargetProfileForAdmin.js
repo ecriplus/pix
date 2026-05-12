@@ -75,8 +75,23 @@ class TargetProfileForAdmin {
   update(attributes) {
     const hasTubeToUpdate = attributes.tubes?.length > 0;
 
-    if (hasTubeToUpdate && this.hasLinkedCampaign) {
-      throw new DomainError('Le profil cible est relié à une campagne, interdiction de modifier le référentiel');
+    if (hasTubeToUpdate) {
+      if (this.hasLinkedCampaign) {
+        throw new DomainError('Le profil cible est relié à une campagne, interdiction de modifier le référentiel');
+      }
+
+      const cappedTubes = this.badges.flatMap(({ criteria }) => criteria).flatMap(({ cappedTubes }) => cappedTubes);
+
+      const lockedCappedTubes = cappedTubes.filter((cappedTube) => {
+        const updatedTube = attributes.tubes.find((tube) => tube.id === cappedTube.tubeId);
+        return !updatedTube || updatedTube.level < cappedTube.level;
+      });
+
+      if (lockedCappedTubes.length > 0) {
+        throw new DomainError(
+          `Un badge est associé à ce profil cible pour le(s) sujet(s): ${lockedCappedTubes.map(({ name, level }) => `${name} (niveau ${level})`).join(', ')}`,
+        );
+      }
     }
 
     const validCategories = Object.values(categories);

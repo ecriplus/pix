@@ -38,8 +38,9 @@ class BadgeCriterion {
 }
 
 class CappedTube {
-  constructor({ tubeId, level }) {
+  constructor({ tubeId, name, level }) {
     this.tubeId = tubeId;
+    this.name = name;
     this.level = level;
   }
 

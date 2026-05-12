@@ -43,8 +43,8 @@ buildBadgeDetails.buildBadgeCriterion_CappedTubes = function ({
     { tubeId: 'recTube2', level: 2 },
   ],
 }) {
-  const cappedTubes = cappedTubesDTO.map(({ tubeId, level }) => {
-    return new CappedTube({ tubeId, level });
+  const cappedTubes = cappedTubesDTO.map(({ tubeId, name, level }) => {
+    return new CappedTube({ tubeId, name, level });
   });
   return new BadgeCriterion({
     id,

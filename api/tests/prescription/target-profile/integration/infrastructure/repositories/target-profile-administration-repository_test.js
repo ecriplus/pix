@@ -454,8 +454,8 @@ describe('Integration | Repository | Target-profile', function () {
         const criteria1Badge2 = domainBuilder.buildBadgeDetails.buildBadgeCriterion_CappedTubes({
           ...badge2Criteria1DTO,
           cappedTubesDTO: [
-            { tubeId: 'recTube2', level: 6 },
-            { tubeId: 'recTube3', level: 3 },
+            { tubeId: 'recTube2', name: 'tubeName2', level: 6 },
+            { tubeId: 'recTube3', name: 'tubeName3', level: 3 },
           ],
         });
         const expectedBadge2 = domainBuilder.buildBadgeDetails({
