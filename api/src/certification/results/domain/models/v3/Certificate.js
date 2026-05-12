@@ -3,7 +3,7 @@
  */
 import { MAX_REACHABLE_SCORE } from '../../../../../shared/domain/constants.js';
 import { CORE_CERTIFICATE_LEVELS } from '../../../../shared/domain/constants/mesh-configuration.js';
-import { GlobalCertificationLevel } from './GlobalCertificationLevel.js';
+import { CertificateMeshLevel } from './CertificateMeshLevel.js';
 
 export class Certificate {
   /**
@@ -15,7 +15,7 @@ export class Certificate {
    * @param {string} props.birthplace
    * @param {string} props.certificationCenter - center name
    * @param {string} props.pixScore
-   * @param {GlobalCertificationLevel} props.[globalLevel] - auto calculated
+   * @param {CertificateMeshLevel} props.[globalLevel] - auto calculated
    * @param {string} props.verificationCode
    * @param {Array<ResultCompetenceTree>} props.resultCompetenceTree
    * @param {AlgorithmEngineVersion} props.algorithmEngineVersion
@@ -58,7 +58,7 @@ export class Certificate {
   }
 
   #findLevel(reachedMeshIndex, certificationFramework) {
-    const globalCertificationLevel = new GlobalCertificationLevel({ reachedMeshIndex, certificationFramework });
+    const globalCertificationLevel = new CertificateMeshLevel({ reachedMeshIndex, certificationFramework });
 
     return globalCertificationLevel.meshLevel === CORE_CERTIFICATE_LEVELS.preBeginner ? null : globalCertificationLevel;
   }

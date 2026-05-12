@@ -11,7 +11,7 @@ export class CertificationResult {
    * @param {string} props.status
    * @param {string} props.pixScore
    * @param {Date} props.certificationDate
-   * @param {GlobalCertificationLevel} props.globalLevel
+   * @param {CertificateMeshLevel} props.globalLevel
    * @param {Array<Competence>} props.competences
    */
   constructor({

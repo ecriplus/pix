@@ -4,7 +4,7 @@ import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmE
 import { isEduFramework } from '../../../shared/domain/models/Frameworks.js';
 import { hasCoreScope } from '../../../shared/domain/models/Frameworks.js';
 import { JuryComment, JuryCommentContexts } from '../../../shared/domain/models/JuryComment.js';
-import { GlobalCertificationLevel } from './v3/GlobalCertificationLevel.js';
+import { CertificateMeshLevel } from './v3/CertificateMeshLevel.js';
 
 export const CERTIFICATE_STATUSES = {
   WAITING_FOR_RESULTS: 'WAITING_FOR_RESULTS',
@@ -148,5 +148,5 @@ function _getReachedMeshLevel({ reachedMeshIndex, certificationFramework, algori
     return `LEVEL_${eduV3ExternalJuryResult}`;
   }
 
-  return new GlobalCertificationLevel({ reachedMeshIndex, certificationFramework }).meshLevel;
+  return new CertificateMeshLevel({ reachedMeshIndex, certificationFramework }).meshLevel;
 }

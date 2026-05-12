@@ -29,9 +29,10 @@ export const STANDARD_PIX_PLUS_LEVELS = {
   3: 'LEVEL_EXPERT',
 };
 
-export class GlobalCertificationLevel {
+export class CertificateMeshLevel {
   static #schema = Joi.object({
     meshLevel: Joi.string().allow(null),
+    certificationFramework: Joi.string().required(),
   });
 
   /**
@@ -40,6 +41,7 @@ export class GlobalCertificationLevel {
    * @param {string} props.certificationFramework
    */
   constructor({ reachedMeshIndex, certificationFramework }) {
+    this.certificationFramework = certificationFramework;
     this.meshLevel = this.#getLevelKey({ reachedMeshIndex, certificationFramework });
     this.#validate();
   }
@@ -76,8 +78,14 @@ export class GlobalCertificationLevel {
     }
   }
 
+  #getTranslationFrameworkKey() {
+    if (this.certificationFramework === Frameworks.CLEA) return Frameworks.CORE;
+    return this.certificationFramework;
+  }
+
   #translate({ translate, key }) {
-    const translationKey = `certification.global.meshlevel.${key}`;
+    const frameworkKey = this.#getTranslationFrameworkKey();
+    const translationKey = `certification.meshlevel.${frameworkKey}.${key}`;
     const translation = translate(translationKey);
     if (translation === translationKey) {
       return '';
@@ -86,7 +94,7 @@ export class GlobalCertificationLevel {
   }
 
   #validate() {
-    const { error } = GlobalCertificationLevel.#schema.validate(this, { allowUnknown: false });
+    const { error } = CertificateMeshLevel.#schema.validate(this, { allowUnknown: false });
     if (error) {
       throw EntityValidationError.fromJoiErrors(error.details);
     }

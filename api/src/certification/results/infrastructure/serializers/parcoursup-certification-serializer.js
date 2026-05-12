@@ -1,12 +1,12 @@
 /**
  * @typedef {import('../../domain/read-models/parcoursup/CertificationResult.js').CertificationResult} CertificationResult
- * @typedef {import('../../domain/models/v3/GlobalCertificationLevel.js').GlobalCertificationLevel} GlobalCertificationLevel
+ * @typedef {import('../../domain/models/v3/CertificateMeshLevel.js').CertificateMeshLevel} CertificateMeshLevel
  */
 
 /**
  * @param {object} params
  * @param {CertificationResult} params.certificationResult
- * @param {GlobalCertificationLevel} params.globalMeshLevel
+ * @param {CertificateMeshLevel} params.globalMeshLevel
  * @param {object} params.translate
  */
 const serialize = ({ certificationResult, translate }) => {

@@ -1,5 +1,5 @@
 import { Certificate } from '../../../../../../../src/certification/results/domain/models/v3/Certificate.js';
-import { GlobalCertificationLevel } from '../../../../../../../src/certification/results/domain/models/v3/GlobalCertificationLevel.js';
+import { CertificateMeshLevel } from '../../../../../../../src/certification/results/domain/models/v3/CertificateMeshLevel.js';
 import { Frameworks } from '../../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { expect } from '../../../../../../test-helper.js';
 
@@ -73,7 +73,7 @@ describe('Unit | Domain | Models | Certification | Results | Certificate v3', fu
 
         // then
         expect(certificate.globalLevel).to.deepEqualInstance(
-          new GlobalCertificationLevel({ reachedMeshIndex: 1, certificationFramework: Frameworks.CORE }),
+          new CertificateMeshLevel({ reachedMeshIndex: 1, certificationFramework: Frameworks.CORE }),
         );
       });
     });
