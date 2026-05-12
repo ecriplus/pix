@@ -85,7 +85,7 @@ describe('Certification | Configuration | Integration | Repository | Version', f
   });
 
   describe('#update', function () {
-    it('should update the expiration date and challenges configuration of a certification version', async function () {
+    it('should update the expiration date, challenges configuration and comments of a certification version', async function () {
       // given
       const initialChallengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
         maximumAssessmentLength: 20,
@@ -102,6 +102,7 @@ describe('Certification | Configuration | Integration | Repository | Version', f
       await databaseBuilder.commit();
 
       const newExpirationDate = new Date('2025-10-21T10:00:00Z');
+      const newComments = 'New comments';
       const newChallengesConfiguration = {
         maximumAssessmentLength: 32,
         limitToOneQuestionPerTube: true,
@@ -114,6 +115,7 @@ describe('Certification | Configuration | Integration | Repository | Version', f
         expirationDate: newExpirationDate,
         assessmentDuration: existingVersion.assessmentDuration,
         challengesConfiguration: newChallengesConfiguration,
+        comments: newComments,
       });
 
       // when

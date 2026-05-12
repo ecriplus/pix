@@ -1,7 +1,7 @@
 import { createServer } from '../../../../../server.js';
 import { SCOPES } from '../../../../../src/certification/shared/domain/models/Scopes.js';
 import { expect } from '../../../../test-helper.js';
-import { databaseBuilder } from '../../../../tooling/databases.js';
+import { databaseBuilder, knex } from '../../../../tooling/databases.js';
 import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Acceptance | Certification | Configuration | API | certification-version-route', function () {
@@ -64,6 +64,63 @@ describe('Acceptance | Certification | Configuration | API | certification-versi
         },
       });
       expect(response.result.included).to.be.undefined;
+    });
+  });
+
+  describe('PATCH /api/admin/certification-versions/{certificationVersionId}', function () {
+    it('updates the details of a version for a given id', async function () {
+      // given
+      const version = databaseBuilder.factory.buildCertificationVersion({
+        scope: SCOPES.CORE,
+        startDate: new Date('2025-01-11'),
+        expirationDate: new Date('2026-01-01'),
+        assessmentDuration: 100,
+        minimumAnswersRequiredToValidateACertification: 20,
+        challengesConfiguration: {
+          maximumAssessmentLength: 32,
+          challengesBetweenSameCompetence: 2,
+          limitToOneQuestionPerTube: true,
+          enablePassageByAllCompetences: true,
+          variationPercent: 0.5,
+          defaultCandidateCapacity: -3,
+          defaultProbabilityToPickChallenge: 51,
+        },
+        comments: 'Old comments',
+      });
+
+      databaseBuilder.factory.buildCertificationFrameworksChallenge({
+        versionId: version.id,
+      });
+
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'PATCH',
+        url: `/api/admin/certification-versions/${version.id}`,
+        headers: generateAuthenticatedUserRequestHeaders({
+          userId: superAdmin.id,
+        }),
+        payload: {
+          data: {
+            id: version.id,
+            attributes: {
+              'assessment-duration': 120,
+              'minimum-answers-required-for-validation': 20,
+              'maximum-assessment-length': 30,
+              comments: 'Newly updated comments',
+            },
+            type: 'certification-versions',
+          },
+        },
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(204);
+      const [updatedVersion] = await knex('certification_versions').where({ id: version.id });
+      expect(updatedVersion.comments).to.equal('Newly updated comments');
     });
   });
 });

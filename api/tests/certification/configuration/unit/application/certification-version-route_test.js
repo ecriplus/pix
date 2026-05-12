@@ -62,4 +62,82 @@ describe('Unit | Certification | Configuration | Application | Router | certific
       });
     });
   });
+
+  describe('PATCH /api/admin/certification-versions/{certificationVersionId}', function () {
+    describe('when the user authenticated has no role', function () {
+      it('should return 403 HTTP status code', async function () {
+        // given
+        sinon
+          .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
+          .returns((request, h) => h.response().code(403).takeover());
+        sinon.stub(certificationVersionController, 'update').returns('ok');
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        // when
+        const response = await httpTestServer.request('PATCH', `/api/admin/certification-versions/1`, {
+          data: {
+            id: '1',
+            attributes: {
+              'assessment-duration': 120,
+              'minimum-answers-required-for-validation': 20,
+              'maximum-assessment-length': 30,
+              comments: 'Newly updated comments',
+            },
+            type: 'certification-versions',
+          },
+        });
+
+        // then
+        expect(response.statusCode).to.equal(403);
+        sinon.assert.notCalled(certificationVersionController.update);
+      });
+    });
+
+    const authorizedRoles = ['SuperAdmin', 'Certif', 'Metier', 'Support'];
+    authorizedRoles.forEach((role) => {
+      describe(`when the user has ${role} role`, function () {
+        it('should return 204 HTTP status code', async function () {
+          // given
+          sinon.stub(securityPreHandlers, `checkAdminMemberHasRole${role}`).returns(true);
+          sinon.stub(certificationVersionController, 'update').callsFake((request, h) => h.response().code(204));
+
+          const httpTestServer = new HttpTestServer();
+          await httpTestServer.register(moduleUnderTest);
+
+          // when
+          const response = await httpTestServer.request('PATCH', `/api/admin/certification-versions/1`, {
+            data: {
+              id: '1',
+              attributes: {
+                'assessment-duration': 120,
+                'minimum-answers-required-for-validation': 20,
+                'maximum-assessment-length': 30,
+                comments: 'Newly updated comments',
+              },
+              type: 'certification-versions',
+            },
+          });
+
+          // then
+          expect(response.statusCode).to.equal(204);
+          sinon.assert.calledOnce(certificationVersionController.update);
+        });
+      });
+    });
+
+    describe('when the version ID parameter is invalid', function () {
+      it('returns a 400 HTTP status', async function () {
+        sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin').returns(true);
+        sinon.stub(certificationVersionController, 'update').returns('ok');
+        const httpTestServer = new HttpTestServer();
+        await httpTestServer.register(moduleUnderTest);
+
+        const response = await httpTestServer.request('GET', '/api/admin/certification-versions/NOT_AN_ID');
+
+        expect(response.statusCode).to.equal(400);
+        sinon.assert.notCalled(certificationVersionController.update);
+      });
+    });
+  });
 });

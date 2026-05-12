@@ -30,6 +30,7 @@ import { importScoWhitelist } from './import-sco-whitelist.js';
 import { searchAttachableTargetProfiles } from './search-attachable-target-profiles.js';
 import { sendTargetProfileNotifications } from './send-target-profile-notifications.js';
 import { updateScoBlockedAccessDate } from './update-sco-blocked-access-date.js';
+import { updateVersion } from './update-version.js';
 
 /**
  *
@@ -88,6 +89,7 @@ const usecasesWithoutInjectedDependencies = {
   searchAttachableTargetProfiles,
   sendTargetProfileNotifications,
   updateScoBlockedAccessDate,
+  updateVersion,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);

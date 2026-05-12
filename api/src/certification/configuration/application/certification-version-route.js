@@ -38,6 +38,50 @@ const register = async function (server) {
         ],
       },
     },
+    {
+      method: 'PATCH',
+      path: '/api/admin/certification-versions/{certificationVersionId}',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([
+                securityPreHandlers.checkAdminMemberHasRoleSuperAdmin,
+                securityPreHandlers.checkAdminMemberHasRoleSupport,
+                securityPreHandlers.checkAdminMemberHasRoleCertif,
+                securityPreHandlers.checkAdminMemberHasRoleMetier,
+              ])(request, h),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            certificationVersionId: identifiersType.certificationVersionId,
+          }),
+          payload: Joi.object({
+            data: Joi.object({
+              id: Joi.number(),
+              attributes: Joi.object({
+                'start-date': Joi.date().allow(null).optional(),
+                'expiration-date': Joi.date().allow(null).optional(),
+                'assessment-duration': Joi.number().required(),
+                'minimum-answers-required-for-validation': Joi.number().required(),
+                'maximum-assessment-length': Joi.number().required(),
+                comments: Joi.string().max(500).allow(null, '').optional(),
+              }).required(),
+              type: Joi.string(),
+              relationships: Joi.object().optional(),
+            }),
+          }),
+        },
+        handler: certificationVersionController.update,
+        tags: ['api', 'admin'],
+        notes: [
+          'Cette route est restreinte aux utilisateurs authentifiés',
+          "Elle permet de modifier les commentaires d'une version",
+        ],
+      },
+    },
   ]);
 };
 

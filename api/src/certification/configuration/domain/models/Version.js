@@ -64,4 +64,8 @@ export class Version {
       throw EntityValidationError.fromJoiErrors(error.details);
     }
   }
+
+  update({ comments }) {
+    this.comments = comments;
+  }
 }
