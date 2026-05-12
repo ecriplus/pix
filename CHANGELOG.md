@@ -1,5 +1,46 @@
 # Pix Changelog
 
+# [5.406.0](https://github.com/1024pix/pix/compare/v5.405.0...v5.406.0) (2026-05-12)
+
+### :rocket: Amélioration
+
+- [#16094](https://github.com/1024pix/pix/pull/16094) Afficher les images des badges Pix+ (PIX-22622). 
+- [#16106](https://github.com/1024pix/pix/pull/16106) Améliorer la page de fin de résultat sur le moteur de recommandation (PIX-22437) (PIX-22125) 
+- [#16151](https://github.com/1024pix/pix/pull/16151) ia-droit-auteur-v3 
+- [#16163](https://github.com/1024pix/pix/pull/16163) Lien de questionnaire spécifique à France Travail (PIX-22701) 
+- [#16153](https://github.com/1024pix/pix/pull/16153) Refonte de l'écran de détail d'un référentiel de certification donné (PIX-21194) 
+- [#16156](https://github.com/1024pix/pix/pull/16156) Suppression des onglets dans la page de résultats de campagne avec recommandation (PIX-22668). 
+- [#16168](https://github.com/1024pix/pix/pull/16168) Update IADefinition_IND.json 
+
+### :bug: Correction
+
+- [#16091](https://github.com/1024pix/pix/pull/16091) Ajouter un message d'erreur dédié (PIX-21376) 
+- [#16140](https://github.com/1024pix/pix/pull/16140) Corriger l'erreur 500 lors de l'acceptation simultanée d'une invitation d'organisation (PIX-21467). 
+- [#16134](https://github.com/1024pix/pix/pull/16134) Empêcher de supprimer un tube lié à un badge lors de la modification d'un profil cible (PIX-17442) 
+
+### :building_construction: Tech
+
+- [#16171](https://github.com/1024pix/pix/pull/16171) :package: force la mise à jour (et la version minimum) du paquet `@xmldom/xmldom` 
+- [#16136](https://github.com/1024pix/pix/pull/16136) :package: Mise à jour de la bibliothèque hapi/hapi  
+- [#16119](https://github.com/1024pix/pix/pull/16119) :recycle: Réduit l'utilisation de `lodash` (pix-22710) 
+- [#16122](https://github.com/1024pix/pix/pull/16122) Ajoute une API interne pour récupérer les participations d'une liste de learners (PIX-22585) 
+- [#16147](https://github.com/1024pix/pix/pull/16147) Réorganiser les sérialiseurs CSV d'import d'apprenants (PIX-22670) 
+
+### :arrow_up: Montée de version
+
+- [#16104](https://github.com/1024pix/pix/pull/16104) Update dependency eslint-plugin-ember to v13 (mon-pix) 
+- [#16174](https://github.com/1024pix/pix/pull/16174) Update dependency eslint-plugin-n to v18 (admin) 
+- [#16175](https://github.com/1024pix/pix/pull/16175) Update dependency eslint-plugin-n to v18 (api) 
+- [#16177](https://github.com/1024pix/pix/pull/16177) Update dependency eslint-plugin-n to v18 (audit-logger) 
+- [#16179](https://github.com/1024pix/pix/pull/16179) Update dependency eslint-plugin-n to v18 (certif) 
+- [#16180](https://github.com/1024pix/pix/pull/16180) Update dependency eslint-plugin-n to v18 (dossier racine) 
+- [#16181](https://github.com/1024pix/pix/pull/16181) Update dependency eslint-plugin-n to v18 (junior) 
+- [#16182](https://github.com/1024pix/pix/pull/16182) Update dependency eslint-plugin-n to v18 (mon-pix) 
+- [#16166](https://github.com/1024pix/pix/pull/16166) Update dependency redis to v7.2.14 
+- [#16167](https://github.com/1024pix/pix/pull/16167) Update mcr.microsoft.com/playwright Docker tag to v1.59.1 (.circleci) 
+
+### :coffee: Autre
+
 # [5.405.0](https://github.com/1024pix/pix/compare/v5.404.0...v5.405.0) (2026-05-11)
 
 ### :rocket: Amélioration
