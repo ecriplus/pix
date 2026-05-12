@@ -325,60 +325,94 @@
         }
       },
       "DROIT": {
-        "LEVEL_INDEPENDENT": {
-          "label": "Indépendant",
-          "summary": "Le candidat a obtenu le niveau Indépendant."
-        },
-        "LEVEL_CONFIRMED": {
-          "label": "Confirmé",
-          "summary": "Le candidat a obtenu le niveau Confirmé."
-        },
         "LEVEL_ADVANCED": {
+          "description": "Votre maîtrise du numérique pour les métiers du droit vous permet d’identifier les enjeux et les problématiques juridiques que soulève le recours au numérique. Elle permet de déterminer le cadre juridique applicable à une situation juridique donnée, et de mettre en œuvre les règles de droit concernées.\nVous maîtrisez également les outils numériques à la disposition des praticiens du droit et pouvez réaliser une recherche juridique avancée et efficace.",
           "label": "Avancé",
           "summary": "Le candidat a obtenu le niveau Avancé."
         },
+        "LEVEL_CONFIRMED": {
+          "description": "Votre maîtrise du numérique pour les métiers du droit vous permet d’identifier les enjeux et les problématiques juridiques que soulève le recours au numérique, et de déterminer le cadre juridique correspondant.\nVous pouvez également identifier les principaux outils numériques à la disposition des praticiens du droit et réaliser une recherche juridique pertinente.",
+          "label": "Confirmé",
+          "summary": "Le candidat a obtenu le niveau Confirmé."
+        },
         "LEVEL_EXPERT": {
+          "description": "Votre maîtrise du numérique pour les métiers du droit vous permet d’identifier les enjeux et les problématiques juridiques que soulève le recours au numérique. Elle permet de déterminer le cadre juridique applicable à une situation juridique donnée, et de mettre en œuvre les règles de droit concernées. Vous êtes en capacité d’anticiper et de proposer des solutions juridiques ajustées à un besoin ou une attente.\nVous maîtrisez également les outils numériques à la disposition des praticiens du droit et pouvez réaliser une recherche juridique avancée et efficace.",
           "label": "Expert",
           "summary": "Le candidat a obtenu le niveau Expert."
+        },
+        "LEVEL_INDEPENDENT": {
+          "description": "Votre maîtrise du numérique pour les métiers du droit vous permet de saisir les principaux enjeux juridiques du numérique et identifier les principaux outils juridiques à la disposition des praticiens du droit.",
+          "label": "Indépendant",
+          "summary": "Le candidat a obtenu le niveau Indépendant."
         }
       },
       "EDU_1ER_DEGRE": {
         "LEVEL_ADMISSIBLE": {
-          "description": "La certification se déroule en deux étapes :\n 1. Épreuve Pix : Il vient de la passer.\n 2. Épreuve orale : organisée en dehors de Pix devant un jury.\nÀ l’issue de cet oral, votre niveau de certification définitif sera attribué (Expert, Avancé, etc.).\nRapprochez-vous de votre centre de certification pour organiser le passage de l’oral.",
+          "description": "La certification se déroule en deux étapes :\n 1. Épreuve Pix : Il vient de la passer.\n 2. Épreuve orale : organisée en dehors de Pix devant un jury.\nÀ l’issue de cet oral, votre niveau de certification définitif sera attribué (Expert, Avancé, etc.).\nRapprochez-vous de votre centre de certification pour organiser le passage de l’oral.",
           "label": "Admissible",
           "summary": "Le candidat est admissible à la certification Pix+ Edu."
+        },
+        "LEVEL_ADVANCED": {
+          "description": "Vous êtes capable de mobiliser le numérique dans votre activité professionnelle, de manière variée et pertinente. Vous disposez de connaissances approfondies qui vous permettent de porter un regard critique et éclairé sur vos usages.",
+          "label": "Avancé",
+          "summary": "Le candidat a obtenu le niveau Avancé."
+        },
+        "LEVEL_EXPERT": {
+          "description": "Vous êtes capable d'utiliser le numérique dans votre pratique professionnelle de manière critique, ciblée et originale en fonction des contextes et des besoins. Vous pouvez utiliser votre expertise pour accompagner, inspirer et soutenir vos pairs dans le développement de leurs compétences numériques professionnelles.",
+          "label": "Expert",
+          "summary": "Le candidat a obtenu le niveau Expert."
         }
       },
       "EDU_2ND_DEGRE": {
         "LEVEL_ADMISSIBLE": {
-          "description": "La certification se déroule en deux étapes :\n 1. Épreuve Pix : Il vient de la passer.\n 2. Épreuve orale : organisée en dehors de Pix devant un jury.\nÀ l’issue de cet oral, votre niveau de certification définitif sera attribué (Expert, Avancé, etc.).\nRapprochez-vous de votre centre de certification pour organiser le passage de l’oral.",
+          "description": "La certification se déroule en deux étapes :\n 1. Épreuve Pix : Il vient de la passer.\n 2. Épreuve orale : organisée en dehors de Pix devant un jury.\nÀ l’issue de cet oral, votre niveau de certification définitif sera attribué (Expert, Avancé, etc.).\nRapprochez-vous de votre centre de certification pour organiser le passage de l’oral.",
           "label": "Admissible",
           "summary": "Le candidat est admissible à la certification Pix+ Edu."
+        },
+        "LEVEL_ADVANCED": {
+          "description": "Vous êtes capable de mobiliser le numérique dans votre activité professionnelle, de manière variée et pertinente. Vous disposez de connaissances approfondies qui vous permettent de porter un regard critique et éclairé sur vos usages.",
+          "label": "Avancé",
+          "summary": "Le candidat a obtenu le niveau Avancé."
+        },
+        "LEVEL_EXPERT": {
+          "description": "Vous êtes capable d'utiliser le numérique dans votre pratique professionnelle de manière critique, ciblée et originale en fonction des contextes et des besoins. Vous pouvez utiliser votre expertise pour accompagner, inspirer et soutenir vos pairs dans le développement de leurs compétences numériques professionnelles.",
+          "label": "Expert",
+          "summary": "Le candidat a obtenu le niveau Expert."
         }
       },
       "EDU_CPE": {
         "LEVEL_ADMISSIBLE": {
-          "description": "La certification se déroule en deux étapes :\n 1. Épreuve Pix : Il vient de la passer.\n 2. Épreuve orale : organisée en dehors de Pix devant un jury.\nÀ l’issue de cet oral, votre niveau de certification définitif sera attribué (Expert, Avancé, etc.).\nRapprochez-vous de votre centre de certification pour organiser le passage de l’oral.",
+          "description": "La certification se déroule en deux étapes :\n 1. Épreuve Pix : Il vient de la passer.\n 2. Épreuve orale : organisée en dehors de Pix devant un jury.\nÀ l’issue de cet oral, votre niveau de certification définitif sera attribué (Expert, Avancé, etc.).\nRapprochez-vous de votre centre de certification pour organiser le passage de l’oral.",
           "label": "Admissible",
           "summary": "Le candidat est admissible à la certification Pix+ Edu."
+        },
+        "LEVEL_ADVANCED": {
+          "description": "Vous êtes capable de mobiliser le numérique dans votre activité professionnelle, de manière variée et pertinente. Vous disposez de connaissances approfondies qui vous permettent de porter un regard critique et éclairé sur vos usages.",
+          "label": "Avancé",
+          "summary": "Le candidat a obtenu le niveau Avancé."
+        },
+        "LEVEL_EXPERT": {
+          "description": "Vous êtes capable d'utiliser le numérique dans votre pratique professionnelle de manière critique, ciblée et originale en fonction des contextes et des besoins. Vous pouvez utiliser votre expertise pour accompagner, inspirer et soutenir vos pairs dans le développement de leurs compétences numériques professionnelles.",
+          "label": "Expert",
+          "summary": "Le candidat a obtenu le niveau Expert."
         }
       },
       "PRO_SANTE": {
-        "LEVEL_INDEPENDENT": {
-          "label": "Indépendant",
-          "summary": "Le candidat a obtenu le niveau Indépendant."
+        "LEVEL_ADVANCED": {
+          "label": "Avancé",
+          "summary": "Le candidat a obtenu le niveau Avancé."
         },
         "LEVEL_CONFIRMED": {
           "label": "Confirmé",
           "summary": "Le candidat a obtenu le niveau Confirmé."
         },
-        "LEVEL_ADVANCED": {
-          "label": "Avancé",
-          "summary": "Le candidat a obtenu le niveau Avancé."
-        },
         "LEVEL_EXPERT": {
           "label": "Expert",
           "summary": "Le candidat a obtenu le niveau Expert."
+        },
+        "LEVEL_INDEPENDENT": {
+          "label": "Indépendant",
+          "summary": "Le candidat a obtenu le niveau Indépendant."
         }
       }
     }

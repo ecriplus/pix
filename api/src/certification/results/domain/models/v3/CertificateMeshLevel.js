@@ -4,7 +4,8 @@
 import Joi from 'joi';
 
 import { EntityValidationError } from '../../../../../shared/domain/errors.js';
-import { Frameworks } from '../../../../shared/domain/models/Frameworks.js';
+import { PIX_PLUS_EDU_EXTERNAL_LEVELS } from '../../../../shared/domain/constants/mesh-configuration.js';
+import { Frameworks, isEduFramework } from '../../../../shared/domain/models/Frameworks.js';
 
 export const CORE_LEVELS = {
   0: 'LEVEL_PRE_BEGINNER',
@@ -39,10 +40,11 @@ export class CertificateMeshLevel {
    * @param {object} props
    * @param {number} props.reachedMeshIndex
    * @param {string} props.certificationFramework
+   * @param {string} [props.eduV3ExternalJuryResult]
    */
-  constructor({ reachedMeshIndex, certificationFramework }) {
+  constructor({ reachedMeshIndex, certificationFramework, eduV3ExternalJuryResult }) {
     this.certificationFramework = certificationFramework;
-    this.meshLevel = this.#getLevelKey({ reachedMeshIndex, certificationFramework });
+    this.meshLevel = this.#getLevelKey({ reachedMeshIndex, certificationFramework, eduV3ExternalJuryResult });
     this.#validate();
   }
 
@@ -58,15 +60,19 @@ export class CertificateMeshLevel {
     return this.#translate({ translate, key: `${this.meshLevel}.description` });
   }
 
-  #getLevelKey({ reachedMeshIndex, certificationFramework }) {
-    if (reachedMeshIndex === null) return null;
+  #getLevelKey({ reachedMeshIndex, certificationFramework, eduV3ExternalJuryResult }) {
+    if (reachedMeshIndex === null || !certificationFramework) return null;
+
+    if (
+      isEduFramework(certificationFramework) &&
+      Object.values(PIX_PLUS_EDU_EXTERNAL_LEVELS).includes(eduV3ExternalJuryResult)
+    ) {
+      return `LEVEL_${eduV3ExternalJuryResult}`;
+    }
 
     switch (certificationFramework) {
       case Frameworks.CORE:
       case Frameworks.CLEA:
-        if (reachedMeshIndex === null) {
-          return null;
-        }
         return CORE_LEVELS[reachedMeshIndex];
       case Frameworks.EDU_1ER_DEGRE:
       case Frameworks.EDU_2ND_DEGRE:

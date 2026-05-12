@@ -32,6 +32,7 @@ export class Certificate {
     deliveredAt,
     pixScore,
     reachedMeshIndex,
+    eduV3ExternalJuryResult,
     verificationCode,
     resultCompetenceTree,
     algorithmEngineVersion,
@@ -47,7 +48,7 @@ export class Certificate {
     this.deliveredAt = deliveredAt;
     this.certificationCenter = certificationCenter;
     this.pixScore = pixScore;
-    this.globalLevel = this.#findLevel(reachedMeshIndex, certificationFramework);
+    this.globalLevel = this.#findLevel({ reachedMeshIndex, certificationFramework, eduV3ExternalJuryResult });
     this.verificationCode = verificationCode;
     this.maxReachableScore = MAX_REACHABLE_SCORE;
     this.resultCompetenceTree = this.globalLevel?.meshLevel && this.pixScore ? resultCompetenceTree : null;
@@ -57,8 +58,12 @@ export class Certificate {
     this.certificationFramework = certificationFramework;
   }
 
-  #findLevel(reachedMeshIndex, certificationFramework) {
-    const globalCertificationLevel = new CertificateMeshLevel({ reachedMeshIndex, certificationFramework });
+  #findLevel({ reachedMeshIndex, certificationFramework, eduV3ExternalJuryResult }) {
+    const globalCertificationLevel = new CertificateMeshLevel({
+      reachedMeshIndex,
+      certificationFramework,
+      eduV3ExternalJuryResult,
+    });
 
     return globalCertificationLevel.meshLevel === CORE_CERTIFICATE_LEVELS.preBeginner ? null : globalCertificationLevel;
   }

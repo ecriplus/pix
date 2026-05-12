@@ -1,7 +1,5 @@
 import { AssessmentResult } from '../../../../shared/domain/models/AssessmentResult.js';
-import { PIX_PLUS_EDU_EXTERNAL_LEVELS } from '../../../shared/domain/constants/mesh-configuration.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
-import { isEduFramework } from '../../../shared/domain/models/Frameworks.js';
 import { hasCoreScope } from '../../../shared/domain/models/Frameworks.js';
 import { JuryComment, JuryCommentContexts } from '../../../shared/domain/models/JuryComment.js';
 import { CertificateMeshLevel } from './v3/CertificateMeshLevel.js';
@@ -134,19 +132,11 @@ export class CertificateSummary {
       certificateType,
       reachedMeshLevel: isRejectedV3
         ? null
-        : _getReachedMeshLevel({ reachedMeshIndex, certificationFramework, algorithmVersion, eduV3ExternalJuryResult }),
+        : _getReachedMeshLevel({ reachedMeshIndex, certificationFramework, eduV3ExternalJuryResult }),
     });
   }
 }
 
-function _getReachedMeshLevel({ reachedMeshIndex, certificationFramework, algorithmVersion, eduV3ExternalJuryResult }) {
-  if (
-    AlgorithmEngineVersion.isV3(algorithmVersion) &&
-    isEduFramework(certificationFramework) &&
-    Object.values(PIX_PLUS_EDU_EXTERNAL_LEVELS).includes(eduV3ExternalJuryResult)
-  ) {
-    return `LEVEL_${eduV3ExternalJuryResult}`;
-  }
-
-  return new CertificateMeshLevel({ reachedMeshIndex, certificationFramework }).meshLevel;
+function _getReachedMeshLevel({ reachedMeshIndex, certificationFramework, eduV3ExternalJuryResult }) {
+  return new CertificateMeshLevel({ reachedMeshIndex, certificationFramework, eduV3ExternalJuryResult }).meshLevel;
 }

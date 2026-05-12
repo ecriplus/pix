@@ -134,6 +134,7 @@ function _selectCertificationCourseDTOs(knexConn) {
       certificationFramework: 'certification-courses.framework',
       pixScore: 'assessment-results.pixScore',
       reachedMeshIndex: 'assessment-results.reachedMeshIndex',
+      eduV3ExternalJuryResult: 'assessment-results.eduV3ExternalJuryResult',
       assessmentResultId: 'assessment-results.id',
       competenceMarks: knexConn.raw(`
         json_agg(

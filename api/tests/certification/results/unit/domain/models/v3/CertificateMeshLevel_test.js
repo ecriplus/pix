@@ -3,6 +3,7 @@ import {
   CORE_LEVELS,
   EDU_LEVELS,
 } from '../../../../../../../src/certification/results/domain/models/v3/CertificateMeshLevel.js';
+import { PIX_PLUS_EDU_EXTERNAL_LEVELS } from '../../../../../../../src/certification/shared/domain/constants/mesh-configuration.js';
 import { Frameworks } from '../../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { expect } from '../../../../../../test-helper.js';
@@ -52,6 +53,40 @@ describe('Unit | Domain | Models | CertificateMeshLevel', function () {
 
         // then
         expect(globalCertificationLevel.meshLevel).to.equal(EDU_LEVELS['0']);
+      });
+    });
+
+    describe('when the external jury result is set', function () {
+      ['EDU_1ER_DEGRE', 'EDU_2ND_DEGRE', 'EDU_CPE'].forEach((eduFramework) => {
+        context(`for framework ${eduFramework}`, function () {
+          Object.values(PIX_PLUS_EDU_EXTERNAL_LEVELS).forEach((externalLevel) => {
+            it(`should return LEVEL_${externalLevel} when eduV3ExternalJuryResult is ${externalLevel}`, function () {
+              // when
+              const globalCertificationLevel = new CertificateMeshLevel({
+                reachedMeshIndex: 0,
+                certificationFramework: Frameworks[eduFramework],
+                eduV3ExternalJuryResult: externalLevel,
+              });
+
+              // then
+              expect(globalCertificationLevel.meshLevel).to.equal(`LEVEL_${externalLevel}`);
+            });
+          });
+
+          [null, undefined, 'UNSET'].forEach((eduV3ExternalJuryResult) => {
+            it(`should fall back to LEVEL_ADMISSIBLE when eduV3ExternalJuryResult is ${eduV3ExternalJuryResult}`, function () {
+              // when
+              const globalCertificationLevel = new CertificateMeshLevel({
+                reachedMeshIndex: 0,
+                certificationFramework: Frameworks[eduFramework],
+                eduV3ExternalJuryResult,
+              });
+
+              // then
+              expect(globalCertificationLevel.meshLevel).to.equal('LEVEL_ADMISSIBLE');
+            });
+          });
+        });
       });
     });
   });
