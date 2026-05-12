@@ -49,7 +49,7 @@ export default class Hexagon extends Component {
 
   <template>
     {{#if @badgeUrl}}
-      <img class={{this.badgeClassNames}} src={{@badgeUrl}} alt="" />
+      <img data-testid="pw-certification-card-badge" class={{this.badgeClassNames}} src={{@badgeUrl}} alt="" />
     {{else}}
       <div data-testid="pw-certification-card-result" class={{this.hexagonClassNames}}>
         <strong class="score">{{this.score}}</strong>

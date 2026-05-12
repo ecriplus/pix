@@ -129,7 +129,7 @@ test(
           let certificationGeneralInfo = await certificationInformationPage.getGeneralInfo();
           expect(certificationGeneralInfo.sessionNumber).toBe(sessionNumber);
           expect(certificationGeneralInfo.status).toBe('Validée');
-          expect(certificationGeneralInfo.result).toBe('Expert 1 (804 Pix)');
+          expect(certificationGeneralInfo.result).toBe('Expert 1 (806 Pix)');
 
           await certificationInformationPage.rescoreCertification();
           await waitForScoringJobToBeCompleted(certificationNumber);
@@ -137,7 +137,7 @@ test(
           certificationGeneralInfo = await certificationInformationPage.getGeneralInfo();
           expect(certificationGeneralInfo.sessionNumber).toBe(sessionNumber);
           expect(certificationGeneralInfo.status).toBe('Validée');
-          expect(certificationGeneralInfo.result).toBe('Expert 1 (804 Pix)');
+          expect(certificationGeneralInfo.result).toBe('Expert 1 (806 Pix)');
         });
       });
     });

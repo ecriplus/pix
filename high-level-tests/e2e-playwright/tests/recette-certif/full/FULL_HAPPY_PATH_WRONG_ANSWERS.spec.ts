@@ -139,8 +139,16 @@ test.describe('Happy paths on all certifications, 32 wrong answers, through app.
           await pixAppCertifiablePage.goto(process.env.PIX_APP_URL as string);
           const homePage = new HomePage(pixAppCertifiablePage);
           const certificateListPage = await homePage.goToMyCertificates();
-          const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment } =
-            await certificateListPage.getCertificateData(certificationNumber);
+          const {
+            mainStatus,
+            extraStatus,
+            detailsFramework,
+            certificationCenter,
+            examDate,
+            result,
+            comment,
+            hasBadge,
+          } = await certificateListPage.getCertificateData(certificationNumber);
           expect(mainStatus).toBe(testData.appCertificationListInfo.mainStatus);
           expect(extraStatus).toBe(testData.appCertificationListInfo.extraStatus);
           expect(detailsFramework).toBe(null);
@@ -148,6 +156,7 @@ test.describe('Happy paths on all certifications, 32 wrong answers, through app.
           expect(examDate).toBe('Date de passage : ' + getNowAsDDMMYYYY());
           expect(comment).toBe(testData.appCertificationListInfo.comment);
           snapshotHandler.push('appCertificationListInfo_result', result);
+          snapshotHandler.push('appCertificationListInfo_hasBadge', `${hasBadge}`);
         });
 
         await test.step('Checking CSV result file content', async () => {

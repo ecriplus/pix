@@ -121,7 +121,7 @@ test(
       await pixAppCertifiablePage.goto(process.env.PIX_APP_URL as string);
       const homePage = new HomePage(pixAppCertifiablePage);
       const certificateListPage = await homePage.goToMyCertificates();
-      const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment } =
+      const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment, hasBadge } =
         await certificateListPage.getCertificateData(certificationNumber);
       expect(mainStatus).toBe('Certification Pix : Non obtenue');
       expect(extraStatus).toBe(null);
@@ -129,6 +129,7 @@ test(
       expect(certificationCenter).toBe('Centre de certification : ' + certificationCenterName);
       expect(examDate).toBe('Date de passage : ' + getNowAsDDMMYYYY());
       expect(result).toBe('- PIX');
+      expect(hasBadge).toBe(false);
       expect(comment).toBe(
         'Commentaire : Le nombre de questions répondues pendant votre test de certification est insuffisant et ne nous permet pas de vous délivrer une certification.',
       );

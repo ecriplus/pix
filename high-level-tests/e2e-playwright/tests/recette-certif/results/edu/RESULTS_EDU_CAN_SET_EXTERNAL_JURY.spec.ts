@@ -128,7 +128,7 @@ test(
       await pixAppCertifiablePage.goto(process.env.PIX_APP_URL as string);
       const homePage = new HomePage(pixAppCertifiablePage);
       const certificateListPage = await homePage.goToMyCertificates();
-      const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment } =
+      const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment, hasBadge } =
         await certificateListPage.getCertificateData(certificationNumber);
       expect(mainStatus).toBe('Pix+ Édu 1er degré : Admissible');
       expect(extraStatus).toBe(null);
@@ -136,6 +136,7 @@ test(
       expect(certificationCenter).toBe('Centre de certification : ' + certificationCenterName);
       expect(examDate).toBe('Date de passage : ' + getNowAsDDMMYYYY());
       expect(result).toBe('');
+      expect(hasBadge).toBe(false);
       expect(comment).toBe(null);
     });
 

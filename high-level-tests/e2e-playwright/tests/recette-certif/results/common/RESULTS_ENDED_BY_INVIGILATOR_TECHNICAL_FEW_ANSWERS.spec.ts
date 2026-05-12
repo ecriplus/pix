@@ -125,7 +125,7 @@ test(
       await pixAppCertifiablePage.goto(process.env.PIX_APP_URL as string);
       const homePage = new HomePage(pixAppCertifiablePage);
       const certificateListPage = await homePage.goToMyCertificates();
-      const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment } =
+      const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment, hasBadge } =
         await certificateListPage.getCertificateData(certificationNumber);
       expect(mainStatus).toBe('Annulée');
       expect(extraStatus).toBe(null);
@@ -133,6 +133,7 @@ test(
       expect(certificationCenter).toBe('Centre de certification : ' + certificationCenterName);
       expect(examDate).toBe('Date de passage : ' + getNowAsDDMMYYYY());
       expect(result).toBe('- PIX');
+      expect(hasBadge).toBe(false);
       expect(comment).toBe(
         "Commentaire : Un ou plusieurs problème(s) technique(s), signalé(s) à votre surveillant pendant la session de certification, a/ont affecté la qualité du test de certification. En raison du trop grand nombre de questions auxquelles vous n'avez pas pu répondre dans de bonnes conditions, nous ne sommes malheureusement pas en mesure de calculer un score fiable et de fournir un certificat. La certification est annulée, le prescripteur de votre certification (le cas échéant), en est informé.",
       );

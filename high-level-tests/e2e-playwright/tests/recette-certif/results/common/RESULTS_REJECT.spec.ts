@@ -154,7 +154,7 @@ test(
       await pixAppCertifiablePage.goto(process.env.PIX_APP_URL as string);
       const homePage = new HomePage(pixAppCertifiablePage);
       const certificateListPage = await homePage.goToMyCertificates();
-      const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment } =
+      const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment, hasBadge } =
         await certificateListPage.getCertificateData(certificationNumber);
       expect(mainStatus).toBe('Certification Pix : Non obtenue');
       expect(extraStatus).toBe(null);
@@ -162,6 +162,7 @@ test(
       expect(certificationCenter).toBe('Centre de certification : ' + certificationCenterName);
       expect(examDate).toBe('Date de passage : ' + getNowAsDDMMYYYY());
       expect(result).toBe('- PIX');
+      expect(hasBadge).toBe(false);
       expect(comment).toBe(
         "Commentaire : Les conditions de passation du test de certification n'ayant pas été respectées et ayant fait l'objet d'un signalement pour fraude, votre certification a été invalidée en conséquence.",
       );
