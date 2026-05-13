@@ -1,5 +1,42 @@
 # Pix Changelog
 
+# [5.407.0](https://github.com/1024pix/pix/compare/v5.406.0...v5.407.0) (2026-05-13)
+
+### :rocket: Amélioration
+
+- [#16201](https://github.com/1024pix/pix/pull/16201) #MDX-43 Ajout QCU découverte 2 
+- [#16195](https://github.com/1024pix/pix/pull/16195) Ajout de nouvelles colonnes dans la table trainings pour la recommandation de contenus formatifs (PIX-22714). 
+- [#16110](https://github.com/1024pix/pix/pull/16110) Fermer le menu utilisateur au clic souris (PIX-22649). 
+- [#16160](https://github.com/1024pix/pix/pull/16160) Importer les traductions allemande et espagnole (PIX-22665-import-translations) 
+- [#16146](https://github.com/1024pix/pix/pull/16146) MDX-32 Datacenter_NOV retours edito 
+- [#16135](https://github.com/1024pix/pix/pull/16135) MDX-43 intégrations post relectures 
+- [#16200](https://github.com/1024pix/pix/pull/16200) Permet la désactivation des Parcours Combiné via un Feature Toggle (PIX-22658). 
+- [#16172](https://github.com/1024pix/pix/pull/16172) Suppression des colonnes 'completedAt' et 'endedAt' de la table 'certification-courses' (PIX-22328) 
+
+### :bug: Correction
+
+- [#16173](https://github.com/1024pix/pix/pull/16173) Corriger le flaky sur la réconciliation des apprenants lors d'un import SCO (PIX-22719) 
+- [#16169](https://github.com/1024pix/pix/pull/16169) ne pas échouer quand un badge n'est pas valide (PIX-17427) 
+
+### :building_construction: Tech
+
+- [#16196](https://github.com/1024pix/pix/pull/16196) :package: Mise à jour des bibliothèques autour d'Ember (pix-22734) 
+- [#16199](https://github.com/1024pix/pix/pull/16199) :recycle: Fais en sorte que la `startDate` de la version soit optionnelle 
+- [#16203](https://github.com/1024pix/pix/pull/16203) Améliorer les logs des requêtes vers l'API LLM (PIX-22739) 
+- [#16202](https://github.com/1024pix/pix/pull/16202) Désactive temporairement les tests de la recette certif 
+- [#16096](https://github.com/1024pix/pix/pull/16096) Diminution du nombre de tests E2E tout en gardant la couverture(PIX-22657) 
+- [#16184](https://github.com/1024pix/pix/pull/16184) Fusionne les tests du ErrorManager et simplifie le mapping d'erreurs 
+- [#16170](https://github.com/1024pix/pix/pull/16170) Modification de la table `certification_versions` (PIX-22695). 
+- [#16165](https://github.com/1024pix/pix/pull/16165) Refactorer les jobs d'import et de validation des apprenants (PIX-22711) 
+
+### :arrow_up: Montée de version
+
+- [#16183](https://github.com/1024pix/pix/pull/16183) Update dependency eslint-plugin-n to v18 (orga) 
+- [#16192](https://github.com/1024pix/pix/pull/16192) Update dependency oxfmt to ^0.48.0 (api) 
+- [#16205](https://github.com/1024pix/pix/pull/16205) Update dependency sinon to v22 (admin) 
+
+### :coffee: Autre
+
 # [5.406.0](https://github.com/1024pix/pix/compare/v5.405.0...v5.406.0) (2026-05-12)
 
 ### :rocket: Amélioration
