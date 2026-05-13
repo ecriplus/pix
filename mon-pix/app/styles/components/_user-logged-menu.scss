@@ -94,4 +94,8 @@
     text-decoration: none;
     background-color: var(--pix-neutral-20);
   }
+
+  &.active {
+    font-weight: bold;
+  }
 }

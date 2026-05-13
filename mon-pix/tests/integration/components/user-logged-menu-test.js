@@ -1,5 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
-import { click, triggerKeyEvent } from '@ember/test-helpers';
+import { click, settled, triggerEvent, triggerKeyEvent } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
@@ -165,6 +165,52 @@ module('Integration | Component | user logged menu', function (hooks) {
         )
         .exists();
       assert.dom(screen.queryByRole('link', { name: t('navigation.user.account') })).doesNotExist();
+    });
+
+    test('should hide user menu when a link is clicked with a pointer device', async function (assert) {
+      // given
+      const screen = await render(hbs`<UserLoggedMenu />`);
+      const buttonMenu = screen.getByRole('button', {
+        name: `Hermione ${t('navigation.user-logged-menu.details')}`,
+      });
+      await click(buttonMenu);
+
+      // when
+      const link = screen.getByRole('link', { name: t('navigation.main.help') });
+      link.dispatchEvent(new PointerEvent('click', { bubbles: true, pointerType: 'mouse' }));
+      await settled();
+
+      // then
+      assert
+        .dom(
+          screen.getByRole('button', {
+            name: `Hermione ${t('navigation.user-logged-menu.details')}`,
+            expanded: false,
+          }),
+        )
+        .exists();
+    });
+
+    test('should keep user menu open when a link is activated with the keyboard', async function (assert) {
+      // given
+      const screen = await render(hbs`<UserLoggedMenu />`);
+      const buttonMenu = screen.getByRole('button', {
+        name: `Hermione ${t('navigation.user-logged-menu.details')}`,
+      });
+      await click(buttonMenu);
+
+      // when
+      await triggerEvent(screen.getByRole('link', { name: t('navigation.main.help') }), 'click', { detail: 0 });
+
+      // then
+      assert
+        .dom(
+          screen.getByRole('button', {
+            name: `Hermione ${t('navigation.user-logged-menu.details')}`,
+            expanded: true,
+          }),
+        )
+        .exists();
     });
 
     module('Link to "My tests"', function () {
