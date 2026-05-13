@@ -1254,6 +1254,13 @@
         "start-button": "Meine Reise beginnen",
         "step": "Schritt {stepNumber}."
       },
+      "errors": {
+        "disabled": {
+          "content": "Aufgrund des hohen Besucherandrangs ist der Zugang zu diesem Parcours vorübergehend gesperrt.",
+          "instructions": "Bitte versuche es später noch einmal.",
+          "title": "Diese Parcours ist derzeit nicht verfügbar"
+        }
+      },
       "items": {
         "aria-label-completed-campaign": "Dieses Element wird mit einer Erfolgsquote von {value, number, ::percent} abgeschlossen.",
         "aria-label-completed-campaign-with-stages": "Du hast {acquired, plural, =0 {keinen Stern} =1 {# Stern} other {# Sterne}} von {total} erhalten.",

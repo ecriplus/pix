@@ -70,7 +70,35 @@ module('Acceptance | Fill in campaign code page', function (hooks) {
           await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
 
           // then
-          assert.strictEqual(currentURL(), `/campagnes/SOMETHING/oups`);
+          assert.strictEqual(currentURL(), `/parcours/oups`);
+        });
+      });
+      module('when combined courses feature is disabled', function (hooks) {
+        hooks.beforeEach(async function () {
+          await authenticate(user);
+          this.server.create('feature-toggle', {
+            id: 0,
+            areCombinedCoursesEnabled: false,
+          });
+        });
+
+        test('it displays combined course error page', async function (assert) {
+          // given
+          const verifiedCode = server.create('verified-code', { id: 'SOMETHING', type: 'combined-course' });
+          this.server.create('combined-course', { code: verifiedCode.id });
+          this.server.get(
+            'verified-codes/:code',
+            () => new Response(422, {}, { errors: [{ status: '422', code: 'DISABLED_FEATURE' }] }),
+          );
+
+          // when
+          const screen = await visit(`/campagnes`);
+          await fillIn(screen.getByLabelText(`${t('pages.fill-in-campaign-code.label')} *`), verifiedCode.id);
+
+          await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
+
+          // then
+          assert.strictEqual(currentURL(), `/parcours/erreur`);
         });
       });
       module('when access to combined course has failed', function () {

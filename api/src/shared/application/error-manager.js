@@ -215,6 +215,7 @@ const UNPROCESSABLE_ENTITY_ERRORS = [
   SharedDomainErrors.UserShouldNotBeReconciledOnAnotherAccountError,
   UserNotMemberOfOrganizationError,
   ArchiveOrganizationError,
+  SharedDomainErrors.FeatureDisabledError,
 ];
 
 const UNAUTHORIZED_ERRORS = [

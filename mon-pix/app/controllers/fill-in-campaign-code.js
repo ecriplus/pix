@@ -69,11 +69,13 @@ export default class FillInCampaignCodeController extends Controller {
   }
 
   onStartCampaignError(error) {
-    const { status } = error.errors[0];
+    const { status, code } = error.errors[0];
     if (status === '403') {
       this.apiErrorMessage = this.intl.t('pages.fill-in-campaign-code.errors.forbidden');
     } else if (status === '404') {
       this.apiErrorMessage = this.intl.t('pages.fill-in-campaign-code.errors.not-found');
+    } else if (code === 'DISABLED_FEATURE') {
+      this.router.transitionTo('combined-courses.disabled-feature-error');
     } else {
       throw error;
     }

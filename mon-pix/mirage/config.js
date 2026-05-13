@@ -59,6 +59,10 @@ export default function makeServer(config) {
 
   const server = createServer(finalConfig);
   server.create('information-banner', 'withoutBanners');
+  server.create('feature-toggle', {
+    id: 0,
+    areCombinedCoursesEnabled: true,
+  });
 
   return server;
 }

@@ -136,4 +136,11 @@ export default {
     devDefaultValues: { test: false, reviewApp: false },
     tags: ['team-acces', 'pix-api', 'backend'],
   },
+  areCombinedCoursesEnabled: {
+    type: 'boolean',
+    description: 'Enables combined courses',
+    defaultValue: true,
+    devDefaultValues: { test: true, reviewApp: true },
+    tags: ['team-combinix', 'pix-api', 'frontend'],
+  },
 };

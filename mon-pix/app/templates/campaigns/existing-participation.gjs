@@ -1,8 +1,8 @@
 import t from 'ember-intl/helpers/t';
-import InaccessibleCampaign from 'mon-pix/components/inaccessible-campaign';
+import InaccessibleContent from 'mon-pix/components/inaccessible-content';
 <template>
-  <InaccessibleCampaign class="inaccessible-campaign">
-    <:default>{{t "pages.campaign.errors.existing-participation"}}</:default>
+  <InaccessibleContent class="inaccessible-campaign">
+    <:title>{{t "pages.campaign.errors.existing-participation"}}</:title>
     <:content>
       <p class="inaccessible-campaign__message">
         {{t
@@ -15,5 +15,5 @@ import InaccessibleCampaign from 'mon-pix/components/inaccessible-campaign';
         {{t "pages.campaign.errors.existing-participation-info"}}
       </p>
     </:content>
-  </InaccessibleCampaign>
+  </InaccessibleContent>
 </template>

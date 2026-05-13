@@ -198,6 +198,9 @@ const register = async function (server) {
       config: {
         pre: [
           {
+            method: securityPreHandlers.checkCombinedCoursesFeatureIsEnabled,
+          },
+          {
             method: securityPreHandlers.checkAuthorizationToAccessCombinedCourse,
           },
         ],
@@ -216,6 +219,9 @@ const register = async function (server) {
       path: '/api/combined-courses/{code}/reassess-status',
       config: {
         pre: [
+          {
+            method: securityPreHandlers.checkCombinedCoursesFeatureIsEnabled,
+          },
           {
             method: securityPreHandlers.checkAuthorizationToAccessCombinedCourse,
           },

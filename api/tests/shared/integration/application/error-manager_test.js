@@ -596,7 +596,7 @@ describe('Integration | API | Controller Error', function () {
     });
   });
 
-  context('404 Not Found', function () {
+  context('404 Not found', function () {
     const NOT_FOUND_ERROR = 404;
 
     it('responds Not Found when a LLMDomainErrors.ChatNotFoundError error occurs', async function () {
@@ -835,6 +835,14 @@ describe('Integration | API | Controller Error', function () {
 
       expect(response.statusCode).to.equal(UNPROCESSABLE_ENTITY_ERROR);
       expect(responseDetail(response)).to.equal('Attributs manquants.');
+    });
+
+    it('responds Unprocessable Entity when a DomainErrors.FeatureDisabledError error occurs', async function () {
+      routeHandler.throws(new DomainErrors.FeatureDisabledError());
+      const response = await server.requestObject(request);
+
+      expect(response.statusCode).to.equal(UNPROCESSABLE_ENTITY_ERROR);
+      expect(responseDetail(response)).to.equal('Feature is disabled.');
     });
   });
 

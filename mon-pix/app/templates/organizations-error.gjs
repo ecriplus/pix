@@ -1,7 +1,7 @@
 import t from 'ember-intl/helpers/t';
-import InaccessibleCampaign from 'mon-pix/components/inaccessible-campaign';
+import InaccessibleContent from 'mon-pix/components/inaccessible-content';
 <template>
-  <InaccessibleCampaign>
-    {{t "pages.campaign.errors.not-accessible"}}
-  </InaccessibleCampaign>
+  <InaccessibleContent>
+    <:title>{{t "pages.campaign.errors.not-accessible"}}</:title>
+  </InaccessibleContent>
 </template>

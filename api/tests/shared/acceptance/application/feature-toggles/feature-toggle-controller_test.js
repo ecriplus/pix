@@ -40,6 +40,7 @@ describe('Acceptance | Shared | Application | Controller | feature-toggle', func
               'EDU_CPE',
               'PRO_SANTE',
             ],
+            'are-combined-courses-enabled': true,
           },
         },
       };

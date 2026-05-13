@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import Service from '@ember/service';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
@@ -11,6 +12,10 @@ module('Integration | Component | CampaignParticipationOverview | Card | Ended',
 
   hooks.beforeEach(function () {
     store = this.owner.lookup('service:store');
+    class FeatureTogglesStub extends Service {
+      featureToggles = { areCombinedCoursesEnabled: true };
+    }
+    this.owner.register('service:featureToggles', FeatureTogglesStub);
   });
   module('when card has "ENDED" status', function () {
     test('should render card info ', async function (assert) {
@@ -29,7 +34,6 @@ module('Integration | Component | CampaignParticipationOverview | Card | Ended',
       const screen = await render(
         hbs`<CampaignParticipationOverview::Card::Ended @model={{this.campaignParticipationOverview}} />`,
       );
-
       // then
       assert.ok(screen.getByRole('heading', { name: 'My organization' }));
       assert.ok(screen.getByText('My campaign'));
