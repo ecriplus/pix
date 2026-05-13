@@ -8,9 +8,7 @@ describe('Integration | Prescription | Infrastructure | Repository | Jobs | impo
   describe('#performAsync', function () {
     it('publish a job', async function () {
       // when
-      await importFromSiecleJobRepository.performAsync(
-        new ImportFromSiecleJob({ organizationImportId: 4123132 }),
-      );
+      await importFromSiecleJobRepository.performAsync(new ImportFromSiecleJob({ organizationImportId: 4123132 }));
 
       // then
       await expect(ImportFromSiecleJob.name).to.have.have.been.performed.withJob({

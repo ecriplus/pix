@@ -32,9 +32,7 @@ const validateGenericFile = async function ({
     });
 
     learnerSet.addLearners(learners);
-    await importFromGenericFileJobRepository.performAsync(
-      new ImportFromGenericFileJob({ organizationImportId }),
-    );
+    await importFromGenericFileJobRepository.performAsync(new ImportFromGenericFileJob({ organizationImportId }));
   } catch (error) {
     if (Array.isArray(error)) {
       errors.push(...error);

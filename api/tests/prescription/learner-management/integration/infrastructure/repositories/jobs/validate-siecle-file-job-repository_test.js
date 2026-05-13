@@ -8,9 +8,7 @@ describe('Integration | Prescription | Infrastructure | Repository | Jobs | vali
   describe('#performAsync', function () {
     it('publish a job', async function () {
       // when
-      await validateSiecleFileJobRepository.performAsync(
-        new ValidateSiecleFileJob({ organizationImportId: 4123132 }),
-      );
+      await validateSiecleFileJobRepository.performAsync(new ValidateSiecleFileJob({ organizationImportId: 4123132 }));
 
       // then
       await expect(ValidateSiecleFileJob.name).to.have.been.performed.withJob({
