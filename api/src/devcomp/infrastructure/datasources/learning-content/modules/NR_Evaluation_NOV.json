@@ -310,7 +310,7 @@
                 "props": {
                   "image": {
                     "src": "https://assets.pix.org/modules/nr-evaluation-nov/draft-image-cliquable_nr-evaluation-nov.png",
-                    "alt": "",
+                    "alt": "Parcours d'un smaprthone de sa fabrication à son utilisation",
                     "width": 0,
                     "height": 0
                   },
@@ -494,7 +494,7 @@
             {
               "type": "element",
               "element": {
-                "id": "7532844f-4f8c-46bb-a3cf-ccbf7ef63e9d",
+                "id": "0d19d441-4265-4f1f-b516-76dbe5b69829",
                 "type": "text",
                 "tag": " ",
                 "content": "<p>Pour cela, il a listé tous les équipements informatiques qu’il possède pour les saisir dans un logiciel de calcul d’empreinte carbone. Observez les résultats fournis par le logiciel pour répondre aux questions suivantes.</p>"
@@ -654,7 +654,7 @@
             {
               "type": "element",
               "element": {
-                "id": "84230031-3337-4598-9a01-971e1b8c8c47",
+                "id": "40c90095-fccd-42e9-aa92-0c565d891189",
                 "type": "text",
                 "tag": " ",
                 "content": "<ul><li>🌏L’empreinte carbone estime l’impact d’une activité (comme regarder un film) ou de la construction d’un objet (comme un ordinateur) sur le réchauffement climatique.</li><li>📐Elle permet de comparer différentes activités, numériques ou non, et de fixer des objectifs pour réduire les émissions.</li><li>🤔 Pour la calculer, on définit les activités, la période, puis on estime les émissions de gaz à effet de serre associées.</li><li>⚠️Mais elle a une limite importante&nbsp;: elle ne prend pas en compte d’autres impacts, comme la consommation en l’eau ou en ressources.</li></ul>"
@@ -740,7 +740,7 @@
             {
               "type": "element",
               "element": {
-                "id": "0c545fdd-6027-4bf3-9533-2fc337ff570e",
+                "id": "12230128-20b2-432c-9b20-bee86fc9f02f",
                 "type": "text",
                 "tag": " ",
                 "content": "<p>L’entreprise BTPix a calculé l’empreinte carbone de ses activités numériques. Consultez le détail de cette empreinte carbone puis répondez aux questions.</p><p>Empreinte carbone du matériel&nbsp;:</p><table><thead><tr><th style=\"text-align:left\">Équipement</th><th style=\"text-align:left\">Quantité</th><th style=\"text-align:left\">Empreinte carbone par unité</th><th style=\"text-align:left\">Empreinte carbone totale</th></tr></thead><tbody><tr><td style=\"text-align:left\">Ordinateur portable</td><td style=\"text-align:left\">10</td><td style=\"text-align:left\">193kg CO2eq</td><td style=\"text-align:left\">1930kg CO2eq</td></tr><tr><td style=\"text-align:left\">Ordinateur fixe</td><td style=\"text-align:left\">24</td><td style=\"text-align:left\">259kg CO2eq</td><td style=\"text-align:left\">6216kg CO2eq</td></tr><tr><td style=\"text-align:left\">Écran d’ordinateur</td><td style=\"text-align:left\">33</td><td style=\"text-align:left\">92,6kg CO2eq</td><td style=\"text-align:left\">3055,6kg CO2eq</td></tr></tbody></table><p>Empreinte carbone des services numériques&nbsp;:</p><table><thead><tr><th style=\"text-align:left\">Service</th><th style=\"text-align:left\">Quantité par semaine</th><th style=\"text-align:left\">Empreinte carbone totale par semaine</th></tr></thead><tbody><tr><td style=\"text-align:left\">Emails</td><td style=\"text-align:left\">770 emails</td><td style=\"text-align:left\">0,9kg CO2eq</td></tr><tr><td style=\"text-align:left\">Visioconférence</td><td style=\"text-align:left\">300 heures</td><td style=\"text-align:left\">4,81 CO2eq</td></tr></tbody></table>"
