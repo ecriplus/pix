@@ -7,7 +7,7 @@ import { EntityValidationError } from '../../../../../shared/domain/errors.js';
 import { findMeshFromScore } from '../../../../shared/domain/services/mesh-service.js';
 
 /**
- * Temporary - To unify with GlobalCertificationLevel
+ * Temporary - To unify with CertificateMeshLevel
  */
 
 export class ParcoursupCertificationLevel {
@@ -30,7 +30,7 @@ export class ParcoursupCertificationLevel {
   }
 
   #translate({ translate, key }) {
-    const translationKey = `certification.global.meshlevel.${key}`;
+    const translationKey = `certification.meshlevel.CORE.${key}`;
     const translation = translate(translationKey);
     if (translation === translationKey) {
       return '';

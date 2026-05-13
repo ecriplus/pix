@@ -5,7 +5,9 @@ import url from 'node:url';
 
 import PDFDocument from 'pdfkit';
 
-import { generateV3AttestationTemplate } from './templates/certificate.js';
+import { hasCoreScope } from '../../../../shared/domain/models/Frameworks.js';
+import generateV3CertificateTemplate from './templates/v3-certificate.js';
+import generateV3PixPlusCertificateTemplate from './templates/v3-pix-plus-certificate.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -13,7 +15,7 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
  * @param {object} params
  * @param {Array<Certificate>} params.certificates
  */
-const generate = ({ certificates, i18n }) => {
+const generate = async ({ certificates, i18n }) => {
   const doc = new PDFDocument({
     size: 'A4',
     layout: 'landscape',
@@ -36,17 +38,28 @@ const generate = ({ certificates, i18n }) => {
     `${__dirname}/../../../../../shared/infrastructure/utils/pdf/fonts/Roboto-Medium.ttf`,
   );
 
-  certificates.forEach((certificate, index) => {
+  const imageCache = new Map();
+
+  for (const [index, certificate] of certificates.entries()) {
     if (index > 0) {
       doc.addPage();
     }
 
-    generateV3AttestationTemplate({
-      pdf: doc,
-      data: certificate,
-      translate: i18n.__,
-    });
-  });
+    if (hasCoreScope(certificate.certificationFramework)) {
+      generateV3CertificateTemplate({
+        pdf: doc,
+        data: certificate,
+        translate: i18n.__,
+      });
+    } else {
+      await generateV3PixPlusCertificateTemplate({
+        pdf: doc,
+        data: certificate,
+        translate: i18n.__,
+        imageCache,
+      });
+    }
+  }
 
   doc.end();
 

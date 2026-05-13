@@ -1,14 +1,15 @@
 import {
+  CertificateMeshLevel,
   CORE_LEVELS,
   EDU_LEVELS,
-  GlobalCertificationLevel,
-} from '../../../../../../../src/certification/results/domain/models/v3/GlobalCertificationLevel.js';
+} from '../../../../../../../src/certification/results/domain/models/v3/CertificateMeshLevel.js';
+import { PIX_PLUS_EDU_EXTERNAL_LEVELS } from '../../../../../../../src/certification/shared/domain/constants/mesh-configuration.js';
 import { Frameworks } from '../../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { expect } from '../../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../../tooling/domain-builder/domain-builder.js';
 
-describe('Unit | Domain | Models | GlobalCertificationLevel', function () {
+describe('Unit | Domain | Models | CertificateMeshLevel', function () {
   let translate;
 
   beforeEach(function () {
@@ -18,7 +19,7 @@ describe('Unit | Domain | Models | GlobalCertificationLevel', function () {
   describe('when the scope is CORE', function () {
     it('should return the corresponding mesh level', async function () {
       // when
-      const globalCertificationLevel = new GlobalCertificationLevel({
+      const globalCertificationLevel = new CertificateMeshLevel({
         reachedMeshIndex: 2,
         certificationFramework: Frameworks.CORE,
       });
@@ -32,7 +33,7 @@ describe('Unit | Domain | Models | GlobalCertificationLevel', function () {
     describe('when the reached mesh index is null', function () {
       it('should return a null mesh level', async function () {
         // when
-        const globalCertificationLevel = new GlobalCertificationLevel({
+        const globalCertificationLevel = new CertificateMeshLevel({
           reachedMeshIndex: null,
           certificationFramework: Frameworks.EDU_1ER_DEGRE,
         });
@@ -45,7 +46,7 @@ describe('Unit | Domain | Models | GlobalCertificationLevel', function () {
     describe('when the reached mesh index is at least O', function () {
       it('should return the corresponding mesh level', async function () {
         // when
-        const globalCertificationLevel = new GlobalCertificationLevel({
+        const globalCertificationLevel = new CertificateMeshLevel({
           reachedMeshIndex: 0,
           certificationFramework: Frameworks.EDU_CPE,
         });
@@ -54,13 +55,47 @@ describe('Unit | Domain | Models | GlobalCertificationLevel', function () {
         expect(globalCertificationLevel.meshLevel).to.equal(EDU_LEVELS['0']);
       });
     });
+
+    describe('when the external jury result is set', function () {
+      ['EDU_1ER_DEGRE', 'EDU_2ND_DEGRE', 'EDU_CPE'].forEach((eduFramework) => {
+        context(`for framework ${eduFramework}`, function () {
+          Object.values(PIX_PLUS_EDU_EXTERNAL_LEVELS).forEach((externalLevel) => {
+            it(`should return LEVEL_${externalLevel} when eduV3ExternalJuryResult is ${externalLevel}`, function () {
+              // when
+              const globalCertificationLevel = new CertificateMeshLevel({
+                reachedMeshIndex: 0,
+                certificationFramework: Frameworks[eduFramework],
+                eduV3ExternalJuryResult: externalLevel,
+              });
+
+              // then
+              expect(globalCertificationLevel.meshLevel).to.equal(`LEVEL_${externalLevel}`);
+            });
+          });
+
+          [null, undefined, 'UNSET'].forEach((eduV3ExternalJuryResult) => {
+            it(`should fall back to LEVEL_ADMISSIBLE when eduV3ExternalJuryResult is ${eduV3ExternalJuryResult}`, function () {
+              // when
+              const globalCertificationLevel = new CertificateMeshLevel({
+                reachedMeshIndex: 0,
+                certificationFramework: Frameworks[eduFramework],
+                eduV3ExternalJuryResult,
+              });
+
+              // then
+              expect(globalCertificationLevel.meshLevel).to.equal('LEVEL_ADMISSIBLE');
+            });
+          });
+        });
+      });
+    });
   });
 
   describe('#getLevelLabel', function () {
     context('when certificationFramework is CORE', function () {
       it('should return the label for LEVEL_BEGINNER_2', function () {
         // given
-        const globalMeshLevel = domainBuilder.certification.results.buildGlobalCertificationLevel({
+        const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
           reachedMeshIndex: 2,
           certificationFramework: Frameworks.CORE,
         });
@@ -69,12 +104,12 @@ describe('Unit | Domain | Models | GlobalCertificationLevel', function () {
         const translatedLabel = globalMeshLevel.getLevelLabel(translate);
 
         // then
-        expect(translatedLabel).to.equal(translate('certification.global.meshlevel.LEVEL_BEGINNER_2.label'));
+        expect(translatedLabel).to.equal(translate('certification.meshlevel.CORE.LEVEL_BEGINNER_2.label'));
       });
 
       it('should return the label for LEVEL_EXPERT_7', function () {
         // given
-        const globalMeshLevel = domainBuilder.certification.results.buildGlobalCertificationLevel({
+        const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
           reachedMeshIndex: 7,
           certificationFramework: Frameworks.CORE,
         });
@@ -83,12 +118,12 @@ describe('Unit | Domain | Models | GlobalCertificationLevel', function () {
         const translatedLabel = globalMeshLevel.getLevelLabel(translate);
 
         // then
-        expect(translatedLabel).to.equal(translate('certification.global.meshlevel.LEVEL_EXPERT_7.label'));
+        expect(translatedLabel).to.equal(translate('certification.meshlevel.CORE.LEVEL_EXPERT_7.label'));
       });
 
       it('should return an empty string when there is no translation (LEVEL_PRE_BEGINNER)', function () {
         // given
-        const globalMeshLevel = domainBuilder.certification.results.buildGlobalCertificationLevel({
+        const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
           reachedMeshIndex: 0,
           certificationFramework: Frameworks.CORE,
         });
@@ -104,7 +139,7 @@ describe('Unit | Domain | Models | GlobalCertificationLevel', function () {
     context('when certificationFramework is CLEA', function () {
       it('should return the same label as CORE for LEVEL_BEGINNER_2', function () {
         // given
-        const globalMeshLevel = domainBuilder.certification.results.buildGlobalCertificationLevel({
+        const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
           reachedMeshIndex: 2,
           certificationFramework: Frameworks.CLEA,
         });
@@ -113,14 +148,14 @@ describe('Unit | Domain | Models | GlobalCertificationLevel', function () {
         const translatedLabel = globalMeshLevel.getLevelLabel(translate);
 
         // then
-        expect(translatedLabel).to.equal(translate('certification.global.meshlevel.LEVEL_BEGINNER_2.label'));
+        expect(translatedLabel).to.equal(translate('certification.meshlevel.CORE.LEVEL_BEGINNER_2.label'));
       });
     });
 
     context('when certificationFramework is EDU', function () {
       it('should return the label for LEVEL_ADMISSIBLE', function () {
         // given
-        const globalMeshLevel = domainBuilder.certification.results.buildGlobalCertificationLevel({
+        const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
           reachedMeshIndex: 0,
           certificationFramework: Frameworks.EDU_1ER_DEGRE,
         });
@@ -129,7 +164,7 @@ describe('Unit | Domain | Models | GlobalCertificationLevel', function () {
         const translatedLabel = globalMeshLevel.getLevelLabel(translate);
 
         // then
-        expect(translatedLabel).to.equal(translate('certification.global.meshlevel.LEVEL_ADMISSIBLE.label'));
+        expect(translatedLabel).to.equal(translate('certification.meshlevel.EDU_1ER_DEGRE.LEVEL_ADMISSIBLE.label'));
       });
     });
   });
@@ -138,7 +173,7 @@ describe('Unit | Domain | Models | GlobalCertificationLevel', function () {
     context('when certificationFramework is CORE', function () {
       it('should return the summary for LEVEL_BEGINNER_2', function () {
         // given
-        const globalMeshLevel = domainBuilder.certification.results.buildGlobalCertificationLevel({
+        const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
           reachedMeshIndex: 2,
           certificationFramework: Frameworks.CORE,
         });
@@ -147,14 +182,14 @@ describe('Unit | Domain | Models | GlobalCertificationLevel', function () {
         const translatedLabel = globalMeshLevel.getSummaryLabel(translate);
 
         // then
-        expect(translatedLabel).to.equal(translate('certification.global.meshlevel.LEVEL_BEGINNER_2.summary'));
+        expect(translatedLabel).to.equal(translate('certification.meshlevel.CORE.LEVEL_BEGINNER_2.summary'));
       });
     });
 
     context('when certificationFramework is EDU', function () {
       it('should return the summary for LEVEL_ADMISSIBLE', function () {
         // given
-        const globalMeshLevel = domainBuilder.certification.results.buildGlobalCertificationLevel({
+        const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
           reachedMeshIndex: 0,
           certificationFramework: Frameworks.EDU_1ER_DEGRE,
         });
@@ -163,7 +198,7 @@ describe('Unit | Domain | Models | GlobalCertificationLevel', function () {
         const translatedLabel = globalMeshLevel.getSummaryLabel(translate);
 
         // then
-        expect(translatedLabel).to.equal(translate('certification.global.meshlevel.LEVEL_ADMISSIBLE.summary'));
+        expect(translatedLabel).to.equal(translate('certification.meshlevel.EDU_1ER_DEGRE.LEVEL_ADMISSIBLE.summary'));
       });
     });
   });
@@ -172,7 +207,7 @@ describe('Unit | Domain | Models | GlobalCertificationLevel', function () {
     context('when certificationFramework is CORE', function () {
       it('should return the description for LEVEL_BEGINNER_2', function () {
         // given
-        const globalMeshLevel = domainBuilder.certification.results.buildGlobalCertificationLevel({
+        const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
           reachedMeshIndex: 2,
           certificationFramework: Frameworks.CORE,
         });
@@ -181,14 +216,14 @@ describe('Unit | Domain | Models | GlobalCertificationLevel', function () {
         const translatedLabel = globalMeshLevel.getDescriptionLabel(translate);
 
         // then
-        expect(translatedLabel).to.equal(translate('certification.global.meshlevel.LEVEL_BEGINNER_2.description'));
+        expect(translatedLabel).to.equal(translate('certification.meshlevel.CORE.LEVEL_BEGINNER_2.description'));
       });
     });
 
     context('when certificationFramework is EDU', function () {
       it('should return the description for LEVEL_ADMISSIBLE', function () {
         // given
-        const globalMeshLevel = domainBuilder.certification.results.buildGlobalCertificationLevel({
+        const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
           reachedMeshIndex: 0,
           certificationFramework: Frameworks.EDU_CPE,
         });
@@ -197,7 +232,7 @@ describe('Unit | Domain | Models | GlobalCertificationLevel', function () {
         const translatedLabel = globalMeshLevel.getDescriptionLabel(translate);
 
         // then
-        expect(translatedLabel).to.equal(translate('certification.global.meshlevel.LEVEL_ADMISSIBLE.description'));
+        expect(translatedLabel).to.equal(translate('certification.meshlevel.EDU_CPE.LEVEL_ADMISSIBLE.description'));
       });
     });
   });

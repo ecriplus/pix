@@ -21,7 +21,7 @@ describe('Unit | Domain | Read-models | Parcoursup | ParcoursupCertificationLeve
       const translatedLabel = certificationLevel.getLevelLabel(translate);
 
       // then
-      expect(translatedLabel).to.equal(translate('certification.global.meshlevel.LEVEL_BEGINNER_2.label'));
+      expect(translatedLabel).to.equal(translate('certification.meshlevel.CORE.LEVEL_BEGINNER_2.label'));
     });
 
     it('should return the label for LEVEL_EXPERT_7', function () {
@@ -35,7 +35,7 @@ describe('Unit | Domain | Read-models | Parcoursup | ParcoursupCertificationLeve
       const translatedLabel = certificationLevel.getLevelLabel(translate);
 
       // then
-      expect(translatedLabel).to.equal(translate('certification.global.meshlevel.LEVEL_EXPERT_7.label'));
+      expect(translatedLabel).to.equal(translate('certification.meshlevel.CORE.LEVEL_EXPERT_7.label'));
     });
 
     it('should return an empty string when there is no translation (LEVEL_PRE_BEGINNER)', function () {

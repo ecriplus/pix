@@ -4,7 +4,7 @@ import url from 'node:url';
 import dayjs from 'dayjs';
 import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs';
 
-import { generate } from '../../../../../../../src/certification/results/infrastructure/utils/pdf/generate-v2-pdf-certificate.js';
+import { generate } from '../../../../../../../src/certification/results/infrastructure/utils/pdf/generate-v2-pdf-attestation.js';
 import { AlgorithmEngineVersion } from '../../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { ComplementaryCertificationKeys } from '../../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
 import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
@@ -14,7 +14,7 @@ import { buildCompetenceMark } from '../../../../../../tooling/domain-builder/fa
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
-describe('Integration | Infrastructure | Utils | Pdf | V2 Certificate Pdf', function () {
+describe('Integration | Infrastructure | Utils | Pdf | V2 Attestation Pdf', function () {
   let i18n, translate;
 
   beforeEach(function () {

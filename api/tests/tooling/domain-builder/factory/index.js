@@ -207,8 +207,8 @@ import { buildFlashAssessmentAlgorithm } from './certification/evaluation/build-
 import { buildPixPlusCertificationCourse } from './certification/evaluation/build-pix-plus-certification-course.js';
 import { buildComplementaryCertificationScoringWithComplementaryReferential } from './certification/evaluation/build-pix-plus-certification-scoring.js';
 import { buildResultsSession } from './certification/evaluation/build-session.js';
+import { buildCertificateMeshLevel } from './certification/results/build-certificate-mesh-level.js';
 import { buildCertificateSummary } from './certification/results/build-certificate-summary.js';
-import { buildGlobalCertificationLevel } from './certification/results/build-global-mesh-level.js';
 import { buildCertificate } from './certification/results/build-v3-certification-attestation.js';
 import { buildCertificationResult as parcoursupCertificationResult } from './certification/results/parcoursup/build-certification-result.js';
 import { buildCompetence as parcoursupCompetence } from './certification/results/parcoursup/build-competence.js';
@@ -309,7 +309,7 @@ const certification = {
     buildComplementaryCertification: buildSharedComplementaryCertification,
   },
   results: {
-    buildGlobalCertificationLevel,
+    buildCertificateMeshLevel,
     buildCertificate,
     buildCertificateSummary,
     parcoursup: {

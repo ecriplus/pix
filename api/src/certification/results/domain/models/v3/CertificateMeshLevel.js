@@ -4,7 +4,8 @@
 import Joi from 'joi';
 
 import { EntityValidationError } from '../../../../../shared/domain/errors.js';
-import { Frameworks } from '../../../../shared/domain/models/Frameworks.js';
+import { PIX_PLUS_EDU_EXTERNAL_LEVELS } from '../../../../shared/domain/constants/mesh-configuration.js';
+import { Frameworks, isEduFramework } from '../../../../shared/domain/models/Frameworks.js';
 
 export const CORE_LEVELS = {
   0: 'LEVEL_PRE_BEGINNER',
@@ -29,18 +30,21 @@ export const STANDARD_PIX_PLUS_LEVELS = {
   3: 'LEVEL_EXPERT',
 };
 
-export class GlobalCertificationLevel {
+export class CertificateMeshLevel {
   static #schema = Joi.object({
     meshLevel: Joi.string().allow(null),
+    certificationFramework: Joi.string().required(),
   });
 
   /**
    * @param {object} props
    * @param {number} props.reachedMeshIndex
    * @param {string} props.certificationFramework
+   * @param {string} [props.eduV3ExternalJuryResult]
    */
-  constructor({ reachedMeshIndex, certificationFramework }) {
-    this.meshLevel = this.#getLevelKey({ reachedMeshIndex, certificationFramework });
+  constructor({ reachedMeshIndex, certificationFramework, eduV3ExternalJuryResult }) {
+    this.certificationFramework = certificationFramework;
+    this.meshLevel = this.#getLevelKey({ reachedMeshIndex, certificationFramework, eduV3ExternalJuryResult });
     this.#validate();
   }
 
@@ -56,15 +60,19 @@ export class GlobalCertificationLevel {
     return this.#translate({ translate, key: `${this.meshLevel}.description` });
   }
 
-  #getLevelKey({ reachedMeshIndex, certificationFramework }) {
-    if (reachedMeshIndex === null) return null;
+  #getLevelKey({ reachedMeshIndex, certificationFramework, eduV3ExternalJuryResult }) {
+    if (reachedMeshIndex === null || !certificationFramework) return null;
+
+    if (
+      isEduFramework(certificationFramework) &&
+      Object.values(PIX_PLUS_EDU_EXTERNAL_LEVELS).includes(eduV3ExternalJuryResult)
+    ) {
+      return `LEVEL_${eduV3ExternalJuryResult}`;
+    }
 
     switch (certificationFramework) {
       case Frameworks.CORE:
       case Frameworks.CLEA:
-        if (reachedMeshIndex === null) {
-          return null;
-        }
         return CORE_LEVELS[reachedMeshIndex];
       case Frameworks.EDU_1ER_DEGRE:
       case Frameworks.EDU_2ND_DEGRE:
@@ -76,8 +84,14 @@ export class GlobalCertificationLevel {
     }
   }
 
+  #getTranslationFrameworkKey() {
+    if (this.certificationFramework === Frameworks.CLEA) return Frameworks.CORE;
+    return this.certificationFramework;
+  }
+
   #translate({ translate, key }) {
-    const translationKey = `certification.global.meshlevel.${key}`;
+    const frameworkKey = this.#getTranslationFrameworkKey();
+    const translationKey = `certification.meshlevel.${frameworkKey}.${key}`;
     const translation = translate(translationKey);
     if (translation === translationKey) {
       return '';
@@ -86,7 +100,7 @@ export class GlobalCertificationLevel {
   }
 
   #validate() {
-    const { error } = GlobalCertificationLevel.#schema.validate(this, { allowUnknown: false });
+    const { error } = CertificateMeshLevel.#schema.validate(this, { allowUnknown: false });
     if (error) {
       throw EntityValidationError.fromJoiErrors(error.details);
     }

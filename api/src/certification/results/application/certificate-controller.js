@@ -8,8 +8,8 @@ import { usecases } from '../domain/usecases/index.js';
 import * as certificateSerializer from '../infrastructure/serializers/certificate-serializer.js';
 import * as certificateSummarySerializer from '../infrastructure/serializers/certificate-summary-serializer.js';
 import * as privateCertificateSerializer from '../infrastructure/serializers/private-certificate-serializer.js';
-import * as v3CertificationAttestationPdf from '../infrastructure/utils/pdf/generate-pdf-certificate.js';
-import * as v2CertificationAttestationPdf from '../infrastructure/utils/pdf/generate-v2-pdf-certificate.js';
+import * as v2CertificationAttestationPdf from '../infrastructure/utils/pdf/generate-v2-pdf-attestation.js';
+import * as v3CertificationAttestationPdf from '../infrastructure/utils/pdf/generate-v3-pdf-certificate.js';
 
 async function getCertificateByVerificationCode(request, h, dependencies = { certificateSerializer }) {
   const locale = getChallengeLocale(request);
@@ -84,7 +84,7 @@ async function getPDFCertificate(
   if (certificate instanceof Certificate) {
     return h
       .response(
-        dependencies.v3CertificationAttestationPdf.generate({
+        await dependencies.v3CertificationAttestationPdf.generate({
           certificates: [certificate],
           i18n,
         }),
@@ -127,7 +127,7 @@ async function getSessionCertificates(
   if (certificates.every((certificate) => certificate instanceof Certificate)) {
     return h
       .response(
-        dependencies.v3CertificationAttestationPdf.generate({
+        await dependencies.v3CertificationAttestationPdf.generate({
           certificates,
           i18n,
         }),
@@ -175,7 +175,7 @@ async function downloadDivisionCertificates(
 
     return h
       .response(
-        dependencies.v3CertificationAttestationPdf.generate({
+        await dependencies.v3CertificationAttestationPdf.generate({
           certificates: v3Certificates,
           i18n,
         }),
