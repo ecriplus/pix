@@ -86,7 +86,7 @@
     },
     {
       "id": "af6d9547-81c1-49b4-8bff-e5a0ca67c64c",
-      "type": "question-yourself",
+      "type": "explore-to-understand",
       "grains": [
         {
           "id": "513e756d-60c5-41e0-851b-bc991d9a623f",
@@ -120,7 +120,7 @@
                 "id": "c0568f59-0071-4d9b-b928-f02f9aa219c5",
                 "type": "text",
                 "tag": " ",
-                "content": "<p><strong>🏗&nbsp;Image temporaire en attendant le POI final&nbsp;🏗</strong></p><p><strong>Fonctionnement du POI</strong>&nbsp;: Lorsque l’on sélectionne une activité dans la partie gauche, la partie droite affiche le(s) gaz à effet de serre émis par cette activité, et la balance est plus ou moins remplie selon l’impact carbone de l’activité (pas à l’échelle, juste de façon indicative).</p><p><strong>Contenu du POI&nbsp;:</strong></p><ul><li>Parcourir 100km en voiture<ul><li>Gaz émis&nbsp;: Dioxyde de carbone (CO2)</li></ul></li><li>Produire 100kg de carottes<ul><li>Gaz émis&nbsp;: Méthane et Protoxyde d’azote</li></ul></li><li>Produire 100kWh d’électricité en France<ul><li>Gaz émis&nbsp;: Dioxyde de carbone (CO2)</li></ul></li><li>Produire 100g de viande boeuf<ul><li>Gaz émis&nbsp;: Méthane et Dioxyde de carbone (CO2)</li></ul></li><li>Envoyer 100 emails<ul><li>Gaz émis&nbsp;: Dioxyde de carbone (CO2)</li></ul></li><li>Chauffer un appartement de 50m2 en hiver<ul><li>Gaz émis&nbsp;: Dioxyde de carbone (CO2)</li></ul></li><br></ul>"
+                "content": "<p><strong>🏗&nbsp;Image temporaire en attendant le POI final&nbsp;🏗</strong></p><p><strong>Fonctionnement du POI</strong>&nbsp;: Lorsque l’on sélectionne une activité dans la partie gauche, la partie droite affiche le(s) gaz à effet de serre émis par cette activité, et la balance est plus ou moins remplie selon l’impact carbone de l’activité (pas à l’échelle, juste de façon indicative).</p><p><strong>Contenu du POI&nbsp;:</strong></p><ul><li>Parcourir 100km en voiture<ul><li>Gaz émis&nbsp;: Dioxyde de carbone (CO₂)</li></ul></li><li>Produire 100kg de carottes<ul><li>Gaz émis&nbsp;: Méthane et Protoxyde d’azote</li></ul></li><li>Produire 100kWh d’électricité en France<ul><li>Gaz émis&nbsp;: Dioxyde de carbone (CO₂)</li></ul></li><li>Produire 100g de viande boeuf<ul><li>Gaz émis&nbsp;: Méthane et Dioxyde de carbone (CO₂)</li></ul></li><li>Envoyer 100 emails<ul><li>Gaz émis&nbsp;: Dioxyde de carbone (CO₂)</li></ul></li><li>Chauffer un appartement de 50m2 en hiver<ul><li>Gaz émis&nbsp;: Dioxyde de carbone (CO₂)</li></ul></li><br></ul>"
               }
             },
             {
@@ -137,10 +137,10 @@
                       "proposals": [
                         {
                           "id": "0",
-                          "content": "<p>Dioxyde de carbone (CO2)</p>",
+                          "content": "<p>Dioxyde de carbone (CO₂)</p>",
                           "feedback": {
                             "state": "<p>Bonne réponse ! </p>",
-                            "diagnosis": "<p>Parcourir un trajet en voiture émet du Dioxyde de carbone (CO2).</p>"
+                            "diagnosis": "<p>Parcourir un trajet en voiture émet du Dioxyde de carbone (CO₂).</p>"
                           }
                         },
                         {
@@ -148,7 +148,7 @@
                           "content": "<p>Oxygène</p>",
                           "feedback": {
                             "state": "<p>Eh non !<br></p>",
-                            "diagnosis": "<p>Parcourir un trajet en voiture émet du Dioxyde de carbone (CO2).</p>"
+                            "diagnosis": "<p>Parcourir un trajet en voiture émet du Dioxyde de carbone (CO₂).</p>"
                           }
                         },
                         {
@@ -156,7 +156,7 @@
                           "content": "<p>Méthane</p>",
                           "feedback": {
                             "state": "<p>Eh non !<br></p>",
-                            "diagnosis": "<p>Parcourir un trajet en voiture émet du Dioxyde de carbone (CO2).</p>"
+                            "diagnosis": "<p>Parcourir un trajet en voiture émet du Dioxyde de carbone (CO₂).</p>"
                           }
                         }
                       ],
@@ -230,7 +230,7 @@
                       "id": "b6c741e0-c479-4595-be35-34e2eeaba573",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p><strong>🤔 C’est quoi l’empreinte carbone ?</strong></p><p> 💡Le but de l’empreinte carbone est de <strong>calculer la quantité de gaz à effet de serre émise</strong> par une activité, en <strong>prenant en compte tous les gaz à effet de serre</strong> qui sont émis. Elle est exprimée en équivalent CO2, noté CO2eq.</p>"
+                      "content": "<p><strong>🤔 C’est quoi l’empreinte carbone ?</strong></p><p>💡Le but de l’empreinte carbone est de <strong>calculer la quantité de gaz à effet de serre émise</strong> par une activité, en <strong>prenant en compte tous les gaz à effet de serre</strong> qui sont émis. Elle est exprimée en équivalent CO₂, noté CO₂eq.</p>"
                     }
                   ]
                 },
@@ -240,7 +240,7 @@
                       "id": "7f3ead4f-887e-4147-bc87-033360754977",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Par exemple&nbsp;: le méthane réchauffe 30 fois plus le climat que le CO2, donc 1kg de méthane a un impact sur le réchauffement climatique de 30kg CO2eq.</p>"
+                      "content": "<p>Par exemple&nbsp;: le méthane réchauffe 30 fois plus le climat que le CO₂, donc 1kg de méthane a un impact sur le réchauffement climatique de 30kg CO₂eq.</p>"
                     }
                   ]
                 }
@@ -304,7 +304,7 @@
                 "id": "f2761634-11d6-42a2-bfd0-ecbb2979d93b",
                 "type": "custom",
                 "title": "",
-                "instruction": "",
+                "instruction": "Parcourez l'image suivante pour découvrir d'où viennent les émissions de gaz à effet de serre liées à l'ordinateur de Benoît.",
                 "functionalInstruction": "",
                 "tagName": "clickable-image",
                 "props": {
@@ -462,7 +462,7 @@
                       "id": "f5ebfe06-d4f8-465c-afd7-ad7f6dc05a0e",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Dans le cadre du numérique, on peut calculer une empreinte carbone à différentes échelles&nbsp;: </p><ul><li><strong>à l’échelle d’un équipement</strong>, par exemple l’empreinte carbone d’un ordinateur ou d’un smartphone</li><li><strong>à l’échelle d’un individu</strong>, en additionnant les empreintes carbone de tous ses équipements et des services numériques qu’il utilise</li><li><strong>à l’échelle d’une entreprise</strong>, en additionnant les empreintes c</li><li>arbone de toutes les personnes qui y travaillent</li><li>etc.</li></ul>"
+                      "content": "<p>Dans le cadre du numérique, on peut calculer une empreinte carbone à différentes échelles&nbsp;: </p><ul><li><strong>à l’échelle d’un équipement</strong>, par exemple l’empreinte carbone d’un ordinateur ou d’un smartphone</li><li><strong>à l’échelle d’un individu</strong>, en additionnant les empreintes carbone de tous ses équipements et des services numériques qu’il utilise</li><li><strong>à l’échelle d’une entreprise</strong>, en additionnant les empreintes carbone de toutes les personnes qui y travaillent</li><li>etc.</li></ul>"
                     }
                   ]
                 }
@@ -507,7 +507,7 @@
                 "type": "image",
                 "url": "https://assets.pix.org/modules/nr-evaluation-nov/draft_po-idataselect_impacts-carbone-activites.png",
                 "alt": "",
-                "alternativeText": "<p>Extraits du logiciel de calcul d’empreinte carbone.</p><p>Empreintes carbone des équipements numériques&nbsp;:</p><ul><li>Smartphone&nbsp;: 80,2kg CO2eq dont&nbsp; 79,3kg CO₂e à la fabrication et 0,89 kg CO₂e à l’utilisation et fin de vie</li><li>Ordinateur portable&nbsp;: 193kg&nbsp;CO2eq&nbsp;dont 182 kg CO₂e à la fabrication et 10,3kgCO2eq à l’usage et fin de vie</li><li>Télévision&nbsp;: 370kg&nbsp;CO2eq&nbsp;dont 328kg CO2eq à la fabrication et 41,5 kg CO₂e à l’usage et fin de vie</li></ul><p>Empreintes carbone d’activités de référence&nbsp;:</p><ul><li>4 aller-retours Paris-Berlin en TGV&nbsp;: 29,3kg&nbsp;CO2eq</li><li>100kg de bananes&nbsp;: 90,9kg&nbsp;CO2eq</li><li>Fabrication de&nbsp;10 jeans&nbsp;: 251kg&nbsp;CO2eq</li></ul>",
+                "alternativeText": "<p>Extraits du logiciel de calcul d’empreinte carbone.</p><p>Empreintes carbone des équipements numériques&nbsp;:</p><ul><li>Smartphone&nbsp;: 80,2kg CO₂eq dont&nbsp; 79,3kg CO₂eq à la fabrication et 0,89 kg CO₂eq à l’utilisation et fin de vie</li><li>Ordinateur portable&nbsp;: 193kg&nbsp;CO₂eq&nbsp;dont 182 kg CO₂eq à la fabrication et 10,3kgCO₂eq à l’usage et fin de vie</li><li>Télévision&nbsp;: 370kg&nbsp;CO₂eq&nbsp;dont 328kg CO₂eq à la fabrication et 41,5 kg CO₂eq à l’usage et fin de vie</li></ul><p>Empreintes carbone d’activités de référence&nbsp;:</p><ul><li>4 aller-retours Paris-Berlin en TGV&nbsp;: 29,3kg&nbsp;CO₂eq</li><li>100kg de bananes&nbsp;: 90,9kg&nbsp;CO₂eq</li><li>Fabrication de&nbsp;10 jeans&nbsp;: 251kg&nbsp;CO₂eq</li></ul>",
                 "legend": "",
                 "licence": ""
               }
@@ -658,6 +658,76 @@
                 "type": "text",
                 "tag": " ",
                 "content": "<ul><li>🌏L’empreinte carbone estime l’impact d’une activité (comme regarder un film) ou de la construction d’un objet (comme un ordinateur) sur le réchauffement climatique.</li><li>📐Elle permet de comparer différentes activités, numériques ou non, et de fixer des objectifs pour réduire les émissions.</li><li>🤔 Pour la calculer, on définit les activités, la période, puis on estime les émissions de gaz à effet de serre associées.</li><li>⚠️Mais elle a une limite importante&nbsp;: elle ne prend pas en compte d’autres impacts, comme la consommation en l’eau ou en ressources.</li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "063ef0d9-da46-4067-88af-f16e1f59a2e2",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "f5b9243e-c1b2-4a03-a021-9333b868c3f1",
+          "type": "activity",
+          "title": "activite-1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "fe5b6f59-bf42-4987-97c2-57ecb6a5278d",
+                "type": "qab",
+                "instruction": "<p>Les affirmations suivantes sont-elles vraies ou fausses ? Sélectionnez la bonne réponse.</p>",
+                "cards": [
+                  {
+                    "id": "1de50b70-8780-4b5e-a3ff-9ff80269bfa6",
+                    "text": "Le dioxyde de carbone (CO₂) est le seul gaz à effet de serre.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "9dd5ab20-eaab-464c-90b3-bd54c9ffc990",
+                    "text": "1kg de méthane contribue autant à l’effet de serre que 1kg de CO₂.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "aa12edd4-44b5-45d7-adce-4b55ba5cabbf",
+                    "text": "L’empreinte carbone est exprimée en équivalent CO₂ (CO₂eq)",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "c6e2f882-a8a4-493d-8827-70d31e3f2cea",
+                    "text": "Produire un smartphone n’émet pas de gaz à effet de serre.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": ""
+                }
               }
             }
           ]
