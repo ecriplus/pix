@@ -1,5 +1,18 @@
 class UserRecommendedTraining {
-  constructor({ id, title, link, type, duration, locales, editorName, editorLogoUrl } = {}) {
+  constructor({
+    id,
+    title,
+    link,
+    type,
+    duration,
+    locales,
+    editorName,
+    editorLogoUrl,
+    deliveryMode,
+    registrationRequired,
+    program,
+    objectives,
+  } = {}) {
     this.id = id;
     this.title = title;
     this.link = link;
@@ -8,6 +21,10 @@ class UserRecommendedTraining {
     this.locales = locales;
     this.editorName = editorName;
     this.editorLogoUrl = editorLogoUrl;
+    this.deliveryMode = deliveryMode;
+    this.registrationRequired = registrationRequired;
+    this.program = program;
+    this.objectives = objectives;
   }
 }
 
