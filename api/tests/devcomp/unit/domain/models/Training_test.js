@@ -31,16 +31,25 @@ describe('Unit | Devcomp | Domain | Models | Training', function () {
       });
 
       // then
-      expect(training.id).to.equal(1);
-      expect(training.title).to.equal('Training 1');
-      expect(training.link).to.equal('https://example.net');
-      expect(training.type).to.equal('webinar');
-      expect(training.duration).to.deep.equal({ hours: 5 });
-      expect(training.locales).to.deep.equal(['fr-fr']);
-      expect(training.targetProfileIds).to.deep.equal([1]);
-      expect(training.editorName).to.equal('Example');
-      expect(training.editorLogoUrl).to.equal('https://example.net/logo.svg');
-      expect(training.trainingTriggers).to.deep.equal(trainingTriggers);
+      expect(training).to.deep.equal({
+        deliveryMode: 'remote',
+        duration: {
+          hours: 5,
+        },
+        editorLogoUrl: 'https://example.net/logo.svg',
+        editorName: 'Example',
+        id: 1,
+        internalTitle: 'Training 1 internal title',
+        link: 'https://example.net',
+        locales: ['fr-fr'],
+        objectives: ['objective 1', 'objective 2'],
+        program: 'training program',
+        registrationRequired: false,
+        targetProfileIds: [1],
+        title: 'Training 1',
+        trainingTriggers,
+        type: 'webinar',
+      });
     });
   });
 

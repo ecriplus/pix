@@ -14,6 +14,10 @@ const buildTraining = function ({
   editorName = 'Ministère education nationale',
   editorLogoUrl = 'https://assets.pix.org/contenu-formatif/editeur/editor_logo_url.svg',
   trainingTriggers,
+  deliveryMode = Training.modes.REMOTE,
+  registrationRequired = false,
+  program = 'training program',
+  objectives = ['objective 1', 'objective 2'],
 } = {}) {
   return new Training({
     id,
@@ -27,6 +31,10 @@ const buildTraining = function ({
     editorName,
     editorLogoUrl,
     trainingTriggers,
+    deliveryMode,
+    registrationRequired,
+    program,
+    objectives,
   });
 };
 

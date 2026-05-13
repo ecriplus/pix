@@ -1,4 +1,5 @@
 import { createServer } from '../../../../../server.js';
+import { Training } from '../../../../../src/devcomp/domain/models/Training.js';
 import { expect } from '../../../../test-helper.js';
 import { databaseBuilder } from '../../../../tooling/databases.js';
 import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
@@ -44,6 +45,10 @@ describe('Acceptance | API | Campaign Participations', function () {
         type: training.type,
         'editor-name': training.editorName,
         'editor-logo-url': training.editorLogoUrl,
+        'delivery-mode': Training.modes.HYBRID,
+        'registration-required': false,
+        program: 'Programme du contenu formatif',
+        objectives: [],
       });
     });
   });
