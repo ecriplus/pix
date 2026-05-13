@@ -1,9 +1,9 @@
-import nock from 'nock';
+import sinon from 'sinon';
 
 import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
 import { Configuration } from '../../../../../src/llm/domain/models/Configuration.js';
 import { startChat } from '../../../../../src/llm/domain/usecases/start-chat.js';
-import { chatRepository, configurationRepository } from '../../../../../src/llm/infrastructure/repositories/index.js';
+import { chatRepository } from '../../../../../src/llm/infrastructure/repositories/index.js';
 import { expect } from '../../../../test-helper.js';
 import { knex } from '../../../../tooling/databases.js';
 
@@ -48,7 +48,7 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
     });
 
     context('when config object not provided', function () {
-      let configurationId, userId, llmApiScope, config;
+      let configurationId, userId, config, configurationRepositoryStub;
 
       beforeEach(function () {
         configurationId = 'uneConfigQuiExist';
@@ -63,7 +63,11 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
             context: '**coucou**',
           },
         };
-        llmApiScope = nock('https://llm-test.pix.fr/api').get('/configurations/uneConfigQuiExist').reply(200, config);
+        configurationRepositoryStub = {
+          get: sinon.stub().rejects(),
+        };
+
+        configurationRepositoryStub.get.withArgs(configurationId).resolves(new Configuration(config));
       });
 
       it('should return the newly created chat', async function () {
@@ -81,7 +85,7 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
           moduleId,
           randomUUID,
           chatRepository,
-          configurationRepository,
+          configurationRepository: configurationRepositoryStub,
         });
 
         // then
@@ -99,7 +103,6 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
             totalOutputTokens: 0,
           }),
         );
-        expect(llmApiScope.isDone()).to.be.true;
         const { chatDB, messagesDB } = await getChatAndMessagesFromDB(chatId);
         expect(chatDB).to.deep.equal({
           id: chatId,
@@ -124,6 +127,7 @@ describe('LLM | Integration | Domain | UseCases | start-chat', function () {
           totalOutputTokens: 0,
         });
         expect(messagesDB).to.be.empty;
+        expect(configurationRepositoryStub.get.calledOnce).true;
       });
     });
   });

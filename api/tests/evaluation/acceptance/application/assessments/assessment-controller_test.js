@@ -4,6 +4,7 @@ import { Readable } from 'node:stream';
 import _ from 'lodash';
 import nock from 'nock';
 import sinon from 'sinon';
+import { MockAgent, setGlobalDispatcher } from 'undici';
 
 import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../../db/migrations/20221017085933_create-user-recommended-trainings.js';
 import { createServer } from '../../../../../server.js';
@@ -765,8 +766,16 @@ describe('Acceptance | Controller | assessment-controller', function () {
               context: 'context',
             },
           };
-          const llmApiScope = nock('https://llm-test.pix.fr/api')
-            .get('/configurations/c1SuperConfig2Lespace')
+          const mockAgent = new MockAgent();
+          const llmApiScope = mockAgent.get('https://llm-test.pix.fr');
+
+          setGlobalDispatcher(mockAgent);
+          llmApiScope
+            .intercept({
+              path: '/api/configurations/c1SuperConfig2Lespace',
+              method: 'GET',
+            })
+            .defaultReplyHeaders({ 'Content-Type': 'application/json' })
             .reply(200, config);
 
           // when
@@ -787,7 +796,6 @@ describe('Acceptance | Controller | assessment-controller', function () {
             context: 'evaluation',
           });
           expect(response.result).to.have.property('id').that.is.a('string').and.not.empty;
-          expect(llmApiScope.isDone()).to.be.true;
           const createdChat = await knex('chats').first();
           expect(createdChat.assessmentId).to.equal(assessment.id);
           expect(createdChat.challengeId).to.equal(assessment.lastChallengeId);

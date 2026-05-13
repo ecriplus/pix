@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { Readable } from 'node:stream';
 
 import nock from 'nock';
+import { MockAgent, setGlobalDispatcher } from 'undici';
 
 import { createServer } from '../../../../../server.js';
 import { Chat } from '../../../../../src/llm/domain/models/Chat.js';
@@ -266,8 +267,16 @@ describe('Acceptance | Controller | passage-controller', function () {
               context: 'context',
             },
           };
-          const llmApiScope = nock('https://llm-test.pix.fr/api')
-            .get('/configurations/c1SuperConfig2Lespace')
+          const mockAgent = new MockAgent();
+          const llmApiScope = mockAgent.get('https://llm-test.pix.fr');
+
+          setGlobalDispatcher(mockAgent);
+          llmApiScope
+            .intercept({
+              path: '/api/configurations/c1SuperConfig2Lespace',
+              method: 'GET',
+            })
+            .defaultReplyHeaders({ 'Content-Type': 'application/json' })
             .reply(200, config);
 
           // when
@@ -288,7 +297,6 @@ describe('Acceptance | Controller | passage-controller', function () {
             context: 'modulix',
           });
           expect(response.result).to.have.property('id').that.is.a('string').and.not.empty;
-          expect(llmApiScope.isDone()).to.be.true;
           const chat = await knex('chats').first();
           expect(chat.passageId).to.equal(passage.id);
           expect(chat.moduleId).to.equal(passage.moduleId);

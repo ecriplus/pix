@@ -7,6 +7,14 @@ import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('LLM | Integration | Infrastructure | Repositories | configuration', function () {
   describe('#get', function () {
+    let llmApiClient;
+    beforeEach(function () {
+      // given
+      const mockAgent = new MockAgent();
+      setGlobalDispatcher(mockAgent);
+      llmApiClient = mockAgent.get('https://llm-test.pix.fr');
+    });
+
     context('error cases', function () {
       context('when no config id provided', function () {
         it('should throw a ConfigurationNotFoundError', async function () {
@@ -21,16 +29,12 @@ describe('LLM | Integration | Infrastructure | Repositories | configuration', fu
 
       context('when configuration does not exist', function () {
         it('should throw a ConfigurationNotFoundError', async function () {
-          // given
-          const llmApiClient = new MockAgent().get('https://llm-test.pix.fr');
-
           llmApiClient
             .intercept({
               path: '/api/configurations/uneConfigQuiExistePo',
               method: 'GET',
             })
             .reply(404, {});
-          setGlobalDispatcher(llmApiClient);
 
           // when
           const err = await catchErr(get)('uneConfigQuiExistePo');
@@ -44,8 +48,6 @@ describe('LLM | Integration | Infrastructure | Repositories | configuration', fu
       context('when something went wrong when reaching LLM Api to get configuration', function () {
         it('should retry the request 2 more times before throwing a LLMApiError', async function () {
           // given
-          const llmApiClient = new MockAgent().get('https://llm-test.pix.fr');
-
           llmApiClient
             .intercept({
               path: '/api/configurations/unIdDeConfiguration',
@@ -54,7 +56,6 @@ describe('LLM | Integration | Infrastructure | Repositories | configuration', fu
             .defaultReplyHeaders({ 'Content-Type': 'application/json' })
             .reply(422, { err: 'some error occurred' })
             .times(3);
-          setGlobalDispatcher(llmApiClient);
 
           // when
           const err = await catchErr(get)('unIdDeConfiguration');
@@ -71,8 +72,6 @@ describe('LLM | Integration | Infrastructure | Repositories | configuration', fu
     context('success cases', function () {
       it('returns the configuration from the LLM Api', async function () {
         // given
-        const llmApiClient = new MockAgent().get('https://llm-test.pix.fr');
-
         llmApiClient
           .intercept({
             path: '/api/configurations/unIdDeConfiguration',
@@ -83,7 +82,6 @@ describe('LLM | Integration | Infrastructure | Repositories | configuration', fu
             challenge: { inputMaxChars: 2, inputMaxPrompts: 4 },
             attachment: { name: 'some_attachment_name', context: 'some attachment context' },
           });
-        setGlobalDispatcher(llmApiClient);
 
         // when
         const configuration = await get('unIdDeConfiguration');
