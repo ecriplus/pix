@@ -1,3 +1,4 @@
+import { Training } from '../../../../../../src/devcomp/domain/models/Training.js';
 import * as serializer from '../../../../../../src/devcomp/infrastructure/serializers/jsonapi/training-serializer.js';
 import { expect } from '../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
@@ -345,6 +346,10 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | training-ser
             locales: ['fr-fr'],
             'editor-name': 'Ministère education nationale',
             'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/editor_logo_url.svg',
+            'delivery-mode': Training.modes.REMOTE,
+            objectives: ['objective 1', 'objective 2'],
+            program: 'training program',
+            'registration-required': false,
           },
           relationships: {
             'target-profile-summaries': {
@@ -391,6 +396,10 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | training-ser
             locales: ['fr-fr'],
             'editor-name': 'Ministère education nationale',
             'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/editor_logo_url.svg',
+            'delivery-mode': Training.modes.REMOTE,
+            objectives: ['objective 1', 'objective 2'],
+            program: 'training program',
+            'registration-required': false,
           },
           relationships: {
             'target-profile-summaries': {

@@ -94,6 +94,10 @@ const serialize = function (training = {}, meta) {
       'editorName',
       'editorLogoUrl',
       'targetProfileSummaries',
+      'deliveryMode',
+      'registrationRequired',
+      'program',
+      'objectives',
     ],
     targetProfileSummaries: {
       ref: 'id',
