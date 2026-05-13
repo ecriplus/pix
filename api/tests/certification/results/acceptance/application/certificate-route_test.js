@@ -530,6 +530,7 @@ describe('Certification | Results | Acceptance | Application | Certification', f
               'max-reachable-level-on-certification-date': certificationCourse.maxReachableLevelOnCertificationDate,
               version: session.version,
               'acquired-complementary-certification': undefined,
+              'badge-url': undefined,
             },
             id: `${certificationCourse.id}`,
             relationships: {

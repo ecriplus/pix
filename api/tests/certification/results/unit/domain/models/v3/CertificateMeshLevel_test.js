@@ -203,6 +203,95 @@ describe('Unit | Domain | Models | CertificateMeshLevel', function () {
     });
   });
 
+  describe('#badgeUrl', function () {
+    context('when the framework is CORE', function () {
+      it('should return null', function () {
+        // given
+        const meshLevel = new CertificateMeshLevel({
+          reachedMeshIndex: 1,
+          certificationFramework: Frameworks.CORE,
+        });
+
+        // then
+        expect(meshLevel.badgeUrl).to.be.null;
+      });
+    });
+
+    context('when the framework is CLEA', function () {
+      it('should return null', function () {
+        // given
+        const meshLevel = new CertificateMeshLevel({
+          reachedMeshIndex: 1,
+          certificationFramework: Frameworks.CLEA,
+        });
+
+        // then
+        expect(meshLevel.badgeUrl).to.be.null;
+      });
+    });
+
+    context('when the meshLevel is null', function () {
+      it('should return null', function () {
+        // given
+        const meshLevel = new CertificateMeshLevel({
+          reachedMeshIndex: null,
+          certificationFramework: Frameworks.DROIT,
+        });
+
+        // then
+        expect(meshLevel.badgeUrl).to.be.null;
+      });
+    });
+
+    context('when the meshLevel is LEVEL_ADMISSIBLE', function () {
+      it('should return null', function () {
+        // given
+        const meshLevel = new CertificateMeshLevel({
+          reachedMeshIndex: 0,
+          certificationFramework: Frameworks.EDU_1ER_DEGRE,
+        });
+
+        // then
+        expect(meshLevel.badgeUrl).to.be.null;
+      });
+    });
+
+    context('when the framework is a Pix+ with a valid level', function () {
+      it('should return the badge URL', function () {
+        // given
+        process.env.PIX_ASSETS_MANAGER_URL = 'https://super-assert-url.org';
+
+        // when
+        const meshLevel = new CertificateMeshLevel({
+          reachedMeshIndex: 2,
+          certificationFramework: Frameworks.DROIT,
+        });
+
+        // then
+        expect(meshLevel.badgeUrl).to.equal('https://super-assert-url.org/badges-certifies/v3/droit/advanced.svg');
+      });
+    });
+
+    context('when the framework is EDU with an external jury result', function () {
+      it('should return the badge URL', function () {
+        // given
+        process.env.PIX_ASSETS_MANAGER_URL = 'https://super-assert-url.org';
+
+        // when
+        const meshLevel = new CertificateMeshLevel({
+          reachedMeshIndex: 0,
+          certificationFramework: Frameworks.EDU_2ND_DEGRE,
+          eduV3ExternalJuryResult: PIX_PLUS_EDU_EXTERNAL_LEVELS.ADVANCED,
+        });
+
+        // then
+        expect(meshLevel.badgeUrl).to.equal(
+          'https://super-assert-url.org/badges-certifies/v3/edu_2nd_degre/advanced.svg',
+        );
+      });
+    });
+  });
+
   describe('#getDescriptionLabel', function () {
     context('when certificationFramework is CORE', function () {
       it('should return the description for LEVEL_BEGINNER_2', function () {

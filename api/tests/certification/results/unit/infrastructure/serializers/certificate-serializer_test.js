@@ -77,6 +77,7 @@ describe('Unit | Serializer | JSONAPI | certificate-serializer', function () {
             'max-reachable-level-on-certification-date': 6,
             version: AlgorithmEngineVersion.V3,
             'acquired-complementary-certification': undefined,
+            'badge-url': undefined,
           },
           relationships: {
             'result-competence-tree': {
@@ -212,6 +213,7 @@ describe('Unit | Serializer | JSONAPI | certificate-serializer', function () {
             level: '1',
             'certification-date': new Date('2015-10-03T01:02:03Z'),
             'acquired-complementary-certification': 'http://example.com/',
+            'badge-url': null,
             'certification-framework': Frameworks.CORE,
           },
           relationships: {

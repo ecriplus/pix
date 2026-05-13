@@ -1,6 +1,5 @@
 import { AssessmentResult } from '../../../../shared/domain/models/AssessmentResult.js';
 import { AlgorithmEngineVersion } from '../../../shared/domain/models/AlgorithmEngineVersion.js';
-import { hasCoreScope } from '../../../shared/domain/models/Frameworks.js';
 import { JuryComment, JuryCommentContexts } from '../../../shared/domain/models/JuryComment.js';
 import { CertificateMeshLevel } from './v3/CertificateMeshLevel.js';
 
@@ -24,6 +23,8 @@ export const CERTIFICATE_TYPES = {
 };
 
 export class CertificateSummary {
+  #certificateMeshLevel;
+
   constructor({
     id,
     verificationCode,
@@ -36,6 +37,7 @@ export class CertificateSummary {
     extraCertificationStatus,
     certificateType,
     reachedMeshLevel,
+    certificateMeshLevel,
   }) {
     this.id = id;
     this.verificationCode = verificationCode;
@@ -48,21 +50,11 @@ export class CertificateSummary {
     this.extraCertificationStatus = extraCertificationStatus;
     this.certificateType = certificateType;
     this.reachedMeshLevel = reachedMeshLevel;
+    this.#certificateMeshLevel = certificateMeshLevel ?? null;
   }
 
   get badgeUrl() {
-    if (
-      hasCoreScope(this.certificationFramework) ||
-      !this.reachedMeshLevel ||
-      this.reachedMeshLevel === 'LEVEL_ADMISSIBLE'
-    ) {
-      return null;
-    }
-
-    const framework = this.certificationFramework.toLowerCase();
-    const meshLevel = this.reachedMeshLevel.replace('LEVEL_', '').toLowerCase();
-
-    return `${process.env.PIX_ASSETS_MANAGER_URL}/badges-certifies/v3/${framework}/${meshLevel}.svg`;
+    return this.#certificateMeshLevel?.badgeUrl ?? null;
   }
 
   static buildFrom({
@@ -119,6 +111,10 @@ export class CertificateSummary {
     const isRejectedV3 =
       AlgorithmEngineVersion.isV3(algorithmVersion) && assessmentResultStatus === AssessmentResult.status.REJECTED;
 
+    const certificateMeshLevel = isRejectedV3
+      ? null
+      : new CertificateMeshLevel({ reachedMeshIndex, certificationFramework, eduV3ExternalJuryResult });
+
     return new CertificateSummary({
       id,
       verificationCode,
@@ -130,13 +126,8 @@ export class CertificateSummary {
       status,
       extraCertificationStatus,
       certificateType,
-      reachedMeshLevel: isRejectedV3
-        ? null
-        : _getReachedMeshLevel({ reachedMeshIndex, certificationFramework, eduV3ExternalJuryResult }),
+      reachedMeshLevel: certificateMeshLevel?.meshLevel ?? null,
+      certificateMeshLevel,
     });
   }
-}
-
-function _getReachedMeshLevel({ reachedMeshIndex, certificationFramework, eduV3ExternalJuryResult }) {
-  return new CertificateMeshLevel({ reachedMeshIndex, certificationFramework, eduV3ExternalJuryResult }).meshLevel;
 }

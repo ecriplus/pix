@@ -58,6 +58,10 @@ export class Certificate {
     this.certificationFramework = certificationFramework;
   }
 
+  get badgeUrl() {
+    return this.globalLevel?.badgeUrl ?? null;
+  }
+
   #findLevel({ reachedMeshIndex, certificationFramework, eduV3ExternalJuryResult }) {
     const globalCertificationLevel = new CertificateMeshLevel({
       reachedMeshIndex,
