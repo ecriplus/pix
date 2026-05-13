@@ -77,8 +77,8 @@ describe('Integration | Legal documents | Scripts | convert-users-pix-app-cgu-da
       await script.handle({ options, logger });
 
       // then
-      expect(logger.info).to.have.been.calledWith('Batch #1');
-      expect(logger.info).to.have.been.calledWith('Batch #2');
+      expect(logger.info).to.have.been.calledWith('Batch #1: 1 users');
+      expect(logger.info).to.have.been.calledWith('Batch #2: 1 users');
       expect(logger.info).to.have.been.calledWith('Total users migrated: 2');
 
       const userAcceptances = await knex('legal-document-version-user-acceptances').where({
@@ -148,7 +148,7 @@ describe('Integration | Legal documents | Scripts | convert-users-pix-app-cgu-da
         await script.handle({ options, logger });
 
         // then
-        expect(logger.info).to.have.been.calledWith('Batch #1');
+        expect(logger.info).to.have.been.calledWith('Batch #1: 1 users');
         expect(logger.info).to.have.been.calledWith('Total users to migrate: 1');
 
         const userAcceptances = await knex('legal-document-version-user-acceptances').where({

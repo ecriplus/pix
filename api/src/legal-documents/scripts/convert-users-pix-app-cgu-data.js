@@ -51,52 +51,42 @@ export class ConvertUsersPixAppCguData extends Script {
     }
 
     let offset = 0;
+    let batchNumber = 0;
     let migrationCount = 0;
 
-    const run = true;
-    while (run) {
-      const usersWithCgu = await this.#findPixAppCguAcceptedUsers({ batchSize, offset });
+    while (true) {
+      const usersToMigrate = await this.#findUsersWithoutCguMigration({ legalDocument, batchSize, offset });
+      if (usersToMigrate.length === 0) break;
 
-      if (usersWithCgu.length === 0) {
-        break;
-      }
-
-      logger.info(`Batch #${Math.ceil(offset / batchSize + 1)}`);
-
-      const usersToMigrate = await this.#filterAlreadyMigratedUsers({ legalDocument, users: usersWithCgu });
+      logger.info(`Batch #${++batchNumber}: ${usersToMigrate.length} users`);
 
       if (!dryRun) {
         await this.#createNewLegalDocumentAcceptanceForUsersBatch({ legalDocument, users: usersToMigrate });
+      } else {
+        offset += batchSize;
       }
 
       migrationCount += usersToMigrate.length;
-      offset += usersWithCgu.length;
-
       await setTimeout(throttleDelay);
     }
 
     logger.info(`Total users ${dryRun ? 'to migrate' : 'migrated'}: ${migrationCount}`);
   }
 
-  async #findPixAppCguAcceptedUsers({ batchSize, offset }) {
+  async #findUsersWithoutCguMigration({ legalDocument, batchSize, offset }) {
     const knexConnection = DomainTransaction.getConnection();
-
-    return knexConnection('users').select('*').where('cgu', true).limit(batchSize).offset(offset);
-  }
-
-  async #filterAlreadyMigratedUsers({ legalDocument, users }) {
-    const knexConnection = DomainTransaction.getConnection();
-
-    const alreadyMigratedUsers = await knexConnection('legal-document-version-user-acceptances')
-      .select('userId')
-      .where('legalDocumentVersionId', legalDocument.id)
-      .whereIn(
-        'userId',
-        users.map((user) => user.id),
-      );
-
-    const alreadyMigratedIds = alreadyMigratedUsers.map((user) => user.userId);
-    return users.filter((user) => !alreadyMigratedIds.includes(user.id));
+    return knexConnection('users')
+      .select('users.id', 'users.lastTermsOfServiceValidatedAt')
+      .where('users.cgu', true)
+      .whereNotExists(
+        knexConnection
+          .select(1)
+          .from('legal-document-version-user-acceptances')
+          .where('legalDocumentVersionId', legalDocument.id)
+          .whereRaw('"legal-document-version-user-acceptances"."userId" = "users"."id"'),
+      )
+      .limit(batchSize)
+      .offset(offset);
   }
 
   async #createNewLegalDocumentAcceptanceForUsersBatch({ legalDocument, users }) {
