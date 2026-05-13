@@ -126,7 +126,7 @@ module('Unit | Route | modules | passage', function (hooks) {
         module,
       };
       const router = this.owner.lookup('service:router');
-      const replaceWithStub = sinon.stub(router, 'replaceWith');
+      const transitionToStub = sinon.stub(router, 'transitionTo');
 
       const route = this.owner.lookup('route:module.passage');
 
@@ -134,7 +134,7 @@ module('Unit | Route | modules | passage', function (hooks) {
       route.redirect(model);
 
       // then
-      sinon.assert.calledOnceWithExactly(replaceWithStub, 'module.passage', module.shortId, module.slug);
+      sinon.assert.calledOnceWithExactly(transitionToStub, 'module.passage', module.shortId, module.slug);
       assert.ok(true);
     });
   });

@@ -32,6 +32,6 @@ export default class ModulePassageRoute extends Route {
   }
 
   redirect({ module }) {
-    this.router.replaceWith('module.passage', module.shortId, module.slug);
+    this.router.transitionTo('module.passage', module.shortId, module.slug);
   }
 }
