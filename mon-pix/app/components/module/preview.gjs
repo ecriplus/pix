@@ -2,6 +2,7 @@ import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixButtonLink from '@1024pix/pix-ui/components/pix-button-link';
 import PixSegmentedControl from '@1024pix/pix-ui/components/pix-segmented-control';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
+import PixTag from '@1024pix/pix-ui/components/pix-tag';
 import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
@@ -160,6 +161,11 @@ export default class ModulixPreview extends Component {
   }
 
   @action
+  toggleGrainsTitleButton() {
+    this.modulixPreviewMode.toggleGrainsTitleButton();
+  }
+
+  @action
   updateModule(event) {
     try {
       this.errorMessage = null;
@@ -180,6 +186,11 @@ export default class ModulixPreview extends Component {
         grainIndex: this.selectedGrainIndex,
       },
     });
+  }
+
+  @action
+  getModuleGrainIndex(grainId) {
+    return this.moduleGrains.findIndex((grain) => grain.id === grainId);
   }
 
   @action
@@ -221,15 +232,25 @@ export default class ModulixPreview extends Component {
       </div>
     {{/unless}}
 
-    <div class="modulix-preview__panel" {{didInsert this.setHTMLElementOffset}}>
-      <PixSegmentedControl @onChange={{this.toggleElementIdButton}} @variant="primary" @toggled={{false}}>
-        <:label>{{t "pages.modulix.preview.elements-id-button.label"}}</:label>
-        <:viewA>{{t "pages.modulix.preview.elements-id-button.choices.yes"}}</:viewA>
-        <:viewB>{{t "pages.modulix.preview.elements-id-button.choices.no"}}</:viewB>
-      </PixSegmentedControl>
+    <div class="module-preview__panel" {{didInsert this.setHTMLElementOffset}}>
+      <form
+        class="module-preview-panel__metadata-display-form"
+        aria-label={{t "pages.modulix.preview.elements-display-panel-label"}}
+      >
+        <PixSegmentedControl @onChange={{this.toggleElementIdButton}} @variant="primary" @toggled={{false}}>
+          <:label>{{t "pages.modulix.preview.elements-id-button.label"}}</:label>
+          <:viewA>{{t "common.yes"}}</:viewA>
+          <:viewB>{{t "common.no"}}</:viewB>
+        </PixSegmentedControl>
+        <PixSegmentedControl @onChange={{this.toggleGrainsTitleButton}} @variant="primary" @toggled={{true}}>
+          <:label>{{t "pages.modulix.preview.grains-title-button.label"}}</:label>
+          <:viewA>{{t "common.yes"}}</:viewA>
+          <:viewB>{{t "common.no"}}</:viewB>
+        </PixSegmentedControl>
+      </form>
       {{#if this.previewingExistingModule}}
         <hr />
-        <form class="modulix-preview-panel__grain-form">
+        <form class="module-preview-panel__grain-form">
           <PixSelect
             @isComputeWidthDisabled={{true}}
             @hideDefaultOption={{true}}
@@ -258,6 +279,15 @@ export default class ModulixPreview extends Component {
               <ModulixSectionTitle @sectionType={{section.type}} />
             {{/if}}
             {{#each section.grains as |grain|}}
+              {{#if this.modulixPreviewMode.isPreviewAndGrainsTitleButtonEnabled}}
+                <PixTag @color="primary" class="module-preview__grains-title-tag">
+                  {{t
+                    "pages.modulix.preview.grain-select.grain-label"
+                    index=(this.getModuleGrainIndex grain.id)
+                    title=grain.title
+                  }}
+                </PixTag>
+              {{/if}}
               <ModulixGrain
                 @grain={{grain}}
                 @onElementRetry={{this.noop}}

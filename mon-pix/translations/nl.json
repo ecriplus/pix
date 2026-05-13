@@ -125,6 +125,7 @@
     "new-information-banner": {
       "close-label": "Sluit de banner"
     },
+    "no": "Nee",
     "no-level": "Geen niveau",
     "or": "of",
     "pagination": {
@@ -154,7 +155,8 @@
           "min-length": "Minstens 8 tekens"
         }
       }
-    }
+    },
+    "yes": "Ja"
   },
   "components": {
     "attestations": {
@@ -1799,16 +1801,16 @@
       },
       "preview": {
         "elements-id-button": {
-          "choices": {
-            "no": "Nee",
-            "yes": "Ja"
-          },
           "label": "De ID's van de elementen weergeven"
         },
+        "elements-metadata-panel-label": "Metadata weergeven of verbergen",
         "grain-select": {
           "button": "Grain testen",
           "grain-label": "Grain {index} : {title}",
           "label": "Kies het te testen grain"
+        },
+        "grains-title-button": {
+          "label": "De titel van de items weergeven"
         },
         "modulix-editor": "Modulix Editor",
         "showJson": "Show JSON",

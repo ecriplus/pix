@@ -47,6 +47,16 @@ module('Unit | Service | modulix-preview-mode', function (hooks) {
     });
   });
 
+  module('isGrainsTitleButtonEnabled', function () {
+    test('it should be disabled by default', function (assert) {
+      // when
+      const previewMode = this.owner.lookup('service:modulix-preview-mode');
+
+      // then
+      assert.false(previewMode.isGrainsTitleButtonEnabled);
+    });
+  });
+
   module('toggleElementIdButton', function () {
     test('it switches elements id button state', function (assert) {
       // given
@@ -57,6 +67,19 @@ module('Unit | Service | modulix-preview-mode', function (hooks) {
 
       // then
       assert.false(previewMode.isElementsIdButtonEnabled);
+    });
+  });
+
+  module('toggleGrainsTitleButton', function () {
+    test('it switches grains title button state', function (assert) {
+      // given
+      const previewMode = this.owner.lookup('service:modulix-preview-mode');
+
+      // when
+      previewMode.toggleGrainsTitleButton();
+
+      // then
+      assert.true(previewMode.isGrainsTitleButtonEnabled);
     });
   });
 
@@ -98,6 +121,48 @@ module('Unit | Service | modulix-preview-mode', function (hooks) {
 
         // then
         assert.true(previewMode.isPreviewAndElementsIdButtonEnabled);
+      });
+    });
+  });
+
+  module('get isPreviewAndGrainsTitleButtonEnabled', function () {
+    module('when preview mode is not enabled', function () {
+      test('it returns false', function (assert) {
+        // given
+        const previewMode = this.owner.lookup('service:modulix-preview-mode');
+
+        // when
+        previewMode.disable();
+
+        // then
+        assert.false(previewMode.isPreviewAndGrainsTitleButtonEnabled);
+      });
+    });
+
+    module('when grains title button is not enabled', function () {
+      test('it returns false', function (assert) {
+        // given
+        const previewMode = this.owner.lookup('service:modulix-preview-mode');
+
+        // when
+        previewMode.enable();
+
+        // then
+        assert.false(previewMode.isPreviewAndGrainsTitleButtonEnabled);
+      });
+    });
+
+    module('when both are enabled', function () {
+      test('it returns true', function (assert) {
+        // given
+        const previewMode = this.owner.lookup('service:modulix-preview-mode');
+
+        // when
+        previewMode.enable();
+        previewMode.toggleGrainsTitleButton();
+
+        // then
+        assert.true(previewMode.isPreviewAndGrainsTitleButtonEnabled);
       });
     });
   });

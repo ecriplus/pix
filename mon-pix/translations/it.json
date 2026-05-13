@@ -125,6 +125,7 @@
     "new-information-banner": {
       "close-label": "Chiudere il banner"
     },
+    "no": "No",
     "no-level": "Nessun livello",
     "or": "o",
     "pagination": {
@@ -154,7 +155,8 @@
           "min-length": "8 caratteri minimo"
         }
       }
-    }
+    },
+    "yes": "Si"
   },
   "components": {
     "attestations": {
@@ -1799,11 +1801,19 @@
         }
       },
       "preview": {
+        "elements-id-button": {
+          "label": "Visualizza l'ID degli elementi"
+        },
+        "elements-metadata-panel-label": "Mostra o nascondi i metadati",
         "grain-select": {
           "button": "Testare il grain",
           "grain-label": "Grain {index} : {title}",
           "label": "Scegli il grain da testare"
         },
+        "grains-title-button": {
+          "label": "Mostra il nome dei chicchi"
+        },
+        "modulix-editor": "Modulix Editor",
         "showJson": "Visualizzare JSON",
         "stepper": "Anteprima: stepper {direction}",
         "textarea-label": "Contenuto del modulo"

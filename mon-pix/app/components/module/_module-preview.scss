@@ -19,8 +19,8 @@
     padding: var(--pix-spacing-3x);
   }
 
-  &__passage {
-    width: 100%;
+  &__elements-id-tag, &__grains-title-tag {
+    margin: var(--pix-spacing-2x) 0;
   }
 
   &__form {
@@ -34,6 +34,48 @@
     .pix-textarea {
       height: 100%;
     }
+  }
+
+  &__grains-title-tag {
+    // Due to module-preview-passage__content class, all children elements are centered
+    // We are making an exception for this class by adding a margin-right
+    // see https://stackoverflow.com/a/36102124 for further explanations
+    margin-right: auto;
+  }
+
+  &__panel {
+    position: fixed;
+    top: var(--pix-spacing-6x);
+    z-index: 200;
+    display: inline-block;
+    width: 15rem;
+    margin-left: var(--pix-spacing-6x);
+    padding: var(--pix-spacing-4x);
+    background-color: var(--pix-neutral-0);
+    border: 2px solid var(--pix-primary-100);
+    border-radius: 4px;
+  }
+
+  &__passage {
+    width: 100%;
+  }
+}
+
+.module-preview-panel {
+  &__grains-title-control {
+    margin-top: var(--pix-spacing-2x);
+  }
+
+  &__grain-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-2x);
+  }
+
+  &__metadata-display-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-2x);
   }
 }
 

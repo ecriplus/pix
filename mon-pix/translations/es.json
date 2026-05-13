@@ -125,6 +125,7 @@
     "new-information-banner": {
       "close-label": "Cerrar el banner"
     },
+    "no": "No",
     "no-level": "Sin nivel",
     "or": "o",
     "pagination": {
@@ -154,7 +155,8 @@
           "min-length": "mínimo 8 caracteres"
         }
       }
-    }
+    },
+    "yes": "Si"
   },
   "components": {
     "attestations": {
@@ -1800,16 +1802,16 @@
       },
       "preview": {
         "elements-id-button": {
-          "choices": {
-            "no": "No",
-            "yes": "Si"
-          },
           "label": "Mostrar ID de los elementos"
         },
+        "elements-metadata-panel-label": "Mostrar u ocultar los metadatos",
         "grain-select": {
           "button": "Probar el grano",
           "grain-label": "Grano {index} : {title}",
           "label": "Elige el grano que quieres probar"
+        },
+        "grains-title-button": {
+          "label": "Mostrar el nombre de los granos"
         },
         "modulix-editor": "Modulix Editor",
         "showJson": "Show JSON",

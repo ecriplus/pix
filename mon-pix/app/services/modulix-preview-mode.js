@@ -5,6 +5,7 @@ import { tracked } from '@glimmer/tracking';
 export default class ModulixPreviewModeService extends Service {
   isEnabled = false;
   @tracked isElementsIdButtonEnabled = true;
+  @tracked isGrainsTitleButtonEnabled = false;
 
   enable() {
     this.isEnabled = true;
@@ -18,7 +19,15 @@ export default class ModulixPreviewModeService extends Service {
     return this.isEnabled && this.isElementsIdButtonEnabled;
   }
 
+  get isPreviewAndGrainsTitleButtonEnabled() {
+    return this.isEnabled && this.isGrainsTitleButtonEnabled;
+  }
+
   @action toggleElementIdButton() {
     this.isElementsIdButtonEnabled = !this.isElementsIdButtonEnabled;
+  }
+
+  @action toggleGrainsTitleButton() {
+    this.isGrainsTitleButtonEnabled = !this.isGrainsTitleButtonEnabled;
   }
 }

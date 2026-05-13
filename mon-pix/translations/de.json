@@ -125,6 +125,7 @@
     "new-information-banner": {
       "close-label": "Banner schließen"
     },
+    "no": "Nicht",
     "no-level": "Kein Level",
     "or": "oder",
     "pagination": {
@@ -154,7 +155,8 @@
           "min-length": "Mindestens 8 Zeichen"
         }
       }
-    }
+    },
+    "yes": "Ja"
   },
   "components": {
     "attestations": {
@@ -1789,16 +1791,16 @@
       },
       "preview": {
         "elements-id-button": {
-          "choices": {
-            "no": "Nein",
-            "yes": "Ja"
-          },
           "label": "ID der Elemente anzeigen"
         },
+        "elements-metadata-panel-label": "Metadaten anzeigen oder ausblenden",
         "grain-select": {
           "button": "Grain testen",
           "grain-label": "Grain {index} : {title}",
           "label": "Wähle das zu testende Grain aus"
+        },
+        "grains-title-button": {
+          "label": "Körnerbezeichnungen anzeigen"
         },
         "modulix-editor": "Modulix Editor",
         "showJson": "JSON anzeigen",
