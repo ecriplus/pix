@@ -1,3 +1,23 @@
+@use 'pix-design-tokens/typography';
+
+.evaluation-results-tabs {
+  max-width: 66rem;
+  margin: 0 auto;
+}
+
+.evaluation-results-tab__title {
+  @extend %pix-title-s;
+
+  margin-top: var(--pix-spacing-10x);
+}
+
+.evaluation-results-tab__description {
+  @extend %pix-body-m;
+
+  margin-top: var(--pix-spacing-2x);
+  color: var(--pix-neutral-500);
+}
+
 .evaluation-results-tab__trainings-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
