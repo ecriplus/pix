@@ -10,7 +10,7 @@ export class Version {
     scope: Joi.string()
       .required()
       .valid(...Object.values(SCOPES)),
-    startDate: Joi.date().required(),
+    startDate: Joi.date().allow(null).optional(),
     expirationDate: Joi.date().allow(null).optional(),
     assessmentDuration: Joi.number().required(),
     minimumAnswersRequiredToValidateACertification: Joi.number().required(),
