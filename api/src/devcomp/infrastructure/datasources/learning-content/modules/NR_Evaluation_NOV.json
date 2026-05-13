@@ -731,6 +731,118 @@
               }
             }
           ]
+        },
+        {
+          "id": "091ce3b1-b73e-4f9d-b2c6-91ccfc6709f0",
+          "type": "activity",
+          "title": "activite-2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "0c545fdd-6027-4bf3-9533-2fc337ff570e",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>L’entreprise BTPix a calculé l’empreinte carbone de ses activités numériques. Consultez le détail de cette empreinte carbone puis répondez aux questions.</p>\n<p>Empreinte carbone du matériel :</p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align:left\">Équipement</th>\n<th style=\"text-align:left\">Quantité</th>\n<th style=\"text-align:left\">Empreinte carbone par unité</th>\n<th style=\"text-align:left\">Empreinte carbone totale</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align:left\">Ordinateur portable</td>\n<td style=\"text-align:left\">10</td>\n<td style=\"text-align:left\">193kg CO2eq</td>\n<td style=\"text-align:left\">1930kg CO2eq</td>\n</tr>\n<tr>\n<td style=\"text-align:left\">Ordinateur fixe</td>\n<td style=\"text-align:left\">24</td>\n<td style=\"text-align:left\">259kg CO2eq</td>\n<td style=\"text-align:left\">6216kg CO2eq</td>\n</tr>\n<tr>\n<td style=\"text-align:left\">Écran d’ordinateur</td>\n<td style=\"text-align:left\">33</td>\n<td style=\"text-align:left\">92,6kg CO2eq</td>\n<td style=\"text-align:left\">3055,6kg CO2eq</td>\n</tr>\n</tbody>\n</table>\n<p>Empreinte carbone des services numériques :\n</p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align:left\">Service</th>\n<th style=\"text-align:left\">Quantité par semaine</th>\n<th style=\"text-align:left\">Empreinte carbone totale par semaine</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align:left\">Emails</td>\n<td style=\"text-align:left\">770 emails</td>\n<td style=\"text-align:left\">0,9kg CO2eq</td>\n</tr>\n<tr>\n<td style=\"text-align:left\">Visioconférence</td>\n<td style=\"text-align:left\">300 heures</td>\n<td style=\"text-align:left\">4,81 CO2eq</td>\n</tr>\n</tbody>\n</table>"
+              }
+            },
+            {
+              "type": "stepper",
+              "instruction": "<p>Pour les questions suivantes, sélectionnez la bonne réponse.<br></p>",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "3dd45ded-001a-40aa-80c7-9f351f72deb1",
+                      "type": "qcu",
+                      "instruction": "<p>Quel matériel informatique de BTPix a l'empreinte carbone la plus élevée ?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "<p>Les ordinateurs portables</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise&nbsp;réponse !</p>",
+                            "diagnosis": "<p>Consultez les tableaux précédents pour trouver la réponse.</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "<p>Les écrans d’ordinateur</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise&nbsp;réponse !</p>",
+                            "diagnosis": "<p>Consultez les tableaux précédents pour trouver la réponse.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Les smartphones</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise&nbsp;réponse !</p>",
+                            "diagnosis": "<p>Consultez les tableaux précédents pour trouver la réponse.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Les ordinateurs fixes</p>",
+                          "feedback": {
+                            "state": "<p>Bonne réponse !<br></p>",
+                            "diagnosis": "<p>Ce sont effectivement les ordinateurs fixes qui représentent la plus grande empreinte carbone du matériel informatique de BTPix.<br></p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "5bae62fb-8a20-4d40-b43c-45f366c33a37",
+                      "type": "qcu",
+                      "instruction": "<p>Sur quelle durée a été calculée l’empreinte carbone des services numériques de BTPix ?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "<p>Deux semaine</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse !<br></p>",
+                            "diagnosis": "<p>Consultez les tableaux précédents pour trouver la réponse.</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "<p>Un mois</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse !</p>",
+                            "diagnosis": "<p>Consultez les tableaux précédents pour trouver la réponse.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Une semaine<br></p>",
+                          "feedback": {
+                            "state": "<p>Bonne réponse !<br></p>",
+                            "diagnosis": "<p>L'empreinte carbone des services numériques de BTPix a effectivement été calculée sur une semaine.<br></p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Une journée<br></p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse !</p>",
+                            "diagnosis": "<p>Consultez les tableaux précédents pour trouver la réponse.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     }
