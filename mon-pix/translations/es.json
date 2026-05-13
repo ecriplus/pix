@@ -700,7 +700,9 @@
             "2": "Sección práctica'<br/>'profesional",
             "3": "Resultado final"
           },
-          "sub-title": "¡El candidato es admisible para la 2.ª etapa!"
+          "sub-title": {
+            "admissible": "¡El candidato es admisible para la 2.ª etapa!"
+          }
         }
       },
       "global": {
@@ -727,7 +729,7 @@
       "jury-info": "Las observaciones del tribunal no se comparten en la página de comprobación de tu certificado.",
       "jury-title": "Observaciones del tribunal",
       "learn-about-certification-results": "¿Cómo interpretar los resultados?",
-      "obtained-certification": "El candidato ha obtenido la certificación {frameworkLabel}",
+      "obtained-certification": "El candidato ha alcanzado el nivel {globalLevelLabel} de la certificación {frameworkLabel}.",
       "professionalizing-warning": "El certificado Pix está reconocido como cualificación profesional por France Compétences una vez alcanzada una puntuación mínima de 120 pix.",
       "results": {
         "sub-title": "El candidato es admisible para la certificación {framework}.",

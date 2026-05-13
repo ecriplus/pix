@@ -699,7 +699,9 @@
             "2": "Berufspraktischer'<br/>'Teil",
             "3": "Endergebnis"
           },
-          "sub-title": "Der Kandidat/Die Kandidatin ist für die 2. Stufe zugelassen!"
+          "sub-title": {
+            "admissible": "Der Kandidat/Die Kandidatin ist für die 2. Stufe zugelassen!"
+          }
         }
       },
       "global": {
@@ -726,6 +728,7 @@
       "jury-info": "Die Bemerkungen der Jury werden auf der Überprüfungsseite deines Zeugnisses nicht geteilt.",
       "jury-title": "Bemerkungen der Jury",
       "learn-about-certification-results": "Wie sind die Ergebnisse zu interpretieren?",
+      "obtained-certification": "Der Kandidat hat das Niveau {globalLevelLabel} der {frameworkLabel}-Zertifizierung erreicht.",
       "professionalizing-warning": "Das Pix-Zertifikat wird von France compétences ab einer Mindestpunktzahl von 120 Pix als berufsqualifizierend anerkannt.",
       "results": {
         "sub-title": "Der Kandidat ist für die Zertifizierung {framework} zugelassen.",

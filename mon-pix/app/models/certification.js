@@ -38,6 +38,7 @@ export default class Certification extends Model {
   @attr('string') level;
   @attr('string') acquiredComplementaryCertification;
   @attr('string') certificationFramework;
+  @attr('string') badgeUrl;
 
   // includes
   @belongsTo('result-competence-tree', { async: true, inverse: null }) resultCompetenceTree;

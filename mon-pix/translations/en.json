@@ -700,7 +700,9 @@
             "2": "Professional'<br/>'practice component",
             "3": "Final result"
           },
-          "sub-title": "The candidate is eligible for the 2nd stage!"
+          "sub-title": {
+            "admissible": "The candidate is eligible for the 2nd stage!"
+          }
         }
       },
       "global": {
@@ -727,7 +729,7 @@
       "jury-info": "Notes from the examining body are not displayed on the verification page of your certificate.",
       "jury-title": "Notes from the examining body",
       "learn-about-certification-results": "How to interpret the results?",
-      "obtained-certification": "The candidate has obtained the {frameworkLabel} certification",
+      "obtained-certification": "The candidate has reached the {globalLevelLabel} level of the {frameworkLabel} certification.",
       "professionalizing-warning": "The Pix certificate is recognised as professionalising by France Compétences upon reaching a minimum score of 120 pix.",
       "results": {
         "sub-title": "The candidate is eligible for {framework} certification.",

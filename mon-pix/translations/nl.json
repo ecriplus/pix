@@ -701,7 +701,9 @@
             "2": "Beroepspraktijk'<br/>'onderdeel",
             "3": "Eindresultaat"
           },
-          "sub-title": "De kandidaat is toegelaten tot de 2e fase!"
+          "sub-title": {
+            "admissible": "De kandidaat is toegelaten tot de 2e fase!"
+          }
         }
       },
       "global": {
@@ -724,7 +726,7 @@
       "jury-info": "De opmerkingen van de jury worden niet gedeeld op de verificatiepagina van je certificaat.",
       "jury-title": "Commentaar van de jury",
       "learn-about-certification-results": "Hoe moeten de resultaten worden geïnterpreteerd?",
-      "obtained-certification": "De kandidaat heeft het {frameworkLabel}-certificaat behaald",
+      "obtained-certification": "De kandidaat heeft het niveau {globalLevelLabel} van de {frameworkLabel}-certificering bereikt.",
       "professionalizing-warning": "Het Pix-certificaat wordt door France Compétences erkend als een professionele kwalificatie zodra een minimale score van 120 pix is behaald.",
       "progressbar-explanation": "oortgangsbalk die aangeeft welk niveau je hebt bereikt ( {level}, i.e. level {globalLevelLabel} ) van het maximaal haalbare niveau van 7 (niveau Expert 1)",
       "results": {

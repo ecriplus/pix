@@ -7,18 +7,27 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
-import { eq } from 'ember-truth-helpers';
+import { and } from 'ember-truth-helpers';
 import { CERTIFICATE_TYPES } from 'mon-pix/models/certificate-summary';
 
 import Hexagon from '../../user-certifications/list-item/hexagon';
 
+const EDU_STEPS = {
+  ADMISSIBLE: 2,
+  FINAL: 3,
+};
+
 export default class PixPlusCertificate extends Component {
   @service intl;
 
-  @tracked eduCurrentStep = this.args.certificate.level === 'ADMISSIBLE' ? 2 : 3;
+  @tracked eduCurrentStep = this.isCandidateEduAdmissible ? EDU_STEPS.ADMISSIBLE : EDU_STEPS.FINAL;
 
   get isEduCertification() {
     return this.args.certificate.certificationFramework.includes('EDU');
+  }
+
+  get isCandidateEduAdmissible() {
+    return this.isEduCertification && this.args.certificate.level === 'ADMISSIBLE';
   }
 
   get certificationFrameworkLabel() {
@@ -32,10 +41,11 @@ export default class PixPlusCertificate extends Component {
   }
 
   get certificationSubTitle() {
-    if (this.isEduCertification) {
-      return this.intl.t('pages.certificate.frameworks.EDU.sub-title');
+    if (this.isCandidateEduAdmissible) {
+      return this.intl.t('pages.certificate.frameworks.EDU.sub-title.admissible');
     }
     return this.intl.t('pages.certificate.obtained-certification', {
+      globalLevelLabel: this.reachedMeshLabel,
       frameworkLabel: this.certificationFrameworkLabel,
     });
   }
@@ -102,24 +112,35 @@ export default class PixPlusCertificate extends Component {
         </div>
       </div>
       <div class="v3-pix-plus-certificate__score">
-        <Hexagon
-          @framework={{@certificate.certificationFramework}}
-          @certificateType={{CERTIFICATE_TYPES.CERTIFICATE}}
-          @reachedMeshLevel={{@certificate.level}}
-        />
-        {{#if (eq this.eduCurrentStep 2)}}
+        {{#if this.isCandidateEduAdmissible}}
+          <Hexagon
+            @framework={{@certificate.certificationFramework}}
+            @certificateType={{CERTIFICATE_TYPES.CERTIFICATE}}
+            @reachedMeshLevel={{@certificate.level}}
+          />
           <PixTag @color="green">{{this.reachedMeshLabel}}</PixTag>
+        {{else}}
+          <img class="v3-pix-plus-certificate-score__badge" src={{@certificate.badgeUrl}} alt="" />
         {{/if}}
       </div>
     </PixBlock>
 
-    {{#if this.isEduCertification}}
+    {{#if this.isCandidateEduAdmissible}}
       <PixBlock class="v3-pix-plus-certificate__results-infos-block">
         <img src="/images/illustrations/user-certifications/certificate-magnifier.png" alt="" />
         <div class="v3-pix-plus-certificate__results-infos-details">
           <h3 class="v3-pix-plus-certificate__title">{{t "pages.certificate.results.title"}}</h3>
           <p><strong>{{this.frameworkTranslations.resultsSubTitle}}</strong></p>
           {{this.frameworkTranslations.resultsInfos}}
+        </div>
+      </PixBlock>
+    {{else if (and @certificate.globalSummaryLabel @certificate.globalDescriptionLabel)}}
+      <PixBlock class="v3-pix-plus-certificate__results-infos-block">
+        <img src="/images/illustrations/user-certifications/certificate-magnifier.png" alt="" />
+        <div class="v3-pix-plus-certificate__results-infos-details">
+          <h3 class="v3-pix-plus-certificate__title">{{t "pages.certificate.results.title"}}</h3>
+          <p><strong>{{@certificate.globalSummaryLabel}}</strong></p>
+          {{@certificate.globalDescriptionLabel}}
         </div>
       </PixBlock>
     {{/if}}
