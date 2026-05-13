@@ -1,0 +1,59 @@
+@use 'pix-design-tokens/breakpoints';
+@use 'pix-design-tokens/typography';
+
+.inaccessible-content {
+  &__image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    margin: auto;
+    margin-top: var(--pix-spacing-8x);
+    margin-bottom: var(--pix-spacing-8x);
+
+    @include breakpoints.device-is('tablet') {
+      flex-direction: row;
+    }
+  }
+
+  &__pix-logo {
+    display: flex;
+    gap: var(--pix-spacing-8x);
+    margin: auto;
+  }
+
+  &__image {
+    height: 42px;
+
+    @include breakpoints.device-is('tablet') {
+      height: 70px;
+    }
+  }
+
+  &__error {
+    display: flex;
+    flex-direction: column;
+    gap: 31px;
+    align-items: center;
+    padding: var(--pix-spacing-10x, 40px) var(--pix-spacing-6x, 24px);
+
+    @extend %pix-body-m;
+
+    &__title {
+      @extend %pix-title-s;
+
+      margin-bottom: var(--pix-spacing-6x);
+      text-align: center;
+    }
+
+    &__instructions {
+      font-weight: bold;
+    }
+  }
+
+  &__button {
+    width: fit-content;
+    margin: auto;
+  }
+}
