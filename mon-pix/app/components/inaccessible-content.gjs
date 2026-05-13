@@ -9,20 +9,20 @@ export default class InaccessibleContent extends Component {
   }
   <template>
     <PixBlock ...attributes>
-      <div class="campaign-landing-page__start__image__container">
-        <div class="campaign-landing-page__pix-logo">
-          <img class="campaign-landing-page__image" src="/images/pix-logo.svg" alt="{{t 'navigation.pix'}}" />
+      <div class="inaccessible-content__image-container">
+        <div class="inaccessible-content__pix-logo">
+          <img class="inaccessible-content__image" src="/images/pix-logo.svg" alt="{{t 'navigation.pix'}}" />
         </div>
       </div>
-      <div class="campaign-landing-page-error">
-        <h1 class="campaign-landing-page-error__title">{{yield to="title"}}</h1>
+      <div class="inaccessible-content__error">
+        <h1 class="inaccessible-content__error__title">{{yield to="title"}}</h1>
         {{#if (has-block "content")}}
           {{yield to="content"}}
         {{/if}}
         {{#if (has-block "instructions")}}
-          <div class="campaign-landing-page-error__instructions">{{yield to="instructions"}}</div>
+          <div class="inaccessible-content__error__instructions">{{yield to="instructions"}}</div>
         {{/if}}
-        <PixButtonLink @route="authenticated" class="campaign-landing-page__error-button">
+        <PixButtonLink @route="authenticated" class="inaccessible-content__button">
           {{t this.buttonText}}
         </PixButtonLink>
       </div>

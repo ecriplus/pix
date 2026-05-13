@@ -175,6 +175,7 @@ of an adaptative/mobile-first approach — refactoring is welcome here */
 /* pages */
 @use 'pages/assessment-results' as *;
 @use 'pages/campaign-landing-page' as *;
+@use 'pages/inaccessible-content' as *;
 @use 'pages/campaign-tutorial' as *;
 @use 'pages/challenge' as *;
 @use 'pages/competence-results' as *;

@@ -107,22 +107,3 @@
   text-align: center;
 }
 
-/* ------------------------ ERROR ------------------------ */
-
-.campaign-landing-page-error {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 50px;
-
-  &__title {
-    @extend %pix-title-xs;
-
-    margin-bottom: var(--pix-spacing-6x);
-    text-align: center;
-  }
-}
-
-.campaign-landing-page__error-button {
-  width: fit-content;
-  margin: auto;
-}
