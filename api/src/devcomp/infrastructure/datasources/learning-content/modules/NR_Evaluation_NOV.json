@@ -304,7 +304,7 @@
                 "id": "f2761634-11d6-42a2-bfd0-ecbb2979d93b",
                 "type": "custom",
                 "title": "",
-                "instruction": "Parcourez l'image suivante pour découvrir d'où viennent les émissions de gaz à effet de serre liées à l'ordinateur de Benoît.",
+                "instruction": "Parcourez l’image suivante pour découvrir d’où viennent les émissions de gaz à effet de serre liées à l’ordinateur de Benoît.",
                 "functionalInstruction": "",
                 "tagName": "clickable-image",
                 "props": {
@@ -743,7 +743,7 @@
                 "id": "0c545fdd-6027-4bf3-9533-2fc337ff570e",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>L’entreprise BTPix a calculé l’empreinte carbone de ses activités numériques. Consultez le détail de cette empreinte carbone puis répondez aux questions.</p>\n<p>Empreinte carbone du matériel :</p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align:left\">Équipement</th>\n<th style=\"text-align:left\">Quantité</th>\n<th style=\"text-align:left\">Empreinte carbone par unité</th>\n<th style=\"text-align:left\">Empreinte carbone totale</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align:left\">Ordinateur portable</td>\n<td style=\"text-align:left\">10</td>\n<td style=\"text-align:left\">193kg CO2eq</td>\n<td style=\"text-align:left\">1930kg CO2eq</td>\n</tr>\n<tr>\n<td style=\"text-align:left\">Ordinateur fixe</td>\n<td style=\"text-align:left\">24</td>\n<td style=\"text-align:left\">259kg CO2eq</td>\n<td style=\"text-align:left\">6216kg CO2eq</td>\n</tr>\n<tr>\n<td style=\"text-align:left\">Écran d’ordinateur</td>\n<td style=\"text-align:left\">33</td>\n<td style=\"text-align:left\">92,6kg CO2eq</td>\n<td style=\"text-align:left\">3055,6kg CO2eq</td>\n</tr>\n</tbody>\n</table>\n<p>Empreinte carbone des services numériques :\n</p>\n<table>\n<thead>\n<tr>\n<th style=\"text-align:left\">Service</th>\n<th style=\"text-align:left\">Quantité par semaine</th>\n<th style=\"text-align:left\">Empreinte carbone totale par semaine</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align:left\">Emails</td>\n<td style=\"text-align:left\">770 emails</td>\n<td style=\"text-align:left\">0,9kg CO2eq</td>\n</tr>\n<tr>\n<td style=\"text-align:left\">Visioconférence</td>\n<td style=\"text-align:left\">300 heures</td>\n<td style=\"text-align:left\">4,81 CO2eq</td>\n</tr>\n</tbody>\n</table>"
+                "content": "<p>L’entreprise BTPix a calculé l’empreinte carbone de ses activités numériques. Consultez le détail de cette empreinte carbone puis répondez aux questions.</p><p>Empreinte carbone du matériel&nbsp;:</p><table><thead><tr><th style=\"text-align:left\">Équipement</th><th style=\"text-align:left\">Quantité</th><th style=\"text-align:left\">Empreinte carbone par unité</th><th style=\"text-align:left\">Empreinte carbone totale</th></tr></thead><tbody><tr><td style=\"text-align:left\">Ordinateur portable</td><td style=\"text-align:left\">10</td><td style=\"text-align:left\">193kg CO2eq</td><td style=\"text-align:left\">1930kg CO2eq</td></tr><tr><td style=\"text-align:left\">Ordinateur fixe</td><td style=\"text-align:left\">24</td><td style=\"text-align:left\">259kg CO2eq</td><td style=\"text-align:left\">6216kg CO2eq</td></tr><tr><td style=\"text-align:left\">Écran d’ordinateur</td><td style=\"text-align:left\">33</td><td style=\"text-align:left\">92,6kg CO2eq</td><td style=\"text-align:left\">3055,6kg CO2eq</td></tr></tbody></table><p>Empreinte carbone des services numériques&nbsp;:</p><table><thead><tr><th style=\"text-align:left\">Service</th><th style=\"text-align:left\">Quantité par semaine</th><th style=\"text-align:left\">Empreinte carbone totale par semaine</th></tr></thead><tbody><tr><td style=\"text-align:left\">Emails</td><td style=\"text-align:left\">770 emails</td><td style=\"text-align:left\">0,9kg CO2eq</td></tr><tr><td style=\"text-align:left\">Visioconférence</td><td style=\"text-align:left\">300 heures</td><td style=\"text-align:left\">4,81 CO2eq</td></tr></tbody></table>"
               }
             },
             {
@@ -755,14 +755,14 @@
                     {
                       "id": "3dd45ded-001a-40aa-80c7-9f351f72deb1",
                       "type": "qcu",
-                      "instruction": "<p>Quel matériel informatique de BTPix a l'empreinte carbone la plus élevée ?</p>",
+                      "instruction": "<p>Quel matériel informatique de BTPix a l’empreinte carbone la plus élevée ?</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "0",
                           "content": "<p>Les ordinateurs portables</p>",
                           "feedback": {
-                            "state": "<p>Mauvaise&nbsp;réponse !</p>",
+                            "state": "<p>Mauvaise&nbsp;réponse !</p>",
                             "diagnosis": "<p>Consultez les tableaux précédents pour trouver la réponse.</p>"
                           }
                         },
@@ -770,7 +770,7 @@
                           "id": "1",
                           "content": "<p>Les écrans d’ordinateur</p>",
                           "feedback": {
-                            "state": "<p>Mauvaise&nbsp;réponse !</p>",
+                            "state": "<p>Mauvaise&nbsp;réponse !</p>",
                             "diagnosis": "<p>Consultez les tableaux précédents pour trouver la réponse.</p>"
                           }
                         },
@@ -778,7 +778,7 @@
                           "id": "2",
                           "content": "<p>Les smartphones</p>",
                           "feedback": {
-                            "state": "<p>Mauvaise&nbsp;réponse !</p>",
+                            "state": "<p>Mauvaise&nbsp;réponse !</p>",
                             "diagnosis": "<p>Consultez les tableaux précédents pour trouver la réponse.</p>"
                           }
                         },
@@ -786,7 +786,7 @@
                           "id": "3",
                           "content": "<p>Les ordinateurs fixes</p>",
                           "feedback": {
-                            "state": "<p>Bonne réponse !<br></p>",
+                            "state": "<p>Bonne réponse !<br></p>",
                             "diagnosis": "<p>Ce sont effectivement les ordinateurs fixes qui représentent la plus grande empreinte carbone du matériel informatique de BTPix.<br></p>"
                           }
                         }
@@ -800,14 +800,14 @@
                     {
                       "id": "5bae62fb-8a20-4d40-b43c-45f366c33a37",
                       "type": "qcu",
-                      "instruction": "<p>Sur quelle durée a été calculée l’empreinte carbone des services numériques de BTPix ?</p>",
+                      "instruction": "<p>Sur quelle durée a été calculée l’empreinte carbone des services numériques de BTPix ?</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
                           "id": "0",
                           "content": "<p>Deux semaine</p>",
                           "feedback": {
-                            "state": "<p>Mauvaise réponse !<br></p>",
+                            "state": "<p>Mauvaise réponse !<br></p>",
                             "diagnosis": "<p>Consultez les tableaux précédents pour trouver la réponse.</p>"
                           }
                         },
@@ -815,7 +815,7 @@
                           "id": "1",
                           "content": "<p>Un mois</p>",
                           "feedback": {
-                            "state": "<p>Mauvaise réponse !</p>",
+                            "state": "<p>Mauvaise réponse !</p>",
                             "diagnosis": "<p>Consultez les tableaux précédents pour trouver la réponse.</p>"
                           }
                         },
@@ -823,15 +823,15 @@
                           "id": "2",
                           "content": "<p>Une semaine<br></p>",
                           "feedback": {
-                            "state": "<p>Bonne réponse !<br></p>",
-                            "diagnosis": "<p>L'empreinte carbone des services numériques de BTPix a effectivement été calculée sur une semaine.<br></p>"
+                            "state": "<p>Bonne réponse !<br></p>",
+                            "diagnosis": "<p>L’empreinte carbone des services numériques de BTPix a effectivement été calculée sur une semaine.<br></p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Une journée<br></p>",
                           "feedback": {
-                            "state": "<p>Mauvaise réponse !</p>",
+                            "state": "<p>Mauvaise réponse !</p>",
                             "diagnosis": "<p>Consultez les tableaux précédents pour trouver la réponse.</p>"
                           }
                         }
@@ -854,7 +854,7 @@
               "element": {
                 "id": "2d7bca14-6e70-49ee-9fce-80671e60946d",
                 "type": "qcm",
-                "instruction": "<p>Que permet l’empreinte carbone ? Sélectionnez les bonnes réponses.</p>",
+                "instruction": "<p>Que permet l’empreinte carbone ? Sélectionnez les bonnes réponses.</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
@@ -880,11 +880,11 @@
                 ],
                 "feedbacks": {
                   "valid": {
-                    "state": "<p>Bonne réponse !</p>",
-                    "diagnosis": "<p><br></p>"
+                    "state": "<p>Bonne réponse !</p>",
+                    "diagnosis": ""
                   },
                   "invalid": {
-                    "state": "<p>Mauvaise réponse !</p>",
+                    "state": "<p>Mauvaise réponse !</p>",
                     "diagnosis": "<p>Vous pouvez relire les leçons de ce module puis réessayer.<br></p>"
                   }
                 },
@@ -892,6 +892,51 @@
                   "1",
                   "2",
                   "4"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a3b781de-8643-4b62-b2f4-6df46013990a",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "8a94341e-96cb-413c-b9e6-bc40ca184cb2",
+          "type": "activity",
+          "title": "transfert",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "cacdf097-ad3a-4953-a176-60ea61459f45",
+                "type": "qcu-declarative",
+                "instruction": "<p>Maintenant que vous en savez un peu plus sur l’empreinte carbone du numérique, que pourriez-vous faire pour réduire votre empreinte carbone ?</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "0",
+                    "content": "<p>Calculer l’empreinte carbone de mes activités numériques.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Feedback&nbsp;: Bonne idée ! Connaître l’empreinte carbone de ses activités permet de mieux prioriser ses actions pour réduire ses émissions de gaz à effet de serre. Vous pouvez, par exemple, utiliser ce <a href=\"https://impactco2.fr/outils/usagenumerique\" target=\"_blank\">simulateur de l’ADEME</a> pour estimer l’empreinte carbone de vos appareils numériques.</p>"
+                    }
+                  },
+                  {
+                    "id": "1",
+                    "content": "<p>Comparer l’empreinte carbone de mon ordinateur avec celle de mon alimentation.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Bonne idée. Comparer l’empreinte carbone de plusieurs activités peut aider à les comprendre, et à prioriser ses actions pour réduire les émissions de gaz à effet de serre.&nbsp; Vous pouvez, par exemple, utiliser <a href=\"https://impactco2.fr/outils/usagenumerique\" target=\"_blank\">ce simulateur de l’ADEME</a> pour estimer votre empreinte carbone numérique et <a href=\"https://impactco2.fr/outils/alimentation#repas\" target=\"_blank\">ce simulateur</a> pour estimer l’impact carbone de votre alimentation.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Éviter d’acheter un nouvel ordinateur si je n’en ai pas vraiment besoin.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Très bonne idée ! Comme nous avons pu le voir, fabriquer un ordinateur émet des gaz à effet de serre. On peut éviter ces émissions en n’achetant pas de nouvel ordinateur.</p>"
+                    }
+                  }
                 ]
               }
             }
