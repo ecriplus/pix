@@ -187,6 +187,36 @@
           ]
         },
         {
+          "id": "a33af0d8-649b-4138-9958-e51d43010303",
+          "type": "discovery",
+          "title": "autocompletion-mdp",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "54d93d01-03f5-4297-b89c-6ea57b444f55",
+                "type": "text",
+                "content": "<p>autocompletion-mdp</p>",
+                "tag": " "
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "4934fe15-f787-49fc-8ebc-12b998e4298a",
+                "type": "custom",
+                "instruction": "",
+                "tagName": "autocompletion-mdp",
+                "props": {
+                  "titleLevel": 2
+                },
+                "title": "",
+                "functionalInstruction": ""
+              }
+            }
+          ]
+        },
+        {
           "id": "5161dd9c-0ed3-43a8-b550-ced9e2c539ba",
           "type": "discovery",
           "title": "calcul-impact",
