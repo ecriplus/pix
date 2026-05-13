@@ -43,7 +43,9 @@ module(
 
         // then
         assert
-          .dom(screen.getByRole('heading', { name: t('pages.skill-review.tabs.trainings.title'), level: 2 }))
+          .dom(
+            screen.getByRole('heading', { name: t('pages.skill-review.recommended-engine.trainings.title'), level: 2 }),
+          )
           .exists();
         assert.dom(screen.getByRole('heading', { name: 'Super training', level: 3 })).exists();
       });

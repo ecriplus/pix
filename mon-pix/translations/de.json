@@ -2209,6 +2209,12 @@
         "title": "Deine Meinung zählt!"
       },
       "not-finished": "Du kannst deine Ergebnisse noch nicht einsenden, wir haben noch einige Fragen an dich.",
+      "recommended-engine": {
+        "trainings": {
+          "description": "Es wird entsprechend deinen Fortschritten empfohlen, um dir dabei zu helfen, deine Fähigkeiten zu festigen und zum richtigen Zeitpunkt einen Schritt weiter zu gehen.",
+          "title": "Gehen Sie noch einen Schritt weiter – ganz in Ihrem eigenen Tempo."
+        }
+      },
       "reset": {
         "button": "Auf Null stellen und alles noch einmal versuchen",
         "modal": {

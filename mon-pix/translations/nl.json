@@ -2209,6 +2209,12 @@
         "title": "Jouw mening telt!"
       },
       "not-finished": "Je kunt je resultaten nog niet opsturen, dus we hebben nog een paar vragen voor je.",
+      "recommended-engine": {
+        "trainings": {
+          "description": "Deze aanbeveling wordt gedaan op basis van je voortgang, om je te helpen je vaardigheden te versterken en op het juiste moment een stap verder te gaan.",
+          "title": "Ga verder, op je eigen tempo."
+        }
+      },
       "reset": {
         "button": "Reset en probeer opnieuw",
         "modal": {

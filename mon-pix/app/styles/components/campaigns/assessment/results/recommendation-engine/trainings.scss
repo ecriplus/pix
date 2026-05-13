@@ -1,0 +1,23 @@
+@use 'pix-design-tokens/typography';
+
+.results-recommendation-engine-training {
+  &__title {
+    @extend %pix-title-s;
+
+    margin-top: var(--pix-spacing-10x);
+  }
+
+  &__description {
+    @extend %pix-body-m;
+
+    margin-top: var(--pix-spacing-2x);
+    color: var(--pix-neutral-500);
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+    gap: var(--pix-spacing-6x);
+    margin-top: var(--pix-spacing-8x);
+  }
+}

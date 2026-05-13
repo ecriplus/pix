@@ -2209,6 +2209,12 @@
         "title": "¡Tu opinión cuenta!"
       },
       "not-finished": "Todavía no puedes enviar tus resultados, aún tenemos algunas preguntas para ti.",
+      "recommended-engine": {
+        "trainings": {
+          "description": "Se recomienda en función de tu progreso para ayudarte a reforzar tus habilidades y avanzar más, en el momento adecuado.",
+          "title": "Ve más allá, a tu propio ritmo."
+        }
+      },
       "reset": {
         "button": "Poner a cero y volver a intentarlo todo",
         "modal": {

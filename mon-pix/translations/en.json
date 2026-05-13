@@ -2209,6 +2209,12 @@
         "title": "Your opinion counts!"
       },
       "not-finished": "You can’t submit your results yet, we still have a few questions to ask.",
+      "recommended-engine": {
+        "trainings": {
+          "description": "It is recommended based on your progress to help you build your skills and take them to the next level at just the right time.",
+          "title": "Go further, at your own pace."
+        }
+      },
       "reset": {
         "button": "Reset and restart from the beginning",
         "modal": {
