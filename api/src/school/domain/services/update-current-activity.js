@@ -3,12 +3,12 @@ import { ActivityInfo } from '../models/ActivityInfo.js';
 
 export async function updateCurrentActivity({
   assessmentId,
+  lastActivity,
   activityRepository,
   activityAnswerRepository,
   missionAssessmentRepository,
   missionRepository,
 }) {
-  const lastActivity = await activityRepository.getLastActivity(assessmentId);
   const lastAnswer = await activityAnswerRepository.findLastByActivity(lastActivity.id);
 
   if (lastAnswer.result.isOK() || lastActivity.isTutorial) {
@@ -17,6 +17,7 @@ export async function updateCurrentActivity({
     if (_isActivityFinished(mission, lastActivity, lastAnswer)) {
       return activityRepository.updateStatus({ activityId: lastActivity.id, status: Activity.status.SUCCEEDED });
     }
+
     return lastActivity;
   }
   if (lastAnswer.result.isKO()) {
