@@ -1,3 +1,4 @@
+import { Training } from '../../../../src/devcomp/domain/models/Training.js';
 import { DEVCOMP_BASE_TRAINING_ID, PIX_EDU_SMALL_TARGET_PROFILE_ID } from './constants.js';
 
 export function buildTrainings(databaseBuilder) {
@@ -7,6 +8,7 @@ export function buildTrainings(databaseBuilder) {
     title: 'Apprendre à manger un croissant comme les français',
     internalTitle: 'Apprendre à manger un croissant comme les français',
     locales: ['fr'],
+    objectives: ['Repérer si le croissant est de bonne qualité', 'Rechercher un croissant pour le manger'],
   }).id;
 
   databaseBuilder.factory.buildTargetProfileTraining({
@@ -36,6 +38,11 @@ export function buildTrainings(databaseBuilder) {
     editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg',
     type: 'modulix',
     locales: ['fr'],
+    objectives: [
+      'Comprendre que les conversations avec les IA génératives sont réutilisées',
+      'Savoir rédiger un prompt qui n’inclut pas d’informations personnelles',
+    ],
+    registrationRequired: true,
   }).id;
 
   databaseBuilder.factory.buildTargetProfileTraining({
@@ -65,6 +72,8 @@ export function buildTrainings(databaseBuilder) {
     editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg',
     type: 'modulix',
     locales: ['fr'],
+    objectives: ['Connaître les principaux risques liés aux mots de passe', 'Savoir créer un mot de passe solide'],
+    deliveryMode: Training.modes.ONSITE,
   }).id;
 
   databaseBuilder.factory.buildTargetProfileTraining({
@@ -89,6 +98,9 @@ export function buildTrainings(databaseBuilder) {
     title: 'Apprendre à peindre comme Monet',
     internalTitle: 'Apprendre à peindre comme Monet',
     locales: ['fr-fr'],
+    objectives: ['Connaître Monet', 'Avoir les bases pour peindre'],
+    deliveryMode: Training.modes.REMOTE,
+    registrationRequired: true,
   }).id;
 
   databaseBuilder.factory.buildTargetProfileTraining({
@@ -118,6 +130,11 @@ export function buildTrainings(databaseBuilder) {
     editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg',
     type: 'modulix',
     locales: ['fr-fr'],
+    objectives: [
+      'Comprendre que les conversations avec les IA génératives sont réutilisées',
+      'Savoir rédiger un prompt qui n’inclut pas d’informations personnelles',
+    ],
+    deliveryMode: Training.modes.REMOTE,
   }).id;
 
   databaseBuilder.factory.buildTargetProfileTraining({
@@ -142,6 +159,7 @@ export function buildTrainings(databaseBuilder) {
     title: 'Eat a croissant like the french',
     internalTitle: 'Eat a croissant like the french',
     locales: ['en'],
+    objectives: ['How to tell if a croissant is of good quality', 'Buy a croissant to eat'],
   }).id;
 
   databaseBuilder.factory.buildTargetProfileTraining({
