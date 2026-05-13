@@ -1,0 +1,954 @@
+{
+  "id": "6f79bd86-a169-41f4-8c98-6d20963cc3cd",
+  "shortId": "32444579",
+  "slug": "nr-evaluation-nov",
+  "title": "Empreinte carbone du numérique : de quoi s’agit-il ?",
+  "isBeta": true,
+  "visibility": "public",
+  "details": {
+    "image": "https://assets.pix.org/modules/nr_durabilite-nov/picto_nr_durabilite_nov.svg",
+    "description": "<p>On parle souvent d’empreinte carbone pour évaluer l’impact des activités humaines (transport, alimentation, logement…) sur le dérèglement climatique. Les activités numériques ont aussi une empreinte carbone. Dans ce module vous allez découvrir l’empreinte carbone du numérique&nbsp;: ce que c’est, comment elle est évaluée, ainsi que ses avantages et inconvénients.</p>",
+    "duration": 10,
+    "level": "novice",
+    "objectives": [
+      "<p>Comprendre ce qu’est l’empreinte carbone</p>",
+      "<p>Comprendre comment le activités numériques émettent des gaz à effet de serre</p>",
+      "<p>Connaître les intérêts et les limites de l’empreinte carbone</p>"
+    ],
+    "tabletSupport": "comfortable"
+  },
+  "sections": [
+    {
+      "id": "3161e641-85dd-4126-89f5-33d14302951a",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "5ecf099e-9e0f-484f-bdac-f0cda4e09c38",
+          "type": "discovery",
+          "title": "conversation-accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "7ca08b2c-534e-4e33-96aa-5a8b9ec85e4a",
+                "type": "custom",
+                "title": "",
+                "instruction": "<p>Benoit et Alice s’interrogent sur l’impact environnemental de leurs actions.</p>",
+                "functionalInstruction": "",
+                "tagName": "message-conversation",
+                "props": {
+                  "conversationTitle": "Benoit et Alice s’interrogent sur l’impact environnemental de leurs actions.",
+                  "messages": [
+                    {
+                      "userName": "Benoît",
+                      "direction": "incoming",
+                      "type": "Texte",
+                      "content": "Tu savais que manger, se déplacer, se chauffer … Toutes nos actions ont un impact sur le réchauffement climatique ? 😱"
+                    },
+                    {
+                      "userName": "Alice",
+                      "direction": "outgoing",
+                      "type": "Texte",
+                      "content": "Bien sûr ! Même quand tu achètes un nouvel ordinateur portable, quand tu envoie un mail ou quand tu utilises l’IA…"
+                    },
+                    {
+                      "userName": "Benoît",
+                      "direction": "incoming",
+                      "type": "Texte",
+                      "content": "Ah bon ? 😮"
+                    },
+                    {
+                      "userName": "Alice",
+                      "direction": "outgoing",
+                      "type": "Texte",
+                      "content": "Tes actions numériques émettent aussi des gaz à effet de serre. Mais certaines beaucoup plus que d’autres …"
+                    },
+                    {
+                      "userName": "Benoît",
+                      "direction": "incoming",
+                      "type": "Texte",
+                      "content": "Mais comment savoir ce qui émet le plus ?"
+                    },
+                    {
+                      "userName": "Alice",
+                      "direction": "incoming",
+                      "type": "Texte",
+                      "content": "Eh bien une manière de savoir est de regarder son empreinte carbone. 💡"
+                    }
+                  ],
+                  "animationSpeed": 12
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "af6d9547-81c1-49b4-8bff-e5a0ca67c64c",
+      "type": "explore-to-understand",
+      "grains": [
+        {
+          "id": "513e756d-60c5-41e0-851b-bc991d9a623f",
+          "type": "discovery",
+          "title": "decouverte-1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "26367780-e7c8-415f-beac-58f7a51b8bae",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Pour comprendre ce qu’est une empreinte carbone, regardons déjà quels gaz à effet de serre émettent les activités humaines.</p><p>Sélectionnez une activité humaine pour découvrir quels gaz à effet de serre elle émet.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "bd0a7414-0282-449c-8e4e-e1aa692336d8",
+                "type": "image",
+                "url": "https://assets.pix.org/modules/nr-evaluation-nov/draft-poi-dataselect-empreintes-carbone-activites-humaines.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "c0568f59-0071-4d9b-b928-f02f9aa219c5",
+                "type": "text",
+                "tag": " ",
+                "content": "<p><strong>🏗&nbsp;Image temporaire en attendant le POI final&nbsp;🏗</strong></p><p><strong>Fonctionnement du POI</strong>&nbsp;: Lorsque l’on sélectionne une activité dans la partie gauche, la partie droite affiche le(s) gaz à effet de serre émis par cette activité, et la balance est plus ou moins remplie selon l’impact carbone de l’activité (pas à l’échelle, juste de façon indicative).</p><p><strong>Contenu du POI&nbsp;:</strong></p><ul><li>Parcourir 100km en voiture<ul><li>Gaz émis&nbsp;: Dioxyde de carbone (CO₂)</li></ul></li><li>Produire 100kg de carottes<ul><li>Gaz émis&nbsp;: Méthane et Protoxyde d’azote</li></ul></li><li>Produire 100kWh d’électricité en France<ul><li>Gaz émis&nbsp;: Dioxyde de carbone (CO₂)</li></ul></li><li>Produire 100g de viande boeuf<ul><li>Gaz émis&nbsp;: Méthane et Dioxyde de carbone (CO₂)</li></ul></li><li>Envoyer 100 emails<ul><li>Gaz émis&nbsp;: Dioxyde de carbone (CO₂)</li></ul></li><li>Chauffer un appartement de 50m2 en hiver<ul><li>Gaz émis&nbsp;: Dioxyde de carbone (CO₂)</li></ul></li><br></ul>"
+              }
+            },
+            {
+              "type": "stepper",
+              "instruction": "",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "379fa180-f9e6-4e92-bb6e-65a60917c9c2",
+                      "type": "qcu",
+                      "instruction": "<p>Quel gaz à effet de serre est émis lorsque l’on parcourt un trajet en voiture ? Sélectionnez la bonne réponse.</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "<p>Dioxyde de carbone (CO₂)</p>",
+                          "feedback": {
+                            "state": "<p>Bonne réponse ! </p>",
+                            "diagnosis": "<p>Parcourir un trajet en voiture émet du Dioxyde de carbone (CO₂).</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "<p>Oxygène</p>",
+                          "feedback": {
+                            "state": "<p>Eh non !<br></p>",
+                            "diagnosis": "<p>Parcourir un trajet en voiture émet du Dioxyde de carbone (CO₂).</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Méthane</p>",
+                          "feedback": {
+                            "state": "<p>Eh non !<br></p>",
+                            "diagnosis": "<p>Parcourir un trajet en voiture émet du Dioxyde de carbone (CO₂).</p>"
+                          }
+                        }
+                      ],
+                      "solution": "0"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "8941912c-a237-4b28-887c-a361b01102bc",
+                      "type": "qcu",
+                      "instruction": "<p>Quels gaz à effet de serre sont émis par la production de viande de bœuf ?&nbsp;Sélectionnez la bonne réponse.</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "<p>Dioxyde de carbone et protoxyde d’azote</p>",
+                          "feedback": {
+                            "state": "<p>Eh non !</p>",
+                            "diagnosis": "<p>Produire de la viande de bœuf émet du méthane et du dioxyde de carbone.</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "<p>Oxygène et Dioxyde de carbone</p>",
+                          "feedback": {
+                            "state": "<p>Eh non !</p>",
+                            "diagnosis": "<p>Produire de la viande de bœuf émet du méthane et du dioxyde de carbone.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Méthane et Dioxyde de carbone</p>",
+                          "feedback": {
+                            "state": "<p>Bonne réponse !</p>",
+                            "diagnosis": "<p>Produire de la viande de bœuf émet du méthane et du dioxyde de carbone.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "e91e7443-48a6-48ec-bd8f-834a8a55ef6c",
+          "type": "short-lesson",
+          "title": "lecon-1",
+          "components": [
+            {
+              "type": "stepper",
+              "instruction": "",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "931e6663-e3f9-440c-a493-9f156c777a50",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p>☁️ Plusieurs gaz participent au réchauffement climatique, comme le dioxyde de carbone (CO₂), le méthane, le protoxyde d’azote, etc. Mais ils n’ont pas tous le même impact sur le réchauffement climatique.</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "b6c741e0-c479-4595-be35-34e2eeaba573",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p><strong>🤔 C’est quoi l’empreinte carbone ?</strong></p><p>💡Le but de l’empreinte carbone est de <strong>calculer la quantité de gaz à effet de serre émise</strong> par une activité, en <strong>prenant en compte tous les gaz à effet de serre</strong> qui sont émis. Elle est exprimée en équivalent CO₂, noté CO₂eq.</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "7f3ead4f-887e-4147-bc87-033360754977",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p>Par exemple&nbsp;: le méthane réchauffe 30 fois plus le climat que le CO₂, donc 1kg de méthane a un impact sur le réchauffement climatique de 30kg CO₂eq.</p>"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "9e4d9b02-b3b2-42fd-b5a9-b35f3955a208",
+          "type": "transition",
+          "title": "transition-dec1-dec2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "9bd3cd6b-8128-4fd3-824c-baedd5ec59c3",
+                "type": "custom",
+                "title": "transition-dec1-dec2-conversation",
+                "instruction": "",
+                "functionalInstruction": "",
+                "tagName": "message-conversation",
+                "props": {
+                  "conversationTitle": "",
+                  "messages": [
+                    {
+                      "userName": "Benoît",
+                      "direction": "incoming",
+                      "type": "Texte",
+                      "content": "Okay, j’ai compris ce que c’est l’empreinte carbone. Mais dans le cas du numérique, qu’est-ce qui émet des gaz à effet de serre ?"
+                    },
+                    {
+                      "userName": "Alice",
+                      "direction": "outgoing",
+                      "type": "Texte",
+                      "content": "Beaucoup de choses : la fabrication de ton ordinateur, la production de l’électricité pour le recharger …"
+                    }
+                  ],
+                  "animationSpeed": 8
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "89c45a6b-2956-4f23-9014-b87f14080e2f",
+          "type": "discovery",
+          "title": "decouverte-2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "6507c5dd-83b8-4e6e-9623-717c80d9dd39",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Voyons d’un peu plus près d’où peuvent venir les émissions de gaz à effet de serre liées à l’ordinateur de Benoît.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "f2761634-11d6-42a2-bfd0-ecbb2979d93b",
+                "type": "custom",
+                "title": "",
+                "instruction": "Parcourez l’image suivante pour découvrir d’où viennent les émissions de gaz à effet de serre liées à l’ordinateur de Benoît.",
+                "functionalInstruction": "",
+                "tagName": "clickable-image",
+                "props": {
+                  "image": {
+                    "src": "https://assets.pix.org/modules/nr-evaluation-nov/draft-image-cliquable_nr-evaluation-nov.png",
+                    "alt": "Parcours d'un smaprthone de sa fabrication à son utilisation",
+                    "width": 0,
+                    "height": 0
+                  },
+                  "areas": [
+                    {
+                      "coords": {
+                        "x1": 15,
+                        "y1": 50,
+                        "x2": 210,
+                        "y2": 210
+                      },
+                      "spot": {
+                        "x": 8,
+                        "y": 58
+                      },
+                      "info": "L’ordinateur de Benoît a d’abord été fabriqué dans une usine. Cela a nécessité beaucoup d’énergie et de matières premières, ce qui a émis des gaz à effet de serre (dioxyde de carbone).",
+                      "tooltipPosition": "bottom"
+                    },
+                    {
+                      "coords": {
+                        "x1": 120,
+                        "y1": 240,
+                        "x2": 310,
+                        "y2": 400
+                      },
+                      "spot": {
+                        "x": -50,
+                        "y": -40
+                      },
+                      "info": "Une fois fabriqué, l’ordinateur de Benoît a été transporté jusque chez lui, en bateau puis en camion. Ces transports ont également émis des gaz à effet de serre.",
+                      "tooltipPosition": "bottom"
+                    },
+                    {
+                      "coords": {
+                        "x1": 375,
+                        "y1": 10,
+                        "x2": 740,
+                        "y2": 320
+                      },
+                      "spot": {
+                        "x": 28,
+                        "y": -25
+                      },
+                      "info": "Maintenant, Benoît doit recharger régulièrement la batterie de son ordinateur. Cela consomme de l’électricité, qui est produite dans une centrale électrique qui émet généralement des gaz à effet de serre.",
+                      "tooltipPosition": "bottom"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "type": "stepper",
+              "instruction": "<p>Pour chacune des affirmations suivantes, sélectionnez la bonne réponse.</p>",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "7da14819-5686-4f3d-ae00-7e15e460e9d0",
+                      "type": "qcu",
+                      "instruction": "<p>Vrai ou faux&nbsp;: toutes les émissions de gaz à effet de serre liées à un ordinateur portable ont lieu après qu’il ait été acheté.</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "Vrai",
+                          "feedback": {
+                            "state": "<p>Eh non !</p>",
+                            "diagnosis": "<p> La fabrication et le transport de l’ordinateur, par exemple, émettent aussi des gaz à effet de serre.</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "Faux",
+                          "feedback": {
+                            "state": "<p>Bien joué !</p>",
+                            "diagnosis": "<p>La fabrication et le transport de l’ordinateur, par exemple, émettent aussi des gaz à effet de serre.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "804b3d9c-474e-4734-b9bd-f512ef9df19a",
+                      "type": "qcu",
+                      "instruction": "<p>Vrai ou faux&nbsp;: Pour calculer l’empreinte carbone totale d’un ordinateur, il faut prendre en compte uniquement les émissions de gaz à effet de serre de sa fabrication et son transport.</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "Vrai",
+                          "feedback": {
+                            "state": "<p>Eh non !</p>",
+                            "diagnosis": "<p>Pour calculer l’empreinte carbone d’un objet, il faut prendre toutes les émissions de gaz à effet de serre qui lui sont associées, de sa fabrication.</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "Faux",
+                          "feedback": {
+                            "state": "<p>Bien joué !<br></p>",
+                            "diagnosis": "<p>Pour calculer l’empreinte carbone d’un objet, il faut prendre toutes les émissions de gaz à effet de serre qui lui sont associées, de sa fabrication.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "d4685763-32fc-43f7-9d7e-7765340f999a",
+          "type": "short-lesson",
+          "title": "lecon-2",
+          "components": [
+            {
+              "type": "stepper",
+              "instruction": "",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "7d5bb9a0-4bdb-4353-a92a-0330028022ef",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p><strong>L’empreinte carbone est l’addition de tous les gaz à effet de serre émis lors d’une activité.</strong></p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "fefda88b-c863-4cb5-9b78-b2b0b9500e23",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p>Ce calcul est complexe et dépend de <strong>nombreux facteurs</strong>. Il est donc important, lorsque l’on parle d’empreinte carbone, de vérifier à quelles <strong>activités</strong> et à quelle <strong>période</strong> elle correspond. 👀</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "f5ebfe06-d4f8-465c-afd7-ad7f6dc05a0e",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p>Dans le cadre du numérique, on peut calculer une empreinte carbone à différentes échelles&nbsp;: </p><ul><li><strong>à l’échelle d’un équipement</strong>, par exemple l’empreinte carbone d’un ordinateur ou d’un smartphone</li><li><strong>à l’échelle d’un individu</strong>, en additionnant les empreintes carbone de tous ses équipements et des services numériques qu’il utilise</li><li><strong>à l’échelle d’une entreprise</strong>, en additionnant les empreintes carbone de toutes les personnes qui y travaillent</li><li>etc.</li></ul>"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "53272a76-c0f2-4b38-8a32-26405dea42e4",
+          "type": "transition",
+          "title": "transitioon dec1-dec2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "bf20c6a4-b455-4fca-b853-13c5911ae09b",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Benoît veut maintenant calculer l’empreinte carbone de l’ensemble de son matériel informatique. Voyons cela.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "f80f9ff4-8aac-419c-b710-c16f857c583b",
+          "type": "discovery",
+          "title": "decouverte-3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "0d19d441-4265-4f1f-b516-76dbe5b69829",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Pour cela, il a listé tous les équipements informatiques qu’il possède pour les saisir dans un logiciel de calcul d’empreinte carbone. Observez les résultats fournis par le logiciel pour répondre aux questions suivantes.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "f12ca75a-4fc1-4c63-bdf3-1d0e5977cb5b",
+                "type": "image",
+                "url": "https://assets.pix.org/modules/nr-evaluation-nov/draft_po-idataselect_impacts-carbone-activites.png",
+                "alt": "",
+                "alternativeText": "<p>Extraits du logiciel de calcul d’empreinte carbone.</p><p>Empreintes carbone des équipements numériques&nbsp;:</p><ul><li>Smartphone&nbsp;: 80,2kg CO₂eq dont&nbsp; 79,3kg CO₂eq à la fabrication et 0,89 kg CO₂eq à l’utilisation et fin de vie</li><li>Ordinateur portable&nbsp;: 193kg&nbsp;CO₂eq&nbsp;dont 182 kg CO₂eq à la fabrication et 10,3kgCO₂eq à l’usage et fin de vie</li><li>Télévision&nbsp;: 370kg&nbsp;CO₂eq&nbsp;dont 328kg CO₂eq à la fabrication et 41,5 kg CO₂eq à l’usage et fin de vie</li></ul><p>Empreintes carbone d’activités de référence&nbsp;:</p><ul><li>4 aller-retours Paris-Berlin en TGV&nbsp;: 29,3kg&nbsp;CO₂eq</li><li>100kg de bananes&nbsp;: 90,9kg&nbsp;CO₂eq</li><li>Fabrication de&nbsp;10 jeans&nbsp;: 251kg&nbsp;CO₂eq</li></ul>",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "stepper",
+              "instruction": "<p>Observez les résultats du logiciels de calcul d’empreinte carbone et répondez aux questions suivantes.<br></p>",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "15c7f1a1-e92a-4558-a51f-6fa960c7fa0c",
+                      "type": "qcu",
+                      "instruction": "<p>Pour un smartphone, quelle étape émet le plus de gaz à effet de serre ?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "<p>Sa fabrication</p>",
+                          "feedback": {
+                            "state": "<p>Bien vu !</p>",
+                            "diagnosis": "<p>La fabrication d’un smartphone émet beaucoup plus de gaz à effet de serre que son utilisation.</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "<p>Son utilisation<br></p>",
+                          "feedback": {
+                            "state": "<p>Eh non !<br></p>",
+                            "diagnosis": "<p>La fabrication d’un smartphone émet beaucoup plus de gaz à effet de serre que son utilisation.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "0"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "03c988e2-cde6-47fe-8341-b7d4dfb36a6b",
+                      "type": "qcu",
+                      "instruction": "<p>Qu’est-ce qui a la plus grande empreinte carbone totale ?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "<p>Un smartphone</p>",
+                          "feedback": {
+                            "state": "<p>Eh non !</p>",
+                            "diagnosis": "<p>L’empreinte carbone d’une télévision est bien plus importante que celle d’un smartphone.</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "<p>Une télévision<br></p>",
+                          "feedback": {
+                            "state": "<p>Bien vu !</p>",
+                            "diagnosis": "<p>L’empreinte carbone d’une télévision est bien plus importante que celle d’un smartphone.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "020f2752-2a1a-4ab3-a4a0-ffcdcbbaa06d",
+                      "type": "qcu",
+                      "instruction": "<p>Qu’est-ce qui émet le plus de gaz à effet de serre ?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "<p>La fabrication d’un smartphone</p>",
+                          "feedback": {
+                            "state": "<p>Bien vu !<br></p>",
+                            "diagnosis": "<p>La fabrication d’un smartphone émet beaucoup plus de gaz à effet de serre que celle d’un jean.</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "<p>La fabrication d’un jean<br></p>",
+                          "feedback": {
+                            "state": "<p>Eh non !</p>",
+                            "diagnosis": "<p>La fabrication d’un smartphone émet beaucoup plus de gaz à effet de serre que celle d’un jean.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "4f3334e1-c634-4c8d-ad14-bf84541dedaa",
+          "type": "short-lesson",
+          "title": "lecon-3",
+          "components": [
+            {
+              "type": "stepper",
+              "instruction": "",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "e0d9a2da-2cf3-4128-87cf-07ec313efd18",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p>Le calcul de l’empreinte carbone permet de faire des <strong>comparaisons</strong> entre différentes activités.</p><p>Il permet aussi de se <strong>fixer des objectifs chiffrés</strong> pour réduire notre impact sur l’environnement.</p><p>💡 Par exemple, les Accords de Paris fixent un objectif de 2 tonnes de CO₂eq par an et par personne.</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "989597aa-693b-4791-98ac-03562231dca6",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p><strong>🤔 Mais on ne parle que de réchauffement climatique ici ?</strong></p><p>En effet, c’est l’une des <strong>limites</strong> de l’empreinte carbone. Elle ne présente qu’un facteur d’impact environnemental&nbsp;: l’effet sur le <strong>réchauffement climatique</strong>. Elle ne reflète pas la diversité des <strong>autres impacts</strong> environnementaux, comme la raréfaction des ressources en <strong>eau douce</strong> de la planète, la raréfaction des <strong>ressources</strong> métalliques, l’acidification des océans, etc.</p>"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "de06fd56-b502-4278-89a9-9fa770a1fc8e",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "89934e68-dc09-4eb5-9a59-d28eb865afbf",
+          "type": "summary",
+          "title": "recap",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "40c90095-fccd-42e9-aa92-0c565d891189",
+                "type": "text",
+                "tag": " ",
+                "content": "<ul><li>🌏L’empreinte carbone estime l’impact d’une activité (comme regarder un film) ou de la construction d’un objet (comme un ordinateur) sur le réchauffement climatique.</li><li>📐Elle permet de comparer différentes activités, numériques ou non, et de fixer des objectifs pour réduire les émissions.</li><li>🤔 Pour la calculer, on définit les activités, la période, puis on estime les émissions de gaz à effet de serre associées.</li><li>⚠️Mais elle a une limite importante&nbsp;: elle ne prend pas en compte d’autres impacts, comme la consommation en l’eau ou en ressources.</li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "063ef0d9-da46-4067-88af-f16e1f59a2e2",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "f5b9243e-c1b2-4a03-a021-9333b868c3f1",
+          "type": "activity",
+          "title": "activite-1",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "fe5b6f59-bf42-4987-97c2-57ecb6a5278d",
+                "type": "qab",
+                "instruction": "<p>Les affirmations suivantes sont-elles vraies ou fausses ? Sélectionnez la bonne réponse.</p>",
+                "cards": [
+                  {
+                    "id": "1de50b70-8780-4b5e-a3ff-9ff80269bfa6",
+                    "text": "Le dioxyde de carbone (CO₂) est le seul gaz à effet de serre.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "9dd5ab20-eaab-464c-90b3-bd54c9ffc990",
+                    "text": "1kg de méthane contribue autant à l’effet de serre que 1kg de CO₂.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "aa12edd4-44b5-45d7-adce-4b55ba5cabbf",
+                    "text": "L’empreinte carbone est exprimée en équivalent CO₂ (CO₂eq)",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "c6e2f882-a8a4-493d-8827-70d31e3f2cea",
+                    "text": "Produire un smartphone n’émet pas de gaz à effet de serre.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": ""
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "091ce3b1-b73e-4f9d-b2c6-91ccfc6709f0",
+          "type": "activity",
+          "title": "activite-2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "12230128-20b2-432c-9b20-bee86fc9f02f",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>L’entreprise BTPix a calculé l’empreinte carbone de ses activités numériques. Consultez le détail de cette empreinte carbone puis répondez aux questions.</p><p>Empreinte carbone du matériel&nbsp;:</p><table><thead><tr><th style=\"text-align:left\">Équipement</th><th style=\"text-align:left\">Quantité</th><th style=\"text-align:left\">Empreinte carbone par unité</th><th style=\"text-align:left\">Empreinte carbone totale</th></tr></thead><tbody><tr><td style=\"text-align:left\">Ordinateur portable</td><td style=\"text-align:left\">10</td><td style=\"text-align:left\">193kg CO2eq</td><td style=\"text-align:left\">1930kg CO2eq</td></tr><tr><td style=\"text-align:left\">Ordinateur fixe</td><td style=\"text-align:left\">24</td><td style=\"text-align:left\">259kg CO2eq</td><td style=\"text-align:left\">6216kg CO2eq</td></tr><tr><td style=\"text-align:left\">Écran d’ordinateur</td><td style=\"text-align:left\">33</td><td style=\"text-align:left\">92,6kg CO2eq</td><td style=\"text-align:left\">3055,6kg CO2eq</td></tr></tbody></table><p>Empreinte carbone des services numériques&nbsp;:</p><table><thead><tr><th style=\"text-align:left\">Service</th><th style=\"text-align:left\">Quantité par semaine</th><th style=\"text-align:left\">Empreinte carbone totale par semaine</th></tr></thead><tbody><tr><td style=\"text-align:left\">Emails</td><td style=\"text-align:left\">770 emails</td><td style=\"text-align:left\">0,9kg CO2eq</td></tr><tr><td style=\"text-align:left\">Visioconférence</td><td style=\"text-align:left\">300 heures</td><td style=\"text-align:left\">4,81 CO2eq</td></tr></tbody></table>"
+              }
+            },
+            {
+              "type": "stepper",
+              "instruction": "<p>Pour les questions suivantes, sélectionnez la bonne réponse.<br></p>",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "3dd45ded-001a-40aa-80c7-9f351f72deb1",
+                      "type": "qcu",
+                      "instruction": "<p>Quel matériel informatique de BTPix a l’empreinte carbone la plus élevée ?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "<p>Les ordinateurs portables</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise&nbsp;réponse !</p>",
+                            "diagnosis": "<p>Consultez les tableaux précédents pour trouver la réponse.</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "<p>Les écrans d’ordinateur</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise&nbsp;réponse !</p>",
+                            "diagnosis": "<p>Consultez les tableaux précédents pour trouver la réponse.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Les smartphones</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise&nbsp;réponse !</p>",
+                            "diagnosis": "<p>Consultez les tableaux précédents pour trouver la réponse.</p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Les ordinateurs fixes</p>",
+                          "feedback": {
+                            "state": "<p>Bonne réponse !<br></p>",
+                            "diagnosis": "<p>Ce sont effectivement les ordinateurs fixes qui représentent la plus grande empreinte carbone du matériel informatique de BTPix.<br></p>"
+                          }
+                        }
+                      ],
+                      "solution": "3"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "5bae62fb-8a20-4d40-b43c-45f366c33a37",
+                      "type": "qcu",
+                      "instruction": "<p>Sur quelle durée a été calculée l’empreinte carbone des services numériques de BTPix ?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "<p>Deux semaine</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse !<br></p>",
+                            "diagnosis": "<p>Consultez les tableaux précédents pour trouver la réponse.</p>"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "content": "<p>Un mois</p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse !</p>",
+                            "diagnosis": "<p>Consultez les tableaux précédents pour trouver la réponse.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Une semaine<br></p>",
+                          "feedback": {
+                            "state": "<p>Bonne réponse !<br></p>",
+                            "diagnosis": "<p>L’empreinte carbone des services numériques de BTPix a effectivement été calculée sur une semaine.<br></p>"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Une journée<br></p>",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse !</p>",
+                            "diagnosis": "<p>Consultez les tableaux précédents pour trouver la réponse.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "1f6e59c0-a4ab-4178-a8a5-9f391842f4d2",
+          "type": "short-lesson",
+          "title": "activite-3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "2d7bca14-6e70-49ee-9fce-80671e60946d",
+                "type": "qcm",
+                "instruction": "<p>Que permet l’empreinte carbone ? Sélectionnez les bonnes réponses.</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "0",
+                    "content": "<p>Prendre en compte la consommation d’eau d’une activité.</p>"
+                  },
+                  {
+                    "id": "1",
+                    "content": "<p>Calculer les émissions de gaz à effet de serre.</p>"
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Comparer les émissions de gaz à effet de serre de différentes activités.</p>"
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Prendre en compte la consommation de métaux rares.</p>"
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Fixer des objectifs chiffrés de réduction des émissions de gaz à effet de serre.</p>"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bonne réponse !</p>",
+                    "diagnosis": ""
+                  },
+                  "invalid": {
+                    "state": "<p>Mauvaise réponse !</p>",
+                    "diagnosis": "<p>Vous pouvez relire les leçons de ce module puis réessayer.<br></p>"
+                  }
+                },
+                "solutions": [
+                  "1",
+                  "2",
+                  "4"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a3b781de-8643-4b62-b2f4-6df46013990a",
+      "type": "go-further",
+      "grains": [
+        {
+          "id": "8a94341e-96cb-413c-b9e6-bc40ca184cb2",
+          "type": "activity",
+          "title": "transfert",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "cacdf097-ad3a-4953-a176-60ea61459f45",
+                "type": "qcu-declarative",
+                "instruction": "<p>Maintenant que vous en savez un peu plus sur l’empreinte carbone du numérique, que pourriez-vous faire pour réduire votre empreinte carbone ?</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "0",
+                    "content": "<p>Calculer l’empreinte carbone de mes activités numériques.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Feedback&nbsp;: Bonne idée ! Connaître l’empreinte carbone de ses activités permet de mieux prioriser ses actions pour réduire ses émissions de gaz à effet de serre. Vous pouvez, par exemple, utiliser ce <a href=\"https://impactco2.fr/outils/usagenumerique\" target=\"_blank\">simulateur de l’ADEME</a> pour estimer l’empreinte carbone de vos appareils numériques.</p>"
+                    }
+                  },
+                  {
+                    "id": "1",
+                    "content": "<p>Comparer l’empreinte carbone de mon ordinateur avec celle de mon alimentation.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Bonne idée. Comparer l’empreinte carbone de plusieurs activités peut aider à les comprendre, et à prioriser ses actions pour réduire les émissions de gaz à effet de serre.&nbsp; Vous pouvez, par exemple, utiliser <a href=\"https://impactco2.fr/outils/usagenumerique\" target=\"_blank\">ce simulateur de l’ADEME</a> pour estimer votre empreinte carbone numérique et <a href=\"https://impactco2.fr/outils/alimentation#repas\" target=\"_blank\">ce simulateur</a> pour estimer l’impact carbone de votre alimentation.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Éviter d’acheter un nouvel ordinateur si je n’en ai pas vraiment besoin.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Très bonne idée ! Comme nous avons pu le voir, fabriquer un ordinateur émet des gaz à effet de serre. On peut éviter ces émissions en n’achetant pas de nouvel ordinateur.</p>"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "glossary": [
+    {
+      "word": "Accords de Paris",
+      "definition": "<p>Les «&nbsp;accords de Paris&nbsp;» sont des accords internationaux signés à Paris, en 2015. Leur objectif est de&nbsp;limiter les émissions de gaz à effet de serre et le réchauffement climatique.</p>"
+    }
+  ]
+}
