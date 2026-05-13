@@ -1,4 +1,4 @@
-# .circleci/continue_config.yml
+# .circleci/jobs.yml
 #
 #
 # Caching notes:
@@ -256,7 +256,7 @@ commands:
       app_name:
         type: string
     steps:
-      - browser-tools/install-chrome
+      - browser-tools/install_browser_tools
       - attach_workspace:
           at: ~/pix
       - run:
@@ -961,7 +961,7 @@ jobs:
             if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-mon-pix >>" == "false" ]] && [[ "<< pipeline.parameters.run-api >>" == "false" ]] && [[ "<< pipeline.parameters.run-e2e-cypress >>" == "false" ]]; then
               circleci step halt
             fi
-      - browser-tools/install-chrome
+      - browser-tools/install_browser_tools
       - run:
           name: Manual safety start of X11 server
           command: |
@@ -1045,7 +1045,7 @@ jobs:
             if [[ "$CIRCLE_BRANCH" != "dev" ]] && [[ "<< pipeline.parameters.run-orga >>" == "false" ]] && [[ "<< pipeline.parameters.run-api >>" == "false" ]] && [[ "<< pipeline.parameters.run-e2e-cypress >>" == "false" ]]; then
               circleci step halt
             fi
-      - browser-tools/install-chrome
+      - browser-tools/install_browser_tools
       - run:
           name: Manual safety start of X11 server
           command: |
