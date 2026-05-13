@@ -843,6 +843,59 @@
               ]
             }
           ]
+        },
+        {
+          "id": "1f6e59c0-a4ab-4178-a8a5-9f391842f4d2",
+          "type": "short-lesson",
+          "title": "activite-3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "2d7bca14-6e70-49ee-9fce-80671e60946d",
+                "type": "qcm",
+                "instruction": "<p>Que permet l’empreinte carbone ? Sélectionnez les bonnes réponses.</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "0",
+                    "content": "<p>Prendre en compte la consommation d’eau d’une activité.</p>"
+                  },
+                  {
+                    "id": "1",
+                    "content": "<p>Calculer les émissions de gaz à effet de serre.</p>"
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Comparer les émissions de gaz à effet de serre de différentes activités.</p>"
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Prendre en compte la consommation de métaux rares.</p>"
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Fixer des objectifs chiffrés de réduction des émissions de gaz à effet de serre.</p>"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Bonne réponse !</p>",
+                    "diagnosis": "<p><br></p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Mauvaise réponse !</p>",
+                    "diagnosis": "<p>Vous pouvez relire les leçons de ce module puis réessayer.<br></p>"
+                  }
+                },
+                "solutions": [
+                  "1",
+                  "2",
+                  "4"
+                ]
+              }
+            }
+          ]
         }
       ]
     }
