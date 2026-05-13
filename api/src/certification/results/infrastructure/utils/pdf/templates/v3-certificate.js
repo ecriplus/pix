@@ -15,7 +15,7 @@ const __badgesDirname = url.fileURLToPath(new URL('../badges/', import.meta.url)
  * @param {object} params
  * @param {Certificate} params.data
  */
-export default function generateV3AttestationTemplate({ pdf, data, translate }) {
+export default function generateV3CertificateTemplate({ pdf, data, translate }) {
   // Global
   pdf.image(path.resolve(__dirname, 'assets/v3-core-background.jpg'), 0, 0, {
     width: pdf.page.width,

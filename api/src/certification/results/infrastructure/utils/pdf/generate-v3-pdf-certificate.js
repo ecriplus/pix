@@ -6,8 +6,8 @@ import url from 'node:url';
 import PDFDocument from 'pdfkit';
 
 import { hasCoreScope } from '../../../../shared/domain/models/Frameworks.js';
-import generateV3AttestationTemplate from './templates/v3-certificate.js';
-import generateV3PixPlusAttestationTemplate from './templates/v3-pix-plus-certificate.js';
+import generateV3CertificateTemplate from './templates/v3-certificate.js';
+import generateV3PixPlusCertificateTemplate from './templates/v3-pix-plus-certificate.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -46,13 +46,13 @@ const generate = async ({ certificates, i18n }) => {
     }
 
     if (hasCoreScope(certificate.certificationFramework)) {
-      generateV3AttestationTemplate({
+      generateV3CertificateTemplate({
         pdf: doc,
         data: certificate,
         translate: i18n.__,
       });
     } else {
-      await generateV3PixPlusAttestationTemplate({
+      await generateV3PixPlusCertificateTemplate({
         pdf: doc,
         data: certificate,
         translate: i18n.__,

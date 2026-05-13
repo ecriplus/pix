@@ -15,7 +15,7 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
  * @param {Function} params.translate
  * @param {Map<string, Buffer>} params.imageCache
  */
-export default async function generateV3PixPlusAttestationTemplate({ pdf, data, translate, imageCache }) {
+export default async function generateV3PixPlusCertificateTemplate({ pdf, data, translate, imageCache }) {
   // Global
   pdf.image(path.resolve(__dirname, 'assets/v3-pix-plus-background.jpg'), 0, 0, {
     width: pdf.page.width,
