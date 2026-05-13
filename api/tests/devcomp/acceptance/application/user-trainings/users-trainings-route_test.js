@@ -1,4 +1,5 @@
 import { createServer } from '../../../../../server.js';
+import { Training } from '../../../../../src/devcomp/domain/models/Training.js';
 import { expect } from '../../../../test-helper.js';
 import { databaseBuilder } from '../../../../tooling/databases.js';
 import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
@@ -42,6 +43,10 @@ describe('Acceptance | Routes | UserTrainingsRoute', function () {
             duration: { days: 0, hours: 6, minutes: 0 },
             link: 'http://mon-link.com',
             locales: ['fr-fr'],
+            objectives: [],
+            program: 'Programme du contenu formatif',
+            'registration-required': false,
+            'delivery-mode': Training.modes.HYBRID,
             title: 'title',
             type: 'webinaire',
             'editor-name': "Ministère de l'Éducation nationale et de la Jeunesse. Liberté égalité fraternité",
