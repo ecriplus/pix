@@ -24,7 +24,7 @@ export default class AttestationList extends Component {
   }
 
   get shouldShowDivisions() {
-    return this.args.participantStatuses?.some((participantStatus) => Boolean(participantStatus.division));
+    return this.args.divisionsOptions?.length > 0;
   }
 
   <template>

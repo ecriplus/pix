@@ -12,6 +12,7 @@ module('Integration | Component | Attestations | List', function (hooks) {
   test('it should display division column and filter if at least one participant has division', async function (assert) {
     // given
     const triggerFiltering = sinon.stub();
+    const divisionsOptions = ['6emeA'];
     const participantStatuses = [
       {
         lastName: 'jean',
@@ -30,7 +31,11 @@ module('Integration | Component | Attestations | List', function (hooks) {
     // when
     const screen = await render(
       <template>
-        <AttestationList @participantStatuses={{participantStatuses}} @onFilter={{triggerFiltering}} />
+        <AttestationList
+          @divisionsOptions={{divisionsOptions}}
+          @participantStatuses={{participantStatuses}}
+          @onFilter={{triggerFiltering}}
+        />
       </template>,
     );
 
