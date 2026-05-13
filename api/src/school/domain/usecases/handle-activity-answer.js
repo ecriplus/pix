@@ -15,7 +15,7 @@ const handleActivityAnswer = async function ({
   missionAssessmentRepository,
   missionRepository,
 }) {
-  return DomainTransaction.execute(async () => {
+  return await DomainTransaction.execute(async () => {
     let lastActivity = await activityRepository.getLastActivity(assessmentId);
 
     const correctedAnswer = await correctAnswer({
