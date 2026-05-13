@@ -153,6 +153,7 @@ const schema = Joi.object({
   LCMS_API_URL: Joi.string().uri().requiredForApi(),
   LCMS_API_RELEASE_ID: Joi.any(),
   LLM_CHAT_TEMPORARY_STORAGE_EXP_DELAY_SECONDS: Joi.string().optional(),
+  LLM_CONFIGURATION_EDITOR_API_FETCH_CONNECTION_TIMEOUT_MS: Joi.number().min(0).optional(),
   LLM_CONFIGURATION_EDITOR_API_GET_CONFIGURATION_URL: Joi.string().optional(),
   LLM_CONFIGURATION_EDITOR_API_JWT_SECRET: Joi.string().optional(),
   LLM_INFERENCE_API_POST_PROMPT_URL: Joi.string().optional(),
@@ -381,6 +382,10 @@ const configuration = (function () {
           process.env.LLM_CONFIGURATION_EDITOR_API_GET_CONFIGURATION_URL ?? '',
         ),
         authSecret: process.env.LLM_CONFIGURATION_EDITOR_API_JWT_SECRET,
+        fetchConnectionTimeoutMs: _getNumber(
+          process.env.LLM_CONFIGURATION_EDITOR_API_FETCH_CONNECTION_TIMEOUT_MS,
+          12_000,
+        ),
       },
       deleteChatsJob: {
         lifespan: _getNumber(process.env.LLM_DELETE_CHATS_JOB_LIFESPAN, 80),

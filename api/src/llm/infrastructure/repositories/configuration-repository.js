@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import { Agent, fetch, getGlobalDispatcher } from 'undici';
 
 import { config } from '../../../shared/config.js';
 import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
@@ -17,63 +18,80 @@ export async function get(id) {
   }
 
   const url = config.llm.configurationEditorApi.getConfigurationUrl + '/' + id;
-  let response;
-  try {
-    response = await fetch(url, {
-      headers: {
-        authorization: `Bearer ${jwt.sign('foo', config.llm.configurationEditorApi.authSecret)}`,
-      },
-    });
-  } catch (err) {
-    logger.error(
-      {
-        err,
-        context: 'fetch-configuration',
-        data: {
-          configurationId: id,
-        },
-      },
-      'fetch error when trying to reach LLM API',
-    );
-    throw new LLMApiError(err.toString());
-  }
 
-  if (response.ok) {
-    const contentType = response.headers.get('Content-Type');
-    if (contentType !== 'application/json') {
-      logger.error({
-        err: `received unexpected response Content-Type when fetching configuration`,
-        context: 'fetch-configuration',
-        data: {
-          configurationId: id,
-          responseContentType: contentType,
-          responseBody: await response.text().catch(() => 'Unreadable response body'),
+  let response;
+  let currentRetryCount = 0;
+  const MAX_RETRY_COUNT = 2;
+  do {
+    try {
+      response = await fetch(url, {
+        headers: {
+          authorization: `Bearer ${jwt.sign('foo', config.llm.configurationEditorApi.authSecret)}`,
         },
+        dispatcher:
+          getGlobalDispatcher() ??
+          new Agent({
+            connectTimeout: config.llm.configurationEditorApi.fetchConnectionTimeoutMs,
+          }),
       });
-      throw new LLMApiError('Unexpected response Content-Type');
+    } catch (err) {
+      logger.error(
+        {
+          err,
+          context: 'fetch-configuration',
+          data: {
+            configurationId: id,
+            retryCount: currentRetryCount,
+          },
+        },
+        'fetch error when trying to reach LLM API',
+      );
+      throw new LLMApiError(err.toString());
     }
 
-    const configurationDTO = await response.json();
-    return Configuration.fromDTO(configurationDTO);
-  }
+    if (response.ok) {
+      const contentType = response.headers.get('Content-Type');
+      if (contentType !== 'application/json') {
+        logger.error({
+          err: `received unexpected response Content-Type when fetching configuration`,
+          context: 'fetch-configuration',
+          data: {
+            configurationId: id,
+            responseContentType: contentType,
+            responseBody: await response.text().catch(() => 'Unreadable response body'),
+          },
+        });
+        throw new LLMApiError('Unexpected response Content-Type');
+      }
 
-  const { status, err } = await handleFetchErrors(response);
-  if (status === 404) {
-    throw new ConfigurationNotFoundError(id);
-  } else {
-    logger.error(
-      {
-        err,
-        context: 'fetch-configuration',
-        data: {
-          configurationId: id,
-          responseStatus: status,
+      const configurationDTO = await response.json();
+      return Configuration.fromDTO(configurationDTO);
+    }
+
+    const { status, err } = await handleFetchErrors(response);
+    if (status === 404) {
+      throw new ConfigurationNotFoundError(id);
+    } else {
+      logger.error(
+        {
+          err,
+          context: 'fetch-configuration',
+          data: {
+            configurationId: id,
+            responseStatus: status,
+            retryCount: currentRetryCount,
+          },
         },
-      },
-      `error when reaching LLM API : code ${status}`,
-    );
-    throw new LLMApiError(err);
-  }
+        `error when reaching LLM API after ${currentRetryCount + 1} attempt(s) : code ${status}`,
+      );
+    }
+
+    if (currentRetryCount >= MAX_RETRY_COUNT) {
+      throw new LLMApiError(err);
+    }
+
+    currentRetryCount++;
+  } while (currentRetryCount <= MAX_RETRY_COUNT);
 }
 
 async function handleFetchErrors(response) {
