@@ -1,3 +1,4 @@
+import { Training } from '../../../src/devcomp/domain/models/Training.js';
 import { databaseBuffer } from '../database-buffer.js';
 
 /**
@@ -13,7 +14,11 @@ import { databaseBuffer } from '../database-buffer.js';
  *  editorLogoUrl: string,
  *  isDisabled: boolean,
  *  createdAt: Date,
- *  updatedAt: Date
+ *  updatedAt: Date,
+ *  deliveryMode: string,
+ *   registrationRequired: boolean,
+ *   program: string,
+ *   objectives: string[],
  * }} Training
  */
 
@@ -30,6 +35,10 @@ function buildTraining({
   isDisabled = false,
   createdAt = new Date(),
   updatedAt = new Date(),
+  deliveryMode = Training.modes.HYBRID,
+  registrationRequired = false,
+  program = 'Programme du contenu formatif',
+  objectives = [],
 } = {}) {
   const values = {
     id,
@@ -44,6 +53,10 @@ function buildTraining({
     isDisabled,
     createdAt,
     updatedAt,
+    deliveryMode,
+    registrationRequired,
+    program,
+    objectives,
   };
   return databaseBuffer.pushInsertable({
     tableName: 'trainings',
