@@ -4,9 +4,9 @@ import { t } from 'ember-intl';
 
 import ResultsDetails from '../../../campaigns/assessment/results/evaluation-results-tabs/results-details';
 import Rewards from '../../../campaigns/assessment/results/evaluation-results-tabs/rewards';
-import Trainings from '../../../campaigns/assessment/results/evaluation-results-tabs/trainings';
 import QuitResults from '../../../campaigns/assessment/results/quit-results';
 import EvaluationResultsHeroRecommendationEngine from '../../../campaigns/assessment/results-recommendation-engine/evaluation-results-hero-recommendation-engine';
+import Trainings from '../../../campaigns/assessment/results-recommendation-engine/trainings';
 
 export default class EvaluationResultsRecommendationEngine extends Component {
   @service media;
@@ -48,12 +48,7 @@ export default class EvaluationResultsRecommendationEngine extends Component {
       />
 
       {{#if this.hasTrainings}}
-        <Trainings
-          @trainings={{this.trainings}}
-          @questResults={{@model.questResults}}
-          @campaignParticipationResult={{@model.campaignParticipationResult}}
-          @campaignId={{@model.campaign.id}}
-        />
+        <Trainings @trainings={{this.trainings}} />
       {{/if}}
 
       <ResultsDetails
