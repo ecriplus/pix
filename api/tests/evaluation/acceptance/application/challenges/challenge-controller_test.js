@@ -3,7 +3,7 @@ import { expect } from '../../../../test-helper.js';
 import { databaseBuilder } from '../../../../tooling/databases.js';
 import { buildLearningContent as learningContentBuilder } from '../../../../tooling/learning-content-builder/index.js';
 
-describe('Acceptance | API | ChallengeController', function () {
+describe('Evaluation | Acceptance | Challenge | ChallengeController', function () {
   let server;
 
   beforeEach(async function () {

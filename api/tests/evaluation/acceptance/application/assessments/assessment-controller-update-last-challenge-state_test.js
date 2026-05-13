@@ -47,7 +47,7 @@ const learningContent = [
   },
 ];
 
-describe('Acceptance | API | assessment-controller-update-last-challenge-state', function () {
+describe('Evaluation | Acceptance | Assessment | assessment-controller-update-last-challenge-state', function () {
   let server;
 
   beforeEach(async function () {

@@ -1,12 +1,12 @@
-import { ChallengeAlreadyAnsweredError } from '../../../evaluation/domain/errors.js';
-import { CertificationChallengeLiveAlert } from '../../../shared/domain/models/CertificationChallengeLiveAlert.js';
+import { CertificationChallengeLiveAlert } from '../../../shared/domain/models/CertificationChallengeLiveAlert.js'; // todo me déplacer
+import { ChallengeAlreadyAnsweredError } from '../errors.js';
 
-const createCertificationChallengeLiveAlert = async function ({
+export async function createLiveAlert({
   assessmentId,
   challengeId,
   certificationChallengeLiveAlertRepository,
   answerRepository,
-  challengeRepository,
+  sharedChallengeRepository,
 }) {
   const unhandledCertificationChallengeLiveAlert =
     await certificationChallengeLiveAlertRepository.getOngoingByChallengeIdAndAssessmentId({
@@ -30,7 +30,7 @@ const createCertificationChallengeLiveAlert = async function ({
 
   const questionNumber = _getCurrentQuestionNumber(answers);
 
-  const { attachments, embedUrl, illustrationUrl, focused } = await challengeRepository.get(challengeId);
+  const { attachments, embedUrl, illustrationUrl, focused } = await sharedChallengeRepository.get(challengeId);
 
   const certificationChallengeLiveAlert = new CertificationChallengeLiveAlert({
     assessmentId,
@@ -43,10 +43,8 @@ const createCertificationChallengeLiveAlert = async function ({
   });
 
   return certificationChallengeLiveAlertRepository.save({ certificationChallengeLiveAlert });
-};
+}
 
 function _getCurrentQuestionNumber(answers) {
   return answers.length + 1;
 }
-
-export { createCertificationChallengeLiveAlert };

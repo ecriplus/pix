@@ -1,7 +1,7 @@
-import { logger } from '../../infrastructure/utils/logger.js';
-import { Assessment } from '../models/Assessment.js';
+import { Assessment } from '../../../shared/domain/models/Assessment.js';
+import { logger } from '../../../shared/infrastructure/utils/logger.js';
 
-const updateLastQuestionState = async function ({
+export async function updateLastQuestionState({
   assessmentId,
   lastQuestionState,
   challengeId,
@@ -42,6 +42,4 @@ const updateLastQuestionState = async function ({
     id: assessmentId,
     lastQuestionState,
   });
-};
-
-export { updateLastQuestionState };
+}

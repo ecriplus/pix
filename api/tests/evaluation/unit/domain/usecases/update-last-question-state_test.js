@@ -1,10 +1,10 @@
 import sinon from 'sinon';
 
+import { updateLastQuestionState } from '../../../../../src/evaluation/domain/usecases/update-last-question-state.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import { updateLastQuestionState } from '../../../../../src/shared/domain/usecases/update-last-question-state.js';
 import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
-describe('Unit | UseCase | update-last-question-state', function () {
+describe('Evaluation | Unit | UseCase | update-last-question-state', function () {
   const assessmentId = 'assessmentId';
   const focusedChallengeId = 'focusedChallengeId';
   const notFocusedChallengeId = 'notFocusedChallengeId';

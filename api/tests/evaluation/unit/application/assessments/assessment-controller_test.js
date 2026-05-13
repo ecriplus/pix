@@ -8,10 +8,13 @@ import { stageUsecases } from '../../../../../src/prescription/stages/domain/use
 import { usecases as profileUsecases } from '../../../../../src/profile/domain/usecases/index.js';
 import { usecases as questUsecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
+import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
 import { expect } from '../../../../test-helper.js';
+import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
+import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
-describe('Unit | Controller | assessment-controller', function () {
+describe('Evaluation | Unit | Application | assessment-controller', function () {
   describe('#completeAssessment', function () {
     let assessmentId, assessment, locale;
 
@@ -235,6 +238,136 @@ describe('Unit | Controller | assessment-controller', function () {
         expect(questUsecases.getQuestResultsForCampaignParticipation).to.have.been.called;
         expect(profileUsecases.shareProfileReward).to.not.have.been.called;
       });
+    });
+  });
+
+  describe('#save', function () {
+    context('when the assessment saved is a preview test', function () {
+      const request = {
+        headers: {
+          authorization: 'Bearer my-token',
+        },
+        payload: {
+          data: {
+            id: 42,
+            attributes: {
+              'estimated-level': 4,
+              'pix-score': 4,
+              type: 'PREVIEW',
+            },
+            relationships: {
+              course: {
+                data: {
+                  id: 'null-preview-id',
+                },
+              },
+            },
+          },
+        },
+      };
+      let assessmentRepositoryStub;
+
+      beforeEach(function () {
+        assessmentRepositoryStub = { save: sinon.stub() };
+        assessmentRepositoryStub.save.resolves({
+          toDto: () => {
+            return {};
+          },
+        });
+      });
+
+      it('should save an assessment with type PREVIEW', async function () {
+        // given
+        const expected = new Assessment({
+          id: 42,
+          courseId: null,
+          type: 'PREVIEW',
+          userId: null,
+          state: 'started',
+          method: 'CHOSEN',
+        });
+
+        // when
+        await assessmentController.save(request, hFake, { assessmentRepository: assessmentRepositoryStub });
+
+        // then
+        expect(assessmentRepositoryStub.save).to.have.been.calledWithExactly({ assessment: expected });
+      });
+    });
+  });
+
+  describe('#findCompetenceEvaluations', function () {
+    it('should return the competence evaluations', async function () {
+      // given
+      const userId = 123;
+      const assessmentId = 456;
+      const competenceEvaluation1 = domainBuilder.buildCompetenceEvaluation({ assessmentId, userId });
+      const competenceEvaluation2 = domainBuilder.buildCompetenceEvaluation({ assessmentId, userId });
+      sinon
+        .stub(evaluationUsecases, 'findCompetenceEvaluationsByAssessment')
+        .withArgs({ assessmentId, userId })
+        .resolves([competenceEvaluation1, competenceEvaluation2]);
+      const request = {
+        auth: { credentials: { userId } },
+        params: {
+          id: assessmentId,
+        },
+      };
+
+      // when
+      const result = await assessmentController.findCompetenceEvaluations(request, hFake);
+
+      // then
+      expect(result.data).to.be.deep.equal([
+        {
+          type: 'competence-evaluations',
+          id: competenceEvaluation1.id.toString(),
+          attributes: {
+            'competence-id': competenceEvaluation1.competenceId,
+            'user-id': competenceEvaluation1.userId,
+            'created-at': competenceEvaluation1.createdAt,
+            'updated-at': competenceEvaluation1.updatedAt,
+            status: competenceEvaluation1.status,
+          },
+          relationships: {
+            assessment: {
+              data: {
+                id: assessmentId.toString(),
+                type: 'assessments',
+              },
+            },
+            scorecard: {
+              links: {
+                related: `/api/scorecards/${userId}_${competenceEvaluation1.competenceId}`,
+              },
+            },
+          },
+        },
+        {
+          type: 'competence-evaluations',
+          id: competenceEvaluation2.id.toString(),
+          attributes: {
+            'competence-id': competenceEvaluation2.competenceId,
+            'user-id': competenceEvaluation2.userId,
+            'created-at': competenceEvaluation2.createdAt,
+            'updated-at': competenceEvaluation2.updatedAt,
+            status: competenceEvaluation2.status,
+          },
+          relationships: {
+            assessment: {
+              data: {
+                id: assessmentId.toString(),
+                type: 'assessments',
+              },
+            },
+            scorecard: {
+              links: {
+                related: `/api/scorecards/${userId}_${competenceEvaluation2.competenceId}`,
+              },
+            },
+          },
+        },
+      ]);
     });
   });
 });

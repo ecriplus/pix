@@ -3,7 +3,7 @@ import { expect } from '../../../../test-helper.js';
 import { databaseBuilder } from '../../../../tooling/databases.js';
 import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
-describe('Acceptance | API | assessment-controller-find-competence-evaluations', function () {
+describe('Evaluation | Acceptance | Assessment | assessment-controller-find-competence-evaluations', function () {
   let server;
 
   beforeEach(async function () {

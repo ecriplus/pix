@@ -2,14 +2,14 @@ import _ from 'lodash';
 import sinon from 'sinon';
 
 import { ChallengeAlreadyAnsweredError } from '../../../../../../src/certification/evaluation/domain/errors.js';
-import { createCertificationChallengeLiveAlert } from '../../../../../../src/certification/session-management/domain/usecases/create-certification-challenge-live-alert.js';
+import { createLiveAlert } from '../../../../../../src/certification/evaluation/domain/usecases/create-live-alert.js';
 import { expect } from '../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
-describe('Unit | UseCase | create-certification-challenge-live-alert', function () {
+describe('Certification | Evaluation | Unit | UseCase | create-live-alert', function () {
   let certificationChallengeLiveAlertRepository;
-  let challengeRepository;
+  let sharedChallengeRepository;
   let answerRepository;
 
   beforeEach(function () {
@@ -18,7 +18,7 @@ describe('Unit | UseCase | create-certification-challenge-live-alert', function 
       getOngoingByChallengeIdAndAssessmentId: sinon.stub(),
     };
 
-    challengeRepository = {
+    sharedChallengeRepository = {
       get: sinon.stub(),
     };
 
@@ -47,17 +47,17 @@ describe('Unit | UseCase | create-certification-challenge-live-alert', function 
     const answers = [domainBuilder.buildAnswer({ id: 1 }), domainBuilder.buildAnswer({ id: 2 })];
 
     answerRepository.findByAssessment.withArgs(assessmentId).resolves(answers);
-    challengeRepository.get.withArgs(challengeId).resolves(challenge);
+    sharedChallengeRepository.get.withArgs(challengeId).resolves(challenge);
 
     certificationChallengeLiveAlertRepository.save.withArgs({ certificationChallengeLiveAlert }).resolves();
 
     // when
-    await createCertificationChallengeLiveAlert({
+    await createLiveAlert({
       assessmentId,
       challengeId,
       certificationChallengeLiveAlertRepository,
       answerRepository,
-      challengeRepository,
+      sharedChallengeRepository,
     });
 
     // then
@@ -91,12 +91,12 @@ describe('Unit | UseCase | create-certification-challenge-live-alert', function 
       answerRepository.findByAssessment.withArgs(assessmentId).resolves(answers);
 
       // when
-      const error = await catchErr(createCertificationChallengeLiveAlert)({
+      const error = await catchErr(createLiveAlert)({
         assessmentId,
         challengeId,
         certificationChallengeLiveAlertRepository,
         answerRepository,
-        challengeRepository,
+        sharedChallengeRepository,
       });
 
       // then
@@ -123,12 +123,12 @@ describe('Unit | UseCase | create-certification-challenge-live-alert', function 
       .resolves(unhandledCertificationChallengeLiveAlert);
 
     // when
-    await createCertificationChallengeLiveAlert({
+    await createLiveAlert({
       assessmentId,
       challengeId,
       certificationChallengeLiveAlertRepository,
       answerRepository,
-      challengeRepository,
+      sharedChallengeRepository,
     });
 
     // then

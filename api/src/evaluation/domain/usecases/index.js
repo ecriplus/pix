@@ -107,6 +107,7 @@ import { startOrResumeCompetenceEvaluation } from './start-or-resume-competence-
 import { updateAutonomousCourse } from './update-autonomous-course.js';
 import { updateBadge } from './update-badge.js';
 import { updateBadgeCriterion } from './update-badge-criterion.js';
+import { updateLastQuestionState } from './update-last-question-state.js';
 
 const usecasesWithoutInjectedDependencies = {
   completeAssessment,
@@ -145,6 +146,7 @@ const usecasesWithoutInjectedDependencies = {
   updateAutonomousCourse,
   updateBadgeCriterion,
   updateBadge,
+  updateLastQuestionState,
 };
 
 const evaluationUsecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);

@@ -33,6 +33,7 @@ import { services } from '../services/index.js';
 import pickChallengeService from '../services/pick-challenge-service.js';
 import { completeCertificationAssessment } from './complete-certification-assessment.js';
 import { createCompanionAlert } from './create-companion-alert.js';
+import { createLiveAlert } from './create-live-alert.js';
 import { deneutralizeChallenge } from './deneutralize-challenge.js';
 import { evaluateAndSaveAnswer } from './evaluate-and-save-answer.js';
 import { getCertificationCourse } from './get-certification-course.js';
@@ -60,7 +61,6 @@ import { simulateScoreFromCapacity } from './simulate-score-from-capacity.js';
  * @typedef {certificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
  * @typedef {flashAlgorithmService} FlashAlgorithmService
  * @typedef {certificationCandidateRepository} CertificationCandidateRepository
- * @typedef {certificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
  * @typedef {answerRepository} AnswerRepository
  * @typedef {sharedChallengeRepository} SharedChallengeRepository
  * @typedef {calibratedChallengeRepository} CalibratedChallengeRepository
@@ -119,6 +119,7 @@ const usecasesWithoutInjectedDependencies = {
   simulateCapacityFromScore,
   simulateScoreFromCapacity,
   evaluateAndSaveAnswer,
+  createLiveAlert,
 };
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
 

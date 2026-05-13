@@ -1,10 +1,10 @@
 import sinon from 'sinon';
 
-import { challengeController } from '../../../../../src/shared/application/challenges/challenge-controller.js';
+import { challengeController } from '../../../../../src/evaluation/application/challenges/challenge-controller.js';
 import { expect } from '../../../../test-helper.js';
 import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
 
-describe('Unit | Controller | challenge-controller', function () {
+describe('Evaluation | Unit | Application | challenge-controller', function () {
   let challengeRepository;
   let challengeSerializer;
 
