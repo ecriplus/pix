@@ -6,9 +6,9 @@ import { Assessment } from '../models/Assessment.js';
 const correctAnswer = async function ({
   activityAnswer,
   assessmentId,
+  activityId,
   activityAnswerRepository,
   challengeRepository,
-  activityRepository,
   assessmentRepository,
   examiner: injectedExaminer,
 } = {}) {
@@ -22,7 +22,6 @@ const correctAnswer = async function ({
     throw new ChallengeNotAskedError();
   }
 
-  const activityId = (await activityRepository.getLastActivity(assessmentId)).id;
   const challenge = await challengeRepository.get(activityAnswer.challengeId);
   const examiner = injectedExaminer ?? new Examiner({ validator: challenge.validator });
   const correctedAnswer = examiner.evaluate({
@@ -30,7 +29,8 @@ const correctAnswer = async function ({
     challengeFormat: challenge.format,
   });
 
-  return await activityAnswerRepository.save({ ...correctedAnswer, activityId });
+  const correctAnswerInDb = await activityAnswerRepository.save({ ...correctedAnswer, activityId });
+  return correctAnswerInDb;
 };
 
 export { correctAnswer };
