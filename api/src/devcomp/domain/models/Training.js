@@ -1,3 +1,9 @@
+const modes = {
+  HYBRID: 'hybrid',
+  ONSITE: 'onSite',
+  REMOTE: 'remote',
+};
+
 class Training {
   constructor({
     id,
@@ -11,6 +17,10 @@ class Training {
     editorName,
     editorLogoUrl,
     trainingTriggers,
+    deliveryMode,
+    registrationRequired,
+    program,
+    objectives,
   } = {}) {
     this.id = id;
     this.title = title;
@@ -23,6 +33,10 @@ class Training {
     this.editorName = editorName;
     this.editorLogoUrl = editorLogoUrl;
     this.trainingTriggers = trainingTriggers;
+    this.deliveryMode = deliveryMode;
+    this.registrationRequired = registrationRequired;
+    this.program = program;
+    this.objectives = objectives;
   }
 
   shouldBeObtained(knowledgeElements, skills) {
@@ -34,4 +48,6 @@ class Training {
   }
 }
 
-export { Training };
+Training.modes = modes;
+
+export { modes, Training };
