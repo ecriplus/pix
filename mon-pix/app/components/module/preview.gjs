@@ -232,9 +232,9 @@ export default class ModulixPreview extends Component {
       </div>
     {{/unless}}
 
-    <div class="modulix-preview__panel" {{didInsert this.setHTMLElementOffset}}>
+    <div class="module-preview__panel" {{didInsert this.setHTMLElementOffset}}>
       <form
-        class="modulix-preview-panel__metadata-display-form"
+        class="module-preview-panel__metadata-display-form"
         aria-label={{t "pages.modulix.preview.elements-display-panel-label"}}
       >
         <PixSegmentedControl @onChange={{this.toggleElementIdButton}} @variant="primary" @toggled={{false}}>
@@ -250,7 +250,7 @@ export default class ModulixPreview extends Component {
       </form>
       {{#if this.previewingExistingModule}}
         <hr />
-        <form class="modulix-preview-panel__grain-form">
+        <form class="module-preview-panel__grain-form">
           <PixSelect
             @isComputeWidthDisabled={{true}}
             @hideDefaultOption={{true}}
@@ -280,7 +280,7 @@ export default class ModulixPreview extends Component {
             {{/if}}
             {{#each section.grains as |grain|}}
               {{#if this.modulixPreviewMode.isPreviewAndGrainsTitleButtonEnabled}}
-                <PixTag @color="primary" class="modulix-preview__grains-title-tag">
+                <PixTag @color="primary" class="module-preview__grains-title-tag">
                   {{t
                     "pages.modulix.preview.grain-select.grain-label"
                     index=(this.getModuleGrainIndex grain.id)
