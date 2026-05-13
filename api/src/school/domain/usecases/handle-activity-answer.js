@@ -32,7 +32,7 @@ const handleActivityAnswer = async function ({
     lastActivity = await updateCurrentActivity({
       assessmentId,
       lastActivity,
-      activityAnswerRepository,
+      lastAnswer: correctedAnswer,
       activityRepository,
       missionAssessmentRepository,
       missionRepository,

@@ -4,13 +4,11 @@ import { ActivityInfo } from '../models/ActivityInfo.js';
 export async function updateCurrentActivity({
   assessmentId,
   lastActivity,
+  lastAnswer,
   activityRepository,
-  activityAnswerRepository,
   missionAssessmentRepository,
   missionRepository,
 }) {
-  const lastAnswer = await activityAnswerRepository.findLastByActivity(lastActivity.id);
-
   if (lastAnswer.result.isOK() || lastActivity.isTutorial) {
     const { missionId } = await missionAssessmentRepository.getByAssessmentId(assessmentId);
     const mission = await missionRepository.get(missionId);
