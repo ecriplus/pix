@@ -1,5 +1,22 @@
 # Pix Changelog
 
+# [5.408.0](https://github.com/1024pix/pix/compare/v5.407.0...v5.408.0) (2026-05-14)
+
+### :rocket: Amélioration
+
+- [#16209](https://github.com/1024pix/pix/pull/16209) Accéder aux nouvelles données des contenus formatif dans la page de fin de parcours (PIX-22715). 
+- [#16133](https://github.com/1024pix/pix/pull/16133) Générer le certificat Pix+ v3 (PIX-22537). 
+- [#16178](https://github.com/1024pix/pix/pull/16178) laisse le filtrer division visible sur la page attestation (PIX-22076)  
+- [#16214](https://github.com/1024pix/pix/pull/16214) NR_Eval_NOV intégration du module 
+
+### :building_construction: Tech
+
+- [#16118](https://github.com/1024pix/pix/pull/16118) Afficher le titre des grains dans la preview d'un module (PIX-22652) 
+- [#16212](https://github.com/1024pix/pix/pull/16212) Déplacer des endpoints d'assessment dans les bounded-contexts correspondants 
+- [#16112](https://github.com/1024pix/pix/pull/16112) Limiter les problèmes de mises à jour des paquets lors du démarrage de certains jobs CircleCI 
+- [#16208](https://github.com/1024pix/pix/pull/16208) Mettre à jour le package epreuves component. 
+- [#16213](https://github.com/1024pix/pix/pull/16213) Renommer les classes CSS du composant InaccessibleContent
+
 # [5.407.0](https://github.com/1024pix/pix/compare/v5.406.0...v5.407.0) (2026-05-13)
 
 ### :rocket: Amélioration
