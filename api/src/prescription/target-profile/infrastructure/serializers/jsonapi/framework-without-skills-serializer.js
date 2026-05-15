@@ -23,7 +23,19 @@ const serialize = function (frameworks) {
           tubes: {
             include: true,
             ref: 'id',
-            attributes: ['name', 'practicalTitle', 'practicalDescription', 'isMobileCompliant', 'isTabletCompliant'],
+            attributes: [
+              'name',
+              'practicalTitle',
+              'practicalDescription',
+              'isMobileCompliant',
+              'isTabletCompliant',
+              'skills',
+            ],
+            skills: {
+              include: true,
+              ref: 'id',
+              attributes: ['difficulty'],
+            },
           },
         },
       },

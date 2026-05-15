@@ -12,7 +12,7 @@ describe('Integration | Repository | learning-content', function () {
   let competence1Fr, competence1En, competence2Fr, competence2En, competence3Fr, competence3En;
   let thematic1Fr, thematic1En, thematic2Fr, thematic2En, thematic3Fr, thematic3En;
   let tube1Fr, tube1En, tube2Fr, tube2En, tube4Fr, tube4En;
-  let skill2Fr, skill3Fr;
+  let skill1Fr, skill2Fr, skill3Fr, skill4Fr;
 
   beforeEach(async function () {
     const framework1DB = databaseBuilder.factory.learningContent.buildFramework({
@@ -100,7 +100,10 @@ describe('Integration | Repository | learning-content', function () {
       name: '@tube1_name',
       title: 'tube1_title',
       description: 'tube1_description',
-      practicalTitle_i18n: { fr: 'tube1_practicalTitleFr', en: 'tube1_practicalTitleEn' },
+      practicalTitle_i18n: {
+        fr: 'tube1_practicalTitleFr',
+        en: 'tube1_practicalTitleEn',
+      },
       practicalDescription_i18n: {
         fr: 'tube1_practicalDescriptionFr',
         en: 'tube1_practicalDescriptionEn',
@@ -109,13 +112,17 @@ describe('Integration | Repository | learning-content', function () {
       isTabletCompliant: false,
       competenceId: 'recCompetence1',
       thematicId: 'recThematic1',
+      skillIds: ['recSkill1'],
     });
     const tube2DB = databaseBuilder.factory.learningContent.buildTube({
       id: 'recTube2',
       name: '@tube2_name',
       title: '@tube2_title',
       description: '@tube2_description',
-      practicalTitle_i18n: { fr: 'tube2_practicalTitleFr', en: 'tube2_practicalTitleEn' },
+      practicalTitle_i18n: {
+        fr: 'tube2_practicalTitleFr',
+        en: 'tube2_practicalTitleEn',
+      },
       practicalDescription_i18n: {
         fr: 'tube2_practicalDescriptionFr',
         en: 'tube2_practicalDescriptionEn',
@@ -124,6 +131,7 @@ describe('Integration | Repository | learning-content', function () {
       isTabletCompliant: true,
       competenceId: 'recCompetence2',
       thematicId: 'recThematic2',
+      skillIds: ['recSkill2', 'recSkill3'],
     });
     const tube3DB = databaseBuilder.factory.learningContent.buildTube({
       id: 'recTube3',
@@ -145,7 +153,10 @@ describe('Integration | Repository | learning-content', function () {
       name: '@tube4_name',
       title: 'tube4_title',
       description: 'tube4_description',
-      practicalTitle_i18n: { fr: 'tube4_practicalTitleFr', en: 'tube4_practicalTitleEn' },
+      practicalTitle_i18n: {
+        fr: 'tube4_practicalTitleFr',
+        en: 'tube4_practicalTitleEn',
+      },
       practicalDescription_i18n: {
         fr: 'tube4_practicalDescriptionFr',
         en: 'tube4_practicalDescriptionEn',
@@ -154,6 +165,7 @@ describe('Integration | Repository | learning-content', function () {
       isTabletCompliant: false,
       competenceId: 'recCompetence3',
       thematicId: 'recThematic3',
+      skillIds: ['recSkill4'],
     });
 
     databaseBuilder.factory.learningContent.buildTube({
@@ -172,7 +184,7 @@ describe('Integration | Repository | learning-content', function () {
       thematicId: 'recThematic3',
     });
 
-    databaseBuilder.factory.learningContent.buildSkill({
+    const skill1DB = databaseBuilder.factory.learningContent.buildSkill({
       id: 'recSkill1',
       name: 'tube1_name1',
       status: 'actif',
@@ -201,7 +213,7 @@ describe('Integration | Repository | learning-content', function () {
       tubeId: 'recTube2',
     });
 
-    databaseBuilder.factory.learningContent.buildSkill({
+    const skill4DB = databaseBuilder.factory.learningContent.buildSkill({
       id: 'recSkill4',
       name: 'tube4_name1',
       status: 'actif',
@@ -235,7 +247,7 @@ describe('Integration | Repository | learning-content', function () {
     );
     [tube1Fr, tube2Fr, , tube4Fr] = _buildDomainTubesFromDB([tube1DB, tube2DB, tube3DB, tube4DB], 'fr');
     [tube1En, tube2En, , tube4En] = _buildDomainTubesFromDB([tube1DB, tube2DB, tube3DB, tube4DB], 'en');
-    [skill2Fr, skill3Fr] = _buildDomainSkillsFromDB([skill2DB, skill3DB], 'fr');
+    [skill1Fr, skill2Fr, skill3Fr, skill4Fr] = _buildDomainSkillsFromDB([skill1DB, skill2DB, skill3DB, skill4DB], 'fr');
   });
 
   describe('#findBySkillIds', function () {
@@ -498,15 +510,15 @@ describe('Integration | Repository | learning-content', function () {
       competence2Fr.tubes = [tube2Fr];
       thematic1Fr.tubes = [tube1Fr];
       thematic2Fr.tubes = [tube2Fr];
-      tube1Fr.skills = [];
-      tube2Fr.skills = [];
+      tube1Fr.skills = [skill1Fr];
+      tube2Fr.skills = [skill2Fr];
 
       framework2Fr.areas = [area2Fr];
       area2Fr.competences = [competence3Fr];
       competence3Fr.thematics = [thematic3Fr];
       competence3Fr.tubes = [tube4Fr];
       thematic3Fr.tubes = [tube4Fr];
-      tube4Fr.skills = [];
+      tube4Fr.skills = [skill4Fr];
 
       // when
       const results = await learningContentRepository.findByOrganizationId({ organizationId });
@@ -536,15 +548,15 @@ describe('Integration | Repository | learning-content', function () {
         competence2En.tubes = [tube2En];
         thematic1En.tubes = [tube1En];
         thematic2En.tubes = [tube2En];
-        tube1En.skills = [];
-        tube2En.skills = [];
+        tube1En.skills = [skill1Fr];
+        tube2En.skills = [skill2Fr];
 
         framework2En.areas = [area2En];
         area2En.competences = [competence3En];
         competence3En.thematics = [thematic3En];
         competence3En.tubes = [tube4En];
         thematic3En.tubes = [tube4En];
-        tube4En.skills = [];
+        tube4En.skills = [skill4Fr];
 
         // when
         const results = await learningContentRepository.findByOrganizationId({ organizationId, locale: 'en' });

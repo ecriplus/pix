@@ -72,6 +72,14 @@ export async function findByOrganizationId({ organizationId, locale }) {
     return [];
   }
 
+  const skillIds = tubes.flatMap((tube) => tube.skillIds);
+
+  const skills = await skillRepository.findActiveByRecordIds(skillIds);
+
+  tubes.forEach((tube) => {
+    tube.skills = skills?.filter((skill) => tube.skillIds?.includes(skill.id));
+  });
+
   const frameworks = await _getLearningContentByTubes(tubes, locale);
 
   return frameworks.sort((frameworkA, frameworkB) => {
