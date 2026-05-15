@@ -1609,10 +1609,9 @@
       "table": {
         "caption": "Selectie van onderwerpen",
         "column": {
-          "mobile": "Geschikt voor smartphone",
-          "name": "Naam onderwerp",
-          "tablet": "Geschikt voor tablet",
-          "theme-name": "Naam van thema"
+          "compatibility": "Compatibiliteit",
+          "name": "Onderwerp",
+          "theme-name": "Thema"
         },
         "is-responsive": "ja",
         "not-responsive": "nee",

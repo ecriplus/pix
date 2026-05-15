@@ -1633,10 +1633,9 @@
       "table": {
         "caption": "Topic selection",
         "column": {
-          "mobile": "Mobile compliant",
-          "name": "Topic name",
-          "tablet": "Tablet compliant",
-          "theme-name": "Theme name"
+          "compatibility": "Compatibility",
+          "name": "Topic",
+          "theme-name": "Theme"
         },
         "is-responsive": "yes",
         "not-responsive": "no",

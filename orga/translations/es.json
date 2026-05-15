@@ -1621,10 +1621,9 @@
       "table": {
         "caption": "Selección de temas",
         "column": {
-          "mobile": "Compatible con smartphones",
-          "name": "Nombre del sujeto",
-          "tablet": "Compatible con tabletas",
-          "theme-name": "Nombre del tema"
+          "compatibility": "Compatibilidad",
+          "name": "Sujeto",
+          "theme-name": "Tema"
         },
         "is-responsive": "sí",
         "not-responsive": "no",

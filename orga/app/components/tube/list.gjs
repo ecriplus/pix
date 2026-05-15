@@ -153,11 +153,8 @@ export default class TubeList extends Component {
                           <Header @size="wide" scope="col">
                             {{t "pages.preselect-target-profile.table.column.name"}}
                           </Header>
-                          <Header @size="small" @align="center" scope="col">
-                            {{t "pages.preselect-target-profile.table.column.mobile"}}
-                          </Header>
-                          <Header @size="small" @align="center" scope="col">
-                            {{t "pages.preselect-target-profile.table.column.tablet"}}
+                          <Header @size="small" @align="center" scope="col" >
+                            {{t "pages.preselect-target-profile.table.column.compatibility"}}
                           </Header>
                         </tr>
                       </thead>

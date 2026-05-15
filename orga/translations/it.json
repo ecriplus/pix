@@ -1618,10 +1618,9 @@
       "table": {
         "caption": "Selezione dei soggetti",
         "column": {
-          "mobile": "Compatibile con gli smartphone",
-          "name": "Nome del soggetto",
-          "tablet": "Compatibile con i tablet",
-          "theme-name": "Nome del tema"
+          "compatibility": "Compatibilità",
+          "name": "Soggetto",
+          "theme-name": "Tema"
         },
         "is-responsive": "sì",
         "not-responsive": "no",

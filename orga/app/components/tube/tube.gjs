@@ -30,7 +30,7 @@ export default class Tube extends Component {
       </PixCheckbox>
     </td>
     <td class="table__column--center">
-      <div
+      <div class="icon-container"
         aria-label="{{if
           @tube.isMobileCompliant
           (t 'pages.preselect-target-profile.table.is-responsive')
@@ -42,9 +42,7 @@ export default class Tube extends Component {
           class="{{if @tube.isMobileCompliant 'is-responsive' 'not-responsive'}}"
         />
       </div>
-    </td>
-    <td class="table__column--center">
-      <div
+      <div class="icon-container"
         aria-label="{{if
           @tube.isTabletCompliant
           (t 'pages.preselect-target-profile.table.is-responsive')
