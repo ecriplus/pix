@@ -1,3 +1,4 @@
+import { Training } from '../../../../src/devcomp/domain/models/Training.js';
 import { COUNTRY_CANADA_CODE } from '../common/constants.js';
 import * as tooling from '../common/tooling/index.js';
 import { acceptPixOrgaTermsOfService } from '../common/tooling/legal-documents.js';
@@ -15,6 +16,8 @@ import evalCampaignWithStagesUser from './users/eval-campaign-with-stages.js';
 export async function teamEvaluationDataBuilder({ databaseBuilder }) {
   createScoOrganization(databaseBuilder);
   await createCoreTargetProfile(databaseBuilder);
+  createTrainings(databaseBuilder);
+
   await createAssessmentCampaign(databaseBuilder);
 
   // Other users
@@ -247,5 +250,86 @@ async function createAssessmentCampaign(databaseBuilder) {
       participantCount: 30,
     },
     recommendationEngine: true,
+  });
+}
+
+function createTrainings(databaseBuilder) {
+  const inPersonTrainingId = databaseBuilder.factory.buildTraining({
+    title: 'Apprendre à manger une chocolatine comme les français',
+    internalTitle: 'Apprendre à manger une chocolatine comme les français',
+    link: 'https://example.net',
+    duration: '00:30:00',
+    editorName: 'Pix',
+    editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg',
+    locales: ['fr', 'fr-fr'],
+    type: 'in-person-training',
+    deliveryMode: Training.modes.ONSITE,
+    objectives: [
+      'Tenir la chocolatine sans la casser',
+      'Savoir la croquer avec élégance, en évitant de faire tomber la garniture',
+      'Intégrer la culture française autour de la chocolatine',
+    ],
+    program:
+      'Cette formation intensive alterne théorie et pratique pour maîtriser l’art de déguster une chocolatine. Après une introduction culturelle (chocolatine vs. pain au chocolat, son histoire en France), les participants apprennent la posture idéale, la technique de préhension et la mastication parfaite (sans éclaboussures de chocolat). Un atelier pratique permet de tester ses compétences, suivi d’un quiz final pour valider son niveau de "Françaisitude". À la fin, les participants repartent avec un diplôme (et des miettes sur les doigts). 🥐🇫🇷',
+    registrationRequired: true,
+  }).id;
+
+  const moduleTrainingId = databaseBuilder.factory.buildTraining({
+    title: 'Bac à sable',
+    internalTitle: 'Bac à sable',
+    link: '/modules/6a68bf32/bac-a-sable',
+    duration: '00:25:00',
+    editorName: 'Pix',
+    editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg',
+    locales: ['fr-fr'],
+    type: 'modulix',
+    deliveryMode: Training.modes.REMOTE,
+    objectives: ['Non régression fonctionnelle', 'Test de nouvelles modalités'],
+    program:
+      "<p>Ce module est dédié à des tests internes à Pix.</p><p>Il contient normalement l'intégralité des fonctionnalités disponibles à date.</p>",
+    registrationRequired: false,
+  }).id;
+
+  const otherModuleTrainingId = databaseBuilder.factory.buildTraining({
+    title: 'Ce qu’il faut éviter de dire à une IA générative',
+    internalTitle: 'Ce qu’il faut éviter de dire à une IA générative',
+    link: '/modules/e71a9bdd/iagenethique',
+    duration: '00:10:00',
+    editorName: 'Pix',
+    editorLogoUrl: 'https://assets.pix.org/contenu-formatif/editeur/pix-logo.svg',
+    locales: ['fr-fr'],
+    type: 'modulix',
+    deliveryMode: Training.modes.HYBRID,
+    registrationRequired: false,
+    objectives: [
+      '<p>Comprendre que les conversations avec les IA génératives sont réutilisées</p>',
+      '<p>Savoir rédiger un prompt qui n’inclut pas d’informations personnelles</p>',
+      '<p>Connaître les risques du partage de données sensibles avec l’IA générative</p>',
+    ],
+    program:
+      '<p>Quand vous discutez avec un logiciel d’intelligence artificielle (IA) générative, la conversation n’est pas privée.</p><p>Tout ce que vous écrivez peut être enregistré et parfois réutilisé pour améliorer l’IA.</p><p>Dans ce module, vous allez comprendre pourquoi les échanges avec une IA générative ne sont pas totalement privés et quelles informations il vaut mieux éviter d’écrire dans vos instructions (prompts).</p>',
+  }).id;
+
+  _addTrainingTriggerAndLinkToTargetProfile(inPersonTrainingId, databaseBuilder);
+  _addTrainingTriggerAndLinkToTargetProfile(moduleTrainingId, databaseBuilder);
+  _addTrainingTriggerAndLinkToTargetProfile(otherModuleTrainingId, databaseBuilder);
+}
+
+function _addTrainingTriggerAndLinkToTargetProfile(trainingId, databaseBuilder) {
+  databaseBuilder.factory.buildTargetProfileTraining({
+    targetProfileId: TARGET_PROFILE_PIX_ID,
+    trainingId: trainingId,
+  });
+
+  const frTrainingTriggerId = databaseBuilder.factory.buildTrainingTrigger({
+    trainingId: trainingId,
+    threshold: 0,
+    type: 'prerequisite',
+  }).id;
+
+  databaseBuilder.factory.buildTrainingTriggerTube({
+    trainingTriggerId: frTrainingTriggerId,
+    tubeId: 'tube1NLpOetQhutFlA',
+    level: 2,
   });
 }
