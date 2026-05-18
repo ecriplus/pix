@@ -1,8 +1,7 @@
-import { expect } from 'chai';
-
 import { createServer } from '../../../../../server.js';
 import { SCOPES } from '../../../../../src/certification/shared/domain/models/Scopes.js';
-import { databaseBuilder, knex } from '../../../../tooling/databases.js';
+import { expect } from '../../../../test-helper.js';
+import { databaseBuilder } from '../../../../tooling/databases.js';
 import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Acceptance | Certification | Configuration | API | certification-version-route', function () {
@@ -124,6 +123,31 @@ describe('Acceptance | Certification | Configuration | API | certification-versi
       expect(response.statusCode).to.equal(204);
       const [updatedVersion] = await knex('certification_versions').where({ id: version.id });
       expect(updatedVersion.comments).to.equal('Newly updated comments');
+    });
+  });
+
+  describe('DELETE /api/admin/certification-frameworks/{id}', function () {
+    it('should return 204 HTTP status code', async function () {
+      // given
+      const versionId = databaseBuilder.factory.buildCertificationVersion({
+        scope: SCOPES.CORE,
+        startDate: null,
+        expirationDate: null,
+      }).id;
+
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'DELETE',
+        url: `/api/admin/certification-frameworks/${versionId}`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(204);
     });
   });
 });
