@@ -3,11 +3,13 @@
  * @typedef {import("../../../shared/domain/models/Scopes.js").SCOPES} SCOPES
  * @typedef {import("../../../../shared/domain/models/Challenge.js").Challenge} Challenge
  */
-import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { NotFoundError } from '../../../../shared/domain/errors.js';
-import { FlashAssessmentAlgorithmConfiguration } from '../../../shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
-import { Version } from '../../domain/models/Version.js';
-import { FrameworkHistoryEntry } from '../../domain/read-models/FrameworkHistoryEntry.js';
+import { DomainTransaction } from "../../../../shared/domain/DomainTransaction.js";
+import { NotFoundError } from "../../../../shared/domain/errors.js";
+import {
+  FlashAssessmentAlgorithmConfiguration
+} from "../../../shared/domain/models/FlashAssessmentAlgorithmConfiguration.js";
+import { Version } from "../../domain/models/Version.js";
+import { FrameworkHistoryEntry } from "../../domain/read-models/FrameworkHistoryEntry.js";
 
 /**
  * @returns {Promise<Version[]>}
@@ -126,6 +128,18 @@ export async function getFrameworkHistory({ scope }) {
     .orderBy('startDate', 'desc');
 
   return rows.map(_toFrameworkHistoryEntry);
+}
+
+export async function isDraft(id) {
+  const knexConn = DomainTransaction.getConnection();
+  const version = await knexConn('certification_versions').select('startDate').where({ id }).first();
+  return version?.startDate === null;
+}
+
+export async function deleteDraft(id) {
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn('certification-frameworks-challenges').where({ versionId: id }).del();
+  await knexConn('certification_versions').where({ id }).del();
 }
 
 const _toFrameworkHistoryEntry = ({ id, startDate, expirationDate, assessmentDuration, challengesConfiguration }) => {

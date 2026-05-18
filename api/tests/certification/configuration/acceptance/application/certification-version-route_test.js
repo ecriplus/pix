@@ -139,7 +139,7 @@ describe('Acceptance | Certification | Configuration | API | certification-versi
 
       const options = {
         method: 'DELETE',
-        url: `/api/admin/certification-frameworks/${versionId}`,
+        url: `/api/admin/certification-versions/${versionId}`,
         headers: generateAuthenticatedUserRequestHeaders({ userId: superAdmin.id }),
       };
 

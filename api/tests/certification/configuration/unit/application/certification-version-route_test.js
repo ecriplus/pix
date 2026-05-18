@@ -1,10 +1,13 @@
-import sinon from 'sinon';
+import sinon from "sinon";
 
-import { certificationVersionController } from '../../../../../src/certification/configuration/application/certification-version-controller.js';
-import * as moduleUnderTest from '../../../../../src/certification/configuration/application/certification-version-route.js';
-import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
-import { expect } from '../../../../test-helper.js';
-import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';
+import {
+  certificationVersionController
+} from "../../../../../src/certification/configuration/application/certification-version-controller.js";
+import * as moduleUnderTest
+  from "../../../../../src/certification/configuration/application/certification-version-route.js";
+import { securityPreHandlers } from "../../../../../src/shared/application/security-pre-handlers.js";
+import { expect } from "../../../../test-helper.js";
+import { HttpTestServer } from "../../../../tooling/server/http-test-server.js";
 
 describe('Unit | Certification | Configuration | Application | Router | certification-version-route', function () {
   describe('GET /api/admin/certification-versions/{certificationVersionId}', function () {
@@ -141,7 +144,7 @@ describe('Unit | Certification | Configuration | Application | Router | certific
     });
   });
 
-  describe('DELETE /api/admin/certification-frameworks/{id}', function () {
+  describe('DELETE /api/admin/certification-version/{id}', function () {
     it('should return 204 HTTP status code', async function () {
       // given
       sinon.stub(securityPreHandlers, `checkAdminMemberHasRoleSuperAdmin`).returns(true);
@@ -158,6 +161,40 @@ describe('Unit | Certification | Configuration | Application | Router | certific
       // then
       expect(response.statusCode).to.equal(204);
       sinon.assert.calledOnce(certificationVersionController.deleteCertificationVersion);
+    });
+
+    it('should return 403 HTTP status code when user is not SuperAdmin', async function () {
+      // given
+      sinon
+        .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
+        .returns((request, h) => h.response().code(403).takeover());
+      sinon.stub(certificationVersionController, 'deleteCertificationVersion').returns('ok');
+
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      // when
+      const response = await httpTestServer.request('DELETE', '/api/admin/certification-versions/1');
+
+      // then
+      expect(response.statusCode).to.equal(403);
+      sinon.assert.notCalled(certificationVersionController.deleteCertificationVersion);
+    });
+
+    it('should return 400 HTTP status code when id is not valid', async function () {
+      // given
+      sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin').returns(true);
+      sinon.stub(certificationVersionController, 'deleteCertificationVersion').returns('ok');
+
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      // when
+      const response = await httpTestServer.request('DELETE', '/api/admin/certification-versions/NOT_AN_ID');
+
+      // then
+      expect(response.statusCode).to.equal(400);
+      sinon.assert.notCalled(certificationVersionController.deleteCertificationVersion);
     });
   });
 });

@@ -1,4 +1,4 @@
-import { DomainError } from '../../../shared/domain/errors.js';
+import { DomainError } from "../../../shared/domain/errors.js";
 
 export class InvalidScoWhitelistError extends DomainError {
   constructor(meta) {
@@ -10,5 +10,11 @@ export class InvalidBadgeLevelError extends DomainError {
   constructor(message = 'Badge level inconsistency') {
     super(message);
     this.code = 'INVALID_BADGE_LEVEL';
+  }
+}
+
+export class CertificationVersionForbiddenDeletionError extends DomainError {
+  constructor() {
+    super('Il est interdit de supprimer une version de référentiel de certification qui a déjà été activé.');
   }
 }

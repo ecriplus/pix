@@ -1,5 +1,6 @@
-import { usecases } from '../domain/usecases/index.js';
-import * as certificationVersionDetailSerializer from '../infrastructure/serializers/certification-version-detail-serializer.js';
+import { usecases } from "../domain/usecases/index.js";
+import * as certificationVersionDetailSerializer
+  from "../infrastructure/serializers/certification-version-detail-serializer.js";
 
 const getVersionById = async function (request) {
   const certificationVersionId = request.params.certificationVersionId;
@@ -26,7 +27,7 @@ const update = async function (request, h) {
 const deleteCertificationVersion = async function (request) {
   const versionId = request.params.certificationVersionId;
 
-  await usecases.deleteCertificationVersion({ versionId });
+  await usecases.deleteCertificationVersion({ certificationVersionId });
 
   return h.response().code(204);
 };

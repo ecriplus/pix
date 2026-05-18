@@ -31,6 +31,7 @@ import { searchAttachableTargetProfiles } from './search-attachable-target-profi
 import { sendTargetProfileNotifications } from './send-target-profile-notifications.js';
 import { updateScoBlockedAccessDate } from './update-sco-blocked-access-date.js';
 import { updateVersion } from './update-version.js';
+import { deleteCertificationVersion } from "./delete-certification-version.js";
 
 /**
  *
@@ -77,6 +78,7 @@ const usecasesWithoutInjectedDependencies = {
   attachBadges,
   calibrateFrameworkVersion,
   createCertificationVersion,
+  deleteCertificationVersion,
   exportScoWhitelist,
   findCertificationFrameworks,
   findComplementaryCertifications,

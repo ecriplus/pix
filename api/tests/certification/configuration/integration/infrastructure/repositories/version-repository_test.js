@@ -1,13 +1,14 @@
-import { Version } from '../../../../../../src/certification/configuration/domain/models/Version.js';
-import * as versionRepository from '../../../../../../src/certification/configuration/infrastructure/repositories/version-repository.js';
-import { DEFAULT_SESSION_DURATION_MINUTES } from '../../../../../../src/certification/shared/domain/constants.js';
-import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
-import { SCOPES } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
-import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
-import { expect } from '../../../../../test-helper.js';
-import { databaseBuilder, knex } from '../../../../../tooling/databases.js';
-import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
-import { catchErr } from '../../../../../tooling/test-utils/error.js';
+import { Version } from "../../../../../../src/certification/configuration/domain/models/Version.js";
+import * as versionRepository
+  from "../../../../../../src/certification/configuration/infrastructure/repositories/version-repository.js";
+import { DEFAULT_SESSION_DURATION_MINUTES } from "../../../../../../src/certification/shared/domain/constants.js";
+import { Frameworks } from "../../../../../../src/certification/shared/domain/models/Frameworks.js";
+import { SCOPES } from "../../../../../../src/certification/shared/domain/models/Scopes.js";
+import { NotFoundError } from "../../../../../../src/shared/domain/errors.js";
+import { expect } from "../../../../../test-helper.js";
+import { databaseBuilder, knex } from "../../../../../tooling/databases.js";
+import { domainBuilder } from "../../../../../tooling/domain-builder/domain-builder.js";
+import { catchErr } from "../../../../../tooling/test-utils/error.js";
 
 describe('Certification | Configuration | Integration | Repository | Version', function () {
   describe('#create', function () {
@@ -535,6 +536,48 @@ describe('Certification | Configuration | Integration | Repository | Version', f
           comments: 'versionDroit',
         }),
       ]);
+    });
+  });
+
+  describe('#isDraft', function () {
+    it('should return true when certificationVersion does not have a start date', async function () {
+      const certificationVersionId = databaseBuilder.factory.buildCertificationVersion({
+        startDate: null,
+        expirationDate: null,
+      }).id;
+      await databaseBuilder.commit();
+
+      const result = await versionRepository.isDraft(certificationVersionId);
+
+      expect(result).to.be.true;
+    });
+    it('should return false when certification version have a start date', async function () {
+      const certificationVersionId = databaseBuilder.factory.buildCertificationVersion({
+        startDate: new Date('2025-06-01'),
+        expirationDate: null,
+      }).id;
+      await databaseBuilder.commit();
+
+      const result = await versionRepository.isDraft(certificationVersionId);
+
+      expect(result).to.be.false;
+    });
+  });
+
+  describe('#deleteDraft', function () {
+    it('should return delete a draft certification version ', async function () {
+      const certificationVersionId = databaseBuilder.factory.buildCertificationVersion({
+        startDate: null,
+        expirationDate: null,
+      }).id;
+      await databaseBuilder.commit();
+
+      await versionRepository.deleteDraft(certificationVersionId);
+
+      const matchingCertificationVersions = await knex
+        .from('certification_versions')
+        .where({ id: certificationVersionId });
+      expect(matchingCertificationVersions).to.be.empty;
     });
   });
 });
