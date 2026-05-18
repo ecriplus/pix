@@ -400,6 +400,16 @@ workflows:
             - mon_pix_install
             - orga_install
             - certif_install
+      - e2e_playwright_test_recette_certif:
+          context: Pix
+          requires:
+            - api_install
+            - mon_pix_install
+            - certif_install
+            - admin_install
+          filters:
+            branches:
+              only: dev
 
 # ---------------------------------------------------------------------------
 # Jobs

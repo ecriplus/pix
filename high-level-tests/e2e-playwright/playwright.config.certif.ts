@@ -13,6 +13,12 @@ export default defineConfig({
       testMatch: '**/*.spec.ts',
     },
   ],
+  use: {
+    ...sharedConfig.use,
+    launchOptions: {
+      args: ['--disable-web-security'],
+    },
+  },
 
   webServer: isCI
     ? [setupWebServer(App.PIX_APP, true), setupWebServer(App.PIX_CERTIF, true), setupWebServer(App.PIX_ADMIN, true)]
