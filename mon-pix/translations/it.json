@@ -25,7 +25,7 @@
       "s50": "Questo identificatore esiste già",
       "s51": "Hai già un account Pix con l'indirizzo e-mail '<br>'{value}'<br><br>'Per continuare, accedi a questo account o chiedi aiuto a un insegnante.'<br><br>' (Per l'insegnante: vedi il 'Kit per la risoluzione dei problemi' in Pix Orga > Documentazione - Codice R51).",
       "s52": "Hai già un account Pix utilizzato con l'identificativo nella forma nome.cognome seguito da 4 cifre:'<br>'{value}'<br><br>'Per continuare, accedi a questo account o chiedi aiuto a un insegnante.'<br><br>'(Per l'insegnante: vedi il 'Kit per la risoluzione dei problemi' in Pix Orga > Documentazione - Codice R52)",
-      "s53": "Hai già un account Pix tramite ENT.'<br> 'Usalo per iscriverti al percorso.",
+      "s53": "Hai già un account Pix tramite ENT.'<br>'Usalo per iscriverti al percorso.",
       "s61": "Hai già un account Pix con l'indirizzo e-mail '<br>'{value}'<br><br>'Per continuare, accedi a questo account o chiedi aiuto a un insegnante.'<br><br>' (Per l'insegnante: vedi il 'Kit per la risoluzione dei problemi' in Pix Orga > Documentazione - Codice R61).",
       "s62": "Hai già un account Pix utilizzato con l'identificativo nella forma nome.cognome seguito da 4 cifre:'<br>'{value}'<br><br>'Per continuare, accedere a questo account o chiedere aiuto a un insegnante.'<br><br>'(Per l'insegnante: vedere il 'Kit per la risoluzione dei problemi' in Pix Orga > Documentazione - Codice R62)",
       "s63": "Hai già un account Pix tramite l'ENT di un'altra scuola.'<br><br>'Per continuare, contatta un insegnante che può darti accesso a questo account usando Pix Orga. '<br><br>' (Per l'insegnante: vedi il 'Kit di risoluzione dei problemi' in Pix Orga > Documentazione - Codice R63)"
@@ -106,7 +106,7 @@
       "invisible-password": "nascondi la password",
       "mandatory": "obbligatorio",
       "mandatory-all-fields": "Tutti i campi sono obbligatori.",
-      "mandatory-fields": "I campi contrassegnati da '<abbr title=\"mandatory\" class=\"mandatory-mark\">'*'</abbr>' sono obbligatori.",
+      "mandatory-fields": "I campi contrassegnati da '<abbr title=\"obbligatorio\" class=\"mandatory-mark\">'*'</abbr>' sono obbligatori.",
       "success": "corretto",
       "visible-password": "mostra la password"
     },
@@ -125,6 +125,7 @@
     "new-information-banner": {
       "close-label": "Chiudere il banner"
     },
+    "no": "No",
     "no-level": "Nessun livello",
     "or": "o",
     "pagination": {
@@ -155,7 +156,6 @@
         }
       }
     },
-    "no": "No",
     "yes": "Sì"
   },
   "components": {
@@ -641,8 +641,8 @@
           "finished": "Completato",
           "started": "In percorso"
         },
-        "text-deleted": "Percorso disattivato dalla propria organizzazione.'<br> 'Non è più possibile agire su questo percorso.",
-        "text-disabled": "Percorso disattivato dalla propria organizzazione.'<br> 'Non è più possibile invia i risultati."
+        "text-deleted": "Percorso disattivato dalla propria organizzazione.'<br>'Non è più possibile agire su questo percorso.",
+        "text-disabled": "Percorso disattivato dalla propria organizzazione.'<br>'Non è più possibile inviare i risultati."
       },
       "title": "Percorso"
     },
@@ -684,17 +684,17 @@
       "framework-title": {
         "CLEA": "Certificazione Pix",
         "CORE": "Certificazione Pix",
+        "DROIT": "Certificato Pix+ Diritto",
         "EDU_1ER_DEGRE": "Certificato Pix+ Edu 1° livello",
         "EDU_2ND_DEGRE": "Certificato Pix+ Edu 2° livello",
         "EDU_CPE": "Certificato Pix+ Edu CPE",
-        "DROIT": "Certificato Pix+ Diritto",
         "PRO_SANTE": "Certificato Pix+ Professionisti della Salute"
       },
       "frameworks": {
         "EDU": {
           "results-infos": "'<p>'La certificazione si svolge in due fasi:'</p><ol><li>'Prova Pix: appena completata.'</li><li>'Prova orale: organizzata al di fuori di Pix davanti a una giuria.'</li></ol><p>'Al termine dell'orale, verrà assegnato il livello di certificazione definitivo (Esperto, Avanzato, ecc.).'<br/>'Contatta il tuo centro di certificazione per organizzare la prova orale.'</p>'",
-          "status": "Certificato valido",
           "results-sub-title": "Il/la candidato/a è ammissibile al modulo 2 della pratica professionale della certificazione Pix+ Édu!",
+          "status": "Certificato valido",
           "steps": {
             "1": "Volet Pix",
             "2": "Volet pratica'<br/>'professionale",
@@ -729,12 +729,14 @@
       "jury-info": "Le osservazioni della giuria non vengono condivise nella pagina di verifica del certificato.",
       "jury-title": "Commenti della giuria",
       "learn-about-certification-results": "Come interpretare i risultati?",
+      "obtained-certification": "Il candidato ha raggiunto il livello {globalLevelLabel} della certificazione {frameworkLabel}.",
       "professionalizing-warning": "Il certificato Pix è riconosciuto come qualifica professionale da France Compétences una volta raggiunto un punteggio minimo di 120 pix.",
       "results": {
         "sub-title": "Il candidato è ammissibile alla certificazione {framework}.",
         "title": "Lettura del risultato:"
       },
       "title": "Certificato Pix",
+      "valid-status": "Certificato valido",
       "verification-code": {
         "alt": "Copia",
         "copied": "Codice copiato!",
@@ -743,9 +745,7 @@
         "share": "Condividi il tuo certificato",
         "title": "Codice di verifica",
         "tooltip": "Fornite questo codice per consentire a terzi di verificare l'autenticità del tuo certificato."
-      },
-      "obtained-certification": "Il candidato ha raggiunto il livello {globalLevelLabel} della certificazione {frameworkLabel}.",
-      "valid-status": "Certificato valido"
+      }
     },
     "certification-ender": {
       "candidate": {
@@ -789,10 +789,10 @@
       "steps": {
         "1": {
           "paragraphs": {
-            "1": "La certificazione {certificationName} è un test \"<strong>adattivo\"</strong> per valutare il tuo livello nel \"<strong>quadro di riferimento delle 16 competenze digitali del Pix\"</strong>.",
-            "2": "La \"<strong>difficoltà delle domande si adatta in tempo reale\"</strong> in base alle risposte fornite.",
-            "3": "Se alcune domande sembrano difficili, è perché il test di certificazione cerca di misurare il tuo livello massimo. Se non sei in grado di rispondere a una domanda, hai la possibilità di \"saltarla\": non verrà riproposta durante la certificazione e non sarà convalidata.",
-            "4": "Per ottenere un punteggio il più vicino possibile alle proprie capacità \"<strong>è necessario arrivare alla fine del test\"</strong>.",
+            "1": "La certificazione {certificationName} è un '<strong>'test adattivo'</strong>' per valutare il tuo livello nel '<strong>'quadro di riferimento delle 16 competenze digitali del Pix'</strong>'.",
+            "2": "La '<strong>'difficoltà delle domande si adatta in tempo reale'</strong>' in base alle risposte fornite.",
+            "3": "Se alcune domande sembrano difficili, è perché il test di certificazione cerca di misurare il tuo livello massimo. '<strong>'Se non sei in grado di rispondere a una domanda, hai la possibilità di \"saltarla\"'</strong>': non verrà riproposta durante la certificazione e non sarà convalidata.",
+            "4": "Per ottenere un punteggio il più vicino possibile alle proprie capacità '<strong>'è necessario arrivare alla fine del test'</strong>'.",
             "pix-plus-1": "La certificazione {certificationName} è un '<strong>'test adattivo'</strong>' per valutare il livello del candidato sull’'<strong>'insieme di competenze del quadro di riferimento della certificazione {certificationName}'</strong>'."
           },
           "question": "Come funziona il test?",
@@ -803,7 +803,7 @@
             "strong-text": "32 DOMANDE"
           },
           "paragraphs": {
-            "1": "Il test di certificazione è composto da \"<strong>32 domande\"</strong>\".",
+            "1": "Il test di certificazione è composto da '<strong>'32 domande'</strong>'",
             "2": "Hai un massimo di '<strong>'{duration}'</strong>' per rispondere*.",
             "3": "*escluso il tempo supplementare",
             "4": "Se si completano '<strong>'meno di 20 domande, non sarà possibile assegnare un punteggio'</strong>'."
@@ -821,7 +821,7 @@
               "title": "Modalità libera:"
             },
             "2": {
-              "text": "Per le domande in \"<strong>modalità focus\"</strong>, indicate da un'icona gialla: non sarà possibile lasciare la pagina e cercare.",
+              "text": "Per le domande in '<strong>'modalità focus'</strong>', indicate da un'icona gialla: non sarà possibile lasciare la pagina e cercare.",
               "title": "Modalità di messa a fuoco:"
             }
           },
@@ -834,7 +834,7 @@
             "3": "Fare clic su \"Sì, sono sicuro\".",
             "4": "Chiamate il sorvegliante, che interverrà per aiutarvi."
           },
-          "text": "'<strong>'In caso di problemi tecnici'</strong> (ad esempio l'immagine si rifiuta di essere visualizzata), seguire questi passaggi:",
+          "text": "'<strong>'In caso di problemi tecnici'</strong>' (ad esempio l'immagine si rifiuta di essere visualizzata), seguire questi passaggi:",
           "title": "Cosa fare in caso di problemi?"
         },
         "5": {
@@ -959,9 +959,6 @@
         }
       },
       "first-title": "Stai per iniziare il test di certificazione",
-      "link-to-user-certification": "Vedi le mie certificazioni",
-      "non-eligible-subscription": "Non si ha diritto a {complementarySubscriptionLabel}. È tuttavia possibile ottenere la certificazione Pix.",
-      "title": "Partecipa a una sessione di certificazione",
       "language-selector": {
         "confirmation-label": "Confermo di essere a mio agio nella lingua selezionata per rispondere alle domande.'<br>'La scelta della lingua è '<strong>'definitiva'</strong>'.",
         "label": "Lingua di certificazione",
@@ -969,7 +966,10 @@
           "english": "inglese - EN",
           "french": "francese - FR"
         }
-      }
+      },
+      "link-to-user-certification": "Vedi le mie certificazioni",
+      "non-eligible-subscription": "Non si ha diritto a {complementarySubscriptionLabel}. È tuttavia possibile ottenere la certificazione Pix.",
+      "title": "Partecipa a una sessione di certificazione"
     },
     "certifications-list": {
       "buttons": {
@@ -1246,7 +1246,7 @@
       },
       "completion-percentage": {
         "caption": "progressi lungo il percorso",
-        "label": "'<p class=\"sr-only\">'Hai completato '</p>'{completionPercentage}%'<p class=\"sr-only\">' del tuo viaggio.'</p>'"
+        "label": "Hai completato {completion, number, ::percent} del tuo percorso."
       },
       "sharing-results": {
         "information-banner": "Cliccando sul pulsante \"Vedi i miei risultati\", i tuoi risultati saranno inviati all'organizzatore."
@@ -1269,6 +1269,13 @@
         "start-button": "Inizia il mio percorso",
         "step": "Fase {stepNumber}"
       },
+      "errors": {
+        "disabled": {
+          "content": "A causa di un elevato afflusso, l'accesso a questo percorso è temporaneamente sospeso.",
+          "instructions": "Si prega di riprovare più tardi.",
+          "title": "Questo percorso non è disponibile al momento"
+        }
+      },
       "items": {
         "aria-label-completed-campaign": "Questo elemento viene completato con una percentuale di successo di {value, number, ::percent}.",
         "aria-label-completed-campaign-with-stages": "Hai ottenuto {acquired, plural, =0 {no stelle} =1 {# stelle} other {# stelle}} su {total}.",
@@ -1289,13 +1296,6 @@
           "select-passages": "Selezione di corsi di formazione adeguati."
         },
         "title": "Calcolo del seguito del percorso in corso."
-      },
-      "errors": {
-        "disabled": {
-          "content": "A causa di un elevato afflusso, l'accesso a questo percorso è temporaneamente sospeso.",
-          "instructions": "Si prega di riprovare più tardi.",
-          "title": "Questo percorso non è disponibile al momento"
-        }
       }
     },
     "comparison-window": {
@@ -1321,7 +1321,7 @@
         },
         "feedback": {
           "correct": "Risposta corretta",
-          "wrong": "Risposta errata. '<br>La risposta corretta è:"
+          "wrong": "Risposta errata. '<br>'La risposta corretta è:"
         },
         "focusedOut": {
           "title": "Hai superato la prova",
@@ -1576,7 +1576,7 @@
         "continue-with-pix": "Continua con il mio account Pix",
         "error-not-found": "Sei uno studente? '<br>' Controlla i tuoi dati (nome, cognome e data di nascita) o contatta un insegnante.'<br><br>' Sei un insegnante? '<br>' L'accesso a un percorso non è al momento disponibile.",
         "first-title": "Entra nell'organizzazione { organizationName }",
-        "invalid-reconciliation-error": "Si è verificato un errore. Contattare l'assistenza.",
+        "invalid-reconciliation-error": "Si è verificato un errore. '<br>' Contattare l'assistenza.",
         "login-information-message": "L'account Pix '<b>'{ connectionMethod }'</b>' sarà associato allo studente: '<b>'{ firstName } { lastName }'</b>'.'<br><br>'Se sei voi, fate clic su \"Associa\", altrimenti uscite.",
         "login-information-title": "Informazioni sulla accesso",
         "subtitle": "Compila le informazioni mancanti"
@@ -1803,9 +1803,6 @@
         }
       },
       "preview": {
-        "showJson": "Visualizza JSON",
-        "stepper": "Anteprima: stepper {direction}",
-        "textarea-label": "Contenuto del modulo",
         "elements-id-button": {
           "label": "Mostra l'ID degli elementi"
         },
@@ -1818,7 +1815,10 @@
         "grains-title-button": {
           "label": "Mostra il titolo dei grain"
         },
-        "modulix-editor": "Modulix Editor"
+        "modulix-editor": "Modulix Editor",
+        "showJson": "Visualizza JSON",
+        "stepper": "Anteprima: stepper {direction}",
+        "textarea-label": "Contenuto del modulo"
       },
       "qab": {
         "correct-answer": "Risposta corretta!",
@@ -1947,7 +1947,7 @@
         }
       },
       "description": "Mettiti alla prova con i tuoi ritmi in 16 competenze digitali. Scegli una competenza e inizia a guadagnare pix.",
-      "first-title": "Hai 16 competenze da testare. Concentrati e parti!",
+      "first-title": "Hai 16 competenze da testare.'<br>'Concentrati e parti!",
       "resume-campaign-banner": {
         "accessibility": {
           "resume": "Continua il tuo viaggio",
@@ -1964,7 +1964,7 @@
       },
       "title": "Competenze",
       "total-score-helper": {
-        "explanation": "'<p>'Questo è il numero massimo di pix che saremo in grado di raggiungere quando tutti gli 8 livelli del repository Pix saranno disponibili.'</p><p>'Oggi,'<span class=\"hexagon-score-information__--strong\">'il massimo è {maxReachablePixScore} pix'</span>', corrispondente al livello {maxReachableLevel}.'</p>'",
+        "explanation": "'<p>'Questo è il numero massimo di pix che saremo in grado di raggiungere quando tutti gli 8 livelli del repository Pix saranno disponibili.'</p><p>'Oggi,'<span class=\"hexagon-score-information__text--strong\">'il massimo è {maxReachablePixScore} pix'</span>', corrispondente al livello {maxReachableLevel}.'</p>'",
         "icon": "Informazioni sui pix",
         "label": "Apri il tooltip",
         "title": "Perché 1024 pix?"
@@ -2092,7 +2092,7 @@
         "send": "Invio il mio profilo",
         "shared": "Grazie, il tuo profilo è stato inviato!"
       },
-      "instructions": "Trasmetterete il punteggio e i livelli di competenze del tuo profilo Pix. Eventuali modifiche al profilo dopo l'invio di queste informazioni non saranno trasmesse. Ricordati di controlla prima di invia!",
+      "instructions": "Trasmetterete il punteggio e i livelli di competenze del tuo profilo Pix. '<br>' Eventuali modifiche al profilo dopo l'invio di queste informazioni non saranno trasmesse. '<br>' Ricordati di verificarlo prima di inviarlo!",
       "title": "Invia il mio profilo"
     },
     "shared-certification": {
@@ -2176,6 +2176,7 @@
         "explanations": {
           "trainings": "Per aiutarvi a progredire, date un'occhiata ai nostri corsi di formazione consigliati e trova quelli più adatti a voi."
         },
+        "hidden-badges": "{ count, plural, =1 {badge aggiuntivo acquisito non visualizzato} other {badge aggiuntivi acquisiti non visualizzati} }",
         "mastery-rate": "di successo nelle domande",
         "retry": {
           "actions": {
@@ -2188,12 +2189,11 @@
         },
         "see-trainings": "Vedere i corsi",
         "shared-message": "I risultati sono stati inviati da {date} a {time}.",
-        "thanks": "Grazie {name} per la tua partecipazione!",
-        "hidden-badges": "{ count, plural, =1 {badge aggiuntivo acquisito non visualizzato} other {badge aggiuntivi acquisiti non visualizzati} }",
         "staged-message": {
           "show-less": "Comprimi",
           "show-more": "Mostra di più"
-        }
+        },
+        "thanks": "Grazie {name} per la tua partecipazione!"
       },
       "improve": {
         "description": "È possibile riprovare alcune delle domande",
@@ -2231,11 +2231,11 @@
       "stage": {
         "caption": "I dettagli dei tuoi risultati sotto forma di percentuali e stelle in base alle competenze",
         "masteryPercentage": "{rate, number, ::percent} di successo",
-        "starsAcquired": "{acquired, plural, =0 {nessuna stella acquisita} =1 {# stelle acquisite} other {# stelle acquisite}} su {total}.",
-        "title": "Dettagli sulle competenze",
         "recommendedEngine": {
           "starsAcquired": "{acquired}/{total, plural, =0 {stella} =1 {# stella} other {# stelle}}"
-        }
+        },
+        "starsAcquired": "{acquired, plural, =0 {nessuna stella acquisita} =1 {# stelle acquisite} other {# stelle acquisite}} su {total}.",
+        "title": "Dettagli sulle competenze"
       },
       "tabs": {
         "aria-label": "3 schede con i dettagli dei risultati",
@@ -2342,69 +2342,6 @@
       "validation": "La password è stata aggiornata."
     },
     "user-account": {
-      "connexion-methods": {
-        "authentication-methods": {
-          "gar": "via ENT/Mediacentre",
-          "label": "Connessione esterna",
-          "connection-via": "Connessione via {identityProviderOrganizationName}",
-          "other-authentication-label": "Altro metodo di connessione"
-        },
-        "edit-button": "Modificare",
-        "email": "Indirizzo e-mail",
-        "menu-link-title": "I miei metodi di accesso",
-        "username": "Identificatore"
-      },
-      "delete-account": {
-        "actions": {
-          "delete": "Elimina il mio account"
-        },
-        "menu-link-title": "Elimina il mio account",
-        "modal": {
-          "error-403": "Non è possibile eliminare il proprio account. Contattare l'assistenza Pix.",
-          "question": "Sei sicuro di voler cancellare il tuo account?",
-          "title": "Stai per eliminare il tuo account",
-          "warning-1": "Si noti che l'account non può essere recuperato dopo l'eliminazione.",
-          "warning-2": "Non appena confermate, verrete automaticamente disconnessi e la tua richiesta verrà immediatamente elaborata."
-        },
-        "more-information": "Per ulteriori informazioni,",
-        "more-information-contact-support": "è possibile contattare l'assistenza.",
-        "title": "Elimina definitivamente il mio account",
-        "warning-email": "Questa azione è irreversibile. Tutte le competenze, i corsi e i {pixScore} pix ottenuti saranno eliminati definitivamente per l'account PIX che utilizza l'indirizzo e-mail <strong>{email}</strong>.",
-        "warning-other": "Questa azione è irreversibile. Tutte le competenze, i corsi e i {pixScore} pix ottenuti saranno eliminati definitivamente per l'account PIX <strong>{firstName} {lastName}</strong>."
-      },
-      "email-confirmed": "Indirizzo e-mail verificato.",
-      "email-verification": {
-        "code-explanation-of-use": "Per spostarsi da un campo all'altro, utilizzare la tabulazione o le frecce destra e sinistra della tastiera. Per compila un campo, inserisci i numeri da 1 a 9 o utilizzare le frecce su e giù della tastiera.",
-        "code-label": "Campo",
-        "code-legend": "Inserisci il codice di verifica inviato per e-mail",
-        "confirmation-message": "E-mail inviata!",
-        "description": "Inserisci il codice di verifica ricevuto all'indirizzo e-mail:",
-        "did-not-receive": "Non ho ricevuto nulla,",
-        "errors": {
-          "email-modification-demand-expired": "Questo codice è scaduto. Si prega di rinnovare la richiesta.",
-          "incorrect-code": "Il codice inserito non è corretto.",
-          "new-email-already-exist": "Questo indirizzo e-mail è già in uso.",
-          "unknown-error": "Si è verificato un errore. Riprovare o contattare l'assistenza.",
-          "no-code": "Inserisci il codice a {numInputs} cifre ricevuto via e-mail."
-        },
-        "send-back-the-code": "inviami di nuovo il codice",
-        "time-code-validation": "Il codice ricevuto è valido per 10 minuti",
-        "title": "Verifica dell'indirizzo e-mail",
-        "update-successful": "Il tuo indirizzo e-mail è stato modificato!",
-        "add-successful": "Il tuo indirizzo e-mail è stato aggiunto!",
-        "validate-new-email": "Conferma il mio nuovo indirizzo e-mail"
-      },
-      "language": {
-        "lang": "Lingua",
-        "menu-link-title": "Scegli la tua lingua",
-        "update-successful": "La tua lingua è stata cambiata!"
-      },
-      "personal-information": {
-        "first-name": "Nome",
-        "last-name": "Cognome",
-        "menu-link-title": "I miei dati personali"
-      },
-      "title": "Il mio account",
       "account-add-or-update-email-with-validation": {
         "code-reception-information": "Confermando la richiesta di aggiunta dell'indirizzo e-mail, riceverai un codice via e-mail.",
         "fields": {
@@ -2434,34 +2371,97 @@
           "add-email": "Aggiungi un indirizzo e-mail",
           "update-email": "Modifica dell'indirizzo e-mail"
         }
-      }
+      },
+      "connexion-methods": {
+        "authentication-methods": {
+          "connection-via": "Connessione via {identityProviderOrganizationName}",
+          "gar": "via ENT/Mediacentre",
+          "label": "Connessione esterna",
+          "other-authentication-label": "Altro metodo di connessione"
+        },
+        "edit-button": "Modificare",
+        "email": "Indirizzo e-mail",
+        "menu-link-title": "I miei metodi di accesso",
+        "username": "Identificatore"
+      },
+      "delete-account": {
+        "actions": {
+          "delete": "Elimina il mio account"
+        },
+        "menu-link-title": "Elimina il mio account",
+        "modal": {
+          "error-403": "Non è possibile eliminare il proprio account. Contattare l'assistenza Pix.",
+          "question": "Sei sicuro di voler cancellare il tuo account?",
+          "title": "Stai per eliminare il tuo account",
+          "warning-1": "Si noti che l'account non può essere recuperato dopo l'eliminazione.",
+          "warning-2": "Non appena confermate, verrete automaticamente disconnessi e la tua richiesta verrà immediatamente elaborata."
+        },
+        "more-information": "Per ulteriori informazioni,",
+        "more-information-contact-support": "è possibile contattare l'assistenza.",
+        "title": "Elimina definitivamente il mio account",
+        "warning-email": "Questa azione è irreversibile. Tutte le competenze, i corsi e i {pixScore} pix ottenuti saranno eliminati definitivamente per l'account PIX che utilizza l'indirizzo e-mail <strong>{email}</strong>.",
+        "warning-other": "Questa azione è irreversibile. Tutte le competenze, i corsi e i {pixScore} pix ottenuti saranno eliminati definitivamente per l'account PIX <strong>{firstName} {lastName}</strong>."
+      },
+      "email-confirmed": "Indirizzo e-mail verificato.",
+      "email-verification": {
+        "add-successful": "Il tuo indirizzo e-mail è stato aggiunto!",
+        "code-explanation-of-use": "Per spostarsi da un campo all'altro, utilizzare la tabulazione o le frecce destra e sinistra della tastiera. Per compila un campo, inserisci i numeri da 1 a 9 o utilizzare le frecce su e giù della tastiera.",
+        "code-label": "Campo",
+        "code-legend": "Inserisci il codice di verifica inviato per e-mail",
+        "confirmation-message": "E-mail inviata!",
+        "description": "Inserisci il codice di verifica ricevuto all'indirizzo e-mail:",
+        "did-not-receive": "Non ho ricevuto nulla,",
+        "errors": {
+          "email-modification-demand-expired": "Questo codice è scaduto. Si prega di rinnovare la richiesta.",
+          "incorrect-code": "Il codice inserito non è corretto.",
+          "new-email-already-exist": "Questo indirizzo e-mail è già in uso.",
+          "no-code": "Inserisci il codice a {numInputs} cifre ricevuto via e-mail.",
+          "unknown-error": "Si è verificato un errore. Riprovare o contattare l'assistenza."
+        },
+        "send-back-the-code": "inviami di nuovo il codice",
+        "time-code-validation": "Il codice ricevuto è valido per 10 minuti",
+        "title": "Verifica dell'indirizzo e-mail",
+        "update-successful": "Il tuo indirizzo e-mail è stato modificato!",
+        "validate-new-email": "Conferma il mio nuovo indirizzo e-mail"
+      },
+      "language": {
+        "lang": "Lingua",
+        "menu-link-title": "Scegli la tua lingua",
+        "update-successful": "La tua lingua è stata cambiata!"
+      },
+      "personal-information": {
+        "first-name": "Nome",
+        "last-name": "Cognome",
+        "menu-link-title": "I miei dati personali"
+      },
+      "title": "Il mio account"
     },
     "user-certifications": {
       "meshes": {
-        "EDU_1ER_DEGRE": {
-          "BELOW_MINIMUM": "Non ammissibile",
-          "ADMISSIBLE": "Ammissibile",
-          "ADVANCED": "Avanzato",
-          "EXPERT": "Esperto"
-        },
-        "EDU_2ND_DEGRE": {
-          "BELOW_MINIMUM": "Non ammissibile",
-          "ADMISSIBLE": "Ammissibile",
-          "ADVANCED": "Avanzato",
-          "EXPERT": "Esperto"
-        },
-        "EDU_CPE": {
-          "BELOW_MINIMUM": "Non ammissibile",
-          "ADMISSIBLE": "Ammissibile",
-          "ADVANCED": "Avanzato",
-          "EXPERT": "Esperto"
-        },
         "DROIT": {
           "ADVANCED": "Avanzato",
           "BELOW_MINIMUM": "Non ottenuto",
           "CONFIRMED": "Confermato",
           "EXPERT": "Esperto",
           "INDEPENDENT": "Indipendente"
+        },
+        "EDU_1ER_DEGRE": {
+          "ADMISSIBLE": "Ammissibile",
+          "ADVANCED": "Avanzato",
+          "BELOW_MINIMUM": "Non ammissibile",
+          "EXPERT": "Esperto"
+        },
+        "EDU_2ND_DEGRE": {
+          "ADMISSIBLE": "Ammissibile",
+          "ADVANCED": "Avanzato",
+          "BELOW_MINIMUM": "Non ammissibile",
+          "EXPERT": "Esperto"
+        },
+        "EDU_CPE": {
+          "ADMISSIBLE": "Ammissibile",
+          "ADVANCED": "Avanzato",
+          "BELOW_MINIMUM": "Non ammissibile",
+          "EXPERT": "Esperto"
         },
         "PRO_SANTE": {
           "ADVANCED": "Avanzato",
