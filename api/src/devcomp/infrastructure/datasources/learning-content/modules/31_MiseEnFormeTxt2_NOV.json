@@ -524,7 +524,7 @@
                 "id": "f1c1dd38-b81b-4931-b253-89ff7af1aace",
                 "type": "text",
                 "tag": " ",
-                "content": "<ul><li>Il existe de nombreuses applications de traitement de texte&nbsp;: <strong>gratuites</strong> ou <strong>payantes</strong>. Certaines sont <strong>installées sur votre appareil</strong>, d’autres sont accessibles <strong>en ligne</strong>.&nbsp; [<em>liste de pictos avec les noms&nbsp;: LibreOffice Writer, Apache OpenOffice, Microsoft Word, Google Docs, Pages]</em></li><li> Les interfaces des applications de traitement de texte sont composées de la <strong>zone de travail centrale</strong> pour taper et modifier du texte, de la <strong>barre d’outils</strong> et de la <strong>barre des menus</strong>.&nbsp;<em>[option représentation graphique]</em></li><li> Dans la barre des menus, «&nbsp;<strong>Enregistrer sous</strong>&nbsp;» permet de sauvegarder un nouveau fichier texte&nbsp;:<ul><li>en lui donner <strong>un nom</strong> de fichier,</li><li>et en choisissant <strong>où enregistrer</strong> le fichier sur l’ordinateur.</li></ul></li><li> Le symbole « 💾&nbsp;» ou l’option «&nbsp;<strong>Enregistrer </strong>» permet d’<strong>enregistrer des modifications</strong> sur un fichier texte qui a déjà un nom et un emplacement. Pensez à le faire régulièrement.</li></ul>"
+                "content": "<ul><li>Il existe de nombreuses applications de traitement de texte&nbsp;: <strong>gratuites</strong> ou <strong>payantes</strong>. Certaines sont <strong>installées sur votre appareil</strong>, d’autres sont accessibles <strong>en ligne</strong>.&nbsp; [<em>liste de pictos avec les noms&nbsp;: LibreOffice Writer, Apache OpenOffice, Microsoft Word, Google Docs, Pages]</em></li><li> Les interfaces des applications de traitement de texte sont composées de la <strong>zone de travail centrale</strong> pour taper et modifier du texte, de la <strong>barre d’outils</strong> et de la <strong>barre des menus</strong>.&nbsp;<em>[option représentation graphique]</em></li><li> Dans la barre des menus, «&nbsp;<strong>Enregistrer sous</strong>&nbsp;» permet de sauvegarder un nouveau fichier texte&nbsp;:<ul><li>en lui donner <strong>un nom</strong> de fichier,</li><li>et en choisissant <strong>où enregistrer</strong> le fichier sur l’ordinateur.</li></ul></li><li> Le symbole « 💾&nbsp;» ou l’option «&nbsp;<strong>Enregistrer </strong>» permet d’<strong>enregistrer des modifications</strong> sur un document qui a déjà un nom et un emplacement. Pensez à le faire régulièrement.</li></ul>"
               }
             }
           ]
@@ -791,9 +791,41 @@
               "type": "element",
               "element": {
                 "id": "997391b1-d4dd-4279-98d6-25b476741b63",
-                "type": "text",
-                "tag": " ",
-                "content": "<p>à remplir<br></p>"
+                "type": "qcm",
+                "instruction": "<p>Quels sont les points communs entre les applications de traitement de texte et les applications pour modifier des tableaux ou des présentations (diapositives) ?</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>les 3 zones de l’interface</p>"
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>le logo qui représente souvent une page ou un crayon</p>"
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>la différence entre Enregistrer et Enregistrer sous</p>"
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>le type de fichier que l’on peut modifier</p>"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Effectivement !</p>",
+                    "diagnosis": "<p>Les applications pour créer et modifier des textes, des tableaux ou des présentations ont de nombreux points communs. </p><p>Les interfaces de toutes ces applications sont composées des mêmes 3 zones : la <strong>zone de travail centrale</strong>, la <strong>barre d’outils</strong> et la <strong>barre des menus</strong>.&nbsp; </p><p>Ces applications permettent d’<strong>Enregistrer sous</strong> des fichiers, et ensuite d’<strong>Enregistrer</strong> des modifications.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Eh non.</p>",
+                    "diagnosis": "<p>Les applications pour créer et modifier des textes, des tableaux ou des présentations ont de nombreux points communs. </p>\n<p>Les interfaces de toutes ces applications sont composées des mêmes 3 zones : la <strong>zone de travail centrale</strong>, la <strong>barre d’outils</strong> et la <strong>barre des menus</strong>.&nbsp; </p>\n<p>Ces applications permettent d’<strong>Enregistrer sous</strong> des fichiers, et ensuite d’<strong>Enregistrer</strong> des modifications.</p>"
+                  }
+                },
+                "solutions": [
+                  "1",
+                  "2"
+                ]
               }
             }
           ]
