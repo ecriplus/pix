@@ -2,7 +2,10 @@ import { Writable } from 'node:stream';
 
 import pino from 'pino';
 
-import { incrementInContext } from '../../../../src/shared/infrastructure/execution-context-manager.js';
+import {
+  incrementInContext,
+  installHapiHook,
+} from '../../../../src/shared/infrastructure/execution-context-manager.js';
 import * as pinoPlugin from '../../../../src/shared/infrastructure/plugins/pino.js';
 import { expect } from '../../../test-helper.js';
 import { HttpTestServer } from '../../../tooling/server/http-test-server.js';
@@ -31,7 +34,7 @@ describe('Integration | Infrastructure | plugins | pino', function () {
             path: '/api/token',
             config: {
               handler: () => {
-                return {};
+                return { user_id: '1234' };
               },
             },
           },
@@ -48,6 +51,7 @@ describe('Integration | Infrastructure | plugins | pino', function () {
       },
       name: 'test-api',
     });
+    installHapiHook();
   });
 
   async function registerWithPlugin(cb) {
@@ -137,7 +141,7 @@ describe('Integration | Infrastructure | plugins | pino', function () {
           expect(messages).to.have.lengthOf(1);
           expect(messages[0].msg).to.equal('request completed');
           expect(messages[0].req.version).to.equal('development');
-          expect(messages[0].req.user_id).to.equal(null);
+          expect(messages[0].req.user_id).to.equal('1234');
           expect(messages[0].req.route).to.equal('/api/token');
           expect(messages[0].req.usernameHash).to.equal(
             '31f7a65e315586ac198bd798b6629ce4903d0899476d5741a9f32e2e521b6a66', // echo -n 'toto'| shasum -a 256
@@ -164,7 +168,7 @@ describe('Integration | Infrastructure | plugins | pino', function () {
           expect(messages).to.have.lengthOf(1);
           expect(messages[0].msg).to.equal('request completed');
           expect(messages[0].req.version).to.equal('development');
-          expect(messages[0].req.user_id).to.equal(null);
+          expect(messages[0].req.user_id).to.equal('1234');
           expect(messages[0].req.route).to.equal('/api/token');
           expect(messages[0].req.usernameHash).to.equal('-');
         });
