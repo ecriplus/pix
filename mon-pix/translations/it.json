@@ -700,7 +700,9 @@
             "2": "Sezione pratica'<br/>'professionale",
             "3": "Risultato finale"
           },
-          "sub-title": "Il candidato è ammesso alla 2ª fase!"
+          "sub-title": {
+            "admissible": "Il candidato è ammesso alla 2ª fase!"
+          }
         }
       },
       "global": {
@@ -727,7 +729,7 @@
       "jury-info": "Le osservazioni della giuria non vengono condivise nella pagina di verifica del certificato.",
       "jury-title": "Commenti della giuria",
       "learn-about-certification-results": "Come vanno interpretati i risultati?",
-      "obtained-certification": "Il candidato ha ottenuto la certificazione {frameworkLabel}",
+      "obtained-certification": "Il candidato ha raggiunto il livello {globalLevelLabel} della certificazione {frameworkLabel}.",
       "professionalizing-warning": "Il certificato Pix è riconosciuto come qualifica professionale da France Compétences una volta raggiunto un punteggio minimo di 120 pix.",
       "results": {
         "sub-title": "Il candidato è ammissibile alla certificazione {framework}.",

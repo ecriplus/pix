@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import {
   CertificateMeshLevel,
   CORE_LEVELS,
@@ -5,6 +7,7 @@ import {
 } from '../../../../../../../src/certification/results/domain/models/v3/CertificateMeshLevel.js';
 import { PIX_PLUS_EDU_EXTERNAL_LEVELS } from '../../../../../../../src/certification/shared/domain/constants/mesh-configuration.js';
 import { Frameworks } from '../../../../../../../src/certification/shared/domain/models/Frameworks.js';
+import { config } from '../../../../../../../src/shared/config.js';
 import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { expect } from '../../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../../tooling/domain-builder/domain-builder.js';
@@ -199,6 +202,95 @@ describe('Unit | Domain | Models | CertificateMeshLevel', function () {
 
         // then
         expect(translatedLabel).to.equal(translate('certification.meshlevel.EDU_1ER_DEGRE.LEVEL_ADMISSIBLE.summary'));
+      });
+    });
+  });
+
+  describe('#badgeUrl', function () {
+    context('when the framework is CORE', function () {
+      it('should return null', function () {
+        // given
+        const meshLevel = new CertificateMeshLevel({
+          reachedMeshIndex: 1,
+          certificationFramework: Frameworks.CORE,
+        });
+
+        // then
+        expect(meshLevel.badgeUrl).to.be.null;
+      });
+    });
+
+    context('when the framework is CLEA', function () {
+      it('should return null', function () {
+        // given
+        const meshLevel = new CertificateMeshLevel({
+          reachedMeshIndex: 1,
+          certificationFramework: Frameworks.CLEA,
+        });
+
+        // then
+        expect(meshLevel.badgeUrl).to.be.null;
+      });
+    });
+
+    context('when the meshLevel is null', function () {
+      it('should return null', function () {
+        // given
+        const meshLevel = new CertificateMeshLevel({
+          reachedMeshIndex: null,
+          certificationFramework: Frameworks.DROIT,
+        });
+
+        // then
+        expect(meshLevel.badgeUrl).to.be.null;
+      });
+    });
+
+    context('when the meshLevel is LEVEL_ADMISSIBLE', function () {
+      it('should return null', function () {
+        // given
+        const meshLevel = new CertificateMeshLevel({
+          reachedMeshIndex: 0,
+          certificationFramework: Frameworks.EDU_1ER_DEGRE,
+        });
+
+        // then
+        expect(meshLevel.badgeUrl).to.be.null;
+      });
+    });
+
+    context('when the framework is a Pix+ with a valid level', function () {
+      it('should return the badge URL', function () {
+        // given
+        sinon.stub(config.assetsManager, 'url').value('https://super-assert-url.org');
+
+        // when
+        const meshLevel = new CertificateMeshLevel({
+          reachedMeshIndex: 2,
+          certificationFramework: Frameworks.DROIT,
+        });
+
+        // then
+        expect(meshLevel.badgeUrl).to.equal('https://super-assert-url.org/badges-certifies/v3/droit/advanced.svg');
+      });
+    });
+
+    context('when the framework is EDU with an external jury result', function () {
+      it('should return the badge URL', function () {
+        // given
+        sinon.stub(config.assetsManager, 'url').value('https://super-assert-url.org');
+
+        // when
+        const meshLevel = new CertificateMeshLevel({
+          reachedMeshIndex: 0,
+          certificationFramework: Frameworks.EDU_2ND_DEGRE,
+          eduV3ExternalJuryResult: PIX_PLUS_EDU_EXTERNAL_LEVELS.ADVANCED,
+        });
+
+        // then
+        expect(meshLevel.badgeUrl).to.equal(
+          'https://super-assert-url.org/badges-certifies/v3/edu_2nd_degre/advanced.svg',
+        );
       });
     });
   });

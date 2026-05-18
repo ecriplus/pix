@@ -700,7 +700,9 @@
             "2": "Volet pratique'<br/>'professionnelle",
             "3": "Résultat final"
           },
-          "sub-title": "Le/la candidat(e) est admissible au volet 2 de pratique professionnelle !"
+          "sub-title": {
+            "admissible": "Le/la candidat(e) est admissible au volet 2 de pratique professionnelle !"
+          }
         }
       },
       "global": {
@@ -727,7 +729,7 @@
       "jury-info": "Les observations du jury ne sont pas partagées sur la page de vérification de votre certificat.",
       "jury-title": "Observations du jury",
       "learn-about-certification-results": "Comment interpréter les résultats ?",
-      "obtained-certification": "Le candidat a obtenu la certification {frameworkLabel}",
+      "obtained-certification": "Le candidat a atteint le niveau {globalLevelLabel} de la certification {frameworkLabel}.",
       "professionalizing-warning": "Le certificat Pix est reconnu comme professionnalisant par France compétences à compter d’un score minimal de 120 pix",
       "results": {
         "sub-title": "Le/la candidat(e) est admissible à la certification {framework}.",

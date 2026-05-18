@@ -182,6 +182,7 @@ const schema = Joi.object({
   TLD_FR: Joi.string().optional(),
   TLD_ORG: Joi.string().optional(),
   APIM_URL: Joi.string().optional(),
+  PIX_ASSETS_MANAGER_URL: Joi.string().uri().optional(),
   HTTP_SERVER_RESPONSE_TIMEOUT_MS: Joi.number().integer().min(0).optional(),
 }).options({ allowUnknown: true });
 
@@ -215,6 +216,9 @@ const configuration = (function () {
     },
     apiManager: {
       url: process.env.APIM_URL || 'https://gateway.pix.fr',
+    },
+    assetsManager: {
+      url: process.env.PIX_ASSETS_MANAGER_URL,
     },
     attestations: {
       storage: {
