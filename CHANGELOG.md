@@ -1,5 +1,23 @@
 # Pix Changelog
 
+## [5.408.1](https://github.com/1024pix/pix/compare/v5.408.0...v5.408.1) (2026-05-18)
+
+### :bug: Correction
+
+- [#16211](https://github.com/1024pix/pix/pull/16211) Corrige l'erreur sur la route `/api/junior/activity-answer` (PIX-22740) 
+
+### :building_construction: Tech
+
+- [#16204](https://github.com/1024pix/pix/pull/16204) :package: Mise à jours des paquets de PixJunior 
+- [#16207](https://github.com/1024pix/pix/pull/16207) Renommer les usecases et repositories d'import de participants (PIX-22738) 
+
+### :arrow_up: Montée de version
+
+- [#16206](https://github.com/1024pix/pix/pull/16206) Update dependency sinon to v22 (api) 
+- [#16222](https://github.com/1024pix/pix/pull/16222) Update dependency sinon to v22 (certif) 
+- [#16224](https://github.com/1024pix/pix/pull/16224) Update dependency sinon to v22 (junior) 
+- [#16221](https://github.com/1024pix/pix/pull/16221) Update dependency undici to v7.25.0 (api)
+
 # [5.408.0](https://github.com/1024pix/pix/compare/v5.407.0...v5.408.0) (2026-05-14)
 
 ### :rocket: Amélioration
