@@ -1,11 +1,11 @@
 {
   "api-error-messages": {
     "join-error": {
-      "r11": "Hai già un account Pix con l'indirizzo e-mail '<br>'{valore }'<br><br>'Per continuare, accedi a questo account o chiedi aiuto a un insegnante.'<br><br>' (Per l'insegnante: vedi il 'Kit di risoluzione dei problemi' in Pix Orga > Documentazione - Codice R11).",
-      "r12": "Hai già un account Pix utilizzato con l'identificativo nella forma nome.cognome seguito da 4 cifre:'<br>'{valore }'<br><br>'Per continuare, accedere a questo account o chiedere aiuto a un insegnante.'<br><br>'(Per l'insegnante: vedere il 'Kit per la risoluzione dei problemi' in Pix Orga &gt; Documentazione - Codice R12)",
+      "r11": "Hai già un account Pix con l'indirizzo e-mail '<br>'{value}'<br><br>'Per continuare, accedi a questo account o chiedi aiuto a un insegnante.'<br><br>' (Per l'insegnante: vedi il 'Kit di risoluzione dei problemi' in Pix Orga > Documentazione - Codice R11).",
+      "r12": "Hai già un account Pix utilizzato con l'identificativo nella forma nome.cognome seguito da 4 cifre:'<br>'{value}'<br><br>'Per continuare, accedere a questo account o chiedere aiuto a un insegnante.'<br><br>'(Per l'insegnante: vedere il 'Kit per la risoluzione dei problemi' in Pix Orga &gt; Documentazione - Codice R12)",
       "r13": "Hai già un account Pix tramite l'ENT di un'altra scuola.'<br><br>'Per continuare, contatta un insegnante che può darti accesso a questo account usando Pix Orga. '<br><br>' (Per l'insegnante: vedi il 'Kit per la risoluzione dei problemi' in Pix Orga &gt; Documentazione - Codice R13)",
-      "r31": "Hai già un account Pix con l'indirizzo e-mail '<br>'{valore }'<br><br>'Per continuare, accedi a questo account o chiedi aiuto a un insegnante.'<br><br>' (Per l'insegnante: vedi il 'Kit per la risoluzione dei problemi' nella Documentazione di Pix Orga &gt; Codice R31)",
-      "r32": "Hai già un account Pix utilizzato con l'identificativo nella forma nome.cognome seguito da 4 cifre:'<br>'{valore }'<br><br>'Per continuare, accedere a questo account o chiedere aiuto a un insegnante.'<br><br>'(Per l'insegnante: vedere il 'Kit di risoluzione dei problemi' in Pix Orga &gt; Documentazione - Codice R32)",
+      "r31": "Hai già un account Pix con l'indirizzo e-mail '<br>'{value}'<br><br>'Per continuare, accedi a questo account o chiedi aiuto a un insegnante.'<br><br>' (Per l'insegnante: vedi il 'Kit per la risoluzione dei problemi' nella Documentazione di Pix Orga &gt; Codice R31)",
+      "r32": "Hai già un account Pix utilizzato con l'identificativo nella forma nome.cognome seguito da 4 cifre:'<br>'{value}'<br><br>'Per continuare, accedere a questo account o chiedere aiuto a un insegnante.'<br><br>'(Per l'insegnante: vedere il 'Kit di risoluzione dei problemi' in Pix Orga &gt; Documentazione - Codice R32)",
       "r33": "Hai già un account Pix tramite ENT. Usalo per iscriverti al percorso.",
       "r70": "Si è verificato un errore. Esci e riprova.",
       "r90": {
@@ -23,11 +23,11 @@
     },
     "register-error": {
       "s50": "Questo identificatore esiste già",
-      "s51": "Hai già un account Pix con l'indirizzo e-mail '<br>'{valore }'<br><br>'Per continuare, accedi a questo account o chiedi aiuto a un insegnante.'<br><br>' (Per l'insegnante: vedi il 'Kit per la risoluzione dei problemi' in Pix Orga > Documentazione - Codice R51).",
-      "s52": "Hai già un account Pix utilizzato con l'identificativo nella forma nome.cognome seguito da 4 cifre:'<br>'{valore }'<br><br>'Per continuare, accedi a questo account o chiedi aiuto a un insegnante.'<br><br>'(Per l'insegnante: vedi il 'Kit per la risoluzione dei problemi' in Pix Orga > Documentazione - Codice R52)",
+      "s51": "Hai già un account Pix con l'indirizzo e-mail '<br>'{value}'<br><br>'Per continuare, accedi a questo account o chiedi aiuto a un insegnante.'<br><br>' (Per l'insegnante: vedi il 'Kit per la risoluzione dei problemi' in Pix Orga > Documentazione - Codice R51).",
+      "s52": "Hai già un account Pix utilizzato con l'identificativo nella forma nome.cognome seguito da 4 cifre:'<br>'{value}'<br><br>'Per continuare, accedi a questo account o chiedi aiuto a un insegnante.'<br><br>'(Per l'insegnante: vedi il 'Kit per la risoluzione dei problemi' in Pix Orga > Documentazione - Codice R52)",
       "s53": "Hai già un account Pix tramite ENT.'<br> 'Usalo per iscriverti al percorso.",
-      "s61": "Hai già un account Pix con l'indirizzo e-mail '<br>'{valore }'<br><br>'Per continuare, accedi a questo account o chiedi aiuto a un insegnante.'<br><br>' (Per l'insegnante: vedi il 'Kit per la risoluzione dei problemi' in Pix Orga > Documentazione - Codice R61).",
-      "s62": "Hai già un account Pix utilizzato con l'identificativo nella forma nome.cognome seguito da 4 cifre:'<br>'{valore }'<br><br>'Per continuare, accedere a questo account o chiedere aiuto a un insegnante.'<br><br>'(Per l'insegnante: vedere il 'Kit per la risoluzione dei problemi' in Pix Orga > Documentazione - Codice R62)",
+      "s61": "Hai già un account Pix con l'indirizzo e-mail '<br>'{value}'<br><br>'Per continuare, accedi a questo account o chiedi aiuto a un insegnante.'<br><br>' (Per l'insegnante: vedi il 'Kit per la risoluzione dei problemi' in Pix Orga > Documentazione - Codice R61).",
+      "s62": "Hai già un account Pix utilizzato con l'identificativo nella forma nome.cognome seguito da 4 cifre:'<br>'{value}'<br><br>'Per continuare, accedere a questo account o chiedere aiuto a un insegnante.'<br><br>'(Per l'insegnante: vedere il 'Kit per la risoluzione dei problemi' in Pix Orga > Documentazione - Codice R62)",
       "s63": "Hai già un account Pix tramite l'ENT di un'altra scuola.'<br><br>'Per continuare, contatta un insegnante che può darti accesso a questo account usando Pix Orga. '<br><br>' (Per l'insegnante: vedi il 'Kit di risoluzione dei problemi' in Pix Orga > Documentazione - Codice R63)"
     }
   },
@@ -791,7 +791,7 @@
           },
           "paragraphs": {
             "1": "Il test di certificazione è composto da \"<strong>32 domande\"</strong>\".",
-            "2": "Hai un massimo di '<strong>'{durata}'</strong>' per rispondere*.",
+            "2": "Hai un massimo di '<strong>'{duration}'</strong>' per rispondere*.",
             "3": "*escluso il tempo supplementare",
             "4": "Se si completano '<strong>'meno di 20 domande, non sarà possibile assegnare un punteggio'</strong>'."
           },
