@@ -484,7 +484,7 @@
                 "id": "21191f50-a20c-4505-95d5-dd4004fdb110",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>⚠️ <strong>Attention</strong><br>Si vous utilisez «&nbsp;Enregistrer sous&nbsp;» sur un document déjà enregistré, vous allez créer un deuxième document/fichier texte qui contient les modifications.</p>"
+                "content": "<p>⚠️ <strong>Attention</strong><br>Si vous utilisez «&nbsp;Enregistrer sous&nbsp;» sur un document déjà enregistré, vous allez créer un deuxième document texte qui contient les modifications.</p>"
               }
             },
             {
@@ -493,7 +493,7 @@
                 "id": "0b92a9c9-e904-4a03-be3e-52e53f0a3ce5",
                 "type": "text",
                 "tag": "tip",
-                "content": "<p>Sur la plupart des logiciels de traitement de texte, quand vous n’avez pas encore “Enregistrer sous”, si vous cliquez sur «&nbsp;Enregistrer&nbsp;» 💾 le logiciel vous proposera automatiquement d’«&nbsp;Enregistrer sous&nbsp;».</p>"
+                "content": "<p>Sur la plupart des logiciels de traitement de texte, quand vous n’avez pas encore «&nbsp;Enregistrer sous&nbsp;», si vous cliquez sur «&nbsp;Enregistrer&nbsp;» 💾 le logiciel vous proposera automatiquement d’«&nbsp;Enregistrer sous&nbsp;».</p>"
               }
             },
             {
