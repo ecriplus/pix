@@ -112,7 +112,7 @@
                 "type": "embed",
                 "isCompletionRequired": false,
                 "title": "QCU image",
-                "url": " https://epreuves.pix.fr/fr/qcu_image/outilstdtexte.html",
+                "url": "https://epreuves.pix.fr/fr/qcu_image/outilstdtexte.html",
                 "instruction": "<p>Parmi les applications ci-dessous, sélectionnez une application de traitement de texte qui permettra à Mina d’écrire son discours sur son ordinateur.</p>",
                 "solution": "",
                 "height": 0
@@ -227,7 +227,7 @@
                 "isCompletionRequired": false,
                 "title": "saisie",
                 "url": "https://epreuves.pix.fr/pixwriter-mise-en-forme/pixwriter-mise-en-forme.html?lang=fr&mode=example",
-                "instruction": "",
+                "instruction": "Écrivez la phrase dans l’application de traitement de texte ci-dessous.",
                 "solution": "",
                 "height": 400
               }
@@ -631,7 +631,7 @@
                 "type": "embed",
                 "isCompletionRequired": false,
                 "title": "Application - Paragraphe et enregistrer",
-                "url": "",
+                "url": "https://epreuves.pix.fr/pixwriter-poeme/pixwriter-poeme.html?lang=fr",
                 "instruction": "<p>Dans l’application de traitement de texte ci-dessous&nbsp;:&nbsp; </p><ul><li>Créez un nouveau paragraphe après le mot «&nbsp;caves.&nbsp;»</li><li>Enregistrez les modifications</li></ul>",
                 "solution": "",
                 "height": 400
@@ -782,7 +782,23 @@
     {
       "id": "566a6dac-321d-4031-a3bf-e5f715012a48",
       "type": "go-further",
-      "grains": []
+      "grains": [{
+          "id": "ed41b53c-a2ad-43a0-b330-fe9cf636c9a5",
+          "type": "challenge",
+          "title": "transfert",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "997391b1-d4dd-4279-98d6-25b476741b63",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>à remplir<br></p>"
+              }
+            }
+          ]
+        }
+      ]
     }
   ],
   "glossary": []
