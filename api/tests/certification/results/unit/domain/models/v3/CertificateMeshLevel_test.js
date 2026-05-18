@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 import {
   CertificateMeshLevel,
   CORE_LEVELS,
@@ -5,6 +7,7 @@ import {
 } from '../../../../../../../src/certification/results/domain/models/v3/CertificateMeshLevel.js';
 import { PIX_PLUS_EDU_EXTERNAL_LEVELS } from '../../../../../../../src/certification/shared/domain/constants/mesh-configuration.js';
 import { Frameworks } from '../../../../../../../src/certification/shared/domain/models/Frameworks.js';
+import { config } from '../../../../../../../src/shared/config.js';
 import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { expect } from '../../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../../tooling/domain-builder/domain-builder.js';
@@ -259,7 +262,7 @@ describe('Unit | Domain | Models | CertificateMeshLevel', function () {
     context('when the framework is a Pix+ with a valid level', function () {
       it('should return the badge URL', function () {
         // given
-        process.env.PIX_ASSETS_MANAGER_URL = 'https://super-assert-url.org';
+        sinon.stub(config.assetsManager, 'url').value('https://super-assert-url.org');
 
         // when
         const meshLevel = new CertificateMeshLevel({
@@ -275,7 +278,7 @@ describe('Unit | Domain | Models | CertificateMeshLevel', function () {
     context('when the framework is EDU with an external jury result', function () {
       it('should return the badge URL', function () {
         // given
-        process.env.PIX_ASSETS_MANAGER_URL = 'https://super-assert-url.org';
+        sinon.stub(config.assetsManager, 'url').value('https://super-assert-url.org');
 
         // when
         const meshLevel = new CertificateMeshLevel({

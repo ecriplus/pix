@@ -3,6 +3,7 @@
  */
 import Joi from 'joi';
 
+import { config } from '../../../../../shared/config.js';
 import { EntityValidationError } from '../../../../../shared/domain/errors.js';
 import { PIX_PLUS_EDU_EXTERNAL_LEVELS } from '../../../../shared/domain/constants/mesh-configuration.js';
 import { Frameworks, hasCoreScope, isEduFramework } from '../../../../shared/domain/models/Frameworks.js';
@@ -68,7 +69,7 @@ export class CertificateMeshLevel {
     const framework = this.certificationFramework.toLowerCase();
     const level = this.meshLevel.replace('LEVEL_', '').toLowerCase();
 
-    return `${process.env.PIX_ASSETS_MANAGER_URL}/badges-certifies/v3/${framework}/${level}.svg`;
+    return `${config.assetsManager.url}/badges-certifies/v3/${framework}/${level}.svg`;
   }
 
   #getLevelKey({ reachedMeshIndex, certificationFramework, eduV3ExternalJuryResult }) {

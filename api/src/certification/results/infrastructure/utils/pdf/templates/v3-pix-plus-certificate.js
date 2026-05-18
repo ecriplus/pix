@@ -6,6 +6,8 @@ import * as url from 'node:url';
 
 import dayjs from 'dayjs';
 
+import { config } from '../../../../../../shared/config.js';
+
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 /**
@@ -153,7 +155,7 @@ export default async function generateV3PixPlusCertificateTemplate({ pdf, data, 
     } else {
       const framework = data.certificationFramework.toLowerCase();
       const level = data.globalLevel.meshLevel.replace('LEVEL_', '').toLowerCase();
-      const badgeUrl = `${process.env.PIX_ASSETS_MANAGER_URL}/badges-certifies/v3/${framework}/${level}.png`;
+      const badgeUrl = `${config.assetsManager.url}/badges-certifies/v3/${framework}/${level}.png`;
       const badgeBuffer = await _fetchImage(badgeUrl, imageCache);
       if (badgeBuffer) {
         pdf.image(badgeBuffer, 594, 80, {
