@@ -1,11 +1,9 @@
-import { usecases } from "../../../../../../src/certification/configuration/domain/usecases/index.js";
-import { SCOPES } from "../../../../../../src/certification/shared/domain/models/Scopes.js";
-import { expect } from "../../../../../test-helper.js";
-import { databaseBuilder, knex } from "../../../../../tooling/databases.js";
-import { catchErr } from "../../../../../tooling/test-utils/error.js";
-import {
-  CertificationVersionForbiddenDeletionError
-} from "../../../../../../src/certification/configuration/domain/errors.js";
+import { CertificationVersionForbiddenDeletionError } from '../../../../../../src/certification/configuration/domain/errors.js';
+import { usecases } from '../../../../../../src/certification/configuration/domain/usecases/index.js';
+import { SCOPES } from '../../../../../../src/certification/shared/domain/models/Scopes.js';
+import { expect } from '../../../../../test-helper.js';
+import { databaseBuilder, knex } from '../../../../../tooling/databases.js';
+import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Configuration | Integration | Domain | UseCase | delete-certification-version', function () {
   it('should throw CertificationVersionForbiddenDeletionError certification-version is not draft', async function () {

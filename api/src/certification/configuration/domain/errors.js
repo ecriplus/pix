@@ -1,4 +1,4 @@
-import { DomainError } from "../../../shared/domain/errors.js";
+import { DomainError } from '../../../shared/domain/errors.js';
 
 export class InvalidScoWhitelistError extends DomainError {
   constructor(meta) {

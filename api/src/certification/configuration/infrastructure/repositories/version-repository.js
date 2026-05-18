@@ -3,13 +3,11 @@
  * @typedef {import("../../../shared/domain/models/Scopes.js").SCOPES} SCOPES
  * @typedef {import("../../../../shared/domain/models/Challenge.js").Challenge} Challenge
  */
-import { DomainTransaction } from "../../../../shared/domain/DomainTransaction.js";
-import { NotFoundError } from "../../../../shared/domain/errors.js";
-import {
-  FlashAssessmentAlgorithmConfiguration
-} from "../../../shared/domain/models/FlashAssessmentAlgorithmConfiguration.js";
-import { Version } from "../../domain/models/Version.js";
-import { FrameworkHistoryEntry } from "../../domain/read-models/FrameworkHistoryEntry.js";
+import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { NotFoundError } from '../../../../shared/domain/errors.js';
+import { FlashAssessmentAlgorithmConfiguration } from '../../../shared/domain/models/FlashAssessmentAlgorithmConfiguration.js';
+import { Version } from '../../domain/models/Version.js';
+import { FrameworkHistoryEntry } from '../../domain/read-models/FrameworkHistoryEntry.js';
 
 /**
  * @returns {Promise<Version[]>}

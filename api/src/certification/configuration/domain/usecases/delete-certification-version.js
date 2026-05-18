@@ -2,7 +2,7 @@
  * @typedef {import ('./index.js').VersionRepository} VersionRepository
  */
 
-import { CertificationVersionForbiddenDeletionError } from "../errors.js";
+import { CertificationVersionForbiddenDeletionError } from '../errors.js';
 
 /**
  * @param {object} params
