@@ -36,10 +36,10 @@ export default class FrameworkHistory extends Component {
   }
 
   @action
-  editVersion() {}
-
-  @action
-  deleteVersion() {}
+  async deleteVersion(id) {
+    const selectedVersion = await this.store.findRecord('certification-version', id);
+    selectedVersion.destroyRecord()
+  }
 
   <template>
     <section class="framework-versions">
