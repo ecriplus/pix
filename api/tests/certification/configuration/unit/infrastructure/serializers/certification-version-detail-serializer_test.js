@@ -1,5 +1,6 @@
+import { expect } from 'chai';
+
 import * as serializer from '../../../../../../src/certification/configuration/infrastructure/serializers/certification-version-detail-serializer.js';
-import { expect } from '../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
 describe('Certification | Configuration | Unit | Serializer | certification-version-detail-serializer', function () {
@@ -13,6 +14,7 @@ describe('Certification | Configuration | Unit | Serializer | certification-vers
         assessmentDuration: 105,
         minimumAnswersRequiredToValidateACertification: 20,
         challengesConfiguration: { maximumAssessmentLength: 32 },
+        comments: 'some good comments',
       });
 
       const area = domainBuilder.buildArea({
@@ -32,6 +34,7 @@ describe('Certification | Configuration | Unit | Serializer | certification-vers
           'assessment-duration': 105,
           'minimum-answers-required-for-validation': 20,
           'maximum-assessment-length': 32,
+          comments: 'some good comments',
         },
       });
       expect(result.data.relationships.areas.data).to.deep.equal([{ id: area.id, type: 'areas' }]);

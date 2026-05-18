@@ -10,6 +10,7 @@ export const serialize = ({ version, areas }) => {
     assessmentDuration: version.assessmentDuration,
     minimumAnswersRequiredForValidation: version.minimumAnswersRequiredToValidateACertification,
     maximumAssessmentLength: version.challengesConfiguration?.maximumAssessmentLength,
+    comments: version.comments,
     areas,
   };
 
@@ -20,6 +21,7 @@ export const serialize = ({ version, areas }) => {
       'assessmentDuration',
       'minimumAnswersRequiredForValidation',
       'maximumAssessmentLength',
+      'comments',
       'areas',
     ],
     areas: {

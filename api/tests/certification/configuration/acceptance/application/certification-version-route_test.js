@@ -1,6 +1,7 @@
+import { expect } from 'chai';
+
 import { createServer } from '../../../../../server.js';
 import { SCOPES } from '../../../../../src/certification/shared/domain/models/Scopes.js';
-import { expect } from '../../../../test-helper.js';
 import { databaseBuilder, knex } from '../../../../tooling/databases.js';
 import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
@@ -23,6 +24,7 @@ describe('Acceptance | Certification | Configuration | API | certification-versi
         expirationDate: new Date('2026-01-01'),
         assessmentDuration: 100,
         minimumAnswersRequiredToValidateACertification: 20,
+        comments: 'Some awesome comments',
         challengesConfiguration: {
           maximumAssessmentLength: 32,
           challengesBetweenSameCompetence: 2,
@@ -58,6 +60,7 @@ describe('Acceptance | Certification | Configuration | API | certification-versi
           'assessment-duration': 100,
           'minimum-answers-required-for-validation': 20,
           'maximum-assessment-length': 32,
+          comments: 'Some awesome comments',
         },
         relationships: {
           areas: { data: [] },
