@@ -1614,11 +1614,16 @@
     "preselect-target-profile": {
       "download": "Scaricare la selezione di argomenti ({ numberOfTubesSelected }) (JSON, { fileSize }ko)",
       "download-filename": "selection-subjects-{ organizationName }-{ date }.json",
+      "levels": {
+        "label": "Selezionare il livello del soggetto successivo: {title}",
+        "placeholder": "Selezionare un livello"
+      },
       "no-tube-selected": "Scaricare la selezione di argomenti (JSON, { fileSize }ko)",
       "table": {
         "caption": "Selezione dei soggetti",
         "column": {
           "compatibility": "Compatibilità",
+          "level": "Livello",
           "name": "Soggetto",
           "theme-name": "Tema"
         },

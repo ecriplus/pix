@@ -1605,11 +1605,16 @@
     "preselect-target-profile": {
       "download": "Downloaden selectie onderwerpen ({ numberOfTubesSelected }) (JSON, { fileSize }kB)",
       "download-filename": "selectie-onderwerpen-{ organizationName }-{ date }.json",
+      "levels": {
+        "label": "Selecteer het niveau van het volgende onderwerp: {title}",
+        "placeholder": "Selecteer een niveau"
+      },
       "no-tube-selected": "Downloaden selectie onderwerpen (JSON, { fileSize }kB)",
       "table": {
         "caption": "Selectie van onderwerpen",
         "column": {
           "compatibility": "Compatibiliteit",
+          "level": "Niveau",
           "name": "Onderwerp",
           "theme-name": "Thema"
         },

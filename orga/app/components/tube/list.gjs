@@ -15,7 +15,7 @@ import Thematic from './thematic';
 import Tube from './tube';
 
 export default class TubeList extends Component {
-  @tracked selectedTubeIds = [];
+  @tracked selectedTubeLevels = {};
   @service pixMetrics;
 
   @action
@@ -34,17 +34,17 @@ export default class TubeList extends Component {
 
   @action
   selectTube(tube) {
-    if (this.isTubeSelected(tube)) return;
-    this.selectedTubeIds = [...this.selectedTubeIds, tube.id];
+    this.selectedTubeLevels = { ...this.selectedTubeLevels, [tube.id]: null };
   }
 
   @action
   unselectTube(tube) {
-    const index = this.selectedTubeIds.indexOf(tube.id);
-    if (index === -1) return;
-    this.selectedTubeIds.splice(index, 1);
+    delete this.selectedTubeLevels[tube.id];
+  }
 
-    this.selectedTubeIds = [...this.selectedTubeIds];
+  @action
+  setTubeLevel(tubeId, level) {
+    this.selectedTubeLevels = { ...this.selectedTubeLevels, [tubeId]: parseInt(level) };
   }
 
   getThematicState = (thematic) => {
@@ -61,14 +61,15 @@ export default class TubeList extends Component {
   };
 
   isTubeSelected = (tube) => {
-    return this.selectedTubeIds.includes(tube.id);
+    return Object.prototype.hasOwnProperty.call(this.selectedTubeLevels, tube.id);
   };
+
   get haveNoTubeSelected() {
-    return this.selectedTubeIds.length === 0;
+    return Object.keys(this.selectedTubeLevels).length === 0;
   }
 
   get numberOfTubesSelected() {
-    return this.selectedTubeIds.length;
+    return Object.keys(this.selectedTubeLevels).length;
   }
 
   get file() {
@@ -81,6 +82,7 @@ export default class TubeList extends Component {
               .map((tube) => ({
                 id: tube.id,
                 frameworkId: framework.id,
+                level: this.selectedTubeLevels[tube.id],
               }));
           });
         });
@@ -153,7 +155,10 @@ export default class TubeList extends Component {
                           <Header @size="wide" scope="col">
                             {{t "pages.preselect-target-profile.table.column.name"}}
                           </Header>
-                          <Header @size="small" @align="center" scope="col" >
+                          <Header @size="medium" scope="col">
+                            {{t "pages.preselect-target-profile.table.column.level"}}
+                          </Header>
+                          <Header @size="small" @align="center" scope="col">
                             {{t "pages.preselect-target-profile.table.column.compatibility"}}
                           </Header>
                         </tr>
@@ -173,9 +178,11 @@ export default class TubeList extends Component {
                               {{/if}}
                               <Tube
                                 @tube={{tube}}
+                                @selectedTubeLevels={{this.selectedTubeLevels}}
                                 @isTubeSelected={{this.isTubeSelected}}
                                 @selectTube={{this.selectTube}}
                                 @unselectTube={{this.unselectTube}}
+                                @setTubeLevel={{this.setTubeLevel}}
                               />
                             </tr>
                           {{/each}}
