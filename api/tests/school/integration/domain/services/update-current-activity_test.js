@@ -1,6 +1,6 @@
 import { Activity } from '../../../../../src/school/domain/models/Activity.js';
+import { ActivityAnswer } from '../../../../../src/school/domain/models/ActivityAnswer.js';
 import { updateCurrentActivity } from '../../../../../src/school/domain/services/update-current-activity.js';
-import * as activityAnswerRepository from '../../../../../src/school/infrastructure/repositories/activity-answer-repository.js';
 import * as activityRepository from '../../../../../src/school/infrastructure/repositories/activity-repository.js';
 import * as missionAssessmentRepository from '../../../../../src/school/infrastructure/repositories/mission-assessment-repository.js';
 import * as missionRepository from '../../../../../src/school/infrastructure/repositories/mission-repository.js';
@@ -19,14 +19,15 @@ describe('Integration | UseCase | update current activity', function () {
       ].forEach(({ message, result }) =>
         it(`should not update current activity status when challenge is ${message}`, async function () {
           const { assessmentId, missionId } = databaseBuilder.factory.buildMissionAssessment();
-          const { id: activityId } = databaseBuilder.factory.buildActivity({
+          const activity = databaseBuilder.factory.buildActivity({
             assessmentId,
             level: Activity.levels.TUTORIAL,
             status: Activity.status.STARTED,
             stepIndex: 0,
           });
-          databaseBuilder.factory.buildActivityAnswer({
-            activityId,
+          const lastActivity = new Activity(activity);
+          const lastAnswer = new ActivityAnswer({
+            activityId: lastActivity.id,
             challengeId: 'di_challenge_id',
             result,
           });
@@ -49,8 +50,9 @@ describe('Integration | UseCase | update current activity', function () {
 
           const currentActivity = await updateCurrentActivity({
             assessmentId,
+            lastActivity,
+            lastAnswer,
             activityRepository,
-            activityAnswerRepository,
             missionAssessmentRepository,
             missionRepository,
           });
@@ -73,23 +75,17 @@ describe('Integration | UseCase | update current activity', function () {
       ].forEach(({ message, result }) =>
         it(`should update current activity with SUCCEEDED status when challenge is ${message}`, async function () {
           const { assessmentId, missionId } = databaseBuilder.factory.buildMissionAssessment();
-          const { id: activityId } = databaseBuilder.factory.buildActivity({
+          const activity = databaseBuilder.factory.buildActivity({
             assessmentId,
             level: Activity.levels.TUTORIAL,
             status: Activity.status.STARTED,
             stepIndex: 0,
           });
-          databaseBuilder.factory.buildActivityAnswer({
-            activityId,
-            challengeId: 'di_challenge_id',
-            result,
-            createdAt: new Date('2020-01-01T10:00:00Z'),
-          });
-          databaseBuilder.factory.buildActivityAnswer({
-            activityId,
+          const lastActivity = new Activity(activity);
+          const lastAnswer = new ActivityAnswer({
+            activityId: lastActivity.id,
             challengeId: 'di_next_challenge_id',
             result,
-            createdAt: new Date('2020-01-01T10:01:00Z'),
           });
 
           databaseBuilder.factory.learningContent.build({
@@ -110,8 +106,9 @@ describe('Integration | UseCase | update current activity', function () {
 
           const currentActivity = await updateCurrentActivity({
             assessmentId,
+            lastActivity,
+            lastAnswer,
             activityRepository,
-            activityAnswerRepository,
             missionAssessmentRepository,
             missionRepository,
           });
@@ -129,14 +126,14 @@ describe('Integration | UseCase | update current activity', function () {
     context('when last answer is ko', function () {
       it('should update current activity with FAILED status', async function () {
         const { assessmentId, missionId } = databaseBuilder.factory.buildMissionAssessment();
-        const { id: activityId } = databaseBuilder.factory.buildActivity({
+        const lastActivity = databaseBuilder.factory.buildActivity({
           assessmentId,
           status: Activity.status.STARTED,
           level: Activity.levels.VALIDATION,
           stepIndex: 0,
         });
-        databaseBuilder.factory.buildActivityAnswer({
-          activityId,
+        const lastAnswer = new ActivityAnswer({
+          activityId: lastActivity.id,
           challengeId: 'va_challenge_id',
           result: AnswerStatus.statuses.KO,
         });
@@ -160,8 +157,9 @@ describe('Integration | UseCase | update current activity', function () {
 
         const currentActivity = await updateCurrentActivity({
           assessmentId,
+          lastActivity,
+          lastAnswer,
           activityRepository,
-          activityAnswerRepository,
           missionAssessmentRepository,
           missionRepository,
         });
@@ -177,14 +175,14 @@ describe('Integration | UseCase | update current activity', function () {
       context('when activity is not finished', function () {
         it('should not update current activity status', async function () {
           const { assessmentId, missionId } = databaseBuilder.factory.buildMissionAssessment();
-          const { id: activityId } = databaseBuilder.factory.buildActivity({
+          const lastActivity = databaseBuilder.factory.buildActivity({
             assessmentId,
             level: Activity.levels.VALIDATION,
             status: Activity.status.STARTED,
             stepIndex: 0,
           });
-          databaseBuilder.factory.buildActivityAnswer({
-            activityId,
+          const lastAnswer = new ActivityAnswer({
+            activityId: lastActivity.id,
             challengeId: 'va_challenge_id',
             result: AnswerStatus.statuses.OK,
           });
@@ -207,60 +205,9 @@ describe('Integration | UseCase | update current activity', function () {
 
           const currentActivity = await updateCurrentActivity({
             assessmentId,
+            lastActivity,
+            lastAnswer,
             activityRepository,
-            activityAnswerRepository,
-            missionAssessmentRepository,
-            missionRepository,
-          });
-
-          const activities = await knex('activities').where({ assessmentId });
-          expect(activities).to.have.lengthOf(1);
-          expect(activities[0].status).to.equal(Activity.status.STARTED);
-          expect(currentActivity.status).equals(Activity.status.STARTED);
-        });
-      });
-
-      context('when activity is not finished but has answer duplicate', function () {
-        it('should not update current activity status', async function () {
-          const { assessmentId, missionId } = databaseBuilder.factory.buildMissionAssessment();
-          const { id: activityId } = databaseBuilder.factory.buildActivity({
-            assessmentId,
-            level: Activity.levels.VALIDATION,
-            status: Activity.status.STARTED,
-            stepIndex: 0,
-          });
-          databaseBuilder.factory.buildActivityAnswer({
-            activityId,
-            challengeId: 'va_challenge_id',
-            result: AnswerStatus.statuses.OK,
-          });
-          // Anwser duplicate
-          databaseBuilder.factory.buildActivityAnswer({
-            activityId,
-            challengeId: 'va_challenge_id',
-            result: AnswerStatus.statuses.OK,
-          });
-
-          databaseBuilder.factory.learningContent.build({
-            missions: [
-              learningContentBuilder.buildMission({
-                id: missionId,
-                content: {
-                  steps: [
-                    {
-                      validationChallenges: [['va_challenge_id'], ['va_next_challenge_id']],
-                    },
-                  ],
-                },
-              }),
-            ],
-          });
-          await databaseBuilder.commit();
-
-          const currentActivity = await updateCurrentActivity({
-            assessmentId,
-            activityRepository,
-            activityAnswerRepository,
             missionAssessmentRepository,
             missionRepository,
           });
@@ -275,23 +222,16 @@ describe('Integration | UseCase | update current activity', function () {
       context('when activity is finished', function () {
         it('should update current activity with SUCCEEDED status', async function () {
           const { assessmentId, missionId } = databaseBuilder.factory.buildMissionAssessment();
-          const { id: activityId } = databaseBuilder.factory.buildActivity({
+          const lastActivity = databaseBuilder.factory.buildActivity({
             assessmentId,
             level: Activity.levels.VALIDATION,
             status: Activity.status.STARTED,
             stepIndex: 0,
           });
-          databaseBuilder.factory.buildActivityAnswer({
-            activityId,
-            challengeId: 'va_challenge_id',
-            result: AnswerStatus.statuses.OK,
-            createdAt: new Date('2020-01-01T10:00:00Z'),
-          });
-          databaseBuilder.factory.buildActivityAnswer({
-            activityId,
+          const lastAnswer = new ActivityAnswer({
+            activityId: lastActivity.id,
             challengeId: 'va_next_challenge_id',
             result: AnswerStatus.statuses.OK,
-            createdAt: new Date('2020-01-01T10:01:00Z'),
           });
 
           databaseBuilder.factory.learningContent.build({
@@ -312,8 +252,9 @@ describe('Integration | UseCase | update current activity', function () {
 
           const currentActivity = await updateCurrentActivity({
             assessmentId,
+            lastActivity,
+            lastAnswer,
             activityRepository,
-            activityAnswerRepository,
             missionAssessmentRepository,
             missionRepository,
           });
@@ -329,14 +270,14 @@ describe('Integration | UseCase | update current activity', function () {
     context('when challenge has been skipped', function () {
       it('should update current activity with SKIPPED status', async function () {
         const { assessmentId, missionId } = databaseBuilder.factory.buildMissionAssessment();
-        const { id: activityId } = databaseBuilder.factory.buildActivity({
+        const lastActivity = databaseBuilder.factory.buildActivity({
           assessmentId,
           level: Activity.levels.VALIDATION,
           status: Activity.status.STARTED,
           stepIndex: 0,
         });
-        databaseBuilder.factory.buildActivityAnswer({
-          activityId,
+        const lastAnswer = new ActivityAnswer({
+          activityId: lastActivity.id,
           challengeId: 'va_challenge_id',
           result: AnswerStatus.statuses.SKIPPED,
         });
@@ -359,8 +300,9 @@ describe('Integration | UseCase | update current activity', function () {
 
         const currentActivity = await updateCurrentActivity({
           assessmentId,
+          lastActivity,
+          lastAnswer,
           activityRepository,
-          activityAnswerRepository,
           missionAssessmentRepository,
           missionRepository,
         });

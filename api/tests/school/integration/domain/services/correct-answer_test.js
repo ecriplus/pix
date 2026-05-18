@@ -57,10 +57,10 @@ describe('Integration | UseCases | correct-answer', function () {
           const record = await correctAnswer({
             activityAnswer,
             assessmentId: assessment.id,
+            activityId: activity.id,
             challengeRepository,
             assessmentRepository,
             activityAnswerRepository,
-            activityRepository,
             examiner: alwaysTrueExaminer,
           });
 
@@ -90,10 +90,10 @@ describe('Integration | UseCases | correct-answer', function () {
           const record = await correctAnswer({
             activityAnswer,
             assessmentId: assessment.id,
+            activityId: activity.id,
             challengeRepository,
             assessmentRepository,
             activityAnswerRepository,
-            activityRepository,
             examiner: alwaysFalseExaminer,
           });
 
