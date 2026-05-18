@@ -111,7 +111,6 @@
       "visible-password": "mostra la password"
     },
     "french-education-ministry": "Ministero dell'Istruzione e della Gioventù. Libertà, uguaglianza, fraternità",
-    "french-republic": "Repubblica francese. Libertà, uguaglianza, fraternità.",
     "languages": {
       "en": "Inglese",
       "fr": "Francese",
@@ -155,7 +154,9 @@
           "min-length": "almeno 8 caratteri"
         }
       }
-    }
+    },
+    "no": "No",
+    "yes": "Sì"
   },
   "components": {
     "attestations": {
@@ -685,13 +686,23 @@
         "CORE": "Certificazione Pix",
         "EDU_1ER_DEGRE": "Certificato Pix+ Edu 1° livello",
         "EDU_2ND_DEGRE": "Certificato Pix+ Edu 2° livello",
-        "EDU_CPE": "Certificato Pix+ Edu CPE"
+        "EDU_CPE": "Certificato Pix+ Edu CPE",
+        "DROIT": "Certificato Pix+ Diritto",
+        "PRO_SANTE": "Certificato Pix+ Professionisti della Salute"
       },
       "frameworks": {
         "EDU": {
           "results-infos": "'<p>'La certificazione si svolge in due fasi:'</p><ol><li>'Prova Pix: appena completata.'</li><li>'Prova orale: organizzata al di fuori di Pix davanti a una giuria.'</li></ol><p>'Al termine dell'orale, verrà assegnato il livello di certificazione definitivo (Esperto, Avanzato, ecc.).'<br/>'Contatta il tuo centro di certificazione per organizzare la prova orale.'</p>'",
           "status": "Certificato valido",
-          "sub-title": "Il candidato è ammesso alla 2ª fase!"
+          "results-sub-title": "Il/la candidato/a è ammissibile al modulo 2 della pratica professionale della certificazione Pix+ Édu!",
+          "steps": {
+            "1": "Volet Pix",
+            "2": "Volet pratica'<br/>'professionale",
+            "3": "Risultato finale"
+          },
+          "sub-title": {
+            "admissible": "Il candidato è ammesso alla 2ª fase!"
+          }
         }
       },
       "global": {
@@ -732,7 +743,9 @@
         "share": "Condividi il tuo certificato",
         "title": "Codice di verifica",
         "tooltip": "Fornite questo codice per consentire a terzi di verificare l'autenticità del tuo certificato."
-      }
+      },
+      "obtained-certification": "Il candidato ha raggiunto il livello {globalLevelLabel} della certificazione {frameworkLabel}.",
+      "valid-status": "Certificato valido"
     },
     "certification-ender": {
       "candidate": {
@@ -948,7 +961,15 @@
       "first-title": "Stai per iniziare il test di certificazione",
       "link-to-user-certification": "Vedi le mie certificazioni",
       "non-eligible-subscription": "Non si ha diritto a {complementarySubscriptionLabel}. È tuttavia possibile ottenere la certificazione Pix.",
-      "title": "Partecipa a una sessione di certificazione"
+      "title": "Partecipa a una sessione di certificazione",
+      "language-selector": {
+        "confirmation-label": "Confermo di essere a mio agio nella lingua selezionata per rispondere alle domande.'<br>'La scelta della lingua è '<strong>'definitiva'</strong>'.",
+        "label": "Lingua di certificazione",
+        "options": {
+          "english": "inglese - EN",
+          "french": "francese - FR"
+        }
+      }
     },
     "certifications-list": {
       "buttons": {
@@ -1268,6 +1289,13 @@
           "select-passages": "Selezione di corsi di formazione adeguati."
         },
         "title": "Calcolo del seguito del percorso in corso."
+      },
+      "errors": {
+        "disabled": {
+          "content": "A causa di un elevato afflusso, l'accesso a questo percorso è temporaneamente sospeso.",
+          "instructions": "Si prega di riprovare più tardi.",
+          "title": "Questo percorso non è disponibile al momento"
+        }
       }
     },
     "comparison-window": {
@@ -1686,7 +1714,6 @@
             "context": "Contesto",
             "did-you-know": "Lo sapevi?",
             "further-information": "Per saperne di più",
-            "key-points": "Punti chiave",
             "tip": "Consiglio"
           }
         }
@@ -1708,7 +1735,8 @@
       },
       "grain": {
         "tag": {
-          "activity": "Attività"
+          "activity": "Attività",
+          "key-points": "Punti chiave"
         },
         "title": {
           "lesson": "Lezione",
@@ -1777,7 +1805,20 @@
       "preview": {
         "showJson": "Visualizza JSON",
         "stepper": "Anteprima: stepper {direction}",
-        "textarea-label": "Contenuto del modulo"
+        "textarea-label": "Contenuto del modulo",
+        "elements-id-button": {
+          "label": "Mostra l'ID degli elementi"
+        },
+        "elements-metadata-panel-label": "Mostra o nascondi i metadati",
+        "grain-select": {
+          "button": "Testa il grain",
+          "grain-label": "Grain {index} : {title}",
+          "label": "Scegli il grain da testare"
+        },
+        "grains-title-button": {
+          "label": "Mostra il titolo dei grain"
+        },
+        "modulix-editor": "Modulix Editor"
       },
       "qab": {
         "correct-answer": "Risposta corretta!",
@@ -2147,7 +2188,12 @@
         },
         "see-trainings": "Vedere i corsi",
         "shared-message": "I risultati sono stati inviati da {date} a {time}.",
-        "thanks": "Grazie {name} per la tua partecipazione!"
+        "thanks": "Grazie {name} per la tua partecipazione!",
+        "hidden-badges": "{ count, plural, =1 {badge aggiuntivo acquisito non visualizzato} other {badge aggiuntivi acquisiti non visualizzati} }",
+        "staged-message": {
+          "show-less": "Comprimi",
+          "show-more": "Mostra di più"
+        }
       },
       "improve": {
         "description": "È possibile riprovare alcune delle domande",
@@ -2186,7 +2232,10 @@
         "caption": "I dettagli dei tuoi risultati sotto forma di percentuali e stelle in base alle competenze",
         "masteryPercentage": "{rate, number, ::percent} di successo",
         "starsAcquired": "{acquired, plural, =0 {nessuna stella acquisita} =1 {# stelle acquisite} other {# stelle acquisite}} su {total}.",
-        "title": "Dettagli sulle competenze"
+        "title": "Dettagli sulle competenze",
+        "recommendedEngine": {
+          "starsAcquired": "{acquired}/{total, plural, =0 {stella} =1 {# stella} other {# stelle}}"
+        }
       },
       "tabs": {
         "aria-label": "3 schede con i dettagli dei risultati",
@@ -2293,56 +2342,12 @@
       "validation": "La password è stata aggiornata."
     },
     "user-account": {
-      "account-update-email": {
-        "email-information": "Questo indirizzo e-mail deve essere valido nel caso in cui si dimentichi la password. Questo sarà il tuo nuovo indirizzo di accesso.",
-        "fields": {
-          "errors": {
-            "empty-password": "La password non può essere vuota.",
-            "invalid-password": "La password inserita non è valida.",
-            "mismatching-email": "I due indirizzi e-mail non sono identici. Si prega di controlla la propria iscrizione.",
-            "new-email-already-exist": "Questo indirizzo e-mail è già in uso.",
-            "unknown-error": "Si è verificato un errore. Riprovare o contattare l'assistenza.",
-            "wrong-email-format": "L'indirizzo e-mail non è valido."
-          },
-          "new-email": {
-            "label": "Nuovo indirizzo e-mail"
-          },
-          "new-email-confirmation": {
-            "label": "Conferma dell'indirizzo e-mail"
-          },
-          "password": {
-            "label": "Password"
-          }
-        },
-        "password-information": "Inserisci la password per confermare",
-        "save-button": "Conferma",
-        "title": "Modifica dell'indirizzo e-mail"
-      },
-      "account-update-email-with-validation": {
-        "fields": {
-          "errors": {
-            "empty-password": "La password non può essere vuota.",
-            "invalid-email": "L'indirizzo e-mail non è valido.",
-            "invalid-or-already-used-email": "Indirizzo e-mail non valido o già utilizzato",
-            "invalid-password": "La password inserita non è valida.",
-            "new-email-already-exist": "Questo indirizzo e-mail è già in uso."
-          },
-          "new-email": {
-            "label": "Nuovo indirizzo e-mail"
-          },
-          "password": {
-            "label": "Password",
-            "security-information": "La sicurezza dei tuoi dati personali è fondamentale. Per questo motivo verifichiamo che siate l'autore della richiesta. Inserisci la tua password per ricevere un codice di verifica."
-          }
-        },
-        "save-button": "Ricevi un codice di verifica",
-        "title": "Modifica dell'indirizzo e-mail"
-      },
       "connexion-methods": {
         "authentication-methods": {
           "gar": "via ENT/Mediacentre",
           "label": "Connessione esterna",
-          "via": "via {identityProviderOrganizationName}"
+          "connection-via": "Connessione via {identityProviderOrganizationName}",
+          "other-authentication-label": "Altro metodo di connessione"
         },
         "edit-button": "Modificare",
         "email": "Indirizzo e-mail",
@@ -2379,12 +2384,15 @@
           "email-modification-demand-expired": "Questo codice è scaduto. Si prega di rinnovare la richiesta.",
           "incorrect-code": "Il codice inserito non è corretto.",
           "new-email-already-exist": "Questo indirizzo e-mail è già in uso.",
-          "unknown-error": "Si è verificato un errore. Riprovare o contattare l'assistenza."
+          "unknown-error": "Si è verificato un errore. Riprovare o contattare l'assistenza.",
+          "no-code": "Inserisci il codice a {numInputs} cifre ricevuto via e-mail."
         },
         "send-back-the-code": "inviami di nuovo il codice",
         "time-code-validation": "Il codice ricevuto è valido per 10 minuti",
         "title": "Verifica dell'indirizzo e-mail",
-        "update-successful": "Il tuo indirizzo e-mail è stato modificato!"
+        "update-successful": "Il tuo indirizzo e-mail è stato modificato!",
+        "add-successful": "Il tuo indirizzo e-mail è stato aggiunto!",
+        "validate-new-email": "Conferma il mio nuovo indirizzo e-mail"
       },
       "language": {
         "lang": "Lingua",
@@ -2396,21 +2404,71 @@
         "last-name": "Cognome",
         "menu-link-title": "I miei dati personali"
       },
-      "title": "Il mio account"
+      "title": "Il mio account",
+      "account-add-or-update-email-with-validation": {
+        "code-reception-information": "Confermando la richiesta di aggiunta dell'indirizzo e-mail, riceverai un codice via e-mail.",
+        "fields": {
+          "email": {
+            "add-email": {
+              "label": "Indirizzo e-mail"
+            },
+            "update-email": {
+              "label": "Nuovo indirizzo e-mail"
+            }
+          },
+          "errors": {
+            "empty-password": "La password non può essere vuota.",
+            "invalid-email": "L'indirizzo e-mail non è valido.",
+            "invalid-or-already-used-email": "Indirizzo e-mail non valido o già utilizzato",
+            "invalid-password": "La password inserita non è valida.",
+            "new-email-already-exist": "Questo indirizzo e-mail è già in uso.",
+            "unknown-error": "Si è verificato un errore. Riprovare o contattare l'assistenza."
+          },
+          "password": {
+            "label": "Password",
+            "security-information": "La sicurezza dei tuoi dati personali è fondamentale. Per questo motivo verifichiamo che siate l'autore della richiesta. Inserisci la tua password per ricevere un codice di verifica."
+          }
+        },
+        "save-button": "Ricevi un codice di verifica",
+        "title": {
+          "add-email": "Aggiungi un indirizzo e-mail",
+          "update-email": "Modifica dell'indirizzo e-mail"
+        }
+      }
     },
     "user-certifications": {
       "meshes": {
         "EDU_1ER_DEGRE": {
-          "0": "Ammissibile",
-          "BELOW_MINIMUM": "Non ammissibile"
+          "BELOW_MINIMUM": "Non ammissibile",
+          "ADMISSIBLE": "Ammissibile",
+          "ADVANCED": "Avanzato",
+          "EXPERT": "Esperto"
         },
         "EDU_2ND_DEGRE": {
-          "0": "Ammissibile",
-          "BELOW_MINIMUM": "Non ammissibile"
+          "BELOW_MINIMUM": "Non ammissibile",
+          "ADMISSIBLE": "Ammissibile",
+          "ADVANCED": "Avanzato",
+          "EXPERT": "Esperto"
         },
         "EDU_CPE": {
-          "0": "Ammissibile",
-          "BELOW_MINIMUM": "Non ammissibile"
+          "BELOW_MINIMUM": "Non ammissibile",
+          "ADMISSIBLE": "Ammissibile",
+          "ADVANCED": "Avanzato",
+          "EXPERT": "Esperto"
+        },
+        "DROIT": {
+          "ADVANCED": "Avanzato",
+          "BELOW_MINIMUM": "Non ottenuto",
+          "CONFIRMED": "Confermato",
+          "EXPERT": "Esperto",
+          "INDEPENDENT": "Indipendente"
+        },
+        "PRO_SANTE": {
+          "ADVANCED": "Avanzato",
+          "BELOW_MINIMUM": "Non ottenuto",
+          "CONFIRMED": "Confermato",
+          "EXPERT": "Esperto",
+          "INDEPENDENT": "Indipendente"
         }
       }
     },
