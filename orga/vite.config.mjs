@@ -1,10 +1,12 @@
 import { fileURLToPath } from 'node:url';
 
+import { loadTranslations } from '@ember-intl/vite';
 import { classicEmberSupport, ember, extensions } from '@embroider/vite';
 import { babel } from '@rollup/plugin-babel';
 import url from 'postcss-url';
 import sassEmbedded, { NodePackageImporter } from 'sass-embedded';
 import { defineConfig } from 'vite';
+
 export default defineConfig({
   resolve: {
     alias: [
@@ -72,6 +74,7 @@ export default defineConfig({
       babelHelpers: 'runtime',
       extensions,
     }),
+    loadTranslations(),
   ],
   preview: {
     port: 4201,
