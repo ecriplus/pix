@@ -254,7 +254,7 @@
                 "id": "ca051382-9f9d-4824-9b11-541fa559ff1d",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Les logiciels de traitement de texte sont organisés en trois zones principales&nbsp;:</p>"
+                "content": "<p>Les applications de traitement de texte sont organisés en trois zones principales&nbsp;:</p>"
               }
             },
             {
@@ -493,7 +493,7 @@
                 "id": "0b92a9c9-e904-4a03-be3e-52e53f0a3ce5",
                 "type": "text",
                 "tag": "tip",
-                "content": "<p>Sur la plupart des logiciels de traitement de texte, quand vous n’avez pas encore «&nbsp;Enregistrer sous&nbsp;», si vous cliquez sur «&nbsp;Enregistrer&nbsp;» 💾 le logiciel vous proposera automatiquement d’«&nbsp;Enregistrer sous&nbsp;».</p>"
+                "content": "<p>Sur la plupart des applications de traitement de texte, quand vous n’avez pas encore «&nbsp;Enregistrer sous&nbsp;», si vous cliquez sur «&nbsp;Enregistrer&nbsp;» 💾 l'application vous proposera automatiquement d’«&nbsp;Enregistrer sous&nbsp;».</p>"
               }
             },
             {
@@ -502,7 +502,7 @@
                 "id": "a103bb9b-7791-4bba-b581-bb1d2d47e83e",
                 "type": "text",
                 "tag": "further-information",
-                "content": "<p>Sur les outils de traitement de texte en ligne, il n’y a pas forcément de bouton «&nbsp;Enregistrer&nbsp;» car toutes les modifications sont <strong>enregistrées automatiquement</strong>.</p>"
+                "content": "<p>Sur les applications de traitement de texte en ligne, il n’y a pas forcément de bouton «&nbsp;Enregistrer&nbsp;» car toutes les modifications sont <strong>enregistrées automatiquement</strong>.</p>"
               }
             }
           ]
@@ -549,7 +549,7 @@
                 "cards": [
                   {
                     "id": "395d28df-b1b5-4639-8267-bb94d795991c",
-                    "text": "Microsoft Word est un logiciel/application de traitement de texte.",
+                    "text": "Microsoft Word est une application de traitement de texte.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -560,7 +560,7 @@
                   },
                   {
                     "id": "dda4d5ee-33c0-47f3-8447-ede234c89cf4",
-                    "text": "Tous les outils de traitement de texte sont payants.",
+                    "text": "Toutes les applications de traitement de texte sont payants.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -582,7 +582,7 @@
                   },
                   {
                     "id": "5da8fbce-82d2-43a7-8ac4-3f541823ebb1",
-                    "text": "Un outil de traitement de texte en ligne permet de modifier et d’enregistrer un document en ligne.",
+                    "text": "Une application de traitement de texte en ligne permet de modifier et d’enregistrer un document en ligne.",
                     "image": {
                       "url": "",
                       "altText": ""
