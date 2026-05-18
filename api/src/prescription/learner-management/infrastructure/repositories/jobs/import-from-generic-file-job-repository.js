@@ -10,4 +10,4 @@ class ImportFromGenericFileJobRepository extends JobRepository {
   }
 }
 
-export const importCommonOrganizationLearnersJobRepository = new ImportFromGenericFileJobRepository();
+export const importFromGenericFileJobRepository = new ImportFromGenericFileJobRepository();

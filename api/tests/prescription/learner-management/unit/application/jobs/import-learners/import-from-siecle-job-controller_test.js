@@ -34,7 +34,7 @@ describe('Unit | Prescription | Application | Jobs | ImportFromSiecleJobControll
 
   describe('#handle', function () {
     it('should call usecase', async function () {
-      sinon.stub(usecases, 'addOrUpdateOrganizationLearners');
+      sinon.stub(usecases, 'importLearnersFromSiecleFile');
 
       // given
       const handler = new ImportFromSiecleJobController();
@@ -44,13 +44,13 @@ describe('Unit | Prescription | Application | Jobs | ImportFromSiecleJobControll
       await handler.handle({ data });
 
       // then
-      expect(usecases.addOrUpdateOrganizationLearners).to.have.been.calledOnce;
-      expect(usecases.addOrUpdateOrganizationLearners).to.have.been.calledWithExactly(data);
+      expect(usecases.importLearnersFromSiecleFile).to.have.been.calledOnce;
+      expect(usecases.importLearnersFromSiecleFile).to.have.been.calledWithExactly(data);
     });
 
     it('should not throw when error is from domain', async function () {
       const error = new OrganizationLearnersCouldNotBeSavedError();
-      sinon.stub(usecases, 'addOrUpdateOrganizationLearners').rejects(error);
+      sinon.stub(usecases, 'importLearnersFromSiecleFile').rejects(error);
 
       // given
       const errorStub = sinon.stub();
@@ -65,7 +65,7 @@ describe('Unit | Prescription | Application | Jobs | ImportFromSiecleJobControll
 
     it('should throw when error is not from domain', async function () {
       const error = new Error();
-      sinon.stub(usecases, 'addOrUpdateOrganizationLearners').rejects(error);
+      sinon.stub(usecases, 'importLearnersFromSiecleFile').rejects(error);
 
       // given
       const handler = new ImportFromSiecleJobController();

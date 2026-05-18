@@ -10,4 +10,4 @@ class ImportFromFregataJobRepository extends JobRepository {
   }
 }
 
-export const importScoCsvOrganizationLearnersJobRepository = new ImportFromFregataJobRepository();
+export const importFromFregataJobRepository = new ImportFromFregataJobRepository();

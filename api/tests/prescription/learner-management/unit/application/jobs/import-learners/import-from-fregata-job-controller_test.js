@@ -35,7 +35,7 @@ describe('Unit | Prescription | Application | Jobs | ImportFromFregataJobControl
 
   describe('#handle', function () {
     it('should call usecase', async function () {
-      sinon.stub(usecases, 'importOrganizationLearnersFromSIECLECSVFormat');
+      sinon.stub(usecases, 'importLearnersFromFregataFile');
 
       // given
       const handler = new ImportFromFregataJobController();
@@ -45,8 +45,8 @@ describe('Unit | Prescription | Application | Jobs | ImportFromFregataJobControl
       await handler.handle({ data });
 
       // then
-      expect(usecases.importOrganizationLearnersFromSIECLECSVFormat).to.have.been.calledOnce;
-      expect(usecases.importOrganizationLearnersFromSIECLECSVFormat).to.have.been.calledWithExactly({
+      expect(usecases.importLearnersFromFregataFile).to.have.been.calledOnce;
+      expect(usecases.importLearnersFromFregataFile).to.have.been.calledWithExactly({
         organizationImportId: data.organizationImportId,
         i18n: getI18n(data.locale),
       });
@@ -54,7 +54,7 @@ describe('Unit | Prescription | Application | Jobs | ImportFromFregataJobControl
 
     it('should not throw when error is from domain', async function () {
       const error = new OrganizationLearnersCouldNotBeSavedError();
-      sinon.stub(usecases, 'importOrganizationLearnersFromSIECLECSVFormat').rejects(error);
+      sinon.stub(usecases, 'importLearnersFromFregataFile').rejects(error);
 
       // given
       const errorStub = sinon.stub();
@@ -69,7 +69,7 @@ describe('Unit | Prescription | Application | Jobs | ImportFromFregataJobControl
 
     it('should throw when error is not from domain', async function () {
       const error = new Error();
-      sinon.stub(usecases, 'importOrganizationLearnersFromSIECLECSVFormat').rejects(error);
+      sinon.stub(usecases, 'importLearnersFromFregataFile').rejects(error);
 
       // given
       const handler = new ImportFromFregataJobController();

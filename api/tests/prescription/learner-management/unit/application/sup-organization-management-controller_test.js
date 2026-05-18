@@ -26,7 +26,7 @@ describe('Unit | Controller | sup-organization-management-controller', function 
     unlinkStub = sinon.stub();
   });
 
-  context('#importSupOrganizationLearners', function () {
+  context('#importLearnersFromSupFile', function () {
     it('should call uploadCsvFile usecase and return 200', async function () {
       const params = { id: organizationId };
       const request = {

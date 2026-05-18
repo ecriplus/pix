@@ -39,7 +39,7 @@ class ImportFromSupJobController extends JobController {
           client: 'PIX_ORGA',
         });
       }
-      await usecases.importSupOrganizationLearners({
+      await usecases.importLearnersFromSupFile({
         organizationImportId,
         i18n,
       });

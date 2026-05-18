@@ -1,25 +1,25 @@
 import lodash from 'lodash';
 
-import { AggregateImportError, SiecleXmlImportError } from '../errors.js';
+import { AggregateImportError, SiecleXmlImportError } from '../../errors.js';
 
 const { isEmpty } = lodash;
 
-import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { SiecleParser } from '../../infrastructure/serializers/xml/siecle-parser.js';
-import { SiecleFileStreamer } from '../../infrastructure/utils/xml/siecle-file-streamer.js';
-import { ImportFromSiecleJob } from '../models/jobs/ImportFromSiecleJob.js';
+import { DomainTransaction } from '../../../../../shared/domain/DomainTransaction.js';
+import { SiecleParser } from '../../../infrastructure/serializers/xml/siecle-parser.js';
+import { SiecleFileStreamer } from '../../../infrastructure/utils/xml/siecle-file-streamer.js';
+import { ImportFromSiecleJob } from '../../models/jobs/ImportFromSiecleJob.js';
 
 const ERRORS = {
   EMPTY: 'EMPTY',
   INVALID_FILE_EXTENSION: 'INVALID_FILE_EXTENSION',
 };
 
-const validateSiecleXmlFile = async function ({
+const validateSiecleFile = async function ({
   organizationImportId,
   organizationRepository,
   organizationImportRepository,
   importStorage,
-  importOrganizationLearnersJobRepository,
+  importFromSiecleJobRepository,
 }) {
   const organizationImport = await DomainTransaction.execute(async () => {
     const organizationImport = await organizationImportRepository.get(organizationImportId);
@@ -61,9 +61,9 @@ const validateSiecleXmlFile = async function ({
     }
   });
 
-  await importOrganizationLearnersJobRepository.performAsync(
+  await importFromSiecleJobRepository.performAsync(
     new ImportFromSiecleJob({ organizationImportId: organizationImport.id }),
   );
 };
 
-export { validateSiecleXmlFile };
+export { validateSiecleFile };

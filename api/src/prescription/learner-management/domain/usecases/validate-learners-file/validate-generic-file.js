@@ -4,10 +4,10 @@ import { AggregateImportError } from '../../errors.js';
 import { ImportOrganizationLearnerSet } from '../../models/ImportOrganizationLearnerSet.js';
 import { ImportFromGenericFileJob } from '../../models/jobs/ImportFromGenericFileJob.js';
 
-const validateOrganizationLearnersFile = async function ({
+const validateGenericFile = async function ({
   organizationImportId,
   organizationLearnerImportFormatRepository,
-  importCommonOrganizationLearnersJobRepository,
+  importFromGenericFileJobRepository,
   organizationImportRepository,
   importStorage,
   dependencies = { getDataBuffer },
@@ -32,9 +32,7 @@ const validateOrganizationLearnersFile = async function ({
     });
 
     learnerSet.addLearners(learners);
-    await importCommonOrganizationLearnersJobRepository.performAsync(
-      new ImportFromGenericFileJob({ organizationImportId }),
-    );
+    await importFromGenericFileJobRepository.performAsync(new ImportFromGenericFileJob({ organizationImportId }));
   } catch (error) {
     if (Array.isArray(error)) {
       errors.push(...error);
@@ -50,4 +48,4 @@ const validateOrganizationLearnersFile = async function ({
   }
 };
 
-export { validateOrganizationLearnersFile };
+export { validateGenericFile };

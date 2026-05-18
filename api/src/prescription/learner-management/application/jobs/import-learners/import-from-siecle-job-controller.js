@@ -21,7 +21,7 @@ class ImportFromSiecleJobController extends JobController {
     const { organizationImportId } = data;
 
     try {
-      return await usecases.addOrUpdateOrganizationLearners({ organizationImportId });
+      return await usecases.importLearnersFromSiecleFile({ organizationImportId });
     } catch (err) {
       if (!(err instanceof DomainError)) {
         throw err;

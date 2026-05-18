@@ -21,7 +21,7 @@ describe('Unit | UseCase | upload-siecle-file', function () {
   let s3filename;
   let filename;
   let filepath;
-  let validateOrganizationImportFileJobRepositoryStub;
+  let validateSiecleFileJobRepositoryStub;
   let domainTransactionStub;
 
   beforeEach(function () {
@@ -36,11 +36,11 @@ describe('Unit | UseCase | upload-siecle-file', function () {
 
     payload = { path: filename };
 
-    validateOrganizationImportFileJobRepositoryStub = {
+    validateSiecleFileJobRepositoryStub = {
       performAsync: sinon.stub(),
     };
 
-    validateOrganizationImportFileJobRepositoryStub.performAsync
+    validateSiecleFileJobRepositoryStub.performAsync
       .withArgs({ organizationImportId: Symbol('OrganizationImportId') })
       .resolves();
 
@@ -96,7 +96,7 @@ describe('Unit | UseCase | upload-siecle-file', function () {
           organizationImportRepository: organizationImportRepositoryStub,
           siecleService: siecleServiceStub,
           importStorage: importStorageStub,
-          validateOrganizationImportFileJobRepository: validateOrganizationImportFileJobRepositoryStub,
+          validateSiecleFileJobRepository: validateSiecleFileJobRepositoryStub,
         });
 
         expect(rmStub).to.have.been.calledWithExactly('tmp', { recursive: true });
@@ -116,7 +116,7 @@ describe('Unit | UseCase | upload-siecle-file', function () {
           organizationImportRepository: organizationImportRepositoryStub,
           siecleService: siecleServiceStub,
           importStorage: importStorageStub,
-          validateOrganizationImportFileJobRepository: validateOrganizationImportFileJobRepositoryStub,
+          validateSiecleFileJobRepository: validateSiecleFileJobRepositoryStub,
           dependencies: { logger: loggerStub },
         });
 
@@ -142,7 +142,7 @@ describe('Unit | UseCase | upload-siecle-file', function () {
         organizationImportRepository: organizationImportRepositoryStub,
         siecleService: siecleServiceStub,
         importStorage: importStorageStub,
-        validateOrganizationImportFileJobRepository: validateOrganizationImportFileJobRepositoryStub,
+        validateSiecleFileJobRepository: validateSiecleFileJobRepositoryStub,
       });
 
       // then
@@ -171,7 +171,7 @@ describe('Unit | UseCase | upload-siecle-file', function () {
           organizationImportRepository: organizationImportRepositoryStub,
           siecleService: siecleServiceStub,
           importStorage: importStorageStub,
-          validateOrganizationImportFileJobRepository: validateOrganizationImportFileJobRepositoryStub,
+          validateSiecleFileJobRepository: validateSiecleFileJobRepositoryStub,
         });
 
         //then
@@ -181,7 +181,7 @@ describe('Unit | UseCase | upload-siecle-file', function () {
           errors: [error],
         });
         expect(organizationImportRepositoryStub.save).to.have.been.calledWithExactly(organizationImportSavedStub);
-        expect(validateOrganizationImportFileJobRepositoryStub.performAsync).not.called;
+        expect(validateSiecleFileJobRepositoryStub.performAsync).not.called;
       });
 
       it('should save organizationImport if zip is invalid', async function () {
@@ -197,7 +197,7 @@ describe('Unit | UseCase | upload-siecle-file', function () {
           organizationImportRepository: organizationImportRepositoryStub,
           siecleService: siecleServiceStub,
           importStorage: importStorageStub,
-          validateOrganizationImportFileJobRepository: validateOrganizationImportFileJobRepositoryStub,
+          validateSiecleFileJobRepository: validateSiecleFileJobRepositoryStub,
         });
 
         //then
@@ -207,7 +207,7 @@ describe('Unit | UseCase | upload-siecle-file', function () {
           errors: [zipError],
         });
         expect(organizationImportRepositoryStub.save).to.have.been.calledWithExactly(organizationImportSavedStub);
-        expect(validateOrganizationImportFileJobRepositoryStub.performAsync).not.called;
+        expect(validateSiecleFileJobRepositoryStub.performAsync).not.called;
       });
 
       it('should save organizationImport if there is detectEncoding fails', async function () {
@@ -223,7 +223,7 @@ describe('Unit | UseCase | upload-siecle-file', function () {
           organizationImportRepository: organizationImportRepositoryStub,
           siecleService: siecleServiceStub,
           importStorage: importStorageStub,
-          validateOrganizationImportFileJobRepository: validateOrganizationImportFileJobRepositoryStub,
+          validateSiecleFileJobRepository: validateSiecleFileJobRepositoryStub,
         });
 
         //then
@@ -233,7 +233,7 @@ describe('Unit | UseCase | upload-siecle-file', function () {
           errors: [encodingError],
         });
         expect(organizationImportRepositoryStub.save).to.have.been.calledWithExactly(organizationImportSavedStub);
-        expect(validateOrganizationImportFileJobRepositoryStub.performAsync).not.called;
+        expect(validateSiecleFileJobRepositoryStub.performAsync).not.called;
       });
     });
   });

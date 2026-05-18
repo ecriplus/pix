@@ -35,8 +35,8 @@ describe('Unit | Prescription | Application | Jobs | ValidateFregataFileJobContr
   });
 
   describe('#handle', function () {
-    it('should call usecase with FregataParser and FREGATA type', async function () {
-      sinon.stub(usecases, 'validateCsvFile');
+    it('should call usecase with FregataParser', async function () {
+      sinon.stub(usecases, 'validateFregataFile');
       // given
       const handler = new ValidateFregataFileJobController();
       const data = { organizationImportId: Symbol('organizationImportId'), locale: 'en' };
@@ -45,17 +45,16 @@ describe('Unit | Prescription | Application | Jobs | ValidateFregataFileJobContr
       await handler.handle({ data });
 
       // then
-      expect(usecases.validateCsvFile).to.have.been.calledOnceWithExactly({
+      expect(usecases.validateFregataFile).to.have.been.calledOnceWithExactly({
         organizationImportId: data.organizationImportId,
         i18n: getI18n(data.locale),
-        type: 'FREGATA',
         Parser: FregataParser,
       });
     });
 
     it('should not throw when error is from domain', async function () {
       const error = new S3FileDoesNotExistError();
-      sinon.stub(usecases, 'validateCsvFile').rejects(error);
+      sinon.stub(usecases, 'validateFregataFile').rejects(error);
 
       // given
       const warnStub = sinon.stub();
@@ -71,7 +70,7 @@ describe('Unit | Prescription | Application | Jobs | ValidateFregataFileJobContr
 
     it('should throw when error is not from domain', async function () {
       const error = new Error();
-      sinon.stub(usecases, 'validateCsvFile').rejects(error);
+      sinon.stub(usecases, 'validateFregataFile').rejects(error);
 
       // given
       const handler = new ValidateFregataFileJobController();

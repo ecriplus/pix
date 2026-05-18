@@ -1,31 +1,29 @@
 import iconv from 'iconv-lite';
 import sinon from 'sinon';
 
-import { IMPORT_STATUSES } from '../../../../../../src/prescription/learner-management/domain/constants.js';
-import { AggregateImportError } from '../../../../../../src/prescription/learner-management/domain/errors.js';
-import { ImportFromFregataJob } from '../../../../../../src/prescription/learner-management/domain/models/jobs/ImportFromFregataJob.js';
-import { ImportFromSupJob } from '../../../../../../src/prescription/learner-management/domain/models/jobs/ImportFromSupJob.js';
-import { OrganizationImportStatus } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationImportStatus.js';
-import { validateCsvFile } from '../../../../../../src/prescription/learner-management/domain/usecases/validate-csv-file.js';
-import { SupHeader } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/headers/sup-header.js';
-import { SupParser } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/parsers/sup-parser.js';
-import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { expect } from '../../../../../test-helper.js';
-import { catchErr } from '../../../../../tooling/test-utils/error.js';
+import { IMPORT_STATUSES } from '../../../../../../../src/prescription/learner-management/domain/constants.js';
+import { AggregateImportError } from '../../../../../../../src/prescription/learner-management/domain/errors.js';
+import { ImportFromFregataJob } from '../../../../../../../src/prescription/learner-management/domain/models/jobs/ImportFromFregataJob.js';
+import { OrganizationImportStatus } from '../../../../../../../src/prescription/learner-management/domain/models/OrganizationImportStatus.js';
+import { validateFregataFile } from '../../../../../../../src/prescription/learner-management/domain/usecases/validate-learners-file/validate-fregata-file.js';
+import { SupHeader } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/headers/sup-header.js';
+import { SupParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/parsers/sup-parser.js';
+import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
+import { expect } from '../../../../../../test-helper.js';
+import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
 const i18n = getI18n();
 
 const supOrganizationLearnerImportHeader = new SupHeader(i18n).columns.map((column) => column.name).join(';');
 
-describe('Unit | UseCase | validateCsvFile', function () {
+describe('Unit | UseCase | validateFregataFile', function () {
   let organizationImportId, organizationId;
   let csvContent,
     expectedWarnings,
     organizationImport,
     organizationImportRepositoryStub,
     importStorageStub,
-    importSupOrganizationLearnersJobRepositoryStub,
-    importScoCsvOrganizationLearnersJobRepositoryStub;
+    importFromFregataJobRepositoryStub;
 
   beforeEach(function () {
     organizationImportId = Symbol('organizationImportId');
@@ -69,11 +67,7 @@ describe('Unit | UseCase | validateCsvFile', function () {
       deleteFile: sinon.stub(),
     };
 
-    importSupOrganizationLearnersJobRepositoryStub = {
-      performAsync: sinon.stub(),
-    };
-
-    importScoCsvOrganizationLearnersJobRepositoryStub = {
+    importFromFregataJobRepositoryStub = {
       performAsync: sinon.stub(),
     };
   });
@@ -88,10 +82,11 @@ describe('Unit | UseCase | validateCsvFile', function () {
         .resolves(SupParser.buildParser(csvContent, organizationId, i18n));
 
       // when
-      await validateCsvFile({
+      await validateFregataFile({
         Parser: SupParser,
         organizationImportId,
         i18n,
+        importFromFregataJobRepository: importFromFregataJobRepositoryStub,
         organizationImportRepository: organizationImportRepositoryStub,
         importStorage: importStorageStub,
       });
@@ -102,76 +97,38 @@ describe('Unit | UseCase | validateCsvFile', function () {
       expect(organizationImport.errors).to.deep.equal(expectedWarnings);
     });
 
-    describe('performJob', function () {
-      it('should perform sup job when type other than FREGATA is detected', async function () {
-        // given
-        const type = Symbol('type');
-        organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImport);
+    it('should perform fregata job', async function () {
+      // given
+      organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImport);
 
-        importStorageStub.getParser
-          .withArgs({ Parser: SupParser, filename: organizationImport.filename }, organizationId, i18n)
-          .resolves(SupParser.buildParser(csvContent, organizationId, i18n));
+      importStorageStub.getParser
+        .withArgs({ Parser: SupParser, filename: organizationImport.filename }, organizationId, i18n)
+        .resolves(SupParser.buildParser(csvContent, organizationId, i18n));
 
-        // when
-        await validateCsvFile({
-          Parser: SupParser,
-          type,
-          organizationImportId,
-          importSupOrganizationLearnersJobRepository: importSupOrganizationLearnersJobRepositoryStub,
-          i18n,
-          organizationImportRepository: organizationImportRepositoryStub,
-          importStorage: importStorageStub,
-        });
-
-        // then
-        expect(importSupOrganizationLearnersJobRepositoryStub.performAsync).to.have.been.calledOnceWithExactly(
-          new ImportFromSupJob({
-            type,
-            locale: 'fr',
-            organizationImportId,
-          }),
-        );
+      // when
+      await validateFregataFile({
+        Parser: SupParser,
+        organizationImportId,
+        importFromFregataJobRepository: importFromFregataJobRepositoryStub,
+        i18n,
+        organizationImportRepository: organizationImportRepositoryStub,
+        importStorage: importStorageStub,
       });
 
-      it('should perform sco csv job when type is detected', async function () {
-        // given
-        const type = 'FREGATA';
-        organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImport);
-
-        importStorageStub.getParser
-          .withArgs({ Parser: SupParser, filename: organizationImport.filename }, organizationId, i18n)
-          .resolves(SupParser.buildParser(csvContent, organizationId, i18n));
-
-        // when
-        await validateCsvFile({
-          Parser: SupParser,
-          type,
+      // then
+      expect(importFromFregataJobRepositoryStub.performAsync).to.have.been.calledOnceWithExactly(
+        new ImportFromFregataJob({
+          locale: 'fr',
           organizationImportId,
-          importScoCsvOrganizationLearnersJobRepository: importScoCsvOrganizationLearnersJobRepositoryStub,
-          i18n,
-          organizationImportRepository: organizationImportRepositoryStub,
-          importStorage: importStorageStub,
-        });
-
-        // then
-        expect(importScoCsvOrganizationLearnersJobRepositoryStub.performAsync).to.have.been.calledOnceWithExactly(
-          new ImportFromFregataJob({
-            locale: 'fr',
-            organizationImportId,
-          }),
-        );
-      });
+        }),
+      );
     });
   });
 
   context('when there is errors', function () {
-    let importSupOrganizationLearnersJobRepositoryStub, organizationImportStub;
+    let organizationImportStub;
 
     beforeEach(function () {
-      importSupOrganizationLearnersJobRepositoryStub = {
-        performAsync: sinon.stub(),
-      };
-
       organizationImportStub = {
         id: 1,
         filename: Symbol('filename'),
@@ -186,11 +143,11 @@ describe('Unit | UseCase | validateCsvFile', function () {
       it('should save error when there is an error reading file from S3', async function () {
         const s3Error = new Error('s3 error');
         importStorageStub.getParser.rejects(s3Error);
-        const error = await catchErr(validateCsvFile)({
+        const error = await catchErr(validateFregataFile)({
           organizationImportId,
           organizationImportRepository: organizationImportRepositoryStub,
           importStorage: importStorageStub,
-          importSupOrganizationLearnersJobRepository: importSupOrganizationLearnersJobRepositoryStub,
+          importFromFregataJobRepository: importFromFregataJobRepositoryStub,
         });
         expect(error).to.eq(s3Error);
         expect(importStorageStub.deleteFile).to.have.been.calledWithExactly({
@@ -212,11 +169,11 @@ describe('Unit | UseCase | validateCsvFile', function () {
         const s3Error = new Error('s3 error');
         importStorageStub.deleteFile.rejects(s3Error);
 
-        const error = await catchErr(validateCsvFile)({
+        const error = await catchErr(validateFregataFile)({
           organizationImportId,
           organizationImportRepository: organizationImportRepositoryStub,
           importStorage: importStorageStub,
-          importSupOrganizationLearnersJobRepositoryStub: importSupOrganizationLearnersJobRepositoryStub,
+          importFromFregataJobRepository: importFromFregataJobRepositoryStub,
         });
         expect(error).to.eq(s3Error);
         expect(importStorageStub.deleteFile).to.have.been.calledWithExactly({
@@ -241,10 +198,11 @@ describe('Unit | UseCase | validateCsvFile', function () {
         .resolves(SupParser.buildParser(csvContent, organizationId, i18n));
 
       // when
-      await catchErr(validateCsvFile)({
+      await catchErr(validateFregataFile)({
         Parser: SupParser,
         organizationImportId,
         i18n,
+        importFromFregataJobRepository: importFromFregataJobRepositoryStub,
         organizationImportRepository: organizationImportRepositoryStub,
         importStorage: importStorageStub,
       });

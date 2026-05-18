@@ -2,18 +2,18 @@ import { Readable } from 'node:stream';
 
 import sinon from 'sinon';
 
-import { OrganizationImportStatus } from '../../../../../../src/prescription/learner-management/domain/models/OrganizationImportStatus.js';
-import { importSupOrganizationLearners } from '../../../../../../src/prescription/learner-management/domain/usecases/import-sup-organization-learners.js';
-import { SupHeader } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/headers/sup-header.js';
-import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
-import { expect } from '../../../../../test-helper.js';
-import { catchErr } from '../../../../../tooling/test-utils/error.js';
+import { OrganizationImportStatus } from '../../../../../../../src/prescription/learner-management/domain/models/OrganizationImportStatus.js';
+import { importLearnersFromSupFile } from '../../../../../../../src/prescription/learner-management/domain/usecases/import-learners/import-learners-from-sup-file.js';
+import { SupHeader } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/csv/headers/sup-header.js';
+import { getI18n } from '../../../../../../../src/shared/infrastructure/i18n/i18n.js';
+import { expect } from '../../../../../../test-helper.js';
+import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
 const i18n = getI18n();
 
 const supOrganizationLearnerImportHeader = new SupHeader(i18n).columns.map((column) => column.name).join(';');
 
-describe('Unit | UseCase | ImportSupOrganizationLearner', function () {
+describe('Unit | UseCase | importLearnersFromSupFile', function () {
   let organizationImportId, organizationId;
   let organizationImport, organizationImportRepositoryStub, supOrganizationLearnerRepositoryStub, importStorageStub;
 
@@ -49,7 +49,7 @@ describe('Unit | UseCase | ImportSupOrganizationLearner', function () {
       organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImport);
       importStorageStub.readFile.withArgs({ filename: organizationImport.filename }).resolves(toStream(input));
 
-      await importSupOrganizationLearners({
+      await importLearnersFromSupFile({
         organizationImportId,
         i18n,
         supOrganizationLearnerRepository: supOrganizationLearnerRepositoryStub,
@@ -100,7 +100,7 @@ describe('Unit | UseCase | ImportSupOrganizationLearner', function () {
       organizationImportRepositoryStub.get.withArgs(organizationImportId).resolves(organizationImport);
       importStorageStub.readFile.withArgs({ filename: organizationImport.filename }).resolves(toStream(input));
 
-      await importSupOrganizationLearners({
+      await importLearnersFromSupFile({
         organizationImportId,
         i18n,
         importStorage: importStorageStub,
@@ -125,7 +125,7 @@ describe('Unit | UseCase | ImportSupOrganizationLearner', function () {
         importStorageStub.readFile.withArgs({ filename: organizationImport.filename }).resolves(toStream(csvContent));
 
         // when
-        await importSupOrganizationLearners({
+        await importLearnersFromSupFile({
           organizationImportId,
           i18n,
           supOrganizationLearnerRepository: supOrganizationLearnerRepositoryStub,
@@ -154,7 +154,7 @@ describe('Unit | UseCase | ImportSupOrganizationLearner', function () {
         supOrganizationLearnerRepositoryStub.addStudents.rejects(insertError);
 
         // when
-        const error = await catchErr(importSupOrganizationLearners)({
+        const error = await catchErr(importLearnersFromSupFile)({
           organizationImportId,
           i18n,
           supOrganizationLearnerRepository: supOrganizationLearnerRepositoryStub,

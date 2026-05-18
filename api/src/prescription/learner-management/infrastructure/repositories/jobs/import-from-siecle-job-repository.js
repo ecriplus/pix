@@ -10,4 +10,4 @@ class ImportFromSiecleJobRepository extends JobRepository {
   }
 }
 
-export const importOrganizationLearnersJobRepository = new ImportFromSiecleJobRepository();
+export const importFromSiecleJobRepository = new ImportFromSiecleJobRepository();

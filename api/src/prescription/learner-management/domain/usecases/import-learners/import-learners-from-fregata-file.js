@@ -2,11 +2,11 @@ const { chunk } = lodash;
 
 import lodash from 'lodash';
 
-import { withTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
-import { ORGANIZATION_LEARNER_CHUNK_SIZE } from '../../../../shared/infrastructure/constants.js';
-import { FregataParser } from '../../infrastructure/serializers/csv/parsers/fregata-parser.js';
+import { withTransaction } from '../../../../../shared/domain/DomainTransaction.js';
+import { ORGANIZATION_LEARNER_CHUNK_SIZE } from '../../../../../shared/infrastructure/constants.js';
+import { FregataParser } from '../../../infrastructure/serializers/csv/parsers/fregata-parser.js';
 
-const importOrganizationLearnersFromSIECLECSVFormat = withTransaction(async function ({
+const importLearnersFromFregataFile = withTransaction(async function ({
   organizationImportId,
   organizationLearnerRepository,
   organizationImportRepository,
@@ -52,4 +52,4 @@ const importOrganizationLearnersFromSIECLECSVFormat = withTransaction(async func
   }
 });
 
-export { importOrganizationLearnersFromSIECLECSVFormat };
+export { importLearnersFromFregataFile };

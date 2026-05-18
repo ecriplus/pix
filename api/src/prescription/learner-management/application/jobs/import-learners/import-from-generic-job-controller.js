@@ -21,7 +21,7 @@ class ImportFromGenericJobController extends JobController {
     const { organizationImportId } = data;
 
     try {
-      return await usecases.saveOrganizationLearnersFile({ organizationImportId });
+      return await usecases.importLearnersFromGenericFile({ organizationImportId });
     } catch (err) {
       if (!(err instanceof DomainError)) {
         throw err;

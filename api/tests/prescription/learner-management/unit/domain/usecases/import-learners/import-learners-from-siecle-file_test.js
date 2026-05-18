@@ -1,13 +1,13 @@
 import sinon from 'sinon';
 
-import { addOrUpdateOrganizationLearners } from '../../../../../../src/prescription/learner-management/domain/usecases/add-or-update-organization-learners.js';
-import { SiecleParser } from '../../../../../../src/prescription/learner-management/infrastructure/serializers/xml/siecle-parser.js';
-import { SiecleFileStreamer } from '../../../../../../src/prescription/learner-management/infrastructure/utils/xml/siecle-file-streamer.js';
-import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
-import { expect } from '../../../../../test-helper.js';
-import { catchErr } from '../../../../../tooling/test-utils/error.js';
+import { importLearnersFromSiecleFile } from '../../../../../../../src/prescription/learner-management/domain/usecases/import-learners/import-learners-from-siecle-file.js';
+import { SiecleParser } from '../../../../../../../src/prescription/learner-management/infrastructure/serializers/xml/siecle-parser.js';
+import { SiecleFileStreamer } from '../../../../../../../src/prescription/learner-management/infrastructure/utils/xml/siecle-file-streamer.js';
+import { DomainTransaction } from '../../../../../../../src/shared/domain/DomainTransaction.js';
+import { expect } from '../../../../../../test-helper.js';
+import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
-describe('Unit | UseCase | add-or-update-organization-learners', function () {
+describe('Unit | UseCase | importLearnersFromSiecleFile', function () {
   const organizationImportId = 1234;
   let organizationId;
   let organizationLearnerRepositoryStub;
@@ -66,7 +66,7 @@ describe('Unit | UseCase | add-or-update-organization-learners', function () {
   it('should save learners', async function () {
     organizationLearnerRepositoryStub.addOrUpdateOrganizationOfOrganizationLearners.resolves();
 
-    await addOrUpdateOrganizationLearners({
+    await importLearnersFromSiecleFile({
       organizationImportId,
       importStorage: importStorageStub,
       organizationImportRepository: organizationImportRepositoryStub,
@@ -101,7 +101,7 @@ describe('Unit | UseCase | add-or-update-organization-learners', function () {
   it('should handle errors', async function () {
     const s3Error = new Error('s3 error');
     importStorageStub.readFile.rejects(s3Error);
-    const error = await catchErr(addOrUpdateOrganizationLearners)({
+    const error = await catchErr(importLearnersFromSiecleFile)({
       organizationImportId,
       importStorage: importStorageStub,
       organizationImportRepository: organizationImportRepositoryStub,
@@ -118,7 +118,7 @@ describe('Unit | UseCase | add-or-update-organization-learners', function () {
   it('should save import state even if deleteFile crash but log error for tracking', async function () {
     const s3DeleteError = new Error('s3 delete error');
     importStorageStub.deleteFile.rejects(s3DeleteError);
-    await addOrUpdateOrganizationLearners({
+    await importLearnersFromSiecleFile({
       organizationImportId,
       importStorage: importStorageStub,
       organizationImportRepository: organizationImportRepositoryStub,

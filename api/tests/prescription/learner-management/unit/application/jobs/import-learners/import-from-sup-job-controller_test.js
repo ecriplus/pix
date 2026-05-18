@@ -43,7 +43,7 @@ describe('Unit | Prescription | Application | Jobs | ImportFromSupJobController'
 
     it('should not throw when error is from domain', async function () {
       const error = new OrganizationLearnersCouldNotBeSavedError();
-      sinon.stub(usecases, 'importSupOrganizationLearners').rejects(error);
+      sinon.stub(usecases, 'importLearnersFromSupFile').rejects(error);
 
       // given
       const errorStub = sinon.stub();
@@ -57,7 +57,7 @@ describe('Unit | Prescription | Application | Jobs | ImportFromSupJobController'
 
     it('should throw when error is not from domain', async function () {
       const error = new Error();
-      sinon.stub(usecases, 'importSupOrganizationLearners').rejects(error);
+      sinon.stub(usecases, 'importLearnersFromSupFile').rejects(error);
 
       // given
       const errorStub = sinon.stub();
