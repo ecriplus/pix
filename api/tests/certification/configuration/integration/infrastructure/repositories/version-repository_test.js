@@ -128,6 +128,41 @@ describe('Certification | Configuration | Integration | Repository | Version', f
       expect(updatedVersion.challengesConfiguration).to.deep.equal(versionToUpdate.challengesConfiguration);
       expect(updatedVersion.scope).to.equal(existingVersion.scope);
       expect(updatedVersion.startDate).to.deep.equal(existingVersion.startDate);
+      expect(updatedVersion.comments).to.equal(newComments);
+    });
+
+    it('updates the comments to null if given an empty string', async function () {
+      // given
+      const initialChallengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
+        maximumAssessmentLength: 20,
+        limitToOneQuestionPerTube: false,
+      });
+      const existingVersion = databaseBuilder.factory.buildCertificationVersion({
+        scope: SCOPES.PIX_PLUS_DROIT,
+        startDate: new Date('2024-01-01'),
+        expirationDate: null,
+        assessmentDuration: DEFAULT_SESSION_DURATION_MINUTES,
+        challengesConfiguration: initialChallengesConfiguration,
+      });
+
+      await databaseBuilder.commit();
+
+      const versionToUpdate = domainBuilder.certification.configuration.buildVersion({
+        id: existingVersion.id,
+        scope: existingVersion.scope,
+        startDate: existingVersion.startDate,
+        expirationDate: existingVersion.expirationDate,
+        assessmentDuration: existingVersion.assessmentDuration,
+        challengesConfiguration: existingVersion.challengesConfiguration,
+        comments: '',
+      });
+
+      // when
+      await versionRepository.update({ version: versionToUpdate });
+
+      // then
+      const updatedVersion = await knex('certification_versions').where({ id: existingVersion.id }).first();
+      expect(updatedVersion.comments).to.equal(null);
     });
   });
 

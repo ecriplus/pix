@@ -54,7 +54,7 @@ export class Version {
     this.globalScoringConfiguration = globalScoringConfiguration;
     this.competencesScoringConfiguration = competencesScoringConfiguration;
     this.challengesConfiguration = challengesConfiguration;
-    this.comments = comments;
+    this.comments = comments === '' ? null : comments;
     this.#validate();
   }
 
