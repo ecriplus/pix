@@ -660,6 +660,8 @@
           "version-detail-modal": {
             "assessment-duration": "Duration:",
             "comment": "Comment:",
+            "comment-save-error": "An error occurred while saving the comment.",
+            "comment-save-success": "The comment has been saved.",
             "content": "Framework content:",
             "expiration-date": "Expiration date:",
             "locales": "Languages:",

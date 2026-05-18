@@ -13,9 +13,12 @@ module('Integration | Component | Complementary certifications/Item/Framework | 
 
   let store;
 
+  let pixToast;
+
   hooks.beforeEach(function () {
     intl = this.owner.lookup('service:intl');
     store = this.owner.lookup('service:store');
+    pixToast = this.owner.lookup('service:pix-toast');
   });
 
   test('it should display the framework history', async function (assert) {
@@ -99,5 +102,47 @@ module('Integration | Component | Complementary certifications/Item/Framework | 
     // then
     sinon.assert.calledOnceWithExactly(store.findRecord, 'certification-version', 456);
     assert.dom(screen.getByRole('dialog')).exists();
+  });
+
+  test('it closes the detail modal after saving comments successfully', async function (assert) {
+    // given
+    const frameworkHistory = [
+      {
+        id: 456,
+        startDate: new Date('2023-10-10'),
+        expirationDate: null,
+        assessmentDuration: 90,
+        maximumAssessmentLength: 32,
+        status: 'ACTIVE',
+      },
+    ];
+
+    const certificationVersion = store.createRecord('certification-version', {
+      id: '456',
+      startDate: new Date('2023-10-10'),
+      assessmentDuration: 90,
+      minimumAnswersRequiredForValidation: 20,
+      maximumAssessmentLength: 32,
+      comments: '',
+      areas: [],
+    });
+    sinon.stub(certificationVersion, 'save').resolves();
+    sinon.stub(store, 'findRecord').resolves(certificationVersion);
+    sinon.stub(pixToast, 'sendSuccessNotification');
+
+    const screen = await render(<template><FrameworkHistory @history={{frameworkHistory}} @scope="CORE" /></template>);
+
+    await click(
+      screen.getByRole('button', {
+        name: t('components.complementary-certifications.item.framework.history.table.actions.view'),
+      }),
+    );
+    assert.dom(screen.getByRole('dialog')).exists();
+
+    // when
+    await click(screen.getByRole('button', { name: t('common.actions.save') }));
+
+    // then
+    assert.dom(screen.queryByRole('dialog')).doesNotExist();
   });
 });

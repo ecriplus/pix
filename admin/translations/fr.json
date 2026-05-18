@@ -668,6 +668,8 @@
           "version-detail-modal": {
             "assessment-duration": "Durée (min) :",
             "comment": "Commentaire :",
+            "comment-save-error": "Une erreur est survenue lors de la sauvegarde du commentaire.",
+            "comment-save-success": "Le commentaire a bien été sauvegardé.",
             "content": "Contenu du référentiel :",
             "expiration-date": "Date d'expiration :",
             "locales": "Locale :",
