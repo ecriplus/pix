@@ -846,7 +846,7 @@
         },
         {
           "id": "1f6e59c0-a4ab-4178-a8a5-9f391842f4d2",
-          "type": "short-lesson",
+          "type": "activity",
           "title": "activite-3",
           "components": [
             {
@@ -905,7 +905,7 @@
       "grains": [
         {
           "id": "8a94341e-96cb-413c-b9e6-bc40ca184cb2",
-          "type": "activity",
+          "type": "challenge",
           "title": "transfert",
           "components": [
             {
