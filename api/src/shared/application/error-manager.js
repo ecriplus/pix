@@ -1,3 +1,4 @@
+import Joi from 'joi';
 import _ from 'lodash';
 
 import { AdminMemberError } from '../../authorization/domain/errors.js';
@@ -257,22 +258,31 @@ function _mapToHttpError(error) {
 export class ErrorRegistry {
   #registry = [];
 
-  mapToHttpError(domainError) {
-    if (this.#registry[domainError.name]) {
-      return this.#registry[domainError.name](domainError);
-    }
-  }
+  #mappingSchema = Joi.array().items(
+    Joi.object({
+      name: Joi.string().required(),
+      httpErrorFn: Joi.function().required(),
+    }),
+  );
 
-  register(errorsHttpMapping) {
-    errorsHttpMapping.forEach(({ name, httpErrorFn }) => {
-      if (this.#isMapped(name)) {
+  register(mapping) {
+    Joi.assert(mapping, this.#mappingSchema);
+
+    mapping.forEach(({ name, httpErrorFn }) => {
+      if (this.#exists(name)) {
         throw new Error(`Error ${name} already mapped`);
       }
       this.#registry[name] = httpErrorFn;
     });
   }
 
-  #isMapped(name) {
+  mapToError(ErrorClass) {
+    if (this.#registry[ErrorClass.name]) {
+      return this.#registry[ErrorClass.name](ErrorClass);
+    }
+  }
+
+  #exists(name) {
     return this.#registry[name] && config.environment !== 'test';
   }
 }
@@ -300,7 +310,7 @@ export class ErrorHapiManager {
         return HttpErrors.sendJsonApiError(jsonApiError, h);
       }
 
-      const httpError = this.#registry.mapToHttpError(response) ?? _mapToHttpError(response);
+      const httpError = this.#registry.mapToError(response) ?? _mapToHttpError(response);
 
       if (response instanceof AggregateImportError) {
         httpError.meta.forEach((error) => {

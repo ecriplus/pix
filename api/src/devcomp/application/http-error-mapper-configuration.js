@@ -1,5 +1,4 @@
 import { HttpErrors } from '../../shared/application/http-errors.js';
-import { DomainErrorMappingConfiguration } from '../../shared/application/models/domain-error-mapping-configuration.js';
 import {
   ElementInstantiationError,
   ModuleDoesNotExistError,
@@ -39,6 +38,6 @@ const devcompDomainErrorMappingConfiguration = [
       return new HttpErrors.PreconditionFailedError(error.message, error.code, error.meta);
     },
   },
-].map((domainErrorMappingConfiguration) => new DomainErrorMappingConfiguration(domainErrorMappingConfiguration));
+];
 
 export { devcompDomainErrorMappingConfiguration };

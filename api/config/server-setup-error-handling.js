@@ -11,7 +11,6 @@ import { schoolDomainErrorMappingConfiguration } from '../src/school/application
 import { ErrorHapiManager, ErrorRegistry } from '../src/shared/application/error-manager.js';
 import { teamDomainErrorMappingConfiguration } from '../src/team/application/http-error-mapper-configuration.js';
 
-// - Supprimer DomainErrorMappingConfiguration et faire la validation dans le ErrorRegistry
 // - Splitter le fichier error-manager.js :
 //     - error-registry
 //     - error-hapi-manager

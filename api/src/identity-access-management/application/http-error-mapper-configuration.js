@@ -1,5 +1,4 @@
 import { HttpErrors } from '../../shared/application/http-errors.js';
-import { DomainErrorMappingConfiguration } from '../../shared/application/models/domain-error-mapping-configuration.js';
 import {
   AuthenticationKeyExpired,
   DifferentExternalIdentifierError,
@@ -54,6 +53,6 @@ const authenticationDomainErrorMappingConfiguration = [
     name: UserShouldChangePasswordError.name,
     httpErrorFn: (error) => new HttpErrors.PasswordShouldChangeError(error.message, error.meta),
   },
-].map((domainErrorMappingConfiguration) => new DomainErrorMappingConfiguration(domainErrorMappingConfiguration));
+];
 
 export { authenticationDomainErrorMappingConfiguration };
