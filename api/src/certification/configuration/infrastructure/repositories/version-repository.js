@@ -128,13 +128,7 @@ export async function getFrameworkHistory({ scope }) {
   return rows.map(_toFrameworkHistoryEntry);
 }
 
-export async function isDraft(id) {
-  const knexConn = DomainTransaction.getConnection();
-  const version = await knexConn('certification_versions').select('startDate').where({ id }).first();
-  return version?.startDate === null;
-}
-
-export async function deleteDraft(id) {
+export async function deleteVersion(id) {
   const knexConn = DomainTransaction.getConnection();
   await knexConn('certification-frameworks-challenges').where({ versionId: id }).del();
   await knexConn('certification_versions').where({ id }).del();

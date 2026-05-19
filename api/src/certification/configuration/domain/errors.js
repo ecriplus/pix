@@ -15,6 +15,6 @@ export class InvalidBadgeLevelError extends DomainError {
 
 export class CertificationVersionForbiddenDeletionError extends DomainError {
   constructor() {
-    super('Il est interdit de supprimer une version de référentiel de certification qui a déjà été activé.');
+    super('Il est interdit de supprimer une version de référentiel de certification qui a déjà été activée.');
   }
 }

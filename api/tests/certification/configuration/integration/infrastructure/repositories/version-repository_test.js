@@ -538,32 +538,7 @@ describe('Certification | Configuration | Integration | Repository | Version', f
     });
   });
 
-  describe('#isDraft', function () {
-    it('should return true when certificationVersion does not have a start date', async function () {
-      const certificationVersionId = databaseBuilder.factory.buildCertificationVersion({
-        startDate: null,
-        expirationDate: null,
-      }).id;
-      await databaseBuilder.commit();
-
-      const result = await versionRepository.isDraft(certificationVersionId);
-
-      expect(result).to.be.true;
-    });
-    it('should return false when certification version have a start date', async function () {
-      const certificationVersionId = databaseBuilder.factory.buildCertificationVersion({
-        startDate: new Date('2025-06-01'),
-        expirationDate: null,
-      }).id;
-      await databaseBuilder.commit();
-
-      const result = await versionRepository.isDraft(certificationVersionId);
-
-      expect(result).to.be.false;
-    });
-  });
-
-  describe('#deleteDraft', function () {
+  describe('#deleteVersion', function () {
     it('should return delete a draft certification version ', async function () {
       const certificationVersionId = databaseBuilder.factory.buildCertificationVersion({
         startDate: null,
@@ -571,7 +546,7 @@ describe('Certification | Configuration | Integration | Repository | Version', f
       }).id;
       await databaseBuilder.commit();
 
-      await versionRepository.deleteDraft(certificationVersionId);
+      await versionRepository.deleteVersion(certificationVersionId);
 
       const matchingCertificationVersions = await knex
         .from('certification_versions')

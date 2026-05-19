@@ -1,7 +1,7 @@
 import { createServer } from '../../../../../server.js';
 import { SCOPES } from '../../../../../src/certification/shared/domain/models/Scopes.js';
 import { expect } from '../../../../test-helper.js';
-import { databaseBuilder } from '../../../../tooling/databases.js';
+import { databaseBuilder, knex } from '../../../../tooling/databases.js';
 import { generateAuthenticatedUserRequestHeaders } from '../../../../tooling/test-utils/http-server.js';
 
 describe('Acceptance | Certification | Configuration | API | certification-version-route', function () {
@@ -126,7 +126,7 @@ describe('Acceptance | Certification | Configuration | API | certification-versi
     });
   });
 
-  describe('DELETE /api/admin/certification-frameworks/{id}', function () {
+  describe('DELETE /api/admin/certification-versions/{id}', function () {
     it('should return 204 HTTP status code', async function () {
       // given
       const versionId = databaseBuilder.factory.buildCertificationVersion({
