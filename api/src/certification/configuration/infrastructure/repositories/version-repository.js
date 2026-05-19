@@ -106,6 +106,7 @@ export async function update({ version }) {
   const knexConn = DomainTransaction.getConnection();
 
   await knexConn('certification_versions').where({ id: version.id }).update({
+    comments: version.comments,
     expirationDate: version.expirationDate,
     challengesConfiguration: version.challengesConfiguration,
   });
@@ -147,6 +148,7 @@ const _toDomain = ({
   globalScoringConfiguration,
   competencesScoringConfiguration,
   challengesConfiguration,
+  comments,
 }) => {
   return new Version({
     id,
@@ -157,6 +159,7 @@ const _toDomain = ({
     assessmentDuration,
     globalScoringConfiguration,
     competencesScoringConfiguration,
+    comments,
     challengesConfiguration: new FlashAssessmentAlgorithmConfiguration({
       maximumAssessmentLength: challengesConfiguration.maximumAssessmentLength,
       challengesBetweenSameCompetence: challengesConfiguration.challengesBetweenSameCompetence,

@@ -145,6 +145,7 @@ export const buildCertificationVersion = function ({
   competencesScoringConfiguration = defaultCompetencesScoringConfiguration,
   challengesConfiguration = defaultChallengesConfiguration,
   minimumAnswersRequiredToValidateACertification = 20,
+  comments = 'Some comments',
 } = {}) {
   const finalChallengesConfiguration = {
     ...defaultChallengesConfiguration,
@@ -162,6 +163,7 @@ export const buildCertificationVersion = function ({
       competencesScoringConfiguration: JSON.stringify(competencesScoringConfiguration),
       challengesConfiguration: JSON.stringify(finalChallengesConfiguration),
       minimumAnswersRequiredToValidateACertification,
+      comments,
     },
   });
 };

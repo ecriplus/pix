@@ -13,6 +13,7 @@ export const buildVersion = ({
   globalScoringConfiguration = [],
   competencesScoringConfiguration = [],
   challengesConfiguration = {},
+  comments = 'Some comments',
 } = {}) => {
   return new Version({
     id,
@@ -24,6 +25,7 @@ export const buildVersion = ({
     globalScoringConfiguration,
     competencesScoringConfiguration,
     challengesConfiguration: buildFlashAlgorithmConfiguration(challengesConfiguration),
+    comments,
   });
 };
 
@@ -37,6 +39,7 @@ buildVersion.api = ({
   globalScoringConfiguration,
   competencesScoringConfiguration,
   challengesConfiguration,
+  comments = 'Some comments',
 } = {}) => {
   const baseVersion = new Version({
     id,
@@ -47,6 +50,7 @@ buildVersion.api = ({
     minimumAnswersRequiredToValidateACertification,
     globalScoringConfiguration,
     competencesScoringConfiguration,
+    comments,
     challengesConfiguration: buildFlashAlgorithmConfiguration(challengesConfiguration),
   });
   return new VersionApi(baseVersion);

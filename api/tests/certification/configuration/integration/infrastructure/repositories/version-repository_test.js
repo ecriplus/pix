@@ -85,7 +85,7 @@ describe('Certification | Configuration | Integration | Repository | Version', f
   });
 
   describe('#update', function () {
-    it('should update the expiration date and challenges configuration of a certification version', async function () {
+    it('should update the expiration date, challenges configuration and comments of a certification version', async function () {
       // given
       const initialChallengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
         maximumAssessmentLength: 20,
@@ -102,6 +102,7 @@ describe('Certification | Configuration | Integration | Repository | Version', f
       await databaseBuilder.commit();
 
       const newExpirationDate = new Date('2025-10-21T10:00:00Z');
+      const newComments = 'New comments';
       const newChallengesConfiguration = {
         maximumAssessmentLength: 32,
         limitToOneQuestionPerTube: true,
@@ -114,6 +115,7 @@ describe('Certification | Configuration | Integration | Repository | Version', f
         expirationDate: newExpirationDate,
         assessmentDuration: existingVersion.assessmentDuration,
         challengesConfiguration: newChallengesConfiguration,
+        comments: newComments,
       });
 
       // when
@@ -126,6 +128,41 @@ describe('Certification | Configuration | Integration | Repository | Version', f
       expect(updatedVersion.challengesConfiguration).to.deep.equal(versionToUpdate.challengesConfiguration);
       expect(updatedVersion.scope).to.equal(existingVersion.scope);
       expect(updatedVersion.startDate).to.deep.equal(existingVersion.startDate);
+      expect(updatedVersion.comments).to.equal(newComments);
+    });
+
+    it('updates the comments to null if given an empty string', async function () {
+      // given
+      const initialChallengesConfiguration = domainBuilder.buildFlashAlgorithmConfiguration({
+        maximumAssessmentLength: 20,
+        limitToOneQuestionPerTube: false,
+      });
+      const existingVersion = databaseBuilder.factory.buildCertificationVersion({
+        scope: SCOPES.PIX_PLUS_DROIT,
+        startDate: new Date('2024-01-01'),
+        expirationDate: null,
+        assessmentDuration: DEFAULT_SESSION_DURATION_MINUTES,
+        challengesConfiguration: initialChallengesConfiguration,
+      });
+
+      await databaseBuilder.commit();
+
+      const versionToUpdate = domainBuilder.certification.configuration.buildVersion({
+        id: existingVersion.id,
+        scope: existingVersion.scope,
+        startDate: existingVersion.startDate,
+        expirationDate: existingVersion.expirationDate,
+        assessmentDuration: existingVersion.assessmentDuration,
+        challengesConfiguration: existingVersion.challengesConfiguration,
+        comments: '',
+      });
+
+      // when
+      await versionRepository.update({ version: versionToUpdate });
+
+      // then
+      const updatedVersion = await knex('certification_versions').where({ id: existingVersion.id }).first();
+      expect(updatedVersion.comments).to.equal(null);
     });
   });
 
@@ -408,6 +445,7 @@ describe('Certification | Configuration | Integration | Repository | Version', f
         globalScoringConfiguration: [{ config: 'testDroit' }],
         competencesScoringConfiguration: [{ config: 'testDroit' }],
         challengesConfiguration: expectedConfigDroit,
+        comments: 'versionDroit',
       }).id;
       const scopeCoreOld = Frameworks.CORE;
       const expectedConfigCoreOld = {
@@ -429,6 +467,7 @@ describe('Certification | Configuration | Integration | Repository | Version', f
         globalScoringConfiguration: [{ config: 'testCoreOld' }],
         competencesScoringConfiguration: [{ config: 'testCoreOld' }],
         challengesConfiguration: expectedConfigCoreOld,
+        comments: 'versionCoreOld',
       }).id;
       const scopeCoreNew = Frameworks.CORE;
       const expectedConfigCoreNew = {
@@ -450,6 +489,7 @@ describe('Certification | Configuration | Integration | Repository | Version', f
         globalScoringConfiguration: [{ config: 'testCoreNew' }],
         competencesScoringConfiguration: [{ config: 'testCoreNew' }],
         challengesConfiguration: expectedConfigCoreNew,
+        comments: 'versionCoreNew',
       }).id;
       await databaseBuilder.commit();
 
@@ -468,6 +508,7 @@ describe('Certification | Configuration | Integration | Repository | Version', f
           globalScoringConfiguration: [{ config: 'testCoreNew' }],
           competencesScoringConfiguration: [{ config: 'testCoreNew' }],
           challengesConfiguration: expectedConfigCoreNew,
+          comments: 'versionCoreNew',
         }),
         domainBuilder.certification.configuration.buildVersion({
           id: versionIdCoreOld,
@@ -479,6 +520,7 @@ describe('Certification | Configuration | Integration | Repository | Version', f
           globalScoringConfiguration: [{ config: 'testCoreOld' }],
           competencesScoringConfiguration: [{ config: 'testCoreOld' }],
           challengesConfiguration: expectedConfigCoreOld,
+          comments: 'versionCoreOld',
         }),
         domainBuilder.certification.configuration.buildVersion({
           id: versionIdDroit,
@@ -490,6 +532,7 @@ describe('Certification | Configuration | Integration | Repository | Version', f
           globalScoringConfiguration: [{ config: 'testDroit' }],
           competencesScoringConfiguration: [{ config: 'testDroit' }],
           challengesConfiguration: expectedConfigDroit,
+          comments: 'versionDroit',
         }),
       ]);
     });

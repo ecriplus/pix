@@ -3,26 +3,43 @@ import PixButton from '@1024pix/pix-ui/components/pix-button';
 import PixTextarea from '@1024pix/pix-ui/components/pix-textarea';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 
-const MAX_COMMENT_LENGTH = 200;
+const MAX_COMMENTS_LENGTH = 500;
 
 export default class VersionComment extends Component {
-  @tracked comment = this.args.version.comment ?? '';
+  @service intl;
+  @service pixToast;
+
+  @tracked comments = this.args.version.comments ?? '';
 
   @action
-  async saveComment() {
-    const hasBeenSaved = true; //await this.args.onCommentSave(this.comment);
-    if (hasBeenSaved) {
-      this.args.version.comment = this.comment;
+  async saveComments() {
+    try {
+      this.args.version.comments = this.comments;
+      await this.args.version.save();
+      this.pixToast.sendSuccessNotification({
+        message: this.intl.t(
+          'components.complementary-certifications.item.framework.version-detail-modal.comment-save-success',
+        ),
+      });
+      this.args.onSave();
+    } catch {
+      this.args.version.rollbackAttributes();
+      this.pixToast.sendErrorNotification({
+        message: this.intl.t(
+          'components.complementary-certifications.item.framework.version-detail-modal.comment-save-error',
+        ),
+      });
     }
   }
 
   @action
-  onCommentChange(event) {
-    this.comment = event.target.value;
+  onCommentsChange(event) {
+    this.comments = event.target.value;
   }
 
   <template>
@@ -32,12 +49,12 @@ export default class VersionComment extends Component {
     <PixBlock class="certification-version-detail-modal__comment">
       <PixTextarea
         id="version-comment"
-        @value={{this.comment}}
-        @maxlength={{MAX_COMMENT_LENGTH}}
-        {{on "input" this.onCommentChange}}
+        @value={{this.comments}}
+        @maxlength={{MAX_COMMENTS_LENGTH}}
+        {{on "input" this.onCommentsChange}}
       />
       <div class="version-comment__actions">
-        <PixButton @size="small" @variant="secondary" @triggerAction={{this.saveComment}}>
+        <PixButton @size="small" @variant="secondary" @triggerAction={{this.saveComments}}>
           {{t "common.actions.save"}}
         </PixButton>
       </div>

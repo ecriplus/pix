@@ -35,6 +35,12 @@ export default class FrameworkHistory extends Component {
     this.selectedVersionStatus = null;
   }
 
+  @action
+  editVersion() {}
+
+  @action
+  deleteVersion() {}
+
   <template>
     <section class="framework-versions">
       <PixTable
