@@ -1,6 +1,6 @@
 import { CampaignManagement } from '../../../../../../src/prescription/campaign/domain/models/CampaignManagement.js';
 import { usecases } from '../../../../../../src/prescription/campaign/domain/usecases/index.js';
-import { NotFoundError } from '../../../../../../src/shared/application/http-errors.js';
+import { NotFoundError } from '../../../../../../src/shared/application/errors/http-errors.js';
 import { expect } from '../../../../../test-helper.js';
 import { databaseBuilder } from '../../../../../tooling/databases.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';

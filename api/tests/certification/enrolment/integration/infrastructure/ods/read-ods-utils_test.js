@@ -17,7 +17,7 @@ import {
   getSheetDataRowsFromOdsBuffer,
   validateOdsHeaders,
 } from '../../../../../../src/certification/enrolment/infrastructure/utils/ods/read-ods-utils.js';
-import { UnprocessableEntityError } from '../../../../../../src/shared/application/http-errors.js';
+import { UnprocessableEntityError } from '../../../../../../src/shared/application/errors/http-errors.js';
 import { getI18n } from '../../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';

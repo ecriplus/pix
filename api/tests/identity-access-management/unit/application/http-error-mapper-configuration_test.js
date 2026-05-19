@@ -8,7 +8,7 @@ import {
   UserCantBeCreatedError,
   UserShouldChangePasswordError,
 } from '../../../../src/identity-access-management/domain/errors.js';
-import { HttpErrors } from '../../../../src/shared/application/http-errors.js';
+import { HttpErrors } from '../../../../src/shared/application/errors/http-errors.js';
 import { expect } from '../../../test-helper.js';
 
 describe('Unit | Identity Access Management | Application | HttpErrorMapperConfiguration', function () {

@@ -2,7 +2,11 @@ import JoiDate from '@joi/date';
 import BaseJoi from 'joi';
 const Joi = BaseJoi.extend(JoiDate);
 
-import { BadRequestError, PayloadTooLargeError, sendJsonApiError } from '../../../shared/application/http-errors.js';
+import {
+  BadRequestError,
+  PayloadTooLargeError,
+  sendJsonApiError,
+} from '../../../shared/application/errors/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { MAX_FILE_SIZE_UPLOAD } from '../../../shared/domain/constants.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';

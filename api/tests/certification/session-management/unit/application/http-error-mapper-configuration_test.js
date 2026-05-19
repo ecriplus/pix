@@ -7,7 +7,7 @@ import {
   SessionAlreadyPublishedError,
   SessionWithoutStartedCertificationError,
 } from '../../../../../src/certification/session-management/domain/errors.js';
-import { HttpErrors } from '../../../../../src/shared/application/http-errors.js';
+import { HttpErrors } from '../../../../../src/shared/application/errors/http-errors.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Certification | Session | Application | HttpErrorMapperConfiguration', function () {

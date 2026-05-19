@@ -2,7 +2,7 @@ import JoiDate from '@joi/date';
 import BaseJoi from 'joi';
 const Joi = BaseJoi.extend(JoiDate);
 
-import { sendJsonApiError, UnprocessableEntityError } from '../../../shared/application/http-errors.js';
+import { sendJsonApiError, UnprocessableEntityError } from '../../../shared/application/errors/http-errors.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { superviseController } from '../../session-management/application/supervise-controller.js';
 

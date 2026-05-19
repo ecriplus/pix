@@ -1,4 +1,4 @@
-import { NotFoundError } from '../../../../shared/application/http-errors.js';
+import { NotFoundError } from '../../../../shared/application/errors/http-errors.js';
 import * as sessionRepository from '../../../session-management/infrastructure/repositories/session-management-repository.js';
 import * as certificationCourseRepository from '../../infrastructure/repositories/certification-course-repository.js';
 

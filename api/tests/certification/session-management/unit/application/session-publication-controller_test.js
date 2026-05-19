@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import { sessionPublicationController } from '../../../../../src/certification/session-management/application/session-publication-controller.js';
 import { SessionPublicationBatchResult } from '../../../../../src/certification/session-management/domain/models/SessionPublicationBatchResult.js';
 import { usecases } from '../../../../../src/certification/session-management/domain/usecases/index.js';
-import { SessionPublicationBatchError } from '../../../../../src/shared/application/http-errors.js';
+import { SessionPublicationBatchError } from '../../../../../src/shared/application/errors/http-errors.js';
 import { logger } from '../../../../../src/shared/infrastructure/utils/logger.js';
 import { expect } from '../../../../test-helper.js';
 import { hFake } from '../../../../tooling/mocks/hapi.mock.js';

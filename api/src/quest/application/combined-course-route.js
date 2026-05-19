@@ -5,7 +5,7 @@ const ERRORS = {
 };
 
 import { CombinedCourseParticipationStatuses } from '../../prescription/shared/domain/constants.js';
-import { PayloadTooLargeError, sendJsonApiError } from '../../shared/application/http-errors.js';
+import { PayloadTooLargeError, sendJsonApiError } from '../../shared/application/errors/http-errors.js';
 import { securityPreHandlers } from '../../shared/application/security-pre-handlers.js';
 import { MAX_FILE_SIZE_UPLOAD } from '../../shared/domain/constants.js';
 import { identifiersType } from '../../shared/domain/types/identifiers-type.js';

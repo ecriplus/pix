@@ -8,7 +8,7 @@ import { prescriptionDomainErrorMappingConfiguration } from '../src/prescription
 import { stagesDomainErrorMappingConfiguration } from '../src/prescription/stages/application/http-error-mapper-configuration.js';
 import { profileDomainErrorMappingConfiguration } from '../src/profile/application/http-error-mapper-configuration.js';
 import { schoolDomainErrorMappingConfiguration } from '../src/school/application/http-error-mapper-configuration.js';
-import { ErrorHapiManager, ErrorRegistry } from '../src/shared/application/error-manager.js';
+import { ErrorHapiManager, ErrorRegistry } from '../src/shared/application/errors/error-manager.js';
 import { teamDomainErrorMappingConfiguration } from '../src/team/application/http-error-mapper-configuration.js';
 
 // - Splitter le fichier error-manager.js :

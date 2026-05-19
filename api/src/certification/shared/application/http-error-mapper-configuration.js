@@ -1,4 +1,4 @@
-import { HttpErrors } from '../../../shared/application/http-errors.js';
+import { HttpErrors } from '../../../shared/application/errors/http-errors.js';
 import { configurationDomainErrorMappingConfiguration } from '../../configuration/application/http-error-mapper-configuration.js';
 import { enrolmentDomainErrorMappingConfiguration } from '../../enrolment/application/http-error-mapper-configuration.js';
 import {

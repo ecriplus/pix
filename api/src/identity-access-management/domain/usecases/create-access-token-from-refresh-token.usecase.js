@@ -1,4 +1,4 @@
-import { UnauthorizedError } from '../../../shared/application/http-errors.js';
+import { UnauthorizedError } from '../../../shared/application/errors/http-errors.js';
 import { UserAccessToken } from '../models/UserAccessToken.js';
 
 /**

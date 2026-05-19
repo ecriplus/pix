@@ -1,6 +1,6 @@
 import { legalDocumentsDomainErrorMappingConfiguration } from '../../../../../src/legal-documents/application/http-error-mapper-configuration.js';
 import { LegalDocumentInvalidDateError } from '../../../../../src/legal-documents/domain/errors.js';
-import { HttpErrors } from '../../../../../src/shared/application/http-errors.js';
+import { HttpErrors } from '../../../../../src/shared/application/errors/http-errors.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Legal Documents | Application | HttpErrorMapperConfiguration', function () {

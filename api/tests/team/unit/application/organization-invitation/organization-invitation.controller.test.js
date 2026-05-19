@@ -1,6 +1,6 @@
 import sinon from 'sinon';
 
-import { MissingQueryParamError } from '../../../../../src/shared/application/http-errors.js';
+import { MissingQueryParamError } from '../../../../../src/shared/application/errors/http-errors.js';
 import { Membership } from '../../../../../src/shared/domain/models/Membership.js';
 import { organizationInvitationController } from '../../../../../src/team/application/organization-invitations/organization-invitation.controller.js';
 import { OrganizationInvitation } from '../../../../../src/team/domain/models/OrganizationInvitation.js';

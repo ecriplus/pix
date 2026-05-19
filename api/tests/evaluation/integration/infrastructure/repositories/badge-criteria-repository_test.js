@@ -1,6 +1,6 @@
 import BadgeCriterion from '../../../../../src/evaluation/domain/models/BadgeCriterion.js';
 import * as badgeCriteriaRepository from '../../../../../src/evaluation/infrastructure/repositories/badge-criteria-repository.js';
-import { BadRequestError } from '../../../../../src/shared/application/http-errors.js';
+import { BadRequestError } from '../../../../../src/shared/application/errors/http-errors.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { SCOPES } from '../../../../../src/shared/domain/models/BadgeDetails.js';
 import { expect } from '../../../../test-helper.js';

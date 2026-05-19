@@ -4,7 +4,7 @@ import {
   CertificationCourseUpdateError,
   InvalidCertificationReportForFinalization,
 } from '../../../../../src/certification/shared/domain/errors.js';
-import { HttpErrors } from '../../../../../src/shared/application/http-errors.js';
+import { HttpErrors } from '../../../../../src/shared/application/errors/http-errors.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Certification | Shared | Application | HttpErrorMapperConfiguration', function () {

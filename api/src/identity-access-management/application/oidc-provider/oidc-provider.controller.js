@@ -1,4 +1,4 @@
-import { BadRequestError, UnauthorizedError } from '../../../shared/application/http-errors.js';
+import { BadRequestError, UnauthorizedError } from '../../../shared/application/errors/http-errors.js';
 import * as localeService from '../../../shared/domain/services/locale-service.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { getUserLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';

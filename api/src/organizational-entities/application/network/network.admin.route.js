@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-import { BadRequestError, sendJsonApiError } from '../../../shared/application/http-errors.js';
+import { BadRequestError, sendJsonApiError } from '../../../shared/application/errors/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { networkAdminController } from './network.admin.controller.js';

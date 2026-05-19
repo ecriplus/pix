@@ -1,10 +1,10 @@
 import Joi from 'joi';
 
-import { ErrorHapiManager, ErrorRegistry } from '../../../../src/shared/application/error-manager.js';
-import { EntityValidationError } from '../../../../src/shared/domain/errors.js';
-import { expect } from '../../../test-helper.js';
-import { hFake } from '../../../tooling/mocks/hapi.mock.js';
-import { catchErr } from '../../../tooling/test-utils/error.js';
+import { ErrorHapiManager, ErrorRegistry } from '../../../../../src/shared/application/errors/error-manager.js';
+import { EntityValidationError } from '../../../../../src/shared/domain/errors.js';
+import { expect } from '../../../../test-helper.js';
+import { hFake } from '../../../../tooling/mocks/hapi.mock.js';
+import { catchErr } from '../../../../tooling/test-utils/error.js';
 
 describe('Shared | Unit | Application | ErrorManager', function () {
   describe('ErrorRegistry', function () {

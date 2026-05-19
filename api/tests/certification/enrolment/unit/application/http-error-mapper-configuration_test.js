@@ -4,7 +4,7 @@ import {
   SessionStartedDeletionError,
   UnknownCountryForStudentEnrolmentError,
 } from '../../../../../src/certification/enrolment/domain/errors.js';
-import { HttpErrors } from '../../../../../src/shared/application/http-errors.js';
+import { HttpErrors } from '../../../../../src/shared/application/errors/http-errors.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Certification | Enrolment | Application | HttpErrorMapperConfiguration', function () {

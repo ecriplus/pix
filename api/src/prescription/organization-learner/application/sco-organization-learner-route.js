@@ -6,7 +6,7 @@ import {
   BadRequestError,
   sendJsonApiError,
   UnprocessableEntityError,
-} from '../../../shared/application/http-errors.js';
+} from '../../../shared/application/errors/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { config } from '../../../shared/config.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';

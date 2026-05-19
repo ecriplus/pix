@@ -8,7 +8,7 @@ import {
   UnableToDetachParentOrganizationFromChildOrganization,
 } from '../../../../src/organizational-entities/domain/errors.js';
 import { OrganizationLearnerTypeNotFound } from '../../../../src/organizational-entities/domain/errors.js';
-import { HttpErrors } from '../../../../src/shared/application/http-errors.js';
+import { HttpErrors } from '../../../../src/shared/application/errors/http-errors.js';
 import { expect } from '../../../test-helper.js';
 
 describe('Unit | Organizational Entities | Application | HttpErrorMapperConfiguration', function () {

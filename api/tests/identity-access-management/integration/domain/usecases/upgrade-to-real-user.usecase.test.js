@@ -4,7 +4,7 @@ import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
 import { anonymousUserTokenRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/anonymous-user-token.repository.js';
-import { UnauthorizedError } from '../../../../../src/shared/application/http-errors.js';
+import { UnauthorizedError } from '../../../../../src/shared/application/errors/http-errors.js';
 import { AlreadyRegisteredEmailError } from '../../../../../src/shared/domain/errors.js';
 import { expect } from '../../../../test-helper.js';
 import { databaseBuilder, knex } from '../../../../tooling/databases.js';

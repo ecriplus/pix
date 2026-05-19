@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-import { BadRequestError, NotFoundError, sendJsonApiError } from '../../../shared/application/http-errors.js';
+import { BadRequestError, NotFoundError, sendJsonApiError } from '../../../shared/application/errors/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { getSupportedLocales } from '../../../shared/domain/services/locale-service.js';
 import { editorLogoUrlValidation, identifiersType } from '../../../shared/domain/types/identifiers-type.js';

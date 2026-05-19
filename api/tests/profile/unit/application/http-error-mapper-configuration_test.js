@@ -4,7 +4,7 @@ import {
   ProfileRewardCantBeSharedError,
   RewardTypeDoesNotExistError,
 } from '../../../../src/profile/domain/errors.js';
-import { HttpErrors } from '../../../../src/shared/application/http-errors.js';
+import { HttpErrors } from '../../../../src/shared/application/errors/http-errors.js';
 import { expect } from '../../../test-helper.js';
 
 describe('Profile | Unit | Application | HttpErrorMapperConfiguration', function () {

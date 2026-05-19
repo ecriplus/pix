@@ -1,34 +1,34 @@
 import Joi from 'joi';
 import _ from 'lodash';
 
-import { AdminMemberError } from '../../authorization/domain/errors.js';
-import { ChallengeAlreadyAnsweredError } from '../../certification/evaluation/domain/errors.js';
-import { CertificateGenerationError } from '../../certification/results/domain/errors.js';
+import { AdminMemberError } from '../../../authorization/domain/errors.js';
+import { ChallengeAlreadyAnsweredError } from '../../../certification/evaluation/domain/errors.js';
+import { CertificateGenerationError } from '../../../certification/results/domain/errors.js';
 import {
   CsvWithNoSessionDataError,
   SendingEmailToRefererError,
   SendingEmailToResultRecipientError,
-} from '../../certification/session-management/domain/errors.js';
-import { AlreadyRatedAssessmentError, EmptyAnswerError } from '../../evaluation/domain/errors.js';
-import * as LLMDomainErrors from '../../llm/domain/errors.js';
+} from '../../../certification/session-management/domain/errors.js';
+import { AlreadyRatedAssessmentError, EmptyAnswerError } from '../../../evaluation/domain/errors.js';
+import * as LLMDomainErrors from '../../../llm/domain/errors.js';
 import {
   ArchiveOrganizationError,
   UnableToAttachChildOrganizationToParentOrganizationError,
-} from '../../organizational-entities/domain/errors.js';
-import { ArchivedCampaignError, DeletedCampaignError } from '../../prescription/campaign/domain/errors.js';
-import { CampaignParticipationDeletedError } from '../../prescription/campaign-participation/domain/errors.js';
-import { AggregateImportError, SiecleXmlImportError } from '../../prescription/learner-management/domain/errors.js';
-import { OrganizationCantGetPlacesStatisticsError } from '../../prescription/organization-place/domain/errors.js';
+} from '../../../organizational-entities/domain/errors.js';
+import { ArchivedCampaignError, DeletedCampaignError } from '../../../prescription/campaign/domain/errors.js';
+import { CampaignParticipationDeletedError } from '../../../prescription/campaign-participation/domain/errors.js';
+import { AggregateImportError, SiecleXmlImportError } from '../../../prescription/learner-management/domain/errors.js';
+import { OrganizationCantGetPlacesStatisticsError } from '../../../prescription/organization-place/domain/errors.js';
 import {
   AlreadyAcceptedOrCancelledInvitationError,
   UserHasNoOrganizationMembershipError,
   UserNotMemberOfOrganizationError,
-} from '../../team/domain/errors.js';
-import { config } from '../config.js';
-import * as SharedDomainErrors from '../domain/errors.js';
-import { getBaseLocale } from '../domain/services/locale-service.js';
-import { getI18n } from '../infrastructure/i18n/i18n.js';
-import { getChallengeLocale } from '../infrastructure/utils/request-response-utils.js';
+} from '../../../team/domain/errors.js';
+import { config } from '../../config.js';
+import * as SharedDomainErrors from '../../domain/errors.js';
+import { getBaseLocale } from '../../domain/services/locale-service.js';
+import { getI18n } from '../../infrastructure/i18n/i18n.js';
+import { getChallengeLocale } from '../../infrastructure/utils/request-response-utils.js';
 import { BaseHttpError, HttpErrors } from './http-errors.js';
 
 const NOT_VALID_RELATIONSHIPS = ['externalId', 'participantExternalId'];

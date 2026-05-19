@@ -1,4 +1,4 @@
-import { BadRequestError } from '../../../shared/application/http-errors.js';
+import { BadRequestError } from '../../../shared/application/errors/http-errors.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import BadgeCriterion from '../../domain/models/BadgeCriterion.js';

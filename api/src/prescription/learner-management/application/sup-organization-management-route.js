@@ -6,7 +6,7 @@ import {
   PayloadTooLargeError,
   sendJsonApiError,
   UnprocessableEntityError,
-} from '../../../shared/application/http-errors.js';
+} from '../../../shared/application/errors/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { identifiersType } from '../../../shared/domain/types/identifiers-type.js';
 import { supOrganizationManagementController } from './sup-organization-management-controller.js';

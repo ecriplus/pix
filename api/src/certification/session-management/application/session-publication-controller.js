@@ -1,4 +1,4 @@
-import { SessionPublicationBatchError } from '../../../shared/application/http-errors.js';
+import { SessionPublicationBatchError } from '../../../shared/application/errors/http-errors.js';
 import { logger } from '../../../shared/infrastructure/utils/logger.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as sessionManagementSerializer from '../infrastructure/serializers/session-serializer.js';

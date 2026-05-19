@@ -1,7 +1,7 @@
 import { Readable } from 'node:stream';
 
 import * as attestationSerializer from '../../profile/infrastructure/serializers/jsonapi/attestation-serializer.js';
-import { BadRequestError } from '../../shared/application/http-errors.js';
+import { BadRequestError } from '../../shared/application/errors/http-errors.js';
 import { usecases } from '../domain/usecases/index.js';
 
 const WRONG_FILE_FORMAT = 'WRONG_FILE_FORMAT';

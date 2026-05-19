@@ -1,4 +1,4 @@
-import { HttpErrors } from '../../shared/application/http-errors.js';
+import { HttpErrors } from '../../shared/application/errors/http-errors.js';
 import {
   AdministrationTeamNotFound,
   ArchiveCertificationCentersInBatchError,
