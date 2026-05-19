@@ -17,7 +17,6 @@ export async function getNextChallengeForCampaignAssessment({
   knowledgeElementForParticipationService,
   campaignParticipationRepository,
   improvementService,
-  challengeRepository,
 }) {
   const { allAnswers, lastAnswer, targetSkills, challenges, knowledgeElements } =
     await algorithmDataFetcherService.fetchForCampaigns({
@@ -61,5 +60,5 @@ export async function getNextChallengeForCampaignAssessment({
     randomSeed: assessment.id,
     locale,
   });
-  return challengeRepository.get(smartRandomChallenge.id);
+  return smartRandomChallenge.id;
 }

@@ -20,6 +20,7 @@ import { answerJobRepository } from '../../infrastructure/repositories/answer-jo
 import * as badgeAcquisitionRepository from '../../infrastructure/repositories/badge-acquisition-repository.js';
 import * as badgeCriteriaRepository from '../../infrastructure/repositories/badge-criteria-repository.js';
 import * as badgeRepository from '../../infrastructure/repositories/badge-repository.js';
+import * as challengeToPlayRepository from '../../infrastructure/repositories/challenge-to-play-repository.js';
 import * as competenceEvaluationRepository from '../../infrastructure/repositories/competence-evaluation-repository.js';
 import * as feedbackRepository from '../../infrastructure/repositories/feedback-repository.js';
 import { repositories } from '../../infrastructure/repositories/index.js';
@@ -69,6 +70,7 @@ const dependencies = {
   getMasteryPercentageService,
   knowledgeElementForParticipationService,
   smartRandomChallengeRepository,
+  challengeToPlayRepository,
 };
 
 import { completeAssessment } from './complete-assessment.js';
@@ -87,7 +89,6 @@ import { getCorrectionForAnswer } from './get-correction-for-answer.js';
 import { getNextChallengeForCampaignAssessment } from './get-next-challenge-for-campaign-assessment.js';
 import { getNextChallengeForCompetenceEvaluation } from './get-next-challenge-for-competence-evaluation.js';
 import { getNextChallengeForDemo } from './get-next-challenge-for-demo.js';
-import { getNextChallengeForPreview } from './get-next-challenge-for-preview.js';
 import { getNextChallengeForSimulator } from './get-next-challenge-for-simulator.js';
 import { getProgression } from './get-progression.js';
 import { getScorecard } from './get-scorecard.js';
@@ -126,7 +127,6 @@ const usecasesWithoutInjectedDependencies = {
   getNextChallengeForCampaignAssessment,
   getNextChallengeForCompetenceEvaluation,
   getNextChallengeForDemo,
-  getNextChallengeForPreview,
   getNextChallengeForSimulator,
   getProgression,
   getScorecard,

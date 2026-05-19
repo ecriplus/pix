@@ -18,10 +18,7 @@ describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-campai
         const skill = domainBuilder.buildSkill();
 
         const answerRepository = { findByAssessment: sinon.stub() };
-        const challengeRepository = { get: sinon.stub() };
         const pickChallengeService = { pickChallenge: sinon.stub() };
-
-        challengeRepository.get.withArgs(firstChallengeId).resolves(finalChallenge);
 
         const possibleSkillsForNextChallenge = [skill];
         const smartRandomStub = {
@@ -38,8 +35,7 @@ describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-campai
           .returns(firstChallenge);
 
         // when
-        const challenge = await getNextChallengeForCampaignAssessment({
-          challengeRepository,
+        const challengeId = await getNextChallengeForCampaignAssessment({
           answerRepository,
           pickChallengeService,
           assessment,
@@ -50,7 +46,7 @@ describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-campai
         });
 
         // then
-        expect(challenge).to.deep.equal(finalChallenge);
+        expect(challengeId).to.deep.equal(finalChallenge.id);
       });
     });
   });

@@ -18,12 +18,11 @@ describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-compet
       locale,
       pickChallengeService,
       recentKnowledgeElements,
-      actualComputedChallenge,
+      actualComputedChallengeId,
       challengeUrl21,
       challengeUrl22,
       algorithmDataFetcherServiceStub,
-      smartRandomStub,
-      challengeRepository;
+      smartRandomStub;
 
     beforeEach(async function () {
       userId = 'dummyUserId';
@@ -61,9 +60,6 @@ describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-compet
       };
       pickChallengeService = { pickChallenge: sinon.stub() };
       pickChallengeService.pickChallenge.returns(challengeUrl22);
-      challengeRepository = {
-        get: sinon.stub(),
-      };
       algorithmDataFetcherServiceStub.fetchForCompetenceEvaluations.resolves({
         allAnswers: [lastAnswer],
         lastAnswer: lastAnswer,
@@ -90,7 +86,6 @@ describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-compet
           locale,
           smartRandomService: smartRandomStub,
           algorithmDataFetcherService: algorithmDataFetcherServiceStub,
-          challengeRepository,
         });
       });
 
@@ -100,18 +95,14 @@ describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-compet
     });
 
     context('when user is related to assessment', function () {
-      let finalChallenge;
       beforeEach(async function () {
-        finalChallenge = domainBuilder.buildChallenge({ id: challengeUrl22.id });
-        challengeRepository.get.withArgs(challengeUrl22.id).resolves(finalChallenge);
-        actualComputedChallenge = await getNextChallengeForCompetenceEvaluation({
+        actualComputedChallengeId = await getNextChallengeForCompetenceEvaluation({
           assessment,
           userId,
           pickChallengeService,
           locale,
           smartRandomService: smartRandomStub,
           algorithmDataFetcherService: algorithmDataFetcherServiceStub,
-          challengeRepository,
         });
       });
 
@@ -127,9 +118,8 @@ describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-compet
         });
       });
 
-      it('should have returned the next challenge', function () {
-        expect(actualComputedChallenge.id).to.equal(challengeUrl22.id);
-        expect(actualComputedChallenge).to.deep.equal(finalChallenge);
+      it('should have returned the next challenge id', function () {
+        expect(actualComputedChallengeId).to.equal(challengeUrl22.id);
       });
     });
   });

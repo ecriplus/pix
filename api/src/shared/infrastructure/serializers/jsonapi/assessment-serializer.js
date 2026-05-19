@@ -1,9 +1,9 @@
 import jsonapiSerializer from 'jsonapi-serializer';
 import isEmpty from 'lodash/isEmpty.js';
 
+import * as challengeToPlayApi from '../../../../evaluation/application/api/challenge-to-play-api.js';
 import { DomainError } from '../../../domain/errors.js';
 import { Assessment } from '../../../domain/models/Assessment.js';
-import { config as challengeSerializerConfig } from './challenge-serializer.js';
 
 const { Serializer } = jsonapiSerializer;
 
@@ -68,7 +68,7 @@ const serialize = function (assessments) {
     },
     nextChallenge: {
       ref: 'id',
-      ...challengeSerializerConfig,
+      ...challengeToPlayApi.getSerializationConfig(),
     },
     course: {
       ref: 'id',

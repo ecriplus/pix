@@ -10,13 +10,15 @@ export async function updateAssessmentWithNextChallenge({
   assessmentRepository,
   certificationEvaluationRepository,
   courseRepository,
+  challengeToPlayApi,
   competenceRepository,
   certificationChallengeLiveAlertRepository,
   certificationCompanionAlertRepository,
 }) {
   const assessment = await assessmentRepository.getWithAnswers(assessmentId);
+  assessment.nextChallenge = null;
   let globalProgression = null;
-  let nextChallenge = null;
+  let nextChallengeId = null;
   try {
     if (assessment.isCertification()) {
       const challengeLiveAlerts = await certificationChallengeLiveAlertRepository.getByAssessmentId({
@@ -27,14 +29,14 @@ export async function updateAssessmentWithNextChallenge({
       });
       assessment.attachLiveAlerts({ challengeLiveAlerts, companionLiveAlerts });
       if (assessment.isStarted()) {
-        nextChallenge = await certificationEvaluationRepository.selectNextCertificationChallenge({
+        nextChallengeId = await certificationEvaluationRepository.selectNextCertificationChallenge({
           assessmentId: assessment.id,
         });
       }
     }
 
     if (assessment.isPreview() && assessment.isStarted()) {
-      nextChallenge = await evaluationUsecases.getNextChallengeForPreview({});
+      throw new AssessmentEndedError();
     }
 
     if (assessment.isDemo()) {
@@ -44,7 +46,7 @@ export async function updateAssessmentWithNextChallenge({
       }
       assessment.title = course.name;
       if (assessment.isStarted()) {
-        nextChallenge = await evaluationUsecases.getNextChallengeForDemo({ assessment });
+        nextChallengeId = await evaluationUsecases.getNextChallengeForDemo({ assessment });
       }
     }
 
@@ -60,13 +62,13 @@ export async function updateAssessmentWithNextChallenge({
         });
         globalProgression = progression.completionRate;
       }
-      nextChallenge = await evaluationUsecases.getNextChallengeForCampaignAssessment({ assessment, locale });
+      nextChallengeId = await evaluationUsecases.getNextChallengeForCampaignAssessment({ assessment, locale });
     }
 
     if (assessment.isCompetenceEvaluation()) {
       assessment.title = await competenceRepository.getCompetenceName({ id: assessment.competenceId, locale });
       if (assessment.isStarted()) {
-        nextChallenge = await evaluationUsecases.getNextChallengeForCompetenceEvaluation({
+        nextChallengeId = await evaluationUsecases.getNextChallengeForCompetenceEvaluation({
           assessment,
           userId,
           locale,
@@ -83,9 +85,9 @@ export async function updateAssessmentWithNextChallenge({
         },
         'Assessment ended prematurely: no challenge remaining before reaching maximum assessment length',
       );
-      nextChallenge = null;
+      assessment.nextChallenge = null;
     } else if (error instanceof AssessmentEndedError) {
-      nextChallenge = null;
+      assessment.nextChallenge = null;
     } else {
       logger.error(
         { assessmentId: assessment.id, assessmentType: assessment.type, err: error },
@@ -95,16 +97,21 @@ export async function updateAssessmentWithNextChallenge({
     }
   }
 
-  if (nextChallenge) {
-    await assessmentRepository.updateLastQuestionDate({ id: assessment.id, lastQuestionDate: new Date() });
+  if (!nextChallengeId) {
+    return {
+      assessment,
+      globalProgression,
+    };
   }
-  if (nextChallenge && nextChallenge.id !== assessment.lastChallengeId) {
+  await assessmentRepository.updateLastQuestionDate({ id: assessment.id, lastQuestionDate: new Date() });
+  if (nextChallengeId !== assessment.lastChallengeId) {
     await assessmentRepository.updateWhenNewChallengeIsAsked({
       id: assessment.id,
-      lastChallengeId: nextChallenge.id,
+      lastChallengeId: nextChallengeId,
     });
   }
-  assessment.nextChallenge = nextChallenge;
+
+  assessment.nextChallenge = await challengeToPlayApi.get(nextChallengeId);
 
   return {
     assessment,

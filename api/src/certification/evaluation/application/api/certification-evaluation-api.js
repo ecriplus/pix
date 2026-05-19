@@ -46,7 +46,7 @@ export const rescoreV2Certification = async ({ event }) => {
  * @param {object} params
  * @param {number} params.assessmentId
  *
- * @returns {Promise<Challenge>}
+ * @returns {Promise<string>} next challenge id
  * @throws {AssessmentEndedError} test ended or no next challenge available
  * @throws {AssessmentLackOfChallengesError} no eligible challenges remaining before reaching maximum assessment length
  */

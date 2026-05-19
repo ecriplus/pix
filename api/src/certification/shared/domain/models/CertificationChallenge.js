@@ -11,7 +11,7 @@ class CertificationChallenge {
     difficulty,
     discriminant,
     createdAt,
-  } = {}) {
+  }) {
     this.id = id;
     this.associatedSkillName = associatedSkillName;
     this.associatedSkillId = associatedSkillId;

@@ -1,9 +1,9 @@
-import * as challengeRepository from '../../../shared/infrastructure/repositories/challenge-repository.js';
-import * as challengeSerializer from '../../../shared/infrastructure/serializers/jsonapi/challenge-serializer.js';
+import * as challengeToPlayRepository from '../../infrastructure/repositories/challenge-to-play-repository.js';
+import * as challengeToPlaySerializer from '../../infrastructure/serializers/jsonapi/challenge-to-play-serializer.js';
 
-async function get(request, h, dependencies = { challengeRepository, challengeSerializer }) {
-  const challenge = await dependencies.challengeRepository.get(request.params.id);
-  return dependencies.challengeSerializer.serialize(challenge);
+async function get(request, h, dependencies = { challengeToPlayRepository, challengeToPlaySerializer }) {
+  const challengeToPlay = await dependencies.challengeToPlayRepository.get(request.params.id);
+  return dependencies.challengeToPlaySerializer.serialize(challengeToPlay);
 }
 
 const challengeController = { get };

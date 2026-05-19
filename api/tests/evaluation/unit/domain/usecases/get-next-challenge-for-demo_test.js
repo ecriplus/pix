@@ -8,7 +8,6 @@ import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder
 describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-demo', function () {
   describe('#get-next-challenge-for-demo', function () {
     let courseRepository;
-    let challengeRepository;
     let answerRepository;
 
     let assessment;
@@ -23,26 +22,22 @@ describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-demo',
       assessment = domainBuilder.buildAssessment({ id: 1165, courseId: course.id });
 
       courseRepository = { get: sinon.stub().resolves(course) };
-      challengeRepository = { get: sinon.stub() };
       answerRepository = { findByAssessment: sinon.stub() };
-      challengeRepository.get.withArgs('first_challenge').resolves(firstChallenge);
-      challengeRepository.get.withArgs('second_challenge').resolves(secondChallenge);
     });
 
-    it('should return the first challenge if no answer exist', async function () {
+    it('should return the first challenge id if no answer exist', async function () {
       // given
       answerRepository.findByAssessment.resolves([]);
 
       // when
       const result = await getNextChallengeForDemo({
         courseRepository,
-        challengeRepository,
         answerRepository,
         assessment,
       });
 
       // then
-      expect(result).to.equal(firstChallenge);
+      expect(result).to.equal(firstChallenge.id);
     });
 
     it('should return the second challenge if the first challenge is already answered', async function () {
@@ -53,13 +48,12 @@ describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-demo',
       // when
       const result = await getNextChallengeForDemo({
         courseRepository,
-        challengeRepository,
         answerRepository,
         assessment,
       });
 
       // then
-      expect(result).to.equal(secondChallenge);
+      expect(result).to.equal(secondChallenge.id);
     });
 
     it('should throw a AssessmentEndedError when there are no more challenges to ask', function () {
@@ -69,7 +63,7 @@ describe('Evaluation | Unit | Domain | Use Cases | get-next-challenge-for-demo',
       answerRepository.findByAssessment.resolves([firstAnswer, secondAnswer]);
 
       // when
-      const promise = getNextChallengeForDemo({ courseRepository, challengeRepository, answerRepository, assessment });
+      const promise = getNextChallengeForDemo({ courseRepository, answerRepository, assessment });
 
       // then
       return expect(promise).to.be.rejectedWith(AssessmentEndedError);
