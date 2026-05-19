@@ -2210,6 +2210,17 @@
       },
       "not-finished": "Todavía no puedes enviar tus resultados, aún tenemos algunas preguntas para ti.",
       "recommended-engine": {
+        "training-card": {
+          "delivery-mode": {
+            "hybrid": "Híbrido",
+            "on-site": "Presencial",
+            "remote": "A distancia"
+          },
+          "registration-required": {
+            "no": "Acceso libre inmediato",
+            "yes": "Inscripción requerida"
+          }
+        },
         "trainings": {
           "description": "Se recomienda en función de tu progreso para ayudarte a reforzar tus habilidades y avanzar más, en el momento adecuado.",
           "title": "Ve más allá, a tu propio ritmo."

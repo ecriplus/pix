@@ -2210,6 +2210,17 @@
       },
       "not-finished": "You can’t submit your results yet, we still have a few questions to ask.",
       "recommended-engine": {
+        "training-card": {
+          "delivery-mode": {
+            "hybrid": "Hybrid",
+            "on-site": "On-site",
+            "remote": "Remote"
+          },
+          "registration-required": {
+            "no": "Immediate free access",
+            "yes": "Registration required"
+          }
+        },
         "trainings": {
           "description": "It is recommended based on your progress to help you build your skills and take them to the next level at just the right time.",
           "title": "Go further, at your own pace."

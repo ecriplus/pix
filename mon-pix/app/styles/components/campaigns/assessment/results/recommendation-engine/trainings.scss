@@ -1,4 +1,6 @@
 @use 'pix-design-tokens/typography';
+@use 'pix-design-tokens/shadows';
+@use 'pix-design-tokens/breakpoints';
 
 .results-recommendation-engine-training {
   &__title {
@@ -15,9 +17,90 @@
   }
 
   &__list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
-    gap: var(--pix-spacing-6x);
-    margin-top: var(--pix-spacing-8x);
+    display: flex;
+    gap: var(--pix-spacing-8x);
+    margin-top: var(--pix-spacing-4x);
+    padding : 3px 5px 7px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
   }
 }
+
+.results-recommendation-engine-training-card {
+    @extend %pix-shadow-default;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--pix-spacing-4x);
+    justify-content: space-between;
+    width: 329px;
+    height: 315px;
+    padding: var(--pix-spacing-3x);
+    padding-bottom: var(--pix-spacing-6x);
+    background-color: var(--pix-neutral-0);
+    border-radius: 16px 0 16px 16px;
+
+  @include breakpoints.device-is('mobile') {
+    min-width: 280px;
+  }
+
+    &__tag {
+      @extend %pix-body-xs;
+
+      width: fit-content;
+    }
+
+  &__tag-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.results-recommendation-engine-training-card-image-hero {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  height: 127px;
+  padding: var(--pix-spacing-7x, 28px) var(--pix-spacing-7x, 28px);
+  background-color: var(--pix-primary-10);
+  border-radius: 12px;
+
+  &__editor-logo {
+    position: relative;
+    z-index: 1;
+    height: 35px;
+  }
+}
+
+.results-recommendation-engine-training-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pix-spacing-3x);
+
+  &__title {
+    @extend %pix-title-xxs;
+
+    display: -webkit-box;
+    min-height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  &__details {
+    @extend %pix-body-xs;
+
+    display: flex;
+    color: var(--pix-neutral-500);
+  }
+
+  ul li:not(:first-child)::before {
+    margin: 0 var(--pix-spacing-1x);
+    content: '\2022';
+  }
+
+}
+

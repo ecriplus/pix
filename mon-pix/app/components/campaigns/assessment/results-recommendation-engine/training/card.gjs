@@ -1,0 +1,74 @@
+import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+import PixTag from '@1024pix/pix-ui/components/pix-tag';
+import { service } from '@ember/service';
+import Component from '@glimmer/component';
+import { t } from 'ember-intl';
+
+export default class Card extends Component {
+  @service intl;
+
+  get tagProperties() {
+    const registrationRequired = this.args.training.registrationRequired;
+
+    const color = registrationRequired ? 'blue-light' : 'primary';
+    const iconName = registrationRequired ? 'lock' : 'acute';
+    const translationKey = registrationRequired ? 'yes' : 'no';
+    const text = this.intl.t(
+      `pages.skill-review.recommended-engine.training-card.registration-required.${translationKey}`,
+    );
+
+    return {
+      color,
+      iconName,
+      text,
+    };
+  }
+
+  get deliveryMode() {
+    const deliveryMode = this.args.training.deliveryMode === 'onSite' ? 'on-site' : this.args.training.deliveryMode;
+
+    return this.intl.t(`pages.skill-review.recommended-engine.training-card.delivery-mode.${deliveryMode}`);
+  }
+
+  get formattedDuration() {
+    const days = this.args.training.duration.days ? `${this.args.training.duration.days}j ` : '';
+    const hours = this.args.training.duration.hours ? `${this.args.training.duration.hours}h ` : '';
+    const minutes = this.args.training.duration.minutes ? `${this.args.training.duration.minutes}min` : '';
+    return `${days}${hours}${minutes}`.trim();
+  }
+
+  get type() {
+    return this.intl.t(`pages.training.type.${this.args.training.type}`);
+  }
+
+  <template>
+    <a
+      class="results-recommendation-engine-training-card"
+      href={{@training.link}}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={{t "navigation.external-link-title"}}
+    >
+      <div class="results-recommendation-engine-training-card-image-hero">
+        <img
+          class="results-recommendation-engine-training-card-image-hero__editor-logo"
+          src="{{@training.editorLogoUrl}}"
+          alt=""
+        />
+      </div>
+      <PixTag @color={{this.tagProperties.color}} class="results-recommendation-engine-training-card__tag">
+        <PixIcon
+          class="results-recommendation-engine-training-card__tag-icon"
+          @name={{this.tagProperties.iconName}}
+          @ariaHidden={{true}}
+        />
+        {{this.tagProperties.text}}
+      </PixTag>
+      <section class="results-recommendation-engine-training-card-content">
+        <h3 class="results-recommendation-engine-training-card-content__title">{{@training.title}}</h3>
+        <ul class="results-recommendation-engine-training-card-content__details"><li>{{this.type}}</li><li
+          >{{this.deliveryMode}}</li><li>{{this.formattedDuration}}</li></ul>
+      </section>
+    </a>
+  </template>
+}

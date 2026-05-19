@@ -2210,6 +2210,17 @@
       },
       "not-finished": "Non è ancora possibile invia i risultati, quindi abbiamo ancora alcune domande per voi.",
       "recommended-engine": {
+        "training-card": {
+          "delivery-mode": {
+            "hybrid": "Ibrido",
+            "on-site": "In loco",
+            "remote": "A distanza"
+          },
+          "registration-required": {
+            "no": "Accesso libero immediato",
+            "yes": "Iscrizione richiesta"
+          }
+        },
         "trainings": {
           "description": "Viene consigliato in base ai tuoi progressi per aiutarti a consolidare le tue competenze e ad andare oltre, al momento giusto.",
           "title": "Andate oltre, al vostro ritmo."
