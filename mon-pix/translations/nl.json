@@ -72,7 +72,7 @@
       "data-protection-policy": "privacybeleid",
       "error": "Je moet de gebruiksvoorwaarden en het privacybeleid van Pix accepteren om een account aan te maken.",
       "label": "Ik accepteer de gebruiksvoorwaarden en het privacybeleid van Pix",
-      "message": "Ik accepteer de '<'a href=\"{cguUrl}\" class=\"link\" target=\"_blank\" rel=\"noopener noreferrer\"'>'gebruiksvoorwaarden'</a>' en de '<'a href=\"{dataProtectionPolicyUrl}\" class=\"link\" target=\"_blank\" rel=\"noopener noreferrer\"'>'privacybeleid'</a>' van Pix.",
+      "message": "Ik accepteer de '<'a href=\"{cguUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'gebruiksvoorwaarden'</a>' en de '<'a href=\"{dataProtectionPolicyUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'privacybeleid'</a>' van Pix.",
       "read-message": "Lees de '<'a href=\"{cguUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'gebruiksvoorwaarden'</a>' en de '<'a href=\"{dataProtectionPolicyUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'privacybeleid'</a>'."
     },
     "companion": {
@@ -321,7 +321,7 @@
         "error-message": {
           "date-field": "Gebruik het formaat dd-mm-jjjj bij het invoeren van het veld {fieldName}",
           "invalid-reconciliation-error": "Controleer je gegevens ({fields}) of neem contact op met een docent.",
-          "mandatory-field": "Dit veld is verplicht"
+          "mandatory-field": "Vul het veld {fieldName} in"
         },
         "field": {
           "birthdate": "Geboortedatum",
@@ -651,7 +651,6 @@
         "download-attestation": "Mijn certificaat downloaden",
         "download-certificate": "Mijn certificaat downloaden"
       },
-      "attestation": "Mijn certificaat downloaden",
       "back-link": "Terug naar mijn certificaten",
       "candidate": "Kandidaat :",
       "candidate-birth": "Geboren op {birthdate}",
@@ -717,6 +716,10 @@
           "expert": "Expert",
           "independent": "Onafhankelijk",
           "level": "Jouw niveau"
+        },
+        "progress-bar-explanation": {
+          "default": "Voortgangsbalk die aangeeft welk niveau je hebt bereikt ( {level}, d.w.z. niveau {globalLevelLabel} ) van het maximaal haalbare niveau van 7 (niveau Expert 1)",
+          "pre-beginner-level": "Voortgangsbalk die het maximale niveau aangeeft dat in de certificering bereikt kan worden (d.w.z. 7 of niveau Expert 1)"
         }
       },
       "hexagon-score": {
@@ -728,7 +731,6 @@
       "learn-about-certification-results": "Hoe moeten de resultaten worden geïnterpreteerd?",
       "obtained-certification": "De kandidaat heeft het niveau {globalLevelLabel} van de {frameworkLabel}-certificering bereikt.",
       "professionalizing-warning": "Het Pix-certificaat wordt door France Compétences erkend als een professionele kwalificatie zodra een minimale score van 120 pix is behaald.",
-      "progressbar-explanation": "oortgangsbalk die aangeeft welk niveau je hebt bereikt ( {level}, i.e. level {globalLevelLabel} ) van het maximaal haalbare niveau van 7 (niveau Expert 1)",
       "results": {
         "sub-title": "De kandidaat is toelaatbaar voor de {framework}-certificering.",
         "title": "Resultaat lezen:"
@@ -787,22 +789,22 @@
       "steps": {
         "1": {
           "paragraphs": {
-            "1": "Pix Certification is een '<strong>'adaptieve'</strong>'test om je niveau te beoordelen op de '<strong>'set van 16 digitale vaardigheden in het Pix'</strong>' referentiekader.",
+            "1": "De certificering {certificationName} is een '<strong>'adaptieve test'</strong>' om je niveau te beoordelen op de '<strong>'set van 16 digitale vaardigheden van het Pix-referentiekader'</strong>'.",
             "2": "De '<strong>'moeilijkheidsgraad van de vragen past zich in realtime aan'</strong>' op basis van de gegeven antwoorden.",
             "3": "Als sommige vragen moeilijk lijken, komt dat omdat de certificeringstest je maximale niveau wil meten. '<strong>'Als je een vraag niet kunt beantwoorden, heb je de optie om deze \"over te slaan\"'</strong>': de vraag zal niet opnieuw worden aangeboden tijdens de certificering en zal niet worden gevalideerd.",
-            "4": "Om een score te halen die zo dicht mogelijk bij je capaciteiten ligt '<strong>'is het nodig om naar het einde van de test te gaan'</strong>'."
+            "4": "Om een score te halen die zo dicht mogelijk bij je capaciteiten ligt '<strong>'is het nodig om naar het einde van de test te gaan'</strong>'.",
+            "pix-plus-1": "De certificering {certificationName} is een '<strong>'adaptieve test'</strong>' voor het evalueren van je niveau in '<strong>'alle competenties van het certificeringsreferentiekader {certificationName}'</strong>'."
           },
           "question": "Hoe werkt de certificeringstest?",
-          "title": "Welkom bij Pix-certificering"
+          "title": "Welkom bij de certificering {certificationName}"
         },
         "2": {
           "legend": {
-            "strong-text": "32 VRAGEN",
-            "text": "1 H 45 min"
+            "strong-text": "32 VRAGEN"
           },
           "paragraphs": {
             "1": "De certificeringstest bestaat uit '<strong>'32 vragen'</strong>'.",
-            "2": "Je hebt maximaal '<strong>'1u45'</strong>' om te reageren*.",
+            "2": "Je hebt maximaal '<strong>'{duration}'</strong>' om te reageren*.",
             "3": "*exclusief eventuele extra tijd",
             "4": "Als je '<strong>'minder dan 20 vragen invult, kunnen we je geen score geven'</strong>'."
           },
@@ -815,7 +817,7 @@
           },
           "paragraphs": {
             "1": {
-              "text": "Voor vragen in de '<strong>'vrije modus'</strong>', aangegeven met een groen pictogram: je mag zoeken op het web en gebruik maken van de digitale omgeving die tot je beschikking staat.",
+              "text": "Voor vragen in de '<strong>'vrije modus'</strong>', aangegeven met een groen pictogram: je mag zoeken op het web en gebruik maken van de digitale omgeving die tot je beschikking staat.'<br>'Bepaalde '<strong>'websites zijn echter niet toegankelijk tijdens de certificering'</strong>'.",
               "title": "Vrije modus :"
             },
             "2": {
@@ -843,7 +845,7 @@
             "3": "'<strong>'Gebruik een kunstmatig intelligentiesysteem'</strong>' of een chatbot.",
             "4": "'<strong>'Raadpleeg een zelfhulpforum'</strong>' geeft direct het antwoord op een vraag.",
             "5": "'<strong>'Zet elk ander middel in dat direct het antwoord op de vraag geeft'</strong>', zonder het werk te hebben gedaan dat de instructie vereist.",
-            "6": "'<strong>'Gebruik een andere browser'</strong>' dan de browser waarop je de Pix-certificeringstest uitvoert.",
+            "6": "'<strong>'Gebruik een andere browser'</strong>' dan de browser waarop je de {certificationName}-certificeringstest uitvoert.",
             "7": "'<strong>'Zich voordoen als' een andere persoon."
           },
           "pix-companion": "Toegang tot bepaalde sites is verboden als onderdeel van de certificeringstest, dankzij een extensie die op de browser is geïnstalleerd. Elke bewezen fraude (poging om de extensie te omzeilen of het niet naleven van de hierboven vermelde gedragingen) kan leiden tot het ongeldig verklaren van de certificering.",
@@ -856,7 +858,7 @@
     },
     "certification-joiner": {
       "congratulation-banner": {
-        "complementary-certification": {
+        "double-certification": {
           "eligible": "Je komt ook in aanmerking voor de aanvullende certificering :",
           "outdated": "<strong>Je komt niet langer in aanmerking voor de {doubleCertificationName}-certificering na de evolutie ervan.</strong><br />Neem contact op met je school of de organisatie die je de cursus heeft aangeboden om opnieuw een campagne te doen en zo weer in aanmerking te komen. Je voortgang is bewaard gebleven en je hoeft alleen nog maar de nieuwe evenementen te spelen, wat snel zou moeten gaan."
         },
@@ -866,7 +868,6 @@
         "message": "Gefeliciteerd {fullName}, je Pix-profiel is certificeerbaar."
       },
       "error-messages": {
-        "candidate-not-eligible": "<strong>Het account waarmee u op dit moment bent ingelogd komt niet in aanmerking voor deze certificeringssessie.</strong> '<br>' De ingevoerde informatie komt overeen met een kandidaat die alleen is geregistreerd voor de sessie aanvullende certificering. '<br>' Controleer of u bent ingelogd op het account dat in aanmerking komt om alleen de aanvullende certificering te volgen.",
         "generic": {
           "check-personal-info": "Controleer bij de toezichthouder of je persoonlijke gegevens overeenkomen met die op het inschrijfformulier.",
           "check-session-number": "Controleer het sessienummer.",
@@ -1210,7 +1211,7 @@
           "aria-label": "Geef de indicatie op het bewijs weer.",
           "close": "Ik snap het.",
           "focused": {
-            "content": "'<p class=\"tooltip-tag-information__title--focused\">'Blijf op deze pagina om te reageren!'</p>' Gebruik geen internet of een app. Elke activiteit buiten de zone wordt gedetecteerd.",
+            "content": "'<strong class=\"tooltip-tag-information__title--focused\">'Blijf op deze pagina om te reageren!'</strong><br/>' Gebruik geen internet of een app. Elke activiteit buiten de zone wordt gedetecteerd.",
             "title": "Scherpstelmodus"
           },
           "other": {
@@ -1575,7 +1576,7 @@
         "continue-with-pix": "Doorgaan met mijn Pix-account",
         "error-not-found": "Ben je student? '<br>' Controleer je gegevens (voornaam, achternaam en geboortedatum) of neem contact op met een docent.'<br><br>' Ben je docent? '<br>' Toegang tot een cursus is momenteel niet beschikbaar.",
         "first-title": "Sluit je aan bij de organisatie { organizationName }",
-        "invalid-reconciliation-error": "Er is een fout opgetreden. Neem contact op met ondersteuning.",
+        "invalid-reconciliation-error": "Er is een fout opgetreden. '<br>' Neem contact op met ondersteuning.",
         "login-information-message": "Het Pix-account '<b>'{ connectionMethod }'</b>' wordt gekoppeld aan de leerling: '<b>'{ firstName } { lastName }'</b>'.'<br><br>'Als jij dit bent, klik je op \"Koppelen\", anders log je uit.",
         "login-information-title": "Verbindingsinformatie",
         "subtitle": "Vul de ontbrekende informatie in"
@@ -1825,7 +1826,7 @@
         "retry": "Probeer het opnieuw",
         "score": {
           "title": "Serie beëindigd",
-          "yourScore": "Je score : {score}/{totalScore}"
+          "yourScore": "Je score : {score}/{total}"
         }
       },
       "qcm": {
@@ -1910,6 +1911,15 @@
       },
       "signup-form": {
         "button": "Ik maak mijn account aan",
+        "claims": {
+          "FrEduFonctAdm": "Administratieve functie",
+          "FrEduNumenHash": "Technische identificatie",
+          "discipline": "Discipline",
+          "employeeNumber": "Personeelsnummer",
+          "population": "Populatie",
+          "rne": "Aanwijzingsinstelling",
+          "title": "Functie"
+        },
         "description": "Er wordt een account aangemaakt met de informatie die door de organisatie is verstrekt",
         "error": "We were unable to retrieve your identity information from the service used. We invite you to contact this organisation's IT support.",
         "first-name-label-and-value": "Voornaam: {firstName}",
@@ -1937,7 +1947,7 @@
         }
       },
       "description": "Beoordeel jezelf in je eigen tempo op 16 digitale vaardigheden. Kies een vaardigheid en begin met het verdienen van pix.",
-      "first-title": "Je moet 16 vaardigheden testen. Concentreer je en ga!",
+      "first-title": "Je moet 16 vaardigheden testen. '<br>'Concentreer je en ga!",
       "resume-campaign-banner": {
         "accessibility": {
           "resume": "Vervolg je reis",
