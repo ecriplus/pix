@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/NR_Durabilite_AVA/picto_nr_durabilite_ava.svg",
-    "description": "<p>Extraction, fabrication, distribution, consommation… Produire de nouveaux appareils numériques a des impacts environnementaux importants. Le renouvellement toujours plus rapide des équipements accentue cette pression sur l’environnement. </p><p><br>Dans ce module, vous découvrirez les mécanismes d’obsolescence qui raccourcissent la durée de vie des appareils numériques et comprendrez comment s’amorce la transition vers une économie circulaire plus durable.</p>",
+    "description": "<p>Extraction, fabrication, distribution, consommation… Produire de nouveaux appareils numériques a des impacts environnementaux importants. Le renouvellement toujours plus rapide des équipements accentue cette pression sur l’environnement. </p><p><br>Dans ce module, vous allez découvrir les mécanismes d’obsolescence qui raccourcissent la durée de vie des appareils numériques et allez comprendre comment s’amorce la transition vers une économie circulaire plus durable.</p>",
     "duration": 10,
     "level": "advanced",
     "objectives": [
@@ -962,7 +962,7 @@
                           "content": "<p>Obsolescence logicielle</p>",
                           "feedback": {
                             "state": "<p>Bonne réponse !</p>",
-                            "diagnosis": "<p>L’arrêt des mises à jour logicielle est un cause fréquente d’obsolescence.</p>"
+                            "diagnosis": "<p>L’arrêt des mises à jour logicielle est une cause fréquente d’obsolescence.</p>"
                           }
                         },
                         {
@@ -1112,7 +1112,7 @@
                   },
                   {
                     "id": "273ac6f4-3454-404e-8d21-00550ce17128",
-                    "text": "Profiter d'une opération «&nbsp;Reprise + Bonus&nbsp;»&nbsp;:&nbsp;le vieil ordinateur est recyclé pour bénéficier d'une réduction sur un neuf",
+                    "text": "Profiter d'une opération « Reprise + Bonus » : le vieil ordinateur est recyclé pour bénéficier d'une réduction sur un neuf",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -1186,7 +1186,7 @@
                     "content": "<p>La première tablette</p>",
                     "feedback": {
                       "state": "<p>C’est exact ! </p>",
-                      "diagnosis": "<p>Sur l’étiquette Energy, on retrouve un <strong>indice de réparabilité</strong>, représenté par les pictogrammes de clé à molette et de tournevis. Cette tablette étant en classe \"A\", elle est  mieux notée et donc plus facilement réparable que l’autre tablette.</p>"
+                      "diagnosis": "<p>Sur l’étiquette Energy, on retrouve un <strong>indice de réparabilité</strong>, représenté par les pictogrammes de clé à molette et de tournevis. Cette tablette étant en classe « A », elle est  mieux notée et donc plus facilement réparable que l’autre tablette.</p>"
                     }
                   },
                   {
@@ -1194,7 +1194,7 @@
                     "content": "<p>La deuxième tablette</p>",
                     "feedback": {
                       "state": "<p>C’est l’inverse ! </p>",
-                      "diagnosis": "<p>Sur l’étiquette Energy, on retrouve un <strong>indice de réparabilité</strong>, représenté par les pictogrammes de clé à molette et de tournevis. Ici, la tablette&nbsp;est en classe C contre une classe A pour l’autre tablette, c’est donc l’autre tablette qui est plus facilement réparable.</p>"
+                      "diagnosis": "<p>Sur l’étiquette Energy, on retrouve un <strong>indice de réparabilité</strong>, représenté par les pictogrammes de clé à molette et de tournevis. Ici, la tablette&nbsp;est en classe  « C » contre une classe « A » pour l’autre tablette, c’est donc l’autre tablette qui est plus facilement réparable.</p>"
                     }
                   }
                 ],
