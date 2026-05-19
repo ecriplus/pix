@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Sur les réseaux sociaux, ce que vous voyez n’est pas choisi au hasard.&nbsp;🎲 Les algorithmes mettent en avant les contenus qui font réagir, et les logiciels d’intelligence artificielle (IA) générative permettent d’en produire toujours plus.</p><p>Découvrez comment ces mécanismes créent de la viralité, influencent ce que vous voyez et peuvent accélérer la diffusion de contenus trompeurs.</p>",
+    "description": "<p>Sur les réseaux sociaux, ce que vous voyez n’est pas choisi au hasard.&nbsp;🎲 </p><p>Les algorithmes mettent en avant les contenus qui font réagir, et les logiciels d’intelligence artificielle (IA) générative permettent d’en produire toujours plus.</p><p>Découvrez comment ces mécanismes créent de la viralité, influencent ce que vous voyez et peuvent accélérer la diffusion de contenus trompeurs.</p>",
     "duration": 10,
     "level": "independent",
     "objectives": [
@@ -105,7 +105,7 @@
     },
     {
       "id": "65126148-d49f-4d69-a55d-05c2fd3756bb",
-      "type": "question-yourself",
+      "type": "explore-to-understand",
       "grains": [
         {
           "id": "8fa6dc08-534c-4f77-b0f0-704ad25c9229",
@@ -118,7 +118,7 @@
                 "id": "2c4bd126-43b5-4b65-8f01-3f18f6a98b37",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Voici le fil d’actualité de Marine. Observez-le, puis répondez à la question qui suit.</p><ul><li>Pourquoi tout le monde parle de cette série 👀</li><li>3 recettes faciles avec seulement 4 ingrédients 🍽️</li><li>Trail des 3 bosquets&nbsp;: le plus beau lever de soleil 🌄🤩</li><li>Pancakes, fruits frais et café glacé ☀️Quand ton chien entend le mot “promenade” 🐶</li><li>Compilation des plus beaux buts de la semaine ⚽</li><li>Comment réussir des pâtes carbonara crémeuses 🍝</li><li>Renforcez vos quadriceps en 15min par jour 💪</li></ul>"
+                "content": "<p>Voici le fil d’actualité de Marine. Observez-le, puis répondez à la question qui suit.</p><ul>    <li>Pourquoi tout le monde parle de cette série 👀</li>    <li>3 recettes faciles avec seulement 4 ingrédients 🍽️</li>    <li>Trail des 3 bosquets&nbsp;: le plus beau lever de soleil 🌄🤩</li>    <li>Pancakes, fruits frais et café glacé ☀️</li>    <li>Quand ton chien entend le mot «&nbsp;promenade&nbsp;» 🐶</li>    <li>Compilation des plus beaux buts de la semaine ⚽</li>    <li>Comment réussir des pâtes carbonara crémeuses 🍝</li>    <li>Renforcez vos quadriceps en 15 minutes par jour 💪</li></ul>"
               }
             },
             {
@@ -149,11 +149,11 @@
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Effectivement.</p>",
-                    "diagnosis": "<p>Plusieurs contenus liés à la cuisine et au sport sont visibles dans le fil d’actualité de Marine, ce qui laisse penser qu’elle s’y intéresse particulièrement. Il y a plus de chances qu’elle voie des contenus proches de ce qu’elle regarde déjà. En effet, un réseau social utilise un <strong>algorithme de recommandation</strong>&nbsp;: un programme dont le but est de <strong>personnaliser les contenus qui apparaissent pour chaque utilisateur</strong>.</p>"
+                    "diagnosis": "<p>Plusieurs contenus liés à la cuisine et au sport sont visibles dans le fil d’actualité de Marine, ce qui laisse penser qu’elle s’y intéresse particulièrement. Il y a plus de chances qu’elle voie des contenus proches de ce qu’elle regarde déjà.</p><p>En effet, un réseau social utilise un <strong>algorithme de recommandation</strong>&nbsp;: un programme dont le but est de <strong>personnaliser les contenus qui apparaissent pour chaque utilisateur</strong>.</p>"
                   },
                   "invalid": {
                     "state": "<p>C’est peu probable.</p>",
-                    "diagnosis": "<p>Vu les centres d’intérêt de Marine, il y a plus de chances qu’elle voie des contenus proches de ce qu’elle regarde déjà, ici la cuisine et le sport. En effet, un réseau social utilise un <strong>algorithme de recommandation</strong>&nbsp;: un programme dont le but est de <strong>personnaliser les contenus qui apparaissent pour chaque utilisateur</strong>.</p>"
+                    "diagnosis": "<p>Vu les centres d’intérêt de Marine, il y a plus de chances qu’elle voie des contenus proches de ce qu’elle regarde déjà, ici la cuisine et le sport.</p><p>En effet, un réseau social utilise un <strong>algorithme de recommandation</strong>&nbsp;: un programme dont le but est de <strong>personnaliser les contenus qui apparaissent pour chaque utilisateur</strong>.</p>"
                   }
                 },
                 "solutions": [
@@ -175,7 +175,7 @@
                 "id": "759f9687-45a7-4d7f-a2c6-eead977661a9",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>L’algorithme de recommandation analyse le <strong>comportement de l’utilisateur</strong>&nbsp;: là où il <strong>clique</strong>, ce qu’il <strong>regarde</strong>, ce qui le fait <strong>réagir</strong> (avec des likes, des commentaires ou des partages).<br>Ensuite, il lui recommande des contenus similaires susceptibles de le faire réagir à nouveau. <br>Ce mécanisme de recommandation est utilisé pour <strong>capter l’attention de l’utilisateur</strong> et pour le faire <strong>rester le plus longtemps possible</strong> sur le réseau social.</p>"
+                "content": "<p>L’algorithme de recommandation analyse le <strong>comportement de l’utilisateur</strong>&nbsp;: là où il <strong>clique</strong>, ce qu’il <strong>regarde</strong>, ce qui le fait <strong>réagir</strong> (avec des likes, des commentaires ou des partages).<br>Ensuite, il lui recommande des contenus similaires susceptibles de le faire réagir à nouveau.</p><p><br></p><p>Ce mécanisme de recommandation est utilisé pour <strong>capter l’attention de l’utilisateur</strong> et pour le faire <strong>rester le plus longtemps possible</strong> sur le réseau social.</p>"
               }
             }
           ]
@@ -207,7 +207,7 @@
                 "id": "c3ee2c5b-031e-415a-bb94-d18836736a7c",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Deux publications parlent du même sujet. Pourtant, l’une est massivement partagée alors que l’autre passe presque inaperçue.</p><p><strong>Observez-les, puis répondez à la question qui suit.</strong></p><p>Publication A&nbsp;: </p><p>📰 “Une étude montre qu’un manque de sommeil régulier peut avoir des effets sur la concentration.” </p><p>👍 24 mentions “J’aime” / 💬 13 commentaires / ↪️ 12 partages</p><p>Heure de publication&nbsp;: 21h24 </p><p>Publication B&nbsp;:&nbsp; “Vous détruisez votre cerveau chaque nuit sans le savoir !” 😱&nbsp;</p><p>👍 17 487 mentions “J’aime” /💬 4 221 commentaires / ↪️ 12 093 partages</p><p>Heure de publication&nbsp;: 8h12</p>"
+                "content": "<p>Deux publications parlent du même sujet. Pourtant, l’une est massivement partagée alors que l’autre passe presque inaperçue.</p><p><br></p><p><strong>Observez-les, puis répondez à la question qui suit.</strong></p><p><strong><br></strong></p><h5>Publication A&nbsp;: </h5><p>«&nbsp;Une étude montre qu’un manque de sommeil régulier peut avoir des effets sur la concentration.&nbsp;»&nbsp;📰</p><p>👍 24 mentions “J’aime” / 💬 13 commentaires / ↪️ 12 partages</p><p>Heure de publication&nbsp;: 21h24</p><p><br></p><h5>Publication B&nbsp;:&nbsp; </h5><p>«&nbsp;Vous détruisez votre cerveau chaque nuit sans le savoir !&nbsp;» 😱&nbsp;</p><p>👍 17 487 mentions “J’aime” /💬 4 221 commentaires / ↪️ 12 093 partages</p><p>Heure de publication&nbsp;: 8h12</p>"
               }
             },
             {
@@ -322,7 +322,119 @@
                 "id": "c640ce0f-2cf7-4b7b-982e-c063fc16e9b0",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Deux créateurs publient des vidéos sur les réseaux sociaux. Leur objectif&nbsp;: produire des contenus viraux, quitte à diffuser des contenus trompeurs.</p><p><strong>Observez leur manière de travailler, puis répondez aux questions qui suivent.</strong></p>"
+                "content": "<p>Deux créateurs publient des vidéos sur les réseaux sociaux. Leur objectif&nbsp;: produire des contenus viraux, quitte à diffuser des contenus trompeurs.</p><p><br></p><p><strong>Observez leur manière de travailler, puis répondez aux questions qui suivent.</strong></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "f7aa057e-bd74-4934-876f-12c986924849",
+                "type": "text",
+                "tag": " ",
+                "content": "<h5>👨‍🦱 Loïc </h5><ul><li>filme une vidéo</li><li>fait le montage</li><li>ajoute des effets visuels</li><li>publie la vidéo</li></ul><h5>👨‍🦰 Joao </h5><ul><li>utilise un logiciel d’IA générative</li><li>génère plusieurs vidéos réalistes à partir d’un simple prompts</li><li>électionne celles qui semblent les plus accrocheuses</li><li>publie les vidéos</li></ul>"
+              }
+            },
+            {
+              "type": "stepper",
+              "instruction": "",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "ce893b30-086a-471d-b294-b866fa19d9d9",
+                      "type": "qcm",
+                      "instruction": "<p>À votre avis, quelles affirmations sont vraies concernant ces deux créateurs ?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "<p>Joao peut produire plus de contenus, plus rapidement.</p>"
+                        },
+                        {
+                          "id": "1",
+                          "content": "<p>Loïc peut difficilement publier autant de vidéos que Joao en une journée.</p>"
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Joao peut produire des contenus très réalistes même sans compétences en montage vidéo.</p>"
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Les contenus de Joao seront moins visibles car ils sont générés par IA.</p>"
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Le fait qu’un contenu soit généré par IA garantit qu’il deviendra viral.</p>"
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Effectivement.</p>",
+                          "diagnosis": "<p>L’utilisation d’un logiciel d’IA générative permet de produire facilement et rapidement un grand nombre de contenus, souvent très réalistes notamment des deepfakes (hypertrucages).<br>Un créateur peut ainsi publier beaucoup plus de contenus en peu de temps.</p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Eh non.</p>",
+                          "diagnosis": "<p>L’utilisation d’un logiciel d’IA générative permet de produire facilement et rapidement un grand nombre de contenus, souvent très réalistes notamment des deepfakes (hypertrucages).<br>Un créateur peut ainsi publier beaucoup plus de contenus en peu de temps.</p>"
+                        }
+                      },
+                      "solutions": [
+                        "0",
+                        "2"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "5e321698-e0bd-43ae-aa0e-21ad06088bd2",
+                      "type": "qcm",
+                      "instruction": "<p>Dans le cas de Joao, que produit l’association entre l’utilisation d’un logiciel d’IA générative et l’existence des algorithmes de recommandation ?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "<p>Les algorithmes mettent en avant les contenus qui font le plus réagir les utilisateurs.</p>"
+                        },
+                        {
+                          "id": "1",
+                          "content": "<p>Les contenus générés par IA sont automatiquement bloqués.</p>"
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Les algorithmes vérifient la fiabilité des contenus avant de les diffuser.</p>"
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Les contenus peuvent paraître crédibles même s’ils sont trompeurs.</p>"
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Effectivement.</p>",
+                          "diagnosis": "<p>Les algorithmes ne bloquent pas automatiquement les contenus générés par IA et ne vérifient pas systématiquement leur fiabilité. Ils repèrent surtout ce qui fait réagir les utilisateurs, qu’il s’agisse de contenus vrais ou faux.</p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Eh non.</p>",
+                          "diagnosis": "<p>Les algorithmes ne bloquent pas automatiquement les contenus générés par IA et ne vérifient pas systématiquement leur fiabilité. Ils repèrent surtout ce qui fait réagir les utilisateurs, qu’il s’agisse de contenus vrais ou faux.</p>"
+                        }
+                      },
+                      "solutions": [
+                        "0",
+                        "3"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "1997254d-e266-4d9a-8f58-57c115ad618e",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Comme ces <strong>deepfakes</strong> sont conçus pour attirer l’attention et faire réagir fortement les utilisateurs, ils sont <strong>mis en avant</strong> par les <strong>algorithmes de recommandation</strong>.</p><p>Résultat, quelqu’un qui souhaite créer du contenu dans le but de diffuser des <strong>informations fausses ou trompeuses</strong> pour <strong>manipuler les utilisateurs</strong> peut donc le faire <strong>beaucoup plus facilement avec plus de succès</strong>.</p>"
               }
             }
           ]
@@ -542,7 +654,7 @@
         {
           "id": "7b7a7ad2-1e1d-4b05-85cc-382484882332",
           "type": "activity",
-          "title": "Acitivité 3",
+          "title": "Activité 3",
           "components": [
             {
               "type": "element",
@@ -567,6 +679,100 @@
                   "colorOfHighlightSentence": ""
                 }
               }
+            },
+            {
+              "type": "stepper",
+              "instruction": "",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "a91c9511-c26f-419a-9f8b-e64dd7653996",
+                      "type": "qcm",
+                      "instruction": "<p>Selon l’article, que peut-on dire sur ces vidéos d’animaux sur des trampolines ?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "<p>Ces vidéos peuvent être créées en grande quantité.</p>"
+                        },
+                        {
+                          "id": "1",
+                          "content": "<p>Ces vidéos sont longues à produire.</p>"
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Ces vidéos se diffusent en ligne très rapidement.</p>"
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Ces vidéos ont été filmées par des caméras de surveillance.</p>"
+                        },
+                        {
+                          "id": "4",
+                          "content": "<p>Ces vidéos ont été filmées dans un refuge pour animaux abandonnés.</p>"
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Exactement !</p>",
+                          "diagnosis": "<p>Les vidéos d’animaux ont été créées en utilisant l’IA générative&nbsp;: elles sont donc très facile à produire et peuvent être produites en grande quantité. Ces vidéos, optimisées pour générer des clics sur les réseaux sociaux, se sont diffusées rapidement&nbsp;: elles sont devenues virales.</p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Pas tout-à-fait.</p>",
+                          "diagnosis": "<p>Les vidéos d’animaux ont été créées en utilisant l’IA générative&nbsp;: elles n’ont donc pas été filmées par des caméras de surveillance ni dans un refuge pour animaux abandonnés.</p>"
+                        }
+                      },
+                      "solutions": [
+                        "0",
+                        "2"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "3d8037e1-0ddc-489b-bc3d-4dfc998c9764",
+                      "type": "qcm",
+                      "instruction": "<p>Quels sont les problèmes posés par la diffusion de ces vidéos ?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "0",
+                          "content": "<p>Les utilisateurs ne sont pas toujours prévenus qu’il s’agit de vidéos créées avec l’IA générative.</p>"
+                        },
+                        {
+                          "id": "1",
+                          "content": "<p>Ces vidéos peuvent faire douter de la fiabilité d’images de surveillance réelles.</p>"
+                        },
+                        {
+                          "id": "2",
+                          "content": "<p>Depuis la diffusion, les ventes de trampolines ont augmenté de 25%, créant des pénuries.</p>"
+                        },
+                        {
+                          "id": "3",
+                          "content": "<p>Comme elles sont publiées par des comptes automatisés, ces vidéos sont moins diffusées.</p>"
+                        }
+                      ],
+                      "feedbacks": {
+                        "valid": {
+                          "state": "<p>Exactement !<br></p>",
+                          "diagnosis": "<p>Les utilisateurs ne sont pas toujours avertis qu’un contenu a été généré avec l’IA. Le réalisme de ces images fictives peut faire douter des images bien réelles enregistrées par des caméras de surveillance.</p>"
+                        },
+                        "invalid": {
+                          "state": "<p>Pas tout-à-fait.</p>",
+                          "diagnosis": "<p>Ce n’est pas parce qu’une vidéo a été publiée par un compte automatisé qu’elle sera moins diffusée. Par ailleurs, l’article ne donne aucun élément concernant les ventes de trampoline.</p>"
+                        }
+                      },
+                      "solutions": [
+                        "0",
+                        "1"
+                      ]
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
