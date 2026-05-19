@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Ce module va vous aider à comprendre la méthode principale utilisée pour évaluer les impacts environnementaux du numérique. Vous verrez quels éléments doivent être pris en compte, pourquoi il faut examiner la vide d’un équipement dans son ensemble, et pourquoi plusieurs indicateurs sont utiles pour lire les résultats de l’impact environnemental du numérique.</p>",
+    "description": "<p>Ce module va vous aider à comprendre la méthode principale utilisée pour évaluer les impacts environnementaux du numérique. Vous verrez quels éléments doivent être pris en compte, pourquoi il faut examiner la vie d’un équipement dans son ensemble, et pourquoi plusieurs indicateurs sont utiles pour comprendre les résultats de l’impact environnemental du numérique.</p>",
     "duration": 10,
     "level": "independent",
     "objectives": [
@@ -303,7 +303,7 @@
                 "id": "34bd97fc-9f59-46ab-829b-53a1b7025316",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>L’activité précédente a permis d’identifier les trois grandes composantes du numérique&nbsp;: <strong>les équipements des utilisateurs, les réseaux et les centres de données</strong>.</p><p>Quand une étude annonce un chiffre sur l’impact environnemental du numérique, ce chiffre dépend du <strong>périmètre étudié</strong>. Une étude peut inclure seulement les smartphones et les ordinateurs, tandis qu’une autre peut aussi prendre en compte les télévisions connectées, les réseaux ou les centres de données.</p><h5>🤔 Pourquoi faut-il connaître le périmètre d’une étude&nbsp;?</h5><p>Parce que deux études peuvent donner des résultats différents sans mesurer exactement la même chose. Pour comprendre ou comparer un chiffre, il faut donc savoir <strong>ce qui est inclus</strong>, <strong>ce qui est exclu</strong> et <strong>quel indicateur environnemental est utilisé</strong>.</p>"
+                "content": "<p>L’activité précédente a permis d’identifier les trois grandes composantes du numérique&nbsp;: <strong>les équipements des utilisateurs, les réseaux et les centres de données</strong>.</p><p>Quand une étude annonce un chiffre sur l’impact environnemental du numérique, ce chiffre dépend du <strong>périmètre étudié</strong>. Une étude peut inclure seulement les smartphones et les ordinateurs, tandis qu’une autre peut aussi prendre en compte les télévisions connectées, les réseaux ou les centres de données.</p><h5>🤔 Pourquoi faut-il connaître le périmètre d’une étude&nbsp;?</h5><p>Parce que deux études peuvent donner des résultats différents si elles ne mesurent pas exactement la même chose. Pour comprendre ou comparer un chiffre, il faut donc savoir <strong>ce qui est inclus</strong>, <strong>ce qui est exclu</strong> et <strong>quel indicateur environnemental est utilisé</strong>.</p>"
               }
             }
           ]
@@ -501,7 +501,7 @@
                 "id": "f12856b3-74b4-4e72-9079-1aceab56bc35",
                 "type": "custom",
                 "title": "",
-                "instruction": "<p>Les trois graphiques ci-dessous montrent trois indicateurs environnementaux du numérique. Pour chaque indicateur, on observe la répartition des impacts selon les étapes du cycle de vie et la grande famille du numérique.</p>",
+                "instruction": "<p>Les trois graphiques ci-dessous montrent trois indicateurs environnementaux du numérique. Pour chaque indicateur, on observe la répartition des impacts selon les étapes du cycle de vie et la composante du numérique.</p>",
                 "functionalInstruction": "",
                 "tagName": "pix-carousel",
                 "props": {
@@ -691,7 +691,7 @@
                       "id": "e9db72b8-cede-469f-b334-4de359561e03",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Pour lire correctement les résultats d’une étude, il faut regarder quel <strong>type d’impact environnemental</strong> est mesuré. Un même usage numérique peut avoir des effets différents sur le climat, les ressources ou la santé.</p><p>Le tableau ci-dessous présente quelques impacts des équipements numériques couramment étudiés.</p>"
+                      "content": "<p>Pour lire correctement les résultats d’une étude, il faut regarder quel <strong>type d’impact environnemental</strong> est mesuré. Un même usage numérique peut avoir des effets différents sur le climat, les ressources naturelles ou la santé.</p><p>Le tableau ci-dessous présente quelques impacts des équipements numériques couramment étudiés.</p>"
                     }
                   ]
                 },
