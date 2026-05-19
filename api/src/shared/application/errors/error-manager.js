@@ -29,7 +29,7 @@ import * as SharedDomainErrors from '../../domain/errors.js';
 import { getBaseLocale } from '../../domain/services/locale-service.js';
 import { getI18n } from '../../infrastructure/i18n/i18n.js';
 import { getChallengeLocale } from '../../infrastructure/utils/request-response-utils.js';
-import { BaseHttpError, HttpErrors } from './http-errors.js';
+import { HttpErrors } from './http-errors.js';
 
 const NOT_VALID_RELATIONSHIPS = ['externalId', 'participantExternalId'];
 
@@ -173,10 +173,6 @@ const INTERNAL_SERVER_ERRORS = [LLMDomainErrors.IncorrectMessagesOrderingError];
 const PAYLOAD_TOO_LARGE_ERRORS = [LLMDomainErrors.TooLargeMessageInputError];
 
 function _mapToHttpError(error) {
-  if (error instanceof HttpErrors.BaseHttpError) {
-    return error;
-  }
-
   // Special cases: hardcoded messages or non-standard patterns
   if (error instanceof SharedDomainErrors.UserNotAuthorizedToAccessEntityError) {
     return new HttpErrors.ForbiddenError('Utilisateur non autorisé à accéder à la ressource');
@@ -297,7 +293,11 @@ export class ErrorHapiManager {
   handle(request, h) {
     const { response } = request;
 
-    if (response instanceof SharedDomainErrors.DomainError || response instanceof BaseHttpError) {
+    if (response instanceof HttpErrors.BaseHttpError) {
+      return HttpErrors.sendJsonApiError(response, h);
+    }
+
+    if (response instanceof SharedDomainErrors.DomainError) {
       if (response instanceof SharedDomainErrors.EntityValidationError) {
         const locale = getChallengeLocale(request);
         const language = getBaseLocale(locale);
