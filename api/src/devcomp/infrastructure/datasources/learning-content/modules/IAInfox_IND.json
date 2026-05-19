@@ -46,7 +46,7 @@
                 "proposals": [
                   {
                     "id": "0",
-                    "content": "<p>Exactement les mêmes contenus dans le même ordre?</p>",
+                    "content": "<p>Exactement les mêmes contenus dans le même ordre.</p>",
                     "feedback": {
                       "diagnosis": "<p>C’est peu probable.<br>Sur un réseau social, <strong>tous les utilisateurs ne voient pas les mêmes contenus</strong>. Chaque réseau social adapte ce qu’il affiche selon l’utilisateur.</p>"
                     }
