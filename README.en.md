@@ -1,28 +1,23 @@
 # Pix
 
-Plateforme d'évaluation et de certification des compétences numériques pour tous.
+Platform for assessing and certifying digital skills for everyone.
 ![Screenshot Pix App](./docs/assets/pix-app-screenshot.png)
 
-## Présentation
+## Overview
 
-Le numérique est désormais partout. Dans notre vie professionnelle comme privée. Maîtriser Internet et l'informatique
-est devenu un enjeu majeur pour la société. Dans ce contexte, la mission de [Pix](https://pix.fr) est d'**aider tout un
-chacun à cultiver ses compétences numériques**.
+Digital technology is now everywhere — in our professional and personal lives alike. Mastering the internet and computing has become a major challenge for society. In this context, [Pix](https://pix.fr)'s mission is to **help everyone develop their digital skills**.
 
-Pix s’adresse à tous : élèves, étudiants, professionnels en activité, décrocheurs, demandeurs d’emploi, séniors, ou plus
-simplement citoyens qui souhaitent mesurer, développer et valoriser leurs compétences numériques.
+Pix is for everyone: students, higher education learners, working professionals, school dropouts, job seekers, seniors, or simply citizens who want to measure, develop, and showcase their digital skills.
 
-Le service se présente sous la forme d’une [plateforme en ligne](https://app.pix.fr) d’évaluation et de certification
-des compétences numériques.
+The service takes the form of an [online platform](https://app.pix.fr) for assessing and certifying digital skills.
 
-Pix cherche à susciter l’envie de se former tout au long de la vie en proposant un standard ainsi que des méthodes
-d’évaluation innovantes, exigeantes et bienveillantes.
+Pix aims to foster a desire for lifelong learning by offering a standard as well as innovative, demanding, and supportive assessment methods.
 
 ## Changelog
 
-Les changements apportés dans chaque version sont documentés dans le [CHANGELOG](./CHANGELOG.md).
+Changes introduced in each version are documented in the [CHANGELOG](./CHANGELOG.md).
 
-## Restez en contact
+## Stay in Touch
 
 - [Twitter](https://twitter.com/pix_officiel)
 - [Blog](https://engineering.pix.fr)
@@ -30,13 +25,13 @@ Les changements apportés dans chaque version sont documentés dans le [CHANGELO
 
 ## Installation
 
-Pour installer Pix en local, lire le [guide d'installation](./INSTALLATION.md).
+To install Pix locally, read the [installation guide](./INSTALLATION.md).
 
-## Contribution
+## Contributing
 
-Assurez-vous de lire le [guide de contribution](./CONTRIBUTING.md) avant d'ouvrir une pull request.
+Make sure to read the [contribution guide](./CONTRIBUTING.md) before opening a pull request.
 
 ## License
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-Ce logiciel et son code source sont distribués sous [licence AGPL](https://www.gnu.org/licenses/why-affero-gpl.fr.html).
+This software and its source code are distributed under the [AGPL license](https://www.gnu.org/licenses/why-affero-gpl.fr.html).

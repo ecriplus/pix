@@ -55,7 +55,7 @@ VALUES
 
 ### Plug LCMS preview
 
-Using an admin account previously created on Pix as values, add these environment variables in LCMS :
+Using an admin account previously created on Pix as values, add these environment variables in LCMS:
 
 ```dotenv
 # No trailing slash !

@@ -1,57 +1,56 @@
 # Installation
 
-## Prérequis
+## Prerequisites
 
-Vous devez au préalable avoir correctement installé les logiciels suivants :
+You must first have the following software correctly installed:
 
 - [Git](https://git-scm.com/) (2.6.4)
-- [Node.js](https://nodejs.org/) (version utilisée disponible dans les fichiers [.nvmrc](https://github.com/1024pix/pix/blob/dev/.nvmrc)) il est recommandé d'utiliser un gestionnaire de versions tel que [nvm](https://github.com/nvm-sh/nvm)
+- [Node.js](https://nodejs.org/) (version in use available in the [.nvmrc](https://github.com/1024pix/pix/blob/dev/.nvmrc) files) — it is recommended to use a version manager such as [nvm](https://github.com/nvm-sh/nvm)
 - [Docker](https://docs.docker.com/get-started/) (20.10)
 
-> ⚠️ Les versions indiquées sont celles utilisées et préconisées par l'équipe de développement. Il est possible que
-> l'application fonctionne avec des versions différentes.
+> ⚠️ The versions listed are those used and recommended by the development team. The application may work with different versions.
 
-Assurez-vous aussi de ne pas avoir de processus écoutant sur le port:
+Also make sure no process is listening on the following ports:
 
-- 5432 (PostgreSQL), ou surchargez la variable `PIX_DATABASE_PORT`;
-- 6379 (redis), ou surchargez la variable `PIX_CACHE_PORT`.
+- 5432 (PostgreSQL), or override the `PIX_DATABASE_PORT` variable;
+- 6379 (redis), or override the `PIX_CACHE_PORT` variable.
 
 ## Instructions
 
-### Récupérer le code source.
+### Fetch the source code
 
-Récupérer le code source en local
+Clone the source code locally:
 
 ```bash
 git clone git@github.com:1024pix/pix.git && cd pix
 ```
 
-⚠️ Cela prend environ 10 minutes avec une connexion standard.
-Pour ne récupérer que la dernière version, qui ne prend qu'une minute, exécuter plutôt :
+⚠️ This takes about 10 minutes on a standard connection.
+To fetch only the latest version, which takes about a minute, run instead:
 
 ```bash
 git clone --filter tree:0  git@github.com:1024pix/pix.git && cd pix
 ```
 
-### Configurer l'environnement de développement sous Windows (si applicable)
+### Configure the development environment on Windows (if applicable)
 
-Définir dans `.npmrc` l'invite de commande à utiliser pour lancer les script-shell.
+Set the shell to use for running shell scripts in `.npmrc`.
 
-Ouvrir une invite de commande (`cmd.exe`) puis:
+Open a command prompt (`cmd.exe`) then:
 
-- installation 64bit :
+- 64-bit installation:
 
 ```bash
 npm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
 ```
 
-- installation 32bit:
+- 32-bit installation:
 
 ```bash
 npm config set script-shell "C:\\Program Files (x86)\\git\\bin\\bash.exe"
 ```
 
-Enfin, pour éviter les problèmes de retour ligne sous Windows:
+Finally, to avoid line-ending issues on Windows:
 
 ```bash
 git config --local core.autocrlf input
@@ -59,78 +58,75 @@ git rm -r --cached .
 git reset --hard
 ```
 
-### Configurer l'environnement de développement
+### Configure the development environment
 
-Le script d'installation effectue les tâches suivantes :
+The installation script performs the following tasks:
 
-- créer la base de données et le cache (conteneurs Docker)
-- installer les librairies communes à tous les projets
+- create the database and cache (Docker containers)
+- install libraries shared across all projects
 
-Il prend moins de 5 minutes.
-Exécutez-le avec  `npm run configure`
+It takes less than 5 minutes.
+Run it with `npm run configure`.
 
-Vérifiez que le script s'est bien terminé : le message "🎉 Congratulations! Your environment has been set up." doit être
-affiché. Si ce n'est pas le cas, contactez les équipes de développement en
-ouvrant [une issue](https://github.com/1024pix/pix/issues).
+Verify the script completed successfully: the message "🎉 Congratulations! Your environment has been set up." should be displayed. If it is not, contact the development teams by opening [an issue](https://github.com/1024pix/pix/issues).
 
 ### IDE
 
 #### VSCode
 
-Pour les utilisateur de vscode, des fichiers de config sont disponibles dans le dossier `.vscode`.
-Pour les utiliser:
+For VSCode users, configuration files are available in the `.vscode` folder.
+To use them:
 `cp .vscode/sample.launch.json .vscode/launch.json`
 `cp .vscode/sample.settings.json .vscode/settings.json`
 
-Les extensions recommandées peuvent se retrouver dans l'onglet extension en renseignant le filtre `@recommanded`
+Recommended extensions can be found in the extensions tab by entering the filter `@recommended`.
 
-### Démarrer les applications
+### Start the applications
 
-Pour démarrer l'ensemble des applications, exécuter `npm run dev`
+To start all applications, run `npm run dev`.
 
-⚠️ Cela prend entre 10 et 15 minutes et la consommation mémoire est élevée lors de cette opération.
+⚠️ This takes between 10 and 15 minutes and memory consumption is high during this operation.
 
-Si cela pose problème, démarrer sélectivement les applications :
+If this is an issue, start applications selectively:
 
-- Admin : `npm run dev:admin`
-- Api : `npm run dev:api`
-- App : `npm run dev:mon-pix`
-- Certif : `npm run dev:certif`
-- Orga : `npm run dev:orga`
-- Pix1d : `npm run dev:pix1d`
+- Admin: `npm run dev:admin`
+- Api: `npm run dev:api`
+- App: `npm run dev:mon-pix`
+- Certif: `npm run dev:certif`
+- Orga: `npm run dev:orga`
+- Pix1d: `npm run dev:pix1d`
 
-### Accéder aux applications
+### Access the applications
 
-- [Pix Admin](http://localhost:4202) - port 4202 avec le compte `superadmin@example.net` / `pix123`
+- [Pix Admin](http://localhost:4202) - port 4202 with account `superadmin@example.net` / `pix123`
 - [Pix API](http://localhost:3000/api) - port 3000
-- [Pix App](http://localhost:4200) - port 4200 avec le compte `certif-success@example.net` / `pix123`
-- [Pix Orga](http://localhost:4201) - port 4201 avec le compte `sup.admin@example.net` / `pix123`
-- [Pix Certif](http://localhost:4203) - port 4203 avec le compte `certifsup@example.net` / `pix123`
+- [Pix App](http://localhost:4200) - port 4200 with account `certif-success@example.net` / `pix123`
+- [Pix Orga](http://localhost:4201) - port 4201 with account `sup.admin@example.net` / `pix123`
+- [Pix Certif](http://localhost:4203) - port 4203 with account `certifsup@example.net` / `pix123`
 
-Le mot de passe est par défaut `pix123`.
-D'autres comptes sont disponibles dans les [seeds](api/db/seeds/data).
+The default password is `pix123`.
+Other accounts are available in the [seeds](api/db/seeds/data).
 
-### Complément
+### Additional configuration
 
-#### Accès aux sources de données
+#### Accessing data sources
 
-Se connecter à la base de données :
+Connect to the database:
 
-- de test manuel : `docker exec -it pix-api-postgres psql -U postgres pix`;
-- de test automatique : `docker exec -it pix-api-postgres psql -U postgres pix_test`.
+- manual test: `docker exec -it pix-api-postgres psql -U postgres pix`;
+- automated test: `docker exec -it pix-api-postgres psql -U postgres pix_test`.
 
-Se connecter au cache :  `docker exec -it pix-api-redis redis-cli`
+Connect to the cache: `docker exec -it pix-api-redis redis-cli`
 
 #### Configuration
 
-Pix s'appuie sur la bibliothèque [Dotenv](https://github.com/motdotla/dotenv) pour gérer les variables d'environnement
-en local.
+Pix uses the [Dotenv](https://github.com/motdotla/dotenv) library to manage environment variables locally.
 
-Le script `scripts/configure.sh` génère un fichier [.env](api/.env) standard.
+The `scripts/configure.sh` script generates a standard [.env](api/.env) file.
 
-Vous pouvez l'adapter à vos besoins:
+You can adapt it to your needs:
 
-- activer le logging détaillé avec pretty-print :
+- enable detailed logging with pretty-print:
 
 ```dotenv
 LOG_ENABLED=true
@@ -138,23 +134,22 @@ LOG_LEVEL=debug
 LOG_FOR_HUMANS=true
 ```
 
-- permettre la suppression du schéma de la base de données sans arrêter l'API :
+- allow dropping the database schema without stopping the API:
 
 ```dotenv
 FORCE_DROP_DATABASE=true
 ```
 
-- se connecter à un autre référentiel pédagogique que celui de base (test):
+- connect to a different learning content repository than the default (test):
 
 ```dotenv
 LCMS_API_KEY=<SOME_KEY>
 LCMS_API_URL=<SOME_URL>
 ```
 
-#### Configurer les domaines locaux
+#### Configure local domains
 
-Il est possible d'accéder aux applications Pix avec des domaines `*.dev.pix.<tld>`
-plutôt que `localhost:port` :
+It is possible to access Pix applications with `*.dev.pix.<tld>` domains instead of `localhost:port`:
 
 - Mon Pix
   - http://app.dev.pix.fr/
@@ -167,82 +162,70 @@ plutôt que `localhost:port` :
 - Certif
   - http://certif.dev.pix.fr/
 
-Pour configurer les domaines locaux, exécuter le script :
+To configure local domains, run the script:
 
 ```bash
 sudo npm run domains:install
 ```
 
-Démarrer le conteneur docker :
+Start the Docker container:
 
 ```bash
 npm run domains:start
 ```
 
-Arrêter le conteneur :
+Stop the container:
 
 ```bash
 npm run domains:stop
 ```
 
-#### Charger des SSO OIDC lors du chargement des seeds
+#### Loading OIDC SSO providers when seeding
 
-Le chargement des SSO OIDC lors du chargement des seeds est effectué depuis la
-variable d’environnement `OIDC_PROVIDERS` si elle définie. Si elle est définie
-elle doit contenir du JSON. Écrire ce JSON est assez pénible car il y a beaucoup
-de propriétés à fournir et qu’on ne peut actuellement pas utiliser de retours à
-la ligne dans le fichier `.env` (même si ce serait théoriquement possible avec
-la notation here-document). Aussi un fichier d'exemple
-`OIDC_PROVIDERS.example.json` est fourni avec un mode opératoire facilité décrit
-ci-dessous.
+Loading OIDC SSO providers during seeding is done from the `OIDC_PROVIDERS` environment variable if it is defined. When defined, it must contain JSON. Writing this JSON is quite tedious as there are many properties to provide and newlines cannot currently be used in the `.env` file (even though it would theoretically be possible with here-document notation). An example file `OIDC_PROVIDERS.example.json` is therefore provided with a simplified workflow described below.
 
-1. Copier et adapter le fichier `OIDC_PROVIDERS.example.json` à votre besoin :
+1. Copy and adapt the `OIDC_PROVIDERS.example.json` file to your needs:
 
    ```shell
    cp OIDC_PROVIDERS.example.json OIDC_PROVIDERS.json
    ```
 
-2. Définir la variable d’environnement `OIDC_PROVIDERS` avec le contenu du
-fichier `OIDC_PROVIDERS.json` :
+2. Set the `OIDC_PROVIDERS` environment variable with the contents of the `OIDC_PROVIDERS.json` file:
 
    ```shell
    export OIDC_PROVIDERS=$(cat OIDC_PROVIDERS.json)
    ```
 
-3. Exécuter le chargement des seeds avec du debug pour constater le bon
-chargement des SSO OIDC :
+3. Run the seed loading with debug output to verify that OIDC SSO providers are loaded correctly:
 
    ```shell
    export DEBUG="pix:oidc-providers:*"
    npm run db:reset
    ```
 
-#### Tester les envois d'e-mails
+#### Testing email sending
 
-##### Avec une interface web
+##### With a web interface
 
-Il est possible de tester les envois d'e-mails avec [Mailpit](https://mailpit.axllent.org/), un outil qui simule un
-serveur SMTP et offre une interface web permettant de voir les e-mails envoyés.
+It is possible to test email sending with [Mailpit](https://mailpit.axllent.org/), a tool that simulates an SMTP server and provides a web interface to view sent emails.
 
-Il faut pour cela ajouter deux variables d'environnement au `.env`:
+To do this, add two environment variables to `.env`:
 
 ```shell
 MAILING_ENABLED=true
 MAILING_PROVIDER=mailpit
 ```
 
-Mailpit est inclus dans les images du fichier docker-compose.yml et sera donc lancé automatiquement.  
+Mailpit is included in the docker-compose.yml images and will therefore be started automatically.
 
-On peut accéder à l'interface web Mailpit à l'adresse http://localhost:8025.
+The Mailpit web interface is accessible at http://localhost:8025.
 
-##### Dans un terminal
+##### In a terminal
 
-On peut également tracer de manière détaillée (debug) l'appel de l'API d'email avec la
-configuration d'une variable d'environnement :
+You can also trace (debug) email API calls in detail by setting an environment variable:
 
 ```shell
 export DEBUG="pix:mailer:email"
 ```
 
-Cette variable d'environnement peut également être alimentée dans le fichier [.env](api/.env).
-
+This environment variable can also be set in the [.env](api/.env) file.
