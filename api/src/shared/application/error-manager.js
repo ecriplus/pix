@@ -23,80 +23,14 @@ import {
   UserHasNoOrganizationMembershipError,
   UserNotMemberOfOrganizationError,
 } from '../../team/domain/errors.js';
+import { config } from '../config.js';
 import * as SharedDomainErrors from '../domain/errors.js';
 import { getBaseLocale } from '../domain/services/locale-service.js';
 import { getI18n } from '../infrastructure/i18n/i18n.js';
 import { getChallengeLocale } from '../infrastructure/utils/request-response-utils.js';
-import { domainErrorMapper } from './domain-error-mapper.js';
-import { HttpErrors } from './http-errors.js';
+import { BaseHttpError, HttpErrors } from './http-errors.js';
 
 const NOT_VALID_RELATIONSHIPS = ['externalId', 'participantExternalId'];
-
-function translateMessage(locale, key) {
-  const i18n = getI18n(locale);
-  if (!key) return key;
-
-  // use regexp to remove i18n key special chars from key
-  const i18nKey = `entity-validation-errors.${key}`.replace(/[:{}%]/g, '');
-  const translation = i18n.__(i18nKey);
-
-  // when the i18n key is returned, so the translation does not exist
-  if (translation === i18nKey) return key;
-
-  return translation;
-}
-
-function _formatUndefinedAttribute({ message, locale, meta }) {
-  const errorContent = {
-    message: translateMessage(locale, message),
-    code: undefined,
-    meta,
-    source: undefined,
-    title: 'Invalid data attributes',
-  };
-
-  return new HttpErrors.InvalidEntityError(errorContent);
-}
-
-function _formatRelationship({ attribute, message, locale, meta }) {
-  const relationship = attribute.replace('Id', '');
-
-  const errorContent = {
-    message: translateMessage(locale, message),
-    code: undefined,
-    meta,
-    source: {
-      pointer: `/data/relationships/${_.kebabCase(relationship)}`,
-    },
-    title: `Invalid relationship "${relationship}"`,
-  };
-
-  return new HttpErrors.InvalidEntityError(errorContent);
-}
-
-function _formatAttribute({ attribute, message, locale, meta }) {
-  const errorContent = {
-    message: translateMessage(locale, message),
-    code: undefined,
-    meta,
-    source: {
-      pointer: `/data/attributes/${_.kebabCase(attribute)}`,
-    },
-    title: `Invalid data attribute "${attribute}"`,
-  };
-
-  return new HttpErrors.InvalidEntityError(errorContent);
-}
-
-function _formatInvalidAttribute(locale, meta, { attribute, message }) {
-  if (!attribute) {
-    return _formatUndefinedAttribute({ message, locale, meta });
-  }
-  if (attribute.endsWith('Id') && !NOT_VALID_RELATIONSHIPS.includes(attribute)) {
-    return _formatRelationship({ attribute, message, locale, meta });
-  }
-  return _formatAttribute({ attribute, message, locale, meta });
-}
 
 const NOT_FOUND_ERRORS = [
   SharedDomainErrors.CertificationCandidateNotFoundError,
@@ -320,27 +254,129 @@ function _mapToHttpError(error) {
   return new HttpErrors.BaseHttpError(error.message);
 }
 
-function handle(request, h, error) {
-  if (error instanceof SharedDomainErrors.EntityValidationError) {
-    const locale = getChallengeLocale(request);
-    const language = getBaseLocale(locale);
+export class ErrorRegistry {
+  #registry = [];
 
-    const jsonApiError =
-      error.invalidAttributes?.map(_formatInvalidAttribute.bind(_formatInvalidAttribute, language, error.meta)) ||
-      new HttpErrors.InvalidEntityError();
-    return HttpErrors.sendJsonApiError(jsonApiError, h);
+  mapToHttpError(domainError) {
+    if (this.#registry[domainError.name]) {
+      return this.#registry[domainError.name](domainError);
+    }
   }
 
-  const httpError = domainErrorMapper.mapToHttpError(error) ?? _mapToHttpError(error);
-
-  if (error instanceof AggregateImportError) {
-    httpError.meta.forEach((error) => {
-      error.status = httpError.status;
+  register(errorsHttpMapping) {
+    errorsHttpMapping.forEach(({ name, httpErrorFn }) => {
+      if (this.#isMapped(name)) {
+        throw new Error(`Error ${name} already mapped`);
+      }
+      this.#registry[name] = httpErrorFn;
     });
-    return HttpErrors.sendJsonApiError(httpError.meta, h);
   }
 
-  return HttpErrors.sendJsonApiError(httpError, h);
+  #isMapped(name) {
+    return this.#registry[name] && config.environment !== 'test';
+  }
 }
 
-export { handle };
+export class ErrorHapiManager {
+  #registry;
+
+  constructor(registry) {
+    this.#registry = registry;
+  }
+
+  handle(request, h) {
+    const { response } = request;
+
+    if (response instanceof SharedDomainErrors.DomainError || response instanceof BaseHttpError) {
+      if (response instanceof SharedDomainErrors.EntityValidationError) {
+        const locale = getChallengeLocale(request);
+        const language = getBaseLocale(locale);
+
+        const jsonApiError =
+          response.invalidAttributes?.map((invalidAttribute) =>
+            this.#formatInvalidAttribute(language, response.meta, invalidAttribute),
+          ) ?? new HttpErrors.InvalidEntityError();
+
+        return HttpErrors.sendJsonApiError(jsonApiError, h);
+      }
+
+      const httpError = this.#registry.mapToHttpError(response) ?? _mapToHttpError(response);
+
+      if (response instanceof AggregateImportError) {
+        httpError.meta.forEach((error) => {
+          error.status = httpError.status;
+        });
+        return HttpErrors.sendJsonApiError(httpError.meta, h);
+      }
+
+      return HttpErrors.sendJsonApiError(httpError, h);
+    }
+    return h.continue;
+  }
+
+  #formatInvalidAttribute(locale, meta, { attribute, message }) {
+    if (!attribute) {
+      return this.#formatUndefinedAttribute({ message, locale, meta });
+    }
+    if (attribute.endsWith('Id') && !NOT_VALID_RELATIONSHIPS.includes(attribute)) {
+      return this.#formatRelationship({ attribute, message, locale, meta });
+    }
+    return this.#formatAttribute({ attribute, message, locale, meta });
+  }
+
+  #translateMessage(locale, key) {
+    const i18n = getI18n(locale);
+    if (!key) return key;
+
+    // use regexp to remove i18n key special chars from key
+    const i18nKey = `entity-validation-errors.${key}`.replace(/[:{}%]/g, '');
+    const translation = i18n.__(i18nKey);
+
+    // when the i18n key is returned, so the translation does not exist
+    if (translation === i18nKey) return key;
+
+    return translation;
+  }
+
+  #formatUndefinedAttribute({ message, locale, meta }) {
+    const errorContent = {
+      message: this.#translateMessage(locale, message),
+      code: undefined,
+      meta,
+      source: undefined,
+      title: 'Invalid data attributes',
+    };
+
+    return new HttpErrors.InvalidEntityError(errorContent);
+  }
+
+  #formatRelationship({ attribute, message, locale, meta }) {
+    const relationship = attribute.replace('Id', '');
+
+    const errorContent = {
+      message: this.#translateMessage(locale, message),
+      code: undefined,
+      meta,
+      source: {
+        pointer: `/data/relationships/${_.kebabCase(relationship)}`,
+      },
+      title: `Invalid relationship "${relationship}"`,
+    };
+
+    return new HttpErrors.InvalidEntityError(errorContent);
+  }
+
+  #formatAttribute({ attribute, message, locale, meta }) {
+    const errorContent = {
+      message: this.#translateMessage(locale, message),
+      code: undefined,
+      meta,
+      source: {
+        pointer: `/data/attributes/${_.kebabCase(attribute)}`,
+      },
+      title: `Invalid data attribute "${attribute}"`,
+    };
+
+    return new HttpErrors.InvalidEntityError(errorContent);
+  }
+}

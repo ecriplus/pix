@@ -8,10 +8,15 @@ import { prescriptionDomainErrorMappingConfiguration } from '../src/prescription
 import { stagesDomainErrorMappingConfiguration } from '../src/prescription/stages/application/http-error-mapper-configuration.js';
 import { profileDomainErrorMappingConfiguration } from '../src/profile/application/http-error-mapper-configuration.js';
 import { schoolDomainErrorMappingConfiguration } from '../src/school/application/http-error-mapper-configuration.js';
-import { domainErrorMapper } from '../src/shared/application/domain-error-mapper.js';
-import * as preResponseUtils from '../src/shared/application/pre-response-utils.js';
+import { ErrorHapiManager, ErrorRegistry } from '../src/shared/application/error-manager.js';
 import { teamDomainErrorMappingConfiguration } from '../src/team/application/http-error-mapper-configuration.js';
 
+// - Supprimer DomainErrorMappingConfiguration et faire la validation dans le ErrorRegistry
+// - Splitter le fichier error-manager.js :
+//     - error-registry
+//     - error-hapi-manager
+//     - error mapping a déplacer dans les bons contextes et shared
+// - Revoir la structure des mapping
 const setupErrorHandling = function (server) {
   const configuration = [
     ...authenticationDomainErrorMappingConfiguration,
@@ -27,9 +32,11 @@ const setupErrorHandling = function (server) {
     ...profileDomainErrorMappingConfiguration,
   ];
 
-  domainErrorMapper.configure(configuration);
+  const errorRegistry = new ErrorRegistry();
+  errorRegistry.register(configuration);
 
-  server.ext('onPreResponse', preResponseUtils.handleDomainAndHttpErrors);
+  const errorManager = new ErrorHapiManager(errorRegistry);
+  server.ext('onPreResponse', (...args) => errorManager.handle(...args));
 };
 
 export { setupErrorHandling };
