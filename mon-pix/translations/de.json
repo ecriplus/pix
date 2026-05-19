@@ -604,6 +604,7 @@
           "description": "Du wirst im Internet recherchieren, deine digitale Arbeitsumgebung nutzen, dein Wissen testen usw.",
           "title": "Miss deine digitalen Kompetenzen mit spielerischen und lernenden Herausforderungen, die sich an deinen Kenntnisstand anpassen (über einen adaptiven Algorithmus)."
         },
+        "exam-notice": "Während dieses Tests wird dein Kompetenzprofil weder berücksichtigt noch verändert. Deine Antworten haben keinen Einfluss auf deine Stufen oder deine Gesamt-Pix-Punktzahl.",
         "legal": "Wenn du auf \"Beginnen\" klickst, werden die Informationen über deinen Fortschritt auf dem Pfad an den Organisator der Pfade weitergeleitet, damit er dich begleiten kann. Am Ende des Lernpfads werden deine Ergebnisse automatisch an den Organisator weitergeleitet.",
         "title": "Beginne deinen Pix-Lernpfad",
         "title-with-username": "'<span>'{userFirstName}'</span>','<br>' bereit, deine digitalen Kompetenzen zu bewerten?"
@@ -640,7 +641,7 @@
           "finished": "Abgeschlossen",
           "started": "In Arbeit"
         },
-        "text-deleted": "Pfad von deiner Organisation deaktiviert.'<br> 'Du kannst nicht mehr auf diesen Pfad einwirken.",
+        "text-deleted": "Pfad von deiner Organisation deaktiviert.'<br>'Du kannst nicht mehr auf diesen Pfad einwirken.",
         "text-disabled": "Pfad von deiner Organisation deaktiviert.'<br>'Du kannst deine Ergebnisse nicht mehr versenden."
       },
       "title": "Pfad"
@@ -735,6 +736,7 @@
         "title": "Ergebnis:"
       },
       "title": "Pix-Zertifikat",
+      "valid-status": "Gültiges Zertifikat",
       "verification-code": {
         "alt": "Kopieren",
         "copied": "Code kopiert!",
@@ -843,7 +845,7 @@
             "3": "'<strong>'Auf ein System mit künstlicher Intelligenz zugreifen'</strong>' oder einen Chatbot.",
             "4": "'<strong>'Ein Forum konsultieren'</strong>', das direkt die Antwort auf eine Frage liefert.",
             "5": "'<strong>'Jedes andere Mittel mobilisieren, das direkt die Antwort auf die Frage liefert '</strong>', ohne die von der Anweisung geforderte Arbeit geleistet zu haben.",
-            "6": "'<strong>'Einen anderen Browser verwenden'</strong>' als den, auf dem du deinen Zertifizierungstest durchführst {certificationName}.",
+            "6": "'<strong>'Einen anderen Browser verwenden'</strong>' als den, auf dem du deinen {certificationName}-Zertifizierungstest durchführst.",
             "7": "'<strong>'Identitätsdiebstahl'</strong>' einer anderen Person."
           },
           "pix-companion": "Der Zugriff auf bestimmte Websites wird im Rahmen des Zertifizierungstests durch eine im Browser installierte Erweiterung unterbunden. Ein nachgewiesener Betrug (Versuch, die Erweiterung zu umgehen oder Nichteinhaltung der oben aufgelisteten Verhaltensweisen) kann zur Ungültigkeit der Zertifizierung führen.",
@@ -957,6 +959,14 @@
         }
       },
       "first-title": "Zertifizierungstest beginnen",
+      "language-selector": {
+        "confirmation-label": "Ich bestätige, dass ich mich in der ausgewählten Sprache wohl fühle, um die Fragen zu beantworten.'<br>'Die Sprachwahl ist '<strong>'endgültig'</strong>'.",
+        "label": "Zertifizierungssprache",
+        "options": {
+          "english": "Englisch - EN",
+          "french": "Französisch - FR"
+        }
+      },
       "link-to-user-certification": "Meine Zertifizierungen ansehen",
       "non-eligible-subscription": "Du bist nicht für {complementarySubscriptionLabel} qualifiziert. Du aknnst dennoch deine Pix-Zertifizierung ablegen.",
       "title": "An einer Zertifizierungstestung teilnehmen"
@@ -1236,7 +1246,7 @@
       },
       "completion-percentage": {
         "caption": "Fortschritt auf dem Pfad",
-        "label": "'<p class=\"sr-only\">'Du hast '</p>'{completionPercentage}%'<p class=\"sr-only\">' deinen Pfad absolviert.'</p>'"
+        "label": "Du hast {completion, number, ::percent} deines Pfades absolviert."
       },
       "sharing-results": {
         "information-banner": "Wenn du auf die Schaltfläche \"Meine Ergebnisse anzeigen\" klickst, werden deine Ergebnisse an den Organisator übermittelt."
@@ -2166,6 +2176,7 @@
         "explanations": {
           "trainings": "Um dich weiterzuentwickeln, entdecke unsere Bildungsempfehlungen und finde heraus, welcher Kurs am besten zu dir passt."
         },
+        "hidden-badges": "{ count, plural, =1 {weiteres erworbenes Badge nicht angezeigt} other {weitere erworbene Badges nicht angezeigt} }",
         "mastery-rate": "Erfolgsquote bei Fragen",
         "retry": {
           "actions": {
@@ -2220,6 +2231,9 @@
       "stage": {
         "caption": "Details zu deinen Ergebnissen in Form von Prozenten und Sternen auf der Grundlage von Kompetenzen",
         "masteryPercentage": "{rate, number, ::percent} des Erfolgs",
+        "recommendedEngine": {
+          "starsAcquired": "{acquired}/{total, plural, =0 {Stern} =1 {# Stern} other {# Sterne}}"
+        },
         "starsAcquired": "{acquired, plural, =0 {kein Stern erworben} =1 {# Stern erworben} other {# Sterne erworben}} auf {total}.",
         "title": "Details zu Kompetenzen"
       },
