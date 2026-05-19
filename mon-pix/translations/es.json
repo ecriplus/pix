@@ -72,7 +72,7 @@
       "data-protection-policy": "política de privacidad",
       "error": "Debes aceptar las condiciones de uso y la política de privacidad de Pix para crear una cuenta.",
       "label": "Acepto las condiciones de uso y la política de privacidad de Pix",
-      "message": "Acepto las '<'a href=\"{cguUrl}\" class=\"link\" target=\"_blank\" rel=\"noopener noreferrer\"'>'condiciones de uso'</a>' y la '<'a href=\"{dataProtectionPolicyUrl}\" class=\"link\" target=\"_blank\" rel=\"noopener noreferrer\"'>'política de privacidad'</a>' de Pix.",
+      "message": "Acepto las '<'a href=\"{cguUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'condiciones de uso'</a>' y la '<'a href=\"{dataProtectionPolicyUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'política de privacidad'</a>' de Pix.",
       "read-message": "Lee las '<'a href=\"{cguUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'condiciones de uso'</a>' y la '<'a href=\"{dataProtectionPolicyUrl}\" class=\"link\" target=\"_blank\" rel=\"noreferrer\"'>'política de privacidad'</a>'."
     },
     "companion": {
@@ -817,7 +817,7 @@
           },
           "paragraphs": {
             "1": {
-              "text": "Para preguntas en '<strong>'modo libre'</strong>', indicado con un icono verde: se le permitirá buscar en la web y utilizar el entorno digital a su disposición.",
+              "text": "Para preguntas en '<strong>'modo libre'</strong>', indicado con un icono verde: se le permitirá buscar en la web y utilizar el entorno digital a su disposición.'<br>'Sin embargo, '<strong>'algunos sitios no serán accesibles durante la certificación'</strong>'.",
               "title": "Modo libre :"
             },
             "2": {
@@ -1211,7 +1211,7 @@
           "aria-label": "Mostrar la indicación en la prueba.",
           "close": "Lo he entendido",
           "focused": {
-            "content": "'<p class=\"tooltip-tag-information__title--focused\">'¡Quédate en esta página para responder!'</p>' No utilices internet ni ninguna aplicación para responder. Se detectará cualquier actividad fuera de la zona.",
+            "content": "'<strong class=\"tooltip-tag-information__title--focused\">'¡Quédate en esta página para responder!'</strong><br/>' No utilices internet ni ninguna aplicación para responder. Se detectará cualquier actividad fuera de la zona.",
             "title": "Modo enfoque"
           },
           "other": {
