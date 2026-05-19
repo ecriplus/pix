@@ -1,5 +1,22 @@
 # Pix Changelog
 
+# [5.409.0](https://github.com/1024pix/pix/compare/v5.408.1...v5.409.0) (2026-05-19)
+
+### :rocket: Amélioration
+
+- [#16216](https://github.com/1024pix/pix/pull/16216) Afficher le badge Pix+ v3 dans l'écran de vérification de certificat (PIX-22746). 
+
+### :building_construction: Tech
+
+- [#16197](https://github.com/1024pix/pix/pull/16197) Corriger les tests de recette certif E2E 
+
+### :arrow_up: Montée de version
+
+- [#16235](https://github.com/1024pix/pix/pull/16235) Update dependency @playwright/test to v1.60.0 (e2e-playwright) 
+- [#16238](https://github.com/1024pix/pix/pull/16238) Update dependency oxfmt to ^0.49.0 (api) 
+- [#16226](https://github.com/1024pix/pix/pull/16226) Update dependency sinon to v22 (orga) 
+- [#16228](https://github.com/1024pix/pix/pull/16228) Update dependency undici to v8 (api)
+
 ## [5.408.1](https://github.com/1024pix/pix/compare/v5.408.0...v5.408.1) (2026-05-18)
 
 ### :bug: Correction
