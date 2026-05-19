@@ -226,7 +226,7 @@
                 "type": "embed",
                 "isCompletionRequired": false,
                 "title": "saisie",
-                "url": "https://epreuves.pix.fr/pixwriter-mise-en-forme/pixwriter-mise-en-forme.html?lang=fr&mode=example",
+                "url": "https://epreuves-pr3122.review.pix.fr/pixwriter-mise-en-forme/pixwriter-mise-en-forme.html?lang=fr&mode=mdx-miseenformetxt-2-d2#5a55634559434044544479074442554549715020545d",
                 "instruction": "Écrivez la phrase dans l’application de traitement de texte ci-dessous.",
                 "solution": "",
                 "height": 400
@@ -415,7 +415,7 @@
                       "type": "embed",
                       "isCompletionRequired": false,
                       "title": "Exercice paragraphe",
-                      "url": "https://epreuves.pix.fr/pixwriter-sauts/pixwriter-sauts.html?lang=fr&mode=example",
+                      "url": "https://epreuves-viewer.pix.digital/pr3121/?embed=pixwriter-sauts&mode=mdx_miseenformetxt_2_D4&locale=fr",
                       "instruction": "<p>Dans l’application de traitement de texte ci-dessous, reproduisez l’exemple pour aider Mina.</p>",
                       "solution": "",
                       "height": 400
