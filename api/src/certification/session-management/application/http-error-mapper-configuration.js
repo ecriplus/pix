@@ -4,6 +4,7 @@ import {
   ChallengeToBeDeneutralizedNotFoundError,
   ChallengeToBeNeutralizedNotFoundError,
   InvalidSessionSupervisingLoginError,
+  SendingEmailToRefererError,
   SessionAlreadyFinalizedError,
   SessionAlreadyPublishedError,
   SessionNotAccessible,
@@ -47,6 +48,10 @@ const sessionDomainErrorMappingConfiguration = [
   {
     name: CertificationCenterIsArchivedError.name,
     httpErrorFn: (error) => new HttpErrors.UnauthorizedError(error.message, error.code),
+  },
+  {
+    name: SendingEmailToRefererError.name,
+    httpErrorFn: (error) => new HttpErrors.ServiceUnavailableError(error.message),
   },
 ];
 

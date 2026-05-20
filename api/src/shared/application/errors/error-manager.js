@@ -1,9 +1,6 @@
 import { AdminMemberError } from '../../../authorization/domain/errors.js';
 import { ChallengeAlreadyAnsweredError } from '../../../certification/evaluation/domain/errors.js';
-import {
-  SendingEmailToRefererError,
-  SendingEmailToResultRecipientError,
-} from '../../../certification/session-management/domain/errors.js';
+import { SendingEmailToResultRecipientError } from '../../../certification/session-management/domain/errors.js';
 import { AlreadyRatedAssessmentError, EmptyAnswerError } from '../../../evaluation/domain/errors.js';
 import * as LLMDomainErrors from '../../../llm/domain/errors.js';
 import {
@@ -147,7 +144,6 @@ const UNAUTHORIZED_ERRORS = [
 ];
 
 const SERVICE_UNAVAILABLE_ERRORS = [
-  SendingEmailToRefererError,
   SharedDomainErrors.SendingEmailError,
   SendingEmailToResultRecipientError,
   SharedDomainErrors.InvalidExternalAPIResponseError,
