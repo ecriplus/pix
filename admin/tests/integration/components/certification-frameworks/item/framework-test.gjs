@@ -32,23 +32,6 @@ module('Integration | Component | certification-frameworks/item/framework', func
         )
         .exists();
     });
-
-    test('it should not display the framework history when there is no history', async function (assert) {
-      // given
-      store.queryRecord = sinon.stub().resolves({ history: [] });
-
-      // when
-      const screen = await render(<template><Framework @frameworkKey="DROIT" /></template>);
-
-      // then
-      assert
-        .dom(
-          screen.queryByRole('table', {
-            name: t('components.complementary-certifications.item.framework.history.table.caption'),
-          }),
-        )
-        .doesNotExist();
-    });
   });
 
   module('when the framework is CORE', function () {

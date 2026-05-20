@@ -1,10 +1,9 @@
-import { action } from '@ember/object';
-import { service } from '@ember/service';
-import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
+import { service } from "@ember/service";
+import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
 
-import FrameworkHistory from './framework/framework-history';
-import History from './target-profile/history';
+import FrameworkHistory from "./framework/framework-history";
+import History from "./target-profile/history";
 
 export default class CertificationFramework extends Component {
   @service store;
@@ -24,28 +23,12 @@ export default class CertificationFramework extends Component {
       await certificationFramework.reload();
       this.targetProfilesHistory = certificationFramework.targetProfilesHistory;
     }
-
-    await this.#loadFrameworkHistory();
-  }
-
-  async #loadFrameworkHistory() {
-    const frameworkHistory = await this.store.queryRecord('framework-history', this.args.frameworkKey);
-    this.frameworkHistory = frameworkHistory?.history;
-  }
-
-  @action
-  async reloadHistory() {
-    await this.#loadFrameworkHistory();
   }
 
   <template>
-    {{#if this.frameworkHistory}}
       <FrameworkHistory
-        @history={{this.frameworkHistory}}
-        @scope={{@frameworkKey}}
-        @onVersionDeleted={{this.reloadHistory}}
+        @frameworkKey={{@frameworkKey}}
       />
-    {{/if}}
 
     {{#if this.targetProfilesHistory}}
       <History @targetProfilesHistory={{this.targetProfilesHistory}} />
