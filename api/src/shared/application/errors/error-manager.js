@@ -5,7 +5,6 @@ import {
   ArchiveOrganizationError,
   UnableToAttachChildOrganizationToParentOrganizationError,
 } from '../../../organizational-entities/domain/errors.js';
-import { CampaignParticipationDeletedError } from '../../../prescription/campaign-participation/domain/errors.js';
 import { SiecleXmlImportError } from '../../../prescription/learner-management/domain/errors.js';
 import { OrganizationCantGetPlacesStatisticsError } from '../../../prescription/organization-place/domain/errors.js';
 import {
@@ -70,7 +69,7 @@ const PRECONDITION_FAILED_ERRORS = [
   SharedDomainErrors.AlreadyExistingEntityError,
   SharedDomainErrors.InvalidInputDataError,
   SiecleXmlImportError,
-  CampaignParticipationDeletedError,
+  SharedDomainErrors.CampaignParticipationDeletedError,
   SharedDomainErrors.NotEnoughDaysPassedBeforeResetCampaignParticipationError,
   SharedDomainErrors.NoCampaignParticipationForUserAndCampaign,
   SharedDomainErrors.OrganizationLearnerDisabledError,

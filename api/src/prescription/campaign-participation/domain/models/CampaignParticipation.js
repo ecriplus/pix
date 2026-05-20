@@ -3,10 +3,10 @@ import _ from 'lodash';
 import {
   AlreadySharedCampaignParticipationError,
   AssessmentNotCompletedError,
+  CampaignParticipationDeletedError,
 } from '../../../../../src/shared/domain/errors.js';
 import { CampaignParticipationLoggerContext, CampaignParticipationStatuses } from '../../../shared/domain/constants.js';
 import { ArchivedCampaignError } from '../../../shared/domain/errors.js';
-import { CampaignParticipationDeletedError } from '../errors.js';
 
 class CampaignParticipation {
   #loggerContext;
