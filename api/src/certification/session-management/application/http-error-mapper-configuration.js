@@ -5,6 +5,7 @@ import {
   ChallengeToBeNeutralizedNotFoundError,
   InvalidSessionSupervisingLoginError,
   SendingEmailToRefererError,
+  SendingEmailToResultRecipientError,
   SessionAlreadyFinalizedError,
   SessionAlreadyPublishedError,
   SessionNotAccessible,
@@ -51,6 +52,10 @@ const sessionDomainErrorMappingConfiguration = [
   },
   {
     name: SendingEmailToRefererError.name,
+    httpErrorFn: (error) => new HttpErrors.ServiceUnavailableError(error.message),
+  },
+  {
+    name: SendingEmailToResultRecipientError.name,
     httpErrorFn: (error) => new HttpErrors.ServiceUnavailableError(error.message),
   },
 ];

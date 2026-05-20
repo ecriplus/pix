@@ -4,6 +4,7 @@ import {
   CertificationCenterIsArchivedError,
   InvalidSessionSupervisingLoginError,
   SendingEmailToRefererError,
+  SendingEmailToResultRecipientError,
   SessionAlreadyFinalizedError,
   SessionAlreadyPublishedError,
   SessionWithoutStartedCertificationError,
@@ -111,12 +112,32 @@ describe('Unit | Certification | Session | Application | HttpErrorMapperConfigur
       );
 
       // when
-      const error = httpErrorMapper.httpErrorFn(new SendingEmailToRefererError(['test@email.com']));
+      const error = httpErrorMapper.httpErrorFn(new SendingEmailToRefererError(['test1@email.com', 'test2@email.com']));
 
       // then
       expect(error).to.be.instanceOf(HttpErrors.ServiceUnavailableError);
       expect(error.message).to.equal(
-        "Échec lors de l'envoi du mail au(x) référent(s) du centre de certification : test@email.com",
+        "Échec lors de l'envoi du mail au(x) référent(s) du centre de certification : test1@email.com, test2@email.com",
+      );
+    });
+  });
+
+  context('when mapping "SendingEmailToResultRecipientError"', function () {
+    it('returns an ServiceUnavailableError Http Error', async function () {
+      // given
+      const httpErrorMapper = sessionDomainErrorMappingConfiguration.find(
+        (httpErrorMapper) => httpErrorMapper.name === SendingEmailToResultRecipientError.name,
+      );
+
+      // when
+      const error = httpErrorMapper.httpErrorFn(
+        new SendingEmailToResultRecipientError(['test1@email.com', 'test2@email.com']),
+      );
+
+      // then
+      expect(error).to.be.instanceOf(HttpErrors.ServiceUnavailableError);
+      expect(error.message).to.equal(
+        "Échec lors de l'envoi des résultats au(x) destinataire(s) : test1@email.com, test2@email.com",
       );
     });
   });

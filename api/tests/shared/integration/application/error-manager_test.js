@@ -1,7 +1,6 @@
 import sinon from 'sinon';
 
 import {
-  SendingEmailToResultRecipientError,
   SessionAlreadyFinalizedError,
   SessionWithoutStartedCertificationError,
 } from '../../../../src/certification/session-management/domain/errors.js';
@@ -936,16 +935,6 @@ describe('Integration | API | Controller Error', function () {
 
       expect(response.statusCode).to.equal(SERVICE_UNAVAILABLE_ERROR);
       expect(responseDetail(response)).to.equal('Failed to send email to "toto@pix.fr" for some unknown reason.');
-    });
-
-    it('responds ServiceUnavailable when a SendingEmailToResultRecipientError error occurs', async function () {
-      routeHandler.throws(new SendingEmailToResultRecipientError(['toto@pix.fr', 'titi@pix.fr']));
-      const response = await server.requestObject(request);
-
-      expect(response.statusCode).to.equal(SERVICE_UNAVAILABLE_ERROR);
-      expect(responseDetail(response)).to.equal(
-        "Échec lors de l'envoi des résultats au(x) destinataire(s) : toto@pix.fr, titi@pix.fr",
-      );
     });
   });
 
