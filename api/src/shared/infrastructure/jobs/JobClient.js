@@ -2,16 +2,14 @@ import { glob } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import _ from "lodash";
-import PgBoss from "pg-boss";
+import { PgBoss } from "pg-boss";
 
 import { Metrics } from "../../../monitoring/infrastructure/metrics.js";
 import { config } from "../../config.js";
 import { executeInContext, EXECUTORS } from "../execution-context-manager.js";
 import { importNamedExportFromFile } from "../utils/import-named-exports-from-directory.js";
 import { child } from "../utils/logger.js";
-import { MonitoredJobHandler } from "./monitoring/MonitoredJobHandler.js";
-import { MonitoringJobExecutionTimeHandler } from "./monitoring/MonitoringJobExecutionTimeHandler.js";
+import { MonitoredJobHandler } from "./MonitoredJobHandler.js";
 
 const workerDirPath = resolve(
   dirname(fileURLToPath(import.meta.url)),
@@ -42,7 +40,7 @@ export class JobClient {
 
   static get instance() {
     if (!JobClient.#jobClient) {
-      JobClient.#jobClient = new JobClient();
+      JobClient.#jobClient = new this(JobClient.#constructorToken);
     }
     return JobClient.#jobClient;
   }
@@ -277,11 +275,8 @@ export class JobClient {
     return stats;
   }
 
-  static get instance() {
-    if (!JobClient.#jobClient) {
-      JobClient.#jobClient = new JobClient();
-    }
-    return JobClient.#jobClient;
+  static _resetForTesting() {
+    JobClient.#jobClient = null;
   }
 
 }
