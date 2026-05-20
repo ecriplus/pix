@@ -1,4 +1,4 @@
-import { ForbiddenError } from '../../../shared/application/http-errors.js';
+import { ForbiddenError } from '../../../shared/application/errors/http-errors.js';
 
 /**
  * @param {Object} params

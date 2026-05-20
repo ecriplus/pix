@@ -1,6 +1,6 @@
 import sinon from 'sinon';
 
-import { ForbiddenError } from '../../../../../src/shared/application/http-errors.js';
+import { ForbiddenError } from '../../../../../src/shared/application/errors/http-errors.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { disableCertificationCenterMembershipFromPixCertif } from '../../../../../src/team/domain/usecases/disable-certification-center-membership-from-pix-certif.js';
 import { expect } from '../../../../test-helper.js';

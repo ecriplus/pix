@@ -1,6 +1,6 @@
 import XLSX from 'xlsx';
 
-import { UnprocessableEntityError } from '../../../../../shared/application/http-errors.js';
+import { UnprocessableEntityError } from '../../../../../shared/application/errors/http-errors.js';
 import isEmpty from '../../../../../shared/infrastructure/utils/is-empty.js';
 import { loadOdsZip } from './common-ods-utils.js';
 

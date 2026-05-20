@@ -1,4 +1,4 @@
-import { BadRequestError } from '../../../shared/application/http-errors.js';
+import { BadRequestError } from '../../../shared/application/errors/http-errors.js';
 import { DomainError } from '../../../shared/domain/errors.js';
 import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 

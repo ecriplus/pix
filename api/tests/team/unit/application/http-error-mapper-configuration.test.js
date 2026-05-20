@@ -1,4 +1,4 @@
-import { HttpErrors } from '../../../../src/shared/application/http-errors.js';
+import { HttpErrors } from '../../../../src/shared/application/errors/http-errors.js';
 import { teamDomainErrorMappingConfiguration } from '../../../../src/team/application/http-error-mapper-configuration.js';
 import {
   AlreadyExistingAdminMemberError,

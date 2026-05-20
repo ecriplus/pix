@@ -1,5 +1,5 @@
 import { AlreadyRegisteredEmailError } from '../../../../src/shared/domain/errors.js';
-import { UnauthorizedError } from '../../../shared/application/http-errors.js';
+import { UnauthorizedError } from '../../../shared/application/errors/http-errors.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../constants/identity-providers.js';
 import { createAccountCreationEmail } from '../emails/create-account-creation.email.js';

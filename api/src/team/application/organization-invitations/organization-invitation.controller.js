@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { MissingQueryParamError } from '../../../shared/application/http-errors.js';
+import { MissingQueryParamError } from '../../../shared/application/errors/http-errors.js';
 import { getUserLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
 import { organizationInvitationSerializer } from '../../infrastructure/serializers/jsonapi/organization-invitation.serializer.js';

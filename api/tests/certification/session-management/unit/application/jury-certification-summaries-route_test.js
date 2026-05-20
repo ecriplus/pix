@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import * as moduleUnderTest from '../../../../../src/certification/session-management/application/jury-certification-summaries-route.js';
 import { sessionController } from '../../../../../src/certification/session-management/application/session-controller.js';
 import { authorization } from '../../../../../src/certification/shared/application/pre-handlers/authorization.js';
-import { NotFoundError } from '../../../../../src/shared/application/http-errors.js';
+import { NotFoundError } from '../../../../../src/shared/application/errors/http-errors.js';
 import { securityPreHandlers } from '../../../../../src/shared/application/security-pre-handlers.js';
 import { expect } from '../../../../test-helper.js';
 import { HttpTestServer } from '../../../../tooling/server/http-test-server.js';

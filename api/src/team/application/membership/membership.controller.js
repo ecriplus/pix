@@ -1,4 +1,4 @@
-import { BadRequestError } from '../../../shared/application/http-errors.js';
+import { BadRequestError } from '../../../shared/application/errors/http-errors.js';
 import * as membershipSerializer from '../../../shared/infrastructure/serializers/jsonapi/membership.serializer.js';
 import { extractUserIdFromRequest } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';

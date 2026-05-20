@@ -1,4 +1,4 @@
-import { PayloadTooLargeError, sendJsonApiError } from '../../../shared/application/http-errors.js';
+import { PayloadTooLargeError, sendJsonApiError } from '../../../shared/application/errors/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { MAX_FILE_SIZE_UPLOAD } from '../../../shared/domain/constants.js';
 import { anonymizationAdminController } from './anonymization.admin.controller.js';

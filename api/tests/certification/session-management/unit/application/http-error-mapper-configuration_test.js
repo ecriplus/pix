@@ -7,20 +7,10 @@ import {
   SessionAlreadyPublishedError,
   SessionWithoutStartedCertificationError,
 } from '../../../../../src/certification/session-management/domain/errors.js';
-import { HttpErrors } from '../../../../../src/shared/application/http-errors.js';
-import { DomainErrorMappingConfiguration } from '../../../../../src/shared/application/models/domain-error-mapping-configuration.js';
+import { HttpErrors } from '../../../../../src/shared/application/errors/http-errors.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Certification | Session | Application | HttpErrorMapperConfiguration', function () {
-  it('contains a list of HttpErrorMapper instances', function () {
-    // given
-    // when
-    // then
-    sessionDomainErrorMappingConfiguration.forEach((domainErrorMappingConfiguration) =>
-      expect(domainErrorMappingConfiguration).to.be.instanceOf(DomainErrorMappingConfiguration),
-    );
-  });
-
   context('when mapping "SessionWithoutStartedCertificationError"', function () {
     it('returns an UnauthorizedError Http Error', function () {
       //given

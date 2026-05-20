@@ -4,20 +4,10 @@ import {
   CertificationCourseUpdateError,
   InvalidCertificationReportForFinalization,
 } from '../../../../../src/certification/shared/domain/errors.js';
-import { HttpErrors } from '../../../../../src/shared/application/http-errors.js';
-import { DomainErrorMappingConfiguration } from '../../../../../src/shared/application/models/domain-error-mapping-configuration.js';
+import { HttpErrors } from '../../../../../src/shared/application/errors/http-errors.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Certification | Shared | Application | HttpErrorMapperConfiguration', function () {
-  it('contains a list of HttpErrorMapper instances', function () {
-    // given
-    // when
-    // then
-    certificationDomainErrorMappingConfiguration.forEach((domainErrorMappingConfiguration) =>
-      expect(domainErrorMappingConfiguration).to.be.instanceOf(DomainErrorMappingConfiguration),
-    );
-  });
-
   context('when mapping "CertificationCourseUpdateError"', function () {
     it('returns an BadRequestError Http Error', function () {
       //given

@@ -2,7 +2,7 @@ import lodash from 'lodash';
 
 const { pick } = lodash;
 
-import { BadRequestError } from '../../../src/shared/application/http-errors.js';
+import { BadRequestError } from '../../../src/shared/application/errors/http-errors.js';
 import { handleFailAction } from '../../../src/shared/validate.js';
 import { expect } from '../../test-helper.js';
 import { hFake } from '../../tooling/mocks/hapi.mock.js';

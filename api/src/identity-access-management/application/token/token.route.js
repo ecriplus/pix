@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-import { BadRequestError, sendJsonApiError } from '../../../shared/application/http-errors.js';
+import { BadRequestError, sendJsonApiError } from '../../../shared/application/errors/http-errors.js';
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { responseAuthenticationDoc } from '../../../shared/infrastructure/open-api-doc/authentication/response-authentication-doc.js';
 import { responseObjectErrorDoc } from '../../../shared/infrastructure/open-api-doc/response-object-error-doc.js';

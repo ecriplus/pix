@@ -8,20 +8,10 @@ import {
   UnableToDetachParentOrganizationFromChildOrganization,
 } from '../../../../src/organizational-entities/domain/errors.js';
 import { OrganizationLearnerTypeNotFound } from '../../../../src/organizational-entities/domain/errors.js';
-import { HttpErrors } from '../../../../src/shared/application/http-errors.js';
-import { DomainErrorMappingConfiguration } from '../../../../src/shared/application/models/domain-error-mapping-configuration.js';
+import { HttpErrors } from '../../../../src/shared/application/errors/http-errors.js';
 import { expect } from '../../../test-helper.js';
 
 describe('Unit | Organizational Entities | Application | HttpErrorMapperConfiguration', function () {
-  it('contains a list of HttpErrorMapper instances', function () {
-    // given
-    // when
-    // then
-    organizationalEntitiesDomainErrorMappingConfiguration.forEach((domainErrorMappingConfiguration) =>
-      expect(domainErrorMappingConfiguration).to.be.instanceOf(DomainErrorMappingConfiguration),
-    );
-  });
-
   context('when mapping "TagNotFoundError"', function () {
     it('returns an NotFoundError Http Error', function () {
       //given

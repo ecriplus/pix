@@ -1,5 +1,5 @@
-import { getRequestId } from '../infrastructure/execution-context-manager.js';
-import * as errorSerializer from '../infrastructure/serializers/jsonapi/error-serializer.js';
+import { getRequestId } from '../../infrastructure/execution-context-manager.js';
+import * as errorSerializer from '../../infrastructure/serializers/jsonapi/error-serializer.js';
 
 class BaseHttpError extends Error {
   constructor(message, dependencies = { getRequestId }) {
@@ -163,7 +163,7 @@ class TooManyRequestsError extends BaseHttpError {
 
 /**
  *
- * @param {import('../infrastructure/serializers/jsonapi/error-serializer.js').HttpError} httpError
+ * @param {import('../../infrastructure/serializers/jsonapi/error-serializer.js').HttpError} httpError
  * @param {Object} h
  * @returns {Promise}
  */

@@ -1,4 +1,4 @@
-import { HttpErrors } from '../../../shared/application/http-errors.js';
+import { HttpErrors } from '../../../shared/application/errors/http-errors.js';
 import { featureToggles } from '../../../shared/infrastructure/feature-toggles/index.js';
 import * as errorSerializer from '../../../shared/infrastructure/serializers/jsonapi/error-serializer.js';
 

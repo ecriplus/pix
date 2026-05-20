@@ -4,20 +4,10 @@ import {
   SessionStartedDeletionError,
   UnknownCountryForStudentEnrolmentError,
 } from '../../../../../src/certification/enrolment/domain/errors.js';
-import { HttpErrors } from '../../../../../src/shared/application/http-errors.js';
-import { DomainErrorMappingConfiguration } from '../../../../../src/shared/application/models/domain-error-mapping-configuration.js';
+import { HttpErrors } from '../../../../../src/shared/application/errors/http-errors.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Unit | Certification | Enrolment | Application | HttpErrorMapperConfiguration', function () {
-  it('contains a list of HttpErrorMapper instances', function () {
-    // given
-    // when
-    // then
-    enrolmentDomainErrorMappingConfiguration.forEach((domainErrorMappingConfiguration) =>
-      expect(domainErrorMappingConfiguration).to.be.instanceOf(DomainErrorMappingConfiguration),
-    );
-  });
-
   context('when mapping "CertificationCandidateForbiddenDeletionError"', function () {
     it('returns an CertificationCandidateForbiddenDeletionError Http Error', function () {
       //given

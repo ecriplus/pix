@@ -1,102 +1,28 @@
-import _ from 'lodash';
-
-import { AdminMemberError } from '../../authorization/domain/errors.js';
-import { ChallengeAlreadyAnsweredError } from '../../certification/evaluation/domain/errors.js';
-import { CertificateGenerationError } from '../../certification/results/domain/errors.js';
+import { AdminMemberError } from '../../../authorization/domain/errors.js';
+import { ChallengeAlreadyAnsweredError } from '../../../certification/evaluation/domain/errors.js';
+import { CertificateGenerationError } from '../../../certification/results/domain/errors.js';
 import {
   CsvWithNoSessionDataError,
   SendingEmailToRefererError,
   SendingEmailToResultRecipientError,
-} from '../../certification/session-management/domain/errors.js';
-import { AlreadyRatedAssessmentError, EmptyAnswerError } from '../../evaluation/domain/errors.js';
-import * as LLMDomainErrors from '../../llm/domain/errors.js';
+} from '../../../certification/session-management/domain/errors.js';
+import { AlreadyRatedAssessmentError, EmptyAnswerError } from '../../../evaluation/domain/errors.js';
+import * as LLMDomainErrors from '../../../llm/domain/errors.js';
 import {
   ArchiveOrganizationError,
   UnableToAttachChildOrganizationToParentOrganizationError,
-} from '../../organizational-entities/domain/errors.js';
-import { ArchivedCampaignError, DeletedCampaignError } from '../../prescription/campaign/domain/errors.js';
-import { CampaignParticipationDeletedError } from '../../prescription/campaign-participation/domain/errors.js';
-import { AggregateImportError, SiecleXmlImportError } from '../../prescription/learner-management/domain/errors.js';
-import { OrganizationCantGetPlacesStatisticsError } from '../../prescription/organization-place/domain/errors.js';
+} from '../../../organizational-entities/domain/errors.js';
+import { ArchivedCampaignError, DeletedCampaignError } from '../../../prescription/campaign/domain/errors.js';
+import { CampaignParticipationDeletedError } from '../../../prescription/campaign-participation/domain/errors.js';
+import { SiecleXmlImportError } from '../../../prescription/learner-management/domain/errors.js';
+import { OrganizationCantGetPlacesStatisticsError } from '../../../prescription/organization-place/domain/errors.js';
 import {
   AlreadyAcceptedOrCancelledInvitationError,
   UserHasNoOrganizationMembershipError,
   UserNotMemberOfOrganizationError,
-} from '../../team/domain/errors.js';
-import * as SharedDomainErrors from '../domain/errors.js';
-import { getBaseLocale } from '../domain/services/locale-service.js';
-import { getI18n } from '../infrastructure/i18n/i18n.js';
-import { getChallengeLocale } from '../infrastructure/utils/request-response-utils.js';
-import { domainErrorMapper } from './domain-error-mapper.js';
+} from '../../../team/domain/errors.js';
+import * as SharedDomainErrors from '../../domain/errors.js';
 import { HttpErrors } from './http-errors.js';
-
-const NOT_VALID_RELATIONSHIPS = ['externalId', 'participantExternalId'];
-
-function translateMessage(locale, key) {
-  const i18n = getI18n(locale);
-  if (!key) return key;
-
-  // use regexp to remove i18n key special chars from key
-  const i18nKey = `entity-validation-errors.${key}`.replace(/[:{}%]/g, '');
-  const translation = i18n.__(i18nKey);
-
-  // when the i18n key is returned, so the translation does not exist
-  if (translation === i18nKey) return key;
-
-  return translation;
-}
-
-function _formatUndefinedAttribute({ message, locale, meta }) {
-  const errorContent = {
-    message: translateMessage(locale, message),
-    code: undefined,
-    meta,
-    source: undefined,
-    title: 'Invalid data attributes',
-  };
-
-  return new HttpErrors.InvalidEntityError(errorContent);
-}
-
-function _formatRelationship({ attribute, message, locale, meta }) {
-  const relationship = attribute.replace('Id', '');
-
-  const errorContent = {
-    message: translateMessage(locale, message),
-    code: undefined,
-    meta,
-    source: {
-      pointer: `/data/relationships/${_.kebabCase(relationship)}`,
-    },
-    title: `Invalid relationship "${relationship}"`,
-  };
-
-  return new HttpErrors.InvalidEntityError(errorContent);
-}
-
-function _formatAttribute({ attribute, message, locale, meta }) {
-  const errorContent = {
-    message: translateMessage(locale, message),
-    code: undefined,
-    meta,
-    source: {
-      pointer: `/data/attributes/${_.kebabCase(attribute)}`,
-    },
-    title: `Invalid data attribute "${attribute}"`,
-  };
-
-  return new HttpErrors.InvalidEntityError(errorContent);
-}
-
-function _formatInvalidAttribute(locale, meta, { attribute, message }) {
-  if (!attribute) {
-    return _formatUndefinedAttribute({ message, locale, meta });
-  }
-  if (attribute.endsWith('Id') && !NOT_VALID_RELATIONSHIPS.includes(attribute)) {
-    return _formatRelationship({ attribute, message, locale, meta });
-  }
-  return _formatAttribute({ attribute, message, locale, meta });
-}
 
 const NOT_FOUND_ERRORS = [
   SharedDomainErrors.CertificationCandidateNotFoundError,
@@ -237,11 +163,7 @@ const INTERNAL_SERVER_ERRORS = [LLMDomainErrors.IncorrectMessagesOrderingError];
 
 const PAYLOAD_TOO_LARGE_ERRORS = [LLMDomainErrors.TooLargeMessageInputError];
 
-function _mapToHttpError(error) {
-  if (error instanceof HttpErrors.BaseHttpError) {
-    return error;
-  }
-
+export function mapToHttpError(error) {
   // Special cases: hardcoded messages or non-standard patterns
   if (error instanceof SharedDomainErrors.UserNotAuthorizedToAccessEntityError) {
     return new HttpErrors.ForbiddenError('Utilisateur non autorisé à accéder à la ressource');
@@ -319,28 +241,3 @@ function _mapToHttpError(error) {
 
   return new HttpErrors.BaseHttpError(error.message);
 }
-
-function handle(request, h, error) {
-  if (error instanceof SharedDomainErrors.EntityValidationError) {
-    const locale = getChallengeLocale(request);
-    const language = getBaseLocale(locale);
-
-    const jsonApiError =
-      error.invalidAttributes?.map(_formatInvalidAttribute.bind(_formatInvalidAttribute, language, error.meta)) ||
-      new HttpErrors.InvalidEntityError();
-    return HttpErrors.sendJsonApiError(jsonApiError, h);
-  }
-
-  const httpError = domainErrorMapper.mapToHttpError(error) ?? _mapToHttpError(error);
-
-  if (error instanceof AggregateImportError) {
-    httpError.meta.forEach((error) => {
-      error.status = httpError.status;
-    });
-    return HttpErrors.sendJsonApiError(httpError.meta, h);
-  }
-
-  return HttpErrors.sendJsonApiError(httpError, h);
-}
-
-export { handle };
