@@ -173,7 +173,7 @@ module('Integration | Component | certification-joiner', function (hooks) {
       // then
       assert.ok(
         screen.getByText(
-          'Les informations saisies correspondent à un.e candidat.e inscrit.e à la session et déjà connecté.e avec un autre compte. Vérifiez que vous êtes connecté.e au compte qui a démarré la certification.',
+          'Les informations saisies correspondent à un(e) candidat(e) inscrit(e) à la session et déjà connecté(e) avec un autre compte. Vérifiez que vous êtes connecté(e) au compte qui a démarré la certification.',
         ),
       );
     });
