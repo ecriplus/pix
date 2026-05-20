@@ -86,18 +86,17 @@ Les extensions recommandées peuvent se retrouver dans l'onglet extension en ren
 
 ### Démarrer les applications
 
-Pour démarrer l'ensemble des applications, exécuter `npm run dev`
+Il faut d’abord démarrer l’API :
 
-⚠️ Cela prend entre 10 et 15 minutes et la consommation mémoire est élevée lors de cette opération.
+- Api : `npm run dev:api`
 
-Si cela pose problème, démarrer sélectivement les applications :
+Puis démarrer sélectivement les applications dont vous avez besoin :
 
 - Admin : `npm run dev:admin`
-- Api : `npm run dev:api`
 - App : `npm run dev:mon-pix`
 - Certif : `npm run dev:certif`
 - Orga : `npm run dev:orga`
-- Pix1d : `npm run dev:pix1d`
+- Junior : `npm run dev:junior`
 
 ### Accéder aux applications
 
