@@ -1,7 +1,6 @@
 import { AdminMemberError } from '../../../authorization/domain/errors.js';
 import { ChallengeAlreadyAnsweredError } from '../../../certification/evaluation/domain/errors.js';
 import {
-  CsvWithNoSessionDataError,
   SendingEmailToRefererError,
   SendingEmailToResultRecipientError,
 } from '../../../certification/session-management/domain/errors.js';
@@ -126,7 +125,6 @@ const UNPROCESSABLE_ENTITY_ERRORS = [
   SharedDomainErrors.UserCouldNotBeReconciledError,
   AdminMemberError,
   ChallengeAlreadyAnsweredError,
-  CsvWithNoSessionDataError,
   SharedDomainErrors.OidcError,
   SharedDomainErrors.AuthenticationMethodAlreadyExistsError,
   SharedDomainErrors.MissingAttributesError,

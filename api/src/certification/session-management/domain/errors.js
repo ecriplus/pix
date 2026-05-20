@@ -47,13 +47,6 @@ class SessionWithMissingAbortReasonError extends DomainError {
   }
 }
 
-class CsvWithNoSessionDataError extends DomainError {
-  constructor(message = 'No session data in csv') {
-    super(message);
-    this.code = 'CSV_DATA_REQUIRED';
-  }
-}
-
 class ChallengeToBeNeutralizedNotFoundError extends DomainError {
   constructor() {
     super("La question à neutraliser n'a pas été posée lors du test de certification");
@@ -107,7 +100,6 @@ export {
   CertificationIssueReportAutomaticallyResolvedShouldNotBeUpdatedManually,
   ChallengeToBeDeneutralizedNotFoundError,
   ChallengeToBeNeutralizedNotFoundError,
-  CsvWithNoSessionDataError,
   InvalidSessionSupervisingLoginError,
   SendingEmailToRefererError,
   SendingEmailToResultRecipientError,

@@ -25,9 +25,17 @@ class CenterHabilitationError extends DomainError {
   }
 }
 
+class CsvWithNoSessionDataError extends DomainError {
+  constructor(message = 'No session data in csv') {
+    super(message);
+    this.code = 'CSV_DATA_REQUIRED';
+  }
+}
+
 export {
   CenterHabilitationError,
   CertificationCandidateNotFoundError,
   CertificationCourseUpdateError,
+  CsvWithNoSessionDataError,
   InvalidCertificationReportForFinalization,
 };

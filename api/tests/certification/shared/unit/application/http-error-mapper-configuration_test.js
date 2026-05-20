@@ -3,6 +3,7 @@ import {
   CenterHabilitationError,
   CertificationCandidateNotFoundError,
   CertificationCourseUpdateError,
+  CsvWithNoSessionDataError,
   InvalidCertificationReportForFinalization,
 } from '../../../../../src/certification/shared/domain/errors.js';
 import { HttpErrors } from '../../../../../src/shared/application/errors/http-errors.js';
@@ -76,6 +77,23 @@ describe('Unit | Certification | Shared | Application | HttpErrorMapperConfigura
       expect(error).to.be.instanceOf(HttpErrors.NotFoundError);
       expect(error.message).to.equal('No candidate found');
       expect(error.code).to.equal('CANDIDATE_NOT_FOUND');
+    });
+  });
+
+  context('when mapping "CsvWithNoSessionDataError"', function () {
+    it('returns a UnprocessableEntityError Http Error', function () {
+      //given
+      const httpErrorMapper = certificationDomainErrorMappingConfiguration.find(
+        (httpErrorMapper) => httpErrorMapper.name === CsvWithNoSessionDataError.name,
+      );
+
+      //when
+      const error = httpErrorMapper.httpErrorFn(new CsvWithNoSessionDataError());
+
+      //then
+      expect(error).to.be.instanceOf(HttpErrors.UnprocessableEntityError);
+      expect(error.message).to.equal('No session data in csv');
+      expect(error.code).to.equal('CSV_DATA_REQUIRED');
     });
   });
 });

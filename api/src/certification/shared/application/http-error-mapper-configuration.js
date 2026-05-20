@@ -10,15 +10,14 @@ import {
   CenterHabilitationError,
   CertificationCandidateNotFoundError,
   CertificationCourseUpdateError,
+  CsvWithNoSessionDataError,
   InvalidCertificationReportForFinalization,
 } from '../domain/errors.js';
 
 const certificationDomainErrorMappingConfiguration = [
   {
     name: InvalidCertificationReportForFinalization.name,
-    httpErrorFn: (error) => {
-      return new HttpErrors.BadRequestError(error.message, error.code, error.meta);
-    },
+    httpErrorFn: (error) => new HttpErrors.BadRequestError(error.message, error.code, error.meta),
   },
   {
     name: CertificationCourseUpdateError.name,
@@ -31,6 +30,10 @@ const certificationDomainErrorMappingConfiguration = [
   {
     name: CertificationCandidateNotFoundError.name,
     httpErrorFn: (error) => new HttpErrors.NotFoundError(error.message, error.code),
+  },
+  {
+    name: CsvWithNoSessionDataError.name,
+    httpErrorFn: (error) => new HttpErrors.UnprocessableEntityError(error.message, error.code, error.meta),
   },
 ];
 
