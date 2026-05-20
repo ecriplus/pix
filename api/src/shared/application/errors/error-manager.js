@@ -5,7 +5,6 @@ import {
   ArchiveOrganizationError,
   UnableToAttachChildOrganizationToParentOrganizationError,
 } from '../../../organizational-entities/domain/errors.js';
-import { OrganizationCantGetPlacesStatisticsError } from '../../../prescription/organization-place/domain/errors.js';
 import {
   AlreadyAcceptedOrCancelledInvitationError,
   UserHasNoOrganizationMembershipError,
@@ -81,7 +80,6 @@ const PRECONDITION_FAILED_ERRORS = [
   SharedDomainErrors.TargetProfileInvalidError,
   SharedDomainErrors.NoStagesForCampaign,
   SharedDomainErrors.CampaignTypeError,
-  OrganizationCantGetPlacesStatisticsError,
 ];
 
 const BAD_REQUEST_ERRORS = [
