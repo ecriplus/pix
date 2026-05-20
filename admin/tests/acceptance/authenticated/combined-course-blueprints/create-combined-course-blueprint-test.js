@@ -15,6 +15,12 @@ module('Acceptance | Combined course blueprint | New', function (hooks) {
 
   hooks.beforeEach(async function () {
     server.create('country', { code: '99100', name: 'France' });
+    server.create('attestation', {
+      templateName: 'parentalite',
+      key: 'PARENTHOOD',
+      file: 'parentalite.pdf',
+      label: 'Parentalite',
+    });
 
     await authenticateAdminMemberWithRole({ isSuperAdmin: true })(server);
   });
@@ -46,6 +52,14 @@ module('Acceptance | Combined course blueprint | New', function (hooks) {
     );
 
     await fillIn(screen.getByLabelText(t('components.combined-course-blueprints.labels.description')), 'description');
+
+    await click(
+      screen.getByRole('button', { name: t('components.combined-course-blueprints.attestation.select-label') }),
+    );
+
+    await screen.findByRole('listbox');
+
+    await click(screen.getByRole('option', { name: 'Parentalite' }));
 
     await click(screen.getByRole('button', { name: t('components.combined-course-blueprints.create.createButton') }));
 

@@ -6,6 +6,7 @@ export default class CombinedCourseBlueprint extends Model {
   @attr('string') illustration;
   @attr('string') description;
   @attr('string') attestationLabel;
+  @attr('string') attestationKey;
   @attr({ type: 'date', defaultValue: () => undefined }) createdAt;
   @attr({ defaultValue: () => [] }) content;
 }
