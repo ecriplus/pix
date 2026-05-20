@@ -38,6 +38,9 @@ export default class Card extends Component {
   }
 
   get type() {
+    if (this.args.training.isTypeLinkedToALocation) {
+      return this.intl.t('pages.training.type.formation');
+    }
     return this.intl.t(`pages.training.type.${this.args.training.type}`);
   }
 

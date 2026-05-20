@@ -38,4 +38,8 @@ export default class Training extends Model {
   get isModulix() {
     return this.type === 'modulix';
   }
+
+  get isTypeLinkedToALocation() {
+    return this.isElearning || this.isHybrid || this.isInPerson;
+  }
 }

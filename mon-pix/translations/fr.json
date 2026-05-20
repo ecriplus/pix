@@ -2302,6 +2302,7 @@
       "type": {
         "autoformation": "Parcours d'autoformation",
         "e-learning": "Formation à distance",
+        "formation": "Formation",
         "hybrid-training": "Formation hybride",
         "in-person-training": "Formation en présentiel",
         "modulix": "Module Pix",

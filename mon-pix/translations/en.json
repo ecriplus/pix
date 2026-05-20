@@ -2302,6 +2302,7 @@
       "type": {
         "autoformation": "Autoformation customised test",
         "e-learning": "E-Learning",
+        "formation": "Training",
         "hybrid-training": "Hybrid training",
         "in-person-training": "In person training",
         "modulix": "Pix Module",

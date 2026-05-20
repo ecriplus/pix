@@ -2302,6 +2302,7 @@
       "type": {
         "autoformation": "Selbstständiger Lernpfad",
         "e-learning": "Fernunterricht",
+        "formation": "Ausbildung",
         "hybrid-training": "Hybride Ausbildung",
         "in-person-training": "Präsenzschulungen",
         "modulix": "Pix-Modul (Beta)",

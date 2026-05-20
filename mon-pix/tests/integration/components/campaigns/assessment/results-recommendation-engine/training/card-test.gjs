@@ -12,7 +12,8 @@ module(
 
     test('it renders with correct fields', async function (assert) {
       // given
-      const training = _buildTraining();
+      const store = this.owner.lookup('service:store');
+      const training = store.createRecord('training', _buildTraining({}));
 
       // when
       const screen = await render(<template><TrainingCard @training={{training}} /></template>);
@@ -27,7 +28,8 @@ module(
     module('when delivery mode is hybrid', function () {
       test('it displays a corresponding information', async function (assert) {
         // given
-        const training = _buildTraining({ deliveryMode: 'hybrid' });
+        const store = this.owner.lookup('service:store');
+        const training = store.createRecord('training', _buildTraining({ deliveryMode: 'hybrid' }));
 
         // when
         const screen = await render(<template><TrainingCard @training={{training}} /></template>);
@@ -42,7 +44,8 @@ module(
     module('when delivery mode is on-site', function () {
       test('it displays a corresponding information', async function (assert) {
         // given
-        const training = _buildTraining({ deliveryMode: 'on-site' });
+        const store = this.owner.lookup('service:store');
+        const training = store.createRecord('training', _buildTraining({ deliveryMode: 'on-site' }));
 
         // when
         const screen = await render(<template><TrainingCard @training={{training}} /></template>);
@@ -57,7 +60,8 @@ module(
     module('when delivery mode is remote', function () {
       test('it displays a corresponding information', async function (assert) {
         // given
-        const training = _buildTraining({ deliveryMode: 'remote' });
+        const store = this.owner.lookup('service:store');
+        const training = store.createRecord('training', _buildTraining({ deliveryMode: 'remote' }));
 
         // when
         const screen = await render(<template><TrainingCard @training={{training}} /></template>);
@@ -72,7 +76,8 @@ module(
     module('when registration is required', function () {
       test('it displays a corresponding tag', async function (assert) {
         // given
-        const training = _buildTraining({ registrationRequired: true });
+        const store = this.owner.lookup('service:store');
+        const training = store.createRecord('training', _buildTraining({ registrationRequired: true }));
 
         // when
         const screen = await render(<template><TrainingCard @training={{training}} /></template>);
@@ -87,7 +92,8 @@ module(
     module('when registration is not required', function () {
       test('it displays a corresponding tag', async function (assert) {
         // given
-        const training = _buildTraining({ registrationRequired: false });
+        const store = this.owner.lookup('service:store');
+        const training = store.createRecord('training', _buildTraining({ registrationRequired: false }));
 
         // when
         const screen = await render(<template><TrainingCard @training={{training}} /></template>);
@@ -99,7 +105,35 @@ module(
       });
     });
 
-    function _buildTraining({ deliveryMode = 'remote', registrationRequired = true }) {
+    module('when training type is e-learning, hybrid or in-person', function () {
+      test('it displays "formation" information only', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const training = store.createRecord('training', _buildTraining({ type: 'e-learning' }));
+
+        // when
+        const screen = await render(<template><TrainingCard @training={{training}} /></template>);
+
+        // then
+        assert.dom(screen.getByText(t('pages.training.type.formation'))).exists();
+      });
+    });
+
+    module('when training type is webinaire, modulix or autoformation', function () {
+      test('it displays the type information', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const training = store.createRecord('training', _buildTraining({ type: 'modulix' }));
+
+        // when
+        const screen = await render(<template><TrainingCard @training={{training}} /></template>);
+
+        // then
+        assert.dom(screen.getByText(t('pages.training.type.modulix'))).exists();
+      });
+    });
+
+    function _buildTraining({ deliveryMode = 'remote', registrationRequired = true, type = 'webinaire' }) {
       return {
         title: 'Apprendre à manger un croissant comme les français',
         link: 'https://example.net/',
@@ -108,7 +142,7 @@ module(
           'https://assets.pix.org/contenu-formatif/editeur/logo-ministere-education-nationale-et-jeunesse.svg',
         editorName: "Ministère de l'éducation nationale et de la jeunesse. Liberté égalité fraternité",
         locale: 'fr-fr',
-        type: 'webinaire',
+        type,
         deliveryMode,
         objectives: ['Repérer si le croissant est de bonne qualité', 'Rechercher un croissant pour le manger'],
         program: 'Heure 1 : Théorie & culture du croissant, Heure 2 : Pratique et technique de dégustation',
