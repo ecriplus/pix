@@ -15,11 +15,11 @@
 
 .preselect-tube-table {
   .is-responsive {
-    fill: var(--pix-success-700);
+    fill: var(--pix-orga-500);
   }
 
   .not-responsive {
-    fill: var(--pix-error-700);
+    fill: var(--pix-neutral-100);
   }
 
   .table__column {
@@ -34,6 +34,10 @@
     &--small {
       width: 10%;
     }
+  }
+
+  &__level-select {
+    width: 141px;
   }
 }
 
@@ -149,15 +153,18 @@
 
     .skill-square {
       padding: 0 4px;
-      color: var(--pix-neutral-0);
       border-radius: 4px;
 
       &__active {
-        background-color: var(--pix-success-700);
+        color: var(--pix-neutral-0);
+        font-weight: bold;
+        background-color: var(--pix-orga-500);
       }
 
       &__missing {
-        background-color: var(--pix-error-700);
+        color: var(--pix-neutral-300);
+        font-weight: normal;
+        background-color: var(--pix-neutral-20);
       }
     }
   }

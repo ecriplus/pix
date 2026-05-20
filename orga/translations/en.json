@@ -1631,7 +1631,8 @@
       "download-filename": "topic-selection-{ organizationName }-{ date }.json",
       "levels": {
         "label": "Select level for the next topic: {title}",
-        "placeholder": "Select a level"
+        "placeholder": "Select a level",
+        "tooltip": "Greyed-out levels are not available for this topic."
       },
       "no-tube-selected": "Download topics selection (JSON, { fileSize }kB)",
       "table": {

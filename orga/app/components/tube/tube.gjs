@@ -1,6 +1,7 @@
 import PixCheckbox from '@1024pix/pix-ui/components/pix-checkbox';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
+import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
@@ -68,17 +69,24 @@ export default class Tube extends Component {
           @onChange={{this.setTubeLevel}}
           @placeholder={{t "pages.preselect-target-profile.levels.placeholder"}}
           @hideDefaultOption={{true}}
-          class="tubes-selection__level-select"
         >
           <:label>{{t "pages.preselect-target-profile.levels.label" title=@tube.practicalTitle}}</:label>
         </PixSelect>
-        <div class="skill-availability">
-          {{#each this.skillAvailabilityMap as |skillAvailability|}}
-            <div
-              class="skill-square skill-square__{{skillAvailability.availability}}"
-            >{{skillAvailability.difficulty}}</div>
-          {{/each}}
-        </div>
+        <PixTooltip @position="bottom" @isInline={{true}}>
+          <:triggerElement>
+            <div class="skill-availability">
+              {{#each this.skillAvailabilityMap as |skillAvailability|}}
+                <div
+                  class="skill-square skill-square__{{skillAvailability.availability}}"
+                >{{skillAvailability.difficulty}}</div>
+              {{/each}}
+            </div>
+          </:triggerElement>
+          <:tooltip>
+            {{t "pages.preselect-target-profile.levels.tooltip"}}
+          </:tooltip>
+        </PixTooltip>
+
       </div>
     </td>
     <td class="table__column--center">

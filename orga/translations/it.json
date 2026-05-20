@@ -1616,7 +1616,8 @@
       "download-filename": "selection-subjects-{ organizationName }-{ date }.json",
       "levels": {
         "label": "Selezionare il livello del soggetto successivo: {title}",
-        "placeholder": "Selezionare un livello"
+        "placeholder": "Selezionare un livello",
+        "tooltip": "I livelli in grigio non sono disponibili per questo soggeto."
       },
       "no-tube-selected": "Scaricare la selezione di argomenti (JSON, { fileSize }ko)",
       "table": {

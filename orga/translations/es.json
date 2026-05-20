@@ -1619,7 +1619,8 @@
       "download-filename": "selection-subjects-{ organizationName }-{ date }.json",
       "levels": {
         "label": "Seleccionar el nivel del siguiente tema: {title}",
-        "placeholder": "Seleccionar un nivel"
+        "placeholder": "Seleccionar un nivel",
+        "tooltip": "Los niveles que aparecen en gris no están disponibles para este tema."
       },
       "no-tube-selected": "Descargar la selección de temas (JSON, { fileSize }ko)",
       "table": {

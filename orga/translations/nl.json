@@ -1607,7 +1607,8 @@
       "download-filename": "selectie-onderwerpen-{ organizationName }-{ date }.json",
       "levels": {
         "label": "Selecteer het niveau van het volgende onderwerp: {title}",
-        "placeholder": "Selecteer een niveau"
+        "placeholder": "Selecteer een niveau",
+        "tooltip": "De grijze niveaus zijn voor dit onderwerp niet beschikbaar."
       },
       "no-tube-selected": "Downloaden selectie onderwerpen (JSON, { fileSize }kB)",
       "table": {

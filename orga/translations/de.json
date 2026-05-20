@@ -1615,7 +1615,8 @@
       "download-filename": "selection-sujets-{ organizationName }-{ date }.json",
       "levels": {
         "label": "Niveauauswahl für das folgende Thema: {title}",
-        "placeholder": "Ein Niveau auswählen"
+        "placeholder": "Ein Niveau auswählen",
+        "tooltip": "Die ausgegrauten Stufen sind für dieses Thema derzeit nicht verfügbar."
       },
       "no-tube-selected": "Themenauswahl herunterladen (JSON, { fileSize }ko)",
       "table": {

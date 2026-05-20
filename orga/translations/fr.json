@@ -1618,7 +1618,8 @@
       "download-filename": "selection-sujets-{ organizationName }-{ date }.json",
       "levels": {
         "label": "Sélection du niveau du sujet suivant : {title}",
-        "placeholder": "Sélectionner un niveau"
+        "placeholder": "Sélectionner un niveau",
+        "tooltip": "Les niveaux grisés ne sont pas disponibles pour ce sujet."
       },
       "no-tube-selected": "Télécharger la sélection des sujets (JSON, { fileSize }ko)",
       "table": {
