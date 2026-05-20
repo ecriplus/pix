@@ -406,7 +406,7 @@
                       "type": "image",
                       "url": "https://assets.pix.org/draft/modules/31_MiseEnFormeTxt_NOV2/captureparagraphe.png",
                       "alt": "",
-                      "alternativeText": "<p>Je prends la parole aujourd’hui avec beaucoup d’émotion pour le mariage de ma sœur Léa.&nbsp; </p><p>Nous avons grandi ensemble et je garde en mémoire nos fous rires et nos secrets partagés dans notre chambre. Tu as toujours été mon modèle, celle qui me protégeait et qui savait me redonner le sourire.&nbsp; </p><p>Aujourd’hui, je vous vois tous les deux si complices et si heureux. C’est une grande joie de voir que tu as trouvé quelqu’un qui partage tes valeurs et ta gentillesse.&nbsp; </p><p>Je vous souhaite une vie remplie de projets et de tendresse. Je vous demande à tous de lever votre verre en l’honneur des jeunes mariés !<br><br></p>",
+                      "alternativeText": "<p>Je prends la parole aujourd’hui avec beaucoup d’émotion pour le mariage de ma sœur Léa.&nbsp; </p><p>Nous avons grandi ensemble et je garde en mémoire nos fous rires et nos secrets partagés dans notre chambre. Tu as toujours été mon modèle, celle qui me protégeait et qui savait me redonner le sourire.&nbsp; </p><p>Aujourd’hui, je vous vois tous les deux si complices et si heureux. C’est une grande joie de voir que tu as trouvé quelqu’un qui partage tes valeurs et ta gentillesse.&nbsp; </p><p>Je vous souhaite une vie remplie de projets et de tendresse. Je vous demande à tous de lever votre verre en l’honneur des jeunes mariés !</p>",
                       "legend": "",
                       "licence": ""
                     },
@@ -415,9 +415,9 @@
                       "type": "embed",
                       "isCompletionRequired": false,
                       "title": "Exercice paragraphe",
-                      "url": "https://epreuves-pr3121.review.pix.fr/pixwriter-sauts/pixwriter-sauts.html?lang=fr&mode=mdx_miseenformetxt_2_D4",
+                      "url": "https://epreuves.pix.fr/pixwriter-sauts/pixwriter-sauts.html?lang=fr&mode=mdx_miseenformetxt_2_D4#404659555c0140594446560c4244525b5445",
                       "instruction": "<p>Dans l’application de traitement de texte ci-dessous, reproduisez l’exemple pour aider Mina.</p>",
-                      "solution": "",
+                      "solution": "courgette",
                       "height": 400
                     },
                     {
