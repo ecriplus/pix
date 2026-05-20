@@ -2,7 +2,7 @@
  * @typedef {import ('./index.js').CandidateRepository} CandidateRepository
  * @typedef {import ('../models/Candidate.js').Candidate} Candidate
  */
-import { CertificationCandidateNotFoundError } from '../errors.js';
+import { CertificationCandidateNotFoundError } from '../../../shared/domain/errors.js';
 
 /**
  * @param {object} params

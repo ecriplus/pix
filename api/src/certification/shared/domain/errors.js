@@ -1,5 +1,12 @@
 import { DomainError } from '../../../shared/domain/errors.js';
 
+class CertificationCandidateNotFoundError extends DomainError {
+  constructor(message = 'No candidate found') {
+    super(message);
+    this.code = 'CANDIDATE_NOT_FOUND';
+  }
+}
+
 class CertificationCourseUpdateError extends DomainError {
   constructor(message = 'Échec lors la création ou de la mise à jour du test de certification.') {
     super(message);
@@ -18,4 +25,9 @@ class CenterHabilitationError extends DomainError {
   }
 }
 
-export { CenterHabilitationError, CertificationCourseUpdateError, InvalidCertificationReportForFinalization };
+export {
+  CenterHabilitationError,
+  CertificationCandidateNotFoundError,
+  CertificationCourseUpdateError,
+  InvalidCertificationReportForFinalization,
+};

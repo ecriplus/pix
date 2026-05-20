@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import { SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
-import { CertificationCandidateNotFoundError } from '../../domain/errors.js';
+import { CertificationCandidateNotFoundError } from '../../../shared/domain/errors.js';
 import { Candidate } from '../../domain/models/Candidate.js';
 import { Subscription } from '../../domain/models/Subscription.js';
 

@@ -111,13 +111,6 @@ class CertificationCandidateByPersonalInfoNotFoundError extends DomainError {
   }
 }
 
-class CertificationCandidateNotFoundError extends DomainError {
-  constructor(message = 'No candidate found') {
-    super(message);
-    this.code = 'CANDIDATE_NOT_FOUND';
-  }
-}
-
 class CsvImportError extends DomainError {
   constructor(code, meta) {
     super('An error occurred during CSV import');
@@ -1095,7 +1088,6 @@ export {
   CertificationCandidateByPersonalInfoNotFoundError,
   CertificationCandidateByPersonalInfoTooManyMatchesError,
   CertificationCandidateDeletionError,
-  CertificationCandidateNotFoundError,
   CertificationCandidateOnFinalizedSessionError,
   CertificationCandidatePersonalInfoFieldMissingError,
   CertificationCandidatePersonalInfoWrongFormat,

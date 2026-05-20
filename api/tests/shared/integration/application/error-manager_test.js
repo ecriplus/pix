@@ -640,15 +640,6 @@ describe('Integration | API | Controller Error', function () {
       expect(response.statusCode).to.equal(NOT_FOUND_ERROR);
       expect(responseDetail(response)).to.equal('Ce compte est introuvable.');
     });
-
-    it('responds NotFoundError when a CertificationCandidateNotFoundError error occurs', async function () {
-      routeHandler.throws(new DomainErrors.CertificationCandidateNotFoundError());
-      const response = await server.requestObject(request);
-
-      expect(response.statusCode).to.equal(NOT_FOUND_ERROR);
-      expect(responseDetail(response)).to.equal('No candidate found');
-      expect(responseCode(response)).to.equal('CANDIDATE_NOT_FOUND');
-    });
   });
 
   context('422 Unprocessable Entity', function () {

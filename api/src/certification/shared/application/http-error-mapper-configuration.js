@@ -8,6 +8,7 @@ import {
 import { sessionDomainErrorMappingConfiguration } from '../../session-management/application/http-error-mapper-configuration.js';
 import {
   CenterHabilitationError,
+  CertificationCandidateNotFoundError,
   CertificationCourseUpdateError,
   InvalidCertificationReportForFinalization,
 } from '../domain/errors.js';
@@ -26,6 +27,10 @@ const certificationDomainErrorMappingConfiguration = [
   {
     name: CenterHabilitationError.name,
     httpErrorFn: (error) => new HttpErrors.ForbiddenError(error.message, error.code),
+  },
+  {
+    name: CertificationCandidateNotFoundError.name,
+    httpErrorFn: (error) => new HttpErrors.NotFoundError(error.message, error.code),
   },
 ];
 

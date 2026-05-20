@@ -25,7 +25,6 @@ import * as SharedDomainErrors from '../../domain/errors.js';
 import { HttpErrors } from './http-errors.js';
 
 const NOT_FOUND_ERRORS = [
-  SharedDomainErrors.CertificationCandidateNotFoundError,
   SharedDomainErrors.NotFoundError,
   SharedDomainErrors.UserNotFoundError,
   SharedDomainErrors.OrganizationNotFoundError,
