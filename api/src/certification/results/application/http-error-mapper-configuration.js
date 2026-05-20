@@ -1,5 +1,9 @@
 import { HttpErrors } from '../../../shared/application/errors/http-errors.js';
-import { MoreThanOneMatchingCertificationError, NoCertificationResultForDivision } from '../domain/errors.js';
+import {
+  CertificateGenerationError,
+  MoreThanOneMatchingCertificationError,
+  NoCertificationResultForDivision,
+} from '../domain/errors.js';
 
 const parcoursupDomainErrorMappingConfiguration = [
   {
@@ -12,6 +16,10 @@ const resultsDomainErrorMappingConfiguration = [
   {
     name: NoCertificationResultForDivision.name,
     httpErrorFn: (error) => new HttpErrors.NotFoundError(error.message, error.code, error.meta),
+  },
+  {
+    name: CertificateGenerationError.name,
+    httpErrorFn: (error) => new HttpErrors.UnprocessableEntityError(error.message, error.code, error.meta),
   },
 ];
 

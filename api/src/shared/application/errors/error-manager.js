@@ -1,6 +1,5 @@
 import { AdminMemberError } from '../../../authorization/domain/errors.js';
 import { ChallengeAlreadyAnsweredError } from '../../../certification/evaluation/domain/errors.js';
-import { CertificateGenerationError } from '../../../certification/results/domain/errors.js';
 import {
   CsvWithNoSessionDataError,
   SendingEmailToRefererError,
@@ -124,7 +123,6 @@ const BAD_REQUEST_ERRORS = [
 ];
 
 const UNPROCESSABLE_ENTITY_ERRORS = [
-  CertificateGenerationError,
   SharedDomainErrors.UserCouldNotBeReconciledError,
   AdminMemberError,
   ChallengeAlreadyAnsweredError,
