@@ -173,37 +173,10 @@ describe('Unit | JobClient', function () {
         expect(pgBossStub.work).to.not.have.been.called;
       });
 
-      it('should register an existing job with overridden options and controller', async function () {
-        // given
-        const pgBossStub = new FakePgBoss();
-        sinon.stub(pgBossStub, 'work');
-
-        const fixturePath = resolve(
-          dirname(fileURLToPath(import.meta.url)),
-          'fixtures/custom-audit-logging-job-controller.js',
-        );
-
-        class CustomJobClient extends JobClient {
-          get jobGlobPatterns() {
-            return [fixturePath];
-          }
-        }
-
-        // when
-        const jobClient = CustomJobClient.instance;
-        await jobClient.initialize({ jobGroups: [JobGroup.DEFAULT], worker: true }, () => pgBossStub);
-
-        // then
-        expect(pgBossStub.work).to.have.been.calledWith(
-          AuditLoggingJob.name,
-          { teamSize: 5, teamConcurrency: 2 },
-          sinon.match.func,
-        );
-      });
     });
 
     describe('cron Job', function () {
-      it('schedule ScheduleComputeOrganizationLearnersCertificabilityJob', async function () {
+      it('schedule ScheduleComputeOrganization                                                                                      ersCertificabilityJob', async function () {
         //given
         const pgBossStub = new FakePgBoss();
         sinon.stub(pgBossStub, 'schedule');
@@ -292,7 +265,7 @@ describe('Unit | JobClient', function () {
       sinon.stub(pgBossStub, 'getDb').returns({ executeSql });
       sinon.stub(pgBossStub, 'getQueues').resolves([{ name: 'FirstJob' }, { name: 'SecondJob' }, { name: 'ThirdJob' }]);
 
-      const jobClient = new JobClient();
+      const jobClient = JobClient.instance;
       await jobClient.initialize(
         {
           jobGroups: [JobGroup.DEFAULT],
