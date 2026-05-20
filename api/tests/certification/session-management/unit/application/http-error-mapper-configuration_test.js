@@ -3,6 +3,8 @@ import { SESSION_SUPERVISING } from '../../../../../src/certification/session-ma
 import {
   CertificationCenterIsArchivedError,
   InvalidSessionSupervisingLoginError,
+  SendingEmailToRefererError,
+  SendingEmailToResultRecipientError,
   SessionAlreadyFinalizedError,
   SessionAlreadyPublishedError,
   SessionWithoutStartedCertificationError,
@@ -85,18 +87,58 @@ describe('Unit | Certification | Session | Application | HttpErrorMapperConfigur
     });
   });
 
-  it('should instantiate ForbiddenError when InvalidSessionSupervisingLoginError', async function () {
-    // given
-    const httpErrorMapper = sessionDomainErrorMappingConfiguration.find(
-      (httpErrorMapper) => httpErrorMapper.name === InvalidSessionSupervisingLoginError.name,
-    );
+  context('when mapping "InvalidSessionSupervisingLoginError"', function () {
+    it('returns an UnauthorizedError Http Error', async function () {
+      // given
+      const httpErrorMapper = sessionDomainErrorMappingConfiguration.find(
+        (httpErrorMapper) => httpErrorMapper.name === InvalidSessionSupervisingLoginError.name,
+      );
 
-    // when
-    const error = httpErrorMapper.httpErrorFn(new InvalidSessionSupervisingLoginError());
+      // when
+      const error = httpErrorMapper.httpErrorFn(new InvalidSessionSupervisingLoginError());
 
-    // then
-    expect(error).to.be.instanceOf(HttpErrors.UnauthorizedError);
-    expect(error.message).to.equal(SESSION_SUPERVISING.INCORRECT_DATA.getMessage());
-    expect(error.code).to.equal(SESSION_SUPERVISING.INCORRECT_DATA.code);
+      // then
+      expect(error).to.be.instanceOf(HttpErrors.UnauthorizedError);
+      expect(error.message).to.equal(SESSION_SUPERVISING.INCORRECT_DATA.getMessage());
+      expect(error.code).to.equal(SESSION_SUPERVISING.INCORRECT_DATA.code);
+    });
+  });
+
+  context('when mapping "SendingEmailToRefererError"', function () {
+    it('returns an ServiceUnavailableError Http Error', async function () {
+      // given
+      const httpErrorMapper = sessionDomainErrorMappingConfiguration.find(
+        (httpErrorMapper) => httpErrorMapper.name === SendingEmailToRefererError.name,
+      );
+
+      // when
+      const error = httpErrorMapper.httpErrorFn(new SendingEmailToRefererError(['test1@email.com', 'test2@email.com']));
+
+      // then
+      expect(error).to.be.instanceOf(HttpErrors.ServiceUnavailableError);
+      expect(error.message).to.equal(
+        "Échec lors de l'envoi du mail au(x) référent(s) du centre de certification : test1@email.com, test2@email.com",
+      );
+    });
+  });
+
+  context('when mapping "SendingEmailToResultRecipientError"', function () {
+    it('returns an ServiceUnavailableError Http Error', async function () {
+      // given
+      const httpErrorMapper = sessionDomainErrorMappingConfiguration.find(
+        (httpErrorMapper) => httpErrorMapper.name === SendingEmailToResultRecipientError.name,
+      );
+
+      // when
+      const error = httpErrorMapper.httpErrorFn(
+        new SendingEmailToResultRecipientError(['test1@email.com', 'test2@email.com']),
+      );
+
+      // then
+      expect(error).to.be.instanceOf(HttpErrors.ServiceUnavailableError);
+      expect(error.message).to.equal(
+        "Échec lors de l'envoi des résultats au(x) destinataire(s) : test1@email.com, test2@email.com",
+      );
+    });
   });
 });

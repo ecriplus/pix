@@ -14,10 +14,6 @@ describe('Certification | session-management | Unit | Domain | Errors', function
     expect(errors.SessionWithMissingAbortReasonError).to.exist;
   });
 
-  it('should export a CsvWithNoSessionDataError', function () {
-    expect(errors.CsvWithNoSessionDataError).to.exist;
-  });
-
   it('should export a ChallengeToBeDeneutralizedNotFoundError', function () {
     expect(errors.ChallengeToBeDeneutralizedNotFoundError).to.exist;
   });

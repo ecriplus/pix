@@ -1,7 +1,6 @@
 import { HttpErrors } from '../../../shared/application/errors/http-errors.js';
 import {
   CertificationCandidateForbiddenDeletionError,
-  CertificationCandidateNotFoundError,
   InvalidCertificationCandidate,
   SessionStartedDeletionError,
   UnknownCountryForStudentEnrolmentError,
@@ -12,10 +11,6 @@ const enrolmentDomainErrorMappingConfiguration = [
   {
     name: CertificationCandidateForbiddenDeletionError.name,
     httpErrorFn: (error) => new HttpErrors.ForbiddenError(error.message, error.code),
-  },
-  {
-    name: CertificationCandidateNotFoundError.name,
-    httpErrorFn: (error) => new HttpErrors.NotFoundError(error.message, error.code),
   },
   { name: SessionStartedDeletionError.name, httpErrorFn: (error) => new HttpErrors.ConflictError(error.message) },
   {

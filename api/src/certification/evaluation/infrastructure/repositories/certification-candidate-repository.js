@@ -1,6 +1,6 @@
 // @ts-check
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { CertificationCandidateNotFoundError } from '../../../../shared/domain/errors.js';
+import { CertificationCandidateNotFoundError } from '../../../shared/domain/errors.js';
 import { Candidate } from '../../domain/models/Candidate.js';
 
 /**

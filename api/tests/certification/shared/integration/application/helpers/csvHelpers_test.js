@@ -1,11 +1,11 @@
 import * as url from 'node:url';
 
-import { CsvWithNoSessionDataError } from '../../../../../../src/certification/session-management/domain/errors.js';
 import {
   parseCsv,
   parseCsvWithHeader,
   readCsvFile,
 } from '../../../../../../src/certification/shared/application/helpers/csvHelpers.js';
+import { CsvWithNoSessionDataError } from '../../../../../../src/certification/shared/domain/errors.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { expect } from '../../../../../test-helper.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';

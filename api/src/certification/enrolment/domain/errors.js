@@ -13,12 +13,6 @@ class SessionStartedDeletionError extends DomainError {
   }
 }
 
-class CertificationCandidateNotFoundError extends DomainError {
-  constructor(message = 'Certification candidate not found') {
-    super(message);
-  }
-}
-
 class UnknownCountryForStudentEnrolmentError extends DomainError {
   constructor(
     { firstName, lastName },
@@ -99,7 +93,6 @@ class WrongDomainExtensionForPixPlusError extends DomainError {
 
 export {
   CertificationCandidateForbiddenDeletionError,
-  CertificationCandidateNotFoundError,
   InvalidCertificationCandidate,
   SessionStartedDeletionError,
   UnknownCountryForStudentEnrolmentError,

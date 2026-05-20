@@ -3,10 +3,8 @@
  */
 
 import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import {
-  CandidateAlreadyLinkedToUserError,
-  CertificationCandidateNotFoundError,
-} from '../../../../shared/domain/errors.js';
+import { CandidateAlreadyLinkedToUserError } from '../../../../shared/domain/errors.js';
+import { CertificationCandidateNotFoundError } from '../../../shared/domain/errors.js';
 
 /**
  * @param {object} params

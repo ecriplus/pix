@@ -1,5 +1,5 @@
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
-import { CertificationCandidateNotFoundError } from '../../../../shared/domain/errors.js';
+import { CertificationCandidateNotFoundError } from '../../../shared/domain/errors.js';
 import { CertificationCandidateForSupervising } from '../../domain/models/CertificationCandidateForSupervising.js';
 
 const get = async function ({ certificationCandidateId }) {
