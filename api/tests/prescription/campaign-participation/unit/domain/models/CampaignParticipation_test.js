@@ -1,6 +1,5 @@
 import sinon from 'sinon';
 
-import { ArchivedCampaignError } from '../../../../../../src/prescription/campaign/domain/errors.js';
 import { CampaignParticipationDeletedError } from '../../../../../../src/prescription/campaign-participation/domain/errors.js';
 import { CampaignParticipation } from '../../../../../../src/prescription/campaign-participation/domain/models/CampaignParticipation.js';
 import {
@@ -8,6 +7,7 @@ import {
   CampaignParticipationStatuses,
   CampaignTypes,
 } from '../../../../../../src/prescription/shared/domain/constants.js';
+import { ArchivedCampaignError } from '../../../../../../src/prescription/shared/domain/errors.js';
 import {
   AlreadySharedCampaignParticipationError,
   AssessmentNotCompletedError,

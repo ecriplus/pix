@@ -1,7 +1,7 @@
 import { ObjectValidationError } from '../../../../shared/domain/errors.js';
 import { CampaignTypes } from '../../../shared/domain/constants.js';
+import { ArchivedCampaignError } from '../../../shared/domain/errors.js';
 import {
-  ArchivedCampaignError,
   CampaignCodeFormatError,
   DeletedCampaignError,
   IsForAbsoluteNoviceUpdateError,
