@@ -10,6 +10,7 @@ export const typeCategories = {
   'hybrid-training': 'Formation hybride',
   'in-person-training': 'Formation en présentiel',
   modulix: 'Module Pix',
+  'external-service': 'Service externe',
 };
 
 export const optionsTypeList = formatList(typeCategories);
