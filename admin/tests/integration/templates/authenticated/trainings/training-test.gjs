@@ -22,7 +22,7 @@ module('Integration | Component | Trainings | Training', function (hooks) {
       title: 'title',
       internalTitle: 'internalTitle',
       link: 'my-training-link',
-      type: 'type',
+      type: 'webinaire',
       locales: ['fr-fr'],
       editorName: 'Albert',
       editorLogoUrl: 'http://localhost:4202/logo-placeholder.png',
@@ -46,7 +46,7 @@ module('Integration | Component | Trainings | Training', function (hooks) {
     assert.ok(screen.getByText('internalTitle'));
     assert.ok(screen.getByText('internalTitle'));
     assert.ok(screen.getByRole('link', { name: 'my-training-link (nouvelle fenêtre)' }));
-    assert.ok(screen.getByText('type'));
+    assert.ok(screen.getByText('Webinaire'));
     assert.ok(screen.getByText('Franco-français (fr-fr)'));
     assert.ok(screen.getByText('Albert'));
   });
