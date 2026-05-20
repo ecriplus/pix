@@ -3,7 +3,7 @@ import { stdSerializers } from 'pino';
 import { generateHash } from '../../../identity-access-management/infrastructure/utils/crypto.js';
 import { getForwardedOrigin } from '../../../identity-access-management/infrastructure/utils/network.js';
 import { config } from '../../config.js';
-import { getCorrelationInfo, getInContext } from '../execution-context-manager.js';
+import { getCorrelationInfo, getInContext, setInContext } from '../execution-context-manager.js';
 import { loggerPino } from '../utils/logger.js';
 
 const serializersSym = Symbol.for('pino.serializers');
@@ -30,13 +30,14 @@ function requestSerializer(req) {
     enhancedReq.grantType = grant_type || '-';
     enhancedReq.usernameHash = generateHash(username) || '-';
     enhancedReq.refreshTokenHash = generateHash(refresh_token) || '-';
+    setInContext('user_id', request?.response?.source?.user_id);
   }
 
   const metrics = getInContext('metrics', null);
   return {
     ...enhancedReq,
     ...getCorrelationInfo(),
-    metrics: metrics,
+    metrics,
     route: request?.route?.path,
     routeDomain: request?.route?.realm?.plugin,
   };
