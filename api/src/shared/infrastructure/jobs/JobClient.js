@@ -2,8 +2,7 @@ import { glob } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import _ from "lodash";
-import PgBoss from "pg-boss";
+import { PgBoss } from "pg-boss";
 
 import { config } from '../../config.js';
 import { executeInContext, EXECUTORS } from '../execution-context-manager.js';
@@ -42,7 +41,7 @@ export class JobClient {
 
   static get instance() {
     if (!JobClient.#jobClient) {
-      JobClient.#jobClient = new JobClient();
+      JobClient.#jobClient = new this(JobClient.#constructorToken);
     }
     return JobClient.#jobClient;
   }
@@ -298,5 +297,9 @@ export class JobClient {
       GROUP BY name
     `);
     return rows;
+  }
+
+  static _resetForTesting() {
+    JobClient.#jobClient = null;
   }
 }
