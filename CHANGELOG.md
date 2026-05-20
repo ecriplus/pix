@@ -1,5 +1,32 @@
 # Pix Changelog
 
+# [5.410.0](https://github.com/1024pix/pix/compare/v5.409.0...v5.410.0) (2026-05-20)
+
+### :rocket: Amélioration
+
+- [#16231](https://github.com/1024pix/pix/pull/16231) Créer un nouveau module IAInfox_IND 
+- [#16154](https://github.com/1024pix/pix/pull/16154) Eval_IND retour edito MDX-57 
+- [#16236](https://github.com/1024pix/pix/pull/16236) Importer les traductions italiennes de Pix App (PIX-22764) 
+- [#16240](https://github.com/1024pix/pix/pull/16240) MDX-104 NR_Evaluation_NOV Fix mauvais grain  
+- [#16227](https://github.com/1024pix/pix/pull/16227) Mise à jour des commentaires d'une version (PIX-22697). 
+- [#16164](https://github.com/1024pix/pix/pull/16164) Script de migration des données CGU de Pix App vers le nouveau modèle (PIX-22574) 
+
+### :bug: Correction
+
+- [#16230](https://github.com/1024pix/pix/pull/16230) - Répare le rattachement d'une attestation aux parcours combinés dans PixAdmin (PIX-22779) 
+- [#16252](https://github.com/1024pix/pix/pull/16252) Changement d'une clé de traduction (PIX-22782) 
+
+### :building_construction: Tech
+
+- [#16083](https://github.com/1024pix/pix/pull/16083) Créer des modèles de Challenge dédiés pour un challenge qui doit être joué 
+- [#16223](https://github.com/1024pix/pix/pull/16223) Logger les userid dans les connexions réussies (PIX-22741) 
+- [#16243](https://github.com/1024pix/pix/pull/16243) Revoir la gestion et le mapping des erreurs dans HAPI 
+- [#16253](https://github.com/1024pix/pix/pull/16253) Suppression de restes de language inclusif (PIX-22798). 
+
+### :coffee: Autre
+
+- [#16250](https://github.com/1024pix/pix/pull/16250) Ne plus inviter à exécuter "npm run dev" pour démarrer toutes les applications à la fois à la racine du monorepo
+
 # [5.409.0](https://github.com/1024pix/pix/compare/v5.408.1...v5.409.0) (2026-05-19)
 
 ### :rocket: Amélioration
