@@ -50,7 +50,7 @@ export default class UserCertificationPage extends Component {
       {{#if this.displayV3CoreCertificate}}
         <V3CoreCertificate @certificate={{this.certificate}} />
       {{else if this.displayV3PixPlusCertificate}}
-        <V3PixPlusCertificate @certificate={{this.certificate}} />
+        <V3PixPlusCertificate @certificate={{this.certificate}} @context="user" />
       {{else}}
         <V2Certificate @model={{this.certificate}} />
       {{/if}}

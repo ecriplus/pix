@@ -162,7 +162,7 @@ module('Integration | Component | Certifications | Shareable certificate | v3-pi
           <Certifications::ShareableCertificate::V3PixPlusCertificate @certificate={{this.certification}} />`);
 
       // then
-      const subTitle = t('pages.certificate.frameworks.EDU.sub-title.admissible').replace(/ /g, ' ');
+      const subTitle = t('pages.certificate.frameworks.EDU.sub-title.admissible.candidate').replace(/ /g, ' ');
       assert
         .dom(screen.getByRole('heading', { level: 2, name: (name) => name.replace(/ /g, ' ').includes(subTitle) }))
         .exists();
@@ -189,7 +189,7 @@ module('Integration | Component | Certifications | Shareable certificate | v3-pi
           <Certifications::ShareableCertificate::V3PixPlusCertificate @certificate={{this.certification}} />`);
 
       // then
-      const subTitle = t('pages.certificate.obtained-certification', {
+      const subTitle = t('pages.certificate.obtained-certification.candidate', {
         globalLevelLabel: t('pages.user-certifications.meshes.EDU_1ER_DEGRE.EXPERT'),
         frameworkLabel: t('pages.certification-frameworks.EDU_1ER_DEGRE'),
       }).replace(/ /g, ' ');
@@ -364,7 +364,7 @@ module('Integration | Component | Certifications | Shareable certificate | v3-pi
       assert
         .dom(
           screen.getByText(
-            t('pages.certificate.obtained-certification', {
+            t('pages.certificate.obtained-certification.candidate', {
               globalLevelLabel: t(`pages.user-certifications.meshes.DROIT.EXPERT`),
               frameworkLabel: t('pages.certification-frameworks.DROIT'),
             }),
