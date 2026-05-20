@@ -149,10 +149,10 @@
       "password": {
         "error": "Das eingegebene Passwort ist falsch. dein Passwort muss länger als 8 Zeichen sein und mindestens eine Zahl, einen Klein- und einen Großbuchstaben enthalten.",
         "rules": {
-          "contains-digit": "eine Mindestzahl",
-          "contains-lowercase": "eine minimale Kleinschreibung",
-          "contains-uppercase": "mindestens ein Großbuchstabe",
-          "min-length": "Mindestens 8 Zeichen"
+          "contains-digit": "Mind. eine Zahl",
+          "contains-lowercase": "Mind. einen Kleinbuchstaben",
+          "contains-uppercase": "Mind. einen Großbuchstaben",
+          "min-length": "Mind. 8 Zeichen"
         }
       }
     },
@@ -173,7 +173,7 @@
         },
         "select-another-organization-link": "Eine andere Organisation wählen",
         "signup": {
-          "heading": "Andere Möglichkeiten der Anmeldung",
+          "heading": "Weitere Anmeldeoptionen",
           "signup-with-featured-identity-provider-link": "Sich mit {featuredIdentityProvider} anmelden"
         }
       },
@@ -189,7 +189,7 @@
       },
       "new-password-input": {
         "completed-message": "{ rulesCompleted } auf { rulesCount } abgeschlossen.",
-        "instructions-label": "dein Passwort muss den folgenden Regeln entsprechen:",
+        "instructions-label": "Dein Passwort muss Folgendes beinhalten:",
         "label": "Passwort"
       },
       "oidc-provider-selector": {
@@ -557,9 +557,9 @@
           "message": "Du wirst nun auf die Login-Seite von \"{providerName}\" weitergeleitet, um dich bei Pix anzumelden."
         },
         "signup": {
-          "button": "Anmelden",
-          "link": "Anmelden",
-          "title": "Du hast kein Konto?"
+          "button": "Registrieren",
+          "link": "Registrieren",
+          "title": "Du hast noch kein Konto?"
         },
         "title": "Wähle deine Organisation"
       }
@@ -569,7 +569,7 @@
         "actions": {
           "sign-in": "Ich habe bereits ein Konto",
           "start-anonymously": "Ich beginne ohne Pix-Konto",
-          "start-connected": "Beginnen"
+          "start-connected": "Start"
         },
         "texts": {
           "first-course": "Ist dies dein erster Pix-Pfad?",
@@ -629,7 +629,7 @@
         "results": "{result, number, ::percent} des Erfolgs",
         "resume": {
           "extra-information": "Fortsetzen des Lernpfads {campaignTitle}.",
-          "information": "Übernehmen"
+          "information": "Fortsetzen"
         },
         "retry": "Erneut versuchen",
         "see-more": "Details ansehen",
@@ -918,8 +918,8 @@
       "action": {
         "back": "Zurück zur Startseite"
       },
-      "text": "Um dein Profil zertifizieren zu lassen, mustt du in mindestens fünf Kompetenzen eine Stufe über 0 erreicht haben.",
-      "title": "Dein Profil ist noch nicht zertifizierbar."
+      "text": "Damit dein Profil zertifiziert werden kann, musst du in mindestens fünf Kompetenzen ein Level über 0 erreicht haben.",
+      "title": "Du kannst dein Profil noch nicht zertifizieren."
     },
     "certification-results": {
       "action": {
@@ -1025,7 +1025,7 @@
       },
       "embed-simulator": {
         "actions": {
-          "launch": "Beginnen",
+          "launch": "Start",
           "launch-label": "Anwendung starten",
           "reset": "Zurücksetzen",
           "reset-label": "Anwendung zurücksetzen"
@@ -1362,7 +1362,7 @@
       "actions": {
         "continue": {
           "extra-information": "Übernimm die Kompetenz {competenceName}.",
-          "label": "Übernehmen"
+          "label": "Fortsetzen"
         },
         "improve": {
           "description": {
@@ -1388,11 +1388,11 @@
         },
         "start": {
           "extra-information": "Beginne die Kompetenz {competenceName}.",
-          "label": "Beginnen"
+          "label": "Start"
         }
       },
       "for-competence": "die Kompetenz {competence}.",
-      "next-level-info": "{ remainingPixToNextLevel } pix vor der Ebene { level }.",
+      "next-level-info": "{ remainingPixToNextLevel } pix bis zu { level }.",
       "title": "Kompetenz",
       "tutorials": {
         "description": "Hier findest du eine Auswahl an Tutorials, die dir helfen können, Pix zu verdienen.",
@@ -1441,12 +1441,12 @@
           "text": "Mehr erfahren",
           "url": "https://pix.fr/actualites/decouvrez-votre-nouveau-tableau-de-bord"
         },
-        "message": "<h2>Hallo, lerne dein Dashboard kennen.</h2><p>Greif schnell und einfach auf deine bereits begonnenen Lernpfade und Kompetenztests.<br/> Finde heraus, wie sich dein Pix-Score entwickelt und überprüfe, ob dein Profil für die Pix-Zertifizierung bereit ist.</p>."
+        "message": "<h2>Lerne dein Dashboard kennen!</h2><p>Greife schnell und einfach auf deine bereits begonnenen Lernpfade und Kompetenztests zu. Finde heraus, wie sich dein Pix-Score entwickelt und überprüfe, ob dein Profil-Fortschritt den Voraussetzungen der Pix-Zertifizierung entspricht.</p>."
       },
       "recommended-competences": {
         "extra-information": "Zugriff auf alle empfohlenen Kompetenzen",
         "profile-link": "Alle Kompetenzen",
-        "subtitle": "Erkunde, welche Kompetenzen für dich empfohlen werden.",
+        "subtitle": "Erkunde, welche Kompetenzen für dich empfohlen sind. ",
         "title": "Empfohlene Kompetenzen"
       },
       "score": {
@@ -1454,7 +1454,7 @@
       },
       "started-competences": {
         "subtitle": "Setze deine Kompetenztests fort, die neuesten findest du hier.",
-        "title": "Eine Kompetenz übernehmen"
+        "title": "Eine Kompetenz erwerben"
       },
       "title": "Startseite",
       "welcome": "Hallo { firstName }."
@@ -1505,7 +1505,7 @@
         "organised-by": "vorgeschlagen von",
         "title": "Zugang zum Lernpfad über Mediacentre"
       },
-      "start": "Zum Lernpfad gelangen",
+      "start": "zum Lernpfad",
       "title": "Ich habe einen Code",
       "warning-message": "Du bist nicht { firstName } { lastName }?",
       "warning-message-logout": "Abmelden"
@@ -1621,7 +1621,7 @@
         "embed": {
           "start": {
             "ariaLabel": "Anwendung starten",
-            "name": "Beginnen"
+            "name": "Start"
           }
         },
         "flashcards": {
@@ -1634,7 +1634,7 @@
           "retry": "Erneut versuchen",
           "seeAgain": "Überarbeiten",
           "seeAnswer": "Siehe die Antwort",
-          "start": "Beginnen"
+          "start": "Start"
         },
         "grain": {
           "continue": "Weiter",
@@ -1682,7 +1682,7 @@
         "smallScreenModal": {
           "cancel": "Zurück zu den Details",
           "description": "Einige Aktivitäten in diesem Modul sind auf einem kleinen Bildschirm möglicherweise nur schwer durchführbar. Für eine optimale Erfahrung empfehlen wir dir, einen Computer zu verwenden.",
-          "startModule": "Beginnen",
+          "startModule": "Start",
           "title": "Du scheinst einen kleinen Bildschirm zu verwenden"
         },
         "startModule": "Das Modul beginnen"
@@ -1946,7 +1946,7 @@
           "no-level": "Kompetenz nicht begonnen"
         }
       },
-      "description": "Bewerte dich in deinem eigenen Tempo in 16 digitalen Kompetenzen. Wähle eine Kompetenz und beginne, Pixel zu verdienen.",
+      "description": "Bewerte deine Kenntnisse in 16 digitalen Kompetenzen, ganz in deinem eigenen Tempo. Wähle eine Kompetenz aus und beantworte die Fragen, um Pix zu sammeln.",
       "first-title": "Du hast 16 Kompetenzen, die du testen müssen. '<br>'Konzentriere dich und los geht's !",
       "resume-campaign-banner": {
         "accessibility": {
@@ -2113,7 +2113,7 @@
           "label": "Passwort"
         }
       },
-      "first-title": "Melde dich an",
+      "first-title": "Anmelden",
       "forgotten-password": "Passwort vergessen?",
       "title": "Verbinden"
     },
@@ -2128,7 +2128,7 @@
           "help": "(z.B. nom@exemple.fr)"
         }
       },
-      "first-title": "Melde dich an",
+      "first-title": "Anmelden",
       "save-progress-message": "Um deinen Fortschritt zu behalten und dich weiterhin zu bewerten, melde dich bei Pix an!",
       "title": "Anmeldung"
     },
@@ -2288,7 +2288,7 @@
       "title": "Bedingungen für die Nutzung"
     },
     "timed-challenge-instructions": {
-      "action": "Beginnen",
+      "action": "Start",
       "primary": "Du hast '<span class=\"timed-challenge-instructions__time\">'{time}'</span>' zur Verfügung, um die nächste Frage zu bestehen.",
       "secondary": "Du kannst danach weiter machen, aber die Frage gilt nicht als bestanden.",
       "time": {
@@ -2539,10 +2539,10 @@
       "recommended": "Empfohlen",
       "recommended-empty": {
         "description": "Um dir Tutorials empfehlen zu können, die auf dein Niveau zugeschnitten sind, musst du einen Kompetenztest beginnen.",
-        "link": "Beginnen",
+        "link": "Start",
         "title": "{firstName}, hier findest du deine Lieblingstutorials wieder"
       },
-      "saved": "Registriert",
+      "saved": "Gemerkt",
       "saved-empty": {
         "description": "Du musst ein empfohlenes Tutorial speichern, damit es hier angezeigt wird.",
         "title": "Du hast noch keine registrierten Tutorials"
