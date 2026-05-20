@@ -1,6 +1,7 @@
 import { campaignDomainErrorMappingConfiguration } from '../../../../../src/prescription/campaign/application/http-error-mapper-configuration.js';
 import {
   CampaignParticipationDoesNotBelongToUser,
+  DeletedCampaignError,
   OrganizationNotAuthorizedMultipleSendingAssessmentToCreateCampaignError,
   OrganizationNotAuthorizedToCreateCampaignError,
   UserNotAuthorizedToCreateCampaignError,
@@ -62,5 +63,18 @@ describe('Prescription | Campaign | Unit | Application | HttpErrorMapperConfigur
 
     //then
     expect(error).to.be.instanceOf(HttpErrors.ForbiddenError);
+  });
+
+  it('instantiates PreconditionFailedError when DeletedCampaignError', async function () {
+    //given
+    const httpErrorMapper = campaignDomainErrorMappingConfiguration.find(
+      (httpErrorMapper) => httpErrorMapper.name === DeletedCampaignError.name,
+    );
+
+    //when
+    const error = httpErrorMapper.httpErrorFn(new DeletedCampaignError());
+
+    //then
+    expect(error).to.be.instanceOf(HttpErrors.PreconditionFailedError);
   });
 });

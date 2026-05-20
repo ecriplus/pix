@@ -4,6 +4,7 @@ import {
   CampaignCodeFormatError,
   CampaignParticipationDoesNotBelongToUser,
   CampaignUniqueCodeError,
+  DeletedCampaignError,
   IsForAbsoluteNoviceUpdateError,
   MultipleSendingsUpdateError,
   OrganizationNotAuthorizedMultipleSendingAssessmentToCreateCampaignError,
@@ -59,6 +60,10 @@ const campaignDomainErrorMappingConfiguration = [
   {
     name: CampaignBelongsToCombinedCourseError.name,
     httpErrorFn: (error) => new HttpErrors.ForbiddenError(error.message, error.code),
+  },
+  {
+    name: DeletedCampaignError.name,
+    httpErrorFn: (error) => new HttpErrors.PreconditionFailedError(error.message, error.code, error.meta),
   },
 ];
 
