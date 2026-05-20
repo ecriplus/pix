@@ -171,8 +171,8 @@ class CertificationAlgorithmVersionError extends DomainError {
 }
 
 class ChallengeAlreadyAnsweredError extends DomainError {
-  constructor(message = 'La question a déjà été répondue.') {
-    super(message);
+  constructor() {
+    super('This challenge has already been answered.', 'ALREADY_ANSWERED_ERROR');
   }
 }
 

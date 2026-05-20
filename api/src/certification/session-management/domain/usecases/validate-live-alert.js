@@ -5,8 +5,7 @@
  * @typedef {import('./index.js').CertificationIssueReportRepository} CertificationIssueReportRepository
  */
 
-import { NotFoundError } from '../../../../shared/domain/errors.js';
-import { ChallengeAlreadyAnsweredError } from '../../../evaluation/domain/errors.js';
+import { ChallengeAlreadyAnsweredError, NotFoundError } from '../../../../shared/domain/errors.js';
 import { CertificationIssueReport } from '../../../shared/domain/models/CertificationIssueReport.js';
 import { CertificationIssueReportCategory } from '../../../shared/domain/models/CertificationIssueReportCategory.js';
 

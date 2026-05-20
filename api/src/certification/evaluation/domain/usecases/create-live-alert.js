@@ -1,5 +1,5 @@
+import { ChallengeAlreadyAnsweredError } from '../../../../shared/domain/errors.js';
 import { CertificationChallengeLiveAlert } from '../../../shared/domain/models/CertificationChallengeLiveAlert.js'; // todo me déplacer
-import { ChallengeAlreadyAnsweredError } from '../errors.js';
 
 export async function createLiveAlert({
   assessmentId,

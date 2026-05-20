@@ -1,5 +1,4 @@
 import { AdminMemberError } from '../../../authorization/domain/errors.js';
-import { ChallengeAlreadyAnsweredError } from '../../../certification/evaluation/domain/errors.js';
 import { AlreadyRatedAssessmentError, EmptyAnswerError } from '../../../evaluation/domain/errors.js';
 import * as LLMDomainErrors from '../../../llm/domain/errors.js';
 import {
@@ -51,6 +50,7 @@ const FORBIDDEN_ERRORS = [
 ];
 
 const CONFLICT_ERRORS = [
+  SharedDomainErrors.ChallengeAlreadyAnsweredError,
   SharedDomainErrors.UserAlreadyExistsWithAuthenticationMethodError,
   SharedDomainErrors.UnexpectedUserAccountError,
   SharedDomainErrors.AccountRecoveryUserAlreadyConfirmEmail,
@@ -120,7 +120,6 @@ const BAD_REQUEST_ERRORS = [
 const UNPROCESSABLE_ENTITY_ERRORS = [
   SharedDomainErrors.UserCouldNotBeReconciledError,
   AdminMemberError,
-  ChallengeAlreadyAnsweredError,
   SharedDomainErrors.OidcError,
   SharedDomainErrors.AuthenticationMethodAlreadyExistsError,
   SharedDomainErrors.MissingAttributesError,
@@ -165,9 +164,6 @@ export function mapToHttpError(error) {
   }
   if (error instanceof AlreadyRatedAssessmentError) {
     return new HttpErrors.PreconditionFailedError('Assessment is already rated.');
-  }
-  if (error instanceof SharedDomainErrors.ChallengeAlreadyAnsweredError) {
-    return new HttpErrors.ConflictError('This challenge has already been answered.');
   }
   if (error instanceof SharedDomainErrors.ChallengeNotAskedError) {
     return new HttpErrors.ConflictError('This challenge has not been asked to the user.');
