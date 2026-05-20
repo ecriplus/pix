@@ -2,6 +2,7 @@ import {
   FEATURE_LEARNER_IMPORT_ID,
   FEATURE_MISSIONS_MANAGEMENT_ID,
   FEATURE_ORALIZATION_ID,
+  IMPORT_FORMAT_GENERIC_1D_ID,
   IMPORT_FORMAT_ONDE_ID,
   USER_ID_ADMIN_ORGANIZATION,
   USER_ID_MEMBER_ORGANIZATION,
@@ -14,6 +15,7 @@ const TEAM_1D_OFFSET_ID = 9000;
 
 const TEAM_1D_ORGANIZATION_1_ID = TEAM_1D_OFFSET_ID;
 const TEAM_1D_ORGANIZATION_2_ID = TEAM_1D_OFFSET_ID + 1;
+const TEAM_1D_ORGANIZATION_WITH_GENERIC_IMPORT = TEAM_1D_OFFSET_ID + 2;
 
 const TEAM_1D_USER_ID = TEAM_1D_OFFSET_ID;
 
@@ -186,6 +188,48 @@ async function _createSco1dOrganizations(databaseBuilder) {
     organizationId: TEAM_1D_ORGANIZATION_2_ID,
     studentNb: 25,
   });
+
+  await tooling.organization.createOrganization({
+    databaseBuilder,
+    organizationId: TEAM_1D_ORGANIZATION_WITH_GENERIC_IMPORT,
+    type: 'SCO-1D',
+    name: 'Ecole de Belgique - Pix1D',
+    isManagingStudents: true,
+    externalId: 'PIX1D_IMPORT',
+    tagIds: [],
+    adminIds: [TEAM_1D_USER_ID, USER_ID_ADMIN_ORGANIZATION],
+    features: [
+      { id: FEATURE_MISSIONS_MANAGEMENT_ID },
+      { id: FEATURE_ORALIZATION_ID },
+      { id: FEATURE_LEARNER_IMPORT_ID, params: { organizationLearnerImportFormatId: IMPORT_FORMAT_GENERIC_1D_ID } },
+    ],
+    administrationTeamId: ADMINISTRATION_TEAM_ALPHA_ID,
+    organizationLearnerTypeId: ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
+  });
+  await databaseBuilder.factory.buildSchool({
+    organizationId: TEAM_1D_ORGANIZATION_WITH_GENERIC_IMPORT,
+    code: 'PIXJUNIOR',
+    sessionExpirationDate,
+  });
+
+  await _buildSchoolGenericStudent({
+    databaseBuilder,
+    division: 'classe1',
+    organizationId: TEAM_1D_ORGANIZATION_WITH_GENERIC_IMPORT,
+    studentNb: 5,
+  });
+  await _buildSchoolGenericStudent({
+    databaseBuilder,
+    division: 'classe2',
+    organizationId: TEAM_1D_ORGANIZATION_WITH_GENERIC_IMPORT,
+    studentNb: 5,
+  });
+
+  databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearnerFilter({
+    organizationId: TEAM_1D_ORGANIZATION_WITH_GENERIC_IMPORT,
+    attributeName: 'COMMON_DIVISION',
+    values: ['classe1', 'classe2'],
+  });
 }
 
 const firstNames = [
@@ -230,6 +274,24 @@ const firstNames = [
   'Sasuke-Yuri',
   'Kirishima',
 ];
+
+async function _buildSchoolGenericStudent({ databaseBuilder, organizationId, division, studentNb }) {
+  for (let index = 0; index < studentNb; index++) {
+    const firstName = firstNames[index];
+    const lastName = _generateLastName();
+    const userId = await databaseBuilder.factory.buildUser({ firstName, lastName }).id;
+    await databaseBuilder.factory.prescription.organizationLearners.buildOrganizationLearner({
+      firstName,
+      lastName,
+      organizationId,
+      attributes: {
+        'Libellé classe': division,
+        'Date de naissance': _generateBirthDate(),
+      },
+      userId,
+    });
+  }
+}
 
 async function _buildSchoolStudent({ databaseBuilder, organizationId, division, studentNb }) {
   for (let index = 0; index < studentNb; index++) {
@@ -290,6 +352,13 @@ function _generateLastName() {
     result.push(randomSyllable());
   }
   return result.join('');
+}
+
+function _generateBirthDate() {
+  const day = Math.round(Math.random() * 27) + 1;
+  const month = Math.round(Math.random() * 11) + 1;
+  const year = 2000 + Math.round(Math.random() * 5);
+  return new Date(`${year}-${month}-${day}`);
 }
 
 export { TEAM_1D_USER_ID, team1dDataBuilder };

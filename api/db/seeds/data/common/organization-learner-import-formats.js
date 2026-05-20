@@ -2,7 +2,12 @@ import {
   ANONYMIZATION_RULE,
   IMPORT_KEY_FIELD,
 } from '../../../../src/prescription/learner-management/domain/constants.js';
-import { IMPORT_FORMAT_GENERIC_ID, IMPORT_FORMAT_ONDE_ID, REAL_PIX_SUPER_ADMIN_ID } from './constants.js';
+import {
+  IMPORT_FORMAT_GENERIC_1D_ID,
+  IMPORT_FORMAT_GENERIC_ID,
+  IMPORT_FORMAT_ONDE_ID,
+  REAL_PIX_SUPER_ADMIN_ID,
+} from './constants.js';
 
 export const organizationLearnerImportFormat = async function ({ databaseBuilder }) {
   await databaseBuilder.factory.buildOrganizationLearnerImportFormat({
@@ -148,7 +153,7 @@ export const organizationLearnerImportFormat = async function ({ databaseBuilder
               position: 1,
               name: IMPORT_KEY_FIELD.COMMON_DIVISION,
               filterable: {
-                type: 'string',
+                type: 'list',
               },
             },
           },
@@ -177,7 +182,8 @@ export const organizationLearnerImportFormat = async function ({ databaseBuilder
   });
 
   await databaseBuilder.factory.buildOrganizationLearnerImportFormat({
-    name: 'GENERIC_V2',
+    id: IMPORT_FORMAT_GENERIC_1D_ID,
+    name: 'GENERIC_1D',
     fileType: 'csv',
     config: {
       acceptedEncoding: ['utf8'],
@@ -212,7 +218,7 @@ export const organizationLearnerImportFormat = async function ({ databaseBuilder
             anonymize: ANONYMIZATION_RULE.CLEAR,
             exportable: true,
             validate: { type: 'string', required: true },
-            mappingColumn: 'Classe',
+            mappingColumn: 'Libellé classe',
             mappingValues: {
               Première: '1ère',
               Deuxième: '2ème',
@@ -222,7 +228,7 @@ export const organizationLearnerImportFormat = async function ({ databaseBuilder
               position: 1,
               name: IMPORT_KEY_FIELD.COMMON_DIVISION,
               filterable: {
-                type: 'string',
+                type: 'list',
               },
             },
           },
