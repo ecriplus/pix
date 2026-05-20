@@ -14,7 +14,7 @@ module('Integration | Component | Complementary certifications/Item/Framework | 
   hooks.beforeEach(function () {
     intl = this.owner.lookup('service:intl');
     store = this.owner.lookup('service:store');
-    pixToast = this.owner.lookup('service:pix-toast');
+    pixToast = this.owner.lookup('service:pixToast');
 
     frameworkItem1 = {
       id: 456,
@@ -125,8 +125,11 @@ module('Integration | Component | Complementary certifications/Item/Framework | 
     assert.dom(screen.queryByRole('dialog')).exists();
   });
 
-  module('deletion', function () {
-    const deleteButtonName = t('components.complementary-certifications.item.framework.history.table.actions.delete');
+  module('deletion', function (hooks) {
+    let deleteButtonName;
+    hooks.beforeEach(() => {
+      deleteButtonName = t('components.complementary-certifications.item.framework.history.table.actions.delete');
+    });
 
     test('it should not be possible to delete an ACTIVE or ARCHIVED version', async function (assert) {
       // when
@@ -150,10 +153,48 @@ module('Integration | Component | Complementary certifications/Item/Framework | 
 
       // when
       await click(screen.getAllByRole('button', { name: deleteButtonName })[2]);
+      await click(screen.getByText('Confirmer la suppression'));
 
       // then
       assert.strictEqual(screen.getAllByRole('row').length, 3);
       assert.dom(screen.queryByRole('cell', { name: `${frameworkItem3.id}` })).doesNotExist();
+    });
+
+    module('when deletion is a success', function () {
+      test('it should send a toast for feedback ', async function (assert) {
+        sinon.stub(pixToast, 'sendSuccessNotification');
+        const certificationVersion = store.createRecord('certification-version', { id: frameworkItem3.id });
+        sinon.stub(store, 'findRecord').resolves(certificationVersion);
+        sinon.stub(certificationVersion, 'destroyRecord').resolves();
+
+        const screen = await render(<template><FrameworkHistory @frameworkKey="CORE" /></template>);
+
+        // when
+        await click(screen.getAllByRole('button', { name: deleteButtonName })[2]);
+        await click(screen.getByText('Confirmer la suppression'));
+
+        // then
+        assert.ok(pixToast.sendSuccessNotification.called);
+      });
+    });
+
+    module('when deletion is a error', function () {
+      test('it should send a toast for feedback ', async function (assert) {
+        sinon.stub(pixToast, 'sendErrorNotification');
+
+        const certificationVersion = store.createRecord('certification-version', { id: frameworkItem3.id });
+        sinon.stub(store, 'findRecord').resolves(certificationVersion);
+        sinon.stub(certificationVersion, 'destroyRecord').rejects();
+
+        const screen = await render(<template><FrameworkHistory @frameworkKey="CORE" /></template>);
+
+        // when
+        await click(screen.getAllByRole('button', { name: deleteButtonName })[2]);
+        await click(screen.getByText('Confirmer la suppression'));
+
+        // then
+        assert.ok(pixToast.sendErrorNotification.called);
+      });
     });
   });
 });

@@ -479,6 +479,13 @@
       }
     },
     "certification-frameworks": {
+      "deletion-modal": {
+        "action-button": "Confirm deletion",
+        "content": "You are about to delete a certification version !!!!",
+        "error-message": "An error has occured",
+        "success-message": "That version has indeed been removed",
+        "title": "Confirmation of version deletion"
+      },
       "item": {
         "framework": {
           "new-version-form": {
