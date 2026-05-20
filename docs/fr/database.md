@@ -1,4 +1,6 @@
-# Conventions
+# Database
+
+## Conventions
 
 Ces conventions sont vérifiées autant que possible dans la tâche de `lint` de l'API.
 
