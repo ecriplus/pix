@@ -205,7 +205,16 @@
                 "id": "4c853dca-4711-4bb0-8bca-1480ee237245",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Les tentatives d’arnaque par message sont des <strong>messages trompeurs</strong> envoyés à <strong>un très grand nombre de personnes</strong> par des escrocs, pour obtenir des informations personnelles.&nbsp;</p><p><br><strong>🤔 Bon à savoir</strong><br>On appelle cela de l’hameçonnage (ou phishing en anglais).</p>"
+                "content": "<p>Les tentatives d’arnaque par message sont des <strong>messages trompeurs</strong> envoyés à <strong>un très grand nombre de personnes</strong> par des escrocs, pour obtenir des informations personnelles.&nbsp;</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "da2de08c-fe9f-42e6-8504-c9ca06055b7b",
+                "type": "text",
+                "tag": "did-you-know",
+                "content": "<p>On appelle cela de l’hameçonnage (ou phishing en anglais).</p>"
               }
             }
           ]
@@ -542,7 +551,16 @@
                 "id": "56b11acd-0a06-4ca7-8872-9da44dd4fc30",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Pour <strong>éviter de tomber dans le piège</strong>, prenez le temps de réfléchir avant d’agir&nbsp;: ne communiquez pas d’informations personnelles et ignorez le message.</p><p><br><strong>🤔 Bon à savoir</strong><br>Ces messages d’arnaque sont très courants par SMS, sur les messageries instantanées mais aussi par mail et sur les réseaux sociaux.</p>"
+                "content": "<p>Pour <strong>éviter de tomber dans le piège</strong>, prenez le temps de réfléchir avant d’agir&nbsp;: ne communiquez pas d’informations personnelles et ignorez le message.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "a44c75a1-1279-4062-9b55-6bec29bec22c",
+                "type": "text",
+                "tag": "further-information",
+                "content": "<p>Ces messages d’arnaque sont très courants par SMS, sur les messageries instantanées mais aussi par mail et sur les réseaux sociaux.</p>"
               }
             }
           ]
