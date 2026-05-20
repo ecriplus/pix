@@ -1,4 +1,4 @@
-import { render, within } from '@1024pix/ember-testing-library';
+import { render } from '@1024pix/ember-testing-library';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
@@ -30,17 +30,9 @@ module('Integration | Component | Certifications | Candidate certificate | v3-ce
         <Certifications::CandidateCertificate::v3Certificate @certificate={{this.certification}} />`);
 
       // then
-      assert.dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.title') })).exists();
       assert
         .dom(
           screen.getByRole('heading', { level: 2, name: t('pages.certificate.global.explanation.pre-beginner-level') }),
-        )
-        .exists();
-      assert
-        .dom(
-          within(screen.getByRole('navigation')).getByRole('link', {
-            name: t('pages.certifications-list.title'),
-          }),
         )
         .exists();
       assert
@@ -76,20 +68,12 @@ module('Integration | Component | Certifications | Candidate certificate | v3-ce
         <Certifications::CandidateCertificate::v3Certificate @certificate={{this.certification}} />`);
 
       // then
-      assert.dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.title') })).exists();
       assert.dom(screen.getByRole('heading', { level: 2, name: t('pages.certificate.congratulations') })).exists();
       assert
         .dom(
           screen.getByText(
             t('pages.certificate.global.explanation.default', { globalLevelLabel: certification.globalLevelLabel }),
           ),
-        )
-        .exists();
-      assert
-        .dom(
-          within(screen.getByRole('navigation')).getByRole('link', {
-            name: t('pages.certifications-list.title'),
-          }),
         )
         .exists();
       const globalLevelLabels = screen.getAllByText(certification.globalLevelLabel);

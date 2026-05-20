@@ -9,7 +9,7 @@ import { tracked } from '@glimmer/tracking';
 import dayjsFormat from 'ember-dayjs/helpers/dayjs-format';
 import { t } from 'ember-intl';
 import CopyPasteButton from 'mon-pix/components/copy-paste-button';
-import { CERTIFICATE_STATUSES, CERTIFICATE_TYPES } from 'mon-pix/models/certificate-summary';
+import { CERTIFICATE_STATUSES } from 'mon-pix/models/certificate-summary';
 
 import Hexagon from './hexagon';
 import Tags from './tags';
@@ -20,8 +20,6 @@ export default class ListItem extends Component {
   @service fileSaver;
   @service currentDomain;
   @service locale;
-  @service featureToggles;
-
   @tracked errorMessage = null;
 
   get isPublished() {
@@ -41,14 +39,6 @@ export default class ListItem extends Component {
       (this.args.certificateSummary.isRejected || this.args.certificateSummary.isCancelled) &&
       this.args.certificateSummary.comment
     );
-  }
-
-  get shouldDisplayActions() {
-    if (this.args.certificateSummary.certificateType === CERTIFICATE_TYPES.ATTESTATION) {
-      return true;
-    }
-    const disabledFrameworks = this.featureToggles.featureToggles?.userCertificationsActionsDisabledFrameworks ?? [];
-    return !disabledFrameworks.includes(this.args.certificateSummary.certificationFramework);
   }
 
   get downloadLabel() {
@@ -138,30 +128,28 @@ export default class ListItem extends Component {
           </div>
         </div>
 
-        {{#if this.shouldDisplayActions}}
-          <ul class="certification-item-buttons">
-            <li>
-              <PixButtonLink
-                @variant="secondary"
-                @route="authenticated.user-certifications.get"
-                @model={{@certificateSummary.id}}
-                @iconBefore="eye"
-              >
-                {{t "pages.certifications-list.buttons.details"}}
-              </PixButtonLink>
-            </li>
-            <li>
-              <PixButton
-                @triggerAction={{this.downloadAttestation}}
-                @loadingColor="grey"
-                @iconBefore="download"
-                @variant="tertiary"
-              >
-                {{this.downloadLabel}}
-              </PixButton>
-            </li>
-          </ul>
-        {{/if}}
+        <ul class="certification-item-buttons">
+          <li>
+            <PixButtonLink
+              @variant="secondary"
+              @route="authenticated.user-certifications.get"
+              @model={{@certificateSummary.id}}
+              @iconBefore="eye"
+            >
+              {{t "pages.certifications-list.buttons.details"}}
+            </PixButtonLink>
+          </li>
+          <li>
+            <PixButton
+              @triggerAction={{this.downloadAttestation}}
+              @loadingColor="grey"
+              @iconBefore="download"
+              @variant="tertiary"
+            >
+              {{this.downloadLabel}}
+            </PixButton>
+          </li>
+        </ul>
       {{/if}}
     </PixBlock>
   </template>

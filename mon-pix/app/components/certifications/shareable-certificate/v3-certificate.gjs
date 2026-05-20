@@ -1,5 +1,3 @@
-import PixBreadcrumb from '@1024pix/pix-ui/components/pix-breadcrumb';
-import { service } from '@ember/service';
 import Component from '@glimmer/component';
 
 import CandidateGlobalLevel from '../certificate-information/candidate-global-level';
@@ -9,33 +7,11 @@ import CompetencesDetails from '../certificate-information/competences-details';
 import PixPlusCertificate from './v3-pix-plus-certificate';
 
 export default class v3Certificate extends Component {
-  @service intl;
-
-  get links() {
-    return [
-      {
-        route: 'fill-in-certificate-verification-code',
-        label: this.intl.t('pages.fill-in-certificate-verification-code.title'),
-      },
-      {
-        label: this.args.certificate.title,
-      },
-    ];
-  }
-
   get isPixPlusFramework() {
     return !['CORE', 'CLEA'].includes(this.args.certificate.certificationFramework);
   }
 
   <template>
-    <section class="global-page-header global-page-header__breadcrumb">
-      <PixBreadcrumb @links={{this.links}} />
-
-      <h1 class="global-page-header__title">
-        {{@certificate.title}}
-      </h1>
-    </section>
-
     <section class="v3-shareable-certificate">
       {{#if this.isPixPlusFramework}}
         <PixPlusCertificate @certificate={{@certificate}} />

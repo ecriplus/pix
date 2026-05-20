@@ -19,6 +19,7 @@ const EDU_STEPS = {
 
 export default class PixPlusCertificate extends Component {
   @service intl;
+  @service router;
 
   @tracked eduCurrentStep = this.isCandidateEduAdmissible ? EDU_STEPS.ADMISSIBLE : EDU_STEPS.FINAL;
 
@@ -66,6 +67,7 @@ export default class PixPlusCertificate extends Component {
   }
 
   <template>
+    {{log this.router}}
     <PixBlock class="v3-pix-plus-certificate__infos-block">
       <div>
         <PixTag @color="green" class="v3-pix-plus-certificate__valid-tag">
