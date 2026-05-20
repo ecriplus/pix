@@ -104,7 +104,7 @@ module('Integration | Component | Complementary certifications/Item/Framework | 
     assert.dom(screen.getByRole('dialog')).exists();
   });
 
-  test('it closes the detail modal after saving comments successfully', async function (assert) {
+  test('it leaves detail modal opened after saving comments successfully', async function (assert) {
     // given
     const frameworkHistory = [
       {
@@ -143,6 +143,6 @@ module('Integration | Component | Complementary certifications/Item/Framework | 
     await click(screen.getByRole('button', { name: t('common.actions.save') }));
 
     // then
-    assert.dom(screen.queryByRole('dialog')).doesNotExist();
+    assert.dom(screen.queryByRole('dialog')).exists();
   });
 });

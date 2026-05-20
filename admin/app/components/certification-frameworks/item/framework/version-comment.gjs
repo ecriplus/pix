@@ -26,7 +26,6 @@ export default class VersionComment extends Component {
           'components.complementary-certifications.item.framework.version-detail-modal.comment-save-success',
         ),
       });
-      this.args.onSave();
     } catch {
       this.args.version.rollbackAttributes();
       this.pixToast.sendErrorNotification({

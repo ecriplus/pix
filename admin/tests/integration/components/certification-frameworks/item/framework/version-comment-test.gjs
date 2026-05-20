@@ -66,21 +66,6 @@ module('Integration | Component | Complementary certifications/Item/Framework | 
       assert.strictEqual(version.comments, 'Mon nouveau commentaire');
       assert.ok(pixToast.sendSuccessNotification.calledOnce);
     });
-
-    test('it calls onSave after a successful save', async function (assert) {
-      // given
-      const version = { comments: '', save: sinon.stub().resolves() };
-      const onSave = sinon.stub();
-      sinon.stub(pixToast, 'sendSuccessNotification');
-
-      const screen = await render(<template><VersionComment @version={{version}} @onSave={{onSave}} /></template>);
-
-      // when
-      await click(screen.getByRole('button', { name: t('common.actions.save') }));
-
-      // then
-      assert.ok(onSave.calledOnce);
-    });
   });
 
   module('when saving comments fails', function () {

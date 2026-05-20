@@ -1,5 +1,4 @@
 import { render } from '@1024pix/ember-testing-library';
-import { click } from '@ember/test-helpers';
 import CertificationVersionDetailModal from 'pix-admin/components/certification-frameworks/item/framework/certification-version-detail-modal';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -12,10 +11,8 @@ module(
     setupIntlRenderingTest(hooks);
 
     let store;
-    let pixToast;
     hooks.beforeEach(function () {
       store = this.owner.lookup('service:store');
-      pixToast = this.owner.lookup('service:pix-toast');
     });
 
     function buildVersion(overrides = {}) {
@@ -123,25 +120,6 @@ module(
 
       // then
       assert.dom(screen.getByRole('button', { name: t('common.actions.save') })).exists();
-    });
-
-    test('it closes the modal when comments are saved successfully', async function (assert) {
-      // given
-      const version = buildVersion();
-      const onClose = sinon.stub();
-      sinon.stub(pixToast, 'sendSuccessNotification');
-
-      const screen = await render(
-        <template>
-          <CertificationVersionDetailModal @version={{version}} @status="ACTIVE" @scope="CORE" @onClose={{onClose}} />
-        </template>,
-      );
-
-      // when
-      await click(screen.getByRole('button', { name: t('common.actions.save') }));
-
-      // then
-      assert.ok(onClose.calledOnce);
     });
   },
 );
