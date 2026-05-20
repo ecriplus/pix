@@ -17,7 +17,9 @@ const EXCLUDED_JOB_FILES = [
   '**/job-controller.js',
   '**/job-controller.ts',
   '**/event-handler.js',
+  '**/event-handler.ts',
   '**/job-schedule-controller.js',
+  '**/job-schedule-controller.ts',
 ];
 
 export class JobClient {
@@ -50,7 +52,7 @@ export class JobClient {
 
   static get instance() {
     if (!JobClient.#jobClient) {
-      JobClient.#jobClient = new JobClient();
+      JobClient.#jobClient = new this(JobClient.#constructorToken);
     }
     return JobClient.#jobClient;
   }
@@ -356,5 +358,9 @@ export class JobClient {
       GROUP BY name
     `);
     return rows;
+  }
+
+  static _resetForTesting() {
+    JobClient.#jobClient = null;
   }
 }
