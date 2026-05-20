@@ -31,7 +31,7 @@ const Header = <template>
       {{/if}}
 
       <div class={{unless (eq @combinedCourse.status "COMPLETED") "combined-course__description"}}>
-        <MarkdownToHtml @markdown={{@combinedCourse.description}} />
+        <MarkdownToHtml @markdown={{@combinedCourse.description}} @mustReplaceLinksFromMarkdown={{true}} />
       </div>
 
       {{#if (eq @combinedCourse.status "NOT_STARTED")}}
