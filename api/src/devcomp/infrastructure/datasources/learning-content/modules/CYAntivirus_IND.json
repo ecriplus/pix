@@ -303,28 +303,28 @@
                     "id": "2",
                     "content": "<p>En analysant uniquement les noms des fichiers et programmes ainsi que leurs extensions.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! Chaque logiciel malveillant possède des caractéristiques et un code qui lui sont propres, appelées <strong>signatures&nbsp;</strong>(virales).<br><br>Lorsqu’un fichier ou un programme est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une base contenant des signatures des logiciels malveillants déjà connus par l’antivirus&nbsp;: la <strong>base de signatures</strong>.</p>"
+                      "diagnosis": "<p>Eh non ! Chaque logiciel malveillant possède des caractéristiques et un code qui lui sont propres, appelées <strong>signatures&nbsp;</strong>(virales).<br><br>Lorsqu’un fichier ou un programme est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une base contenant les signatures des logiciels malveillants déjà connus par l’antivirus&nbsp;: la <strong>base de signatures</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>En supprimant tous les fichiers et programmes qu’il ne reconnaît pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! Chaque logiciel malveillant possède des caractéristiques et un code qui lui sont propres, appelées <strong>signatures&nbsp;</strong>(virales).<br><br>Lorsqu’un fichier ou un programme est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une base contenant des signatures des logiciels malveillants déjà connus par l’antivirus&nbsp;: la <strong>base de signatures</strong>.</p>"
+                      "diagnosis": "<p>Eh non ! Chaque logiciel malveillant possède des caractéristiques et un code qui lui sont propres, appelées <strong>signatures&nbsp;</strong>(virales).<br><br>Lorsqu’un fichier ou un programme est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une base contenant les signatures des logiciels malveillants déjà connus par l’antivirus&nbsp;: la <strong>base de signatures</strong>.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>En vérifiant si le fichier ou le programme est utilisé par beaucoup d’autres personnes.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! Chaque logiciel malveillant possède des caractéristiques et un code qui lui sont propres, appelées <strong>signatures&nbsp;</strong>(virales).<br><br>Lorsqu’un fichier ou un programme est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une base contenant des signatures des logiciels malveillants déjà connus par l’antivirus&nbsp;: la <strong>base de signatures</strong>.</p>"
+                      "diagnosis": "<p>Eh non ! Chaque logiciel malveillant possède des caractéristiques et un code qui lui sont propres, appelées <strong>signatures&nbsp;</strong>(virales).<br><br>Lorsqu’un fichier ou un programme est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une base contenant les signatures des logiciels malveillants déjà connus par l’antivirus&nbsp;: la <strong>base de signatures</strong>.</p>"
                     }
                   },
                   {
                     "id": "5",
                     "content": "<p>Je ne sais pas.<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Chaque logiciel malveillant possède des caractéristiques et un code qui lui sont propres, appelées <strong>signatures&nbsp;</strong>(virales).<br><br>Lorsqu’un fichier ou un programme est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une base contenant des signatures des logiciels malveillants déjà connus par l’antivirus&nbsp;: la <strong>base de signatures</strong>.</p>"
+                      "diagnosis": "<p>Chaque logiciel malveillant possède des caractéristiques et un code qui lui sont propres, appelées <strong>signatures&nbsp;</strong>(virales).<br><br>Lorsqu’un fichier ou un programme est téléchargé, créé, modifié ou exécuté, l’antivirus le compare à une base contenant les signatures des logiciels malveillants déjà connus par l’antivirus&nbsp;: la <strong>base de signatures</strong>.</p>"
                     }
                   }
                 ],
@@ -453,28 +453,28 @@
                     "id": "1",
                     "content": "<p>S’arrêter automatiquement.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non. De nouveaux logiciels malveillants apparaissent chaque jour. Sans mise à jour, l’antivirus ne peut pas les détecter, l’appareil n’est plus protégé efficacement.</p>"
+                      "diagnosis": "<p>Eh non. De nouveaux logiciels malveillants apparaissent chaque jour. <strong>Sans mise à jour</strong>, l’antivirus ne peut pas les détecter, l’appareil n’est <strong>plus protégé efficacement</strong>.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Ralentir l’ordinateur.<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>Eh non. De nouveaux logiciels malveillants apparaissent chaque jour. Sans mise à jour, l’antivirus ne peut pas les détecter, l’appareil n’est plus protégé efficacement.</p>"
+                      "diagnosis": "<p>Eh non. De nouveaux logiciels malveillants apparaissent chaque jour. <strong>Sans mise à jour</strong>, l’antivirus ne peut pas les détecter, l’appareil n’est <strong>plus protégé efficacement</strong>.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Ne pas reconnaître les nouveaux logiciels malveillants.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement, de nouveaux logiciels malveillants apparaissent chaque jour. Sans mise à jour, l’antivirus ne peut pas les détecter, l’appareil n’est plus protégé efficacement.</p>"
+                      "diagnosis": "<p>Effectivement, de nouveaux logiciels malveillants apparaissent chaque jour. <strong>Sans mise à jour</strong>, l’antivirus ne peut pas les détecter, l’appareil n’est <strong>plus protégé efficacement</strong>.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Je ne sais pas.<br></p>",
                     "feedback": {
-                      "diagnosis": "<p>De nouveaux logiciels malveillants apparaissent chaque jour. Sans mise à jour, l’antivirus ne peut pas les détecter, l’appareil n’est plus protégé efficacement.</p>"
+                      "diagnosis": "<p>De nouveaux logiciels malveillants apparaissent chaque jour. <strong>Sans mise à jour</strong>, l’antivirus ne peut pas les détecter, l’appareil n’est <strong>plus protégé efficacement</strong>.</p>"
                     }
                   }
                 ],
@@ -516,7 +516,7 @@
                 "id": "8b661573-da41-43c2-ac3f-bd147e37f702",
                 "type": "text",
                 "tag": " ",
-                "content": "<ul><li>Un <strong>antivirus </strong>est un logiciel qui protège un appareil contre les <strong>logiciels malveillants</strong>. Il est nécessaire d’installer un antivirus sur chaque appareil pour mieux le <strong>protéger</strong>. 🛡️</li></ul><br><ul><li>Un antivirus fonctionne<strong> en permanence</strong> et surveille les fichiers et programmes de l’appareil. 👀</li></ul><br><ul><li>Un antivirus compare les fichiers et les programmes à une<strong> base de signatures</strong> recensant les logiciels malveillants connus. S’il détecte un logiciel malveillant, il peut le <strong> bloquer ou le supprimer</strong>, puis informe l’utilisateur via une notification. 🙅</li></ul><br><ul><li>De nouveaux logiciels malveillants sont créés tous les jours. Pour rester efficace, l’antivirus doit être <strong>mis à jour régulièrement </strong>afin d’intégrer les nouveaux logiciels malveillants recensés.⚙️</li></ul>"
+                "content": "<ul>    <li>Un <strong>antivirus </strong>est un logiciel qui protège un appareil contre les <strong>logiciels malveillants</strong>. Il est nécessaire d’installer un antivirus sur chaque appareil pour mieux le <strong>protéger</strong>. 🛡️</li></ul><ul>    <li>Un antivirus fonctionne<strong> en permanence</strong> et surveille les fichiers et programmes de l’appareil. 👀</li></ul><ul>    <li>Un antivirus compare les fichiers et les programmes à une<strong> base de signatures</strong> recensant les logiciels malveillants connus. Si l’antivirus détecte un logiciel malveillant, il peut le <strong> bloquer ou le supprimer</strong>, puis informe l’utilisateur avec une notification. 🙅</li></ul><ul>    <li>De nouveaux logiciels malveillants sont créés tous les jours. Pour rester efficace, l’antivirus doit être <strong>mis à jour régulièrement </strong>afin d’intégrer les nouveaux logiciels malveillants recensés.⚙️</li></ul>"
               }
             }
           ]
