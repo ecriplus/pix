@@ -5,6 +5,7 @@ import {
   OrganizationArchivedError,
   UncancellableOrganizationInvitationError,
   UserHasNoOrganizationMembershipError,
+  UserNotMemberOfOrganizationError,
 } from '../domain/errors.js';
 
 const teamDomainErrorMappingConfiguration = [
@@ -27,6 +28,10 @@ const teamDomainErrorMappingConfiguration = [
   {
     name: UserHasNoOrganizationMembershipError.name,
     httpErrorFn: (error) => new HttpErrors.ForbiddenError(error.message, error.code, error.meta),
+  },
+  {
+    name: UserNotMemberOfOrganizationError.name,
+    httpErrorFn: (error) => new HttpErrors.UnprocessableEntityError(error.message, error.code, error.meta),
   },
 ];
 

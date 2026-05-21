@@ -6,6 +6,7 @@ import {
   OrganizationArchivedError,
   UncancellableOrganizationInvitationError,
   UserHasNoOrganizationMembershipError,
+  UserNotMemberOfOrganizationError,
 } from '../../../../src/team/domain/errors.js';
 import { expect } from '../../../test-helper.js';
 
@@ -76,5 +77,19 @@ describe('Unit | Team | Application | HttpErrorMapperConfiguration', function ()
     //then
     expect(error).to.be.instanceOf(HttpErrors.ForbiddenError);
     expect(error.message).to.equal('User is not member of any organization');
+  });
+
+  it('instantiates UnprocessableEntityError when UserNotMemberOfOrganizationError', async function () {
+    //given
+    const httpErrorMapper = teamDomainErrorMappingConfiguration.find(
+      (httpErrorMapper) => httpErrorMapper.name === UserNotMemberOfOrganizationError.name,
+    );
+
+    //when
+    const error = httpErrorMapper.httpErrorFn(new UserNotMemberOfOrganizationError());
+
+    //then
+    expect(error).to.be.instanceOf(HttpErrors.UnprocessableEntityError);
+    expect(error.message).to.equal("L'utilisateur n'est pas membre de l'organisation.");
   });
 });
