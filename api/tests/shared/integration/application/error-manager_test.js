@@ -81,14 +81,6 @@ describe('Integration | API | Controller Error', function () {
       expect(responseDetail(response)).to.equal('L\u2019entité existe déjà.');
     });
 
-    it('responds Precondition Failed when a AlreadyRatedAssessmentError error occurs', async function () {
-      routeHandler.throws(new EvaluationDomainErrors.AlreadyRatedAssessmentError());
-      const response = await server.requestObject(request);
-
-      expect(response.statusCode).to.equal(PRECONDITION_FAILED);
-      expect(responseDetail(response)).to.equal('Assessment is already rated.');
-    });
-
     it('responds Precondition Failed when a CompetenceResetError error occurs', async function () {
       routeHandler.throws(new CompetenceResetError(2));
       const response = await server.requestObject(request);

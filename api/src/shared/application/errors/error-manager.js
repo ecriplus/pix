@@ -1,5 +1,5 @@
 import { AdminMemberError } from '../../../authorization/domain/errors.js';
-import { AlreadyRatedAssessmentError, EmptyAnswerError } from '../../../evaluation/domain/errors.js';
+import { EmptyAnswerError } from '../../../evaluation/domain/errors.js';
 import {
   ArchiveOrganizationError,
   UnableToAttachChildOrganizationToParentOrganizationError,
@@ -140,9 +140,7 @@ export function mapToHttpError(error) {
   if (error instanceof SharedDomainErrors.ApplicationWithInvalidCredentialsError) {
     return new HttpErrors.UnauthorizedError('The client ID and/or secret are invalid.');
   }
-  if (error instanceof AlreadyRatedAssessmentError) {
-    return new HttpErrors.PreconditionFailedError('Assessment is already rated.');
-  }
+
   if (error instanceof SharedDomainErrors.ChallengeNotAskedError) {
     return new HttpErrors.ConflictError('This challenge has not been asked to the user.');
   }

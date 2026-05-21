@@ -32,7 +32,7 @@ class AnswerEvaluationError extends DomainError {
 }
 
 class AlreadyRatedAssessmentError extends DomainError {
-  constructor(message = 'Cette évaluation a déjà été évaluée.') {
+  constructor(message = 'Assessment is already rated.') {
     super(message);
   }
 }
