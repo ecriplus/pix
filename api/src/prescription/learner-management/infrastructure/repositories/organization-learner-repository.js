@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import * as organizationLearnerRepository from '../../../../prescription/organization-learner/infrastructure/repositories/organization-learner-repository.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import {
   NotFoundError,
@@ -12,7 +11,6 @@ import { OrganizationLearnerCertificabilityNotUpdatedError } from '../../domain/
 import { CommonOrganizationLearner } from '../../domain/models/CommonOrganizationLearner.js';
 import { OrganizationLearner } from '../../domain/models/OrganizationLearner.js';
 import { OrganizationLearnerForAdmin } from '../../domain/read-models/OrganizationLearnerForAdmin.js';
-import * as studentRepository from './student-repository.js';
 
 const dissociateUserFromOrganizationLearner = async function (organizationLearnerId) {
   const knexConn = DomainTransaction.getConnection();
@@ -65,24 +63,10 @@ const disableAllOrganizationLearnersInOrganization = async function ({ organizat
     .update({ isDisabled: true, updatedAt: knexConn.raw('CURRENT_TIMESTAMP') });
 };
 
-const addOrUpdateOrganizationOfOrganizationLearners = async function (organizationLearnerDatas, organizationId) {
+const addOrUpdateOrganizationOfOrganizationLearners = async function (organizationLearners) {
   const knexConn = DomainTransaction.getConnection();
-  const organizationLearnersFromFile = organizationLearnerDatas.map(
-    (organizationLearnerData) =>
-      new OrganizationLearner({
-        ...organizationLearnerData,
-        organizationId,
-      }),
-  );
-  const existingOrganizationLearners = await organizationLearnerRepository.findByOrganizationId({ organizationId });
-
-  const reconciledOrganizationLearnersToImport = await _reconcileOrganizationLearners(
-    organizationLearnersFromFile,
-    existingOrganizationLearners,
-  );
-
   try {
-    const organizationLearnersToSave = reconciledOrganizationLearnersToImport.map((organizationLearner) => ({
+    const organizationLearnersToSave = organizationLearners.map((organizationLearner) => ({
       ..._.omit(organizationLearner, ['id', 'createdAt', 'isCertifiable', 'certifiableAt']),
       updatedAt: knexConn.raw('CURRENT_TIMESTAMP'),
       isDisabled: false,
@@ -96,79 +80,6 @@ const addOrUpdateOrganizationOfOrganizationLearners = async function (organizati
     throw new OrganizationLearnersCouldNotBeSavedError();
   }
 };
-
-const _reconcileOrganizationLearners = async function (studentsToImport, allOrganizationLearnersInSameOrganization) {
-  const nationalStudentIdsFromFile = studentsToImport
-    .map((organizationLearnerData) => organizationLearnerData.nationalStudentId)
-    .filter(Boolean);
-  const organizationLearnersWithSameNationalStudentIdsAsImported =
-    await studentRepository.findReconciledStudentsByNationalStudentId(nationalStudentIdsFromFile);
-
-  const userIdsWithMultipleNationalStudentIds = new Set(
-    organizationLearnersWithSameNationalStudentIdsAsImported
-      .filter((learner) =>
-        organizationLearnersWithSameNationalStudentIdsAsImported.some(
-          (other) =>
-            other.account.userId === learner.account.userId && other.nationalStudentId !== learner.nationalStudentId,
-        ),
-      )
-      .map((learner) => learner.account.userId),
-  );
-
-  organizationLearnersWithSameNationalStudentIdsAsImported.forEach((organizationLearner) => {
-    const alreadyReconciledStudentToImport = studentsToImport.find(
-      (studentToImport) => studentToImport.userId === organizationLearner.account.userId,
-    );
-
-    if (alreadyReconciledStudentToImport) {
-      alreadyReconciledStudentToImport.userId = null;
-      return;
-    }
-
-    if (userIdsWithMultipleNationalStudentIds.has(organizationLearner.account.userId)) {
-      return;
-    }
-
-    const studentToImport = studentsToImport.find(
-      (studentToImport) => studentToImport.nationalStudentId === organizationLearner.nationalStudentId,
-    );
-
-    if (
-      _shouldStudentToImportBeReconciled(
-        allOrganizationLearnersInSameOrganization,
-        organizationLearner,
-        studentToImport,
-      )
-    ) {
-      studentToImport.userId = organizationLearner.account.userId;
-    }
-  });
-  return studentsToImport;
-};
-
-function _shouldStudentToImportBeReconciled(
-  allOrganizationLearnersInSameOrganization,
-  organizationLearner,
-  studentToImport,
-) {
-  const organizationLearnerWithSameUserId = allOrganizationLearnersInSameOrganization.find(
-    (organizationLearnerInSameOrganization) => {
-      return organizationLearnerInSameOrganization.userId === organizationLearner.account.userId;
-    },
-  );
-  const isOrganizationLearnerReconciled = organizationLearnerWithSameUserId != null;
-  const organizationLearnerHasSameUserIdAndNationalStudentId =
-    organizationLearnerWithSameUserId?.nationalStudentId === organizationLearner.nationalStudentId;
-
-  if (isOrganizationLearnerReconciled && !organizationLearnerHasSameUserIdAndNationalStudentId) {
-    return false;
-  }
-
-  const isFromSameOrganization = studentToImport.organizationId === organizationLearner.account.organizationId;
-  const isFromDifferentOrganizationWithSameBirthday =
-    !isFromSameOrganization && studentToImport.birthdate === organizationLearner.account.birthdate;
-  return isFromSameOrganization || isFromDifferentOrganizationWithSameBirthday;
-}
 
 const saveCommonOrganizationLearners = async function (learners) {
   const knexConn = DomainTransaction.getConnection();
@@ -367,6 +278,12 @@ const findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId = async fu
   const knexConn = DomainTransaction.getConnection();
   return knexConn('view-active-organization-learners').where({ organizationId }).whereNull('attributes').pluck('id');
 };
+
+const findByOrganizationId = async function ({ organizationId }) {
+  const knexConn = DomainTransaction.getConnection();
+  return knexConn('view-active-organization-learners').select('userId', 'nationalStudentId').where({ organizationId });
+};
+
 export {
   addOrUpdateOrganizationOfOrganizationLearners,
   countByUserId,
@@ -375,6 +292,7 @@ export {
   dissociateUserFromOrganizationLearner,
   findAllCommonLearnersFromOrganizationId,
   findAllCommonOrganizationLearnerByReconciliationInfos,
+  findByOrganizationId,
   findByUserId,
   findOrganizationLearnerIdsBeforeImportFeatureFromOrganizationId,
   findOrganizationLearnersByOrganizationIdAndLearnerIds,

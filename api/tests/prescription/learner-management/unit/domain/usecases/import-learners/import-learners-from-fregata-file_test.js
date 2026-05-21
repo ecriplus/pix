@@ -17,6 +17,7 @@ describe('Unit | UseCase | importLearnersFromFregataFile', function () {
     organizationImport,
     organizationImportRepositoryStub,
     organizationLearnerRepositoryStub,
+    studentRepositoryStub,
     importStorageStub,
     parserStub;
 
@@ -36,7 +37,12 @@ describe('Unit | UseCase | importLearnersFromFregataFile', function () {
 
     organizationLearnerRepositoryStub = {
       disableAllOrganizationLearnersInOrganization: sinon.stub(),
-      addOrUpdateOrganizationOfOrganizationLearners: sinon.stub(),
+      addOrUpdateOrganizationOfOrganizationLearners: sinon.stub().resolves(),
+      findByOrganizationId: sinon.stub().resolves([]),
+    };
+
+    studentRepositoryStub = {
+      findReconciledStudentsByNationalStudentId: sinon.stub().resolves([]),
     };
 
     organizationImportRepositoryStub = {
@@ -75,6 +81,7 @@ describe('Unit | UseCase | importLearnersFromFregataFile', function () {
         organizationImportId,
         i18n,
         organizationLearnerRepository: organizationLearnerRepositoryStub,
+        studentRepository: studentRepositoryStub,
         organizationImportRepository: organizationImportRepositoryStub,
         importStorage: importStorageStub,
       });
@@ -91,13 +98,6 @@ describe('Unit | UseCase | importLearnersFromFregataFile', function () {
         organizationLearnerRepositoryStub.addOrUpdateOrganizationOfOrganizationLearners.calledOnce,
         'organizationLearnerRepositoryStub.addOrUpdateOrganizationOfOrganizationLearners',
       ).to.be.true;
-      expect(
-        organizationLearnerRepositoryStub.addOrUpdateOrganizationOfOrganizationLearners.calledWithExactly(
-          learners,
-          organizationId,
-        ),
-        'organizationLearnerRepositoryStub.addOrUpdateOrganizationOfOrganizationLearners',
-      ).to.be.true;
     });
 
     it('should chunk the called insertion', async function () {
@@ -105,6 +105,7 @@ describe('Unit | UseCase | importLearnersFromFregataFile', function () {
         organizationImportId,
         i18n,
         organizationLearnerRepository: organizationLearnerRepositoryStub,
+        studentRepository: studentRepositoryStub,
         organizationImportRepository: organizationImportRepositoryStub,
         importStorage: importStorageStub,
         chunkLength: 2,
@@ -121,6 +122,7 @@ describe('Unit | UseCase | importLearnersFromFregataFile', function () {
         organizationImportId,
         i18n,
         organizationLearnerRepository: organizationLearnerRepositoryStub,
+        studentRepository: studentRepositoryStub,
         organizationImportRepository: organizationImportRepositoryStub,
         importStorage: importStorageStub,
       });
@@ -134,6 +136,7 @@ describe('Unit | UseCase | importLearnersFromFregataFile', function () {
         organizationImportId,
         i18n,
         organizationLearnerRepository: organizationLearnerRepositoryStub,
+        studentRepository: studentRepositoryStub,
         organizationImportRepository: organizationImportRepositoryStub,
         importStorage: importStorageStub,
       });
@@ -170,6 +173,7 @@ describe('Unit | UseCase | importLearnersFromFregataFile', function () {
         organizationImportId,
         i18n,
         organizationLearnerRepository: organizationLearnerRepositoryStub,
+        studentRepository: studentRepositoryStub,
         organizationImportRepository: organizationImportRepositoryStub,
         importStorage: importStorageStub,
       });

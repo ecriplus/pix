@@ -1,14 +1,16 @@
-const { chunk } = lodash;
-
 import lodash from 'lodash';
 
 import { withTransaction } from '../../../../../shared/domain/DomainTransaction.js';
 import { ORGANIZATION_LEARNER_CHUNK_SIZE } from '../../../../../shared/infrastructure/constants.js';
 import { FregataParser } from '../../../infrastructure/serializers/csv/parsers/fregata-parser.js';
+import { ScoOrganizationLearnerSet } from '../../models/ScoOrganizationLearnerSet.js';
+
+const { chunk } = lodash;
 
 const importLearnersFromFregataFile = withTransaction(async function ({
   organizationImportId,
   organizationLearnerRepository,
+  studentRepository,
   organizationImportRepository,
   importStorage,
   i18n,
@@ -39,8 +41,15 @@ const importLearnersFromFregataFile = withTransaction(async function ({
       nationalStudentIds: nationalStudentIdData,
     });
 
+    const existingOrganizationLearners = await organizationLearnerRepository.findByOrganizationId({ organizationId });
+    const reconciledStudents = await studentRepository.findReconciledStudentsByNationalStudentId(
+      nationalStudentIdData.filter(Boolean),
+    );
+
     for (const chunk of organizationLearnersChunks) {
-      await organizationLearnerRepository.addOrUpdateOrganizationOfOrganizationLearners(chunk, organizationId);
+      const scoLearnerSet = new ScoOrganizationLearnerSet(chunk);
+      const learnersToSave = scoLearnerSet.reconcile(reconciledStudents, existingOrganizationLearners);
+      await organizationLearnerRepository.addOrUpdateOrganizationOfOrganizationLearners(learnersToSave);
     }
   } catch (error) {
     errors.push(error);

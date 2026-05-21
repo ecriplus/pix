@@ -4,12 +4,15 @@ import { DomainTransaction } from '../../../../../shared/domain/DomainTransactio
 import { ORGANIZATION_LEARNER_CHUNK_SIZE } from '../../../../../shared/infrastructure/constants.js';
 import { SiecleParser } from '../../../infrastructure/serializers/xml/siecle-parser.js';
 import { SiecleFileStreamer } from '../../../infrastructure/utils/xml/siecle-file-streamer.js';
+import { OrganizationLearner } from '../../models/OrganizationLearner.js';
+import { ScoOrganizationLearnerSet } from '../../models/ScoOrganizationLearnerSet.js';
 
 const { chunk } = lodash;
 
 async function importLearnersFromSiecleFile({
   organizationImportId,
   organizationLearnerRepository,
+  studentRepository,
   organizationImportRepository,
   importStorage,
   logger,
@@ -28,20 +31,26 @@ async function importLearnersFromSiecleFile({
 
       const organizationLearnerData = await parser.parse();
 
+      const organizationId = organizationImport.organizationId;
       const organizationLearnersChunks = chunk(organizationLearnerData, chunkSize);
 
       const nationalStudentIdData = organizationLearnerData.map((learner) => learner.nationalStudentId);
 
       await organizationLearnerRepository.disableAllOrganizationLearnersInOrganization({
-        organizationId: organizationImport.organizationId,
+        organizationId,
         nationalStudentIds: nationalStudentIdData,
       });
 
+      const existingOrganizationLearners = await organizationLearnerRepository.findByOrganizationId({ organizationId });
+      const reconciledStudents = await studentRepository.findReconciledStudentsByNationalStudentId(
+        nationalStudentIdData.filter(Boolean),
+      );
+
       for (const chunk of organizationLearnersChunks) {
-        await organizationLearnerRepository.addOrUpdateOrganizationOfOrganizationLearners(
-          chunk,
-          organizationImport.organizationId,
-        );
+        const organizationLearnersFromChunk = chunk.map((data) => new OrganizationLearner({ ...data, organizationId }));
+        const scoLearnerSet = new ScoOrganizationLearnerSet(organizationLearnersFromChunk);
+        const learnersToSave = scoLearnerSet.reconcile(reconciledStudents, existingOrganizationLearners);
+        await organizationLearnerRepository.addOrUpdateOrganizationOfOrganizationLearners(learnersToSave);
       }
     } catch (error) {
       errors.push(error);
