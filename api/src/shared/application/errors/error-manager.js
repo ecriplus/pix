@@ -1,5 +1,4 @@
 import { AdminMemberError } from '../../../authorization/domain/errors.js';
-import { UnableToAttachChildOrganizationToParentOrganizationError } from '../../../organizational-entities/domain/errors.js';
 import {
   AlreadyAcceptedOrCancelledInvitationError,
   UserHasNoOrganizationMembershipError,
@@ -49,7 +48,6 @@ const CONFLICT_ERRORS = [
   SharedDomainErrors.DeletedError,
   SharedDomainErrors.CertificationEndedByFinalizationError,
   SharedDomainErrors.MultipleOrganizationLearnersWithDifferentNationalStudentIdError,
-  UnableToAttachChildOrganizationToParentOrganizationError,
   AlreadyAcceptedOrCancelledInvitationError,
 ];
 
