@@ -1,5 +1,34 @@
 # Pix Changelog
 
+# [5.411.0](https://github.com/1024pix/pix/compare/v5.410.0...v5.411.0) (2026-05-21)
+
+### :rocket: Amélioration
+
+- [#16254](https://github.com/1024pix/pix/pull/16254) : Dernières modifs Phishing nov avant mise en prod 
+- [#16261](https://github.com/1024pix/pix/pull/16261) Contenus formatifs - Ajouter le format “Service externe” (PIX-22791) 
+- [#16256](https://github.com/1024pix/pix/pull/16256) Dernieres modifs CYAntivirusIND avant mise en prod 
+- [#16260](https://github.com/1024pix/pix/pull/16260) dernières modifs Phishing AVA avant mise en prod 
+- [#16237](https://github.com/1024pix/pix/pull/16237) urabilite-ava-relecture-finale 
+
+### :bug: Correction
+
+- [#16257](https://github.com/1024pix/pix/pull/16257) Remplacer l'apostrophe dans le tag “L’info en +” (PIX-22790) 
+
+### :building_construction: Tech
+
+- [#16148](https://github.com/1024pix/pix/pull/16148) :card_file_box:  Ajoute une table de stockage d'évènement de certification (PIX-22787) 
+- [#16246](https://github.com/1024pix/pix/pull/16246) Ajout d'une commande pour start l'environnement local de certif 
+- [#16233](https://github.com/1024pix/pix/pull/16233) Corrige le rechargement des fichiers de traduction avec Vite sur Orga (PIX-22745) 
+- [#16271](https://github.com/1024pix/pix/pull/16271) Déplace le mapping des erreurs evaluation dans son contexte. 
+- [#16264](https://github.com/1024pix/pix/pull/16264) Déplacer le mapping des erreurs LLM dans son contexte 
+- [#16255](https://github.com/1024pix/pix/pull/16255) Déplacer les erreurs certification définies dans shared 
+- [#16263](https://github.com/1024pix/pix/pull/16263) Déplacer les erreurs prescription définies dans shared 
+- [#16265](https://github.com/1024pix/pix/pull/16265) Réparer un test flaky sur la mise à jour du logo d'une organisation (PIX-22794) 
+
+### :coffee: Autre
+
+- [#16245](https://github.com/1024pix/pix/pull/16245) Docs in english
+
 # [5.410.0](https://github.com/1024pix/pix/compare/v5.409.0...v5.410.0) (2026-05-20)
 
 ### :rocket: Amélioration
