@@ -1627,16 +1627,31 @@
       "title": "Seats"
     },
     "preselect-target-profile": {
+      "compatibility": {
+        "mobile": {
+          "no": "Not compatible with smartphones",
+          "yes": "Compatible with smartphones"
+        },
+        "tablet": {
+          "no": "Not compatible with tablets",
+          "yes": "Compatible with tablets"
+        }
+      },
       "download": "Download topics selection ({ numberOfTubesSelected }) (JSON, { fileSize }kB)",
       "download-filename": "topic-selection-{ organizationName }-{ date }.json",
+      "levels": {
+        "label": "Select level for the next topic: {title}",
+        "placeholder": "Select a level",
+        "tooltip": "No skill available for the greyed-out levels"
+      },
       "no-tube-selected": "Download topics selection (JSON, { fileSize }kB)",
       "table": {
         "caption": "Topic selection",
         "column": {
-          "mobile": "Mobile compliant",
-          "name": "Topic name",
-          "tablet": "Tablet compliant",
-          "theme-name": "Theme name"
+          "compatibility": "Compatibility",
+          "level": "Max. level (optional)",
+          "name": "Topic",
+          "theme-name": "Theme"
         },
         "is-responsive": "yes",
         "not-responsive": "no",

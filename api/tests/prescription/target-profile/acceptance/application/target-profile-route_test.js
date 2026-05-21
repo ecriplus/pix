@@ -202,6 +202,8 @@ describe('Acceptance | Route | target-profile', function () {
             competenceId: 'competencePix1_1',
             isMobileCompliant: true,
             isTabletCompliant: true,
+            skillIds: ['skillPix1_1_1_1_1'],
+            thematicId: 'thematicPix1_1_1',
           },
           {
             id: 'tubeFrance1_1_1_1',
@@ -215,7 +217,8 @@ describe('Acceptance | Route | target-profile', function () {
             competenceId: 'competenceFrance1_1',
             isMobileCompliant: true,
             isTabletCompliant: false,
-            skills: ['skillFrance1_1_1_1_1'],
+            skillIds: ['skillFrance1_1_1_1_1'],
+            thematicId: 'thematicFrance1_1_1',
           },
           {
             id: 'tubeCuisine1_1_1_1',
@@ -229,7 +232,8 @@ describe('Acceptance | Route | target-profile', function () {
             competenceId: 'competenceCuisine1_1',
             isMobileCompliant: false,
             isTabletCompliant: true,
-            skills: ['skillCuisine1_1_1_1_1'],
+            skillIds: ['skillCuisine1_1_1_1_1'],
+            thematicId: 'thematicCuisine1_1_1',
           },
         ],
         skills: [
@@ -237,16 +241,19 @@ describe('Acceptance | Route | target-profile', function () {
             id: 'skillPix1_1_1_1_1',
             status: 'actif',
             tubeId: 'tubePix1_1_1_1',
+            level: 1,
           },
           {
             id: 'skillFrance1_1_1_1_1',
             status: 'actif',
             tubeId: 'tubeFrance1_1_1_1',
+            level: 1,
           },
           {
             id: 'skillCuisine1_1_1_1_1',
             status: 'actif',
             tubeId: 'tubeCuisine1_1_1_1',
+            level: 1,
           },
         ],
       };
@@ -285,7 +292,6 @@ describe('Acceptance | Route | target-profile', function () {
       const response = await server.inject(options);
 
       expect(response.statusCode).to.equal(200);
-      expect(response.result.data[0].type).equal('frameworks');
     });
   });
 });

@@ -1615,16 +1615,31 @@
       "title": "Lugares"
     },
     "preselect-target-profile": {
+      "compatibility": {
+        "mobile": {
+          "no": "No es compatible con teléfonos inteligentes",
+          "yes": "Compatible con smartphones"
+        },
+        "tablet": {
+          "no": "No es compatible con tabletas",
+          "yes": "Compatible con tabletas"
+        }
+      },
       "download": "Descargar la selección de temas ({ numberOfTubesSelected }) (JSON, { fileSize }ko)",
       "download-filename": "selection-subjects-{ organizationName }-{ date }.json",
+      "levels": {
+        "label": "Seleccionar el nivel del siguiente tema: {title}",
+        "placeholder": "Seleccionar un nivel",
+        "tooltip": "No hay pruebas disponibles para los niveles que aparecen en gris"
+      },
       "no-tube-selected": "Descargar la selección de temas (JSON, { fileSize }ko)",
       "table": {
         "caption": "Selección de temas",
         "column": {
-          "mobile": "Compatible con smartphones",
-          "name": "Nombre del sujeto",
-          "tablet": "Compatible con tabletas",
-          "theme-name": "Nombre del tema"
+          "compatibility": "Compatibilidad",
+          "level": "Nivel máximo (opcional)",
+          "name": "Sujeto",
+          "theme-name": "Tema"
         },
         "is-responsive": "sí",
         "not-responsive": "no",
