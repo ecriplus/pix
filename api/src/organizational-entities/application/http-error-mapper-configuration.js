@@ -2,6 +2,7 @@ import { HttpErrors } from '../../shared/application/errors/http-errors.js';
 import {
   AdministrationTeamNotFound,
   ArchiveCertificationCentersInBatchError,
+  ArchiveOrganizationError,
   ArchiveOrganizationsInBatchError,
   CountryNotFoundError,
   DpoEmailInvalid,
@@ -81,6 +82,10 @@ const organizationalEntitiesDomainErrorMappingConfiguration = [
   },
   {
     name: StructureNotFoundError.name,
+    httpErrorFn: (error) => new HttpErrors.UnprocessableEntityError(error.message, error.code, error.meta),
+  },
+  {
+    name: ArchiveOrganizationError.name,
     httpErrorFn: (error) => new HttpErrors.UnprocessableEntityError(error.message, error.code, error.meta),
   },
 ];

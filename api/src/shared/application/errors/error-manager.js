@@ -1,8 +1,5 @@
 import { AdminMemberError } from '../../../authorization/domain/errors.js';
-import {
-  ArchiveOrganizationError,
-  UnableToAttachChildOrganizationToParentOrganizationError,
-} from '../../../organizational-entities/domain/errors.js';
+import { UnableToAttachChildOrganizationToParentOrganizationError } from '../../../organizational-entities/domain/errors.js';
 import {
   AlreadyAcceptedOrCancelledInvitationError,
   UserHasNoOrganizationMembershipError,
@@ -111,7 +108,6 @@ const UNPROCESSABLE_ENTITY_ERRORS = [
   SharedDomainErrors.YamlParsingError,
   SharedDomainErrors.UserShouldNotBeReconciledOnAnotherAccountError,
   UserNotMemberOfOrganizationError,
-  ArchiveOrganizationError,
   SharedDomainErrors.FeatureDisabledError,
 ];
 

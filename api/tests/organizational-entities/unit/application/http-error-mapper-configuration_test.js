@@ -1,5 +1,6 @@
 import { organizationalEntitiesDomainErrorMappingConfiguration } from '../../../../src/organizational-entities/application/http-error-mapper-configuration.js';
 import {
+  ArchiveOrganizationError,
   CountryNotFoundError,
   NetworkAlreadyExistError,
   ParentOrganizationNotInNetworkError,
@@ -140,6 +141,25 @@ describe('Unit | Organizational Entities | Application | HttpErrorMapperConfigur
       // then
       expect(error).to.be.instanceOf(HttpErrors.UnprocessableEntityError);
       expect(error.message).to.equal('Structure not found');
+      expect(error.meta).to.equal(meta);
+    });
+  });
+
+  context('when mapping "ArchiveOrganizationError"', function () {
+    it('should return a UnprocessableEntityError Http Error', function () {
+      // given
+      const httpErrorMapper = organizationalEntitiesDomainErrorMappingConfiguration.find(
+        (httpErrorMapper) => httpErrorMapper.name === ArchiveOrganizationError.name,
+      );
+
+      const meta = { organizationId: 1234 };
+
+      // when
+      const error = httpErrorMapper.httpErrorFn(new ArchiveOrganizationError({ meta }));
+
+      // then
+      expect(error).to.be.instanceOf(HttpErrors.UnprocessableEntityError);
+      expect(error.message).to.equal('Error during organization archiving');
       expect(error.meta).to.equal(meta);
     });
   });
