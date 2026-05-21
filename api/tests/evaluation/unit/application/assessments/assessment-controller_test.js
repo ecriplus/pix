@@ -249,7 +249,6 @@ describe('Evaluation | Unit | Application | assessment-controller', function () 
         },
         payload: {
           data: {
-            id: 42,
             attributes: {
               'estimated-level': 4,
               'pix-score': 4,
@@ -265,27 +264,18 @@ describe('Evaluation | Unit | Application | assessment-controller', function () 
           },
         },
       };
-      let assessmentRepositoryStub;
-
-      beforeEach(function () {
-        assessmentRepositoryStub = { save: sinon.stub() };
-        assessmentRepositoryStub.save.resolves({
-          toDto: () => {
-            return {};
-          },
-        });
-      });
 
       it('should save an assessment with type PREVIEW', async function () {
         // given
+        const assessmentRepositoryStub = { save: sinon.stub() };
         const expected = new Assessment({
-          id: 42,
           courseId: null,
           type: 'PREVIEW',
           userId: null,
           state: 'started',
           method: 'CHOSEN',
         });
+        assessmentRepositoryStub.save.resolves({ id: 42, ...expected });
 
         // when
         await assessmentController.save(request, hFake, { assessmentRepository: assessmentRepositoryStub });

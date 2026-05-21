@@ -2,14 +2,8 @@ import sinon from 'sinon';
 
 import { Campaign } from '../../../../../src/prescription/campaign/domain/models/Campaign.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
-import { CampaignAssessment } from '../../../../../src/shared/domain/read-models/CampaignAssessment.js';
-import { CertificationAssessment } from '../../../../../src/shared/domain/read-models/CertificationAssessment.js';
-import { CompetenceEvaluationAssessment } from '../../../../../src/shared/domain/read-models/CompetenceEvaluationAssessment.js';
-import { DemoAssessment } from '../../../../../src/shared/domain/read-models/DemoAssessment.js';
-import { PreviewAssessment } from '../../../../../src/shared/domain/read-models/PreviewAssessment.js';
 import { expect } from '../../../../test-helper.js';
 import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
-import { catchErrSync } from '../../../../tooling/test-utils/error.js';
 
 describe('Unit | Domain | Models | Assessment', function () {
   describe('#constructor', function () {
@@ -507,57 +501,6 @@ describe('Unit | Domain | Models | Assessment', function () {
 
         // then
         expect(method).to.equal(expectedMethod);
-      });
-    });
-  });
-
-  describe('#toDto', function () {
-    describe('when assessment is type CERTIFICATION', function () {
-      it('should return a CertificationAssessment', function () {
-        const assessment = domainBuilder.buildAssessment({ type: Assessment.types.CERTIFICATION });
-
-        expect(assessment.toDto()).to.be.instanceOf(CertificationAssessment);
-      });
-    });
-    describe('when assessment is type CAMPAIGN', function () {
-      it('should return a CampaignAssessment', function () {
-        const assessment = domainBuilder.buildAssessment({ type: Assessment.types.CAMPAIGN });
-
-        const campaignDTO = assessment.toDto(0.6);
-        expect(campaignDTO).to.be.instanceOf(CampaignAssessment);
-        expect(campaignDTO.globalProgression).equal(0.6);
-      });
-    });
-    describe('when assessment is type DEMO', function () {
-      it('should return a DemoAssessment', function () {
-        const assessment = domainBuilder.buildAssessment({ type: Assessment.types.DEMO });
-
-        expect(assessment.toDto()).to.be.instanceOf(DemoAssessment);
-      });
-    });
-
-    describe('when assessment is type COMPETENCE_EVALUATION', function () {
-      it('should return a CompetenceEvaluationAssessment', function () {
-        const assessment = domainBuilder.buildAssessment({ type: Assessment.types.COMPETENCE_EVALUATION });
-
-        expect(assessment.toDto()).to.be.instanceOf(CompetenceEvaluationAssessment);
-      });
-    });
-
-    describe('when assessment is type PREVIEW', function () {
-      it('should return a PreviewAssessment', function () {
-        const assessment = domainBuilder.buildAssessment({ type: Assessment.types.PREVIEW });
-
-        expect(assessment.toDto()).to.be.instanceOf(PreviewAssessment);
-      });
-    });
-
-    describe('when assessment is type unknown', function () {
-      it('should throw an error', function () {
-        const assessment = domainBuilder.buildAssessment({ type: 'unknown' });
-
-        const error = catchErrSync(assessment.toDto)();
-        expect(error).to.be.instanceOf(Error);
       });
     });
   });
