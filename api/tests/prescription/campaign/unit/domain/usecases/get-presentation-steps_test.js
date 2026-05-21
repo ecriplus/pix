@@ -1,10 +1,8 @@
 import sinon from 'sinon';
 
-import {
-  ArchivedCampaignError,
-  DeletedCampaignError,
-} from '../../../../../../src/prescription/campaign/domain/errors.js';
+import { DeletedCampaignError } from '../../../../../../src/prescription/campaign/domain/errors.js';
 import { getPresentationSteps } from '../../../../../../src/prescription/campaign/domain/usecases/get-presentation-steps.js';
+import { ArchivedCampaignError } from '../../../../../../src/prescription/shared/domain/errors.js';
 import { CampaignCodeError, UserNotAuthorizedToAccessEntityError } from '../../../../../../src/shared/domain/errors.js';
 import { FRENCH_SPOKEN } from '../../../../../../src/shared/domain/services/locale-service.js';
 import { expect } from '../../../../../test-helper.js';

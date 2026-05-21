@@ -12,7 +12,6 @@ import {
   UserShouldChangePasswordError,
 } from '../../../../src/identity-access-management/domain/errors.js';
 import * as LLMDomainErrors from '../../../../src/llm/domain/errors.js';
-import { CampaignParticipationDeletedError } from '../../../../src/prescription/campaign-participation/domain/errors.js';
 import { SiecleXmlImportError } from '../../../../src/prescription/learner-management/domain/errors.js';
 import * as DomainErrors from '../../../../src/shared/domain/errors.js';
 import {
@@ -184,7 +183,7 @@ describe('Integration | API | Controller Error', function () {
     });
 
     it('responds Precondition Failed when a CampaignParticipationDeletedError occurs', async function () {
-      routeHandler.throws(new CampaignParticipationDeletedError());
+      routeHandler.throws(new DomainErrors.CampaignParticipationDeletedError());
       const response = await server.requestObject(request);
 
       expect(response.statusCode).to.equal(PRECONDITION_FAILED);

@@ -1,10 +1,10 @@
 import sinon from 'sinon';
 
-import { CampaignParticipationDeletedError } from '../../../../../src/prescription/campaign-participation/domain/errors.js';
 import { CampaignTypes } from '../../../../../src/prescription/shared/domain/constants.js';
 import {
   AssessmentEndedError,
   AssessmentLackOfChallengesError,
+  CampaignParticipationDeletedError,
   NotFoundError,
 } from '../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';

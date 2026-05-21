@@ -1,5 +1,6 @@
 import { CampaignCodeError, UserNotAuthorizedToAccessEntityError } from '../../../../shared/domain/errors.js';
-import { ArchivedCampaignError, DeletedCampaignError } from '../errors.js';
+import { ArchivedCampaignError } from '../../../shared/domain/errors.js';
+import { DeletedCampaignError } from '../errors.js';
 
 const getPresentationSteps = async function ({
   userId,

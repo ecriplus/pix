@@ -40,12 +40,6 @@ class CampaignCodeFormatError extends DomainError {
   }
 }
 
-class ArchivedCampaignError extends DomainError {
-  constructor(message = 'Cette campagne est déjà archivée.') {
-    super(message);
-  }
-}
-
 class DeletedCampaignError extends DomainError {
   constructor(message = 'Cette campagne est déjà supprimée.') {
     super(message);
@@ -95,7 +89,6 @@ class CampaignBelongsToCombinedCourseError extends DomainError {
 }
 
 export {
-  ArchivedCampaignError,
   CampaignBelongsToCombinedCourseError,
   CampaignCodeFormatError,
   CampaignParticipationDoesNotBelongToUser,

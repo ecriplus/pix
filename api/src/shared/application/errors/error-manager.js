@@ -5,10 +5,6 @@ import {
   ArchiveOrganizationError,
   UnableToAttachChildOrganizationToParentOrganizationError,
 } from '../../../organizational-entities/domain/errors.js';
-import { ArchivedCampaignError, DeletedCampaignError } from '../../../prescription/campaign/domain/errors.js';
-import { CampaignParticipationDeletedError } from '../../../prescription/campaign-participation/domain/errors.js';
-import { SiecleXmlImportError } from '../../../prescription/learner-management/domain/errors.js';
-import { OrganizationCantGetPlacesStatisticsError } from '../../../prescription/organization-place/domain/errors.js';
 import {
   AlreadyAcceptedOrCancelledInvitationError,
   UserHasNoOrganizationMembershipError,
@@ -70,10 +66,7 @@ const PRECONDITION_FAILED_ERRORS = [
   SharedDomainErrors.CsvImportError,
   SharedDomainErrors.AlreadyExistingEntityError,
   SharedDomainErrors.InvalidInputDataError,
-  SiecleXmlImportError,
-  ArchivedCampaignError,
-  DeletedCampaignError,
-  CampaignParticipationDeletedError,
+  SharedDomainErrors.CampaignParticipationDeletedError,
   SharedDomainErrors.NotEnoughDaysPassedBeforeResetCampaignParticipationError,
   SharedDomainErrors.NoCampaignParticipationForUserAndCampaign,
   SharedDomainErrors.OrganizationLearnerDisabledError,
@@ -87,7 +80,6 @@ const PRECONDITION_FAILED_ERRORS = [
   SharedDomainErrors.TargetProfileInvalidError,
   SharedDomainErrors.NoStagesForCampaign,
   SharedDomainErrors.CampaignTypeError,
-  OrganizationCantGetPlacesStatisticsError,
 ];
 
 const BAD_REQUEST_ERRORS = [

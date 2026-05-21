@@ -73,6 +73,12 @@ class CampaignCodeError extends DomainError {
   }
 }
 
+class CampaignParticipationDeletedError extends DomainError {
+  constructor(message = 'La participation est supprimée.') {
+    super(message);
+  }
+}
+
 class CertificateVerificationCodeGenerationTooManyTrials extends DomainError {
   constructor(numberOfTrials) {
     super(`Could not find an available certificate verification code after ${numberOfTrials} trials`);
@@ -1076,6 +1082,7 @@ export {
   AuthenticationMethodNotFoundError,
   AutonomousCourseRequiresATargetProfileWithSimplifiedAccessError,
   CampaignCodeError,
+  CampaignParticipationDeletedError,
   CampaignTypeError,
   CancelledInvitationError,
   CandidateAlreadyLinkedToUserError,

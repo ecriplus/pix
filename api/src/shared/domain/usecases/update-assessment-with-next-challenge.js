@@ -1,6 +1,10 @@
-import { CampaignParticipationDeletedError } from '../../../prescription/campaign-participation/domain/errors.js';
 import { logger } from '../../infrastructure/utils/logger.js';
-import { AssessmentEndedError, AssessmentLackOfChallengesError, NotFoundError } from '../errors.js';
+import {
+  AssessmentEndedError,
+  AssessmentLackOfChallengesError,
+  CampaignParticipationDeletedError,
+  NotFoundError,
+} from '../errors.js';
 
 export async function updateAssessmentWithNextChallenge({
   assessmentId,
