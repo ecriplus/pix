@@ -1,6 +1,7 @@
 import sinon from 'sinon';
 
 import {
+  CERTIFICATE_LABEL_CONTEXTS,
   CertificateMeshLevel,
   CORE_LEVELS,
   EDU_LEVELS,
@@ -174,7 +175,7 @@ describe('Unit | Domain | Models | CertificateMeshLevel', function () {
 
   describe('#getSummaryLabel', function () {
     context('when certificationFramework is CORE', function () {
-      it('should return the summary for LEVEL_BEGINNER_2', function () {
+      it('should return the user summary for LEVEL_BEGINNER_2', function () {
         // given
         const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
           reachedMeshIndex: 2,
@@ -182,15 +183,29 @@ describe('Unit | Domain | Models | CertificateMeshLevel', function () {
         });
 
         // when
-        const translatedLabel = globalMeshLevel.getSummaryLabel(translate);
+        const translatedLabel = globalMeshLevel.getSummaryLabel(translate, CERTIFICATE_LABEL_CONTEXTS.USER);
 
         // then
-        expect(translatedLabel).to.equal(translate('certification.meshlevel.CORE.LEVEL_BEGINNER_2.summary'));
+        expect(translatedLabel).to.equal(translate('certification.meshlevel.CORE.LEVEL_BEGINNER_2.summary.user'));
+      });
+
+      it('should return the shareable summary for LEVEL_BEGINNER_2', function () {
+        // given
+        const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
+          reachedMeshIndex: 2,
+          certificationFramework: Frameworks.CORE,
+        });
+
+        // when
+        const translatedLabel = globalMeshLevel.getSummaryLabel(translate, CERTIFICATE_LABEL_CONTEXTS.SHAREABLE);
+
+        // then
+        expect(translatedLabel).to.equal(translate('certification.meshlevel.CORE.LEVEL_BEGINNER_2.summary.shareable'));
       });
     });
 
     context('when certificationFramework is EDU', function () {
-      it('should return the summary for LEVEL_ADMISSIBLE', function () {
+      it('should return the user summary for LEVEL_ADMISSIBLE', function () {
         // given
         const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
           reachedMeshIndex: 0,
@@ -198,10 +213,158 @@ describe('Unit | Domain | Models | CertificateMeshLevel', function () {
         });
 
         // when
-        const translatedLabel = globalMeshLevel.getSummaryLabel(translate);
+        const translatedLabel = globalMeshLevel.getSummaryLabel(translate, CERTIFICATE_LABEL_CONTEXTS.USER);
 
         // then
-        expect(translatedLabel).to.equal(translate('certification.meshlevel.EDU_1ER_DEGRE.LEVEL_ADMISSIBLE.summary'));
+        expect(translatedLabel).to.equal(
+          translate('certification.meshlevel.EDU_1ER_DEGRE.LEVEL_ADMISSIBLE.summary.user'),
+        );
+      });
+
+      it('should return the shareable summary for LEVEL_ADMISSIBLE', function () {
+        // given
+        const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
+          reachedMeshIndex: 0,
+          certificationFramework: Frameworks.EDU_1ER_DEGRE,
+        });
+
+        // when
+        const translatedLabel = globalMeshLevel.getSummaryLabel(translate, CERTIFICATE_LABEL_CONTEXTS.SHAREABLE);
+
+        // then
+        expect(translatedLabel).to.equal(
+          translate('certification.meshlevel.EDU_1ER_DEGRE.LEVEL_ADMISSIBLE.summary.shareable'),
+        );
+      });
+    });
+
+    context('when certificationFramework is a Pix+ standard framework', function () {
+      it('should return the user summary for LEVEL_ADVANCED', function () {
+        // given
+        const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
+          reachedMeshIndex: 2,
+          certificationFramework: Frameworks.DROIT,
+        });
+
+        // when
+        const translatedLabel = globalMeshLevel.getSummaryLabel(translate, CERTIFICATE_LABEL_CONTEXTS.USER);
+
+        // then
+        expect(translatedLabel).to.equal(translate('certification.meshlevel.DROIT.LEVEL_ADVANCED.summary.user'));
+      });
+
+      it('should return the shareable summary for LEVEL_ADVANCED', function () {
+        // given
+        const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
+          reachedMeshIndex: 2,
+          certificationFramework: Frameworks.DROIT,
+        });
+
+        // when
+        const translatedLabel = globalMeshLevel.getSummaryLabel(translate, CERTIFICATE_LABEL_CONTEXTS.SHAREABLE);
+
+        // then
+        expect(translatedLabel).to.equal(translate('certification.meshlevel.DROIT.LEVEL_ADVANCED.summary.shareable'));
+      });
+    });
+  });
+
+  describe('#getDescriptionLabel', function () {
+    context('when certificationFramework is CORE', function () {
+      it('should return the user description for LEVEL_BEGINNER_2', function () {
+        // given
+        const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
+          reachedMeshIndex: 2,
+          certificationFramework: Frameworks.CORE,
+        });
+
+        // when
+        const translatedLabel = globalMeshLevel.getDescriptionLabel(translate, CERTIFICATE_LABEL_CONTEXTS.USER);
+
+        // then
+        expect(translatedLabel).to.equal(translate('certification.meshlevel.CORE.LEVEL_BEGINNER_2.description.user'));
+      });
+
+      it('should return the shareable description for LEVEL_BEGINNER_2', function () {
+        // given
+        const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
+          reachedMeshIndex: 2,
+          certificationFramework: Frameworks.CORE,
+        });
+
+        // when
+        const translatedLabel = globalMeshLevel.getDescriptionLabel(translate, CERTIFICATE_LABEL_CONTEXTS.SHAREABLE);
+
+        // then
+        expect(translatedLabel).to.equal(
+          translate('certification.meshlevel.CORE.LEVEL_BEGINNER_2.description.shareable'),
+        );
+      });
+    });
+
+    context('when certificationFramework is EDU', function () {
+      it('should return the user description for LEVEL_ADMISSIBLE', function () {
+        // given
+        const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
+          reachedMeshIndex: 0,
+          certificationFramework: Frameworks.EDU_CPE,
+        });
+
+        // when
+        const translatedLabel = globalMeshLevel.getDescriptionLabel(translate, CERTIFICATE_LABEL_CONTEXTS.USER);
+
+        // then
+        expect(translatedLabel).to.equal(
+          translate('certification.meshlevel.EDU_CPE.LEVEL_ADMISSIBLE.description.user'),
+        );
+      });
+
+      it('should return the shareable description for LEVEL_ADMISSIBLE', function () {
+        // given
+        const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
+          reachedMeshIndex: 0,
+          certificationFramework: Frameworks.EDU_CPE,
+        });
+
+        // when
+        const translatedLabel = globalMeshLevel.getDescriptionLabel(translate, CERTIFICATE_LABEL_CONTEXTS.SHAREABLE);
+
+        // then
+        expect(translatedLabel).to.equal(
+          translate('certification.meshlevel.EDU_CPE.LEVEL_ADMISSIBLE.description.shareable'),
+        );
+      });
+    });
+
+    context('when certificationFramework is a Pix+ standard framework', function () {
+      it('should return the user description for LEVEL_ADVANCED', function () {
+        // given
+        const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
+          reachedMeshIndex: 2,
+          certificationFramework: Frameworks.DROIT,
+        });
+
+        // when
+        const translatedLabel = globalMeshLevel.getDescriptionLabel(translate, CERTIFICATE_LABEL_CONTEXTS.USER);
+
+        // then
+        expect(translatedLabel).to.equal(translate('certification.meshlevel.DROIT.LEVEL_ADVANCED.description.user'));
+      });
+
+      it('should return the shareable description for LEVEL_ADVANCED', function () {
+        // given
+        const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
+          reachedMeshIndex: 2,
+          certificationFramework: Frameworks.DROIT,
+        });
+
+        // when
+        const translatedLabel = globalMeshLevel.getDescriptionLabel(translate, CERTIFICATE_LABEL_CONTEXTS.SHAREABLE);
+
+        // then
+        expect(translatedLabel).to.equal(
+          translate('certification.meshlevel.DROIT.LEVEL_ADVANCED.description.shareable'),
+        );
       });
     });
   });
@@ -291,40 +454,6 @@ describe('Unit | Domain | Models | CertificateMeshLevel', function () {
         expect(meshLevel.badgeUrl).to.equal(
           'https://super-assert-url.org/badges-certifies/v3/edu_2nd_degre/advanced.svg',
         );
-      });
-    });
-  });
-
-  describe('#getDescriptionLabel', function () {
-    context('when certificationFramework is CORE', function () {
-      it('should return the description for LEVEL_BEGINNER_2', function () {
-        // given
-        const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
-          reachedMeshIndex: 2,
-          certificationFramework: Frameworks.CORE,
-        });
-
-        // when
-        const translatedLabel = globalMeshLevel.getDescriptionLabel(translate);
-
-        // then
-        expect(translatedLabel).to.equal(translate('certification.meshlevel.CORE.LEVEL_BEGINNER_2.description'));
-      });
-    });
-
-    context('when certificationFramework is EDU', function () {
-      it('should return the description for LEVEL_ADMISSIBLE', function () {
-        // given
-        const globalMeshLevel = domainBuilder.certification.results.buildCertificateMeshLevel({
-          reachedMeshIndex: 0,
-          certificationFramework: Frameworks.EDU_CPE,
-        });
-
-        // when
-        const translatedLabel = globalMeshLevel.getDescriptionLabel(translate);
-
-        // then
-        expect(translatedLabel).to.equal(translate('certification.meshlevel.EDU_CPE.LEVEL_ADMISSIBLE.description'));
       });
     });
   });

@@ -223,7 +223,10 @@
         },
         "score-content": {
           "global-level": "Niveau global",
-          "level-explanation": "Votre niveau signifie que :"
+          "level-explanation": {
+            "shareable": "Le niveau signifie que :",
+            "user": "Votre niveau signifie que :"
+          }
         }
       }
     },
@@ -285,134 +288,269 @@
     "meshlevel": {
       "CORE": {
         "LEVEL_ADVANCED_5": {
-          "description": "Vous êtes capable de recourir à des outils spécialisés pour rechercher de l'information de façon fiable, gérer des réseaux sociaux, éditer des images et des vidéos. Vous savez produire des analyses de données et des représentations graphiques adaptées. Vous savez mettre en place un environnement numérique (installation et paramétrage). Vous connaissez les enjeux autour du traçage et de la collecte de données. Vous comprenez les impacts environnementaux et sociétaux des usages numériques et savez adapter vos pratiques.",
+          "description": {
+            "shareable": "Le/la candidat(e) est capable de recourir à des outils spécialisés pour rechercher de l'information de façon fiable, gérer des réseaux sociaux, éditer des images et des vidéos. Il/elle sait produire des analyses de données et des représentations graphiques adaptées. Il/elle sait mettre en place un environnement numérique (installation et paramétrage). Il/elle connaît les enjeux autour du traçage et de la collecte de données. Il/elle comprend les impacts environnementaux et sociétaux des usages numériques et sait adapter ses pratiques.",
+            "user": "Vous êtes capable de recourir à des outils spécialisés pour rechercher de l'information de façon fiable, gérer des réseaux sociaux, éditer des images et des vidéos. Vous savez produire des analyses de données et des représentations graphiques adaptées. Vous savez mettre en place un environnement numérique (installation et paramétrage). Vous connaissez les enjeux autour du traçage et de la collecte de données. Vous comprenez les impacts environnementaux et sociétaux des usages numériques et savez adapter vos pratiques."
+          },
           "label": "Avancé 1",
-          "summary": "Vous avez des pratiques numériques avancées et disposez de connaissances solides qui vous permettent de faire face seul(e) à des situations nouvelles. Vous pouvez venir en aide à d'autres personnes."
+          "summary": {
+            "shareable": "Le/la candidat(e) a des pratiques numériques avancées et dispose de connaissances solides qui lui permettent de faire face seul(e) à des situations nouvelles. Il/elle peut venir en aide à d'autres personnes.",
+            "user": "Vous avez des pratiques numériques avancées et disposez de connaissances solides qui vous permettent de faire face seul(e) à des situations nouvelles. Vous pouvez venir en aide à d'autres personnes."
+          }
         },
         "LEVEL_ADVANCED_6": {
-          "description": "Vous maîtrisez pleinement votre environnement numérique pour créer et diffuser des contenus, communiquer et collaborer. Vous savez gérer votre présence en ligne et choisir les paramètres pertinents pour vos diffusions. Vous savez programmer et automatiser certaines tâches (traitement de données, sauvegarde, mise à jour, etc). Vous pouvez accompagner les autres pour sécuriser leurs pratiques, et notamment limiter leur impact environnemental et sur la santé.",
+          "description": {
+            "shareable": "Le/la candidat(e) maîtrise pleinement son environnement numérique pour créer et diffuser des contenus, communiquer et collaborer. Il/elle sait gérer sa présence en ligne et choisir les paramètres pertinents pour ses diffusions. Il/elle sait programmer et automatiser certaines tâches (traitement de données, sauvegarde, mise à jour, etc). Il/elle peut accompagner les autres pour sécuriser leurs pratiques, et notamment limiter leur impact environnemental et sur la santé.",
+            "user": "Vous maîtrisez pleinement votre environnement numérique pour créer et diffuser des contenus, communiquer et collaborer. Vous savez gérer votre présence en ligne et choisir les paramètres pertinents pour vos diffusions. Vous savez programmer et automatiser certaines tâches (traitement de données, sauvegarde, mise à jour, etc). Vous pouvez accompagner les autres pour sécuriser leurs pratiques, et notamment limiter leur impact environnemental et sur la santé."
+          },
           "label": "Avancé 2",
-          "summary": "Vous avez des pratiques numériques avancées et disposez de connaissances approfondies, que vous pouvez mettre à profit, pour vous-même ou pour d'autres, de manière créative et sécurisée. Vous pouvez accompagner la montée en compétences d'autres personnes."
+          "summary": {
+            "shareable": "Le/la candidat(e) a des pratiques numériques avancées et dispose de connaissances approfondies, qu'il/elle peut mettre à profit, pour lui/elle-même ou pour d'autres, de manière créative et sécurisée. Il/elle peut accompagner la montée en compétences d'autres personnes.",
+            "user": "Vous avez des pratiques numériques avancées et disposez de connaissances approfondies, que vous pouvez mettre à profit, pour vous-même ou pour d'autres, de manière créative et sécurisée. Vous pouvez accompagner la montée en compétences d'autres personnes."
+          }
         },
         "LEVEL_BEGINNER_1": {
-          "description": "Vous savez vous repérer dans les interfaces des outils numériques que vous avez déjà utilisés (téléphone, tablette, ordinateur). Avec un accompagnement ponctuel, vous pouvez visiter un site Web, lire vos messages (SMS, mails,...) et y répondre, utiliser des applications simples sur téléphone ou tablette, et accéder à des services en ligne.",
+          "description": {
+            "shareable": "Le/la candidat(e) sait se repérer dans les interfaces des outils numériques qu'il/elle a déjà utilisés (téléphone, tablette, ordinateur). Avec un accompagnement ponctuel, il/elle peut visiter un site Web, lire ses messages (SMS, mails,...) et y répondre, utiliser des applications simples sur téléphone ou tablette, et accéder à des services en ligne.",
+            "user": "Vous savez vous repérer dans les interfaces des outils numériques que vous avez déjà utilisés (téléphone, tablette, ordinateur). Avec un accompagnement ponctuel, vous pouvez visiter un site Web, lire vos messages (SMS, mails,...) et y répondre, utiliser des applications simples sur téléphone ou tablette, et accéder à des services en ligne."
+          },
           "label": "Novice 1",
-          "summary": "Vous avez des pratiques numériques simples en ayant souvent besoin d'aide"
+          "summary": {
+            "shareable": "Le/la candidat(e) a des pratiques numériques simples en ayant souvent besoin d'aide",
+            "user": "Vous avez des pratiques numériques simples en ayant souvent besoin d'aide"
+          }
         },
         "LEVEL_BEGINNER_2": {
-          "description": "Dans votre environnement numérique habituel, vous savez rechercher des informations sur le Web, télécharger un fichier et le retrouver, consulter et envoyer des messages électroniques, connecter vos appareils  à internet (ordinateurs, tablette, téléphone). Vous pouvez saisir un texte avec une mise en forme simple et le sauvegarder. Vous savez que certaines informations publiées en ligne sont fausses et qu'il est important de protéger ses comptes avec des mots de passe sûrs.",
+          "description": {
+            "shareable": "Dans son environnement numérique habituel, le/la candidat(e) sait rechercher des informations sur le Web, télécharger un fichier et le retrouver, consulter et envoyer des messages électroniques, connecter ses appareils à internet (ordinateurs, tablette, téléphone). Il/elle peut saisir un texte avec une mise en forme simple et le sauvegarder. Il/elle sait que certaines informations publiées en ligne sont fausses et qu'il est important de protéger ses comptes avec des mots de passe sûrs.",
+            "user": "Dans votre environnement numérique habituel, vous savez rechercher des informations sur le Web, télécharger un fichier et le retrouver, consulter et envoyer des messages électroniques, connecter vos appareils  à internet (ordinateurs, tablette, téléphone). Vous pouvez saisir un texte avec une mise en forme simple et le sauvegarder. Vous savez que certaines informations publiées en ligne sont fausses et qu'il est important de protéger ses comptes avec des mots de passe sûrs."
+          },
           "label": "Novice 2",
-          "summary": "Vous avez des pratiques numériques simples, avec de l'aide quand la situation se complique."
+          "summary": {
+            "shareable": "Le/la candidat(e) a des pratiques numériques simples, avec de l'aide quand la situation se complique.",
+            "user": "Vous avez des pratiques numériques simples, avec de l'aide quand la situation se complique."
+          }
         },
         "LEVEL_EXPERT_7": {
-          "description": "Vous êtes capable d'analyser un besoin, de consulter de la documentation même technique et d'évaluer des solutions numériques pour mettre en oeuvre la plus optimale, voire même de développer vous-mêmes des outils. Vous comprenez les enjeux économiques, sociétaux, et éthiques associés aux technologies numériques et pouvez exercer votre esprit critique sur vos pratiques numériques. Vous êtes en capacité de vous former à de nouvelles techniques et appréhendez avec aisance les avancées technologiques les plus récentes, telles que celles permises par l'intelligence artificielle.",
+          "description": {
+            "shareable": "Le/la candidat(e) est capable d'analyser un besoin, de consulter de la documentation même technique et d'évaluer des solutions numériques pour mettre en oeuvre la plus optimale, voire même de développer lui/elle-même des outils. Il/elle comprend les enjeux économiques, sociétaux, et éthiques associés aux technologies numériques et peut exercer son esprit critique sur ses pratiques numériques. Il/elle est en capacité de se former à de nouvelles techniques et appréhende avec aisance les avancées technologiques les plus récentes, telles que celles permises par l'intelligence artificielle.",
+            "user": "Vous êtes capable d'analyser un besoin, de consulter de la documentation même technique et d'évaluer des solutions numériques pour mettre en oeuvre la plus optimale, voire même de développer vous-mêmes des outils. Vous comprenez les enjeux économiques, sociétaux, et éthiques associés aux technologies numériques et pouvez exercer votre esprit critique sur vos pratiques numériques. Vous êtes en capacité de vous former à de nouvelles techniques et appréhendez avec aisance les avancées technologiques les plus récentes, telles que celles permises par l'intelligence artificielle."
+          },
           "label": "Expert 1",
-          "summary": "Vous avez des pratiques numériques optimisées et disposez de connaissances expertes qui vous permettent d'aborder avec méthode des situations complexes et nouvelles."
+          "summary": {
+            "shareable": "Le/la candidat(e) a des pratiques numériques optimisées et dispose de connaissances expertes qui lui permettent d'aborder avec méthode des situations complexes et nouvelles.",
+            "user": "Vous avez des pratiques numériques optimisées et disposez de connaissances expertes qui vous permettent d'aborder avec méthode des situations complexes et nouvelles."
+          }
         },
         "LEVEL_EXPERT_8": {
           "label": "Expert 2",
-          "summary": "Vous êtes capables de documenter vos solutions à des problèmes nouveaux et spécifiques pour les partager."
+          "summary": {
+            "shareable": "Le/la candidat(e) est capable de documenter ses solutions à des problèmes nouveaux et spécifiques pour les partager.",
+            "user": "Vous êtes capables de documenter vos solutions à des problèmes nouveaux et spécifiques pour les partager."
+          }
         },
         "LEVEL_INDEPENDENT_3": {
-          "description": "Vous savez naviguer sur le Web pour réaliser une recherche approfondie avec des informations pertinentes. Vous savez participer à des activités collaboratives (messagerie, agenda partagé, réunion en visio, documents partagés). Vous savez utiliser les fonctionnalités les plus courantes des logiciels usuels (traitement de texte et tableur). Vous êtes sensible aux risques associés à vos pratiques numériques et à la nécessité de les sécuriser, ainsi qu'à l'impact environnemental de vos usages numériques. Vous savez résoudre les problèmes courants (mot de passe, connexion).",
+          "description": {
+            "shareable": "Le/la candidat(e) sait naviguer sur le Web pour réaliser une recherche approfondie avec des informations pertinentes. Il/elle sait participer à des activités collaboratives (messagerie, agenda partagé, réunion en visio, documents partagés). Il/elle sait utiliser les fonctionnalités les plus courantes des logiciels usuels (traitement de texte et tableur). Il/elle est sensible aux risques associés à ses pratiques numériques et à la nécessité de les sécuriser, ainsi qu'à l'impact environnemental de ses usages numériques. Il/elle sait résoudre les problèmes courants (mot de passe, connexion).",
+            "user": "Vous savez naviguer sur le Web pour réaliser une recherche approfondie avec des informations pertinentes. Vous savez participer à des activités collaboratives (messagerie, agenda partagé, réunion en visio, documents partagés). Vous savez utiliser les fonctionnalités les plus courantes des logiciels usuels (traitement de texte et tableur). Vous êtes sensible aux risques associés à vos pratiques numériques et à la nécessité de les sécuriser, ainsi qu'à l'impact environnemental de vos usages numériques. Vous savez résoudre les problèmes courants (mot de passe, connexion)."
+          },
           "label": "Indépendant 1",
-          "summary": "Vous avez des pratiques numériques simples en autonomie dans la plupart des situations courantes."
+          "summary": {
+            "shareable": "Le/la candidat(e) a des pratiques numériques simples en autonomie dans la plupart des situations courantes.",
+            "user": "Vous avez des pratiques numériques simples en autonomie dans la plupart des situations courantes."
+          }
         },
         "LEVEL_INDEPENDENT_4": {
-          "description": "Vous savez mettre en place une stratégie de recherche d'information sur le Web et via les réseaux sociaux et vérifier la fiabilité des informations trouvées. Vous savez utiliser les principales fonctionnalités des outils collaboratifs et créer des documents au moyen de différents logiciels (traitement de texte, tableur, diaporama, images). Vous pouvez mettre en oeuvre des pratiques sécurisées en matière de données personnelles et de protection de vos appareils. Vous savez adapter vos pratiques numériques pour limiter leur impact sur l'environnement et sur votre santé.",
+          "description": {
+            "shareable": "Le/la candidat(e) sait mettre en place une stratégie de recherche d'information sur le Web et via les réseaux sociaux et vérifier la fiabilité des informations trouvées. Il/elle sait utiliser les principales fonctionnalités des outils collaboratifs et créer des documents au moyen de différents logiciels (traitement de texte, tableur, diaporama, images). Il/elle peut mettre en oeuvre des pratiques sécurisées en matière de données personnelles et de protection de ses appareils. Il/elle sait adapter ses pratiques numériques pour limiter leur impact sur l'environnement et sur sa santé.",
+            "user": "Vous savez mettre en place une stratégie de recherche d'information sur le Web et via les réseaux sociaux et vérifier la fiabilité des informations trouvées. Vous savez utiliser les principales fonctionnalités des outils collaboratifs et créer des documents au moyen de différents logiciels (traitement de texte, tableur, diaporama, images). Vous pouvez mettre en oeuvre des pratiques sécurisées en matière de données personnelles et de protection de vos appareils. Vous savez adapter vos pratiques numériques pour limiter leur impact sur l'environnement et sur votre santé."
+          },
           "label": "Indépendant 2",
-          "summary": "Vous êtes à l'aise dans toutes les situations courantes d'utilisation du numérique et maîtrisez le vocabulaire usuel associé aux technologies numériques."
+          "summary": {
+            "shareable": "Le/la candidat(e) est à l'aise dans toutes les situations courantes d'utilisation du numérique et maîtrise le vocabulaire usuel associé aux technologies numériques.",
+            "user": "Vous êtes à l'aise dans toutes les situations courantes d'utilisation du numérique et maîtrisez le vocabulaire usuel associé aux technologies numériques."
+          }
         }
       },
       "DROIT": {
         "LEVEL_ADVANCED": {
-          "description": "Votre maîtrise du numérique pour les métiers du droit vous permet d’identifier les enjeux et les problématiques juridiques que soulève le recours au numérique. Elle permet de déterminer le cadre juridique applicable à une situation juridique donnée, et de mettre en œuvre les règles de droit concernées.\nVous maîtrisez également les outils numériques à la disposition des praticiens du droit et pouvez réaliser une recherche juridique avancée et efficace.",
+          "description": {
+            "shareable": "La maîtrise du numérique du/de la candidat(e) pour les métiers du droit lui permet d’identifier les enjeux et les problématiques juridiques que soulève le recours au numérique. Elle permet de déterminer le cadre juridique applicable à une situation juridique donnée, et de mettre en œuvre les règles de droit concernées.\nIl/elle maîtrise également les outils numériques à la disposition des praticiens du droit et peut réaliser une recherche juridique avancée et efficace.",
+            "user": "Votre maîtrise du numérique pour les métiers du droit vous permet d’identifier les enjeux et les problématiques juridiques que soulève le recours au numérique. Elle permet de déterminer le cadre juridique applicable à une situation juridique donnée, et de mettre en œuvre les règles de droit concernées.\nVous maîtrisez également les outils numériques à la disposition des praticiens du droit et pouvez réaliser une recherche juridique avancée et efficace."
+          },
           "label": "Avancé",
-          "summary": "Le candidat a obtenu le niveau Avancé."
+          "summary": {
+            "shareable": "Le/la candidat(e) a obtenu le niveau Avancé.",
+            "user": "Vous avez obtenu le niveau Avancé."
+          }
         },
         "LEVEL_CONFIRMED": {
-          "description": "Votre maîtrise du numérique pour les métiers du droit vous permet d’identifier les enjeux et les problématiques juridiques que soulève le recours au numérique, et de déterminer le cadre juridique correspondant.\nVous pouvez également identifier les principaux outils numériques à la disposition des praticiens du droit et réaliser une recherche juridique pertinente.",
+          "description": {
+            "shareable": "La maîtrise du numérique du/de la candidat(e) pour les métiers du droit lui permet d’identifier les enjeux et les problématiques juridiques que soulève le recours au numérique, et de déterminer le cadre juridique correspondant.\nIl/elle peut également identifier les principaux outils numériques à la disposition des praticiens du droit et réaliser une recherche juridique pertinente.",
+            "user": "Votre maîtrise du numérique pour les métiers du droit vous permet d’identifier les enjeux et les problématiques juridiques que soulève le recours au numérique, et de déterminer le cadre juridique correspondant.\nVous pouvez également identifier les principaux outils numériques à la disposition des praticiens du droit et réaliser une recherche juridique pertinente."
+          },
           "label": "Confirmé",
-          "summary": "Le candidat a obtenu le niveau Confirmé."
+          "summary": {
+            "shareable": "Le/la candidat(e) a obtenu le niveau Confirmé.",
+            "user": "Vous avez obtenu le niveau Confirmé."
+          }
         },
         "LEVEL_EXPERT": {
-          "description": "Votre maîtrise du numérique pour les métiers du droit vous permet d’identifier les enjeux et les problématiques juridiques que soulève le recours au numérique. Elle permet de déterminer le cadre juridique applicable à une situation juridique donnée, et de mettre en œuvre les règles de droit concernées. Vous êtes en capacité d’anticiper et de proposer des solutions juridiques ajustées à un besoin ou une attente.\nVous maîtrisez également les outils numériques à la disposition des praticiens du droit et pouvez réaliser une recherche juridique avancée et efficace.",
+          "description": {
+            "shareable": "La maîtrise du numérique du/de la candidat(e) pour les métiers du droit lui permet d’identifier les enjeux et les problématiques juridiques que soulève le recours au numérique. Elle permet de déterminer le cadre juridique applicable à une situation juridique donnée, et de mettre en œuvre les règles de droit concernées. Il/elle est en capacité d’anticiper et de proposer des solutions juridiques ajustées à un besoin ou une attente.\nIl/elle maîtrise également les outils numériques à la disposition des praticiens du droit et peut réaliser une recherche juridique avancée et efficace.",
+            "user": "Votre maîtrise du numérique pour les métiers du droit vous permet d’identifier les enjeux et les problématiques juridiques que soulève le recours au numérique. Elle permet de déterminer le cadre juridique applicable à une situation juridique donnée, et de mettre en œuvre les règles de droit concernées. Vous êtes en capacité d’anticiper et de proposer des solutions juridiques ajustées à un besoin ou une attente.\nVous maîtrisez également les outils numériques à la disposition des praticiens du droit et pouvez réaliser une recherche juridique avancée et efficace."
+          },
           "label": "Expert",
-          "summary": "Le candidat a obtenu le niveau Expert."
+          "summary": {
+            "shareable": "Le/la candidat(e) a obtenu le niveau Expert.",
+            "user": "Vous avez obtenu le niveau Expert."
+          }
         },
         "LEVEL_INDEPENDENT": {
-          "description": "Votre maîtrise du numérique pour les métiers du droit vous permet de saisir les principaux enjeux juridiques du numérique et identifier les principaux outils juridiques à la disposition des praticiens du droit.",
+          "description": {
+            "shareable": "La maîtrise du numérique du/de la candidat(e) pour les métiers du droit lui permet de saisir les principaux enjeux juridiques du numérique et identifier les principaux outils juridiques à la disposition des praticiens du droit.",
+            "user": "Votre maîtrise du numérique pour les métiers du droit vous permet de saisir les principaux enjeux juridiques du numérique et identifier les principaux outils juridiques à la disposition des praticiens du droit."
+          },
           "label": "Indépendant",
-          "summary": "Le candidat a obtenu le niveau Indépendant."
+          "summary": {
+            "shareable": "Le/la candidat(e) a obtenu le niveau Indépendant.",
+            "user": "Vous avez obtenu le niveau Indépendant."
+          }
         }
       },
       "EDU_1ER_DEGRE": {
         "LEVEL_ADMISSIBLE": {
-          "description": "La certification se déroule en deux étapes :\n 1. Épreuve Pix : Il vient de la passer.\n 2. Épreuve orale : organisée en dehors de Pix devant un jury.\nÀ l’issue de cet oral, votre niveau de certification définitif sera attribué (Expert, Avancé, etc.).\nRapprochez-vous de votre centre de certification pour organiser le passage de l’oral.",
+          "description": {
+            "shareable": "La certification se déroule en deux étapes :\n 1. Épreuve Pix : il/elle vient de la passer.\n 2. Épreuve orale : organisée en dehors de Pix devant un jury.\nÀ l’issue de cet oral, le niveau de certification définitif du/de la candidat(e) sera attribué (Expert, Avancé, etc.).",
+            "user": "La certification se déroule en deux étapes :\n 1. Épreuve Pix : vous venez de la passer.\n 2. Épreuve orale : organisée en dehors de Pix devant un jury.\nÀ l’issue de cet oral, votre niveau de certification définitif sera attribué (Expert, Avancé, etc.).\nRapprochez-vous de votre centre de certification pour organiser le passage de l’oral."
+          },
           "label": "Admissible",
-          "summary": "Le candidat est admissible à la certification Pix+ Edu."
+          "summary": {
+            "shareable": "Le/la candidat(e) est admissible à la certification Pix+ Edu.",
+            "user": "Vous êtes admissible à la certification Pix+ Edu."
+          }
         },
         "LEVEL_ADVANCED": {
-          "description": "Vous êtes capable de mobiliser le numérique dans votre activité professionnelle, de manière variée et pertinente. Vous disposez de connaissances approfondies qui vous permettent de porter un regard critique et éclairé sur vos usages.",
+          "description": {
+            "shareable": "Le/la candidat(e) est capable de mobiliser le numérique dans son activité professionnelle, de manière variée et pertinente. Il/elle dispose de connaissances approfondies qui lui permettent de porter un regard critique et éclairé sur ses usages.",
+            "user": "Vous êtes capable de mobiliser le numérique dans votre activité professionnelle, de manière variée et pertinente. Vous disposez de connaissances approfondies qui vous permettent de porter un regard critique et éclairé sur vos usages."
+          },
           "label": "Avancé",
-          "summary": "Le candidat a obtenu le niveau Avancé."
+          "summary": {
+            "shareable": "Le/la candidat(e) a obtenu le niveau Avancé.",
+            "user": "Vous avez obtenu le niveau Avancé."
+          }
         },
         "LEVEL_EXPERT": {
-          "description": "Vous êtes capable d'utiliser le numérique dans votre pratique professionnelle de manière critique, ciblée et originale en fonction des contextes et des besoins. Vous pouvez utiliser votre expertise pour accompagner, inspirer et soutenir vos pairs dans le développement de leurs compétences numériques professionnelles.",
+          "description": {
+            "shareable": "Le/la candidat(e) est capable d'utiliser le numérique dans sa pratique professionnelle de manière critique, ciblée et originale en fonction des contextes et des besoins. Il/elle peut utiliser son expertise pour accompagner, inspirer et soutenir ses pairs dans le développement de leurs compétences numériques professionnelles.",
+            "user": "Vous êtes capable d'utiliser le numérique dans votre pratique professionnelle de manière critique, ciblée et originale en fonction des contextes et des besoins. Vous pouvez utiliser votre expertise pour accompagner, inspirer et soutenir vos pairs dans le développement de leurs compétences numériques professionnelles."
+          },
           "label": "Expert",
-          "summary": "Le candidat a obtenu le niveau Expert."
+          "summary": {
+            "shareable": "Le/la candidat(e) a obtenu le niveau Expert.",
+            "user": "Vous avez obtenu le niveau Expert."
+          }
         }
       },
       "EDU_2ND_DEGRE": {
         "LEVEL_ADMISSIBLE": {
-          "description": "La certification se déroule en deux étapes :\n 1. Épreuve Pix : Il vient de la passer.\n 2. Épreuve orale : organisée en dehors de Pix devant un jury.\nÀ l’issue de cet oral, votre niveau de certification définitif sera attribué (Expert, Avancé, etc.).\nRapprochez-vous de votre centre de certification pour organiser le passage de l’oral.",
+          "description": {
+            "shareable": "La certification se déroule en deux étapes :\n 1. Épreuve Pix : il/elle vient de la passer.\n 2. Épreuve orale : organisée en dehors de Pix devant un jury.\nÀ l’issue de cet oral, le niveau de certification définitif du/de la candidat(e) sera attribué (Expert, Avancé, etc.).",
+            "user": "La certification se déroule en deux étapes :\n 1. Épreuve Pix : vous venez de la passer.\n 2. Épreuve orale : organisée en dehors de Pix devant un jury.\nÀ l’issue de cet oral, votre niveau de certification définitif sera attribué (Expert, Avancé, etc.).\nRapprochez-vous de votre centre de certification pour organiser le passage de l’oral."
+          },
           "label": "Admissible",
-          "summary": "Le candidat est admissible à la certification Pix+ Edu."
+          "summary": {
+            "shareable": "Le/la candidat(e) est admissible à la certification Pix+ Edu.",
+            "user": "Vous êtes admissible à la certification Pix+ Edu."
+          }
         },
         "LEVEL_ADVANCED": {
-          "description": "Vous êtes capable de mobiliser le numérique dans votre activité professionnelle, de manière variée et pertinente. Vous disposez de connaissances approfondies qui vous permettent de porter un regard critique et éclairé sur vos usages.",
+          "description": {
+            "shareable": "Le/la candidat(e) est capable de mobiliser le numérique dans son activité professionnelle, de manière variée et pertinente. Il/elle dispose de connaissances approfondies qui lui permettent de porter un regard critique et éclairé sur ses usages.",
+            "user": "Vous êtes capable de mobiliser le numérique dans votre activité professionnelle, de manière variée et pertinente. Vous disposez de connaissances approfondies qui vous permettent de porter un regard critique et éclairé sur vos usages."
+          },
           "label": "Avancé",
-          "summary": "Le candidat a obtenu le niveau Avancé."
+          "summary": {
+            "shareable": "Le/la candidat(e) a obtenu le niveau Avancé.",
+            "user": "Vous avez obtenu le niveau Avancé."
+          }
         },
         "LEVEL_EXPERT": {
-          "description": "Vous êtes capable d'utiliser le numérique dans votre pratique professionnelle de manière critique, ciblée et originale en fonction des contextes et des besoins. Vous pouvez utiliser votre expertise pour accompagner, inspirer et soutenir vos pairs dans le développement de leurs compétences numériques professionnelles.",
+          "description": {
+            "shareable": "Le/la candidat(e) est capable d'utiliser le numérique dans sa pratique professionnelle de manière critique, ciblée et originale en fonction des contextes et des besoins. Il/elle peut utiliser son expertise pour accompagner, inspirer et soutenir ses pairs dans le développement de leurs compétences numériques professionnelles.",
+            "user": "Vous êtes capable d'utiliser le numérique dans votre pratique professionnelle de manière critique, ciblée et originale en fonction des contextes et des besoins. Vous pouvez utiliser votre expertise pour accompagner, inspirer et soutenir vos pairs dans le développement de leurs compétences numériques professionnelles."
+          },
           "label": "Expert",
-          "summary": "Le candidat a obtenu le niveau Expert."
+          "summary": {
+            "shareable": "Le/la candidat(e) a obtenu le niveau Expert.",
+            "user": "Vous avez obtenu le niveau Expert."
+          }
         }
       },
       "EDU_CPE": {
         "LEVEL_ADMISSIBLE": {
-          "description": "La certification se déroule en deux étapes :\n 1. Épreuve Pix : Il vient de la passer.\n 2. Épreuve orale : organisée en dehors de Pix devant un jury.\nÀ l’issue de cet oral, votre niveau de certification définitif sera attribué (Expert, Avancé, etc.).\nRapprochez-vous de votre centre de certification pour organiser le passage de l’oral.",
+          "description": {
+            "shareable": "La certification se déroule en deux étapes :\n 1. Épreuve Pix : il/elle vient de la passer.\n 2. Épreuve orale : organisée en dehors de Pix devant un jury.\nÀ l’issue de cet oral, le niveau de certification définitif du/de la candidat(e) sera attribué (Expert, Avancé, etc.).",
+            "user": "La certification se déroule en deux étapes :\n 1. Épreuve Pix : vous venez de la passer.\n 2. Épreuve orale : organisée en dehors de Pix devant un jury.\nÀ l’issue de cet oral, votre niveau de certification définitif sera attribué (Expert, Avancé, etc.).\nRapprochez-vous de votre centre de certification pour organiser le passage de l’oral."
+          },
           "label": "Admissible",
-          "summary": "Le candidat est admissible à la certification Pix+ Edu."
+          "summary": {
+            "shareable": "Le/la candidat(e) est admissible à la certification Pix+ Edu.",
+            "user": "Vous êtes admissible à la certification Pix+ Edu."
+          }
         },
         "LEVEL_ADVANCED": {
-          "description": "Vous êtes capable de mobiliser le numérique dans votre activité professionnelle, de manière variée et pertinente. Vous disposez de connaissances approfondies qui vous permettent de porter un regard critique et éclairé sur vos usages.",
+          "description": {
+            "shareable": "Le/la candidat(e) est capable de mobiliser le numérique dans son activité professionnelle, de manière variée et pertinente. Il/elle dispose de connaissances approfondies qui lui permettent de porter un regard critique et éclairé sur ses usages.",
+            "user": "Vous êtes capable de mobiliser le numérique dans votre activité professionnelle, de manière variée et pertinente. Vous disposez de connaissances approfondies qui vous permettent de porter un regard critique et éclairé sur vos usages."
+          },
           "label": "Avancé",
-          "summary": "Le candidat a obtenu le niveau Avancé."
+          "summary": {
+            "shareable": "Le/la candidat(e) a obtenu le niveau Avancé.",
+            "user": "Vous avez obtenu le niveau Avancé."
+          }
         },
         "LEVEL_EXPERT": {
-          "description": "Vous êtes capable d'utiliser le numérique dans votre pratique professionnelle de manière critique, ciblée et originale en fonction des contextes et des besoins. Vous pouvez utiliser votre expertise pour accompagner, inspirer et soutenir vos pairs dans le développement de leurs compétences numériques professionnelles.",
+          "description": {
+            "shareable": "Le/la candidat(e) est capable d'utiliser le numérique dans sa pratique professionnelle de manière critique, ciblée et originale en fonction des contextes et des besoins. Il/elle peut utiliser son expertise pour accompagner, inspirer et soutenir ses pairs dans le développement de leurs compétences numériques professionnelles.",
+            "user": "Vous êtes capable d'utiliser le numérique dans votre pratique professionnelle de manière critique, ciblée et originale en fonction des contextes et des besoins. Vous pouvez utiliser votre expertise pour accompagner, inspirer et soutenir vos pairs dans le développement de leurs compétences numériques professionnelles."
+          },
           "label": "Expert",
-          "summary": "Le candidat a obtenu le niveau Expert."
+          "summary": {
+            "shareable": "Le/la candidat(e) a obtenu le niveau Expert.",
+            "user": "Vous avez obtenu le niveau Expert."
+          }
         }
       },
       "PRO_SANTE": {
         "LEVEL_ADVANCED": {
           "label": "Avancé",
-          "summary": "Le candidat a obtenu le niveau Avancé."
+          "summary": {
+            "shareable": "Le/la candidat(e) a obtenu le niveau Avancé.",
+            "user": "Vous avez obtenu le niveau Avancé."
+          }
         },
         "LEVEL_CONFIRMED": {
           "label": "Confirmé",
-          "summary": "Le candidat a obtenu le niveau Confirmé."
+          "summary": {
+            "shareable": "Le/la candidat(e) a obtenu le niveau Confirmé.",
+            "user": "Vous avez obtenu le niveau Confirmé."
+          }
         },
         "LEVEL_EXPERT": {
           "label": "Expert",
-          "summary": "Le candidat a obtenu le niveau Expert."
+          "summary": {
+            "shareable": "Le/la candidat(e) a obtenu le niveau Expert.",
+            "user": "Vous avez obtenu le niveau Expert."
+          }
         },
         "LEVEL_INDEPENDENT": {
           "label": "Indépendant",
-          "summary": "Le candidat a obtenu le niveau Indépendant."
+          "summary": {
+            "shareable": "Le/la candidat(e) a obtenu le niveau Indépendant.",
+            "user": "Vous avez obtenu le niveau Indépendant."
+          }
         }
       }
     }

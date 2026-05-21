@@ -1,5 +1,6 @@
 import { ResultCompetence } from '../../../../../../src/certification/results/domain/models/ResultCompetence.js';
 import { ResultCompetenceTree } from '../../../../../../src/certification/results/domain/models/ResultCompetenceTree.js';
+import { CERTIFICATE_LABEL_CONTEXTS } from '../../../../../../src/certification/results/domain/models/v3/CertificateMeshLevel.js';
 import * as serializer from '../../../../../../src/certification/results/infrastructure/serializers/certificate-serializer.js';
 import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
@@ -189,9 +190,14 @@ describe('Unit | Serializer | JSONAPI | certificate-serializer', function () {
           acquiredComplementaryCertification: { imageUrl: 'http://example.com/' },
         });
         const translate = getI18n().__;
+        const context = CERTIFICATE_LABEL_CONTEXTS.USER;
 
         // when
-        const serializedCertifications = serializer.serialize({ certificate: shareableCertificate, translate });
+        const serializedCertifications = serializer.serialize({
+          certificate: shareableCertificate,
+          translate,
+          context,
+        });
 
         // then
         expect(serializedCertifications.data).to.deep.equal({
@@ -208,8 +214,8 @@ describe('Unit | Serializer | JSONAPI | certificate-serializer', function () {
             'pix-score': 123,
             'verification-code': 'P-SOMECODE',
             'global-level-label': shareableCertificate.globalLevel.getLevelLabel(translate),
-            'global-summary-label': shareableCertificate.globalLevel.getSummaryLabel(translate),
-            'global-description-label': shareableCertificate.globalLevel.getDescriptionLabel(translate),
+            'global-summary-label': shareableCertificate.globalLevel.getSummaryLabel(translate, context),
+            'global-description-label': shareableCertificate.globalLevel.getDescriptionLabel(translate, context),
             level: '1',
             'certification-date': new Date('2015-10-03T01:02:03Z'),
             'acquired-complementary-certification': 'http://example.com/',

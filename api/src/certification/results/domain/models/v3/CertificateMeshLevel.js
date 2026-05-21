@@ -31,6 +31,11 @@ export const STANDARD_PIX_PLUS_LEVELS = {
   3: 'LEVEL_EXPERT',
 };
 
+export const CERTIFICATE_LABEL_CONTEXTS = {
+  USER: 'user',
+  SHAREABLE: 'shareable',
+};
+
 export class CertificateMeshLevel {
   static #schema = Joi.object({
     meshLevel: Joi.string().allow(null),
@@ -53,12 +58,12 @@ export class CertificateMeshLevel {
     return this.#translate({ translate, key: `${this.meshLevel}.label` });
   }
 
-  getSummaryLabel(translate) {
-    return this.#translate({ translate, key: `${this.meshLevel}.summary` });
+  getSummaryLabel(translate, context) {
+    return this.#translate({ translate, key: `${this.meshLevel}.summary.${context}` });
   }
 
-  getDescriptionLabel(translate) {
-    return this.#translate({ translate, key: `${this.meshLevel}.description` });
+  getDescriptionLabel(translate, context) {
+    return this.#translate({ translate, key: `${this.meshLevel}.description.${context}` });
   }
 
   get badgeUrl() {

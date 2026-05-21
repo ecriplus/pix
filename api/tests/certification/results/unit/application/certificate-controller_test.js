@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import sinon from 'sinon';
 
 import { certificateController } from '../../../../../src/certification/results/application/certificate-controller.js';
+import { CERTIFICATE_LABEL_CONTEXTS } from '../../../../../src/certification/results/domain/models/v3/CertificateMeshLevel.js';
 import { CertificationCourseVersion } from '../../../../../src/certification/results/domain/read-models/CertificationCourseVersion.js';
 import { usecases } from '../../../../../src/certification/results/domain/usecases/index.js';
 import { AlgorithmEngineVersion } from '../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
@@ -45,6 +46,12 @@ describe('Certification | Results | Unit | Application | certificate-controller'
           locale,
         });
         expect(usecases.getShareableCertificate).to.not.have.been.calledOnce;
+        const translate = getI18nFromRequest(request).__;
+        expect(certificateSerializerStub.serialize).to.have.been.calledWithExactly({
+          certificate,
+          translate,
+          context: CERTIFICATE_LABEL_CONTEXTS.SHAREABLE,
+        });
       });
     });
 
@@ -154,6 +161,7 @@ describe('Certification | Results | Unit | Application | certificate-controller'
         expect(dependencies.certificateSerializer.serialize).to.have.been.calledWithExactly({
           translate,
           certificate,
+          context: CERTIFICATE_LABEL_CONTEXTS.USER,
         });
       });
     });
