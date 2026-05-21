@@ -99,7 +99,7 @@ export default class CertificationVersionDetailModal extends Component {
 
         <FrameworkContentDetails @areas={{@version.areas}} />
 
-        <VersionComment @version={{@version}} @onSave={{@onClose}} />
+        <VersionComment @version={{@version}} />
       </:content>
     </PixModal>
   </template>
