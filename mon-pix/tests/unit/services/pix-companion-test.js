@@ -29,7 +29,10 @@ module('Unit | Service | pix-companion', function (hooks) {
       pixCompanion.startCertification(windowStub);
 
       // Then
-      sinon.assert.calledWith(windowStub.dispatchEvent, new CustomEvent('pix:certification:start'));
+      sinon.assert.calledWith(
+        windowStub.dispatchEvent,
+        sinon.match.instanceOf(CustomEvent).and(sinon.match.has('type', 'pix:certification:start')),
+      );
       sinon.assert.calledWith(windowStub.postMessage, { event: 'pix:certification:start' }, 'test');
       assert.ok(true);
     });
@@ -68,7 +71,10 @@ module('Unit | Service | pix-companion', function (hooks) {
       pixCompanion.stopCertification(windowStub);
 
       // Then
-      sinon.assert.calledWith(windowStub.dispatchEvent, new CustomEvent('pix:certification:stop'));
+      sinon.assert.calledWith(
+        windowStub.dispatchEvent,
+        sinon.match.instanceOf(CustomEvent).and(sinon.match.has('type', 'pix:certification:stop')),
+      );
       sinon.assert.calledWith(windowStub.postMessage, { event: 'pix:certification:stop' }, 'test');
       assert.ok(true);
     });
@@ -103,8 +109,9 @@ module('Unit | Service | pix-companion', function (hooks) {
         removeEventListener: sinon.stub(),
         setTimeout: sinon.stub(),
       };
+      let capturedEventListenerType;
       windowStub.addEventListener.callsFake((type, listener) => {
-        assert.strictEqual(type, 'pix:companion:pong');
+        capturedEventListenerType = type;
         listener();
       });
       pixCompanion._isExtensionEnabled = false;
@@ -114,7 +121,11 @@ module('Unit | Service | pix-companion', function (hooks) {
       await new Promise((resolve) => setTimeout(resolve, 0));
 
       // Then
-      sinon.assert.calledWith(windowStub.dispatchEvent, new CustomEvent('pix:companion:ping'));
+      assert.strictEqual(capturedEventListenerType, 'pix:companion:pong');
+      sinon.assert.calledWith(
+        windowStub.dispatchEvent,
+        sinon.match.instanceOf(CustomEvent).and(sinon.match.has('type', 'pix:companion:ping')),
+      );
       assert.true(pixCompanion.isExtensionEnabled);
     });
 
@@ -126,8 +137,9 @@ module('Unit | Service | pix-companion', function (hooks) {
         removeEventListener: sinon.stub(),
         setTimeout: sinon.stub(),
       };
+      let capturedTimeoutDelay;
       windowStub.setTimeout.callsFake((callback, timeout) => {
-        assert.strictEqual(timeout, 500);
+        capturedTimeoutDelay = timeout;
         callback();
       });
       pixCompanion._isExtensionEnabled = true;
@@ -145,7 +157,11 @@ module('Unit | Service | pix-companion', function (hooks) {
       await new Promise((resolve) => setTimeout(resolve, 0));
 
       // Then
-      sinon.assert.calledWith(windowStub.dispatchEvent, new CustomEvent('pix:companion:ping'));
+      assert.strictEqual(capturedTimeoutDelay, 500);
+      sinon.assert.calledWith(
+        windowStub.dispatchEvent,
+        sinon.match.instanceOf(CustomEvent).and(sinon.match.has('type', 'pix:companion:ping')),
+      );
       assert.false(pixCompanion.isExtensionEnabled);
       assert.true(blockEventReceived);
     });
