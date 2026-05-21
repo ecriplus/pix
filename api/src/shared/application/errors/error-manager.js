@@ -1,9 +1,5 @@
 import { AdminMemberError } from '../../../authorization/domain/errors.js';
-import {
-  AlreadyAcceptedOrCancelledInvitationError,
-  UserHasNoOrganizationMembershipError,
-  UserNotMemberOfOrganizationError,
-} from '../../../team/domain/errors.js';
+import { UserHasNoOrganizationMembershipError, UserNotMemberOfOrganizationError } from '../../../team/domain/errors.js';
 import * as SharedDomainErrors from '../../domain/errors.js';
 import { HttpErrors } from './http-errors.js';
 
@@ -48,7 +44,6 @@ const CONFLICT_ERRORS = [
   SharedDomainErrors.DeletedError,
   SharedDomainErrors.CertificationEndedByFinalizationError,
   SharedDomainErrors.MultipleOrganizationLearnersWithDifferentNationalStudentIdError,
-  AlreadyAcceptedOrCancelledInvitationError,
 ];
 
 const PRECONDITION_FAILED_ERRORS = [

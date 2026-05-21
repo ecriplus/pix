@@ -1,5 +1,6 @@
 import { HttpErrors } from '../../shared/application/errors/http-errors.js';
 import {
+  AlreadyAcceptedOrCancelledInvitationError,
   AlreadyExistingAdminMemberError,
   OrganizationArchivedError,
   UncancellableOrganizationInvitationError,
@@ -17,6 +18,10 @@ const teamDomainErrorMappingConfiguration = [
   {
     name: OrganizationArchivedError.name,
     httpErrorFn: (error) => new HttpErrors.UnprocessableEntityError(error.message),
+  },
+  {
+    name: AlreadyAcceptedOrCancelledInvitationError.name,
+    httpErrorFn: (error) => new HttpErrors.ConflictError(error.message, error.code, error.meta),
   },
 ];
 

@@ -14,7 +14,6 @@ import {
 import { SiecleXmlImportError } from '../../../../src/prescription/learner-management/domain/errors.js';
 import * as DomainErrors from '../../../../src/shared/domain/errors.js';
 import {
-  AlreadyAcceptedOrCancelledInvitationError,
   UserHasNoOrganizationMembershipError,
   UserNotMemberOfOrganizationError,
 } from '../../../../src/team/domain/errors.js';
@@ -236,14 +235,6 @@ describe('Integration | API | Controller Error', function () {
 
       expect(response.statusCode).to.equal(CONFLICT_ERROR);
       expect(responseDetail(response)).to.equal('This user has already a confirmed email.');
-    });
-
-    it('responds Conflict when an AlreadyAcceptedOrCancelledInvitationError occurs', async function () {
-      routeHandler.throws(new AlreadyAcceptedOrCancelledInvitationError());
-      const response = await server.requestObject(request);
-
-      expect(response.statusCode).to.equal(CONFLICT_ERROR);
-      expect(responseCode(response)).to.equal('INVITATION_ALREADY_ACCEPTED_OR_CANCELLED');
     });
 
     it('responds Conflict when a ChallengeNotAskedError error occurs', async function () {
