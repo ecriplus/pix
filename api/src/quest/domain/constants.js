@@ -2,6 +2,11 @@ import { ATTESTATIONS_TABLE_NAME } from '../../../db/migrations/20240820101115_a
 import { CsvColumn } from '../../shared/infrastructure/serializers/csv/csv-column.js';
 
 export const REWARD_TYPES = { ATTESTATION: ATTESTATIONS_TABLE_NAME };
+
+export const COMBINED_COURSE_ITEM_TYPES = {
+  MODULE: 'module',
+  EVALUATION: 'evaluation',
+};
 export const QUEST_HEADER = {
   columns: [
     new CsvColumn({
