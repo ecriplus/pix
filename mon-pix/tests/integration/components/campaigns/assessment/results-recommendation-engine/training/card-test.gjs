@@ -19,8 +19,8 @@ module(
       const screen = await render(<template><TrainingCard @training={{training}} /></template>);
 
       // then
-      assert.dom(screen.getByRole('link', training.link)).exists();
-      assert.dom(screen.getByRole('heading', { name: training.title, level: 3 })).exists();
+      const trainingTitle = screen.getAllByText(training.title);
+      assert.strictEqual(trainingTitle.length, 2);
       assert.dom(screen.getByText('Webinaire')).exists();
       assert.dom(screen.getByText('2h')).exists();
     });

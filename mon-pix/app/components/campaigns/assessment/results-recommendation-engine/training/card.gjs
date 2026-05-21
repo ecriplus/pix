@@ -1,11 +1,16 @@
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
+import PixModal from '@1024pix/pix-ui/components/pix-modal';
 import PixTag from '@1024pix/pix-ui/components/pix-tag';
+import { on } from '@ember/modifier';
+import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import { t } from 'ember-intl';
+import { tracked } from '@glimmer/tracking';
 
 export default class Card extends Component {
   @service intl;
+
+  @tracked modalIsOpen = false;
 
   get tagProperties() {
     const registrationRequired = this.args.training.registrationRequired;
@@ -44,14 +49,18 @@ export default class Card extends Component {
     return this.intl.t(`pages.training.type.${this.args.training.type}`);
   }
 
+  @action
+  showModal() {
+    this.modalIsOpen = true;
+  }
+
+  @action
+  closeModal() {
+    this.modalIsOpen = false;
+  }
+
   <template>
-    <a
-      class="results-recommendation-engine-training-card"
-      href={{@training.link}}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={{t "navigation.external-link-title"}}
-    >
+    <button class="results-recommendation-engine-training-card" type="button" {{on "click" this.showModal}}>
       <div class="results-recommendation-engine-training-card-image-hero">
         <img
           class="results-recommendation-engine-training-card-image-hero__editor-logo"
@@ -68,10 +77,14 @@ export default class Card extends Component {
         {{this.tagProperties.text}}
       </PixTag>
       <section class="results-recommendation-engine-training-card-content">
-        <h3 class="results-recommendation-engine-training-card-content__title">{{@training.title}}</h3>
+        <p class="results-recommendation-engine-training-card-content__title">{{@training.title}}</p>
         <ul class="results-recommendation-engine-training-card-content__details"><li>{{this.type}}</li><li
           >{{this.deliveryMode}}</li><li>{{this.formattedDuration}}</li></ul>
       </section>
-    </a>
+    </button>
+    <PixModal @title={{@training.title}} @showModal={{this.modalIsOpen}} @onCloseButtonClick={{this.closeModal}}>
+      <:content>
+      </:content>
+    </PixModal>
   </template>
 }
