@@ -49,7 +49,7 @@
       "send": "Invia",
       "show-less": "Mostra meno",
       "show-more": "Mostra di più",
-      "sign-out": "Disconnetti",
+      "sign-out": "Esci",
       "stay": "Rimani",
       "validate": "Conferma"
     },
@@ -199,7 +199,7 @@
       },
       "password-reset-demand-form": {
         "actions": {
-          "receive-reset-button": "Ricevi un link di reimpostazione"
+          "receive-reset-button": "Ricevi un link per reimpostare la password"
         },
         "contact-us-link": {
           "link-text": "Consulta il centro assistenza"
@@ -361,7 +361,7 @@
       "attestations": "I miei certificati",
       "code": "Ho un codice",
       "dashboard": "Home",
-      "help": "Aiuto",
+      "help": "Hai bisogno di aiuto?",
       "label": "Menu principale",
       "link-help": "https://pix.fr/support",
       "skills": "Competenze",
@@ -384,7 +384,7 @@
     "user": {
       "account": "Il mio account",
       "certifications": "Le mie certificazioni",
-      "sign-out": "Disconnetti",
+      "sign-out": "Esci",
       "tests": "I miei percorsi"
     },
     "user-logged-menu": {
@@ -558,7 +558,7 @@
         },
         "signup": {
           "button": "Voglio registrarmi",
-          "link": "Registrati su",
+          "link": "Registrati",
           "title": "Non hai un account?"
         },
         "title": "Scegli la tua organizzazione"
@@ -618,7 +618,7 @@
       },
       "title": "Presentazione",
       "warning-message": "Non sei { firstName } { lastName }?",
-      "warning-message-logout": "Disconnetti"
+      "warning-message-logout": "Esci"
     },
     "campaign-participation": {
       "title": "Percorso"
@@ -924,7 +924,7 @@
     "certification-results": {
       "action": {
         "confirm": "Confermo",
-        "logout": "Disconnetti"
+        "logout": "Esci"
       },
       "finished": {
         "description": "I risultati saranno presto disponibili nel tuo account.",
@@ -1362,7 +1362,7 @@
       "actions": {
         "continue": {
           "extra-information": "Competenze del percorso {competenceName}",
-          "label": "Continua il percorso"
+          "label": "Continua"
         },
         "improve": {
           "description": {
@@ -1373,7 +1373,7 @@
           "label": "Riprova"
         },
         "reset": {
-          "description": "Reimposta disponibile in { daysBeforeReset, plural, =0 {0 giorni.} =1 { giorno.} other {# giorni.} }",
+          "description": "Reimposta disponibile tra { daysBeforeReset, plural, =0 {0 giorni.} =1 { giorno.} other {# giorni.} }",
           "label": "Reimposta",
           "modal": {
             "important-message": "Il tuo { earnedPix } Pix sarà rimosso dall'competenze: { scoreCardName }.",
@@ -1392,7 +1392,7 @@
         }
       },
       "for-competence": "l'competenze {competence}",
-      "next-level-info": "{ remainingPixToNextLevel } pix prima del livello { level }",
+      "next-level-info": "{ remainingPixToNextLevel } pix al livello { level }",
       "title": "Competenza",
       "tutorials": {
         "description": "Ecco una selezione di tutorial per aiutarvi a guadagnare Pix.",
@@ -1441,23 +1441,23 @@
           "text": "Per saperne di più",
           "url": "https://pix.fr/actualites/decouvrez-votre-nouveau-tableau-de-bord"
         },
-        "message": "<h2>Ciao, scopri la tua dashboard.</h2><p>Accedi rapidamente e facilmente ai tuoi corsi e ai test di competenze già iniziati.<br/>Scopri come procede il tuo punteggio Pix e controlla se il tuo profilo è pronto per la certificazione Pix.</p>"
+        "message": "<h2>Ciao, ti diamo il benvenuto nella tua dashboard!</h2><p>Accedi rapidamente e facilmente ai tuoi corsi e ai test di competenze già iniziati.<br/>Monitora i progressi del tuo punteggio Pix e controlla se il tuo profilo è pronto per la certificazione Pix.</p>"
       },
       "recommended-competences": {
         "extra-information": "Accesso a tutte le competenze consigliate",
         "profile-link": "Tutte le competenze",
-        "subtitle": "Esplorate le competenze consigliate per voi.",
+        "subtitle": "Scopri le competenze suggerite in base al tuo profilo.",
         "title": "Competenze consigliate"
       },
       "score": {
         "profile-link": "Vedi le mie competenze"
       },
       "started-competences": {
-        "subtitle": "Continuate con i tuoi test di competenze, trova gli ultimi qui.",
-        "title": "Riprendere in mano un'competenze"
+        "subtitle": "Continua a testare le tue competenze: qui trovi i test più recenti.",
+        "title": "In corso"
       },
       "title": "Home",
-      "welcome": "Ciao { firstName }."
+      "welcome": "Ciao { firstName }!"
     },
     "download-session-results": {
       "button": {
@@ -1486,13 +1486,13 @@
       }
     },
     "fill-in-campaign-code": {
-      "description": "Questo codice è composto da 9 numeri e/o lettere. Viene inviato dalla tua scuola/organizzazione e serve per iniziare un percorso o invia il tuo profilo.",
+      "description": "Questo codice è composto da 9 numeri e/o lettere. Viene fornito dalla tua scuola/organizzazione e serve per iniziare un test personalizzato o per registrare il tuo profilo.",
       "errors": {
         "forbidden": "Oops! Non riusciamo a trovarti. Controlla i tuoi dati per continuare oppure informa l'organizzatore.",
         "missing-code": "Inserisci un codice.",
         "not-found": "Il codice è errato, verificare il formato (ad esempio ABCDEF234) o contattare l'organizzatore."
       },
-      "first-title-connected": "{ firstName }, inserisci il codice",
+      "first-title-connected": "{ firstName }, inserisci il tuo codice",
       "first-title-not-connected": "Inserisci il tuo codice",
       "label": "Inserisci il tuo codice per iniziare",
       "mediacentre-start-campaign-modal": {
@@ -1505,10 +1505,10 @@
         "organised-by": "proposto da",
         "title": "Accesso al percorso tramite Mediacentre"
       },
-      "start": "Accedi al percorso",
+      "start": "Accedi",
       "title": "Ho un codice",
       "warning-message": "Non sei { firstName } { lastName }?",
-      "warning-message-logout": "Disconnetti"
+      "warning-message-logout": "Esci"
     },
     "fill-in-certificate-verification-code": {
       "description": "La certificazione Pix attesta un livello di competenza digitale: inserisci il \"codice di verifica\" del certificato Pix che si desidera controlla qui sotto.",
@@ -1946,7 +1946,7 @@
           "no-level": "Competenza non avviata"
         }
       },
-      "description": "Mettiti alla prova con i tuoi ritmi in 16 competenze digitali. Scegli una competenza e inizia a guadagnare pix.",
+      "description": "Allenati e mettiti alla prova in 16 competenze digitali, seguendo i tuoi tempi. Scegli una competenza e inizia a guadagnare Pix.",
       "first-title": "Hai 16 competenze da testare.'<br>'Concentrati e parti!",
       "resume-campaign-banner": {
         "accessibility": {
@@ -1964,7 +1964,7 @@
       },
       "title": "Competenze",
       "total-score-helper": {
-        "explanation": "'<p>'Questo è il numero massimo di pix che saremo in grado di raggiungere quando tutti gli 8 livelli del repository Pix saranno disponibili.'</p><p>'Oggi,'<span class=\"hexagon-score-information__text--strong\">'il massimo è {maxReachablePixScore} pix'</span>', corrispondente al livello {maxReachableLevel}.'</p>'",
+        "explanation": "'<p>'Questo è il punteggio pix massimo che sarà possibile raggiungere quando tutti gli 8 livelli del repository pix saranno disponibili.'</p><p>'Oggi, '<span class=\"hexagon-score-information__text--strong\">'il massimo è {maxReachablePixScore} pix'</span>', corrispondente al livello {maxReachableLevel}.'</p>'",
         "icon": "Informazioni sui pix",
         "label": "Apri il tooltip",
         "title": "Perché 1024 pix?"
@@ -2101,7 +2101,7 @@
     },
     "sign-in": {
       "actions": {
-        "submit": "Voglio accedere"
+        "submit": "Accedi"
       },
       "fields": {
         "legend": "Informazioni necessarie per l'accesso.",
@@ -2113,7 +2113,7 @@
           "label": "Password"
         }
       },
-      "first-title": "Accedere a",
+      "first-title": "Accedi",
       "forgotten-password": "Hai dimenticato la password?",
       "title": "Connessione"
     },
@@ -2507,7 +2507,7 @@
       "title": "I miei corsi di formazione"
     },
     "user-tutorials": {
-      "description": "Migliorate le tue competenze digitali con esercitazioni adatte al tuo livello.",
+      "description": "Migliora le tue competenze digitali grazie ai tutorial suggeriti dalla community degli utenti Pix.",
       "empty-list-info": {
         "description": {
           "part1": "Durante lo svolgimento dei test, ti verranno suggerite delle esercitazioni: fate clic sull'icona del segnalibro",
@@ -2538,7 +2538,7 @@
       },
       "recommended": "Consigliati",
       "recommended-empty": {
-        "description": "Per consigliare le esercitazioni adatte al tuo livello, è necessario avviare un test delle competenze.",
+        "description": "Per ottenere tutorial adatti al tuo livello, devi prima iniziare un test.",
         "link": "Inizia",
         "title": "{firstName}, trova i tuoi tutorial preferiti qui"
       },
