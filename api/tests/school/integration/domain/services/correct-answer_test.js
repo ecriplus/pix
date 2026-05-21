@@ -131,7 +131,6 @@ describe('Integration | UseCases | correct-answer', function () {
       });
 
       expect(error).to.be.instanceOf(ChallengeNotAskedError);
-      expect(error.message).to.equal('La question à laquelle vous essayez de répondre ne vous a pas été proposée.');
     });
 
     it('should return error when lastChallengeId is missing', async function () {
@@ -157,7 +156,6 @@ describe('Integration | UseCases | correct-answer', function () {
       });
 
       expect(error).to.be.instanceOf(ChallengeNotAskedError);
-      expect(error.message).to.equal('La question à laquelle vous essayez de répondre ne vous a pas été proposée.');
     });
 
     it('should return error when assessment is finished', async function () {

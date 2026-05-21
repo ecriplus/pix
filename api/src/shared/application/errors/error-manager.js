@@ -7,6 +7,7 @@ const NOT_FOUND_ERRORS = [
   SharedDomainErrors.UserNotFoundError,
   SharedDomainErrors.OrganizationNotFoundError,
   SharedDomainErrors.CampaignCodeError,
+  SharedDomainErrors.CertificationCandidateByPersonalInfoNotFoundError,
 ];
 
 const FORBIDDEN_ERRORS = [
@@ -28,6 +29,10 @@ const FORBIDDEN_ERRORS = [
   SharedDomainErrors.CandidateNotAuthorizedToJoinSessionError,
   SharedDomainErrors.CandidateNotAuthorizedToResumeCertificationTestError,
   SharedDomainErrors.CertificationCandidateOnFinalizedSessionError,
+  SharedDomainErrors.UserNotAuthorizedToAccessEntityError,
+  SharedDomainErrors.UserAlreadyLinkedToCandidateInSessionError,
+  SharedDomainErrors.UserNotAuthorizedToCertifyError,
+  SharedDomainErrors.ApplicationScopeNotAllowedError,
 ];
 
 const CONFLICT_ERRORS = [
@@ -42,6 +47,8 @@ const CONFLICT_ERRORS = [
   SharedDomainErrors.DeletedError,
   SharedDomainErrors.CertificationEndedByFinalizationError,
   SharedDomainErrors.MultipleOrganizationLearnersWithDifferentNationalStudentIdError,
+  SharedDomainErrors.ChallengeNotAskedError,
+  SharedDomainErrors.CertificationCandidateByPersonalInfoTooManyMatchesError,
 ];
 
 const PRECONDITION_FAILED_ERRORS = [
@@ -84,6 +91,12 @@ const BAD_REQUEST_ERRORS = [
   SharedDomainErrors.UserOrgaSettingsCreationError,
   SharedDomainErrors.AutonomousCourseRequiresATargetProfileWithSimplifiedAccessError,
   SharedDomainErrors.TargetProfileRequiresToBeLinkedToAutonomousCourseOrganization,
+  SharedDomainErrors.CertificationCandidatePersonalInfoFieldMissingError,
+  SharedDomainErrors.CertificationCandidatePersonalInfoWrongFormat,
+  SharedDomainErrors.CertificationCenterMembershipCreationError,
+  SharedDomainErrors.SendingEmailToInvalidDomainError,
+  SharedDomainErrors.SendingEmailToInvalidEmailAddressError,
+  SharedDomainErrors.AssessmentEndedError,
 ];
 
 const UNPROCESSABLE_ENTITY_ERRORS = [
@@ -106,6 +119,7 @@ const UNAUTHORIZED_ERRORS = [
   SharedDomainErrors.InvalidResultRecipientTokenError,
   SharedDomainErrors.InvalidTemporaryKeyError,
   SharedDomainErrors.AccountRecoveryDemandExpired,
+  SharedDomainErrors.ApplicationWithInvalidCredentialsError,
 ];
 
 const SERVICE_UNAVAILABLE_ERRORS = [
@@ -114,56 +128,6 @@ const SERVICE_UNAVAILABLE_ERRORS = [
 ];
 
 export function mapToHttpError(error) {
-  // Special cases: hardcoded messages or non-standard patterns
-  if (error instanceof SharedDomainErrors.UserNotAuthorizedToAccessEntityError) {
-    return new HttpErrors.ForbiddenError('Utilisateur non autorisé à accéder à la ressource');
-  }
-  if (error instanceof SharedDomainErrors.UserAlreadyLinkedToCandidateInSessionError) {
-    return new HttpErrors.ForbiddenError("L'utilisateur est déjà lié à un candidat dans cette session.");
-  }
-  if (error instanceof SharedDomainErrors.ApplicationWithInvalidCredentialsError) {
-    return new HttpErrors.UnauthorizedError('The client ID and/or secret are invalid.');
-  }
-
-  if (error instanceof SharedDomainErrors.ChallengeNotAskedError) {
-    return new HttpErrors.ConflictError('This challenge has not been asked to the user.');
-  }
-  if (error instanceof SharedDomainErrors.CertificationCandidateByPersonalInfoNotFoundError) {
-    return new HttpErrors.NotFoundError(
-      "Aucun candidat de certification ne correspond aux informations d'identité fournies.",
-    );
-  }
-  if (error instanceof SharedDomainErrors.CertificationCandidateByPersonalInfoTooManyMatchesError) {
-    return new HttpErrors.ConflictError(
-      "Plus d'un candidat de certification correspondent aux informations d'identité fournies.",
-    );
-  }
-  if (error instanceof SharedDomainErrors.CertificationCandidatePersonalInfoFieldMissingError) {
-    return new HttpErrors.BadRequestError("Un ou plusieurs champs d'informations d'identité sont manquants.");
-  }
-  if (error instanceof SharedDomainErrors.CertificationCandidatePersonalInfoWrongFormat) {
-    return new HttpErrors.BadRequestError("Un ou plusieurs champs d'informations d'identité sont au mauvais format.");
-  }
-  if (error instanceof SharedDomainErrors.CertificationCenterMembershipCreationError) {
-    return new HttpErrors.BadRequestError("Le membre ou le centre de certification n'existe pas.");
-  }
-  if (error instanceof SharedDomainErrors.UserNotAuthorizedToCertifyError) {
-    return new HttpErrors.ForbiddenError('The user cannot be certified.');
-  }
-  if (error instanceof SharedDomainErrors.ApplicationScopeNotAllowedError) {
-    return new HttpErrors.ForbiddenError('The scope is not allowed.');
-  }
-  if (error instanceof SharedDomainErrors.AssessmentEndedError) {
-    return new HttpErrors.BaseHttpError(error.message);
-  }
-  if (error instanceof SharedDomainErrors.SendingEmailToInvalidDomainError) {
-    return new HttpErrors.BadRequestError(error.message, 'SENDING_EMAIL_TO_INVALID_DOMAIN');
-  }
-  if (error instanceof SharedDomainErrors.SendingEmailToInvalidEmailAddressError) {
-    return new HttpErrors.BadRequestError(error.message, 'SENDING_EMAIL_TO_INVALID_EMAIL_ADDRESS', error.meta);
-  }
-
-  // Standard mapping by HTTP error type
   if (NOT_FOUND_ERRORS.some((E) => error instanceof E))
     return new HttpErrors.NotFoundError(error.message, error.code, error.meta);
   if (FORBIDDEN_ERRORS.some((E) => error instanceof E))

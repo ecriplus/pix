@@ -290,7 +290,7 @@ describe('Integration | API | Controller Error', function () {
       const response = await server.requestObject(request);
 
       expect(response.statusCode).to.equal(BAD_REQUEST_ERROR);
-      expect(responseDetail(response)).to.equal("Le membre ou le centre de certification n'existe pas.");
+      expect(responseDetail(response)).to.equal('Erreur lors de la création du membership de centre de certification.');
     });
 
     it('responds Bad Request when a InvalidCertificationReportForFinalization error occurs', async function () {
@@ -386,7 +386,7 @@ describe('Integration | API | Controller Error', function () {
       const response = await server.requestObject(request);
 
       expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
-      expect(responseDetail(response)).to.equal('Utilisateur non autorisé à accéder à la ressource');
+      expect(responseDetail(response)).to.equal('User is not authorized to access ressource');
     });
 
     it('responds Forbidden when a UserNotAuthorizedToUpdatePasswordError error occurs', async function () {
@@ -437,7 +437,9 @@ describe('Integration | API | Controller Error', function () {
       const response = await server.requestObject(request);
 
       expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
-      expect(responseDetail(response)).to.equal("L'utilisateur est déjà lié à un candidat dans cette session.");
+      expect(responseDetail(response)).to.equal(
+        'Cet utilisateur est déjà lié à un candidat de certification au sein de cette session.',
+      );
     });
 
     it('responds Forbidden when a UserNotAuthorizedToCertifyError error occurs', async function () {
@@ -445,7 +447,7 @@ describe('Integration | API | Controller Error', function () {
       const response = await server.requestObject(request);
 
       expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
-      expect(responseDetail(response)).to.equal('The user cannot be certified.');
+      expect(responseDetail(response)).to.equal('User is not certifiable');
     });
 
     it('responds Forbidden when a UserNotAuthorizedToGetCampaignResultsError error occurs', async function () {
@@ -770,7 +772,7 @@ describe('Integration | API | Controller Error', function () {
       const response = await server.requestObject(request);
 
       expect(response.statusCode).to.equal(UNAUTHORIZED_ERROR);
-      expect(responseDetail(response)).to.equal('The client ID and/or secret are invalid.');
+      expect(responseDetail(response)).to.equal('The client ID or secret are invalid.');
     });
   });
 

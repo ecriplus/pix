@@ -112,7 +112,7 @@ class CandidateAlreadyLinkedToUserError extends DomainError {
 }
 
 class CertificationCandidateByPersonalInfoNotFoundError extends DomainError {
-  constructor(message = "Aucun candidat de certification n'a été trouvé avec ces informations.") {
+  constructor(message = "Aucun candidat de certification ne correspond aux informations d'identité fournies.") {
     super(message);
   }
 }
@@ -126,7 +126,7 @@ class CsvImportError extends DomainError {
 }
 
 class CertificationCandidateByPersonalInfoTooManyMatchesError extends DomainError {
-  constructor(message = "Plus d'un candidat de certification a été trouvé avec ces informations.") {
+  constructor(message = "Plus d'un candidat de certification correspondent aux informations d'identité fournies.") {
     super(message);
   }
 }
@@ -138,13 +138,13 @@ class CertificationCandidateDeletionError extends DomainError {
 }
 
 class CertificationCandidatePersonalInfoFieldMissingError extends DomainError {
-  constructor(message = 'Information obligatoire manquante du candidat de certification.') {
+  constructor(message = "Un ou plusieurs champs d'informations d'identité sont manquants.") {
     super(message);
   }
 }
 
 class CertificationCandidatePersonalInfoWrongFormat extends DomainError {
-  constructor(message = 'Information transmise par le candidat de certification au mauvais format.') {
+  constructor(message = "Un ou plusieurs champs d'informations d'identité sont au mauvais format.") {
     super(message);
   }
 }
@@ -183,7 +183,7 @@ class ChallengeAlreadyAnsweredError extends DomainError {
 }
 
 class ChallengeNotAskedError extends DomainError {
-  constructor(message = 'La question à laquelle vous essayez de répondre ne vous a pas été proposée.') {
+  constructor(message = 'This challenge has not been asked to the user.') {
     super(message);
   }
 }
@@ -588,7 +588,7 @@ class ApplicationWithInvalidCredentialsError extends DomainError {
 }
 
 class ApplicationScopeNotAllowedError extends DomainError {
-  constructor(message = 'The scope is invalid.') {
+  constructor(message = 'The scope is not allowed.') {
     super(message);
   }
 }
@@ -767,14 +767,14 @@ class SendingEmailError extends DomainError {
 class SendingEmailToInvalidDomainError extends DomainError {
   constructor(emailAddress) {
     super(`Failed to send email to "${emailAddress}" because domain seems to be invalid.`);
-    this.code = 'INVALID_EMAIL_DOMAIN';
+    this.code = 'SENDING_EMAIL_TO_INVALID_DOMAIN';
   }
 }
 
 class SendingEmailToInvalidEmailAddressError extends DomainError {
   constructor(emailAddress, errorMessage) {
     super(`Failed to send email to "${emailAddress}" because email address seems to be invalid.`);
-    this.code = 'INVALID_EMAIL_ADDRESS_FORMAT';
+    this.code = 'SENDING_EMAIL_TO_INVALID_EMAIL_ADDRESS';
     this.meta = {
       emailAddress,
       errorMessage,
