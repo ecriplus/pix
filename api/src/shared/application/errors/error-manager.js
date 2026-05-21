@@ -1,6 +1,5 @@
 import { AdminMemberError } from '../../../authorization/domain/errors.js';
 import { AlreadyRatedAssessmentError, EmptyAnswerError } from '../../../evaluation/domain/errors.js';
-import * as LLMDomainErrors from '../../../llm/domain/errors.js';
 import {
   ArchiveOrganizationError,
   UnableToAttachChildOrganizationToParentOrganizationError,
@@ -18,7 +17,6 @@ const NOT_FOUND_ERRORS = [
   SharedDomainErrors.UserNotFoundError,
   SharedDomainErrors.OrganizationNotFoundError,
   SharedDomainErrors.CampaignCodeError,
-  LLMDomainErrors.ChatNotFoundError,
 ];
 
 const FORBIDDEN_ERRORS = [
@@ -41,8 +39,6 @@ const FORBIDDEN_ERRORS = [
   SharedDomainErrors.CandidateNotAuthorizedToResumeCertificationTestError,
   SharedDomainErrors.CertificationCandidateOnFinalizedSessionError,
   UserHasNoOrganizationMembershipError,
-  LLMDomainErrors.MaxPromptsReachedError,
-  LLMDomainErrors.ChatForbiddenError,
 ];
 
 const CONFLICT_ERRORS = [
@@ -59,7 +55,6 @@ const CONFLICT_ERRORS = [
   SharedDomainErrors.MultipleOrganizationLearnersWithDifferentNationalStudentIdError,
   UnableToAttachChildOrganizationToParentOrganizationError,
   AlreadyAcceptedOrCancelledInvitationError,
-  LLMDomainErrors.PromptAlreadyOngoingError,
 ];
 
 const PRECONDITION_FAILED_ERRORS = [
@@ -103,10 +98,6 @@ const BAD_REQUEST_ERRORS = [
   SharedDomainErrors.AutonomousCourseRequiresATargetProfileWithSimplifiedAccessError,
   SharedDomainErrors.TargetProfileRequiresToBeLinkedToAutonomousCourseOrganization,
   EmptyAnswerError,
-  LLMDomainErrors.ConfigurationNotFoundError,
-  LLMDomainErrors.NoUserIdProvidedError,
-  LLMDomainErrors.NoAttachmentNeededError,
-  LLMDomainErrors.NoAttachmentNorMessageProvidedError,
 ];
 
 const UNPROCESSABLE_ENTITY_ERRORS = [
@@ -136,12 +127,7 @@ const UNAUTHORIZED_ERRORS = [
 const SERVICE_UNAVAILABLE_ERRORS = [
   SharedDomainErrors.SendingEmailError,
   SharedDomainErrors.InvalidExternalAPIResponseError,
-  LLMDomainErrors.LLMApiError,
 ];
-
-const INTERNAL_SERVER_ERRORS = [LLMDomainErrors.IncorrectMessagesOrderingError];
-
-const PAYLOAD_TOO_LARGE_ERRORS = [LLMDomainErrors.TooLargeMessageInputError];
 
 export function mapToHttpError(error) {
   // Special cases: hardcoded messages or non-standard patterns
@@ -212,9 +198,6 @@ export function mapToHttpError(error) {
     return new HttpErrors.UnauthorizedError(error.message, error.code, error.meta);
   if (SERVICE_UNAVAILABLE_ERRORS.some((E) => error instanceof E))
     return new HttpErrors.ServiceUnavailableError(error.message);
-  if (INTERNAL_SERVER_ERRORS.some((E) => error instanceof E)) return new HttpErrors.InternalServerError(error.message);
-  if (PAYLOAD_TOO_LARGE_ERRORS.some((E) => error instanceof E))
-    return new HttpErrors.PayloadTooLargeError(error.message, error.code, error.meta);
 
   return new HttpErrors.BaseHttpError(error.message);
 }
