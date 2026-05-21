@@ -33,7 +33,7 @@ export default class Tube extends Component {
   }
 
   get selectedLevel() {
-    return this.args.selectedTubeLevels[this.args.tube.id];
+    return this.args.selectedTubeLevels.get(this.args.tube.id);
   }
 
   @action

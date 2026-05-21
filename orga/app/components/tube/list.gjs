@@ -15,7 +15,7 @@ import Thematic from './thematic';
 import Tube from './tube';
 
 export default class TubeList extends Component {
-  @tracked selectedTubeLevels = {};
+  @tracked selectedTubeLevels = new Map();
   @service pixMetrics;
 
   @action
@@ -34,17 +34,18 @@ export default class TubeList extends Component {
 
   @action
   selectTube(tube) {
-    this.selectedTubeLevels = { ...this.selectedTubeLevels, [tube.id]: null };
+    this.selectedTubeLevels = this.selectedTubeLevels.set(tube.id, null);
   }
 
   @action
   unselectTube(tube) {
-    delete this.selectedTubeLevels[tube.id];
+    this.selectedTubeLevels.delete(tube.id);
+    this.selectedTubeLevels = new Map(this.selectedTubeLevels);
   }
 
   @action
   setTubeLevel(tubeId, level) {
-    this.selectedTubeLevels = { ...this.selectedTubeLevels, [tubeId]: parseInt(level) };
+    this.selectedTubeLevels = this.selectedTubeLevels.set(tubeId, parseInt(level));
   }
 
   getThematicState = (thematic) => {
@@ -61,15 +62,15 @@ export default class TubeList extends Component {
   };
 
   isTubeSelected = (tube) => {
-    return Object.prototype.hasOwnProperty.call(this.selectedTubeLevels, tube.id);
+    return this.selectedTubeLevels.has(tube.id);
   };
 
   get haveNoTubeSelected() {
-    return Object.keys(this.selectedTubeLevels).length === 0;
+    return this.selectedTubeLevels.size === 0;
   }
 
   get numberOfTubesSelected() {
-    return Object.keys(this.selectedTubeLevels).length;
+    return this.selectedTubeLevels.size;
   }
 
   get file() {
@@ -82,7 +83,7 @@ export default class TubeList extends Component {
               .map((tube) => ({
                 id: tube.id,
                 frameworkId: framework.id,
-                level: this.selectedTubeLevels[tube.id],
+                level: this.selectedTubeLevels.get(tube.id) ?? null,
               }));
           });
         });
