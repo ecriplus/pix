@@ -14,7 +14,7 @@ const getItemType = (type) =>
 export default class RequirementTag extends Component {
   @action
   onRemove() {
-    this.args.onRemove?.({ type: this.args.type, value: this.args.value });
+    this.args.onRemove?.({ type: this.args.requirement.type, value: this.args.requirement.value });
   }
 
   get displayRemoveButton() {
@@ -22,26 +22,34 @@ export default class RequirementTag extends Component {
   }
 
   <template>
-    <PixTag @color={{getItemColor @type}} @displayRemoveButton={{this.displayRemoveButton}} @onRemove={{this.onRemove}}>
-      {{#if (eq @type "evaluation")}}
+    <PixTag
+      @color={{getItemColor @requirement.type}}
+      @displayRemoveButton={{this.displayRemoveButton}}
+      @onRemove={{this.onRemove}}
+    >
+      {{#if (eq @requirement.type "evaluation")}}
         <LinkTo
           @route="authenticated.target-profiles.target-profile.details"
-          @model={{@value}}
+          @model={{@requirement.value}}
           target="_blank"
           rel="noopener noreferrer"
         >
-          {{t (getItemType @type)}}
+          {{t (getItemType @requirement.type)}}
           -
-          {{@value}}
+          {{@requirement.value}}
           -
-          {{@label}}</LinkTo>
+          {{@requirement.label}}</LinkTo>
       {{else}}
-        <a target="_blank" rel="noopener noreferrer" href="https://app.recette.pix.fr/modules/{{@value}}/slug/details">
-          {{t (getItemType @type)}}
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://app.recette.pix.fr/modules/{{@requirement.shortId}}/slug/details"
+        >
+          {{t (getItemType @requirement.type)}}
           -
-          {{@value}}
+          {{@requirement.shortId}}
           -
-          {{@label}}
+          {{@requirement.label}}
         </a>
       {{/if}}
     </PixTag>
