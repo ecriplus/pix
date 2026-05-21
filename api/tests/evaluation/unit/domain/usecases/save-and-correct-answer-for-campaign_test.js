@@ -1,11 +1,14 @@
 import sinon from 'sinon';
 
-import { EmptyAnswerError } from '../../../../../src/evaluation/domain/errors.js';
 import * as correctionService from '../../../../../src/evaluation/domain/services/correction-service.js';
 import { saveAndCorrectAnswerForCampaign } from '../../../../../src/evaluation/domain/usecases/save-and-correct-answer-for-campaign.js';
 import { AnswerJob } from '../../../../../src/quest/domain/models/AnwserJob.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
-import { ChallengeAlreadyAnsweredError, ChallengeNotAskedError } from '../../../../../src/shared/domain/errors.js';
+import {
+  ChallengeAlreadyAnsweredError,
+  ChallengeNotAskedError,
+  EmptyAnswerError,
+} from '../../../../../src/shared/domain/errors.js';
 import { ForbiddenAccess } from '../../../../../src/shared/domain/errors.js';
 import { AnswerStatus } from '../../../../../src/shared/domain/models/AnswerStatus.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';

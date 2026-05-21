@@ -1,11 +1,5 @@
 import { DomainError } from '../../shared/domain/errors.js';
 
-class EmptyAnswerError extends DomainError {
-  constructor(message = 'The answer value cannot be empty', code = 'ANSWER_CANNOT_BE_EMPTY') {
-    super(message, code);
-  }
-}
-
 class ImproveCompetenceEvaluationForbiddenError extends DomainError {
   constructor(message = 'Le niveau maximum est déjà atteint pour cette compétence.') {
     super(message);
@@ -32,7 +26,7 @@ class AnswerEvaluationError extends DomainError {
 }
 
 class AlreadyRatedAssessmentError extends DomainError {
-  constructor(message = 'Cette évaluation a déjà été évaluée.') {
+  constructor(message = 'Assessment is already rated.') {
     super(message);
   }
 }
@@ -42,6 +36,5 @@ export {
   AlreadyRatedAssessmentError,
   AnswerEvaluationError,
   CompetenceResetError,
-  EmptyAnswerError,
   ImproveCompetenceEvaluationForbiddenError,
 };

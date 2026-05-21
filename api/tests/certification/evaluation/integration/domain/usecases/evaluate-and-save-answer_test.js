@@ -1,11 +1,11 @@
 import { usecases } from '../../../../../../src/certification/evaluation/domain/usecases/index.js';
 import { CertificationChallengeLiveAlertStatus } from '../../../../../../src/certification/shared/domain/models/CertificationChallengeLiveAlert.js';
-import { EmptyAnswerError } from '../../../../../../src/evaluation/domain/errors.js';
 import {
   CertificationEndedByFinalizationError,
   CertificationEndedByInvigilatorError,
   ChallengeAlreadyAnsweredError,
   ChallengeNotAskedError,
+  EmptyAnswerError,
   ForbiddenAccess,
   NotFoundError,
 } from '../../../../../../src/shared/domain/errors.js';

@@ -1,10 +1,10 @@
-import { EmptyAnswerError } from '../../../../evaluation/domain/errors.js';
 import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.js';
 import {
   CertificationEndedByFinalizationError,
   CertificationEndedByInvigilatorError,
   ChallengeAlreadyAnsweredError,
   ChallengeNotAskedError,
+  EmptyAnswerError,
   ForbiddenAccess,
   NotFoundError,
 } from '../../../../shared/domain/errors.js';

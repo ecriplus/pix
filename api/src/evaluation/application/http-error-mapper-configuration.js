@@ -1,19 +1,13 @@
 import { HttpErrors } from '../../shared/application/errors/http-errors.js';
 import {
   AcquiredBadgeForbiddenUpdateError,
+  AlreadyRatedAssessmentError,
   AnswerEvaluationError,
   CompetenceResetError,
-  EmptyAnswerError,
   ImproveCompetenceEvaluationForbiddenError,
 } from '../domain/errors.js';
 
 const evaluationDomainErrorMappingConfiguration = [
-  {
-    name: EmptyAnswerError.name,
-    httpErrorFn: (error) => {
-      return new HttpErrors.BadRequestError(error.message, error.code);
-    },
-  },
   {
     name: ImproveCompetenceEvaluationForbiddenError.name,
     httpErrorFn: (error) => {
@@ -36,6 +30,12 @@ const evaluationDomainErrorMappingConfiguration = [
     name: AnswerEvaluationError.name,
     httpErrorFn: (error) => {
       return new HttpErrors.InternalServerError(error.message);
+    },
+  },
+  {
+    name: AlreadyRatedAssessmentError.name,
+    httpErrorFn: (error) => {
+      return new HttpErrors.PreconditionFailedError(error.message);
     },
   },
 ];
