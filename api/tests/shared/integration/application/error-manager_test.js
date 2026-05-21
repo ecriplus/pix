@@ -13,10 +13,7 @@ import {
 } from '../../../../src/identity-access-management/domain/errors.js';
 import { SiecleXmlImportError } from '../../../../src/prescription/learner-management/domain/errors.js';
 import * as DomainErrors from '../../../../src/shared/domain/errors.js';
-import {
-  UserHasNoOrganizationMembershipError,
-  UserNotMemberOfOrganizationError,
-} from '../../../../src/team/domain/errors.js';
+import { UserNotMemberOfOrganizationError } from '../../../../src/team/domain/errors.js';
 import { expect } from '../../../test-helper.js';
 import { HttpTestServer } from '../../../tooling/server/http-test-server.js';
 
@@ -503,16 +500,6 @@ describe('Integration | API | Controller Error', function () {
 
       expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
       expect(responseDetail(response)).to.equal("L'invitation à cette organisation a été annulée.");
-      expect(responseTitle(response)).to.equal('Forbidden');
-    });
-
-    it('responds Forbidden when a UserHasNoOrganizationMembershipError error occurs', async function () {
-      routeHandler.throws(new UserHasNoOrganizationMembershipError());
-      const response = await server.requestObject(request);
-
-      expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
-      expect(responseDetail(response)).to.equal('User is not member of any organization');
-      expect(responseCode(response)).to.equal('USER_HAS_NO_ORGANIZATION_MEMBERSHIP');
       expect(responseTitle(response)).to.equal('Forbidden');
     });
   });

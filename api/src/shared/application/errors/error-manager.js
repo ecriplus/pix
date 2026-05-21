@@ -1,5 +1,5 @@
 import { AdminMemberError } from '../../../authorization/domain/errors.js';
-import { UserHasNoOrganizationMembershipError, UserNotMemberOfOrganizationError } from '../../../team/domain/errors.js';
+import { UserNotMemberOfOrganizationError } from '../../../team/domain/errors.js';
 import * as SharedDomainErrors from '../../domain/errors.js';
 import { HttpErrors } from './http-errors.js';
 
@@ -29,7 +29,6 @@ const FORBIDDEN_ERRORS = [
   SharedDomainErrors.CandidateNotAuthorizedToJoinSessionError,
   SharedDomainErrors.CandidateNotAuthorizedToResumeCertificationTestError,
   SharedDomainErrors.CertificationCandidateOnFinalizedSessionError,
-  UserHasNoOrganizationMembershipError,
 ];
 
 const CONFLICT_ERRORS = [

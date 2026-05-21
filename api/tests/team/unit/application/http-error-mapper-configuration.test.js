@@ -5,6 +5,7 @@ import {
   AlreadyExistingAdminMemberError,
   OrganizationArchivedError,
   UncancellableOrganizationInvitationError,
+  UserHasNoOrganizationMembershipError,
 } from '../../../../src/team/domain/errors.js';
 import { expect } from '../../../test-helper.js';
 
@@ -61,5 +62,19 @@ describe('Unit | Team | Application | HttpErrorMapperConfiguration', function ()
     //then
     expect(error).to.be.instanceOf(HttpErrors.ConflictError);
     expect(error.message).to.equal('The invitation has already been accepted or cancelled');
+  });
+
+  it('instantiates ForbiddenError when UserHasNoOrganizationMembershipError', async function () {
+    //given
+    const httpErrorMapper = teamDomainErrorMappingConfiguration.find(
+      (httpErrorMapper) => httpErrorMapper.name === UserHasNoOrganizationMembershipError.name,
+    );
+
+    //when
+    const error = httpErrorMapper.httpErrorFn(new UserHasNoOrganizationMembershipError());
+
+    //then
+    expect(error).to.be.instanceOf(HttpErrors.ForbiddenError);
+    expect(error.message).to.equal('User is not member of any organization');
   });
 });

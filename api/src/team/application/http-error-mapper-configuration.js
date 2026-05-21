@@ -4,6 +4,7 @@ import {
   AlreadyExistingAdminMemberError,
   OrganizationArchivedError,
   UncancellableOrganizationInvitationError,
+  UserHasNoOrganizationMembershipError,
 } from '../domain/errors.js';
 
 const teamDomainErrorMappingConfiguration = [
@@ -22,6 +23,10 @@ const teamDomainErrorMappingConfiguration = [
   {
     name: AlreadyAcceptedOrCancelledInvitationError.name,
     httpErrorFn: (error) => new HttpErrors.ConflictError(error.message, error.code, error.meta),
+  },
+  {
+    name: UserHasNoOrganizationMembershipError.name,
+    httpErrorFn: (error) => new HttpErrors.ForbiddenError(error.message, error.code, error.meta),
   },
 ];
 
