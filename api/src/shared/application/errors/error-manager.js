@@ -1,5 +1,4 @@
 import { AdminMemberError } from '../../../authorization/domain/errors.js';
-import { EmptyAnswerError } from '../../../evaluation/domain/errors.js';
 import {
   ArchiveOrganizationError,
   UnableToAttachChildOrganizationToParentOrganizationError,
@@ -97,7 +96,6 @@ const BAD_REQUEST_ERRORS = [
   SharedDomainErrors.UserOrgaSettingsCreationError,
   SharedDomainErrors.AutonomousCourseRequiresATargetProfileWithSimplifiedAccessError,
   SharedDomainErrors.TargetProfileRequiresToBeLinkedToAutonomousCourseOrganization,
-  EmptyAnswerError,
 ];
 
 const UNPROCESSABLE_ENTITY_ERRORS = [

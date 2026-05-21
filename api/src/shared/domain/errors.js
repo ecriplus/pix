@@ -1059,6 +1059,12 @@ class FeatureDisabledError extends DomainError {
   }
 }
 
+class EmptyAnswerError extends DomainError {
+  constructor(message = 'The answer value cannot be empty', code = 'ANSWER_CANNOT_BE_EMPTY') {
+    super(message, code);
+  }
+}
+
 export {
   AccountRecoveryDemandExpired,
   AccountRecoveryUserAlreadyConfirmEmail,
@@ -1114,6 +1120,7 @@ export {
   DeprecatedCertificationIssueReportSubcategoryError,
   DomainError,
   EmailModificationDemandNotFoundOrExpiredError,
+  EmptyAnswerError,
   EntityValidationError,
   FeatureDisabledError,
   FileValidationError,

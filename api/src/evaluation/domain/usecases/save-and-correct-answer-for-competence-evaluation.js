@@ -1,9 +1,8 @@
 import { AnswerJob } from '../../../quest/domain/models/AnwserJob.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
-import { ChallengeAlreadyAnsweredError, ForbiddenAccess } from '../../../shared/domain/errors.js';
+import { ChallengeAlreadyAnsweredError, EmptyAnswerError, ForbiddenAccess } from '../../../shared/domain/errors.js';
 import { ChallengeNotAskedError } from '../../../shared/domain/errors.js';
 import { KnowledgeElement } from '../../../shared/domain/models/KnowledgeElement.js';
-import { EmptyAnswerError } from '../errors.js';
 
 export async function saveAndCorrectAnswerForCompetenceEvaluation({
   answer,

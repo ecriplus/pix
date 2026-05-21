@@ -4,17 +4,10 @@ import {
   AlreadyRatedAssessmentError,
   AnswerEvaluationError,
   CompetenceResetError,
-  EmptyAnswerError,
   ImproveCompetenceEvaluationForbiddenError,
 } from '../domain/errors.js';
 
 const evaluationDomainErrorMappingConfiguration = [
-  {
-    name: EmptyAnswerError.name,
-    httpErrorFn: (error) => {
-      return new HttpErrors.BadRequestError(error.message, error.code);
-    },
-  },
   {
     name: ImproveCompetenceEvaluationForbiddenError.name,
     httpErrorFn: (error) => {
