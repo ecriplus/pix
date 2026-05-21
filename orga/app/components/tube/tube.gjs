@@ -98,11 +98,23 @@ export default class Tube extends Component {
           (t 'pages.preselect-target-profile.table.not-responsive')
         }}"
       >
-        <PixIcon
-          @name="{{if @tube.isMobileCompliant 'mobile' 'mobileOff'}}"
-          class="{{if @tube.isMobileCompliant 'is-responsive' 'not-responsive'}}"
-        />
+        <PixTooltip @position="bottom" @isInline={{true}}>
+          <:triggerElement>
+            <PixIcon
+              @name="{{if @tube.isMobileCompliant 'mobile' 'mobileOff'}}"
+              class="{{if @tube.isMobileCompliant 'is-responsive' 'not-responsive'}}"
+            />
+          </:triggerElement>
+          <:tooltip>
+            {{#if @tube.isMobileCompliant}}
+              {{t "pages.preselect-target-profile.compatibility.mobile.yes"}}
+            {{else}}
+              {{t "pages.preselect-target-profile.compatibility.mobile.no"}}
+            {{/if}}
+          </:tooltip>
+        </PixTooltip>
       </div>
+
       <div
         class="icon-container"
         aria-label="{{if
@@ -111,10 +123,21 @@ export default class Tube extends Component {
           (t 'pages.preselect-target-profile.table.not-responsive')
         }}"
       >
-        <PixIcon
-          @name="{{if @tube.isMobileCompliant 'tablet' 'tabletOff'}}"
-          class="{{if @tube.isMobileCompliant 'is-responsive' 'not-responsive'}}"
-        />
+        <PixTooltip @position="bottom" @isInline={{true}}>
+          <:triggerElement>
+            <PixIcon
+              @name="{{if @tube.isMobileCompliant 'tablet' 'tabletOff'}}"
+              class="{{if @tube.isMobileCompliant 'is-responsive' 'not-responsive'}}"
+            />
+          </:triggerElement>
+          <:tooltip>
+            {{#if @tube.isTabletCompliant}}
+              {{t "pages.preselect-target-profile.compatibility.tablet.yes"}}
+            {{else}}
+              {{t "pages.preselect-target-profile.compatibility.tablet.no"}}
+            {{/if}}
+          </:tooltip>
+        </PixTooltip>
       </div>
     </td>
   </template>

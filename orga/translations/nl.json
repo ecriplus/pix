@@ -1603,19 +1603,29 @@
       "title": "Plaatsen"
     },
     "preselect-target-profile": {
+      "compatibility": {
+        "mobile": {
+          "no": "Niet compatibel met smartphones",
+          "yes": "Compatibel met smartphones"
+        },
+        "tablet": {
+          "no": "Niet compatibel met tablets",
+          "yes": "Compatibel met tablets"
+        }
+      },
       "download": "Downloaden selectie onderwerpen ({ numberOfTubesSelected }) (JSON, { fileSize }kB)",
       "download-filename": "selectie-onderwerpen-{ organizationName }-{ date }.json",
       "levels": {
         "label": "Selecteer het niveau van het volgende onderwerp: {title}",
         "placeholder": "Selecteer een niveau",
-        "tooltip": "De grijze niveaus zijn voor dit onderwerp niet beschikbaar."
+        "tooltip": "Er zijn geen toetsen beschikbaar voor de grijs weergegeven niveaus"
       },
       "no-tube-selected": "Downloaden selectie onderwerpen (JSON, { fileSize }kB)",
       "table": {
         "caption": "Selectie van onderwerpen",
         "column": {
           "compatibility": "Compatibiliteit",
-          "level": "Niveau",
+          "level": "Max. niveau (optioneel)",
           "name": "Onderwerp",
           "theme-name": "Thema"
         },

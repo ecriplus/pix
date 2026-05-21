@@ -1614,19 +1614,29 @@
       "title": "Places"
     },
     "preselect-target-profile": {
+      "compatibility": {
+        "mobile": {
+          "no": "Non compatible avec smartphone",
+          "yes": "Compatible avec smartphone"
+        },
+        "tablet": {
+          "no": "Non compatible avec tablette",
+          "yes": "Compatible avec tablette"
+        }
+      },
       "download": "Télécharger la sélection des sujets ({ numberOfTubesSelected }) (JSON, { fileSize }ko)",
       "download-filename": "selection-sujets-{ organizationName }-{ date }.json",
       "levels": {
         "label": "Sélection du niveau du sujet suivant : {title}",
         "placeholder": "Sélectionner un niveau",
-        "tooltip": "Les niveaux grisés ne sont pas disponibles pour ce sujet."
+        "tooltip": "Aucune épreuve disponible pour les niveaux grisés"
       },
       "no-tube-selected": "Télécharger la sélection des sujets (JSON, { fileSize }ko)",
       "table": {
         "caption": "Sélection des sujets",
         "column": {
           "compatibility": "Compatibilité",
-          "level": "Niveau",
+          "level": "Niveau max. (optionnel)",
           "name": "Sujet",
           "theme-name": "Thématique"
         },

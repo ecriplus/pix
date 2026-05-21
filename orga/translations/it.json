@@ -1612,19 +1612,29 @@
       "title": "Luoghi"
     },
     "preselect-target-profile": {
+      "compatibility": {
+        "mobile": {
+          "no": "Non compatibile con gli smartphone",
+          "yes": "Compatibile con gli smartphone"
+        },
+        "tablet": {
+          "no": "Non compatibile con tablet",
+          "yes": "Compatibile con tablet"
+        }
+      },
       "download": "Scaricare la selezione di argomenti ({ numberOfTubesSelected }) (JSON, { fileSize }ko)",
       "download-filename": "selection-subjects-{ organizationName }-{ date }.json",
       "levels": {
         "label": "Selezionare il livello del soggetto successivo: {title}",
         "placeholder": "Selezionare un livello",
-        "tooltip": "I livelli in grigio non sono disponibili per questo soggeto."
+        "tooltip": "Non sono disponibili prove per i livelli evidenziati in grigio"
       },
       "no-tube-selected": "Scaricare la selezione di argomenti (JSON, { fileSize }ko)",
       "table": {
         "caption": "Selezione dei soggetti",
         "column": {
           "compatibility": "Compatibilità",
-          "level": "Livello",
+          "level": "Livello massimo (facoltativo)",
           "name": "Soggetto",
           "theme-name": "Tema"
         },

@@ -1611,19 +1611,29 @@
       "title": "Plätze"
     },
     "preselect-target-profile": {
+      "compatibility": {
+        "mobile": {
+          "no": "Nicht mit Smartphones kompatibel",
+          "yes": "Kompatibel mit Smartphones"
+        },
+        "tablet": {
+          "no": "Nicht mit Tablets kompatibel",
+          "yes": "Kompatibel mit Tablets"
+        }
+      },
       "download": "Herunterladen der Themenauswahl ({ numberOfTubesSelected }) (JSON, { fileSize }ko)",
       "download-filename": "selection-sujets-{ organizationName }-{ date }.json",
       "levels": {
         "label": "Niveauauswahl für das folgende Thema: {title}",
         "placeholder": "Ein Niveau auswählen",
-        "tooltip": "Die ausgegrauten Stufen sind für dieses Thema derzeit nicht verfügbar."
+        "tooltip": "Für die ausgegrauten Stufen sind keine Prüfungen verfügbar"
       },
       "no-tube-selected": "Themenauswahl herunterladen (JSON, { fileSize }ko)",
       "table": {
         "caption": "Auswahl der Themen",
         "column": {
           "compatibility": "Kompatibilität",
-          "level": "Niveau",
+          "level": "Max. Niveau (optional)",
           "name": "Themas",
           "theme-name": "Themas"
         },
