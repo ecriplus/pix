@@ -115,8 +115,9 @@ export default class CombineCourseBluePrintForm extends Component {
   }
 
   @action
-  setAttestationKey(value) {
-    this.blueprint.attestationKey = value;
+  setAttestation(rewardId) {
+    this.blueprint.rewardId = rewardId;
+    this.blueprint.rewardType = 'ATTESTATION';
   }
 
   @action
@@ -245,8 +246,8 @@ export default class CombineCourseBluePrintForm extends Component {
 
         <SelectAttestation
           @attestations={{@attestations}}
-          @value={{this.blueprint.attestationKey}}
-          @onChange={{this.setAttestationKey}}
+          @value={{this.blueprint.rewardId}}
+          @onChange={{this.setAttestation}}
         />
 
       </form>

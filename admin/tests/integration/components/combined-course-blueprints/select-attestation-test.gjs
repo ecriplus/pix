@@ -32,8 +32,8 @@ module('Integration | Component | CombinedCourseBlueprints::SelectAttestation', 
   test('it should select an attestation', async function (assert) {
     const onChangeStub = sinon.stub();
     const attestations = [
-      { key: 'KEY_1', label: 'Attestation 1' },
-      { key: 'KEY_2', label: 'Attestation 2' },
+      { id: 1, key: 'KEY_1', label: 'Attestation 1' },
+      { id: 2, key: 'KEY_2', label: 'Attestation 2' },
     ];
     const screen = await render(
       <template><SelectAttestation @attestations={{attestations}} @onChange={{onChangeStub}} /></template>,
@@ -45,6 +45,6 @@ module('Integration | Component | CombinedCourseBlueprints::SelectAttestation', 
 
     await click(screen.getByRole('option', { name: 'Attestation 1' }));
 
-    assert.ok(onChangeStub.calledWithExactly('KEY_1'));
+    assert.ok(onChangeStub.calledWithExactly(1));
   });
 });
