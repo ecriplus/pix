@@ -3,7 +3,7 @@ import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 import { DescriptionList } from 'pix-admin/components/ui/description-list';
 
-import { localeCategories } from '../../models/training';
+import { localeCategories, typeCategories } from '../../models/training';
 import StateTag from './state-tag';
 
 export default class TrainingDetailsCard extends Component {
@@ -24,6 +24,10 @@ export default class TrainingDetailsCard extends Component {
     return this.args.training.type === 'modulix'
       ? `${this.url.pixAppUrl}${this.args.training.link}`
       : this.args.training.link;
+  }
+
+  get typeLabel() {
+    return typeCategories[this.args.training.type];
   }
 
   <template>
@@ -48,7 +52,7 @@ export default class TrainingDetailsCard extends Component {
         </DescriptionList.Item>
 
         <DescriptionList.Item @label={{t "pages.trainings.training.details.contentType"}}>
-          {{@training.type}}
+          {{this.typeLabel}}
         </DescriptionList.Item>
 
         <DescriptionList.Item @label={{t "pages.trainings.training.details.duration"}}>

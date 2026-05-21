@@ -31,7 +31,7 @@ module('Integration | Component | Trainings::TrainingDetailsCard', function (hoo
     assert.dom(screen.getByRole('heading', { level: 1, name: training.internalTitle })).exists();
     assert.dom(screen.getByText(training.title)).exists();
     assert.dom(screen.getByText('https://un-contenu-formatif')).exists();
-    assert.dom(screen.getByText('webinaire')).exists();
+    assert.dom(screen.getByText('Webinaire')).exists();
     assert.dom(screen.getByText('2j')).exists();
     assert.dom(screen.getByText('Franco-français (fr-fr)')).exists();
     assert.dom(screen.getByText('Un éditeur de contenu formatif')).exists();
