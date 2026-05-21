@@ -1,5 +1,4 @@
 import { CampaignParticipationStatuses } from '../../../prescription/shared/domain/constants.js';
-import { ADMIN_COMBINED_COURSE_BLUEPRINT_ITEMS } from './AdminCombinedCourseBlueprint.js';
 import { CombinedCourse } from './CombinedCourse.js';
 import { CRITERION_COMPARISONS, Quest, REQUIREMENT_COMPARISONS, REQUIREMENT_TYPES } from './Quest.js';
 import { buildRequirement } from './Requirement.js';
@@ -78,36 +77,6 @@ export class CombinedCourseBlueprint {
       },
       quest,
     );
-  }
-
-  static buildWithQuest({ adminCombinedCourseBlueprint, modulesByShortId, rewardId, rewardType }) {
-    const successRequirements = adminCombinedCourseBlueprint.content.map((requirement) => {
-      if (requirement.type === ADMIN_COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION) {
-        const requirementTargetProfileId = requirement.value;
-        return CombinedCourseBlueprint.buildRequirementForCombinedCourse({
-          targetProfileId: requirementTargetProfileId,
-        });
-      } else if (requirement.type === ADMIN_COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE) {
-        const [module] = modulesByShortId[requirement.value];
-        return CombinedCourseBlueprint.buildRequirementForCombinedCourse({
-          moduleId: module.id,
-        });
-      } else {
-        return requirement;
-      }
-    });
-
-    const quest = new Quest({
-      rewardType,
-      rewardId,
-      eligibilityRequirements: [],
-      successRequirements,
-    });
-
-    return new CombinedCourseBlueprint({
-      ...adminCombinedCourseBlueprint,
-      quest,
-    });
   }
 
   static buildRequirementForCombinedCourse({ campaignId, moduleId, targetProfileId }) {

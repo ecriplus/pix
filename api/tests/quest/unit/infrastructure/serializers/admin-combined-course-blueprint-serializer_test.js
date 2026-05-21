@@ -1,62 +1,18 @@
-import {
-  ADMIN_COMBINED_COURSE_BLUEPRINT_ITEMS,
-  AdminCombinedCourseBlueprint,
-} from '../../../../../src/quest/domain/models/AdminCombinedCourseBlueprint.js';
+import { COMBINED_COURSE_ITEM_TYPES, REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
+import { AdminCombinedCourseBlueprint } from '../../../../../src/quest/domain/models/AdminCombinedCourseBlueprint.js';
+import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
+import { Quest } from '../../../../../src/quest/domain/models/Quest.js';
 import * as adminCombinedCourseBlueprintSerializer from '../../../../../src/quest/infrastructure/serializers/admin-combined-course-blueprint-serializer.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Infrastructure | Serializers | admin-combined-course-blueprint', function () {
-  it('#serialize', function () {
-    // given
-    const adminCombinedCourseBlueprint = new AdminCombinedCourseBlueprint({
-      id: 1,
-      name: 'Mon parcours',
-      internalName: 'Mon modèle de parcours',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      illustration: '/illustrations/image.svg',
-      content: AdminCombinedCourseBlueprint.buildContentItems([
-        { moduleShortId: 'mon-module' },
-        { targetProfileId: 123 },
-      ]),
-      attestationKey: 'SIXTH_GRADE',
-      attestationLabel: '6ème',
-      organizationIds: [],
-    });
-
-    // when
-    const serializedCombinedCourseBlueprint =
-      adminCombinedCourseBlueprintSerializer.serialize(adminCombinedCourseBlueprint);
-
-    // then
-    expect(serializedCombinedCourseBlueprint).to.deep.equal({
-      data: {
-        attributes: {
-          name: 'Mon parcours',
-          'internal-name': 'Mon modèle de parcours',
-          illustration: '/illustrations/image.svg',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-          content: [
-            {
-              type: ADMIN_COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE,
-              value: 'mon-module',
-            },
-            {
-              type: ADMIN_COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION,
-              value: 123,
-            },
-          ],
-          'created-at': adminCombinedCourseBlueprint.createdAt,
-          'updated-at': adminCombinedCourseBlueprint.updatedAt,
-          'attestation-label': '6ème',
-        },
-        type: 'combined-course-blueprints',
-        id: '1',
-      },
-    });
-  });
-
   it('#deserialize', async function () {
     const date = new Date();
+    const moduleId = 'eeeb4951-6f38-4467-a4ba-0c85ed71321a';
+    const items = [
+      { type: COMBINED_COURSE_ITEM_TYPES.MODULE, value: moduleId },
+      { type: COMBINED_COURSE_ITEM_TYPES.EVALUATION, value: 123 },
+    ];
     // given
     const serializedBlueprint = {
       data: {
@@ -65,17 +21,9 @@ describe('Quest | Unit | Infrastructure | Serializers | admin-combined-course-bl
           'internal-name': 'Mon modèle de parcours',
           illustration: '/illustrations/image.svg',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-          'attestation-key': 'SIXTH_GRADE',
-          content: [
-            {
-              type: 'passages',
-              value: 'mon-module',
-            },
-            {
-              type: 'campaignParticipations',
-              value: 123,
-            },
-          ],
+          'reward-id': 5,
+          'reward-type': 'ATTESTATION',
+          content: items,
           'created-at': date,
           'updated-at': date,
         },
@@ -85,30 +33,30 @@ describe('Quest | Unit | Infrastructure | Serializers | admin-combined-course-bl
     };
 
     // when
-    const deserialize = await adminCombinedCourseBlueprintSerializer.deserialize(serializedBlueprint);
+    const result = await adminCombinedCourseBlueprintSerializer.deserialize(serializedBlueprint);
 
     // then
-    expect(deserialize).deep.equal({
-      id: '1',
-      name: 'Mon parcours',
-      internalName: 'Mon modèle de parcours',
-      illustration: '/illustrations/image.svg',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      content: [
-        {
-          type: 'passages',
-          value: 'mon-module',
-        },
-        {
-          type: 'campaignParticipations',
-          value: 123,
-        },
-      ],
-      attestationKey: 'SIXTH_GRADE',
-      attestationLabel: undefined,
-      organizationIds: [],
-      createdAt: date,
-      updatedAt: date,
-    });
+    expect(result).to.deep.equal(
+      new AdminCombinedCourseBlueprint({
+        id: '1',
+        name: 'Mon parcours',
+        internalName: 'Mon modèle de parcours',
+        illustration: '/illustrations/image.svg',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        rewardId: 5,
+        rewardType: 'ATTESTATION',
+        createdAt: date,
+        updatedAt: date,
+        quest: new Quest({
+          eligibilityRequirements: [],
+          successRequirements: [
+            CombinedCourseBlueprint.buildRequirementForCombinedCourse({ moduleId }),
+            CombinedCourseBlueprint.buildRequirementForCombinedCourse({ targetProfileId: 123 }),
+          ],
+          rewardId: 5,
+          rewardType: REWARD_TYPES.ATTESTATION,
+        }),
+      }),
+    );
   });
 });

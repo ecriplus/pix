@@ -2,7 +2,6 @@ import Joi from 'joi';
 
 import { securityPreHandlers } from '../../shared/application/security-pre-handlers.js';
 import { identifiersType } from '../../shared/domain/types/identifiers-type.js';
-import { contentSchema } from '../domain/models/AdminCombinedCourseBlueprint.js';
 import { combinedCourseBlueprintController } from './combined-course-blueprint-controller.js';
 
 const register = async function (server) {
@@ -53,8 +52,9 @@ const register = async function (server) {
                 'internal-name': Joi.string().required(),
                 illustration: Joi.string().allow(null),
                 description: Joi.string().allow(null),
-                'attestation-key': Joi.string().allow(null),
-                content: contentSchema,
+                'reward-id': Joi.number().integer().allow(null),
+                'reward-type': Joi.string().allow(null),
+                content: Joi.array(),
                 createdAt: Joi.date(),
               },
             },
