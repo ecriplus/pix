@@ -13,11 +13,6 @@ import {
 } from '../../../../src/identity-access-management/domain/errors.js';
 import { SiecleXmlImportError } from '../../../../src/prescription/learner-management/domain/errors.js';
 import * as DomainErrors from '../../../../src/shared/domain/errors.js';
-import {
-  AlreadyAcceptedOrCancelledInvitationError,
-  UserHasNoOrganizationMembershipError,
-  UserNotMemberOfOrganizationError,
-} from '../../../../src/team/domain/errors.js';
 import { expect } from '../../../test-helper.js';
 import { HttpTestServer } from '../../../tooling/server/http-test-server.js';
 
@@ -236,14 +231,6 @@ describe('Integration | API | Controller Error', function () {
 
       expect(response.statusCode).to.equal(CONFLICT_ERROR);
       expect(responseDetail(response)).to.equal('This user has already a confirmed email.');
-    });
-
-    it('responds Conflict when an AlreadyAcceptedOrCancelledInvitationError occurs', async function () {
-      routeHandler.throws(new AlreadyAcceptedOrCancelledInvitationError());
-      const response = await server.requestObject(request);
-
-      expect(response.statusCode).to.equal(CONFLICT_ERROR);
-      expect(responseCode(response)).to.equal('INVITATION_ALREADY_ACCEPTED_OR_CANCELLED');
     });
 
     it('responds Conflict when a ChallengeNotAskedError error occurs', async function () {
@@ -514,16 +501,6 @@ describe('Integration | API | Controller Error', function () {
       expect(responseDetail(response)).to.equal("L'invitation à cette organisation a été annulée.");
       expect(responseTitle(response)).to.equal('Forbidden');
     });
-
-    it('responds Forbidden when a UserHasNoOrganizationMembershipError error occurs', async function () {
-      routeHandler.throws(new UserHasNoOrganizationMembershipError());
-      const response = await server.requestObject(request);
-
-      expect(response.statusCode).to.equal(FORBIDDEN_ERROR);
-      expect(responseDetail(response)).to.equal('User is not member of any organization');
-      expect(responseCode(response)).to.equal('USER_HAS_NO_ORGANIZATION_MEMBERSHIP');
-      expect(responseTitle(response)).to.equal('Forbidden');
-    });
   });
 
   context('404 Not found', function () {
@@ -581,14 +558,6 @@ describe('Integration | API | Controller Error', function () {
 
       expect(response.statusCode).to.equal(UNPROCESSABLE_ENTITY_ERROR);
       expect(responseDetail(response)).to.equal('An error occurred, file is invalid');
-    });
-
-    it('responds Unprocessable Entity when a UserNotMemberOfOrganizationError error occurs', async function () {
-      routeHandler.throws(new UserNotMemberOfOrganizationError("L'utilisateur n'est pas membre de l'organisation."));
-      const response = await server.requestObject(request);
-
-      expect(response.statusCode).to.equal(UNPROCESSABLE_ENTITY_ERROR);
-      expect(responseDetail(response)).to.equal("L'utilisateur n'est pas membre de l'organisation.");
     });
 
     it('responds Unprocessable Entity with invalid data attribute', async function () {

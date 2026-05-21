@@ -1,13 +1,4 @@
 import { AdminMemberError } from '../../../authorization/domain/errors.js';
-import {
-  ArchiveOrganizationError,
-  UnableToAttachChildOrganizationToParentOrganizationError,
-} from '../../../organizational-entities/domain/errors.js';
-import {
-  AlreadyAcceptedOrCancelledInvitationError,
-  UserHasNoOrganizationMembershipError,
-  UserNotMemberOfOrganizationError,
-} from '../../../team/domain/errors.js';
 import * as SharedDomainErrors from '../../domain/errors.js';
 import { HttpErrors } from './http-errors.js';
 
@@ -37,7 +28,6 @@ const FORBIDDEN_ERRORS = [
   SharedDomainErrors.CandidateNotAuthorizedToJoinSessionError,
   SharedDomainErrors.CandidateNotAuthorizedToResumeCertificationTestError,
   SharedDomainErrors.CertificationCandidateOnFinalizedSessionError,
-  UserHasNoOrganizationMembershipError,
 ];
 
 const CONFLICT_ERRORS = [
@@ -52,8 +42,6 @@ const CONFLICT_ERRORS = [
   SharedDomainErrors.DeletedError,
   SharedDomainErrors.CertificationEndedByFinalizationError,
   SharedDomainErrors.MultipleOrganizationLearnersWithDifferentNationalStudentIdError,
-  UnableToAttachChildOrganizationToParentOrganizationError,
-  AlreadyAcceptedOrCancelledInvitationError,
 ];
 
 const PRECONDITION_FAILED_ERRORS = [
@@ -110,8 +98,6 @@ const UNPROCESSABLE_ENTITY_ERRORS = [
   SharedDomainErrors.OidcMissingFieldsError,
   SharedDomainErrors.YamlParsingError,
   SharedDomainErrors.UserShouldNotBeReconciledOnAnotherAccountError,
-  UserNotMemberOfOrganizationError,
-  ArchiveOrganizationError,
   SharedDomainErrors.FeatureDisabledError,
 ];
 
