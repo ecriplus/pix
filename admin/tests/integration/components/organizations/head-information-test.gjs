@@ -189,7 +189,7 @@ module('Integration | Component | organizations/header-information', function (h
         });
 
         sinon.stub(organization, 'save').rejects({ errors: [{ status: '413', meta: { maxSizeInMegaBytes: '2.5' } }] });
-        sinon.stub(organization, 'rollbackAttributes').resolves();
+        sinon.stub(organization, 'rollbackAttributes').returns();
 
         const file = new Blob([''], { type: `new-logo-file` });
 
@@ -219,7 +219,7 @@ module('Integration | Component | organizations/header-information', function (h
         });
 
         sinon.stub(organization, 'save').rejects();
-        sinon.stub(organization, 'rollbackAttributes').resolves();
+        sinon.stub(organization, 'rollbackAttributes').returns();
 
         const file = new Blob([''], { type: `new-logo-file` });
 
