@@ -23,7 +23,7 @@
       "grains": [
         {
           "id": "a4ca59bc-3a7c-4c22-a259-af041348fa55",
-          "type": "activity",
+          "type": "discovery",
           "title": "Accroche",
           "components": [
             {
@@ -31,7 +31,7 @@
               "element": {
                 "id": "2476fe57-7696-4368-a657-7a0ccf392d7b",
                 "type": "text",
-                "tag": " ",
+                "tag": "context",
                 "content": "<p>L’entreprise AgroDélices a été victime d’une arnaque.<br>Lisez l’article suivant puis répondez à la question ci-dessous.&nbsp;</p>"
               }
             },
@@ -127,7 +127,7 @@
               "element": {
                 "id": "ca7fc2b1-130b-4bc8-b06d-86426cce8dc4",
                 "type": "text",
-                "tag": " ",
+                "tag": "context",
                 "content": "<p>Ce matin, Marie a été contactée par téléphone, par un homme se présentant comme faisant partie du service sécurité de la Banque Nationale.📲<br>Écoutez la conversation et observez la manière dont l’homme formule sa demande.</p>"
               }
             },
@@ -146,7 +146,7 @@
               "element": {
                 "id": "b69e5412-68ae-434d-896f-7f34cc8829e2",
                 "type": "qrocm",
-                "instruction": "<p>Complétez la phrase suivante&nbsp;:</p>",
+                "instruction": "<p>Complétez la phrase suivante pour décrire la situation de Marie.</p>",
                 "proposals": [
                   {
                     "type": "text",
@@ -292,7 +292,7 @@
                   },
                   "invalid": {
                     "state": "",
-                    "diagnosis": "<p>Ici, un cyberattaquant a utilisé la manipulation pour pousser Marie à fournir ses informations personnelles et valider un paiement en ligne.<br>l’attaquant ne force pas la <strong>victime </strong>: il la <strong>manipule </strong>pour la pousser à <strong>agir volontairement</strong>, en jouant sur la confiance et l’urgence.</p>"
+                    "diagnosis": "<p>Ici, un cyberattaquant a utilisé la manipulation pour pousser Marie à fournir ses informations personnelles et valider un paiement en ligne.<br>L’attaquant ne force pas la <strong>victime </strong>: il la <strong>manipule </strong>pour la pousser à <strong>agir volontairement</strong>, en jouant sur la confiance et l’urgence.</p>"
                   }
                 }
               }
@@ -416,7 +416,16 @@
                 "id": "8a36d6e6-ab1b-4ff5-8260-a2baa62ff833",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Dans les attaques reposant sur l’ingénierie sociale, les cyberattaquants exploitent des <strong>biais cognitifs communs aux êtres humains</strong>&nbsp;: des raccourcis de pensée qui <strong>influencent nos décisions</strong> dans le sens souhaité par les attaquants. 🧠</p><p> </p><br><p>🤔<strong> Bon à savoir</strong><br>Ces attaques peuvent s’appuyer sur de nombreux autres biais cognitifs&nbsp;: le biais de confirmation, le biais de contexte, le biais de surconfiance, etc.</p>"
+                "content": "<p>Dans les attaques reposant sur l’ingénierie sociale, les cyberattaquants exploitent des <strong>biais cognitifs communs aux êtres humains</strong>&nbsp;: des raccourcis de pensée qui <strong>influencent nos décisions</strong> dans le sens souhaité par les attaquants. 🧠</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "dd759fbe-3a4d-4988-820c-d6ec6b3091f2",
+                "type": "text",
+                "tag": "further-information",
+                "content": "<p>Ces attaques peuvent s’appuyer sur de nombreux autres biais cognitifs&nbsp;: le biais de confirmation, le biais de contexte, le biais de surconfiance, etc.</p>"
               }
             }
           ]
@@ -661,7 +670,16 @@
                 "id": "af215ff5-1482-4681-95c0-96d22b0c75f0",
                 "type": "text",
                 "tag": " ",
-                "content": "<p><strong>💡 Le saviez-vous ?</strong> <br>Plus l’attaque est personnalisée et soignée, plus elle est difficile à repérer. Même des experts en cybersécurité tombent parfois dans le piège.</p>"
+                "content": "<p>Plus l’attaque est personnalisée et soignée, plus elle est difficile à repérer.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "0bf919ba-69ea-4ce0-8a4d-bd3fe11f854b",
+                "type": "text",
+                "tag": "did-you-know",
+                "content": "<p>Même des experts en cybersécurité tombent parfois dans le piège.</p>"
               }
             }
           ]
