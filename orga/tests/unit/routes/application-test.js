@@ -12,7 +12,7 @@ module('Unit | Route | application', function (hooks) {
     sinon.stub(this.route.featureToggles, 'load').resolves();
     sinon.stub(this.route.oidcIdentityProviders, 'load').resolves();
     sinon.stub(this.route.locale, 'setBestLocale').resolves();
-    sinon.stub(this.route.dayjsLocaleLoader, 'load').resolves();
+    sinon.stub(this.route.localeLoader, 'load').resolves();
   });
   hooks.afterEach(function () {
     sinon.restore();
@@ -69,7 +69,7 @@ module('Unit | Route | application', function (hooks) {
       assert.ok(this.route.oidcIdentityProviders.load.called);
     });
 
-    test('set dayjs locale', async function (assert) {
+    test('loads locale translation', async function (assert) {
       // given
 
       sinon.stub(this.route.locale, 'currentLanguage').value('fr');
@@ -79,7 +79,7 @@ module('Unit | Route | application', function (hooks) {
       await this.route.beforeModel(transition);
 
       // then
-      assert.ok(this.route.dayjsLocaleLoader.load.calledOnceWithExactly('fr'));
+      assert.ok(this.route.localeLoader.load.calledOnceWithExactly('fr'));
     });
   });
 });

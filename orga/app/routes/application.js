@@ -14,7 +14,7 @@ export default class ApplicationRoute extends Route {
   @service pixMetrics;
   @service router;
   @service intl;
-  @service dayjsLocaleLoader;
+  @service localeLoader;
 
   constructor() {
     super(...arguments);
@@ -38,7 +38,7 @@ export default class ApplicationRoute extends Route {
     await this.session.setup();
     await this.oidcIdentityProviders.load().catch();
 
-    await this.dayjsLocaleLoader.load(this.locale.currentLanguage);
+    await this.localeLoader.load(this.locale.currentLocale);
   }
 
   async model() {
