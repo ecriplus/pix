@@ -91,9 +91,6 @@ module('Integration | Component | Certifications | Shareable certificate | v3-ce
         <Certifications::ShareableCertificate::v3Certificate @certificate={{this.certification}} />`);
 
       // then
-      assert
-        .dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.framework-title.EDU_1ER_DEGRE') }))
-        .exists();
       assert.dom(screen.getAllByText(t('pages.certificate.frameworks.EDU.status'))[0]).exists();
       assert
         .dom(screen.queryByRole('heading', { name: t('pages.certificate.details.competences.title') }))

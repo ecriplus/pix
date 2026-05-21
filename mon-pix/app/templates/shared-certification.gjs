@@ -16,7 +16,7 @@ export default class SharedCertification extends Component {
         label: this.intl.t('pages.fill-in-certificate-verification-code.title'),
       },
       {
-        label: this.args.controller.model.title,
+        label: this.args.model.title,
       },
     ];
   }
@@ -25,18 +25,18 @@ export default class SharedCertification extends Component {
     {{pageTitle (t "pages.shared-certification.title")}}
 
     <main id="main" class="global-page-container" role="main">
-      <section class="global-page-header global-page-header__breadcrumb">
-        <PixBreadcrumb @links={{this.links}} />
+      {{#if @model.isV3}}
+        <section class="global-page-header global-page-header__breadcrumb">
+          <PixBreadcrumb @links={{this.links}} />
 
-        <h1 class="global-page-header__title">
-          {{@controller.model.title}}
-        </h1>
-      </section>
+          <h1 class="global-page-header__title">
+            {{@model.title}}
+          </h1>
+        </section>
 
-      {{#if @controller.displayV3CertificationShared}}
-        <V3Certificate @certificate={{@controller.model}} />
+        <V3Certificate @certificate={{@model}} />
       {{else}}
-        <V2Certificate @model={{@controller.model}} />
+        <V2Certificate @model={{@model}} />
       {{/if}}
     </main>
   </template>

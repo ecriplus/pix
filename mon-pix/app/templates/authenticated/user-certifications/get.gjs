@@ -12,20 +12,6 @@ export default class UserCertificationPage extends Component {
     return this.args.model;
   }
 
-  get displayV3CoreCertificate() {
-    return (
-      this.certificate.algorithmEngineVersion === 3 &&
-      ['CORE', 'CLEA'].includes(this.certificate.certificationFramework)
-    );
-  }
-
-  get displayV3PixPlusCertificate() {
-    return (
-      this.certificate.algorithmEngineVersion === 3 &&
-      !['CORE', 'CLEA'].includes(this.certificate.certificationFramework)
-    );
-  }
-
   get links() {
     return [
       {
@@ -40,17 +26,19 @@ export default class UserCertificationPage extends Component {
 
   <template>
     <main id="main" class="global-page-container" role="main">
-      <section class="global-page-header global-page-header__breadcrumb">
-        <PixBreadcrumb @links={{this.links}} />
+      {{#if this.certificate.isV3}}
+        <section class="global-page-header global-page-header__breadcrumb">
+          <PixBreadcrumb @links={{this.links}} />
 
-        <h1 class="global-page-header__title">
-          {{this.certificate.title}}
-        </h1>
-      </section>
-      {{#if this.displayV3CoreCertificate}}
-        <V3CoreCertificate @certificate={{this.certificate}} />
-      {{else if this.displayV3PixPlusCertificate}}
-        <V3PixPlusCertificate @certificate={{this.certificate}} @context="user" />
+          <h1 class="global-page-header__title">
+            {{this.certificate.title}}
+          </h1>
+        </section>
+        {{#if this.certificate.hasPixPlusFramework}}
+          <V3PixPlusCertificate @certificate={{this.certificate}} @context="user" />
+        {{else}}
+          <V3CoreCertificate @certificate={{this.certificate}} />
+        {{/if}}
       {{else}}
         <V2Certificate @model={{this.certificate}} />
       {{/if}}

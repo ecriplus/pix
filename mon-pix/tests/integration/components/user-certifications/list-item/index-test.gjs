@@ -227,5 +227,4 @@ module('Integration | Component | User certifications | List item', function (ho
         .doesNotExist();
     });
   });
-
 });
