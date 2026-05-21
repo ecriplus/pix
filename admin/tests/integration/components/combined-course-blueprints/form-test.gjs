@@ -28,10 +28,12 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
     sinon.stub(store, 'createRecord').withArgs('combined-course-blueprint').returns(blueprintStub);
     const findRecordStub = sinon.stub(store, 'findRecord');
     const attestations = [
-      { key: 'PARENTHOOD', label: 'Parentalite' },
-      { key: 'SIXTH_GRADE', label: '6eme' },
+      { id: 5, key: 'PARENTHOOD', label: 'Parentalite' },
+      { id: 6, key: 'SIXTH_GRADE', label: '6eme' },
     ];
-    findRecordStub.withArgs('module', 'module-123').resolves({ title: 'module 123' });
+    findRecordStub
+      .withArgs('module', 'module-123')
+      .resolves({ id: 'full-id-module-123', shortId: 'module-123', title: 'module 123' });
     findRecordStub.withArgs('target-profile', '1').resolves({ internalName: 'super pc' });
 
     //when
@@ -78,11 +80,12 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
     assert.strictEqual(blueprintStub.internalName, 'internalName');
     assert.deepEqual(blueprintStub.content, [
       { type: 'evaluation', value: 1, label: 'super pc' },
-      { type: 'module', value: 'module-123', label: 'module 123' },
+      { type: 'module', value: 'full-id-module-123', shortId: 'module-123', label: 'module 123' },
     ]);
     assert.strictEqual(blueprintStub.illustration, 'illustrations/hello.svg');
     assert.strictEqual(blueprintStub.description, 'description');
-    assert.strictEqual(blueprintStub.attestationKey, 'PARENTHOOD');
+    assert.strictEqual(blueprintStub.rewardId, 5);
+    assert.strictEqual(blueprintStub.rewardType, 'ATTESTATION');
     assert.ok(
       pixToastSuccessStub.calledOnceWith({
         message: t('components.combined-course-blueprints.create.notifications.success'),
@@ -287,7 +290,9 @@ module('Integration | Component | CombinedCourseBlueprints::form', function (hoo
       // given
       const store = this.owner.lookup('service:store');
       const findRecordStub = sinon.stub(store, 'findRecord');
-      findRecordStub.withArgs('module', 'module123').resolves({ title: 'module 123' });
+      findRecordStub
+        .withArgs('module', 'module123')
+        .resolves({ id: 'full-id-module123', shortId: 'module123', title: 'module 123' });
       findRecordStub.withArgs('target-profile', '1').resolves({ internalName: 'super pc' });
       //when
       const screen = await render(<template><CombinedCourseBlueprintForm /></template>);

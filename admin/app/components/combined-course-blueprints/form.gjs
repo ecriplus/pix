@@ -71,7 +71,8 @@ export default class CombineCourseBluePrintForm extends Component {
       ...this.blueprint.content,
       {
         type: 'module',
-        value: this.itemValue,
+        value: module.id,
+        shortId: module.shortId,
         label: module.title,
       },
     ];
@@ -259,12 +260,8 @@ export default class CombineCourseBluePrintForm extends Component {
         {{#if (gt this.blueprint.content.length 0)}}
           <ul class="combined-course-page__list">
             {{#each this.blueprint.content as |item|}}
-              <li><RequirementTag
-                  @type={{item.type}}
-                  @value={{item.value}}
-                  @label={{item.label}}
-                  @onRemove={{this.removeRequirement}}
-                />
+              <li>
+                <RequirementTag @requirement={{item}} @onRemove={{this.removeRequirement}} />
               </li>
             {{/each}}
           </ul>
