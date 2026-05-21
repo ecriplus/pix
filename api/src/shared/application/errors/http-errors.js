@@ -1,10 +1,8 @@
-import { getRequestId } from '../../infrastructure/execution-context-manager.js';
 import * as errorSerializer from '../../infrastructure/serializers/jsonapi/error-serializer.js';
 
 class BaseHttpError extends Error {
-  constructor(message, dependencies = { getRequestId }) {
+  constructor(message) {
     super(message);
-    this.id = dependencies.getRequestId();
     this.title = 'Default Bad Request';
     this.status = 400;
   }

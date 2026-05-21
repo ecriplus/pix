@@ -1,13 +1,11 @@
-import { getRequestId } from '../infrastructure/execution-context-manager.js';
 import { VALIDATION_ERRORS } from './constants.js';
 
 class DomainError extends Error {
-  constructor(message, code, meta, dependencies = { getRequestId }) {
+  constructor(message, code, meta) {
     super(message);
     this.name = this.constructor.name;
     this.code = code;
     this.meta = meta;
-    this.id = dependencies.getRequestId();
   }
 }
 
