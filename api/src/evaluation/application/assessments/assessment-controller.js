@@ -5,6 +5,7 @@ import { stageUsecases } from '../../../prescription/stages/domain/usecases/inde
 import { usecases as profileUsecases } from '../../../profile/domain/usecases/index.js';
 import { usecases as questUsecases } from '../../../quest/domain/usecases/index.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
+import { AssessmentDtoFactory } from '../../../shared/domain/models/AssessmentDtoFactory.js';
 import { featureToggles } from '../../../shared/infrastructure/feature-toggles/index.js';
 import * as assessmentRepository from '../../../shared/infrastructure/repositories/assessment-repository.js';
 import * as assessmentSerializer from '../../../shared/infrastructure/serializers/jsonapi/assessment-serializer.js';
@@ -88,7 +89,8 @@ async function save(request, h, dependencies = { assessmentRepository }) {
   assessment.userId = extractUserIdFromRequest(request);
   assessment.state = 'started';
   const createdAssessment = await dependencies.assessmentRepository.save({ assessment });
-  return h.response(assessmentSerializer.serialize(createdAssessment.toDto())).created();
+  const assessmentDto = AssessmentDtoFactory.toDto(createdAssessment);
+  return h.response(assessmentSerializer.serialize(assessmentDto)).created();
 }
 
 async function autoValidateNextChallenge(request, h) {
