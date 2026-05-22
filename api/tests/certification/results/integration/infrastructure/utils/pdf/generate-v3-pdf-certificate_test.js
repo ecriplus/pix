@@ -121,9 +121,9 @@ describe('Integration | Infrastructure | Utils | Pdf | V3 Certificate Pdf', func
         expect(pageContent).to.include(`le ${dayjs(certificates[index].deliveredAt).format('DD/MM/YYYY')}`);
         expect(pageContent).to.include(`${certificates[index].verificationCode}`);
         expect(pageContent).to.include(`${certificates[index].pixScore}`);
-        expect(pageContent).to.include('Indépendant 1');
-        expect(pageContent).to.include('Vous avez des pratiques numériques simples');
-        expect(pageContent).to.include('Vous savez naviguer sur le Web');
+        expect(pageContent).to.include(translate('certification.meshlevel.CORE.LEVEL_INDEPENDENT_3.label'));
+        expect(pageContent).to.include(translate('certification.meshlevel.CORE.LEVEL_INDEPENDENT_3.summary.user'));
+        expect(pageContent).to.include(translate('certification.meshlevel.CORE.LEVEL_INDEPENDENT_3.description.user'));
         expect(pageContent).to.include(`${certificates[index].maxReachableScore}`);
         expect(pageContent).to.not.include(translate('certification.certificate.v3.complementary-content.title'));
       });
@@ -305,9 +305,9 @@ describe('Integration | Infrastructure | Utils | Pdf | V3 Certificate Pdf', func
         expect(content).to.include(translate(`certification.certificate.v3.pix-plus-labels.${framework}`));
         expect(content).to.include('Marie DURAND');
         expect(content).to.include('P-PIXPLUS');
-        expect(content).to.include(translate('certification.certificate.v3.score-content.level-explanation'));
+        expect(content).to.include(translate('certification.certificate.v3.score-content.level-explanation.user'));
         expect(content).to.include(translate(`certification.meshlevel.${framework}.${expectedLevel}.label`));
-        expect(content).to.include(translate(`certification.meshlevel.${framework}.${expectedLevel}.summary`));
+        expect(content).to.include(translate(`certification.meshlevel.${framework}.${expectedLevel}.summary.user`));
         expect(content).to.not.include(translate('certification.certificate.v3.complementary-content.title'));
       });
     });
@@ -351,7 +351,7 @@ describe('Integration | Infrastructure | Utils | Pdf | V3 Certificate Pdf', func
         expect(content).to.include(translate(`certification.certificate.v3.pix-plus-labels.${framework}`));
         expect(content).to.include('Sophie LEROY');
         expect(content).to.include(translate(`certification.meshlevel.${framework}.${expectedLevel}.label`));
-        expect(content).to.include(translate(`certification.meshlevel.${framework}.${expectedLevel}.summary`));
+        expect(content).to.include(translate(`certification.meshlevel.${framework}.${expectedLevel}.summary.user`));
       });
     }
   });

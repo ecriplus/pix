@@ -4,6 +4,7 @@ import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js'
 import { getChallengeLocale } from '../../../shared/infrastructure/utils/request-response-utils.js';
 import { normalizeAndRemoveAccents } from '../../../shared/infrastructure/utils/string-utils.js';
 import { Certificate } from '../domain/models/v3/Certificate.js';
+import { CERTIFICATE_LABEL_CONTEXTS } from '../domain/models/v3/CertificateMeshLevel.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as certificateSerializer from '../infrastructure/serializers/certificate-serializer.js';
 import * as certificateSummarySerializer from '../infrastructure/serializers/certificate-summary-serializer.js';
@@ -31,7 +32,11 @@ async function getCertificateByVerificationCode(request, h, dependencies = { cer
       locale,
     });
   }
-  return dependencies.certificateSerializer.serialize({ certificate, translate: i18n.__ });
+  return dependencies.certificateSerializer.serialize({
+    certificate,
+    translate: i18n.__,
+    context: CERTIFICATE_LABEL_CONTEXTS.SHAREABLE,
+  });
 }
 
 async function getCertificate(request, h, dependencies = { certificateSerializer, privateCertificateSerializer }) {
@@ -48,7 +53,11 @@ async function getCertificate(request, h, dependencies = { certificateSerializer
       certificationCourseId,
       locale,
     });
-    return dependencies.certificateSerializer.serialize({ certificate, translate: i18n.__ });
+    return dependencies.certificateSerializer.serialize({
+      certificate,
+      translate: i18n.__,
+      context: CERTIFICATE_LABEL_CONTEXTS.USER,
+    });
   } else {
     certificate = await usecases.getPrivateCertificate({
       certificationCourseId,

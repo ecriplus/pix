@@ -215,7 +215,10 @@
         },
         "score-content": {
           "global-level": "Niveau global",
-          "level-explanation": "Votre niveau signifie que :"
+          "level-explanation": {
+            "shareable": "Dit niveau betekent dat :",
+            "user": "Jouw niveau betekent dat :"
+          }
         }
       }
     },

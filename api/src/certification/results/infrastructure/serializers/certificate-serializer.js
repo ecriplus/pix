@@ -56,14 +56,14 @@ const attributes = [
   'badgeUrl',
 ];
 
-const serialize = function ({ certificate, translate }) {
+const serialize = function ({ certificate, translate, context }) {
   let globalLevel = {};
 
   if (certificate?.globalLevel) {
     globalLevel = {
       globalLevelLabel: certificate.globalLevel.getLevelLabel(translate),
-      globalSummaryLabel: certificate.globalLevel.getSummaryLabel(translate),
-      globalDescriptionLabel: certificate.globalLevel.getDescriptionLabel(translate),
+      globalSummaryLabel: certificate.globalLevel.getSummaryLabel(translate, context),
+      globalDescriptionLabel: certificate.globalLevel.getDescriptionLabel(translate, context),
       level: _getLevel(certificate),
     };
   }

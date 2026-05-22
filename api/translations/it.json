@@ -215,7 +215,10 @@
         },
         "score-content": {
           "global-level": "Livello complessivo",
-          "level-explanation": "Il vostro livello significa che :"
+          "level-explanation": {
+            "shareable": "Questo livello significa che :",
+            "user": "Il vostro livello significa che :"
+          }
         }
       }
     },

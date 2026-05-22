@@ -7,6 +7,7 @@ import * as url from 'node:url';
 import dayjs from 'dayjs';
 
 import { ComplementaryCertificationKeys } from '../../../../../shared/domain/models/ComplementaryCertificationKeys.js';
+import { CERTIFICATE_LABEL_CONTEXTS } from '../../../../domain/models/v3/CertificateMeshLevel.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const __badgesDirname = url.fileURLToPath(new URL('../badges/', import.meta.url));
@@ -145,13 +146,13 @@ export default function generateV3CertificateTemplate({ pdf, data, translate }) 
         align: 'center',
       });
 
-    const globalLevelSummary = globalLevel.getSummaryLabel(translate);
-    const globalLevelDescription = globalLevel.getDescriptionLabel(translate);
+    const globalLevelSummary = globalLevel.getSummaryLabel(translate, CERTIFICATE_LABEL_CONTEXTS.USER);
+    const globalLevelDescription = globalLevel.getDescriptionLabel(translate, CERTIFICATE_LABEL_CONTEXTS.USER);
     pdf
       .font('Nunito-Bold')
       .fontSize(11)
       .fillColor('#253858')
-      .text(translate('certification.certificate.v3.score-content.level-explanation'), 530, 250, {
+      .text(translate('certification.certificate.v3.score-content.level-explanation.user'), 530, 250, {
         width: 250,
       })
       .moveDown(0.5)
