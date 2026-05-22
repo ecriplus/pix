@@ -224,7 +224,7 @@
                           "id": "2",
                           "content": "<p>Un message de rappel qui demande des données administratives.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non.</p><p>Dans ce message, <strong>l’escroc tente d’obtenir des données personnelles</strong> afin de s’en servir ensuite pour  voler de l’argent ou pour escroquer des proches. </p><p> C’est souvent l’objectif des messages d’hameçonnage.</p>"
+                            "diagnosis": "<p>Eh non.</p><p>Dans ce message, <strong>l’escroc tente d’obtenir des données personnelles</strong> afin de s’en servir ensuite pour voler de l’argent ou pour escroquer des proches. </p><p> C’est souvent l’objectif des messages d’hameçonnage.</p>"
                           }
                         },
                         {
