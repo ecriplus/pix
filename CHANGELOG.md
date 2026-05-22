@@ -1,5 +1,36 @@
 # Pix Changelog
 
+# [5.412.0](https://github.com/1024pix/pix/compare/v5.411.0...v5.412.0) (2026-05-22)
+
+### :rocket: Amélioration
+
+- [#16266](https://github.com/1024pix/pix/pull/16266) Ajoute la possibilité d'utiliser du markdown dans les descriptions des parcours combinés (Pix-22820) 
+- [#16215](https://github.com/1024pix/pix/pull/16215) Appliquer le nouveau design des cartes de contenu formatifs en fin de parcours sur Pix App (PIX-22716). 
+- [#16283](https://github.com/1024pix/pix/pull/16283) dernières modifs module cadre IA avant prod 
+- [#16258](https://github.com/1024pix/pix/pull/16258) Laisser la modale d'édition de version ouverte après modification (PIX-22826). 
+- [#16251](https://github.com/1024pix/pix/pull/16251) MDX-119 Visio_IND Corrections diverses 
+- [#16219](https://github.com/1024pix/pix/pull/16219) Permettre la sélection du niveau d'un sujet dans le sélecteur de sujets de Pix Orga (PIX-22330) 
+- [#16232](https://github.com/1024pix/pix/pull/16232) Rendre le bouton "supprimer une version" fonctionnel (PIX-22696) 
+- [#16287](https://github.com/1024pix/pix/pull/16287) surequipement-relecture-finale 
+
+### :building_construction: Tech
+
+- [#16241](https://github.com/1024pix/pix/pull/16241) :package: Mise à jour des paquet pour `mon-pix` 
+- [#16273](https://github.com/1024pix/pix/pull/16273) Corriger le titre du module Vous avez reçu un mail 
+- [#16262](https://github.com/1024pix/pix/pull/16262) Création de seeds pour une organisation SCO-1D avec import générique (PIX-22788) 
+- [#16278](https://github.com/1024pix/pix/pull/16278) Dépendances circulaires dans shared 
+- [#16272](https://github.com/1024pix/pix/pull/16272) Déplace le mapping des erreurs Acquisition dans son contexte. 
+- [#16229](https://github.com/1024pix/pix/pull/16229) Refactoriser la logique de reconciliation d'import (PIX-22412) 
+- [#16274](https://github.com/1024pix/pix/pull/16274) Simplifier le mapping de error-manager dans shared 
+- [#16275](https://github.com/1024pix/pix/pull/16275) Suppression d'un controller certif non utilisé  
+- [#16279](https://github.com/1024pix/pix/pull/16279) Traiter les retours partenaire sur la traduction 'it' (PIX-22851) 
+
+### :arrow_up: Montée de version
+
+- [#16284](https://github.com/1024pix/pix/pull/16284) Mettre à jour le package @1024pix/epreuves-components. 
+- [#16268](https://github.com/1024pix/pix/pull/16268) Update dependency @1024pix/pix-ui to ^60.11.0 (mon-pix) 
+- [#16225](https://github.com/1024pix/pix/pull/16225) Update dependency sinon to v22 (mon-pix)
+
 # [5.411.0](https://github.com/1024pix/pix/compare/v5.410.0...v5.411.0) (2026-05-21)
 
 ### :rocket: Amélioration
