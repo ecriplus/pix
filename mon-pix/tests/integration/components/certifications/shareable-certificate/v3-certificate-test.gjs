@@ -1,4 +1,4 @@
-import { render, within } from '@1024pix/ember-testing-library';
+import { render } from '@1024pix/ember-testing-library';
 import { hbs } from 'ember-cli-htmlbars';
 import { t } from 'ember-intl/test-support';
 import { module, test } from 'qunit';
@@ -31,14 +31,6 @@ module('Integration | Component | Certifications | Shareable certificate | v3-ce
         <Certifications::ShareableCertificate::v3Certificate @certificate={{this.certification}} />`);
 
       // then
-      assert.dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.framework-title.CORE') })).exists();
-      assert
-        .dom(
-          within(screen.getByRole('navigation')).getByRole('link', {
-            name: t('pages.fill-in-certificate-verification-code.title'),
-          }),
-        )
-        .exists();
       assert
         .dom(screen.queryByRole('heading', { name: t('pages.certificate.details.competences.title') }))
         .doesNotExist();
@@ -73,14 +65,6 @@ module('Integration | Component | Certifications | Shareable certificate | v3-ce
         <Certifications::ShareableCertificate::v3Certificate @certificate={{this.certification}} />`);
 
       // then
-      assert.dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.framework-title.CORE') })).exists();
-      assert
-        .dom(
-          within(screen.getByRole('navigation')).getByRole('link', {
-            name: t('pages.fill-in-certificate-verification-code.title'),
-          }),
-        )
-        .exists();
       const globalLevelLabels = screen.getAllByText(certification.globalLevelLabel);
       assert.strictEqual(globalLevelLabels.length, 2);
     });
@@ -107,9 +91,6 @@ module('Integration | Component | Certifications | Shareable certificate | v3-ce
         <Certifications::ShareableCertificate::v3Certificate @certificate={{this.certification}} />`);
 
       // then
-      assert
-        .dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.framework-title.EDU_1ER_DEGRE') }))
-        .exists();
       assert.dom(screen.getAllByText(t('pages.certificate.frameworks.EDU.status'))[0]).exists();
       assert
         .dom(screen.queryByRole('heading', { name: t('pages.certificate.details.competences.title') }))

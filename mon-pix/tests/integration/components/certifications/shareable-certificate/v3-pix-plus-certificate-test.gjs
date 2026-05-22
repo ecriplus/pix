@@ -162,7 +162,7 @@ module('Integration | Component | Certifications | Shareable certificate | v3-pi
           <Certifications::ShareableCertificate::V3PixPlusCertificate @certificate={{this.certification}} />`);
 
       // then
-      const subTitle = t('pages.certificate.frameworks.EDU.sub-title.admissible').replace(/ /g, ' ');
+      const subTitle = t('pages.certificate.frameworks.EDU.sub-title.admissible.candidate').replace(/ /g, ' ');
       assert
         .dom(screen.getByRole('heading', { level: 2, name: (name) => name.replace(/ /g, ' ').includes(subTitle) }))
         .exists();
@@ -189,7 +189,7 @@ module('Integration | Component | Certifications | Shareable certificate | v3-pi
           <Certifications::ShareableCertificate::V3PixPlusCertificate @certificate={{this.certification}} />`);
 
       // then
-      const subTitle = t('pages.certificate.obtained-certification', {
+      const subTitle = t('pages.certificate.obtained-certification.candidate', {
         globalLevelLabel: t('pages.user-certifications.meshes.EDU_1ER_DEGRE.EXPERT'),
         frameworkLabel: t('pages.certification-frameworks.EDU_1ER_DEGRE'),
       }).replace(/ /g, ' ');
@@ -249,6 +249,137 @@ module('Integration | Component | Certifications | Shareable certificate | v3-pi
         assert.dom('.v3-pix-plus-certificate-score__badge').exists();
         assert.dom('.certification-result-hexagon').doesNotExist();
       });
+    });
+  });
+
+  module('when context is "user"', function () {
+    test('it displays the congratulations title and hides the valid-status tag', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const certification = store.createRecord('certification', {
+        birthdate: '2000-01-22',
+        birthplace: 'Paris',
+        firstName: 'Jean',
+        lastName: 'Doe',
+        certificationDate: new Date('2026-02-15T10:00:00Z'),
+        deliveredAt: new Date('2026-02-20T10:00:00Z'),
+        certificationCenter: 'Université de Lyon',
+        certificationFramework: 'DROIT',
+        level: 'EXPERT',
+        badgeUrl: 'https://example.com/badge.png',
+      });
+      this.set('certification', certification);
+
+      // when
+      const screen = await render(hbs`
+          <Certifications::ShareableCertificate::V3PixPlusCertificate @certificate={{this.certification}} @context="user" />`);
+
+      // then
+      assert.dom(screen.getByText(t('pages.certificate.congratulations'))).exists();
+      assert.dom(screen.queryByText(t('pages.certificate.valid-status'))).doesNotExist();
+    });
+
+    test('it displays the download pdf section', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const certification = store.createRecord('certification', {
+        birthdate: '2000-01-22',
+        birthplace: 'Paris',
+        firstName: 'Jean',
+        lastName: 'Doe',
+        certificationDate: new Date('2026-02-15T10:00:00Z'),
+        deliveredAt: new Date('2026-02-20T10:00:00Z'),
+        certificationCenter: 'Université de Lyon',
+        certificationFramework: 'DROIT',
+        level: 'EXPERT',
+        badgeUrl: 'https://example.com/badge.png',
+        verificationCode: 'P-ABC123',
+      });
+      this.set('certification', certification);
+
+      // when
+      await render(hbs`
+          <Certifications::ShareableCertificate::V3PixPlusCertificate @certificate={{this.certification}} @context="user" />`);
+
+      // then
+      assert.dom('.download-pdf').exists();
+    });
+
+    test('it uses the user-targeted obtained-certification subtitle', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const certification = store.createRecord('certification', {
+        birthdate: '2000-01-22',
+        birthplace: 'Paris',
+        firstName: 'Jean',
+        lastName: 'Doe',
+        certificationDate: new Date('2026-02-15T10:00:00Z'),
+        deliveredAt: new Date('2026-02-20T10:00:00Z'),
+        certificationCenter: 'Université de Lyon',
+        certificationFramework: 'DROIT',
+        level: 'EXPERT',
+        badgeUrl: 'https://example.com/badge.png',
+      });
+      this.set('certification', certification);
+
+      // when
+      const screen = await render(hbs`
+          <Certifications::ShareableCertificate::V3PixPlusCertificate @certificate={{this.certification}} @context="user" />`);
+
+      // then
+      assert
+        .dom(
+          screen.getByText(
+            t('pages.certificate.obtained-certification.user', {
+              globalLevelLabel: t('pages.user-certifications.meshes.DROIT.EXPERT'),
+              frameworkLabel: t('pages.certification-frameworks.DROIT'),
+            }),
+          ),
+        )
+        .exists();
+      assert
+        .dom(
+          screen.queryByText(
+            t('pages.certificate.obtained-certification.candidate', {
+              globalLevelLabel: t('pages.user-certifications.meshes.DROIT.EXPERT'),
+              frameworkLabel: t('pages.certification-frameworks.DROIT'),
+            }),
+          ),
+        )
+        .doesNotExist();
+    });
+
+    test('it uses the user-targeted EDU admissible sub-title and results-sub-title when admissible', async function (assert) {
+      // given
+      const store = this.owner.lookup('service:store');
+      const certification = store.createRecord('certification', {
+        birthdate: '2000-01-22',
+        birthplace: 'Paris',
+        firstName: 'Jean',
+        lastName: 'Doe',
+        certificationDate: new Date('2026-02-15T10:00:00Z'),
+        deliveredAt: new Date('2026-02-20T10:00:00Z'),
+        certificationCenter: 'Université de Lyon',
+        certificationFramework: 'EDU_1ER_DEGRE',
+        level: 'ADMISSIBLE',
+      });
+      this.set('certification', certification);
+
+      // when
+      const screen = await render(hbs`
+          <Certifications::ShareableCertificate::V3PixPlusCertificate @certificate={{this.certification}} @context="user" />`);
+
+      // then
+      const userSubTitle = t('pages.certificate.frameworks.EDU.sub-title.admissible.user').replace(/ /g, ' ');
+      assert
+        .dom(
+          screen.getByRole('heading', {
+            level: 2,
+            name: (name) => name.replace(/ /g, ' ').includes(userSubTitle),
+          }),
+        )
+        .exists();
+      assert.dom(screen.getByText('professionnelle de la certification', { exact: false })).exists();
     });
   });
 
@@ -364,7 +495,7 @@ module('Integration | Component | Certifications | Shareable certificate | v3-pi
       assert
         .dom(
           screen.getByText(
-            t('pages.certificate.obtained-certification', {
+            t('pages.certificate.obtained-certification.candidate', {
               globalLevelLabel: t(`pages.user-certifications.meshes.DROIT.EXPERT`),
               frameworkLabel: t('pages.certification-frameworks.DROIT'),
             }),

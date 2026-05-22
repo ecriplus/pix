@@ -58,6 +58,21 @@ module('Acceptance | Authenticated | User certifications | get', function (hooks
       });
     });
 
+    module('when algorithm version is v3 and framework is Pix Plus', function () {
+      test('displays v3 pix plus candidate certificate page', async function (assert) {
+        // given
+        const certificate = _getV3Certificate({ user, server, certificationFramework: 'EDU_1ER_DEGRE' });
+
+        // when
+        const screen = await visit(`/mes-certifications/${certificate.id}`);
+
+        // then
+        assert
+          .dom(screen.getByRole('heading', { level: 1, name: t('pages.certificate.framework-title.EDU_1ER_DEGRE') }))
+          .exists();
+      });
+    });
+
     module('when algorithm version is v2', function () {
       test('displays v2 candidate certificate page', async function (assert) {
         // given
@@ -102,7 +117,7 @@ function _getV2Certificate({ user, server }) {
   return certificate;
 }
 
-function _getV3Certificate({ user, server }) {
+function _getV3Certificate({ user, server, certificationFramework = 'CORE' }) {
   const certificate = server.create('certification', {
     firstName: user.firstName,
     lastName: user.lastName,
@@ -111,6 +126,7 @@ function _getV3Certificate({ user, server }) {
     certificationDate: new Date('2018-07-20T14:33:56Z'),
     status: 'validated',
     algorithmEngineVersion: 3,
+    certificationFramework,
     pixScore: 777,
     isPublished: true,
     globalLevelLabel: 'Expert 1',
@@ -123,6 +139,7 @@ function _getV3Certificate({ user, server }) {
     id: certificate.id,
     certificationCenterName: 'Université de Pix',
     certificationStartedAt: new Date('2018-07-20T14:33:56Z'),
+    certificationFramework,
     status: 'VALIDATED',
     pixScore: 777,
   });

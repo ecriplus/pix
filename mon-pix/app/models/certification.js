@@ -10,6 +10,8 @@ export const assessmentResultStatus = {
   REJECTED: 'rejected',
 };
 
+const CORE_FRAMEWORKS = ['CORE', 'CLEA'];
+
 const professionalizingDate = new Date('2022-01-01');
 
 export default class Certification extends Model {
@@ -64,6 +66,10 @@ export default class Certification extends Model {
 
   get isV3() {
     return this.algorithmEngineVersion === 3;
+  }
+
+  get hasPixPlusFramework() {
+    return !CORE_FRAMEWORKS.includes(this.certificationFramework);
   }
 
   get maxReachablePixCountOnCertificationDate() {

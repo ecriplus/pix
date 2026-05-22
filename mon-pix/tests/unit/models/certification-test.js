@@ -50,6 +50,28 @@ module('Unit | Model | certification', function (hooks) {
     });
   });
 
+  module('#hasPixPlusFramework', function () {
+    test('should be false when framework is CORE', function (assert) {
+      const model = store.createRecord('certification', { certificationFramework: 'CORE' });
+      assert.false(model.hasPixPlusFramework);
+    });
+
+    test('should be false when framework is CLEA', function (assert) {
+      const model = store.createRecord('certification', { certificationFramework: 'CLEA' });
+      assert.false(model.hasPixPlusFramework);
+    });
+
+    test('should be true when framework is an EDU framework', function (assert) {
+      const model = store.createRecord('certification', { certificationFramework: 'EDU_1ER_DEGRE' });
+      assert.true(model.hasPixPlusFramework);
+    });
+
+    test('should be true when framework is DROIT', function (assert) {
+      const model = store.createRecord('certification', { certificationFramework: 'DROIT' });
+      assert.true(model.hasPixPlusFramework);
+    });
+  });
+
   module('#shouldDisplayProfessionalizingWarning', function () {
     module('when domain is french', function (hooks) {
       hooks.beforeEach(function () {

@@ -692,8 +692,14 @@
       },
       "frameworks": {
         "EDU": {
-          "results-infos": "'<p>'La certificación se desarrolla en dos etapas:'</p><ol><li>'Prueba Pix: acaba de realizarla.'</li><li>'Prueba oral: organizada fuera de Pix ante un tribunal.'</li></ol><p>'Al finalizar la prueba oral, se te otorgará tu nivel de certificación definitivo (Experto, Avanzado, etc.).'<br/>'Contacta con tu centro de certificación para organizar la prueba oral.'</p>'",
-          "results-sub-title": "¡El/la candidato/a es admisible para la etapa 2 de práctica profesional de la certificación Pix+ Édu!",
+          "results-infos": {
+            "candidate": "'<p>'La certificación se desarrolla en dos etapas:'</p><ol><li>'Prueba Pix: acaba de realizarla.'</li><li>'Prueba oral: organizada fuera de Pix ante un tribunal.'</li></ol><p>'Al finalizar la prueba oral, se te otorgará tu nivel de certificación definitivo (Experto, Avanzado, etc.).'<br/>'Contacta con tu centro de certificación para organizar la prueba oral.'</p>'",
+            "user": "'<p>'La certificación se desarrolla en dos etapas:'</p><ol><li>'Prueba Pix: acabas de realizarla.'</li><li>'Prueba oral: organizada fuera de Pix ante un tribunal.'</li></ol><p>'Al finalizar la prueba oral, se te otorgará tu nivel de certificación definitivo (Experto, Avanzado, etc.).'<br/>'Contacta con tu centro de certificación para organizar la prueba oral.'</p>'"
+          },
+          "results-sub-title": {
+            "candidate": "¡El/la candidato/a es admisible para la etapa 2 de práctica profesional de la certificación Pix+ Édu!",
+            "user": "¡Eres admisible para la etapa 2 de práctica profesional de la certificación Pix+ Édu!"
+          },
           "status": "Certificado válido",
           "steps": {
             "1": "Sección Pix",
@@ -701,7 +707,10 @@
             "3": "Resultado final"
           },
           "sub-title": {
-            "admissible": "¡El candidato es admisible para la 2.ª etapa!"
+            "admissible": {
+              "candidate": "¡El candidato es admisible para la 2.ª etapa!",
+              "user": "¡Eres admisible para la 2.ª etapa!"
+            }
           }
         }
       },
@@ -729,7 +738,10 @@
       "jury-info": "Las observaciones del tribunal no se comparten en la página de comprobación de tu certificado.",
       "jury-title": "Observaciones del tribunal",
       "learn-about-certification-results": "¿Cómo interpretar los resultados?",
-      "obtained-certification": "El candidato ha alcanzado el nivel {globalLevelLabel} de la certificación {frameworkLabel}.",
+      "obtained-certification": {
+        "candidate": "El candidato ha alcanzado el nivel {globalLevelLabel} de la certificación {frameworkLabel}.",
+        "user": "Has alcanzado el nivel {globalLevelLabel} de la certificación {frameworkLabel}."
+      },
       "professionalizing-warning": "El certificado Pix está reconocido como cualificación profesional por France Compétences una vez alcanzada una puntuación mínima de 120 pix.",
       "results": {
         "sub-title": "El candidato es admisible para la certificación {framework}.",

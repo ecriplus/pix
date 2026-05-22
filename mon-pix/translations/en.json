@@ -692,8 +692,14 @@
       },
       "frameworks": {
         "EDU": {
-          "results-infos": "'<p>'The certification takes place in two stages:'</p><ol><li>'Pix assessment: just completed.'</li><li>'Oral assessment: organised outside of Pix before a panel.'</li></ol><p>'At the end of the oral, your final certification level will be awarded (Expert, Advanced, etc.).'<br/>'Contact your certification centre to organise the oral assessment.'</p>'",
-          "results-sub-title": "The candidate is eligible for the 2nd stage of the Pix+ Édu certification!",
+          "results-infos": {
+            "candidate": "'<p>'The certification takes place in two stages:'</p><ol><li>'Pix assessment: just completed.'</li><li>'Oral assessment: organised outside of Pix before a panel.'</li></ol><p>'At the end of the oral, your final certification level will be awarded (Expert, Advanced, etc.).'<br/>'Contact your certification centre to organise the oral assessment.'</p>'",
+            "user": "'<p>'The certification takes place in two stages:'</p><ol><li>'Pix assessment: you have just completed it.'</li><li>'Oral assessment: organised outside of Pix before a panel.'</li></ol><p>'At the end of the oral, your final certification level will be awarded (Expert, Advanced, etc.).'<br/>'Contact your certification centre to organise the oral assessment.'</p>'"
+          },
+          "results-sub-title": {
+            "candidate": "The candidate is eligible for the 2nd stage of the Pix+ Édu certification!",
+            "user": "You are eligible for the 2nd stage of the Pix+ Édu certification!"
+          },
           "status": "Valid certificate",
           "steps": {
             "1": "Pix component",
@@ -701,7 +707,10 @@
             "3": "Final result"
           },
           "sub-title": {
-            "admissible": "The candidate is eligible for the 2nd stage!"
+            "admissible": {
+              "candidate": "The candidate is eligible for the 2nd stage!",
+              "user": "You are eligible for the 2nd stage!"
+            }
           }
         }
       },
@@ -729,7 +738,10 @@
       "jury-info": "Notes from the examining body are not displayed on the verification page of your certificate.",
       "jury-title": "Notes from the examining body",
       "learn-about-certification-results": "How to interpret the results?",
-      "obtained-certification": "The candidate has reached the {globalLevelLabel} level of the {frameworkLabel} certification.",
+      "obtained-certification": {
+        "candidate": "The candidate has reached the {globalLevelLabel} level of the {frameworkLabel} certification.",
+        "user": "You have reached the {globalLevelLabel} level of the {frameworkLabel} certification."
+      },
       "professionalizing-warning": "The Pix certificate is recognised as professionalising by France Compétences upon reaching a minimum score of 120 pix.",
       "results": {
         "sub-title": "The candidate is eligible for {framework} certification.",

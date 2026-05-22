@@ -692,8 +692,14 @@
       },
       "frameworks": {
         "EDU": {
-          "results-infos": "'<p>'La certification se déroule en deux étapes&nbsp;:'</p><ol><li>'Volet Pix&nbsp;: il/elle vient de le passer.'</li><li>'Volet de pratique professionnelle&nbsp;: organisé en dehors de Pix devant un jury.'</li></ol><p>'À l'issue de ce 2'<sup>'ème'</sup>' volet, le niveau de la certification Pix+ Edu  du/de la candidat(e) sera attribué (Avancé ou Expert).'</p>'",
-          "results-sub-title": "Le/la candidat(e) est admissible au volet 2 de pratique professionnelle de la certification Pix+ Édu !",
+          "results-infos": {
+            "candidate": "'<p>'La certification se déroule en deux étapes&nbsp;:'</p><ol><li>'Volet Pix&nbsp;: il/elle vient de le passer.'</li><li>'Volet de pratique professionnelle&nbsp;: organisé en dehors de Pix devant un jury.'</li></ol><p>'À l'issue de ce 2'<sup>'ème'</sup>' volet, le niveau de la certification Pix+ Edu  du/de la candidat(e) sera attribué (Avancé ou Expert).'</p>'",
+            "user": "'<p>'La certification se déroule en deux étapes :'</p><ol><li>'Volet Pix : vous venez de le passer.'</li><li>'Volet de pratique professionnelle : organisé en dehors de Pix devant un jury.'</li></ol><p>'À l''issue de ce 2'<sup>'ème'</sup>' volet, votre niveau de certification Pix+ Édu sera attribué (Avancé ou Expert).'</p>'"
+          },
+          "results-sub-title": {
+            "candidate": "Le/la candidat(e) est admissible au volet 2 de pratique professionnelle de la certification Pix+ Édu !",
+            "user": "Vous êtes admissible au volet 2 de pratique professionnelle de la certification Pix+ Édu !"
+          },
           "status": "Certificat valide",
           "steps": {
             "1": "Volet Pix",
@@ -701,7 +707,10 @@
             "3": "Résultat final"
           },
           "sub-title": {
-            "admissible": "Le/la candidat(e) est admissible au volet 2 de pratique professionnelle !"
+            "admissible": {
+              "candidate": "Le/la candidat(e) est admissible au volet 2 de pratique professionnelle !",
+              "user": "Vous êtes admissible au volet 2 de pratique professionnelle !"
+            }
           }
         }
       },
@@ -729,7 +738,10 @@
       "jury-info": "Les observations du jury ne sont pas partagées sur la page de vérification de votre certificat.",
       "jury-title": "Observations du jury",
       "learn-about-certification-results": "Comment interpréter les résultats ?",
-      "obtained-certification": "Le candidat a atteint le niveau {globalLevelLabel} de la certification {frameworkLabel}.",
+      "obtained-certification": {
+        "candidate": "Le candidat a atteint le niveau {globalLevelLabel} de la certification {frameworkLabel}.",
+        "user": "Vous avez atteint le niveau {globalLevelLabel} de la certification {frameworkLabel}."
+      },
       "professionalizing-warning": "Le certificat Pix est reconnu comme professionnalisant par France compétences à compter d’un score minimal de 120 pix",
       "results": {
         "sub-title": "Le/la candidat(e) est admissible à la certification {framework}.",

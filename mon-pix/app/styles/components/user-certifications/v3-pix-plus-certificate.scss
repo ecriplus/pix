@@ -2,10 +2,26 @@
 @use 'pix-design-tokens/typography';
 @use 'pix-design-tokens/colors';
 
+.v3-pix-plus-certificate__hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pix-spacing-8x);
+
+  .download-pdf {
+    flex-shrink: 0;
+    justify-content: center;
+  }
+
+  @include breakpoints.device-is('desktop') {
+    flex-direction: row;
+  }
+}
+
 .v3-pix-plus-certificate__infos-block {
   display: grid;
+  flex-grow: 1;
   grid-template-columns: 1fr auto;
-  gap: var(--pix-spacing-12x);
+  gap: max(var(--pix-spacing-6x), 4vw);
   align-items: center;
   padding-right: max(var(--pix-spacing-6x), 4vw);
 

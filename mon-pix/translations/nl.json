@@ -692,8 +692,14 @@
       },
       "frameworks": {
         "EDU": {
-          "results-infos": "'<p>'De certificering verloopt in twee fasen:'</p><ol><li>'Pix-toets: zojuist afgelegd.'</li><li>'Mondeling examen: buiten Pix georganiseerd voor een jury.'</li></ol><p>'Na afloop van het mondeling wordt uw definitieve certificeringsniveau toegekend (Expert, Gevorderd, enz.).'<br/>'Neem contact op met uw certificeringscentrum om het mondeling examen te organiseren.'</p>'",
-          "results-sub-title": "De kandidaat is toegelaten tot de 2e fase van de Pix+ Édu-certificering!",
+          "results-infos": {
+            "candidate": "'<p>'De certificering verloopt in twee fasen:'</p><ol><li>'Pix-toets: zojuist afgelegd.'</li><li>'Mondeling examen: buiten Pix georganiseerd voor een jury.'</li></ol><p>'Na afloop van het mondeling wordt uw definitieve certificeringsniveau toegekend (Expert, Gevorderd, enz.).'<br/>'Neem contact op met uw certificeringscentrum om het mondeling examen te organiseren.'</p>'",
+            "user": "'<p>'De certificering verloopt in twee fasen:'</p><ol><li>'Pix-toets: u heeft deze zojuist afgelegd.'</li><li>'Mondeling examen: buiten Pix georganiseerd voor een jury.'</li></ol><p>'Na afloop van het mondeling wordt uw definitieve certificeringsniveau toegekend (Expert, Gevorderd, enz.).'<br/>'Neem contact op met uw certificeringscentrum om het mondeling examen te organiseren.'</p>'"
+          },
+          "results-sub-title": {
+            "candidate": "De kandidaat is toegelaten tot de 2e fase van de Pix+ Édu-certificering!",
+            "user": "U bent toegelaten tot de 2e fase van de Pix+ Édu-certificering!"
+          },
           "status": "Geldig certificaat",
           "steps": {
             "1": "Pix-onderdeel",
@@ -701,7 +707,10 @@
             "3": "Eindresultaat"
           },
           "sub-title": {
-            "admissible": "De kandidaat is toegelaten tot de 2e fase!"
+            "admissible": {
+              "candidate": "De kandidaat is toegelaten tot de 2e fase!",
+              "user": "U bent toegelaten tot de 2e fase!"
+            }
           }
         }
       },
@@ -729,7 +738,10 @@
       "jury-info": "De opmerkingen van de jury worden niet gedeeld op de verificatiepagina van je certificaat.",
       "jury-title": "Commentaar van de jury",
       "learn-about-certification-results": "Hoe moeten de resultaten worden geïnterpreteerd?",
-      "obtained-certification": "De kandidaat heeft het niveau {globalLevelLabel} van de {frameworkLabel}-certificering bereikt.",
+      "obtained-certification": {
+        "candidate": "De kandidaat heeft het niveau {globalLevelLabel} van de {frameworkLabel}-certificering bereikt.",
+        "user": "U heeft het niveau {globalLevelLabel} van de {frameworkLabel}-certificering bereikt."
+      },
       "professionalizing-warning": "Het Pix-certificaat wordt door France Compétences erkend als een professionele kwalificatie zodra een minimale score van 120 pix is behaald.",
       "results": {
         "sub-title": "De kandidaat is toelaatbaar voor de {framework}-certificering.",

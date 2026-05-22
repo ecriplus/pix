@@ -11,6 +11,7 @@ import { and } from 'ember-truth-helpers';
 import { CERTIFICATE_TYPES } from 'mon-pix/models/certificate-summary';
 
 import Hexagon from '../../user-certifications/list-item/hexagon';
+import DownloadPdf from '../certificate-information/download-pdf';
 
 const EDU_STEPS = {
   ADMISSIBLE: 2,
@@ -30,6 +31,14 @@ export default class PixPlusCertificate extends Component {
     return this.isEduCertification && this.args.certificate.level === 'ADMISSIBLE';
   }
 
+  get isUserCertificate() {
+    return this.args.context === 'user';
+  }
+
+  get contextKey() {
+    return this.isUserCertificate ? 'user' : 'candidate';
+  }
+
   get certificationFrameworkLabel() {
     return this.intl.t(`pages.certification-frameworks.${this.args.certificate.certificationFramework}`);
   }
@@ -42,19 +51,20 @@ export default class PixPlusCertificate extends Component {
 
   get certificationSubTitle() {
     if (this.isCandidateEduAdmissible) {
-      return this.intl.t('pages.certificate.frameworks.EDU.sub-title.admissible');
+      return this.intl.t(`pages.certificate.frameworks.EDU.sub-title.admissible.${this.contextKey}`);
     }
-    return this.intl.t('pages.certificate.obtained-certification', {
+    return this.intl.t(`pages.certificate.obtained-certification.${this.contextKey}`, {
       globalLevelLabel: this.reachedMeshLabel,
       frameworkLabel: this.certificationFrameworkLabel,
     });
   }
 
-  get frameworkTranslations() {
-    return {
-      resultsInfos: this.intl.t('pages.certificate.frameworks.EDU.results-infos', { htmlSafe: true }),
-      resultsSubTitle: this.intl.t('pages.certificate.frameworks.EDU.results-sub-title', { htmlSafe: true }),
-    };
+  get eduResultsInfos() {
+    return this.intl.t(`pages.certificate.frameworks.EDU.results-infos.${this.contextKey}`, { htmlSafe: true });
+  }
+
+  get eduResultsSubTitle() {
+    return this.intl.t(`pages.certificate.frameworks.EDU.results-sub-title.${this.contextKey}`);
   }
 
   get steps() {
@@ -66,83 +76,98 @@ export default class PixPlusCertificate extends Component {
   }
 
   <template>
-    <PixBlock class="v3-pix-plus-certificate__infos-block">
-      <div>
-        <PixTag @color="green" class="v3-pix-plus-certificate__valid-tag">
-          <PixIcon @name="check" />
-          {{t "pages.certificate.valid-status"}}
-        </PixTag>
+    <section class="v3-shareable-certificate">
+      <div class="v3-pix-plus-certificate__hero">
+        <PixBlock class="v3-pix-plus-certificate__infos-block">
+          <div>
+            {{#if this.isUserCertificate}}
+              <h2 class="v3-pix-plus-certificate__title">
+                <strong>{{t "pages.certificate.congratulations"}}</strong>
+                {{this.certificationSubTitle}}
+              </h2>
+            {{else}}
+              <PixTag @color="green" class="v3-pix-plus-certificate__valid-tag">
+                <PixIcon @name="check" />
+                {{t "pages.certificate.valid-status"}}
+              </PixTag>
 
-        <h2 class="v3-pix-plus-certificate__title">
-          <strong>{{t "pages.certificate.valid-status"}}</strong>
-          {{this.certificationSubTitle}}
-        </h2>
+              <h2 class="v3-pix-plus-certificate__title">
+                <strong>{{t "pages.certificate.valid-status"}}</strong>
+                {{this.certificationSubTitle}}
+              </h2>
+            {{/if}}
 
-        {{#if this.isEduCertification}}
-          <PixStepper
-            class="v3-pix-plus-certificate__stepper"
-            @steps={{this.steps}}
-            @currentStep={{this.eduCurrentStep}}
-          />
+            {{#if this.isEduCertification}}
+              <PixStepper
+                class="v3-pix-plus-certificate__stepper"
+                @steps={{this.steps}}
+                @currentStep={{this.eduCurrentStep}}
+              />
+            {{/if}}
+
+            <div class="v3-pix-plus-certificate__details">
+              <p>
+                <strong>
+                  {{t "pages.certificate.candidate"}}
+                  {{@certificate.firstName}}
+                  {{@certificate.lastName}}
+                </strong><br />
+                {{t
+                  "pages.certificate.candidate-birth-complete"
+                  birthdate=(dayjsFormat @certificate.birthdate "DD/MM/YYYY")
+                  birthplace=@certificate.birthplace
+                }}
+              </p>
+              <dl>
+                <dt><strong>{{t "pages.certificate.certification-center"}}</strong></dt>
+                <dd><strong>{{@certificate.certificationCenter}}</strong></dd>
+
+                <dt>{{t "pages.certificate.certification-date"}}</dt>
+                <dd>{{dayjsFormat @certificate.certificationDate "DD/MM/YYYY"}}</dd>
+
+                <dt>{{t "pages.certificate.delivered-at"}}</dt>
+                <dd>{{dayjsFormat @certificate.deliveredAt "DD/MM/YYYY"}}</dd>
+              </dl>
+            </div>
+          </div>
+          <div class="v3-pix-plus-certificate__score">
+            {{#if this.isCandidateEduAdmissible}}
+              <Hexagon
+                @framework={{@certificate.certificationFramework}}
+                @certificateType={{CERTIFICATE_TYPES.CERTIFICATE}}
+                @reachedMeshLevel={{@certificate.level}}
+              />
+              <PixTag @color="green">{{this.reachedMeshLabel}}</PixTag>
+            {{else}}
+              <img class="v3-pix-plus-certificate-score__badge" src={{@certificate.badgeUrl}} alt="" />
+            {{/if}}
+          </div>
+        </PixBlock>
+
+        {{#if this.isUserCertificate}}
+          <DownloadPdf @certificate={{@certificate}} />
         {{/if}}
-
-        <div class="v3-pix-plus-certificate__details">
-          <p>
-            <strong>
-              {{t "pages.certificate.candidate"}}
-              {{@certificate.firstName}}
-              {{@certificate.lastName}}
-            </strong><br />
-            {{t
-              "pages.certificate.candidate-birth-complete"
-              birthdate=(dayjsFormat @certificate.birthdate "DD/MM/YYYY")
-              birthplace=@certificate.birthplace
-            }}
-          </p>
-          <dl>
-            <dt><strong>{{t "pages.certificate.certification-center"}}</strong></dt>
-            <dd><strong>{{@certificate.certificationCenter}}</strong></dd>
-
-            <dt>{{t "pages.certificate.certification-date"}}</dt>
-            <dd>{{dayjsFormat @certificate.certificationDate "DD/MM/YYYY"}}</dd>
-
-            <dt>{{t "pages.certificate.delivered-at"}}</dt>
-            <dd>{{dayjsFormat @certificate.deliveredAt "DD/MM/YYYY"}}</dd>
-          </dl>
-        </div>
       </div>
-      <div class="v3-pix-plus-certificate__score">
-        {{#if this.isCandidateEduAdmissible}}
-          <Hexagon
-            @framework={{@certificate.certificationFramework}}
-            @certificateType={{CERTIFICATE_TYPES.CERTIFICATE}}
-            @reachedMeshLevel={{@certificate.level}}
-          />
-          <PixTag @color="green">{{this.reachedMeshLabel}}</PixTag>
-        {{else}}
-          <img class="v3-pix-plus-certificate-score__badge" src={{@certificate.badgeUrl}} alt="" />
-        {{/if}}
-      </div>
-    </PixBlock>
 
-    {{#if this.isCandidateEduAdmissible}}
-      <PixBlock class="v3-pix-plus-certificate__results-infos-block">
-        <img src="/images/illustrations/user-certifications/certificate-magnifier.png" alt="" />
-        <div class="v3-pix-plus-certificate__results-infos-details">
-          <h3 class="v3-pix-plus-certificate__title">{{t "pages.certificate.results.title"}}</h3>
-          <p><strong>{{this.frameworkTranslations.resultsSubTitle}}</strong></p>
-          {{this.frameworkTranslations.resultsInfos}}
-        </div>
-      </PixBlock>
-    {{else if (and @certificate.globalSummaryLabel @certificate.globalDescriptionLabel)}}
-      <PixBlock class="v3-pix-plus-certificate__results-infos-block">
-        <img src="/images/illustrations/user-certifications/certificate-magnifier.png" alt="" />
-        <div class="v3-pix-plus-certificate__results-infos-details">
-          <h3 class="v3-pix-plus-certificate__title">{{t "pages.certificate.results.title"}}</h3>
-          <p><strong>{{@certificate.globalSummaryLabel}}</strong></p>
-          {{@certificate.globalDescriptionLabel}}
-        </div>
-      </PixBlock>
-    {{/if}}
+      {{#if this.isCandidateEduAdmissible}}
+        <PixBlock class="v3-pix-plus-certificate__results-infos-block">
+          <img src="/images/illustrations/user-certifications/certificate-magnifier.png" alt="" />
+          <div class="v3-pix-plus-certificate__results-infos-details">
+            <h3 class="v3-pix-plus-certificate__title">{{t "pages.certificate.results.title"}}</h3>
+            <p><strong>{{this.eduResultsSubTitle}}</strong></p>
+            {{this.eduResultsInfos}}
+          </div>
+        </PixBlock>
+      {{else if (and @certificate.globalSummaryLabel @certificate.globalDescriptionLabel)}}
+        <PixBlock class="v3-pix-plus-certificate__results-infos-block">
+          <img src="/images/illustrations/user-certifications/certificate-magnifier.png" alt="" />
+          <div class="v3-pix-plus-certificate__results-infos-details">
+            <h3 class="v3-pix-plus-certificate__title">{{t "pages.certificate.results.title"}}</h3>
+            <p><strong>{{@certificate.globalSummaryLabel}}</strong></p>
+            {{@certificate.globalDescriptionLabel}}
+          </div>
+        </PixBlock>
+      {{/if}}
+    </section>
   </template>
 }
