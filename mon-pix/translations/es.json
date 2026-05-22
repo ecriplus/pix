@@ -1958,7 +1958,7 @@
           "no-level": "Competencia sin empezar"
         }
       },
-      "description": "Ponte a prueba a tu propio ritmo en 16 habilidades digitales. Elige una habilidad y empieza a ganar pix.",
+      "description": "Ponte a prueba a tu propio ritmo en 16 habilidades digitales. Elige una competencia y empieza a ganar pix.",
       "first-title": "Tienes 16 competencias en las que hacer pruebas. '<br>'¡Concéntrate y a por ello!",
       "resume-campaign-banner": {
         "accessibility": {
@@ -2356,7 +2356,7 @@
     },
     "tutorial-panel": {
       "info": "Estos enlaces a tutoriales han sido sugeridos por usuarios de Pix.",
-      "title": "Para tener éxito la próxima vez"
+      "title": "Para acertar la próxima vez"
     },
     "update-expired-password": {
       "button": "Restablecer",
