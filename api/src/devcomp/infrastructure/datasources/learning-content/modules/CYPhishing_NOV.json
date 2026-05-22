@@ -291,7 +291,7 @@
                 "type": "custom",
                 "title": "",
                 "instruction": "<p>Pour chaque notification de message ci-dessous, devinez pour qui l’escroc essaye de se faire passer.</p>",
-                "functionalInstruction": "",
+                "functionalInstruction": "Cliquez sur chaque notification pour la catégoriser.",
                 "tagName": "phishing-notification",
                 "props": {
                   "notifications": [
