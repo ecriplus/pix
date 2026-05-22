@@ -114,7 +114,8 @@
   },
   "overrides": {
     "flatted": ">=3.4.2",
-    "@xmldom/xmldom": ">=0.8.13"
+    "@xmldom/xmldom": ">=0.8.13",
+    "braces": ">=3.0.3"
   },
   "exports": {
     "./tests/*": "./tests/*",
