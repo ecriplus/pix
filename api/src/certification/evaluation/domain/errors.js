@@ -6,4 +6,10 @@ class CertificationComputeError extends DomainError {
   }
 }
 
-export { CertificationComputeError };
+class NextChallengeAlreadyComputingError extends DomainError {
+  constructor() {
+    super('Une nouvelle épreuve est en cours de calcul');
+  }
+}
+
+export { CertificationComputeError, NextChallengeAlreadyComputingError };
