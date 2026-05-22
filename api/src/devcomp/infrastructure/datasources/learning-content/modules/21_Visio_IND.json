@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Les outils de visioconférence sont de plus en plus utilisés. Ils intègrent de nombreuses fonctionnalités pour faciliter les échanges à distance&nbsp;: les messages écrits, les réactions, le partage d’écran, etc. Dans ce module, vous découvrirez comment interagir et prendre part activement à une visioconférence.&nbsp;💻🎤</p>",
+    "description": "<p>Les outils de visioconférence sont de plus en plus utilisés. Ils intègrent de nombreuses fonctionnalités pour faciliter les échanges à distance&nbsp;: les messages écrits, les réactions, le partage d’écran, etc. Dans ce module, vous allez découvrir comment interagir et prendre part activement à une visioconférence.&nbsp;💻🎤</p>",
     "duration": 10,
     "level": "independent",
     "objectives": [
@@ -24,7 +24,7 @@
       "grains": [
         {
           "id": "3921761a-3391-423f-9c4e-48e468d88f10",
-          "type": "activity",
+          "type": "discovery",
           "title": "Accroche",
           "components": [
             {
@@ -432,11 +432,11 @@
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Exactement&nbsp;!</p>",
-                    "diagnosis": "<p>Quand un participant utiliser le partage d’écran, tous les participants voient le contenu de son écran, ainsi que son curseur. <br>Les vignettes des autres participants sont alors réduites et parfois masquées. Il est toujours <strong>possible d’intervenir</strong> (micro, chat, réactions).</p>"
+                    "diagnosis": "<p>Quand un participant utilise le partage d’écran, tous les participants voient le contenu de son écran, ainsi que son curseur. <br>Les vignettes des autres participants sont alors réduites et parfois masquées. Il est toujours <strong>possible d’intervenir</strong> (micro, chat, réactions).</p>"
                   },
                   "invalid": {
                     "state": "<p>Pas tout à fait&nbsp;!</p>",
-                    "diagnosis": "<p>Quand un participant utiliser le partage d’écran, tous les participants voient le contenu de son écran, ainsi que son curseur. <br>Les vignettes des autres participants sont alors réduites et parfois masquées. Il est toujours <strong>possible d’intervenir</strong> (micro, chat, réactions).</p>"
+                    "diagnosis": "<p>Quand un participant utilise le partage d’écran, tous les participants voient le contenu de son écran, ainsi que son curseur. <br>Les vignettes des autres participants sont alors réduites et parfois masquées. Il est toujours <strong>possible d’intervenir</strong> (micro, chat, réactions).</p>"
                   }
                 }
               }
