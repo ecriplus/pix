@@ -2209,6 +2209,23 @@
         "title": "Jouw mening telt!"
       },
       "not-finished": "Je kunt je resultaten nog niet opsturen, dus we hebben nog een paar vragen voor je.",
+      "recommended-engine": {
+        "training-card": {
+          "delivery-mode": {
+            "hybrid": "Hybride",
+            "on-site": "Ter plaatse",
+            "remote": "Op afstand"
+          },
+          "registration-required": {
+            "no": "Onmiddellijke vrije toegang",
+            "yes": "Inschrijving vereist"
+          }
+        },
+        "trainings": {
+          "description": "Deze aanbeveling wordt gedaan op basis van je voortgang, om je te helpen je vaardigheden te versterken en op het juiste moment een stap verder te gaan.",
+          "title": "Ga verder, op je eigen tempo."
+        }
+      },
       "reset": {
         "button": "Reset en probeer opnieuw",
         "modal": {
@@ -2285,6 +2302,7 @@
       "type": {
         "autoformation": "Zelftrainingscursussen",
         "e-learning": "Afstandsonderwijs",
+        "formation": "Opleiding",
         "hybrid-training": "Hybride training",
         "in-person-training": "Persoonlijke training",
         "modulix": "Modulix",

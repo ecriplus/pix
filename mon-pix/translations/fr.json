@@ -2209,6 +2209,23 @@
         "title": "Votre avis compte !"
       },
       "not-finished": "Vous ne pouvez pas encore envoyer vos résultats, nous avons encore quelques questions à vous poser.",
+      "recommended-engine": {
+        "training-card": {
+          "delivery-mode": {
+            "hybrid": "Hybride",
+            "on-site": "Sur place",
+            "remote": "À distance"
+          },
+          "registration-required": {
+            "no": "Libre accès immédiat",
+            "yes": "Inscription requise"
+          }
+        },
+        "trainings": {
+          "description": "Il est recommandé en fonction de votre progression pour vous aider à renforcer vos compétences et aller plus loin, au bon moment.",
+          "title": "Allez plus loin, à votre rythme."
+        }
+      },
       "reset": {
         "button": "Remettre à zéro et tout retenter",
         "modal": {
@@ -2285,6 +2302,7 @@
       "type": {
         "autoformation": "Parcours d'autoformation",
         "e-learning": "Formation à distance",
+        "formation": "Formation",
         "hybrid-training": "Formation hybride",
         "in-person-training": "Formation en présentiel",
         "modulix": "Module Pix",

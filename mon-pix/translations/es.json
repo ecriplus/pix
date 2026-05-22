@@ -661,7 +661,7 @@
         "paragraphs": {
           "1": "La certificación Pix, reconocida oficialmente, acredita tu dominio de las competencias digitales. Te unirás a una comunidad de millones de usuarios certificados. ¡Enhorabuena por este importante paso en tu carrera profesional!",
           "2": "Tu puntuación certificada se ha calculado a partir de tus respuestas durante el proceso de certificación. Por lo tanto, puede diferir del número de puntos que aparece en tu perfil.",
-          "3":"El día de tu certificación, se podía alcanzar el nivel 7 y un máximo de 895 puntos (nivel Experto 1)."
+          "3": "El día de tu certificación, se podía alcanzar el nivel 7 y un máximo de 895 puntos (nivel Experto 1)."
         }
       },
       "competences": {
@@ -2209,6 +2209,23 @@
         "title": "¡Tu opinión cuenta!"
       },
       "not-finished": "Todavía no puedes enviar tus resultados, aún tenemos algunas preguntas para ti.",
+      "recommended-engine": {
+        "training-card": {
+          "delivery-mode": {
+            "hybrid": "Híbrido",
+            "on-site": "Presencial",
+            "remote": "A distancia"
+          },
+          "registration-required": {
+            "no": "Acceso libre inmediato",
+            "yes": "Inscripción requerida"
+          }
+        },
+        "trainings": {
+          "description": "Se recomienda en función de tu progreso para ayudarte a reforzar tus habilidades y avanzar más, en el momento adecuado.",
+          "title": "Ve más allá, a tu propio ritmo."
+        }
+      },
       "reset": {
         "button": "Poner a cero y volver a intentarlo todo",
         "modal": {
@@ -2285,6 +2302,7 @@
       "type": {
         "autoformation": "Test de autoformación",
         "e-learning": "Formación a distancia",
+        "formation": "Formación",
         "hybrid-training": "Formación híbrida",
         "in-person-training": "Formación presencial",
         "modulix": "Módulo Pix (Beta)",

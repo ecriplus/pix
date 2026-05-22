@@ -2209,6 +2209,23 @@
         "title": "Deine Meinung zählt!"
       },
       "not-finished": "Du kannst deine Ergebnisse noch nicht einsenden, wir haben noch einige Fragen an dich.",
+      "recommended-engine": {
+        "training-card": {
+          "delivery-mode": {
+            "hybrid": "Hybrid",
+            "on-site": "Vor Ort",
+            "remote": "Fernkurs"
+          },
+          "registration-required": {
+            "no": "Sofortiger freier Zugang",
+            "yes": "Anmeldung erforderlich"
+          }
+        },
+        "trainings": {
+          "description": "Es wird entsprechend deinen Fortschritten empfohlen, um dir dabei zu helfen, deine Fähigkeiten zu festigen und zum richtigen Zeitpunkt einen Schritt weiter zu gehen.",
+          "title": "Gehen Sie noch einen Schritt weiter – ganz in Ihrem eigenen Tempo."
+        }
+      },
       "reset": {
         "button": "Auf Null stellen und alles noch einmal versuchen",
         "modal": {
@@ -2285,6 +2302,7 @@
       "type": {
         "autoformation": "Selbstständiger Lernpfad",
         "e-learning": "Fernunterricht",
+        "formation": "Ausbildung",
         "hybrid-training": "Hybride Ausbildung",
         "in-person-training": "Präsenzschulungen",
         "modulix": "Pix-Modul (Beta)",

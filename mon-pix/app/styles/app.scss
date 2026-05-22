@@ -15,6 +15,7 @@
 @use '../components/attestations/card' as *;
 @use '../components/attestations/content' as *;
 @use '../components/campaigns/assessment/results/evaluation-results-hero/attestation-result' as *;
+@use 'components/campaigns/assessment/results/recommendation-engine/trainings' as *;
 @use 'components/campaigns/assessment/start-landing-page/campaign-landing-page-details' as *;
 @use 'components/campaigns/assessment/start-landing-page/campaign-step' as *;
 @use 'components/authentication/oidc-signup-or-login' as *;

@@ -2209,6 +2209,23 @@
         "title": "La tua opinione conta!"
       },
       "not-finished": "Non è ancora possibile invia i risultati, quindi abbiamo ancora alcune domande per voi.",
+      "recommended-engine": {
+        "training-card": {
+          "delivery-mode": {
+            "hybrid": "Ibrido",
+            "on-site": "In loco",
+            "remote": "A distanza"
+          },
+          "registration-required": {
+            "no": "Accesso libero immediato",
+            "yes": "Iscrizione richiesta"
+          }
+        },
+        "trainings": {
+          "description": "Viene consigliato in base ai tuoi progressi per aiutarti a consolidare le tue competenze e ad andare oltre, al momento giusto.",
+          "title": "Andate oltre, al vostro ritmo."
+        }
+      },
       "reset": {
         "button": "Reimpostare e riprovare",
         "modal": {
@@ -2285,6 +2302,7 @@
       "type": {
         "autoformation": "Corsi di autoformazione",
         "e-learning": "Formazione a distanza",
+        "formation": "Formazione",
         "hybrid-training": "Formazione ibrida",
         "in-person-training": "Formazione faccia a faccia",
         "modulix": "Modulo Pix (Beta)",
