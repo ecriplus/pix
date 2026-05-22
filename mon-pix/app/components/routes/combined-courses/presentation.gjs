@@ -7,6 +7,7 @@ import Component from '@glimmer/component';
 import { t } from 'ember-intl';
 import { and, eq } from 'ember-truth-helpers';
 import CombinedCourseItem from 'mon-pix/components/combined-course/combined-course-item';
+import MarkdownToHtml from 'mon-pix/components/markdown-to-html';
 import ENV from 'mon-pix/config/environment';
 import { CombinedCourseStatuses } from 'mon-pix/models/combined-course';
 
@@ -30,7 +31,7 @@ const Header = <template>
       {{/if}}
 
       <div class={{unless (eq @combinedCourse.status "COMPLETED") "combined-course__description"}}>
-        {{@combinedCourse.description}}
+        <MarkdownToHtml @markdown={{@combinedCourse.description}} @mustReplaceLinksFromMarkdown={{true}} />
       </div>
 
       {{#if (eq @combinedCourse.status "NOT_STARTED")}}

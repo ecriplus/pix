@@ -151,6 +151,7 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
     questId: combinedCourseQuestId,
     deletedAt: combinedCourseData.deletedAt,
     deletedBy: combinedCourseData.deletedBy,
+    description: combinedCourseData.blueprint.description,
   });
 
   combinedCourseData.participations.forEach((participation) => {
@@ -224,7 +225,7 @@ export const buildCombinedCourseBlueprints = () => {
     internalName: 'Mon schéma de parcours combiné 2',
     illustration: 'https://assets.pix.org/combined-courses/illu_ia.svg',
     description:
-      "Un parcours pour découvrir l'essentiel sur l'intelligence artificielle : comprendre sa définition, ses domaines d'application, comment elle fonctionne, ainsi que ses enjeux, notamment en matière d'impact environnemental.",
+      "#Un parcours\n pour découvrir l'essentiel sur l'intelligence artificielle : [comprendre sa définition](http://pix.fr), ses domaines d'application, comment elle fonctionne, ainsi que ses enjeux, notamment en matière d'impact environnemental.",
   }).id;
 
   buildCombinedCourseBlueprintShare({ combinedCourseBlueprintId, organizationId: PRO_ORGANIZATION_ID });

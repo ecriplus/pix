@@ -1,0 +1,9 @@
+@use 'pix-design-tokens/typography';
+
+.link-markdown-to-html {
+    display: inline-flex;
+
+  a {
+    @extend %pix-body-l;
+  }
+}

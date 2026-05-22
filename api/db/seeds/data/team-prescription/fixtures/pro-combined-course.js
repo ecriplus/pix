@@ -15,6 +15,8 @@ export const PRO_COMBINED_COURSE = {
       { type: 'module', moduleId: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a' },
       { type: 'module', moduleId: 'f32a2238-4f65-4698-b486-15d51935d335' },
     ],
+    description:
+      "#Un parcours\n pour découvrir l'essentiel sur l'intelligence artificielle : [comprendre sa définition](http://pix.fr), ses domaines d'application, comment elle fonctionne, ainsi que ses enjeux, notamment en matière d'impact environnemental.",
   },
   combinedCourse: {
     code: 'COMBINIX1',
