@@ -12,3 +12,9 @@ export class InvalidBadgeLevelError extends DomainError {
     this.code = 'INVALID_BADGE_LEVEL';
   }
 }
+
+export class CertificationVersionForbiddenDeletionError extends DomainError {
+  constructor() {
+    super('Il est interdit de supprimer une version de référentiel de certification qui a déjà été activée.');
+  }
+}

@@ -128,6 +128,12 @@ export async function getFrameworkHistory({ scope }) {
   return rows.map(_toFrameworkHistoryEntry);
 }
 
+export async function deleteVersion(id) {
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn('certification-frameworks-challenges').where({ versionId: id }).del();
+  await knexConn('certification_versions').where({ id }).del();
+}
+
 const _toFrameworkHistoryEntry = ({ id, startDate, expirationDate, assessmentDuration, challengesConfiguration }) => {
   return new FrameworkHistoryEntry({
     id,

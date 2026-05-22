@@ -37,7 +37,7 @@ export default class CertificationVersionDetailModal extends Component {
     <PixModal
       class="certification-version-detail-modal"
       @title={{this.frameworkLabel}}
-      @showModal={{true}}
+      @showModal={{@showModal}}
       @onCloseButtonClick={{@onClose}}
     >
       <:content>

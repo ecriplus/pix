@@ -18,6 +18,7 @@ import * as versionRepository from '../../infrastructure/repositories/version-re
 import { attachBadges } from './attach-badges.js';
 import { calibrateFrameworkVersion } from './calibrate-framework-version.js';
 import { createCertificationVersion } from './create-certification-version.js';
+import { deleteCertificationVersion } from './delete-certification-version.js';
 import { exportScoWhitelist } from './export-sco-whitelist.js';
 import { findCertificationFrameworks } from './find-certification-frameworks.js';
 import { findComplementaryCertifications } from './find-complementary-certifications.js';
@@ -77,6 +78,7 @@ const usecasesWithoutInjectedDependencies = {
   attachBadges,
   calibrateFrameworkVersion,
   createCertificationVersion,
+  deleteCertificationVersion,
   exportScoWhitelist,
   findCertificationFrameworks,
   findComplementaryCertifications,

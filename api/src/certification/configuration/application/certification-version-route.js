@@ -82,6 +82,33 @@ const register = async function (server) {
         ],
       },
     },
+    {
+      method: 'DELETE',
+      path: '/api/admin/certification-versions/{certificationVersionId}',
+      config: {
+        pre: [
+          {
+            method: (request, h) =>
+              securityPreHandlers.hasAtLeastOneAccessOf([securityPreHandlers.checkAdminMemberHasRoleSuperAdmin])(
+                request,
+                h,
+              ),
+            assign: 'hasAuthorizationToAccessAdminScope',
+          },
+        ],
+        validate: {
+          params: Joi.object({
+            certificationVersionId: identifiersType.certificationVersionId,
+          }),
+        },
+        handler: certificationVersionController.deleteCertificationVersion,
+        tags: ['api', 'admin'],
+        notes: [
+          'Cette route est restreinte aux utilisateurs authentifiés avec le rôle Super Admin',
+          "Elle supprime une version de référentiel de certification en cours d'édition.",
+        ],
+      },
+    },
   ]);
 };
 

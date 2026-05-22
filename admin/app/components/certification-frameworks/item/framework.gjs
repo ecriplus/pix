@@ -23,15 +23,10 @@ export default class CertificationFramework extends Component {
       await certificationFramework.reload();
       this.targetProfilesHistory = certificationFramework.targetProfilesHistory;
     }
-
-    const frameworkHistory = await this.store.queryRecord('framework-history', this.args.frameworkKey);
-    this.frameworkHistory = frameworkHistory?.history;
   }
 
   <template>
-    {{#if this.frameworkHistory}}
-      <FrameworkHistory @history={{this.frameworkHistory}} @scope={{@frameworkKey}} />
-    {{/if}}
+    <FrameworkHistory @frameworkKey={{@frameworkKey}} />
 
     {{#if this.targetProfilesHistory}}
       <History @targetProfilesHistory={{this.targetProfilesHistory}} />

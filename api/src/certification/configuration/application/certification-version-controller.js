@@ -23,8 +23,17 @@ const update = async function (request, h) {
   return h.response().code(204);
 };
 
+const deleteCertificationVersion = async function (request, h) {
+  const certificationVersionId = request.params.certificationVersionId;
+
+  await usecases.deleteCertificationVersion({ certificationVersionId });
+
+  return h.response().code(204);
+};
+
 const certificationVersionController = {
   getVersionById,
+  deleteCertificationVersion,
   update,
 };
 

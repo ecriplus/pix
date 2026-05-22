@@ -37,7 +37,13 @@ module(
       // when
       const screen = await render(
         <template>
-          <CertificationVersionDetailModal @version={{version}} @status="ACTIVE" @scope="CORE" @onClose={{onClose}} />
+          <CertificationVersionDetailModal
+            @version={{version}}
+            @status="ACTIVE"
+            @scope="CORE"
+            @onClose={{onClose}}
+            @showModal={{true}}
+          />
         </template>,
       );
 
@@ -53,7 +59,13 @@ module(
       // when
       const screen = await render(
         <template>
-          <CertificationVersionDetailModal @version={{version}} @status="ACTIVE" @scope="CORE" @onClose={{onClose}} />
+          <CertificationVersionDetailModal
+            @version={{version}}
+            @status="ACTIVE"
+            @scope="CORE"
+            @onClose={{onClose}}
+            @showModal={{true}}
+          />
         </template>,
       );
 
@@ -71,7 +83,13 @@ module(
       // when
       const screen = await render(
         <template>
-          <CertificationVersionDetailModal @version={{version}} @status="ACTIVE" @scope="CORE" @onClose={{onClose}} />
+          <CertificationVersionDetailModal
+            @version={{version}}
+            @status="ACTIVE"
+            @scope="CORE"
+            @onClose={{onClose}}
+            @showModal={{true}}
+          />
         </template>,
       );
 
@@ -98,7 +116,13 @@ module(
       // when
       const screen = await render(
         <template>
-          <CertificationVersionDetailModal @version={{version}} @status="ACTIVE" @scope="CORE" @onClose={{onClose}} />
+          <CertificationVersionDetailModal
+            @version={{version}}
+            @status="ACTIVE"
+            @scope="CORE"
+            @onClose={{onClose}}
+            @showModal={{true}}
+          />
         </template>,
       );
 
@@ -114,12 +138,46 @@ module(
       // when
       const screen = await render(
         <template>
-          <CertificationVersionDetailModal @version={{version}} @status="ACTIVE" @scope="CORE" @onClose={{onClose}} />
+          <CertificationVersionDetailModal
+            @version={{version}}
+            @status="ACTIVE"
+            @scope="CORE"
+            @onClose={{onClose}}
+            @showModal={{true}}
+          />
         </template>,
       );
 
       // then
       assert.dom(screen.getByRole('button', { name: t('common.actions.save') })).exists();
+    });
+
+    test('if sould be hidden when showModal is false', async function (assert) {
+      //given
+      const area = store.createRecord('area', {
+        id: 'area1',
+        title: 'Domaine test',
+        code: '1',
+        color: 'red',
+        frameworkId: 'fw1',
+      });
+      const version = buildVersion({ areas: [area] });
+      const onClose = sinon.stub();
+
+      //when
+      const screen = await render(
+        <template>
+          <CertificationVersionDetailModal
+            @version={{version}}
+            @status="ACTIVE"
+            @scope="CORE"
+            @onClose={{onClose}}
+            @showModal={{false}}
+          />
+        </template>,
+      );
+
+      assert.dom(screen.queryByRole('dialog')).doesNotExist();
     });
   },
 );

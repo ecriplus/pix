@@ -48,8 +48,8 @@ describe('Unit | Certification | Configuration | Application | Router | certific
       });
     });
 
-    describe('when the scope parameter is invalid', function () {
-      it('should return 400 HTTP status code when scope is not a valid id', async function () {
+    describe('when the id parameter is invalid', function () {
+      it('should return 400 HTTP status code when id is not valid', async function () {
         sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin').returns(true);
         sinon.stub(certificationVersionController, 'getVersionById').returns('ok');
         const httpTestServer = new HttpTestServer();
@@ -138,6 +138,60 @@ describe('Unit | Certification | Configuration | Application | Router | certific
         expect(response.statusCode).to.equal(400);
         sinon.assert.notCalled(certificationVersionController.update);
       });
+    });
+  });
+
+  describe('DELETE /api/admin/certification-version/{id}', function () {
+    it('should return 204 HTTP status code', async function () {
+      // given
+      sinon.stub(securityPreHandlers, `checkAdminMemberHasRoleSuperAdmin`).returns(true);
+      sinon
+        .stub(certificationVersionController, 'deleteCertificationVersion')
+        .callsFake((request, h) => h.response().code(204));
+
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      // when
+      const response = await httpTestServer.request('DELETE', '/api/admin/certification-versions/1');
+
+      // then
+      expect(response.statusCode).to.equal(204);
+      sinon.assert.calledOnce(certificationVersionController.deleteCertificationVersion);
+    });
+
+    it('should return 403 HTTP status code when user is not SuperAdmin', async function () {
+      // given
+      sinon
+        .stub(securityPreHandlers, 'hasAtLeastOneAccessOf')
+        .returns((request, h) => h.response().code(403).takeover());
+      sinon.stub(certificationVersionController, 'deleteCertificationVersion').returns('ok');
+
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      // when
+      const response = await httpTestServer.request('DELETE', '/api/admin/certification-versions/1');
+
+      // then
+      expect(response.statusCode).to.equal(403);
+      sinon.assert.notCalled(certificationVersionController.deleteCertificationVersion);
+    });
+
+    it('should return 400 HTTP status code when id is not valid', async function () {
+      // given
+      sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin').returns(true);
+      sinon.stub(certificationVersionController, 'deleteCertificationVersion').returns('ok');
+
+      const httpTestServer = new HttpTestServer();
+      await httpTestServer.register(moduleUnderTest);
+
+      // when
+      const response = await httpTestServer.request('DELETE', '/api/admin/certification-versions/NOT_AN_ID');
+
+      // then
+      expect(response.statusCode).to.equal(400);
+      sinon.assert.notCalled(certificationVersionController.deleteCertificationVersion);
     });
   });
 });

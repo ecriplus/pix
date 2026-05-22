@@ -486,6 +486,13 @@
       }
     },
     "certification-frameworks": {
+      "deletion-modal": {
+        "action-button": "Confirmer la suppression",
+        "content": "Vous vous apprêtez à supprimer une version.",
+        "error-message": "Une erreur s'est produite",
+        "success-message": "La version à bien été supprimée",
+        "title": "Confirmation de suppression d'une version"
+      },
       "item": {
         "framework": {
           "new-version-form": {
