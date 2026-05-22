@@ -1,4 +1,5 @@
 import { config } from '../../../shared/config.js';
+import { getRequestId } from '../../../shared/infrastructure/execution-context-manager.js';
 import { child, SCOPES } from '../../../shared/infrastructure/utils/logger.js';
 import { ChatForbiddenError, ChatNotFoundError, LLMApiError, PromptAlreadyOngoingError } from '../errors.js';
 import { Chat } from '../models/Chat.js';
@@ -42,7 +43,7 @@ export async function promptChat({
     throw new ChatNotFoundError('null id provided');
   }
 
-  const owner = crypto.randomUUID();
+  const owner = getRequestId();
   const locked = await redisMutex.lock(chatId, owner, config.llm.lockChatExpirationDelayMilliseconds);
   if (!locked) {
     throw new PromptAlreadyOngoingError(chatId);

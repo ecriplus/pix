@@ -1,11 +1,9 @@
 import * as assessmentSheetRepository from '../../../../../../src/certification/evaluation/infrastructure/repositories/assessment-sheet-repository.js';
-import { AlgorithmEngineVersion } from '../../../../../../src/certification/shared/domain/models/AlgorithmEngineVersion.js';
 import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
-import { DomainTransaction } from '../../../../../../src/shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../../../../src/shared/domain/errors.js';
 import { Assessment } from '../../../../../../src/shared/domain/models/Assessment.js';
 import { expect } from '../../../../../test-helper.js';
-import { databaseBuilder, knex } from '../../../../../tooling/databases.js';
+import { databaseBuilder } from '../../../../../tooling/databases.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
@@ -155,48 +153,6 @@ describe('Integration | Certification | Evaluation | Infrastructure | Repositori
         // then
         expect(error).to.be.instanceOf(NotFoundError);
       });
-    });
-
-    it('should lock the assessment', async function () {
-      // given
-      const certificationCenter = databaseBuilder.factory.buildCertificationCenter({
-        id: 99,
-      });
-      const session = databaseBuilder.factory.buildSession({
-        certificationCenterId: certificationCenter.id,
-      });
-      const version = databaseBuilder.factory.buildCertificationVersion();
-      const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate({
-        sessionId: session.id,
-        accessibilityAdjustmentNeeded: false,
-      });
-      const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
-        sessionId: session.id,
-        version: AlgorithmEngineVersion.V3,
-        versionId: version.id,
-        userId: certificationCandidate.userId,
-        candidateId: certificationCandidate.id,
-      });
-
-      const originalAssessment = databaseBuilder.factory.buildAssessment({
-        certificationCourseId: certificationCourse.id,
-        type: Assessment.types.CERTIFICATION,
-      });
-
-      await databaseBuilder.commit();
-
-      // when
-      const error = await catchErr(DomainTransaction.execute)(async () => {
-        await assessmentSheetRepository.getByAssessmentId(originalAssessment.id);
-        // mimick a concurrent call on the same row
-        return knex('assessments').where({ id: originalAssessment.id }).first().forUpdate().timeout(100, {
-          cancel: true,
-        });
-      });
-
-      // then
-      expect(error).to.be.instanceOf(Error);
-      expect(error.message).to.equal('Defined query timeout of 100ms exceeded when running query.');
     });
   });
 

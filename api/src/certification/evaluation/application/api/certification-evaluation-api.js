@@ -11,9 +11,13 @@
  * @typedef {import ('../../../../shared/domain/errors.js').AssessmentLackOfChallengesError} AssessmentLackOfChallengesError
  * @typedef {import ('../../../../shared/domain/models/Challenge.js').Challenge} Challenge
  */
-import { withTransaction } from '../../../../shared/domain/DomainTransaction.js';
+import { config } from '../../../../shared/config.js';
+import { getRequestId } from '../../../../shared/infrastructure/execution-context-manager.js';
+import { redisMutex } from '../../../../shared/infrastructure/mutex/RedisMutex.js';
+import { NextChallengeAlreadyComputingError } from '../../domain/errors.js';
 import { usecases } from '../../domain/usecases/index.js';
 
+const GET_NEXT_LOCK_DELAY = config.timeouts.server ? Math.max(config.timeouts.server - 5_000, 5_000) : 5_000;
 /**
  * @function
  * @name rescoreV3Certification
@@ -23,9 +27,9 @@ import { usecases } from '../../domain/usecases/index.js';
  *
  * @returns {Promise<void>}
  */
-export const rescoreV3Certification = async ({ event }) => {
+export async function rescoreV3Certification({ event }) {
   return usecases.scoreV3Certification({ certificationCourseId: event.certificationCourseId, event });
-};
+}
 /**
  * @function
  * @name rescoreV2Certification
@@ -35,9 +39,9 @@ export const rescoreV3Certification = async ({ event }) => {
  *
  * @returns {Promise<void>}
  */
-export const rescoreV2Certification = async ({ event }) => {
+export async function rescoreV2Certification({ event }) {
   return usecases.rescoreV2Certification({ event });
-};
+}
 
 /**
  * @function
@@ -50,9 +54,18 @@ export const rescoreV2Certification = async ({ event }) => {
  * @throws {AssessmentEndedError} test ended or no next challenge available
  * @throws {AssessmentLackOfChallengesError} no eligible challenges remaining before reaching maximum assessment length
  */
-export const selectNextCertificationChallenge = withTransaction(async ({ assessmentId }) => {
-  return usecases.getNextChallenge({ assessmentId });
-});
+export async function selectNextCertificationChallenge({ assessmentId }) {
+  const owner = getRequestId();
+  const locked = await redisMutex.lock(assessmentId.toString(), owner, GET_NEXT_LOCK_DELAY);
+  if (!locked) {
+    throw new NextChallengeAlreadyComputingError();
+  }
+  try {
+    return await usecases.getNextChallenge({ assessmentId });
+  } finally {
+    await redisMutex.release(assessmentId.toString(), owner);
+  }
+}
 
 /**
  * @function
@@ -80,6 +93,6 @@ export async function evaluateAndSaveAnswer({ answer, userId, certificationCours
  *
  * @returns {Promise<void>}
  */
-export const completeCertificationAssessment = async ({ certificationCourseId, locale }) => {
+export async function completeCertificationAssessment({ certificationCourseId, locale }) {
   return usecases.completeCertificationAssessment({ certificationCourseId, locale });
-};
+}

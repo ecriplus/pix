@@ -49,6 +49,16 @@ class ConflictError extends BaseHttpError {
   }
 }
 
+class LockedError extends BaseHttpError {
+  constructor(message = 'The resource being accessed is currently locked', code, meta) {
+    super(message);
+    this.code = code;
+    this.meta = meta;
+    this.title = 'Locked';
+    this.status = 423;
+  }
+}
+
 class MissingQueryParamError extends BaseHttpError {
   constructor(missingParamName) {
     const message = `Missing ${missingParamName} query parameter.`;
@@ -175,6 +185,7 @@ const HttpErrors = {
   BadRequestError,
   BaseHttpError,
   ConflictError,
+  LockedError,
   ForbiddenError,
   MissingQueryParamError,
   NotFoundError,
@@ -198,6 +209,7 @@ export {
   ConflictError,
   ForbiddenError,
   HttpErrors,
+  LockedError,
   MissingQueryParamError,
   NotFoundError,
   PasswordShouldChangeError,

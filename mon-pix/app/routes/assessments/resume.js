@@ -26,11 +26,25 @@ export default class ResumeRoute extends Route {
     if (!transition.to.parent.params.assessment_id) {
       this.assessmentHasNoMoreQuestions = false;
     } else {
-      const assessment = await this.store.findRecord('assessment', transition.to.parent.params.assessment_id, {
+      const assessment = await this.fetchAssessment(transition.to.parent.params.assessment_id, 1);
+      this.assessmentHasNoMoreQuestions = !assessment.nextChallenge;
+    }
+  }
+
+  async fetchAssessment(id, retryCounter) {
+    try {
+      return await this.store.findRecord('assessment', id, {
         backgroundReload: false,
         reload: !this.hasSeenCheckpoint,
       });
-      this.assessmentHasNoMoreQuestions = !assessment.nextChallenge;
+    } catch (error) {
+      const isLocked = error.errors?.some((e) => e.status === '423');
+
+      if (isLocked && retryCounter < 5) {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        return this.fetchAssessment(id, retryCounter + 1);
+      }
+      throw error;
     }
   }
 
