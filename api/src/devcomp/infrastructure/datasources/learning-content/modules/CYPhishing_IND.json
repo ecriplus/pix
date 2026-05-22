@@ -181,14 +181,14 @@
                           "id": "2",
                           "content": "<p>Un message publicitaire de la part d’un commerçant.</p>",
                           "feedback": {
-                            "diagnosis": "<p>Eh non. C’est un message d’arnaque.</p><p>Dans ce message, <strong>l’escroc joue avec les émotions</strong> (ici l’espérance d’un gain) pour  pousser à agir. </p><p>C’est une technique utilisée dans les messages d’hameçonnage.</p>"
+                            "diagnosis": "<p>Eh non. C’est un message d’arnaque.</p><p>Dans ce message, <strong>l’escroc joue avec les émotions</strong> (ici l’espérance d’un gain) pour pousser à agir. </p><p>C’est une technique utilisée dans les messages d’hameçonnage.</p>"
                           }
                         },
                         {
                           "id": "3",
                           "content": "<p>Je ne sais pas.</p>",
                           "feedback": {
-                            "diagnosis": "<p>C’est un message d’arnaque.</p><p>Dans ce message, <strong>l’escroc joue avec les émotions</strong> (ici l’espérance d’un gain) pour  pousser à agir. </p><p>C’est une technique utilisée dans les messages d’hameçonnage.</p>"
+                            "diagnosis": "<p>C’est un message d’arnaque.</p><p>Dans ce message, <strong>l’escroc joue avec les émotions</strong> (ici l’espérance d’un gain) pour pousser à agir. </p><p>C’est une technique utilisée dans les messages d’hameçonnage.</p>"
                           }
                         }
                       ],
