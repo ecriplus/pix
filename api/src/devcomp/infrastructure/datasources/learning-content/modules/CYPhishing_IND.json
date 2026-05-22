@@ -528,7 +528,7 @@
                       "id": "01292ef8-33f2-4efc-b599-5bb58af5cc7e",
                       "type": "text",
                       "tag": "further-information",
-                      "content": "<p>Des indices se cachent parfois dans les URL. Sur ordinateur,&nbsp;<strong>le survol du lien permet de voir l’URL</strong>&nbsp;vers laquellle un bouton veut vous rediriger. Si cette URL comporte des fautes ou n’a rien à voir avec l’expéditeur ou sa demande, il est possible que le mail soit du phishing.</p>"
+                      "content": "<p>Des indices se cachent parfois dans les URL. Sur ordinateur,&nbsp;<strong>le survol du lien permet de voir l’URL</strong>&nbsp;vers laquelle un bouton veut vous rediriger. Si cette URL comporte des fautes ou n’a rien à voir avec l’expéditeur ou sa demande, il est possible que le mail soit du phishing.</p>"
                     }
                   ]
                 },
