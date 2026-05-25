@@ -1,5 +1,24 @@
 # Pix Changelog
 
+# [5.413.0](https://github.com/1024pix/pix/compare/v5.412.0...v5.413.0) (2026-05-25)
+
+### :rocket: Amélioration
+
+- [#16280](https://github.com/1024pix/pix/pull/16280) Ajouter la colonne description à la table trainings (PIX-22852) 
+- [#16277](https://github.com/1024pix/pix/pull/16277) Contextualiser les informations de certificats provenant du back (PIX-22375). 
+- [#16290](https://github.com/1024pix/pix/pull/16290) dernieres modifs virus nov 
+- [#16286](https://github.com/1024pix/pix/pull/16286) FRI modifs module phishing ind avant panel 
+- [#16289](https://github.com/1024pix/pix/pull/16289) Module Phishing_NOV modif sur une consigne 
+- [#16276](https://github.com/1024pix/pix/pull/16276) Visualiser le détail d'une certification d'un candidat (PIX-22536). 
+
+### :building_construction: Tech
+
+- [#16285](https://github.com/1024pix/pix/pull/16285) :package: Force la mise à jour de Braces en version 3.0.3 minimum 
+- [#16282](https://github.com/1024pix/pix/pull/16282) Corriger les bugs d'affichage des dates sur PixAdmin (PIX-22828)#16269 
+- [#16103](https://github.com/1024pix/pix/pull/16103) Limite les appels concurrentiels au endpoint de calcul de prochaine épreuve en certification via un mutex Redis (pix-22855) 
+
+### :coffee: Autre
+
 # [5.412.0](https://github.com/1024pix/pix/compare/v5.411.0...v5.412.0) (2026-05-22)
 
 ### :rocket: Amélioration
