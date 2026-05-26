@@ -719,10 +719,13 @@ export default function routes() {
       data: [
         {
           type: 'oidc-identity-providers',
-          id: 'oidc-partner',
+          id: 'OIDC_PARTNER',
           attributes: {
             code: 'OIDC_PARTNER',
+            application: 'app',
+            'application-tld': '.fr',
             'organization-name': 'Partenaire OIDC',
+            slug: 'oidc-partner',
             'should-close-session': false,
             source: 'oidc-externe',
           },
@@ -736,10 +739,13 @@ export default function routes() {
       data: [
         {
           type: 'oidc-identity-providers',
-          id: 'oidc-partner',
+          id: 'OIDC_PARTNER',
           attributes: {
             code: 'OIDC_PARTNER',
+            application: 'app',
+            'application-tld': '.fr',
             'organization-name': 'Partenaire OIDC',
+            slug: 'oidc-partner',
             'should-close-session': false,
             source: 'oidc-externe',
           },

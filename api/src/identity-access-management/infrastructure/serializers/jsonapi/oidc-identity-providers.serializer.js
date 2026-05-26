@@ -6,8 +6,10 @@ const serialize = function (oidcIdentityProviders) {
   return new Serializer('oidc-identity-providers', {
     transform(oidcIdentityProvider) {
       return {
-        id: oidcIdentityProvider.slug,
+        id: oidcIdentityProvider.code,
         code: oidcIdentityProvider.code,
+        application: oidcIdentityProvider.application,
+        applicationTld: oidcIdentityProvider.applicationTld,
         organizationName: oidcIdentityProvider.organizationName,
         slug: oidcIdentityProvider.slug,
         shouldCloseSession: oidcIdentityProvider.shouldCloseSession,
@@ -15,7 +17,16 @@ const serialize = function (oidcIdentityProviders) {
         isVisible: oidcIdentityProvider.isVisible,
       };
     },
-    attributes: ['code', 'organizationName', 'slug', 'shouldCloseSession', 'source', 'isVisible'],
+    attributes: [
+      'code',
+      'application',
+      'applicationTld',
+      'organizationName',
+      'slug',
+      'shouldCloseSession',
+      'source',
+      'isVisible',
+    ],
   }).serialize(oidcIdentityProviders);
 };
 

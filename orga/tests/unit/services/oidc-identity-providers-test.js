@@ -11,7 +11,7 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
   let storeStub;
 
   const oidcPartner = {
-    id: 'oidc-partner',
+    id: 'OIDC_PARTNER',
     code: 'OIDC_PARTNER',
     slug: 'partenaire-oidc',
     organizationName: 'Partenaire OIDC',
@@ -21,7 +21,7 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
   };
 
   const nonVisibleIdentityProvider = {
-    id: 'oidc-partner',
+    id: 'OIDC_PARTNER',
     code: 'OIDC_PARTNER',
     slug: 'partenaire-oidc',
     organizationName: 'Partenaire OIDC',
@@ -127,6 +127,42 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
     });
   });
 
+  module('findByCode', function () {
+    module('when the requested identity provider is available', function () {
+      test('returns the identity provider', async function (assert) {
+        // given
+        storeStub = Service.create({
+          findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
+          peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
+        });
+        oidcIdentityProvidersService.set('store', storeStub);
+
+        // when
+        const identityProvider = await oidcIdentityProvidersService.findByCode(oidcPartner.code);
+
+        // then
+        assert.strictEqual(identityProvider.code, oidcPartner.code);
+      });
+    });
+
+    module('when the requested identity provider is not available', function () {
+      test('returns undefined', async function (assert) {
+        // given
+        storeStub = Service.create({
+          findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
+          peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
+        });
+        oidcIdentityProvidersService.set('store', storeStub);
+
+        // when
+        const identityProvider = await oidcIdentityProvidersService.findByCode('not-existing-code');
+
+        // then
+        assert.strictEqual(identityProvider, undefined);
+      });
+    });
+  });
+
   module('findBySlug', function () {
     module('when the requested identity provider is available', function () {
       test('returns the identity provider', async function (assert) {
@@ -172,21 +208,21 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
         { identityProvider: 'AUTRE_FOURNISSEUR_D_IDENTITE' },
       ];
       const oidcPartnerObject = Object.create({
-        id: 'france-connect',
+        id: 'FRANCE_CONNECT',
         code: 'FRANCE_CONNECT',
         organizationName: 'France Connect',
         shouldCloseSession: false,
         source: 'france-connect',
       });
       const secondOidcPartnerObject = Object.create({
-        id: 'impots-gouv',
+        id: 'IMPOTS_GOUV',
         code: 'IMPOTS_GOUV',
         organizationName: 'Impots.gouv',
         shouldCloseSession: false,
         source: 'impots-gouv',
       });
       const thirdOidcPartnerObject = Object.create({
-        id: 'la-poste',
+        id: 'LA_POSTE',
         code: 'LA_POSTE',
         organizationName: 'la-poste.gouv',
         shouldCloseSession: false,

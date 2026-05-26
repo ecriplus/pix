@@ -12,7 +12,7 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
   hooks.beforeEach(function () {
     // given
     oidcPartner = {
-      id: 'oidc-partner',
+      id: 'OIDC_PARTNER',
       code: 'OIDC_PARTNER',
       organizationName: 'Partenaire OIDC',
       shouldCloseSession: false,
@@ -25,6 +25,78 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
     });
     oidcIdentityProvidersService = this.owner.lookup('service:oidcIdentityProviders');
     oidcIdentityProvidersService.set('store', storeStub);
+  });
+
+  module('findByCode', function () {
+    module('when the requested identity provider is available', function () {
+      test('returns the identity provider', async function (assert) {
+        // given
+        storeStub = Service.create({
+          findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
+          peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
+        });
+        oidcIdentityProvidersService.set('store', storeStub);
+
+        // when
+        const identityProvider = await oidcIdentityProvidersService.findByCode(oidcPartner.code);
+
+        // then
+        assert.strictEqual(identityProvider.code, oidcPartner.code);
+      });
+    });
+
+    module('when the requested identity provider is not available', function () {
+      test('returns undefined', async function (assert) {
+        // given
+        storeStub = Service.create({
+          findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
+          peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
+        });
+        oidcIdentityProvidersService.set('store', storeStub);
+
+        // when
+        const identityProvider = await oidcIdentityProvidersService.findByCode('not-existing-code');
+
+        // then
+        assert.strictEqual(identityProvider, undefined);
+      });
+    });
+  });
+
+  module('findBySlug', function () {
+    module('when the requested identity provider is available', function () {
+      test('returns the identity provider', async function (assert) {
+        // given
+        storeStub = Service.create({
+          findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
+          peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
+        });
+        oidcIdentityProvidersService.set('store', storeStub);
+
+        // when
+        const identityProvider = await oidcIdentityProvidersService.findBySlug(oidcPartner.slug);
+
+        // then
+        assert.strictEqual(identityProvider.code, oidcPartner.code);
+      });
+    });
+
+    module('when the requested identity provider is not available', function () {
+      test('returns undefined', async function (assert) {
+        // given
+        storeStub = Service.create({
+          findAll: sinon.stub().resolves([Object.create(oidcPartner)]),
+          peekAll: sinon.stub().returns([Object.create(oidcPartner)]),
+        });
+        oidcIdentityProvidersService.set('store', storeStub);
+
+        // when
+        const identityProvider = await oidcIdentityProvidersService.findBySlug('not-existing-slug');
+
+        // then
+        assert.strictEqual(identityProvider, undefined);
+      });
+    });
   });
 
   module('loadAllAvailableIdentityProviders', function () {
@@ -56,24 +128,6 @@ module('Unit | Service | oidc-identity-providers', function (hooks) {
       assert.strictEqual(oidcIdentityProvidersService.list[0].organizationName, oidcPartner.organizationName);
       assert.strictEqual(oidcIdentityProvidersService.list[0].shouldCloseSession, oidcPartner.shouldCloseSession);
       assert.strictEqual(oidcIdentityProvidersService.list[0].source, oidcPartner.source);
-    });
-  });
-
-  module('isProviderEnabled', function () {
-    test('returns true if given provider is in the list', async function (assert) {
-      // when
-      const isProviderEnabled = await oidcIdentityProvidersService.isProviderEnabled('oidc-partner');
-
-      // then
-      assert.true(isProviderEnabled);
-    });
-
-    test('returns false if given provider is in not the list', async function (assert) {
-      // when
-      const isProviderEnabled = await oidcIdentityProvidersService.isProviderEnabled('disabled-provider');
-
-      // then
-      assert.false(isProviderEnabled);
     });
   });
 });

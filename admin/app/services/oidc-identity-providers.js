@@ -1,5 +1,7 @@
 import Service, { service } from '@ember/service';
 
+const PIX_APP_APPLICATION_NAME = 'app';
+
 export default class OidcIdentityProviders extends Service {
   @service store;
 
@@ -11,6 +13,18 @@ export default class OidcIdentityProviders extends Service {
     return this.list.length > 0;
   }
 
+  get identityProvidersForPixApp() {
+    return this.list.filter((identityProvider) => identityProvider.application == PIX_APP_APPLICATION_NAME);
+  }
+
+  findByCode(identityProviderCode) {
+    return this.list.find((oidcProvider) => oidcProvider.code === identityProviderCode);
+  }
+
+  findBySlug(identityProviderSlug) {
+    return this.list.find((oidcProvider) => oidcProvider.slug === identityProviderSlug);
+  }
+
   async loadAllAvailableIdentityProviders() {
     await this.store.findAll('oidc-identity-provider');
   }
@@ -19,10 +33,5 @@ export default class OidcIdentityProviders extends Service {
     await this.store.findAll('oidc-identity-provider', {
       adapterOptions: { readyIdentityProviders: true },
     });
-  }
-
-  isProviderEnabled(identityProviderSlug) {
-    const oidcIdentityProvider = this.list.find((provider) => provider.id === identityProviderSlug);
-    return oidcIdentityProvider !== undefined;
   }
 }

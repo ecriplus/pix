@@ -8,46 +8,31 @@ import { t } from 'ember-intl';
 
 import OidcProviderSelector from './oidc-provider-selector';
 
-// It will be managed through an API property in the future
-const EXCLUDED_PROVIDER_CODES = ['FWB', 'GOOGLE'];
-
 export default class SsoSelectionForm extends Component {
   @service router;
   @service oidcIdentityProviders;
 
-  @tracked selectedProviderId = null;
+  @tracked selectedIdentityProviderCode = null;
 
   @action
-  async onProviderChange(selectedProviderId) {
-    this.selectedProviderId = selectedProviderId;
+  async onProviderChange(selectedIdentityProviderCode) {
+    this.selectedIdentityProviderCode = selectedIdentityProviderCode;
   }
 
-  get providers() {
-    return this.oidcIdentityProviders.visibleIdentityProviders.filter(
-      (provider) => !EXCLUDED_PROVIDER_CODES.includes(provider.code),
-    );
+  get hasSelectedIdentityProvider() {
+    return this.selectedIdentityProviderCode !== null;
   }
 
-  get hasSelectedProvider() {
-    return this.selectedProviderId !== null;
+  get selectedIdentityProvider() {
+    return this.oidcIdentityProviders.findByCode(this.selectedIdentityProviderCode);
   }
 
-  get selectedProviderName() {
-    const provider = this.oidcIdentityProviders.visibleIdentityProviders.find(
-      (provider) => provider.id === this.selectedProviderId,
-    );
-    if (!provider) return null;
-
-    return provider.organizationName;
+  get selectedIdentityProviderName() {
+    return this.selectedIdentityProvider.organizationName;
   }
 
   get shouldDisplayAccountRecoveryBanner() {
-    const provider = this.oidcIdentityProviders.visibleIdentityProviders.find(
-      (provider) => provider.id === this.selectedProviderId,
-    );
-    if (!provider) return false;
-
-    return this.oidcIdentityProviders.shouldDisplayAccountRecoveryBanner(provider.code);
+    return this.oidcIdentityProviders.shouldDisplayAccountRecoveryBanner(this.selectedIdentityProviderCode);
   }
 
   get accountRecoveryUrl() {
@@ -55,10 +40,9 @@ export default class SsoSelectionForm extends Component {
   }
 
   @action
-  goToOidcProviderLoginPage() {
+  goToIdentityProviderLoginPage() {
     this.oidcIdentityProviders.isOidcProviderAuthenticationInProgress = true;
-    const selectedOidcProviderSlug = this.oidcIdentityProviders[this.selectedProviderId].slug;
-    this.router.transitionTo('authentication.login-oidc', selectedOidcProviderSlug);
+    this.router.transitionTo('authentication.login-oidc', this.selectedIdentityProvider.slug);
   }
 
   <template>
@@ -71,9 +55,12 @@ export default class SsoSelectionForm extends Component {
         {{t "common.form.mandatory-all-fields"}}
       </p>
 
-      <OidcProviderSelector @providers={{this.providers}} @onProviderChange={{this.onProviderChange}} />
+      <OidcProviderSelector
+        @providers={{this.oidcIdentityProviders.visibleIdentityProviders}}
+        @onProviderChange={{this.onProviderChange}}
+      />
 
-      {{#if this.hasSelectedProvider}}
+      {{#if this.hasSelectedIdentityProvider}}
         {{#if this.shouldDisplayAccountRecoveryBanner}}
           <PixNotificationAlert class="sso-selection-form__should-display-account-recovery-banner">
             {{t
@@ -85,7 +72,7 @@ export default class SsoSelectionForm extends Component {
         {{/if}}
 
         <PixButton
-          @triggerAction={{this.goToOidcProviderLoginPage}}
+          @triggerAction={{this.goToIdentityProviderLoginPage}}
           @isLoading={{this.oidcIdentityProviders.isOidcProviderAuthenticationInProgress}}
           aria-describedby="signin-message"
         >
@@ -97,7 +84,7 @@ export default class SsoSelectionForm extends Component {
         </PixButton>
 
         <p id="signin-message" class="sso-selection-form__signin-message" aria-live="polite">
-          {{t "pages.authentication.sso-selection.login.message" providerName=this.selectedProviderName}}
+          {{t "pages.authentication.sso-selection.login.message" providerName=this.selectedIdentityProviderName}}
         </p>
       {{else}}
         <PixButton @type="button" @isDisabled={{true}}>
