@@ -10,7 +10,6 @@ import * as versionApi from '../../../configuration/application/api/version-api.
 import * as verifyCertificateCodeService from '../../../evaluation/domain/services/verify-certificate-code-service.js';
 import * as certificationBadgesService from '../../../shared/domain/services/certification-badges-service.js';
 import * as certificationAssessmentRepository from '../../../shared/infrastructure/repositories/certification-assessment-repository.js';
-import * as sharedCertificationCandidateRepository from '../../../shared/infrastructure/repositories/certification-candidate-repository.js';
 import * as certificationCenterRepository from '../../../shared/infrastructure/repositories/certification-center-repository.js';
 import * as sessionManagementCertificationChallengeRepository from '../../../shared/infrastructure/repositories/certification-challenge-repository.js';
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
@@ -19,15 +18,15 @@ import * as complementaryCertificationCourseResultRepository from '../../../shar
 import * as userRepository from '../../../shared/infrastructure/repositories/user-repository.js';
 import * as assessmentSheetRepository from '../../infrastructure/repositories/assessment-sheet-repository.js';
 import * as calibratedChallengeRepository from '../../infrastructure/repositories/calibrated-challenge-repository.js';
+import * as candidateRepository from '../../infrastructure/repositories/candidate-repository.js';
 import * as certificationAssessmentHistoryRepository from '../../infrastructure/repositories/certification-assessment-history-repository.js';
-import * as certificationCandidateRepository from '../../infrastructure/repositories/certification-candidate-repository.js';
 import * as certificationCompanionAlertRepository from '../../infrastructure/repositories/certification-companion-alert-repository.js';
 import * as challengeCalibrationRepository from '../../infrastructure/repositories/challenge-calibration-repository.js';
 import * as complementaryCertificationScoringCriteriaRepository from '../../infrastructure/repositories/complementary-certification-scoring-criteria-repository.js';
 import { certificationCompletedJobRepository } from '../../infrastructure/repositories/jobs/certification-completed-job-repository.js';
 import * as pixPlusCertificationCourseRepository from '../../infrastructure/repositories/pix-plus-certification-course-repository.js';
 import * as scoringConfigurationRepository from '../../infrastructure/repositories/scoring-configuration-repository.js';
-import * as evaluationSessionRepository from '../../infrastructure/repositories/session-repository.js';
+import * as sessionRepository from '../../infrastructure/repositories/session-repository.js';
 import * as flashAlgorithmService from '../services/algorithm-methods/flash.js';
 import { services } from '../services/index.js';
 import pickChallengeService from '../services/pick-challenge-service.js';
@@ -52,7 +51,7 @@ import { simulateScoreFromCapacity } from './simulate-score-from-capacity.js';
  * @typedef {scoringConfigurationRepository} ScoringConfigurationRepository
  * @typedef {assessmentSheetRepository} AssessmentSheetRepository
  * @typedef {certificationCompanionAlertRepository} CertificationCompanionAlertRepository
- * @typedef {evaluationSessionRepository} EvaluationSessionRepository
+ * @typedef {sessionRepository} SessionRepository
  * @typedef {certificationAssessmentRepository} CertificationAssessmentRepository
  * @typedef {complementaryCertificationScoringCriteriaRepository} ComplementaryCertificationScoringCriteriaRepository
  * @typedef {assessmentResultRepository} AssessmentResultRepository
@@ -60,7 +59,7 @@ import { simulateScoreFromCapacity } from './simulate-score-from-capacity.js';
  * @typedef {sharedChallengeRepository} SharedChallengeRepository
  * @typedef {certificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
  * @typedef {flashAlgorithmService} FlashAlgorithmService
- * @typedef {certificationCandidateRepository} CertificationCandidateRepository
+ * @typedef {candidateRepository} CandidateRepository
  * @typedef {answerRepository} AnswerRepository
  * @typedef {sharedChallengeRepository} SharedChallengeRepository
  * @typedef {calibratedChallengeRepository} CalibratedChallengeRepository
@@ -75,12 +74,11 @@ const dependencies = {
   certificationAssessmentHistoryRepository,
   scoringConfigurationRepository,
   assessmentSheetRepository,
-  evaluationSessionRepository,
+  sessionRepository,
   sessionManagementCertificationChallengeRepository,
   challengeCalibrationRepository,
-  certificationCandidateRepository,
+  candidateRepository,
   assessmentRepository,
-  sharedCertificationCandidateRepository,
   verifyCertificateCodeService,
   assessmentResultRepository,
   answerRepository,

@@ -5,15 +5,14 @@ import * as areaRepository from '../../../../shared/infrastructure/repositories/
 import * as assessmentResultRepository from '../../../../shared/infrastructure/repositories/assessment-result-repository.js';
 import { injectDependencies } from '../../../../shared/infrastructure/utils/dependency-injection.js';
 import * as certificationAssessmentRepository from '../../../shared/infrastructure/repositories/certification-assessment-repository.js';
-import * as sharedCertificationCandidateRepository from '../../../shared/infrastructure/repositories/certification-candidate-repository.js';
 import * as certificationChallengeLiveAlertRepository from '../../../shared/infrastructure/repositories/certification-challenge-live-alert-repository.js';
 import * as certificationCourseRepository from '../../../shared/infrastructure/repositories/certification-course-repository.js';
 import * as competenceMarkRepository from '../../../shared/infrastructure/repositories/competence-mark-repository.js';
 import * as complementaryCertificationBadgesRepository from '../../../shared/infrastructure/repositories/complementary-certification-badge-repository.js';
 import * as complementaryCertificationCourseResultRepository from '../../../shared/infrastructure/repositories/complementary-certification-course-result-repository.js';
 import * as calibratedChallengeRepository from '../../infrastructure/repositories/calibrated-challenge-repository.js';
+import * as candidateRepository from '../../infrastructure/repositories/candidate-repository.js';
 import * as certificationAssessmentHistoryRepository from '../../infrastructure/repositories/certification-assessment-history-repository.js';
-import * as certificationCandidateRepository from '../../infrastructure/repositories/certification-candidate-repository.js';
 import * as challengeCalibrationRepository from '../../infrastructure/repositories/challenge-calibration-repository.js';
 import * as complementaryCertificationScoringCriteriaRepository from '../../infrastructure/repositories/complementary-certification-scoring-criteria-repository.js';
 import * as scoringConfigurationRepository from '../../infrastructure/repositories/scoring-configuration-repository.js';
@@ -40,12 +39,11 @@ import { handleV3CertificationScoring } from './scoring/scoring-v3.js';
  * @typedef {scoringService} ScoringService
  * @typedef {areaRepository} AreaRepository
  * @typedef {placementProfileService} PlacementProfileService
- * @typedef {certificationCandidateRepository} CertificationCandidateRepository
+ * @typedef {candidateRepository} CandidateRepository
  * @typedef {complementaryCertificationBadgesRepository} ComplementaryCertificationBadgesRepository
  * @typedef {certificationAssessmentRepository} CertificationAssessmentRepository
- * @typedef {complementaryCertificationCourseResultRepository} ComplementaryCertificationCourseResultRepository *
+ * @typedef {complementaryCertificationCourseResultRepository} ComplementaryCertificationCourseResultRepository
  * @typedef {complementaryCertificationScoringCriteriaRepository} ComplementaryCertificationScoringCriteriaRepository
- * @typedef {sharedCertificationCandidateRepository} SharedCertificationCandidateRepository
  * @typedef {sharedVersionRepository} SharedVersionRepository
  * @typedef {calibratedChallengeRepository} CalibratedChallengeRepository
  */
@@ -63,12 +61,11 @@ const dependencies = {
   areaRepository,
   placementProfileService,
   scoringService,
-  certificationCandidateRepository,
+  candidateRepository,
   complementaryCertificationBadgesRepository,
   certificationAssessmentRepository,
   complementaryCertificationCourseResultRepository,
   complementaryCertificationScoringCriteriaRepository,
-  sharedCertificationCandidateRepository,
   calibratedChallengeRepository,
 };
 

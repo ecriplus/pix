@@ -10,17 +10,41 @@ describe('Certification | Evaluation | Integration | Infrastructure | Repositori
     context('when the session exists', function () {
       it('should return a session', async function () {
         // given
-        const sessionId = databaseBuilder.factory.buildSession({ id: 123 }).id;
+        const sessionId = databaseBuilder.factory.buildSession({ id: 123, date: '2023-06-06', time: '11:02:00' }).id;
         await databaseBuilder.commit();
 
         // when
         const session = await sessionRepository.get({ id: sessionId });
 
         // then
-        const expectedSession = domainBuilder.certification.evaluation.buildResultsSession({
+        const expectedSession = domainBuilder.certification.evaluation.buildSession({
           id: session.id,
+          date: '2023-06-06',
+          time: '11:02:00',
           isFinalized: session.isFinalized,
           isPublished: session.isPublished,
+          hasStarted: false,
+        });
+        expect(session).to.deepEqualInstance(expectedSession);
+      });
+
+      it('returns a session that "hasStarted" if there is at least one certification-course related to the session', async function () {
+        // given
+        const sessionId = databaseBuilder.factory.buildSession({ id: 123, date: '2023-06-06', time: '11:02:00' }).id;
+        databaseBuilder.factory.buildCertificationCourse({ sessionId });
+        await databaseBuilder.commit();
+
+        // when
+        const session = await sessionRepository.get({ id: sessionId });
+
+        // then
+        const expectedSession = domainBuilder.certification.evaluation.buildSession({
+          id: session.id,
+          date: '2023-06-06',
+          time: '11:02:00',
+          isFinalized: session.isFinalized,
+          isPublished: session.isPublished,
+          hasStarted: true,
         });
         expect(session).to.deepEqualInstance(expectedSession);
       });
@@ -42,7 +66,7 @@ describe('Certification | Evaluation | Integration | Infrastructure | Repositori
       it('should return a session', async function () {
         // given
         const certificationCourseId = 456;
-        const sessionId = databaseBuilder.factory.buildSession({ id: 123 }).id;
+        const sessionId = databaseBuilder.factory.buildSession({ id: 123, date: '2023-06-06', time: '11:02:00' }).id;
         databaseBuilder.factory.buildCertificationCourse({
           id: certificationCourseId,
           sessionId,
@@ -55,10 +79,13 @@ describe('Certification | Evaluation | Integration | Infrastructure | Repositori
         });
 
         // then
-        const expectedSession = domainBuilder.certification.evaluation.buildResultsSession({
+        const expectedSession = domainBuilder.certification.evaluation.buildSession({
           id: session.id,
+          date: '2023-06-06',
+          time: '11:02:00',
           isFinalized: session.isFinalized,
           isPublished: session.isPublished,
+          hasStarted: true,
         });
         expect(session).to.deepEqualInstance(expectedSession);
       });
@@ -74,6 +101,45 @@ describe('Certification | Evaluation | Integration | Infrastructure | Repositori
         // then
         expect(error).to.be.an.instanceof(NotFoundError);
       });
+    });
+  });
+
+  describe('#update', function () {
+    it('should only update allowed fields', async function () {
+      // given
+      databaseBuilder.factory.buildSession({
+        id: 123,
+        date: '2023-06-06',
+        time: '18:22:00',
+        accessCode: 'ABCDEF',
+        finalizedAt: new Date(),
+        publishedAt: new Date(),
+      }).id;
+      await databaseBuilder.commit();
+      const sessionToUpdate = domainBuilder.certification.evaluation.buildSession({
+        id: 123,
+        accessCode: 'FMKP39',
+        date: '2025-05-05',
+        time: '08:02:00',
+        isFinalized: false,
+        isPublished: false,
+      });
+
+      // when
+      await sessionRepository.update(sessionToUpdate);
+
+      // then
+      const updatedSession = await sessionRepository.get({ id: 123 });
+      expect(updatedSession).to.deepEqualInstance(
+        domainBuilder.certification.evaluation.buildSession({
+          id: 123,
+          date: '2025-05-05',
+          time: '08:02:00',
+          accessCode: 'ABCDEF',
+          isFinalized: true,
+          isPublished: true,
+        }),
+      );
     });
   });
 });
