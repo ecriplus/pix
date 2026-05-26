@@ -1,0 +1,837 @@
+{
+  "id": "97430819-8e90-47fe-a78c-fff231c4a17f",
+  "shortId": "8baec56e",
+  "slug": "prendre-en-main-traitement-texte",
+  "title": "Prendre en main un traitement de texte",
+  "isBeta": false,
+  "visibility": "public",
+  "details": {
+    "image": "https://assets.pix.org/modules/placeholder-details.svg",
+    "description": "<p>Écrire une lettre, rédiger un devoir, compléter un document administratif, faire une attestation, tout le monde peut avoir besoin d’écrire du texte sur un ordinateur avec un outil dédié.&nbsp; Dans ce module, découvrez comment utiliser le traitement de texte pour écrire, organiser et enregistrer un document.</p>",
+    "duration": 10,
+    "level": "novice",
+    "objectives": [
+      "<p>Reconnaître un logiciel de traitement de texte</p>",
+      "<p>Se repérer dans l’interface d’un logiciel de traitement de texte</p>",
+      "<p>Enregistrer un document avec un logiciel de traitement de texte</p>"
+    ],
+    "tabletSupport": "comfortable"
+  },
+  "sections": [
+    {
+      "id": "9ff56d15-ec37-402b-b8a1-ac14b6b5826c",
+      "type": "question-yourself",
+      "grains": [
+        {
+          "id": "019c02cf-6324-4d49-a745-ffb64af57dc6",
+          "type": "discovery",
+          "title": "accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "69112264-78fa-4760-b725-ca091a92ca09",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Mina veut écrire au propre sur son ordinateur le discours qu’elle a prévu pour le mariage de sa sœur. Elle veut recopier le brouillon qu’elle rédigé sur du papier. Mais Mina ne sait pas comment s’y prendre…</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "8c29c4d7-9a6a-48d5-8388-aa206d1ff895",
+                "type": "qcu-discovery",
+                "instruction": "<p>Selon vous, quel outil semble le plus adapté pour écrire une lettre ?</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>Écrire son discours avec la messagerie électronique.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non.<br> L’application de traitement de texte est l’outil adapté pour rédiger du texte sur ordinateur.</p>"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>Écrire son discours sur l’outil bloc-note de l’ordinateur.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Eh non.<br> L’application de traitement de texte est l’outil adapté pour rédiger du texte sur ordinateur.</p>"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>Écrire son discours avec une application de traitement de texte.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>Exactement ! <br> L’application de traitement de texte est l’outil adapté pour rédiger du texte sur ordinateur.</p>"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>Je ne sais pas.</p>",
+                    "feedback": {
+                      "diagnosis": "<p>L’application de traitement de texte est l’outil adapté pour rédiger du texte sur ordinateur.</p>"
+                    }
+                  }
+                ],
+                "solution": "3"
+              }
+            }
+          ]
+        },
+        {
+          "id": "6aef291d-4cbd-4acc-b4ab-69701b422eb5",
+          "type": "transition",
+          "title": "Transition accroche",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "7752ec11-aeef-4981-a4d0-d32f446bdfe2",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Mina doit donc commencer par trouver une application de traitement de texte pour rédiger son discours.</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2b407add-ebfa-48fa-9968-297df2da78e2",
+      "type": "explore-to-understand",
+      "grains": [
+        {
+          "id": "9ae8f1ed-f4a7-4383-a3a5-1aa0dd0c4ce6",
+          "type": "discovery",
+          "title": "D1 :  Logiciel de traitement de texte",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "33390847-60c5-429e-8c07-1068ac4b85e1",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "QCU image",
+                "url": "https://epreuves.pix.fr/fr/qcu_image/outilstdtexte.html",
+                "instruction": "<p>Parmi les applications ci-dessous, sélectionnez une application de traitement de texte qui permettra à Mina d’écrire son discours sur son ordinateur.</p>",
+                "solution": "",
+                "height": 0
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "eb93f2b7-bcfe-4f1f-b8a7-120150399d63",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Feedback&nbsp;: Eh non. / Exactement&nbsp;!&nbsp; <br>Les <strong>applications de traitement de texte</strong> sont souvent représentées par des icônes qui montrent une page, un crayon ou qui évoquent l’écriture. 📄🖊️ </p><p>Voici quelques exemples d’applications courantes&nbsp;: LibreOffice Writer, Apache OpenOffice, Microsoft Word, Google Docs, Pages.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "b0537f02-290b-4557-aebb-d4a9ba951f4f",
+          "type": "short-lesson",
+          "title": "L1 : Les traitements de texte",
+          "components": [
+            {
+              "type": "stepper",
+              "instruction": "",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "a9495675-5335-4c12-979c-660bb442ed99",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p>Une <strong>application de traitement de texte</strong> permet d’écrire, de modifier et de mettre en forme du texte sur ordinateur. 💻&nbsp;</p><p><br>Il existe de nombreuses applications de traitement de texte.&nbsp; Certaines sont <strong>gratuites</strong>, d’autres sont <strong>payantes</strong>. 💵 </p><p>Ces applications peuvent être <strong>installées sur votre appareil</strong> ou <strong>accessibles en ligne</strong>.</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "e712d493-f9d1-4707-b44d-1902d6672a4a",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p>À l’ouverture, l’application propose généralement de <strong>créer un nouveau document</strong> ou d’<strong>ouvrir un document existant</strong>.</p>"
+                    },
+                    {
+                      "id": "33518695-e1ce-4a27-aede-01e7f3d55a11",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/31_MiseEnFormeTxt_NOV2/ouverture-traitement-texte.png",
+                      "alt": "",
+                      "alternativeText": "",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "a04d3fe2-d8f0-43bb-a8db-87b92079ef09",
+                      "type": "text",
+                      "tag": "further-information",
+                      "content": "<p>Un document peut généralement s’ouvrir avec toutes les applications de traitement de texte.</p>"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "d5ea8652-7c30-4fb9-9c00-b6a634c9c26a",
+          "type": "transition",
+          "title": "Transition #2",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "f969abb8-d21c-4d5f-85f0-497bef589436",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Mina ouvre l’application de traitement de texte de son ordinateur et crée un nouveau document pour recopier son discours.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "03d051a0-693c-4a71-b975-ec7333092f0e",
+          "type": "discovery",
+          "title": "D2 : découvrir l’interface du traitement de text",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "ccc324a5-a1d3-4cfa-abe9-5a33baee133a",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Mina souhaite commencer à recopier le début de son discours.</p><p><strong>Dans l’application de traitement de texte ci-dessous, écrivez la phrase suivante&nbsp;:</strong></p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "ad0c758f-962d-43d3-9120-0b90957be471",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/31_MiseEnFormeTxt_NOV2/phrasearecopier2.jpg",
+                "alt": "phrase à recopier dans l’alternative textuelle",
+                "alternativeText": "<p>Je prends la parole aujourd’hui avec beaucoup d’émotion</p>",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "e2097fb9-556b-46d3-90e3-c63f17fd3de3",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "saisie",
+                "url": "https://epreuves.pix.fr/pixwriter-mise-en-forme/pixwriter-mise-en-forme.html?lang=fr&mode=mdx-miseenformetxt-2-d2#5b5663435917444754467806454254444973",
+                "instruction": "Écrivez la phrase dans l’application de traitement de texte ci-dessous.",
+                "solution": "courgette",
+                "height": 400
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "32ba46fc-0b8b-4089-a28d-d9e31ea39883",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Feedback&nbsp;:&nbsp;Pour écrire du texte dans une application de traitement de texte, il faut se placer dans la <strong>zone centrale</strong>, appelée <strong>zone de travail</strong>, puis saisir le texte à l’aide de son clavier.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "02bd39bd-fee4-4bef-86d1-106a01b15ac9",
+          "type": "short-lesson",
+          "title": "L2 : Les 3 zones",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "ca051382-9f9d-4824-9b11-541fa559ff1d",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Les applications de traitement de texte sont organisés en trois zones principales&nbsp;:</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "3941faf3-a170-464a-bce6-7f00432f54ce",
+                "type": "image",
+                "url": "https://assets.pix.org/draft/modules/31_MiseEnFormeTxt_NOV2/infographie3zones.png",
+                "alt": "",
+                "alternativeText": "",
+                "legend": "",
+                "licence": ""
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "8275f9df-9b89-4db3-980f-0c5c0f2d773f",
+                "type": "text",
+                "tag": " ",
+                "content": "<ul><li>La <strong>zone de travail</strong>&nbsp;: pour écrire et modifier votre texte avec le clavier.</li><li>La <strong>barre d’outils</strong>&nbsp;: pour modifier l’apparence du texte dans zone de travail centrale.</li><li>La <strong>barre des menus</strong>&nbsp;: pour accéder à des options supplémentaires ou des actions qui concernent tout le document (comme «&nbsp;Enregistrer&nbsp;» ou «&nbsp;Imprimer&nbsp;»).</li></ul>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "7a6b332a-1ff6-4548-8b29-b8d98457f9ff",
+          "type": "transition",
+          "title": "Transition #3",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "460dafa8-bbc3-49cc-ac88-996137376374",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Mina souhaite continuer la rédaction de son discours… mais elle a peur de perdre son travail.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c467930f-3645-49fb-a4ab-209dd8c64ce1",
+          "type": "discovery",
+          "title": "D3 : Faire enregistrer sous",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "8f71a104-d8ad-435a-b25d-bae9157c328e",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Aidez Mina à enregistrer pour la première fois son discours.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "f6af970d-f367-4039-a5e7-60926dce76e2",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "Exercice enregistrer sous",
+                "url": "https://epreuves.pix.fr/pixwriter-contrat/pixwriter-contrat.html?lang=fr",
+                "instruction": "<p>Dans l’interface ci-dessous&nbsp;:&nbsp; </p><ul><li>Dans la barre des menus, sélectionnez «&nbsp;Enregistrer sous&nbsp;»&nbsp;</li><li>Donnez à votre document le nom «&nbsp;Discours&nbsp;»&nbsp;</li><li>Enregistrez le document «&nbsp;Discours&nbsp;» sur le Bureau</li></ul>",
+                "solution": "",
+                "height": 400
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "31fd0233-835f-4d9e-b06a-0055980d3a58",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Feedback&nbsp;:&nbsp; Bien joué ! Vous avez correctement enregistré le discours de Mina.</p><p>La première fois que vous enregistrez un document, cela crée un nouveau fichier. Il est alors demandé de&nbsp;:&nbsp; </p><ul>    <li>choisir <strong>un emplacement</strong> pour dire où le document sera enregistré.</li>    <li>donner <strong>un nom de fichier</strong> pour identifier le document.</li></ul>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "55bdc18b-115a-4c22-8d62-f440a4fece31",
+          "type": "short-lesson",
+          "title": "L3 : Enregistrer sous",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "9d02d6eb-1b19-4aed-a777-923b10142b19",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Si vous utilisez une application installée sur votre ordinateur, il est nécessaire d’<strong>enregistrer le document</strong> pour le retrouver sur votre ordinateur et le modifier plus tard.</p><p>Par contre, si vous utilisez une application en ligne, le document est <strong>enregistré en ligne</strong>, pas sur votre ordinateur.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "30d1730d-59fd-4f69-a9b4-edcb692518b4",
+                "type": "text",
+                "tag": "tip",
+                "content": "<p>Vous pouvez aussi enregistrer votre document <strong>avant d’avoir commencé à écrire</strong>, pour être sûr de ne pas oublier.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "288679f0-9944-4381-b958-12be2d104e24",
+                "type": "text",
+                "tag": "further-information",
+                "content": "<p>Vous avez oublié d’enregistrer votre document ? Pas de panique. <br>Quand vous allez fermer l’application, un message d‘alerte vous proposera d’enregistrer.<br><br></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "bf3c3555-83dc-4127-8daf-96f7ca965076",
+          "type": "transition",
+          "title": "Transition #4",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "93d4c7c1-4c66-49a2-b891-964c7187d350",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>Mina a terminé de recopier le discours qu’elle avait rédigé à la main. Elle souhaite faire des modifications.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "41ab0959-65e3-44cb-ae13-edd017c971d2",
+          "type": "discovery",
+          "title": "D4 : Enregistrer des modifications",
+          "components": [
+            {
+              "type": "stepper",
+              "instruction": "",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "f60c6ff5-39e0-4f64-8145-c36a0807774d",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p>Mina souhaite désormais séparer son texte en 4 parties (paragraphes) pour mieux <strong>l’organiser </strong>et l<strong>e rendre plus facile à lire</strong>.</p><p>Voici le résultat que Mina voudrais atteindre.</p>"
+                    },
+                    {
+                      "id": "4a22a634-ea99-4262-b2f3-c3eb23cf796e",
+                      "type": "image",
+                      "url": "https://assets.pix.org/draft/modules/31_MiseEnFormeTxt_NOV2/captureparagraphe.png",
+                      "alt": "",
+                      "alternativeText": "<p>Je prends la parole aujourd’hui avec beaucoup d’émotion pour le mariage de ma sœur Léa.&nbsp; </p><p>Nous avons grandi ensemble et je garde en mémoire nos fous rires et nos secrets partagés dans notre chambre. Tu as toujours été mon modèle, celle qui me protégeait et qui savait me redonner le sourire.&nbsp; </p><p>Aujourd’hui, je vous vois tous les deux si complices et si heureux. C’est une grande joie de voir que tu as trouvé quelqu’un qui partage tes valeurs et ta gentillesse.&nbsp; </p><p>Je vous souhaite une vie remplie de projets et de tendresse. Je vous demande à tous de lever votre verre en l’honneur des jeunes mariés !</p>",
+                      "legend": "",
+                      "licence": ""
+                    },
+                    {
+                      "id": "c1e3d1af-e38a-44a4-ab33-876d36202503",
+                      "type": "embed",
+                      "isCompletionRequired": false,
+                      "title": "Exercice paragraphe",
+                      "url": "https://epreuves.pix.fr/pixwriter-sauts/pixwriter-sauts.html?lang=fr&mode=mdx_miseenformetxt_2_D4#404659555c0140594446560c4244525b5445",
+                      "instruction": "<p>Dans l’application de traitement de texte ci-dessous, reproduisez l’exemple pour aider Mina.</p>",
+                      "solution": "courgette",
+                      "height": 400
+                    },
+                    {
+                      "id": "6ef00fea-9b2f-4245-90f2-dea59149ab0b",
+                      "type": "expand",
+                      "title": "🗝️ Indice 1",
+                      "content": "<p>Placez-vous au bon endroit pour séparer le texte&nbsp;: à la fin d’une phrase.</p>"
+                    },
+                    {
+                      "id": "05739401-9449-4037-95d2-3c1599ac57a6",
+                      "type": "expand",
+                      "title": "🗝️ Indice 2 :",
+                      "content": "<p>Une touche sur votre clavier permet de faire un saut de ligne , la touche «&nbsp;Entrée ⏎&nbsp;» ou «&nbsp;⏎&nbsp;».</p>"
+                    },
+                    {
+                      "id": "893606ef-aa1d-439c-99be-8b13c46f2648",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p>Feedback&nbsp;:&nbsp; La touche «&nbsp;<strong>Entrée </strong>⏎&nbsp;» permet de <strong>passer à la ligne suivante</strong>. Cela s’appelle un <strong>saut de ligne</strong>. Cela permet de <strong>séparer les idées en paragraphes</strong> et rendre le texte plus lisible.</p>"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "211ae9c3-a929-4f37-8080-15e651085eeb",
+                      "type": "embed",
+                      "isCompletionRequired": true,
+                      "title": "enregistrer",
+                      "url": "https://epreuves.pix.fr/pixwriter-poeme/pixwriter-poeme.html?lang=fr",
+                      "instruction": "<p>Dans l’application de traitement de texte ci-dessous, enregistrez les modifications de texte de Mina.</p>",
+                      "solution": "",
+                      "height": 400
+                    },
+                    {
+                      "id": "f7ba2ac3-a6ba-41d0-8415-d642842064de",
+                      "type": "text",
+                      "tag": " ",
+                      "content": "<p>Feedback&nbsp;:&nbsp; Il est conseillé d’<strong>enregistrer régulièrement son document</strong> avec «&nbsp;Enregistrer&nbsp;» illustrée par le symbole «&nbsp;💾&nbsp;». <br>Enregistrer permet de <strong>sauvegarder les modifications</strong> sur un document existant.</p>"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "9c8178e5-71c7-4049-8a51-57ce43afabd4",
+          "type": "short-lesson",
+          "title": "L4 : Enregistrer sous VS Enregistrer",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "7aefd074-897c-4b7e-8193-7e15b3953cf3",
+                "type": "text",
+                "tag": " ",
+                "content": "<h5>Quelle est la différence entre «&nbsp;Enregistrer sous&nbsp;» et «&nbsp;Enregistrer&nbsp;»  ?</h5><p> <br></p><table> <tbody><tr><th scope=\"\\&quot;col\\&quot;\" style=\"background-color: rgb(255, 255, 255);\"><br></th><th scope=\"\\&quot;col\\&quot;\">Enregistrer sous<br></th><th scope=\"\\&quot;col\\&quot;\">Enregistrer<br></th></tr><tr><th scope=\"\\&quot;row\\&quot;\" style=\"vertical-align: middle;\">Où cliquer.<br></th><td>Cliquer sur «&nbsp;Fichier&nbsp;», <br>puis sur «&nbsp;Enregistrer sous&nbsp;»<br></td><td>Cliquer sur l’icône de disquette 💾 <br>ou cliquer sur «&nbsp;Fichier&nbsp;», <br>puis sur «&nbsp;Enregistrer&nbsp;»<br></td></tr><tr><th scope=\"\\&quot;row\\&quot;\" style=\"vertical-align: middle;\">Ce que ça fait.</th><td><p>Créer un nouveau fichier texte&nbsp;:&nbsp; </p><ul><li>avec un nom</li><li>avec un emplacement</li></ul></td><td>Enregistrer des modifications dans un document existant.<br></td></tr></tbody></table>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "21191f50-a20c-4505-95d5-dd4004fdb110",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>⚠️ <strong>Attention</strong><br>Si vous utilisez «&nbsp;Enregistrer sous&nbsp;» sur un document déjà enregistré, vous allez créer un deuxième document texte qui contient les modifications.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "0b92a9c9-e904-4a03-be3e-52e53f0a3ce5",
+                "type": "text",
+                "tag": "tip",
+                "content": "<p>Sur la plupart des applications de traitement de texte, quand vous n’avez pas encore «&nbsp;Enregistrer sous&nbsp;», si vous cliquez sur «&nbsp;Enregistrer&nbsp;» 💾 l'application vous proposera automatiquement d’«&nbsp;Enregistrer sous&nbsp;».</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "a103bb9b-7791-4bba-b581-bb1d2d47e83e",
+                "type": "text",
+                "tag": "further-information",
+                "content": "<p>Sur les applications de traitement de texte en ligne, il n’y a pas forcément de bouton «&nbsp;Enregistrer&nbsp;» car toutes les modifications sont <strong>enregistrées automatiquement</strong>.</p>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b42ac1ed-f65d-4dbb-a637-dd0d34723da8",
+      "type": "retain-the-essentials",
+      "grains": [
+        {
+          "id": "4c17e8ff-7f78-45dc-a931-6dd0b5a2d086",
+          "type": "summary",
+          "title": "recap",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "f1c1dd38-b81b-4931-b253-89ff7af1aace",
+                "type": "text",
+                "tag": " ",
+                "content": "<ul><li>Il existe de nombreuses applications de traitement de texte&nbsp;: <strong>gratuites</strong> ou <strong>payantes</strong>. Certaines sont <strong>installées sur votre appareil</strong>, d’autres sont accessibles <strong>en ligne</strong>.&nbsp; [<em>liste de pictos avec les noms&nbsp;: LibreOffice Writer, Apache OpenOffice, Microsoft Word, Google Docs, Pages]</em></li><li> Les interfaces des applications de traitement de texte sont composées de la <strong>zone de travail centrale</strong> pour taper et modifier du texte, de la <strong>barre d’outils</strong> et de la <strong>barre des menus</strong>.&nbsp;<em>[option représentation graphique]</em></li><li> Dans la barre des menus, «&nbsp;<strong>Enregistrer sous</strong>&nbsp;» permet de sauvegarder un nouveau fichier texte&nbsp;:<ul><li>en lui donner <strong>un nom</strong> de fichier,</li><li>et en choisissant <strong>où enregistrer</strong> le fichier sur l’ordinateur.</li></ul></li><li> Le symbole « 💾&nbsp;» ou l’option «&nbsp;<strong>Enregistrer </strong>» permet d’<strong>enregistrer des modifications</strong> sur un document qui a déjà un nom et un emplacement. Pensez à le faire régulièrement.</li></ul>"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "61b9fb2d-41a9-4774-b602-bfc3de26b0b3",
+      "type": "practise",
+      "grains": [
+        {
+          "id": "a25b56b1-8f0a-4fb7-bfa9-e5fff15a9ec5",
+          "type": "activity",
+          "title": "Activité 1 : QAB",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "5ab55a5a-764f-4069-8f61-ae9d35a77831",
+                "type": "qab",
+                "instruction": "<p>Pour chacune des affirmations suivantes, indiquez si elle est vraie ou fausse.</p>",
+                "cards": [
+                  {
+                    "id": "395d28df-b1b5-4639-8267-bb94d795991c",
+                    "text": "Microsoft Word est une application de traitement de texte.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "dda4d5ee-33c0-47f3-8447-ede234c89cf4",
+                    "text": "Toutes les applications de traitement de texte sont payants.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  },
+                  {
+                    "id": "fc342579-ca81-4506-9e9f-2045e2c42cf0",
+                    "text": "On écrit dans la zone de travail centrale.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "5da8fbce-82d2-43a7-8ac4-3f541823ebb1",
+                    "text": "Une application de traitement de texte en ligne permet de modifier et d’enregistrer un document en ligne.",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "A"
+                  },
+                  {
+                    "id": "2839b2ed-1076-4ec7-8fc5-632fe0fe4685",
+                    "text": "La barre des menus sert à mettre en forme du texte",
+                    "image": {
+                      "url": "",
+                      "altText": ""
+                    },
+                    "proposalA": "Vrai",
+                    "proposalB": "Faux",
+                    "solution": "B"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": ""
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "b4e50bbf-82cd-434b-bea7-c4982657cb42",
+          "type": "activity",
+          "title": "Activité 2 : Modifier et enregistrer un document",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "8fe317ec-e198-47a7-ba49-6e75b533bddd",
+                "type": "text",
+                "tag": "context",
+                "content": "<p>Dylan a écrit une petite annonce pour retrouver son chat son vélo qu’il veut poster dans son quartier.</p>"
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "03d94fef-7b74-408a-a0a7-d03791f4fc70",
+                "type": "embed",
+                "isCompletionRequired": false,
+                "title": "Application - Paragraphe et enregistrer",
+                "url": "https://epreuves.pix.fr/pixwriter-poeme/pixwriter-poeme.html?lang=fr",
+                "instruction": "<p>Dans l’application de traitement de texte ci-dessous&nbsp;:&nbsp; </p><ul><li>Créez un nouveau paragraphe après le mot «&nbsp;caves.&nbsp;»</li><li>Enregistrez les modifications</li></ul>",
+                "solution": "",
+                "height": 400
+              }
+            },
+            {
+              "type": "element",
+              "element": {
+                "id": "68b87411-8f39-45db-a079-b31dcd278995",
+                "type": "text",
+                "tag": " ",
+                "content": "<p>J’ai perdu mon chat qui s’appelle Pixel dans le quartier de la mairie.&nbsp; C’est un chat noir et blanc avec une petite tache rose sur le nez. Il porte un collier rouge mais il est très craintif avec les inconnus. Il a été vu pour la dernière fois hier soir, rue des Tulipes. Pensez à vérifier vos garages et vos caves. Si vous le voyez, merci de ne pas essayer de l’attraper mais de m’appeler directement au 06 39 98 03 04.&nbsp; Merci pour votre aide.&nbsp; Dylan - Habitant de la Rue des Coquelicots. <br><br></p>"
+              }
+            }
+          ]
+        },
+        {
+          "id": "3a9a94f7-5d3d-4e54-8268-523d4f97d52d",
+          "type": "activity",
+          "title": "Activité 3 : Distinguer quand utiliser Enregistrer ou Enregistrer sous",
+          "components": [
+            {
+              "type": "stepper",
+              "instruction": "<p>Pour chaque situation ci-dessous, indiquez si ce document doit être Enregistré sous ou Enregistré.</p>",
+              "steps": [
+                {
+                  "elements": [
+                    {
+                      "id": "b045f7de-49c7-4b87-8a35-937aa47b3181",
+                      "type": "qcu",
+                      "instruction": "<p>Ali a rédigé une nouvelle page dans le document du roman qu’il écrit depuis un mois.</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Enregistrer",
+                          "feedback": {
+                            "state": "<p>Bonne réponse !</p>",
+                            "diagnosis": "<p>Le roman d’Ali est un document qui existe depuis un mois. Il a ajouté une page supplémentaire, il suffit donc d’Enregistrer les modifications.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Enregistrer sous",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>Le roman d’Ali est un document qui existe depuis un mois. Il a ajouté une page supplémentaire, il suffit donc d’Enregistrer les modifications.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "df161c6a-068d-4616-acc5-9b5abe7decc0",
+                      "type": "qcu",
+                      "instruction": "<p>Manu a commencé à écrire le règlement intérieur de sa nouvelle association de loisirs.</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Enregistrer",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>Manu vient de commencer à écrire, il faut donc utiliser Enregistrer sous pour donner un nom et décider d’un lieu où enregistrer son document.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Enregistrer sous",
+                          "feedback": {
+                            "state": "<p>Bonne réponse !</p>",
+                            "diagnosis": "<p>Manu vient de commencer à écrire, il faut donc utiliser Enregistrer sous pour donner un nom et décider d’un lieu où enregistrer son document.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "2a324a3f-9f27-4be3-a386-dd49401d628b",
+                      "type": "qcu",
+                      "instruction": "<p>Alan écrit en 10 minutes la fiche d’instructions pour nourrir son chien et arroser ses plantes en son absence.</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Enregistrer",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.<br></p>",
+                            "diagnosis": "<p>Alan a créé un nouveau document en 10 minutes. Il a donc créé un nouveau document, il faut donc utiliser Enregistrer sous pour donner un nom et décider d’un lieu où enregistrer son document.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Enregistrer sous",
+                          "feedback": {
+                            "state": "<p>Bonne réponse !</p>",
+                            "diagnosis": "<p>Alan a créé un nouveau document en 10 minutes. Il a donc créé un nouveau document, il faut donc utiliser Enregistrer sous pour donner un nom et décider d’un lieu où enregistrer son document.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "2"
+                    }
+                  ]
+                },
+                {
+                  "elements": [
+                    {
+                      "id": "2949925c-aebb-416e-82ba-d407f41ba57c",
+                      "type": "qcu",
+                      "instruction": "<p>Coco ajoute une note à son journal d’observation de jardinage qu’il remplit tous les jours.</p>",
+                      "hasShortProposals": true,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "Enregistrer",
+                          "feedback": {
+                            "state": "<p>Bonne réponse !</p>",
+                            "diagnosis": "<p>Coco ouvre le même document tous les jours pour y noter ses observations de jardinage. Il suffit donc d’Enregistrer les modifications.</p>"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "content": "Enregistrer sous",
+                          "feedback": {
+                            "state": "<p>Mauvaise réponse.</p>",
+                            "diagnosis": "<p>Coco ouvre le même document tous les jours pour y noter ses observations de jardinage. Il suffit donc d’Enregistrer les modifications.</p>"
+                          }
+                        }
+                      ],
+                      "solution": "1"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "566a6dac-321d-4031-a3bf-e5f715012a48",
+      "type": "go-further",
+      "grains": [{
+          "id": "ed41b53c-a2ad-43a0-b330-fe9cf636c9a5",
+          "type": "challenge",
+          "title": "transfert",
+          "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "997391b1-d4dd-4279-98d6-25b476741b63",
+                "type": "qcm",
+                "instruction": "<p>Quels sont les points communs entre les applications de traitement de texte et les applications pour modifier des tableaux ou des présentations (diapositives) ?</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "<p>les 3 zones de l’interface</p>"
+                  },
+                  {
+                    "id": "4",
+                    "content": "<p>le logo qui représente souvent une page ou un crayon</p>"
+                  },
+                  {
+                    "id": "2",
+                    "content": "<p>la différence entre Enregistrer et Enregistrer sous</p>"
+                  },
+                  {
+                    "id": "3",
+                    "content": "<p>le type de fichier que l’on peut modifier</p>"
+                  }
+                ],
+                "feedbacks": {
+                  "valid": {
+                    "state": "<p>Effectivement !</p>",
+                    "diagnosis": "<p>Les applications pour créer et modifier des textes, des tableaux ou des présentations ont de nombreux points communs. </p><p>Les interfaces de toutes ces applications sont composées des mêmes 3 zones : la <strong>zone de travail centrale</strong>, la <strong>barre d’outils</strong> et la <strong>barre des menus</strong>.&nbsp; </p><p>Ces applications permettent d’<strong>Enregistrer sous</strong> des fichiers, et ensuite d’<strong>Enregistrer</strong> des modifications.</p>"
+                  },
+                  "invalid": {
+                    "state": "<p>Eh non.</p>",
+                    "diagnosis": "<p>Les applications pour créer et modifier des textes, des tableaux ou des présentations ont de nombreux points communs. </p>\n<p>Les interfaces de toutes ces applications sont composées des mêmes 3 zones : la <strong>zone de travail centrale</strong>, la <strong>barre d’outils</strong> et la <strong>barre des menus</strong>.&nbsp; </p>\n<p>Ces applications permettent d’<strong>Enregistrer sous</strong> des fichiers, et ensuite d’<strong>Enregistrer</strong> des modifications.</p>"
+                  }
+                },
+                "solutions": [
+                  "1",
+                  "2"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "glossary": []
+}
