@@ -1,5 +1,5 @@
 import { NotFoundError } from '../../../shared/domain/errors.js';
-import { AdminCombinedCourseBlueprint } from '../models/AdminCombinedCourseBlueprint.js';
+import { AdminCombinedCourseBlueprintDetails } from '../models/AdminCombinedCourseBlueprintDetails.js';
 import { REQUIREMENT_TYPES } from '../models/Quest.js';
 
 export const getCombinedCourseBlueprintById = async ({
@@ -22,7 +22,7 @@ export const getCombinedCourseBlueprintById = async ({
 
   const attestation = await attestationRepository.getByRewardId({ rewardId: combinedCourseBlueprint.quest.rewardId });
 
-  return AdminCombinedCourseBlueprint.buildFromBlueprint({
+  return AdminCombinedCourseBlueprintDetails.buildFromBlueprint({
     combinedCourseBlueprint,
     modulesById,
     attestationLabel: attestation.label,

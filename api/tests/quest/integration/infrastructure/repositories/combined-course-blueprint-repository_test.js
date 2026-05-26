@@ -6,6 +6,7 @@ import {
   REQUIREMENT_COMPARISONS,
   REQUIREMENT_TYPES,
 } from '../../../../../src/quest/domain/models/Quest.js';
+import { QuestInput } from '../../../../../src/quest/domain/models/QuestInput.js';
 import * as combinedCourseBluePrintRepository from '../../../../../src/quest/infrastructure/repositories/combined-course-blueprint-repository.js';
 import { expect } from '../../../../test-helper.js';
 import { databaseBuilder } from '../../../../tooling/databases.js';
@@ -16,16 +17,20 @@ describe('Quest | Integration | Repository | combined-course-blueprint', functio
     it('should create a combined course blueprint with its quest', async function () {
       // given
       const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
-      const combinedCourseBlueprint = CombinedCourseBlueprint.buildWithQuest({
-        adminCombinedCourseBlueprint: new AdminCombinedCourseBlueprint({
+      const content = [
+        { type: 'evaluation', value: targetProfileId },
+        { type: 'module', value: '6282925d-4775-4bca-b513-4c3009ec5886', shortId: '6a68bf32' },
+      ];
+      const combinedCourseBlueprint = new CombinedCourseBlueprint({
+        ...new AdminCombinedCourseBlueprint({
           name: 'Combined course IA',
           internalName: 'Ia combined course blueprint',
           description: "L'ia c'est magique",
           illustration: 'illustration/ia.svg',
-          content: AdminCombinedCourseBlueprint.buildContentItems([{ targetProfileId }, { moduleShortId: '6a68bf32' }]),
+          content,
           organizationIds: [],
+          quest: new QuestInput({ items: content }).toQuest(),
         }),
-        modulesByShortId: { '6a68bf32': [{ id: '6282925d-4775-4bca-b513-4c3009ec5886' }] },
       });
 
       // when
@@ -131,17 +136,18 @@ describe('Quest | Integration | Repository | combined-course-blueprint', functio
 
       await databaseBuilder.commit();
 
-      const combinedCourseBlueprintWithoutTargetProfile = CombinedCourseBlueprint.buildWithQuest({
-        adminCombinedCourseBlueprint: new AdminCombinedCourseBlueprint({
+      const updatedContent = [{ type: 'module', value: '6282925d-4775-4bca-b513-4c3009ec5886', shortId: '6a68bf32' }];
+      const combinedCourseBlueprintWithoutTargetProfile = new CombinedCourseBlueprint({
+        ...new AdminCombinedCourseBlueprint({
           id: combinedCourseBlueprintInDb.id,
           name: 'Updated Combined course IA',
           internalName: 'Ia combined course blueprint',
           description: "L'ia c'est magique",
           illustration: 'illustration/ia.svg',
-          content: AdminCombinedCourseBlueprint.buildContentItems([{ moduleShortId: '6a68bf32' }]),
+          content: updatedContent,
           organizationIds: [],
+          quest: new QuestInput({ items: updatedContent }).toQuest(),
         }),
-        modulesByShortId: { '6a68bf32': [{ id: '6282925d-4775-4bca-b513-4c3009ec5886' }] },
       });
 
       // when

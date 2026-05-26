@@ -23,7 +23,7 @@ module('Integration | Component | CombinedCourseBlueprints::Details', function (
       illustration: 'http://pix.fr/mon-illu.png',
       attestationLabel: '6ème',
       content: [
-        { type: 'module', value: 'abc-123' },
+        { type: 'module', value: 'eeeb4951-6f38-4467-a4ba-0c85ed71321a', shortId: 'abc-123' },
         { type: 'evaluation', value: 123 },
       ],
     };

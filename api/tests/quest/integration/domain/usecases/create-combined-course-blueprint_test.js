@@ -1,6 +1,7 @@
 import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
 import { AdminCombinedCourseBlueprint } from '../../../../../src/quest/domain/models/AdminCombinedCourseBlueprint.js';
 import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
+import { QuestInput } from '../../../../../src/quest/domain/models/QuestInput.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { expect } from '../../../../test-helper.js';
@@ -10,30 +11,30 @@ import { catchErr } from '../../../../tooling/test-utils/error.js';
 describe('Integration | Combined course | Domain | UseCases | create-combined-course-blueprint', function () {
   it('should create a combined course blueprint with quest', async function () {
     // given
-    const moduleShortId = '6a68bf32';
     const moduleId = '6282925d-4775-4bca-b513-4c3009ec5886';
-    const modulesByShortId = { '6a68bf32': [{ id: '6282925d-4775-4bca-b513-4c3009ec5886' }] };
     const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
     const attestation = databaseBuilder.factory.buildAttestation();
     await databaseBuilder.commit();
 
+    const content = [
+      { type: 'module', value: moduleId, shortId: '6a68bf32' },
+      { type: 'evaluation', value: targetProfileId },
+    ];
+    const questInput = new QuestInput({
+      items: content,
+      rewardId: attestation.id,
+      rewardType: REWARD_TYPES.ATTESTATION,
+    });
     const adminCombinedCourseBlueprint = new AdminCombinedCourseBlueprint({
       name: 'Mon épure',
       internalName: 'Une épure pour tel niveau',
       illustration: 'illustrations/mon-epure.png',
       description: 'Description',
-      content: AdminCombinedCourseBlueprint.buildContentItems([{ moduleShortId }, { targetProfileId }]),
-      attestationKey: attestation.key,
+      content,
+      quest: questInput.toQuest(),
     });
 
-    const expectedCombinedCourseBlueprint = CombinedCourseBlueprint.buildWithQuest({
-      adminCombinedCourseBlueprint,
-      modulesByShortId,
-      rewardId: attestation.id,
-      rewardType: REWARD_TYPES.ATTESTATION,
-    });
-
-    const expectedQuest = expectedCombinedCourseBlueprint.quest.toDTO();
+    const expectedQuest = adminCombinedCourseBlueprint.quest.toDTO();
 
     await usecases.createCombinedCourseBlueprint({ adminCombinedCourseBlueprint });
 
@@ -67,13 +68,17 @@ describe('Integration | Combined course | Domain | UseCases | create-combined-co
     const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
     await databaseBuilder.commit();
 
+    const content = [
+      { type: 'module', value: '6282925d-4775-4bca-b513-4c3009ec5886', shortId: '6a68bf32' },
+      { type: 'evaluation', value: targetProfileId },
+    ];
     const adminCombinedCourseBlueprint = new AdminCombinedCourseBlueprint({
       name: 'Mon épure',
       internalName: 'Une épure pour tel niveau',
       illustration: 'illustrations/mon-epure.png',
       description: 'Description',
-      content: AdminCombinedCourseBlueprint.buildContentItems([{ moduleShortId: '6a68bf32' }, { targetProfileId }]),
-      attestationKey: undefined,
+      content,
+      quest: new QuestInput({ items: content }).toQuest(),
     });
 
     await usecases.createCombinedCourseBlueprint({ adminCombinedCourseBlueprint });
@@ -98,29 +103,17 @@ describe('Integration | Combined course | Domain | UseCases | create-combined-co
     const targetProfileId = databaseBuilder.factory.buildTargetProfile().id;
     await databaseBuilder.commit();
 
+    const content = [
+      { type: 'evaluation', value: targetProfileId },
+      { type: 'evaluation', value: 123 },
+    ];
     const adminCombinedCourseBlueprint = new AdminCombinedCourseBlueprint({
       name: 'Mon épure',
       internalName: 'Une épure pour tel niveau',
       illustration: 'illustrations/mon-epure.png',
       description: 'Description',
-      content: AdminCombinedCourseBlueprint.buildContentItems([{ targetProfileId }, { targetProfileId: 123 }]),
-    });
-
-    const error = await catchErr(usecases.createCombinedCourseBlueprint)({ adminCombinedCourseBlueprint });
-    expect(error).to.be.instanceOf(NotFoundError);
-  });
-
-  it('should return error if one of the modules in content is not found', async function () {
-    // given
-    const adminCombinedCourseBlueprint = new AdminCombinedCourseBlueprint({
-      name: 'Mon épure',
-      internalName: 'Une épure pour tel niveau',
-      illustration: 'illustrations/mon-epure.png',
-      description: 'Description',
-      content: AdminCombinedCourseBlueprint.buildContentItems([
-        { moduleShortId: '6a68bf32' },
-        { moduleShortId: 'abc-123' },
-      ]),
+      content,
+      quest: new QuestInput({ items: content }).toQuest(),
     });
 
     const error = await catchErr(usecases.createCombinedCourseBlueprint)({ adminCombinedCourseBlueprint });

@@ -1,15 +1,15 @@
-import { ATTESTATIONS } from '../../../../../src/profile/domain/constants.js';
-import {
-  ADMIN_COMBINED_COURSE_BLUEPRINT_ITEMS,
-  AdminCombinedCourseBlueprint,
-} from '../../../../../src/quest/domain/models/AdminCombinedCourseBlueprint.js';
-import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
+import { COMBINED_COURSE_ITEM_TYPES } from '../../../../../src/quest/domain/constants.js';
+import { AdminCombinedCourseBlueprint } from '../../../../../src/quest/domain/models/AdminCombinedCourseBlueprint.js';
+import { QuestInput } from '../../../../../src/quest/domain/models/QuestInput.js';
+import { ObjectValidationError } from '../../../../../src/shared/domain/errors.js';
 import { expect } from '../../../../test-helper.js';
 import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
+import { catchErrSync } from '../../../../tooling/test-utils/error.js';
 
 describe('Quest | Unit | Domain | Models | AdminCombinedCourseBlueprint ', function () {
   describe('#constructor', function () {
     it('should construct object', function () {
+      const quest = domainBuilder.buildQuest();
       // given
       const values = {
         id: 1,
@@ -17,9 +17,10 @@ describe('Quest | Unit | Domain | Models | AdminCombinedCourseBlueprint ', funct
         internalName: 'internalName',
         description: 'description',
         illustration: 'illustration',
-        content: AdminCombinedCourseBlueprint.buildContentItems([{ moduleShortId: '123' }]),
-        attestationKey: ATTESTATIONS.PARENTHOOD,
         attestationLabel: 'Parentalité',
+        rewardId: 1,
+        rewardType: 'attestations',
+        quest,
         createdAt: new Date(),
         updatedAt: new Date(),
         organizationIds: [],
@@ -30,60 +31,27 @@ describe('Quest | Unit | Domain | Models | AdminCombinedCourseBlueprint ', funct
       // then
       expect(blueprint).deep.equal(values);
     });
-  });
 
-  describe('#buildContentItems', function () {
-    it('should build blueprint content items for targetProfileId and moduleId', function () {
-      const requirements = AdminCombinedCourseBlueprint.buildContentItems([
-        { targetProfileId: 123 },
-        { moduleShortId: 'az-123' },
-      ]);
+    it('should throw if quest is not provided', function () {
+      const error = catchErrSync(() => new AdminCombinedCourseBlueprint({ name: 'test' }))();
 
-      expect(requirements).deep.equal([
-        {
-          type: ADMIN_COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION,
-          value: 123,
-        },
-        {
-          type: ADMIN_COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE,
-          value: 'az-123',
-        },
-      ]);
+      expect(error).to.be.an.instanceOf(ObjectValidationError);
+      expect(error.message).to.equal('Quest is required');
     });
   });
 
-  describe('#buildFromBlueprint', function () {
-    it('should return an object containing combined course blueprint, content and attestation key', function () {
-      // given
-      const combinedCourseBlueprint = domainBuilder.buildCombinedCourseBlueprint({
-        quest: domainBuilder.buildQuest({
-          successRequirements: [
-            CombinedCourseBlueprint.buildRequirementForCombinedCourse({ targetProfileId: 123 }),
-            CombinedCourseBlueprint.buildRequirementForCombinedCourse({ moduleId: 'completeId-az-123' }),
-          ],
-        }),
+  describe('#targetProfileIds', function () {
+    it('should return target profile ids from quest success requirements', function () {
+      const items = [
+        { type: COMBINED_COURSE_ITEM_TYPES.EVALUATION, value: 12 },
+        { type: COMBINED_COURSE_ITEM_TYPES.MODULE, value: '6282925d-4775-4bca-b513-4c3009ec5886' },
+        { type: COMBINED_COURSE_ITEM_TYPES.EVALUATION, value: 34 },
+      ];
+      const blueprint = new AdminCombinedCourseBlueprint({
+        quest: new QuestInput({ items }).toQuest(),
       });
 
-      const expectedContent = AdminCombinedCourseBlueprint.buildContentItems([
-        { targetProfileId: 123 },
-        { moduleShortId: 'az-123' },
-      ]);
-
-      // when
-      const readyToSerialize = AdminCombinedCourseBlueprint.buildFromBlueprint({
-        combinedCourseBlueprint,
-        modulesById: { 'completeId-az-123': [{ shortId: 'az-123' }] },
-        attestationLabel: 'Parentalité',
-      });
-
-      // then
-      expect(readyToSerialize).deep.equal(
-        new AdminCombinedCourseBlueprint({
-          ...combinedCourseBlueprint,
-          content: expectedContent,
-          attestationLabel: 'Parentalité',
-        }),
-      );
+      expect(blueprint.targetProfileIds).to.deep.equal([12, 34]);
     });
   });
 });

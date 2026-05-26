@@ -1,5 +1,4 @@
-import Joi from 'joi';
-
+import { ObjectValidationError } from '../../../shared/domain/errors.js';
 import { REQUIREMENT_TYPES } from './Quest.js';
 
 export class AdminCombinedCourseBlueprint {
@@ -9,9 +8,10 @@ export class AdminCombinedCourseBlueprint {
     internalName,
     description,
     illustration,
-    content,
-    attestationKey,
     attestationLabel,
+    rewardId = null,
+    rewardType = null,
+    quest,
     createdAt,
     updatedAt,
     organizationIds = [],
@@ -22,63 +22,23 @@ export class AdminCombinedCourseBlueprint {
     this.description = description;
     this.illustration = illustration;
     this.organizationIds = organizationIds;
-    this.content = content;
-    this.attestationKey = attestationKey;
     this.attestationLabel = attestationLabel;
+    this.rewardId = rewardId;
+    this.rewardType = rewardType;
+    this.quest = quest;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
+
+    this.validate();
   }
 
-  static buildContentItems(items) {
-    const data = items.map(({ moduleShortId, targetProfileId }) => {
-      return moduleShortId
-        ? { type: ADMIN_COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE, value: moduleShortId }
-        : { type: ADMIN_COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION, value: targetProfileId };
-    });
-    return Joi.attempt(data, contentSchema);
+  get targetProfileIds() {
+    return this.quest.successRequirements
+      .filter((item) => item.requirement_type === REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS)
+      .map(({ data }) => parseInt(data.targetProfileId.data));
   }
 
-  static buildFromBlueprint({ combinedCourseBlueprint, modulesById, attestationLabel }) {
-    const items = combinedCourseBlueprint.quest.successRequirements.map((requirement) => {
-      if (requirement.requirement_type === REQUIREMENT_TYPES.OBJECT.CAMPAIGN_PARTICIPATIONS) {
-        return { targetProfileId: requirement.data.targetProfileId.data };
-      } else if (requirement.requirement_type === REQUIREMENT_TYPES.OBJECT.PASSAGES) {
-        const module = modulesById[requirement.data.moduleId.data];
-        return { moduleShortId: module?.[0].shortId };
-      }
-    });
-
-    const content = AdminCombinedCourseBlueprint.buildContentItems(items);
-    return new AdminCombinedCourseBlueprint({ ...combinedCourseBlueprint, content, attestationLabel });
+  validate() {
+    if (!this.quest) throw new ObjectValidationError('Quest is required');
   }
 }
-
-export const ADMIN_COMBINED_COURSE_BLUEPRINT_ITEMS = {
-  MODULE: 'module',
-  EVALUATION: 'evaluation',
-};
-
-export const contentSchema = Joi.array()
-  .items(
-    Joi.object({
-      type: Joi.string()
-        .valid(ADMIN_COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION, ADMIN_COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE)
-        .required(),
-      value: Joi.alternatives()
-        .conditional('type', {
-          switch: [
-            {
-              is: ADMIN_COMBINED_COURSE_BLUEPRINT_ITEMS.EVALUATION,
-              then: Joi.number().integer(),
-            },
-            {
-              is: ADMIN_COMBINED_COURSE_BLUEPRINT_ITEMS.MODULE,
-              then: Joi.string(),
-            },
-          ],
-        })
-        .required(),
-    }),
-  )
-  .required()
-  .strict();

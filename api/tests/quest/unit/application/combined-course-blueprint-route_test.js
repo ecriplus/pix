@@ -3,7 +3,6 @@ import sinon from 'sinon';
 import { ATTESTATIONS } from '../../../../src/profile/domain/constants.js';
 import { combinedCourseBlueprintController } from '../../../../src/quest/application/combined-course-blueprint-controller.js';
 import * as combinedCourseBlueprintRoute from '../../../../src/quest/application/combined-course-blueprint-route.js';
-import { AdminCombinedCourseBlueprint } from '../../../../src/quest/domain/models/AdminCombinedCourseBlueprint.js';
 import { securityPreHandlers } from '../../../../src/shared/application/security-pre-handlers.js';
 import { expect } from '../../../test-helper.js';
 import { HttpTestServer } from '../../../tooling/server/http-test-server.js';
@@ -54,7 +53,7 @@ describe('Quest | Unit | Routes | combined-course-blueprint-route', function () 
             description: 'La description combinix',
             illustration: 'illustration.svg',
             'attestation-key': ATTESTATIONS.SIXTH_GRADE,
-            content: AdminCombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'e67ec5d0' }]),
+            content: [{ type: 'module', value: 'e67ec5d0', shortId: 'short-e67ec5d0' }],
           },
         },
       };

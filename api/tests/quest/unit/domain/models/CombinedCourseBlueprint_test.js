@@ -1,9 +1,6 @@
-import { ATTESTATIONS } from '../../../../../src/profile/domain/constants.js';
 import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
-import { AdminCombinedCourseBlueprint } from '../../../../../src/quest/domain/models/AdminCombinedCourseBlueprint.js';
 import { CombinedCourse } from '../../../../../src/quest/domain/models/CombinedCourse.js';
 import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
-import { Module } from '../../../../../src/quest/domain/models/Module.js';
 import { Quest } from '../../../../../src/quest/domain/models/Quest.js';
 import { expect } from '../../../../test-helper.js';
 
@@ -174,60 +171,6 @@ describe('Quest | Unit | Domain | Models | CombinedCourseBlueprint ', function (
       expect(combinedCourse.illustration).to.equal(illustration);
       expect(combinedCourse.code).to.equal(code);
       expect(combinedCourse.organizationId).to.equal(organizationId);
-    });
-  });
-
-  describe('#buildWithQuest', function () {
-    it('should return combined course blueprint with quest', async function () {
-      // given
-      const targetProfileId = 1;
-      const moduleShortId = 'ecc13f55';
-      const moduleId = 'eeeb4951-6f38-4467-a4ba-0c85ed71321a';
-      const modulesByShortId = {
-        ecc13f55: [new Module({ id: moduleId })],
-      };
-      const content = AdminCombinedCourseBlueprint.buildContentItems([{ targetProfileId, moduleShortId }]);
-      const adminCombinedCourseBlueprint = new AdminCombinedCourseBlueprint({
-        id: 1,
-        name: 'Combinix',
-        internalName: 'Combinix',
-        description: 'bla bla bla',
-        illustration: 'illu.svg',
-        content,
-        attestationKey: ATTESTATIONS.PARENTHOOD,
-        organizationIds: [1, 2],
-        createdAt: new Date(),
-      });
-
-      const expectedBlueprintQuest = new Quest({
-        rewardId: 1,
-        rewardType: REWARD_TYPES.ATTESTATION,
-        eligibilityRequirements: [],
-        successRequirements: [
-          CombinedCourseBlueprint.buildRequirementForCombinedCourse({ targetProfileId: targetProfileId }),
-          CombinedCourseBlueprint.buildRequirementForCombinedCourse({ moduleId }),
-        ],
-      });
-
-      // when
-      const combinedCourseBlueprint = CombinedCourseBlueprint.buildWithQuest({
-        adminCombinedCourseBlueprint,
-        modulesByShortId,
-        rewardId: 1,
-        rewardType: REWARD_TYPES.ATTESTATION,
-      });
-
-      // then
-      expect(combinedCourseBlueprint).to.be.instanceOf(CombinedCourseBlueprint);
-      expect(combinedCourseBlueprint.name).to.equal(adminCombinedCourseBlueprint.name);
-      expect(combinedCourseBlueprint.internalName).to.equal(adminCombinedCourseBlueprint.internalName);
-      expect(combinedCourseBlueprint.description).to.equal(adminCombinedCourseBlueprint.description);
-      expect(combinedCourseBlueprint.illustration).to.equal(adminCombinedCourseBlueprint.illustration);
-      expect(combinedCourseBlueprint.createdAt).to.equal(adminCombinedCourseBlueprint.createdAt);
-      expect(combinedCourseBlueprint.organizationIds).to.deep.equal([1, 2]);
-
-      expect(combinedCourseBlueprint.quest).to.be.instanceOf(Quest);
-      expect(combinedCourseBlueprint.quest).to.deep.equal(expectedBlueprintQuest);
     });
   });
 

@@ -17,7 +17,8 @@ module('Unit | Serializer | combined-course-blueprint', function (hooks) {
         },
       ],
       attestationLabel: 'Label attestation',
-      attestationKey: 'ATTESTATION_KEY',
+      rewardId: 5,
+      rewardType: 'ATTESTATION',
     });
 
     const serializedRecord = record.serialize();
@@ -39,7 +40,8 @@ module('Unit | Serializer | combined-course-blueprint', function (hooks) {
               },
             ],
             'attestation-label': 'Label attestation',
-            'attestation-key': 'ATTESTATION_KEY',
+            'reward-id': 5,
+            'reward-type': 'ATTESTATION',
           },
         },
       },

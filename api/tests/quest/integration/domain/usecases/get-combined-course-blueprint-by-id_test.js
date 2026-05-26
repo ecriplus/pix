@@ -1,6 +1,6 @@
 import sinon from 'sinon';
 
-import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
+import { COMBINED_COURSE_ITEM_TYPES, REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
 import { AdminCombinedCourseBlueprint } from '../../../../../src/quest/domain/models/AdminCombinedCourseBlueprint.js';
 import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
@@ -62,9 +62,10 @@ describe('Integration | Quest | Domain | UseCases | get-combined-course-blueprin
       organizationIds: [],
       attestationLabel,
     });
-    expect(adminCombinedCourseBlueprint.content).to.deep.equal(
-      AdminCombinedCourseBlueprint.buildContentItems([{ targetProfileId }, { moduleShortId: 'e074af34' }]),
-    );
+    expect(adminCombinedCourseBlueprint.content).to.deep.equal([
+      { type: COMBINED_COURSE_ITEM_TYPES.EVALUATION, value: targetProfileId },
+      { type: COMBINED_COURSE_ITEM_TYPES.MODULE, value: '9beb922f-4d8e-495d-9c85-0e7265ca78d6', shortId: 'e074af34' },
+    ]);
   });
 
   it('should throw when no combined course blueprint is found for a given id', async function () {

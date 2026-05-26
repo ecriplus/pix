@@ -1,6 +1,5 @@
 import { createServer } from '../../../../server.js';
 import { ATTESTATIONS } from '../../../../src/profile/domain/constants.js';
-import { AdminCombinedCourseBlueprint } from '../../../../src/quest/domain/models/AdminCombinedCourseBlueprint.js';
 import { expect } from '../../../test-helper.js';
 import { databaseBuilder } from '../../../tooling/databases.js';
 import { generateAuthenticatedUserRequestHeaders } from '../../../tooling/test-utils/http-server.js';
@@ -41,7 +40,7 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
     context('when user is admin ', function () {
       it('should create a combined course blueprint', async function () {
         // given
-        databaseBuilder.factory.buildAttestation({ key: ATTESTATIONS.SIXTH_GRADE });
+        const attestation = databaseBuilder.factory.buildAttestation({ key: ATTESTATIONS.SIXTH_GRADE });
         const superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
         await databaseBuilder.commit();
 
@@ -53,8 +52,9 @@ describe('Quest | Acceptance | Application | Combined course blueprint Route ', 
               'internal-name': 'Mon schéma de parcours combiné',
               description: 'La description combinix',
               illustration: 'illustration.svg',
-              'attestation-key': ATTESTATIONS.SIXTH_GRADE,
-              content: AdminCombinedCourseBlueprint.buildContentItems([{ moduleShortId: 'e67ec5d0' }]),
+              'reward-id': attestation.id,
+              'reward-type': 'ATTESTATION',
+              content: [{ type: 'module', value: 'e67ec5d0', shortId: 'short-e67ec5d0' }],
             },
           },
         };
