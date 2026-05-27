@@ -5,10 +5,13 @@ export async function getCampaignParticipations(
   h,
   dependencies = { getCampaignParticipations: usecases.getCampaignParticipations },
 ) {
-  const { page, since } = request.query;
+  const { page, since, authenticationRequestedData = [] } = request.query;
   const { models: campaignParticipations, meta } = await dependencies.getCampaignParticipations({
     campaignId: request.params.campaignId,
     clientId: request.auth.credentials.client_id,
+    authenticationRequestedData: Array.isArray(authenticationRequestedData)
+      ? authenticationRequestedData
+      : [authenticationRequestedData],
     page,
     since,
   });
