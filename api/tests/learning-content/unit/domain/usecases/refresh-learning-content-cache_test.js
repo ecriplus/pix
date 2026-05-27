@@ -1,17 +1,17 @@
 import sinon from 'sinon';
 
-import { refreshLearningContentCache } from '../../../../../src/learning-content/domain/usecases/refresh-learning-content-cache.js';
+import { refreshLearningContent } from '../../../../../src/learning-content/domain/usecases/refresh-learning-content.js';
 import { DomainTransaction } from '../../../../../src/shared/domain/DomainTransaction.js';
 import { expect } from '../../../../test-helper.js';
 
-describe('Learning Content | Unit | Domain | Usecase | Refresh learning content cache', function () {
+describe('Learning Content | Unit | Domain | Usecase | Refresh learning content', function () {
   beforeEach(function () {
     sinon.stub(DomainTransaction, 'execute').callsFake((callback) => {
       return callback();
     });
   });
 
-  describe('#refreshLearningContentCache', function () {
+  describe('#refreshLearningContent', function () {
     it('should trigger a reset of the learning content cache', async function () {
       // given
       const frameworks = Symbol('frameworks');
@@ -44,7 +44,6 @@ describe('Learning Content | Unit | Domain | Usecase | Refresh learning content 
 
       const frameworkRepository = {
         saveMany: sinon.stub(),
-        clearCache: sinon.stub(),
       };
       const areaRepository = {
         saveMany: sinon.stub(),
@@ -88,7 +87,7 @@ describe('Learning Content | Unit | Domain | Usecase | Refresh learning content 
       };
 
       // when
-      await refreshLearningContentCache({
+      await refreshLearningContent({
         lcmsClient,
         frameworkRepository,
         areaRepository,
@@ -118,7 +117,6 @@ describe('Learning Content | Unit | Domain | Usecase | Refresh learning content 
       expect(missionRepository.saveMany).to.have.been.calledOnceWithExactly(missions);
       expect(moduleRepository.saveMany).to.have.been.calledOnceWithExactly(modules);
 
-      expect(frameworkRepository.clearCache).to.have.been.calledOnceWithExactly();
       expect(areaRepository.clearCache).to.have.been.calledOnceWithExactly();
       expect(competenceRepository.clearCache).to.have.been.calledOnceWithExactly();
       expect(thematicRepository.clearCache).to.have.been.calledOnceWithExactly();

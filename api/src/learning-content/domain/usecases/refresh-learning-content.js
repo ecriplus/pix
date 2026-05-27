@@ -1,7 +1,7 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 
 /** @param {import('./dependencies.js').Dependencies} */
-export async function refreshLearningContentCache({
+export async function refreshLearningContent({
   lcmsClient,
   frameworkRepository,
   areaRepository,
@@ -31,7 +31,6 @@ export async function refreshLearningContentCache({
     await moduleRepository.saveMany(learningContent.modules);
   });
 
-  frameworkRepository.clearCache();
   areaRepository.clearCache();
   competenceRepository.clearCache();
   thematicRepository.clearCache();

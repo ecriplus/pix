@@ -1,5 +1,5 @@
 /** @param {import('./dependencies.js').Dependencies} */
-export async function patchLearningContentCacheEntry({
+export async function patchLearningContentEntry({
   recordId,
   updatedRecord,
   modelName,
@@ -28,5 +28,5 @@ export async function patchLearningContentCacheEntry({
   }[modelName];
 
   await repository.save(updatedRecord);
-  repository.clearCache(recordId);
+  repository.clearCache?.(recordId);
 }
