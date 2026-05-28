@@ -40,162 +40,193 @@ module('Integration | Component | Certifications | Shareable certificate | v3-pi
   });
 
   module('for an EDU framework', function () {
-    test('it displays the stepper', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const certification = store.createRecord('certification', {
-        birthdate: '2000-01-22',
-        birthplace: 'Paris',
-        firstName: 'Jean',
-        lastName: 'Doe',
-        certificationDate: new Date('2026-02-15T10:00:00Z'),
-        deliveredAt: new Date('2026-02-20T10:00:00Z'),
-        certificationCenter: 'Université de Lyon',
-        certificationFramework: 'EDU_1ER_DEGRE',
-      });
-      this.set('certification', certification);
+    module('stepper', function () {
+      test('it displays the stepper when candidate is admissible', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const certification = store.createRecord('certification', {
+          birthdate: '2000-01-22',
+          birthplace: 'Paris',
+          firstName: 'Jean',
+          lastName: 'Doe',
+          certificationDate: new Date('2026-02-15T10:00:00Z'),
+          deliveredAt: new Date('2026-02-20T10:00:00Z'),
+          certificationCenter: 'Université de Lyon',
+          certificationFramework: 'EDU_1ER_DEGRE',
+          level: 'ADMISSIBLE',
+        });
+        this.set('certification', certification);
 
-      // when
-      const screen = await render(hbs`
+        // when
+        const screen = await render(hbs`
           <Certifications::ShareableCertificate::V3PixPlusCertificate @certificate={{this.certification}} />`);
 
-      // then
-      assert.dom(screen.getByText(t('pages.certificate.frameworks.EDU.steps.1'))).exists();
+        // then
+        assert.dom(screen.getByText(t('pages.certificate.frameworks.EDU.steps.1'))).exists();
+      });
+
+      test('it does not display the stepper when candidate is received', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const certification = store.createRecord('certification', {
+          birthdate: '2000-01-22',
+          birthplace: 'Paris',
+          firstName: 'Jean',
+          lastName: 'Doe',
+          certificationDate: new Date('2026-02-15T10:00:00Z'),
+          deliveredAt: new Date('2026-02-20T10:00:00Z'),
+          certificationCenter: 'Université de Lyon',
+          certificationFramework: 'EDU_1ER_DEGRE',
+          level: 'EXPERT',
+        });
+        this.set('certification', certification);
+
+        // when
+        const screen = await render(hbs`
+          <Certifications::ShareableCertificate::V3PixPlusCertificate @certificate={{this.certification}} />`);
+
+        // then
+        assert.dom(screen.queryByText(t('pages.certificate.frameworks.EDU.steps.1'))).doesNotExist();
+      });
     });
 
-    test('it displays the results block when the candidate is admissible', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const certification = store.createRecord('certification', {
-        birthdate: '2000-01-22',
-        birthplace: 'Paris',
-        firstName: 'Jean',
-        lastName: 'Doe',
-        certificationDate: new Date('2026-02-15T10:00:00Z'),
-        deliveredAt: new Date('2026-02-20T10:00:00Z'),
-        certificationCenter: 'Université de Lyon',
-        certificationFramework: 'EDU_1ER_DEGRE',
-        level: 'ADMISSIBLE',
-      });
-      this.set('certification', certification);
+    module('results block', function () {
+      test('it displays the results block when the candidate is admissible', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const certification = store.createRecord('certification', {
+          birthdate: '2000-01-22',
+          birthplace: 'Paris',
+          firstName: 'Jean',
+          lastName: 'Doe',
+          certificationDate: new Date('2026-02-15T10:00:00Z'),
+          deliveredAt: new Date('2026-02-20T10:00:00Z'),
+          certificationCenter: 'Université de Lyon',
+          certificationFramework: 'EDU_1ER_DEGRE',
+          level: 'ADMISSIBLE',
+        });
+        this.set('certification', certification);
 
-      // when
-      const screen = await render(hbs`
+        // when
+        const screen = await render(hbs`
+            <Certifications::ShareableCertificate::V3PixPlusCertificate @certificate={{this.certification}} />`);
+
+        // then
+        assert.dom(screen.getByRole('heading', { level: 3, name: t('pages.certificate.results.title') })).exists();
+      });
+
+      test('it does not display the results block when the candidate is not admissible and has no global labels', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const certification = store.createRecord('certification', {
+          birthdate: '2000-01-22',
+          birthplace: 'Paris',
+          firstName: 'Jean',
+          lastName: 'Doe',
+          certificationDate: new Date('2026-02-15T10:00:00Z'),
+          deliveredAt: new Date('2026-02-20T10:00:00Z'),
+          certificationCenter: 'Université de Lyon',
+          certificationFramework: 'EDU_1ER_DEGRE',
+          level: 'EXPERT',
+        });
+        this.set('certification', certification);
+
+        // when
+        const screen = await render(hbs`
+            <Certifications::ShareableCertificate::V3PixPlusCertificate @certificate={{this.certification}} />`);
+
+        // then
+        assert
+          .dom(screen.queryByRole('heading', { level: 3, name: t('pages.certificate.results.title') }))
+          .doesNotExist();
+      });
+
+      test('it displays the results block when the candidate is not admissible but has global labels', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const certification = store.createRecord('certification', {
+          birthdate: '2000-01-22',
+          birthplace: 'Paris',
+          firstName: 'Jean',
+          lastName: 'Doe',
+          certificationDate: new Date('2026-02-15T10:00:00Z'),
+          deliveredAt: new Date('2026-02-20T10:00:00Z'),
+          certificationCenter: 'Université de Lyon',
+          certificationFramework: 'EDU_1ER_DEGRE',
+          level: 'EXPERT',
+          globalSummaryLabel: 'Summary label',
+          globalDescriptionLabel: 'Description label',
+        });
+        this.set('certification', certification);
+
+        // when
+        const screen = await render(hbs`
           <Certifications::ShareableCertificate::V3PixPlusCertificate @certificate={{this.certification}} />`);
 
-      // then
-      assert.dom(screen.getByRole('heading', { level: 3, name: t('pages.certificate.results.title') })).exists();
+        // then
+        assert.dom(screen.getByRole('heading', { level: 3, name: t('pages.certificate.results.title') })).exists();
+        assert.dom(screen.getByText('Summary label')).exists();
+        assert.dom(screen.getByText('Description label')).exists();
+      });
     });
 
-    test('it does not display the results block when the candidate is not admissible and has no global labels', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const certification = store.createRecord('certification', {
-        birthdate: '2000-01-22',
-        birthplace: 'Paris',
-        firstName: 'Jean',
-        lastName: 'Doe',
-        certificationDate: new Date('2026-02-15T10:00:00Z'),
-        deliveredAt: new Date('2026-02-20T10:00:00Z'),
-        certificationCenter: 'Université de Lyon',
-        certificationFramework: 'EDU_1ER_DEGRE',
-        level: 'EXPERT',
-      });
-      this.set('certification', certification);
+    module('sub-title', function () {
+      test('it displays the admissible sub-title when the candidate is admissible', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const certification = store.createRecord('certification', {
+          birthdate: '2000-01-22',
+          birthplace: 'Paris',
+          firstName: 'Jean',
+          lastName: 'Doe',
+          certificationDate: new Date('2026-02-15T10:00:00Z'),
+          deliveredAt: new Date('2026-02-20T10:00:00Z'),
+          certificationCenter: 'Université de Lyon',
+          certificationFramework: 'EDU_1ER_DEGRE',
+          level: 'ADMISSIBLE',
+        });
+        this.set('certification', certification);
 
-      // when
-      const screen = await render(hbs`
+        // when
+        const screen = await render(hbs`
           <Certifications::ShareableCertificate::V3PixPlusCertificate @certificate={{this.certification}} />`);
 
-      // then
-      assert
-        .dom(screen.queryByRole('heading', { level: 3, name: t('pages.certificate.results.title') }))
-        .doesNotExist();
-    });
-
-    test('it displays the results block when the candidate is not admissible but has global labels', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const certification = store.createRecord('certification', {
-        birthdate: '2000-01-22',
-        birthplace: 'Paris',
-        firstName: 'Jean',
-        lastName: 'Doe',
-        certificationDate: new Date('2026-02-15T10:00:00Z'),
-        deliveredAt: new Date('2026-02-20T10:00:00Z'),
-        certificationCenter: 'Université de Lyon',
-        certificationFramework: 'EDU_1ER_DEGRE',
-        level: 'EXPERT',
-        globalSummaryLabel: 'Summary label',
-        globalDescriptionLabel: 'Description label',
+        // then
+        const subTitle = t('pages.certificate.frameworks.EDU.sub-title.admissible.candidate').replace(/ /g, ' ');
+        assert
+          .dom(screen.getByRole('heading', { level: 2, name: (name) => name.replace(/ /g, ' ').includes(subTitle) }))
+          .exists();
       });
-      this.set('certification', certification);
 
-      // when
-      const screen = await render(hbs`
+      test('it displays the default sub-title when the candidate is not admissible', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const certification = store.createRecord('certification', {
+          birthdate: '2000-01-22',
+          birthplace: 'Paris',
+          firstName: 'Jean',
+          lastName: 'Doe',
+          certificationDate: new Date('2026-02-15T10:00:00Z'),
+          deliveredAt: new Date('2026-02-20T10:00:00Z'),
+          certificationCenter: 'Université de Lyon',
+          certificationFramework: 'EDU_1ER_DEGRE',
+          level: 'EXPERT',
+        });
+        this.set('certification', certification);
+
+        // when
+        const screen = await render(hbs`
           <Certifications::ShareableCertificate::V3PixPlusCertificate @certificate={{this.certification}} />`);
 
-      // then
-      assert.dom(screen.getByRole('heading', { level: 3, name: t('pages.certificate.results.title') })).exists();
-      assert.dom(screen.getByText('Summary label')).exists();
-      assert.dom(screen.getByText('Description label')).exists();
-    });
-
-    test('it displays the admissible sub-title when the candidate is admissible', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const certification = store.createRecord('certification', {
-        birthdate: '2000-01-22',
-        birthplace: 'Paris',
-        firstName: 'Jean',
-        lastName: 'Doe',
-        certificationDate: new Date('2026-02-15T10:00:00Z'),
-        deliveredAt: new Date('2026-02-20T10:00:00Z'),
-        certificationCenter: 'Université de Lyon',
-        certificationFramework: 'EDU_1ER_DEGRE',
-        level: 'ADMISSIBLE',
+        // then
+        const subTitle = t('pages.certificate.obtained-certification.candidate', {
+          globalLevelLabel: t('pages.user-certifications.meshes.EDU_1ER_DEGRE.EXPERT'),
+          frameworkLabel: t('pages.certification-frameworks.EDU_1ER_DEGRE'),
+        }).replace(/ /g, ' ');
+        assert
+          .dom(screen.getByRole('heading', { level: 2, name: (name) => name.replace(/ /g, ' ').includes(subTitle) }))
+          .exists();
       });
-      this.set('certification', certification);
-
-      // when
-      const screen = await render(hbs`
-          <Certifications::ShareableCertificate::V3PixPlusCertificate @certificate={{this.certification}} />`);
-
-      // then
-      const subTitle = t('pages.certificate.frameworks.EDU.sub-title.admissible.candidate').replace(/ /g, ' ');
-      assert
-        .dom(screen.getByRole('heading', { level: 2, name: (name) => name.replace(/ /g, ' ').includes(subTitle) }))
-        .exists();
-    });
-
-    test('it displays the default sub-title when the candidate is not admissible', async function (assert) {
-      // given
-      const store = this.owner.lookup('service:store');
-      const certification = store.createRecord('certification', {
-        birthdate: '2000-01-22',
-        birthplace: 'Paris',
-        firstName: 'Jean',
-        lastName: 'Doe',
-        certificationDate: new Date('2026-02-15T10:00:00Z'),
-        deliveredAt: new Date('2026-02-20T10:00:00Z'),
-        certificationCenter: 'Université de Lyon',
-        certificationFramework: 'EDU_1ER_DEGRE',
-        level: 'EXPERT',
-      });
-      this.set('certification', certification);
-
-      // when
-      const screen = await render(hbs`
-          <Certifications::ShareableCertificate::V3PixPlusCertificate @certificate={{this.certification}} />`);
-
-      // then
-      const subTitle = t('pages.certificate.obtained-certification.candidate', {
-        globalLevelLabel: t('pages.user-certifications.meshes.EDU_1ER_DEGRE.EXPERT'),
-        frameworkLabel: t('pages.certification-frameworks.EDU_1ER_DEGRE'),
-      }).replace(/ /g, ' ');
-      assert
-        .dom(screen.getByRole('heading', { level: 2, name: (name) => name.replace(/ /g, ' ').includes(subTitle) }))
-        .exists();
     });
 
     module('level tag', function () {
