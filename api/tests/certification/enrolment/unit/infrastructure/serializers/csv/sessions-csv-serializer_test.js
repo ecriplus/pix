@@ -1,98 +1,21 @@
 import _ from 'lodash';
-import sinon from 'sinon';
 
-import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
-import { emptySession } from '../../../../../../src/certification/shared/infrastructure/utils/csv/sessions-import.js';
-import { FileValidationError } from '../../../../../../src/shared/domain/errors.js';
-import * as csvSerializer from '../../../../../../src/shared/infrastructure/serializers/csv/csv-serializer.js';
-import { logger } from '../../../../../../src/shared/infrastructure/utils/logger.js';
-import { expect } from '../../../../../test-helper.js';
-import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
-import { catchErr } from '../../../../../tooling/test-utils/error.js';
+import { deserializeForSessionsImport } from '../../../../../../../src/certification/enrolment/infrastructure/serializers/csv/sessions-csv-serializer.js';
+import { ComplementaryCertificationKeys } from '../../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
+import { emptySession } from '../../../../../../../src/certification/shared/infrastructure/utils/csv/sessions-import.js';
+import { FileValidationError } from '../../../../../../../src/shared/domain/errors.js';
+import { expect } from '../../../../../../test-helper.js';
+import { domainBuilder } from '../../../../../../tooling/domain-builder/domain-builder.js';
+import { catchErr } from '../../../../../../tooling/test-utils/error.js';
 
-describe('Unit | Serializer | CSV | csv-serializer', function () {
-  describe('#serializeLine', function () {
-    it('should quote strings', async function () {
-      // given
-      const safeNumberAsString = '-123456';
-      const csvExpected =
-        '"String with \'single quotes\'";' + '"String with ""double quotes""";' + safeNumberAsString + '\n';
-
-      // when
-      const csv = csvSerializer.serializeLine([
-        "String with 'single quotes'",
-        'String with "double quotes"',
-        safeNumberAsString,
-      ]);
-
-      // then
-      expect(csv).to.equal(csvExpected);
-    });
-
-    it('should format numbers in French locale', async function () {
-      // given
-      const csvExpected = '123;' + '123,456\n';
-
-      // when
-      const csv = csvSerializer.serializeLine([123, 123.456]);
-
-      // then
-      expect(csv).to.equal(csvExpected);
-    });
-
-    it('should escape formula-likes to prevent CSV injections', async function () {
-      // given
-      const csvExpected = '"\'=formula-like";' + '"\'@formula-like";' + '"\'+formula-like";' + '"\'-formula-like"\n';
-
-      // when
-      const csv = csvSerializer.serializeLine(['=formula-like', '@formula-like', '+formula-like', '-formula-like']);
-
-      // then
-      expect(csv).to.equal(csvExpected);
-    });
-
-    context('should log errors for invalid format', function () {
-      it('given object', async function () {
-        // when
-        sinon.stub(logger, 'error');
-        csvSerializer.serializeLine([{}]);
-        // then
-        expect(logger.error).to.have.been.calledWithExactly(
-          'Unknown value type in _csvSerializeValue: object: [object Object]',
-        );
-      });
-
-      it('given null', async function () {
-        // when
-        sinon.stub(logger, 'error');
-        csvSerializer.serializeLine([null]);
-        // then
-        expect(logger.error).to.have.been.calledWithExactly('Unknown value type in _csvSerializeValue: object: null');
-      });
-
-      it('given undefined', async function () {
-        // when
-        sinon.stub(logger, 'error');
-        csvSerializer.serializeLine([undefined]);
-        // then
-        expect(logger.error).to.have.been.calledWithExactly(
-          'Unknown value type in _csvSerializeValue: undefined: undefined',
-        );
-      });
-    });
-  });
-
+describe('Certification | Enrolment | Unit | Infrastructure | Serializers | CSV | sessions-csv-serializer', function () {
   describe('#deserializeForSessionsImport', function () {
     describe('when one or more headers are missing', function () {
       it('should throw an error', async function () {
-        const parsedCsvData = [
-          {
-            '* Nom du site': `Site 1`,
-          },
-        ];
+        const parsedCsvData = [{ '* Nom du site': `Site 1` }];
 
         // when
-        const error = await catchErr(csvSerializer.deserializeForSessionsImport)({
+        const error = await catchErr(deserializeForSessionsImport)({
           parsedCsvData,
           hasBillingMode: true,
         });
@@ -130,7 +53,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
             ];
 
             // when
-            const error = await catchErr(csvSerializer.deserializeForSessionsImport)({
+            const error = await catchErr(deserializeForSessionsImport)({
               parsedCsvData,
               hasBillingMode: true,
             });
@@ -168,7 +91,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
             ];
 
             // when
-            const result = await csvSerializer.deserializeForSessionsImport({ parsedCsvData, hasBillingMode: false });
+            const result = await deserializeForSessionsImport({ parsedCsvData, hasBillingMode: false });
 
             // then
             expect(result).to.deep.equal([emptySession]);
@@ -226,7 +149,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
           ];
 
           // when
-          const error = await catchErr(csvSerializer.deserializeForSessionsImport)({
+          const error = await catchErr(deserializeForSessionsImport)({
             parsedCsvData: parsedCsvDataWithCleASubscription,
             hasBillingMode: true,
             certificationCenterHabilitations: habilitationsWithoutCleA,
@@ -269,7 +192,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
           ];
 
           // when
-          const error = await catchErr(csvSerializer.deserializeForSessionsImport)({
+          const error = await catchErr(deserializeForSessionsImport)({
             parsedCsvData,
             hasBillingMode: false,
           });
@@ -311,7 +234,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
           ];
 
           // when
-          const result = await csvSerializer.deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true });
+          const result = await deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true });
 
           // then
           expect(result).to.deep.equal([emptySession]);
@@ -350,7 +273,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
           ];
 
           // when
-          const result = csvSerializer.deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true });
+          const result = deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true });
 
           // then
           expect(_omitUniqueKey(result)).to.deep.equal(expectedResult);
@@ -387,7 +310,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
           ];
 
           // when
-          const result = csvSerializer.deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true });
+          const result = deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true });
 
           // then
           expect(_omitUniqueKey(result)).to.deep.equal(expectedResult);
@@ -417,7 +340,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
           ];
 
           // when
-          const result = csvSerializer.deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true });
+          const result = deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true });
 
           // then
           expect(_omitUniqueKey(result)).to.deep.equal(expectedResult);
@@ -446,7 +369,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
             ];
 
             // when
-            const result = csvSerializer.deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true });
+            const result = deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true });
 
             // then
             expect(_omitUniqueKey(result)).to.deep.equal(expectedResult);
@@ -489,7 +412,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
           ];
 
           // when
-          const result = csvSerializer.deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true });
+          const result = deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true });
 
           // then
           expect(_omitUniqueKey(result)).to.deep.equal(expectedResult);
@@ -587,7 +510,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
           ];
 
           // when
-          const result = csvSerializer.deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true });
+          const result = deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true });
 
           // then
           expect(_omitUniqueKey(result)).to.deep.equal(expectedResult);
@@ -657,9 +580,9 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
           ];
 
           // when
-          const result = csvSerializer
-            .deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true })
-            .map((session) => _.omit(session, 'uniqueKey'));
+          const result = deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true }).map((session) =>
+            _.omit(session, 'uniqueKey'),
+          );
 
           // then
           expect(_omitUniqueKey(result)).to.deep.equal(expectedResult);
@@ -710,9 +633,9 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
           ];
 
           // when
-          const result = csvSerializer
-            .deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true })
-            .map((session) => _.omit(session, 'uniqueKey'));
+          const result = deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true }).map((session) =>
+            _.omit(session, 'uniqueKey'),
+          );
 
           // then
           expect(_omitUniqueKey(result)).to.deep.equal(expectedResult);
@@ -731,9 +654,9 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
             const csvLine = [_lineWithCandidateAndBillingInformation({ prepaymentCode })];
 
             // when
-            const result = csvSerializer
-              .deserializeForSessionsImport({ parsedCsvData: csvLine, hasBillingMode: true })
-              .map((session) => _.omit(session, 'uniqueKey'));
+            const result = deserializeForSessionsImport({ parsedCsvData: csvLine, hasBillingMode: true }).map(
+              (session) => _.omit(session, 'uniqueKey'),
+            );
 
             // then
             const expectedResult = [
@@ -825,13 +748,11 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
         ];
 
         // when
-        const result = csvSerializer
-          .deserializeForSessionsImport({
-            parsedCsvData,
-            hasBillingMode: true,
-            certificationCenterHabilitations: habilitations,
-          })
-          .map((session) => _.omit(session, 'uniqueKey'));
+        const result = deserializeForSessionsImport({
+          parsedCsvData,
+          hasBillingMode: true,
+          certificationCenterHabilitations: habilitations,
+        }).map((session) => _.omit(session, 'uniqueKey'));
 
         // then
         expect(_omitUniqueKey(result)).to.deep.equal(expectedResult);
@@ -1007,7 +928,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
           ];
 
           // when
-          const [result] = csvSerializer.deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true });
+          const [result] = deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true });
 
           // then
           expect(result.candidates).to.have.lengthOf(6);
@@ -1034,9 +955,9 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
           ];
 
           // when
-          const result = csvSerializer
-            .deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true })
-            .map((session) => _.omit(session, 'uniqueKey'));
+          const result = deserializeForSessionsImport({ parsedCsvData, hasBillingMode: true }).map((session) =>
+            _.omit(session, 'uniqueKey'),
+          );
 
           // then
           expect(_omitUniqueKey(result)).to.deep.equal(expectedResult);
@@ -1063,7 +984,7 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
       ];
 
       // when
-      const [firstSession, secondSession] = csvSerializer.deserializeForSessionsImport({
+      const [firstSession, secondSession] = deserializeForSessionsImport({
         parsedCsvData,
         hasBillingMode: true,
       });
@@ -1132,118 +1053,13 @@ describe('Unit | Serializer | CSV | csv-serializer', function () {
           },
         ];
 
-        const error = await catchErr(csvSerializer.deserializeForSessionsImport)({
+        const error = await catchErr(deserializeForSessionsImport)({
           parsedCsvData,
           hasBillingMode: true,
         });
 
         expect(error).to.be.instanceOf(FileValidationError);
         expect(error.code).to.equal('CSV_DATA_REQUIRED');
-      });
-    });
-  });
-
-  describe('#deserializeForCertificationCenterBatchArchive', function () {
-    it('should check the required header', async function () {
-      // given
-      const filePath = 'file://certification-centers.csv';
-      const checkCsvHeaderStub = sinon.stub();
-      const readCsvFileStub = sinon.stub();
-      const parseCsvDataStub = sinon.stub();
-      parseCsvDataStub.resolves([{ 'ID du centre de certification': 1234 }, { 'ID du centre de certification': 5678 }]);
-
-      const requiredFieldNames = ['ID du centre de certification'];
-
-      // when
-      const serializedData = await csvSerializer.deserializeForCertificationCenterBatchArchive(filePath, {
-        checkCsvHeader: checkCsvHeaderStub,
-        readCsvFile: readCsvFileStub,
-        parseCsvData: parseCsvDataStub,
-      });
-
-      // then
-      expect(checkCsvHeaderStub).to.have.been.calledWithExactly({ filePath, requiredFieldNames });
-      expect(serializedData).to.deep.equal([1234, 5678]);
-    });
-  });
-
-  describe('#deserializeForOrganizationBatchArchive', function () {
-    it('should check the required header', async function () {
-      // given
-      const filePath = 'file://organizations.csv';
-      const checkCsvHeaderStub = sinon.stub();
-      const readCsvFileStub = sinon.stub();
-      const parseCsvDataStub = sinon.stub();
-      parseCsvDataStub.resolves([{ "ID de l'organisation": 1234 }, { "ID de l'organisation": 5678 }]);
-
-      const requiredFieldNames = ["ID de l'organisation"];
-
-      // when
-      const serializedData = await csvSerializer.deserializeForOrganizationBatchArchive(filePath, {
-        checkCsvHeader: checkCsvHeaderStub,
-        readCsvFile: readCsvFileStub,
-        parseCsvData: parseCsvDataStub,
-      });
-
-      // then
-      expect(checkCsvHeaderStub).to.have.been.calledWithExactly({ filePath, requiredFieldNames });
-      expect(serializedData).to.deep.equal([1234, 5678]);
-    });
-  });
-
-  describe('#verifyColumnsValueAgainstConstraints', function () {
-    it('return undefined when file is valid', async function () {
-      const csvLines = [{ 'ma colonne': 'value' }];
-      const headers = { col1: 'ma colonne' };
-
-      expect(csvSerializer.verifyColumnsValueAgainstConstraints({ csvLines, headers })).to.equal(undefined);
-    });
-
-    it('throw FileValidationError when a value is undefined', async function () {
-      const headers = {
-        col1: 'col-1',
-        col2: 'col-2',
-      };
-      const csvLines = [
-        { 'col-1': 'value', 'col-2': 'value2' },
-        { 'col-1': 'value', 'col-2': undefined },
-      ];
-
-      const error = await catchErr(csvSerializer.verifyColumnsValueAgainstConstraints)({ csvLines, headers });
-
-      expect(error).to.be.instanceOf(FileValidationError);
-      expect(error.code).to.equal('CSV_DATA_REQUIRED');
-    });
-
-    context('no billing mode', function () {
-      it('dont throw FileValidationError if billingMode value is undefined', async function () {
-        const headers = {
-          col: 'col',
-          billingMode: 'mode de facturation',
-        };
-        const csvLines = [
-          { col: 'value', 'mode de facturation': 'value2' },
-          { col: 'value', 'mode de facturation': undefined },
-        ];
-
-        expect(
-          csvSerializer.verifyColumnsValueAgainstConstraints({ csvLines, headers, hasBillingMode: false }),
-        ).to.equal(undefined);
-      });
-
-      it('dont throw FileValidationError if prepaymentCode value is undefined', async function () {
-        const headers = {
-          col: 'col',
-          prepaymentCode: 'code de pré-paiement',
-        };
-        const csvLines = [
-          { col: 'value', 'code de pré-paiement': 'value2' },
-          { col: 'value', 'code de pré-paiement': undefined },
-        ];
-
-        expect(
-          csvSerializer.verifyColumnsValueAgainstConstraints({ csvLines, headers, hasBillingMode: false }),
-        ).to.equal(undefined);
       });
     });
   });

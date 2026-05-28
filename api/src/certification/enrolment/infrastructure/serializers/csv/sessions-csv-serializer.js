@@ -1,38 +1,10 @@
-import lodash from 'lodash';
-
+import { FileValidationError } from '../../../../../shared/domain/errors.js';
+import { convertDateValue } from '../../../../../shared/infrastructure/utils/date-utils.js';
 import {
   COMPLEMENTARY_CERTIFICATION_SUFFIX,
   emptySession,
   headers,
-} from '../../../../certification/shared/infrastructure/utils/csv/sessions-import.js';
-import { FileValidationError } from '../../../domain/errors.js';
-import { csvHelper } from '../../helpers/csv.js';
-import { convertDateValue } from '../../utils/date-utils.js';
-import { logger } from '../../utils/logger.js';
-
-const { isEmpty } = lodash;
-
-const { checkCsvHeader, parseCsvWithHeader } = csvHelper;
-
-function _csvFormulaEscapingPrefix(data) {
-  const mayBeInterpretedAsFormula = /^[-@=+]/.test(data);
-  return mayBeInterpretedAsFormula ? "'" : '';
-}
-
-function _csvSerializeValue(data) {
-  if (typeof data === 'number') {
-    return data.toString().replace(/\./, ',');
-  } else if (typeof data === 'string') {
-    if (/^[0-9-]+$/.test(data)) {
-      return data;
-    } else {
-      return `"${_csvFormulaEscapingPrefix(data)}${data.replace(/"/g, '""')}"`;
-    }
-  } else {
-    logger.error(`Unknown value type in _csvSerializeValue: ${typeof data}: ${data}`);
-    return '""';
-  }
-}
+} from '../../../../shared/infrastructure/utils/csv/sessions-import.js';
 
 function deserializeForSessionsImport({ parsedCsvData, hasBillingMode, certificationCenterHabilitations }) {
   const sessions = [];
@@ -97,152 +69,6 @@ function deserializeForSessionsImport({ parsedCsvData, hasBillingMode, certifica
     ...session,
     examiner: session.examiner ? session.examiner.join(', ') : '',
   }));
-}
-
-const requiredFieldNamesForOrganizationsImport = [
-  'type',
-  'externalId',
-  'name',
-  'provinceCode',
-  'credit',
-  'emailInvitations',
-  'emailForSCOActivation',
-  'identityProviderForCampaigns',
-  'organizationInvitationRole',
-  'locale',
-  'tags',
-  'createdBy',
-  'documentationUrl',
-  'targetProfiles',
-  'isManagingStudents',
-  'DPOFirstName',
-  'DPOLastName',
-  'DPOEmail',
-  'administrationTeamId',
-  'parentOrganizationId',
-  'countryCode',
-  'organizationLearnerTypeId',
-];
-
-async function deserializeForOrganizationsImport(file) {
-  const batchOrganizationOptionsWithHeader = {
-    skipEmptyLines: true,
-    header: true,
-    transformHeader: (header) => header?.trim(),
-    transform: (value, columnName) => {
-      if (typeof value === 'string') {
-        value = value.trim();
-      }
-      if (columnName === 'isManagingStudents') {
-        value = value?.toLowerCase() === 'true';
-      }
-      if (!isEmpty(value)) {
-        if (
-          columnName === 'type' ||
-          columnName === 'organizationInvitationRole' ||
-          columnName === 'identityProviderForCampaigns'
-        ) {
-          value = value.toUpperCase();
-        }
-        if (
-          columnName === 'createdBy' ||
-          columnName === 'parentOrganizationId' ||
-          columnName === 'administrationTeamId' ||
-          columnName === 'countryCode' ||
-          columnName === 'organizationLearnerTypeId' ||
-          columnName === 'credit'
-        ) {
-          value = parseInt(value, 10);
-        }
-        if (columnName === 'emailInvitations' || columnName === 'emailForSCOActivation' || columnName === 'DPOEmail') {
-          value = value.replaceAll(' ', '').toLowerCase();
-        }
-      } else {
-        if (
-          columnName === 'identityProviderForCampaigns' ||
-          columnName === 'DPOFirstName' ||
-          columnName === 'DPOLastName' ||
-          columnName === 'DPOEmail' ||
-          columnName === 'parentOrganizationId' ||
-          columnName === 'provinceCode' ||
-          columnName === 'emailForSCOActivation' ||
-          columnName === 'administrationTeamId' ||
-          columnName === 'countryCode' ||
-          columnName === 'organizationLearnerTypeId' ||
-          columnName === 'credit'
-        ) {
-          value = null;
-        }
-        if (columnName === 'locale') {
-          value = 'fr-fr';
-        }
-      }
-      return value;
-    },
-  };
-
-  await checkCsvHeader({ filePath: file, requiredFieldNames: requiredFieldNamesForOrganizationsImport });
-
-  return await parseCsvWithHeader(file, batchOrganizationOptionsWithHeader);
-}
-
-const requiredFieldNamesForCertificationCenterBatchArchive = ['ID du centre de certification'];
-
-async function deserializeForCertificationCenterBatchArchive(
-  file,
-  { checkCsvHeader, readCsvFile, parseCsvData } = csvHelper,
-) {
-  await checkCsvHeader({ filePath: file, requiredFieldNames: requiredFieldNamesForCertificationCenterBatchArchive });
-  const cleanedData = await readCsvFile(file);
-
-  const batchCertificationCenterOptionsWithHeader = {
-    skipEmptyLines: true,
-    header: true,
-    transformHeader: (header) => header?.trim(),
-    transform: (value, columnName) => {
-      if (typeof value === 'string') {
-        value = value.trim();
-      }
-      if (!isEmpty(value)) {
-        if (columnName === 'ID du centre de certification') {
-          value = Number(value);
-        }
-      }
-      return value;
-    },
-  };
-
-  const parsedData = await parseCsvData(cleanedData, batchCertificationCenterOptionsWithHeader);
-
-  return parsedData.map((data) => data['ID du centre de certification']);
-}
-
-const requiredFieldNamesForOrganizationBatchArchive = ["ID de l'organisation"];
-
-async function deserializeForOrganizationBatchArchive(file, { checkCsvHeader, readCsvFile, parseCsvData } = csvHelper) {
-  await checkCsvHeader({ filePath: file, requiredFieldNames: requiredFieldNamesForOrganizationBatchArchive });
-  const cleanedData = await readCsvFile(file);
-
-  const batchOrganizationOptionsWithHeader = {
-    skipEmptyLines: true,
-    header: true,
-    transformHeader: (header) => header?.trim(),
-    transform: (value, columnName) => {
-      if (typeof value === 'string') {
-        value = value.trim();
-      }
-      if (!isEmpty(value)) {
-        if (columnName === columnName) {
-          value = Number(value);
-        }
-      }
-      return value;
-    },
-  };
-
-  const parsedData = await parseCsvData(cleanedData, batchOrganizationOptionsWithHeader);
-
-  return parsedData.map((data) => data[requiredFieldNamesForOrganizationBatchArchive]);
 }
 
 function _hasSessionIdAndCandidateInformation(data) {
@@ -336,10 +162,10 @@ function _verifiyFileIntegrity({
     _validateComplementaryCertificationHeaders(complementaryCertificationHeaders, certificationCenterHabilitations);
   }
 
-  verifyColumnsValueAgainstConstraints({ csvLines: parsedCsvData, headers, hasBillingMode });
+  _verifyColumnsValueAgainstConstraints({ csvLines: parsedCsvData, headers, hasBillingMode });
 }
 
-function verifyColumnsValueAgainstConstraints({ csvLines, headers, hasBillingMode }) {
+function _verifyColumnsValueAgainstConstraints({ csvLines, headers, hasBillingMode }) {
   for (const key in headers) {
     if (!hasBillingMode && (key === 'billingMode' || key === 'prepaymentCode')) {
       break;
@@ -443,18 +269,4 @@ function _generateUniqueKey({ address, room, date, time }) {
   return address + room + date + time;
 }
 
-function serializeLine(lineArray) {
-  return lineArray.map(_csvSerializeValue).join(';') + '\n';
-}
-
-export {
-  deserializeForCertificationCenterBatchArchive,
-  deserializeForOrganizationBatchArchive,
-  deserializeForOrganizationsImport,
-  deserializeForSessionsImport,
-  requiredFieldNamesForCertificationCenterBatchArchive,
-  requiredFieldNamesForOrganizationBatchArchive,
-  requiredFieldNamesForOrganizationsImport,
-  serializeLine,
-  verifyColumnsValueAgainstConstraints,
-};
+export { deserializeForSessionsImport };
