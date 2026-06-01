@@ -26,8 +26,6 @@ const DEFAULT_CLAIM_MAPPING = {
 const defaultSessionTemporaryStorage = temporaryStorage.withPrefix('oidc-session:');
 
 export class OidcAuthenticationService {
-  #isReady = false;
-  #isReadyForPixAdmin = false;
   #openidClient;
   #openidClientConfig;
 
@@ -91,32 +89,17 @@ export class OidcAuthenticationService {
 
     this.claimManager = new ClaimManager({ claimMapping, additionalClaims });
 
-    if (!enabled && !enabledForPixAdmin) {
-      return;
-    }
-
     const accessTokenLifespanSeconds = this.accessTokenLifespanMs / 1000;
     this.accessTokenJwtOptions = { expiresIn: accessTokenLifespanSeconds };
     this.sessionDurationSeconds = accessTokenLifespanSeconds;
-
-    this.#isReady = enabled;
-    this.#isReadyForPixAdmin = enabledForPixAdmin;
   }
 
   get code() {
     return this.identityProvider;
   }
 
-  get isReady() {
-    return this.#isReady;
-  }
-
-  set isReady(isReady) {
-    this.#isReady = isReady;
-  }
-
-  get isReadyForPixAdmin() {
-    return this.#isReadyForPixAdmin;
+  get isEnabled() {
+    return Boolean(this.enabled || this.enabledForPixAdmin);
   }
 
   async initializeClientConfig() {
@@ -143,6 +126,8 @@ export class OidcAuthenticationService {
         event: 'initialize-client-config',
         startDate,
       });
+
+      throw new OidcError({ message: 'Error during initializeClientConfig' });
     }
   }
 
@@ -171,7 +156,8 @@ export class OidcAuthenticationService {
         event: 'generate-authorization-url',
         startDate,
       });
-      throw new OidcError({ message: error.message });
+
+      throw new OidcError({ message: 'Error during getAuthorizationUrl' });
     }
   }
 
@@ -207,7 +193,8 @@ export class OidcAuthenticationService {
         event: 'exchange-code-for-tokens',
         startDate,
       });
-      throw new OidcError({ message: error.message });
+
+      throw new OidcError({ message: 'Error during exchangeCodeForTokens' });
     }
   }
 
@@ -303,7 +290,8 @@ export class OidcAuthenticationService {
         event: 'get-redirect-logout-url',
         startDate,
       });
-      throw new OidcError({ message: error.message });
+
+      throw new OidcError({ message: 'Error during getRedirectLogoutUrl' });
     }
   }
 
@@ -321,25 +309,25 @@ export class OidcAuthenticationService {
         event: 'get-user-info-from-endpoint',
         startDate,
       });
-      throw new OidcError({ message: error.message });
+
+      throw new OidcError({ message: 'Error during _getUserInfoFromEndpoint' });
     }
 
     const missingClaims = this.claimManager.getMissingMandatoryClaims(userInfo);
 
     if (missingClaims.length > 0) {
-      const message = `Un ou des champs obligatoires (${missingClaims.join(
-        ',',
-      )}) n'ont pas été renvoyés par votre fournisseur d'identité ${this.organizationName}.`;
-
-      _monitorOidcError(message, {
-        data: { missingFields: missingClaims.join(', '), userInfo },
-        event: 'find-missing-required-claims',
+      _monitorOidcError('Missing required claims', {
+        data: { missingFields: missingClaims.join(', '), userInfo, organizationName: this.organizationName },
+        event: 'missing-required-claims',
       });
 
       const error = OIDC_ERRORS.USER_INFO.missingFields;
       const meta = {
         shortCode: error.shortCode,
       };
+
+      // TODO: Do the i18n on the front apps
+      const message = `Le ou les champs obligatoires suivants n’ont pas été renvoyés par le fournisseur d’identité ${this.organizationName} : ${missingClaims.join(',')}`;
       throw new OidcMissingFieldsError(message, error.code, meta);
     }
 
@@ -361,6 +349,8 @@ function _monitorOidcError(message, { data, error, event, startDate }) {
       name: error.constructor.name,
       message: error.message,
       stack: error.stack,
+      ...(error.cause && { cause: error.cause }),
+      ...(error.cause?.stack && { causeStack: error.cause.stack }),
       ...(error.error_uri && { errorUri: error.error_uri }),
       ...(error.response && { response: error.response }),
     };

@@ -93,8 +93,8 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
     });
   });
 
-  describe('#isReady', function () {
-    context('when enabled in config', function () {
+  describe('#isEnabled', function () {
+    context('when enabled is true', function () {
       it('returns true', function () {
         // given
         const oidcAuthenticationService = new OidcAuthenticationService(
@@ -112,20 +112,45 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         );
 
         // when
-        const isOidcAuthenticationServiceReady = oidcAuthenticationService.isReady;
+        const result = oidcAuthenticationService.isEnabled;
 
         // then
-        expect(isOidcAuthenticationServiceReady).to.be.true;
+        expect(result).to.be.true;
       });
     });
 
-    context('when not enabled in config', function () {
+    context('when enabledForPixAdmin is true', function () {
+      it('returns true', function () {
+        // given
+        const oidcAuthenticationService = new OidcAuthenticationService(
+          {
+            clientId: 'anId',
+            clientSecret: 'aSecret',
+            additionalRequiredProperties: {
+              aProperty: 'a property value',
+            },
+            enabledForPixAdmin: true,
+            openidConfigurationUrl: 'https://example.net/.well-known/openid-configuration',
+            redirectUri: 'https://example.net/connexion/redirect',
+          },
+          { openidClient },
+        );
+
+        // when
+        const result = oidcAuthenticationService.isEnabled;
+
+        // then
+        expect(result).to.be.true;
+      });
+    });
+
+    context('when neither enabled nor enabledForPixAdmin is true', function () {
       it('returns false', function () {
         // given
         const oidcAuthenticationService = new OidcAuthenticationService({}, { openidClient });
 
         // when
-        const result = oidcAuthenticationService.isReady;
+        const result = oidcAuthenticationService.isEnabled;
 
         // then
         expect(result).to.be.false;
@@ -262,7 +287,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
           delete: sinon.stub().resolves(),
         };
 
-        const errorThrown = new Error('Fails to generate endSessionUrl');
+        const errorThrown = new Error('A low-level server error with potential information');
         openidClient.buildEndSessionUrl.callsFake(() => {
           clock.tick(2000);
           throw errorThrown;
@@ -282,7 +307,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
 
         // then
         expect(error).to.be.instanceOf(OidcError);
-        expect(error.message).to.be.equal('Fails to generate endSessionUrl');
+        expect(error.message).to.be.equal('Error during getRedirectLogoutUrl');
         expect(logger.error).to.have.been.calledWithExactly({
           context: 'oidc',
           data: { organizationName: 'Oidc Example' },
@@ -365,7 +390,9 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         const sessionState = 'sessionState';
         const state = 'state';
 
-        const errorThrown = new Error('Fails to get tokens');
+        const errorThrown = new Error('A low-level server error with potential information', {
+          cause: new Error('An optional cause'),
+        });
         errorThrown.error_uri = '/oauth2/token';
         errorThrown.response = 'api call response here';
         openidClient.authorizationCodeGrant.callsFake(() => {
@@ -394,7 +421,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
 
         // then
         expect(error).to.be.instanceOf(OidcError);
-        expect(error.message).to.be.equal('Fails to get tokens');
+        expect(error.message).to.be.equal('Error during exchangeCodeForTokens');
         expect(logger.error).to.have.been.calledWithExactly({
           context: 'oidc',
           data: {
@@ -409,6 +436,8 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
             name: errorThrown.name,
             message: errorThrown.message,
             stack: sinon.match.string,
+            cause: sinon.match.any,
+            causeStack: sinon.match.any,
             errorUri: '/oauth2/token',
             response: 'api call response here',
           },
@@ -474,7 +503,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         const redirectUri = 'https://example.org/please-redirect-to-me';
         const openidConfigurationUrl = 'https://example.org/oidc-provider-configuration';
 
-        const errorThrown = new Error('Fails to generate authorization url');
+        const errorThrown = new Error('A low-level server error with potential information');
         openidClient.buildAuthorizationUrl.callsFake(() => {
           clock.tick(2000);
           throw errorThrown;
@@ -498,7 +527,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
 
         // then
         expect(error).to.be.instanceOf(OidcError);
-        expect(error.message).to.be.equal('Fails to generate authorization url');
+        expect(error.message).to.be.equal('Error during getAuthorizationUrl');
         expect(logger.error).to.have.been.calledWithExactly({
           context: 'oidc',
           data: { organizationName: 'Oidc Example' },
@@ -776,7 +805,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         const redirectUri = 'https://example.org/please-redirect-to-me';
         const openidConfigurationUrl = 'https://example.org/oidc-provider-configuration';
 
-        const errorThrown = new Error('Fails to get user info');
+        const errorThrown = new Error('A low-level server error with potential information');
         openidClient.fetchUserInfo.callsFake(() => {
           clock.tick(2000);
           throw errorThrown;
@@ -800,7 +829,7 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
 
         // then
         expect(error).to.be.instanceOf(OidcError);
-        expect(error.message).to.be.equal('Fails to get user info');
+        expect(error.message).to.be.equal('Error during _getUserInfoFromEndpoint');
         expect(logger.error).to.have.been.calledWithExactly({
           message: errorThrown.message,
           context: 'oidc',
@@ -851,7 +880,6 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
         await oidcAuthenticationService.initializeClientConfig();
 
         const accessToken = 'thisIsSerializedInformation';
-        const errorMessage = `Un ou des champs obligatoires (family_name) n'ont pas été renvoyés par votre fournisseur d'identité Oidc Example.`;
 
         // when
         const error = await catchErr(
@@ -861,7 +889,9 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
 
         // then
         expect(error).to.be.instanceOf(OidcMissingFieldsError);
-        expect(error.message).to.be.equal(errorMessage);
+        expect(error.message).to.be.equal(
+          'Le ou les champs obligatoires suivants n’ont pas été renvoyés par le fournisseur d’identité Oidc Example : family_name',
+        );
         expect(error.code).to.be.equal(OIDC_ERRORS.USER_INFO.missingFields.code);
         expect(logger.error).to.have.been.calledWithExactly({
           context: 'oidc',
@@ -872,9 +902,10 @@ describe('Unit | Domain | Services | oidc-authentication-service', function () {
               given_name: 'givenName',
               family_name: undefined,
             },
+            organizationName: 'Oidc Example',
           },
-          event: 'find-missing-required-claims',
-          message: errorMessage,
+          event: 'missing-required-claims',
+          message: 'Missing required claims',
           team: 'acces',
         });
       });

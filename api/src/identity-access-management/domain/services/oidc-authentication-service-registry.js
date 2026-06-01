@@ -8,14 +8,17 @@ import { PoleEmploiOidcAuthenticationService } from './pole-emploi-oidc-authenti
 
 export class OidcAuthenticationServiceRegistry {
   #allOidcProviderServices = null;
-  #readyOidcProviderServicesByRequestedApplications = {};
+  #oidcProviderServicesByRequestedApplication = {};
+  #readyOidcProviderServicesByIdentityProviderCode = {};
 
   constructor(dependencies = {}) {
     this.oidcProviderRepository = dependencies.oidcProviderRepository ?? oidcProviderRepository;
   }
 
   /**
-   * @return {OidcAuthenticationService[]|null}
+   * Returns all the OidcAuthenticationServices, enabled or not.
+   *
+   * @returns {OidcAuthenticationService[]|null}
    */
   async getAllOidcProviderServices() {
     await this.#loadAllOidcProviderServices();
@@ -23,44 +26,60 @@ export class OidcAuthenticationServiceRegistry {
     return this.#allOidcProviderServices;
   }
 
-  async getReadyOidcProviderServicesByRequestedApplication(requestedApplication) {
+  /**
+   * Returns the enabled OidcAuthenticationServices for the given requestedApplication.
+   *
+   * @returns {OidcAuthenticationService[]|null}
+   */
+  async getOidcProviderServicesByRequestedApplication(requestedApplication) {
     await this.#loadAllOidcProviderServices();
 
-    const groupByKey = generateGroupByKey(requestedApplication.applicationName, requestedApplication.applicationTld);
-    return this.#readyOidcProviderServicesByRequestedApplications[groupByKey] || [];
+    const key = generateGroupByKeyForRequestedApplication(
+      requestedApplication.applicationName,
+      requestedApplication.applicationTld,
+    );
+    return this.#oidcProviderServicesByRequestedApplication[key] || [];
   }
 
+  /**
+   * Returns the configured OidcAuthenticationService for a given code and requestedApplication.
+   *
+   * @returns {OidcAuthenticationService}
+   * @throws {InvalidArgumentException} if oidcProviderService.initializeClientConfig() throws an error
+   */
   async getOidcProviderServiceByCode({ identityProviderCode, requestedApplication }) {
     await this.#loadAllOidcProviderServices();
-    await this.#configureReadyOidcProviderServiceByCode(identityProviderCode);
 
-    const oidcProviderServices = await this.getReadyOidcProviderServicesByRequestedApplication(requestedApplication);
-    const oidcProviderService = oidcProviderServices.find((service) => identityProviderCode === service.code);
+    const key = generateGroupByKeyForIdentityProviderCode(
+      identityProviderCode,
+      requestedApplication.applicationName,
+      requestedApplication.applicationTld,
+    );
+    let oidcProviderService = this.#readyOidcProviderServicesByIdentityProviderCode[key];
+    if (oidcProviderService) {
+      return oidcProviderService;
+    }
 
+    const oidcProviderServices = await this.getOidcProviderServicesByRequestedApplication(requestedApplication);
+    oidcProviderService = oidcProviderServices.find((service) => identityProviderCode === service.code);
     if (!oidcProviderService) {
       throw new InvalidIdentityProviderError(identityProviderCode);
     }
+
+    await oidcProviderService.initializeClientConfig();
+    this.#readyOidcProviderServicesByIdentityProviderCode[key] = oidcProviderService;
 
     return oidcProviderService;
   }
 
   async testOnly_reset(oidcProviderServices) {
     this.#allOidcProviderServices = null;
-    this.#readyOidcProviderServicesByRequestedApplications = {};
+    this.#oidcProviderServicesByRequestedApplication = {};
+    this.#readyOidcProviderServicesByIdentityProviderCode = {};
 
     if (oidcProviderServices) {
       await this.#loadAllOidcProviderServices(oidcProviderServices);
     }
-  }
-
-  async #configureReadyOidcProviderServiceByCode(oidcProviderServiceCode) {
-    const oidcProviderService = this.#allOidcProviderServices?.find(
-      (oidcProviderService) => oidcProviderService.code === oidcProviderServiceCode,
-    );
-
-    if (!oidcProviderService) return;
-
-    await oidcProviderService.initializeClientConfig();
   }
 
   async #loadAllOidcProviderServices(oidcProviderServices) {
@@ -86,15 +105,22 @@ export class OidcAuthenticationServiceRegistry {
 
     this.#allOidcProviderServices = oidcProviderServices;
 
-    this.#readyOidcProviderServicesByRequestedApplications = Object.groupBy(
-      this.#allOidcProviderServices.filter(
-        (oidcProviderService) => oidcProviderService.isReady || oidcProviderService.isReadyForPixAdmin,
-      ),
-      (oidcProviderService) => generateGroupByKey(oidcProviderService.application, oidcProviderService.applicationTld),
+    const enabledOidcProviderServices = this.#allOidcProviderServices.filter(
+      (oidcProviderService) => oidcProviderService.isEnabled,
+    );
+
+    this.#oidcProviderServicesByRequestedApplication = Object.groupBy(
+      enabledOidcProviderServices,
+      (oidcProviderService) =>
+        generateGroupByKeyForRequestedApplication(oidcProviderService.application, oidcProviderService.applicationTld),
     );
   }
 }
 
-function generateGroupByKey(application, applicationTld) {
+function generateGroupByKeyForRequestedApplication(application, applicationTld) {
   return application + applicationTld;
+}
+
+function generateGroupByKeyForIdentityProviderCode(identityProviderCode, application, applicationTld) {
+  return `${identityProviderCode}-${application}${applicationTld}`;
 }
