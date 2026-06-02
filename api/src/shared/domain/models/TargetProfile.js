@@ -22,26 +22,23 @@ class TargetProfile {
     stages,
     badges,
     description,
+    estimatedTime,
   } = {}) {
     this.id = id;
     this.name = name;
     this.internalName = internalName;
     this.imageUrl = imageUrl;
     this.category = category;
+    this.estimatedTime = estimatedTime;
     this.isSimplifiedAccess = isSimplifiedAccess;
     this.outdated = outdated;
     this.stages = stages;
     this.badges = badges;
     this.description = description;
-    this.organizationsAttached = [];
   }
 
   get hasBadges() {
     return !!this.badges && this.badges.length > 0;
-  }
-
-  get organizations() {
-    return this.organizationsAttached;
   }
 }
 
