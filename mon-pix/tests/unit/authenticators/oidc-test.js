@@ -84,10 +84,11 @@ module('Unit | Authenticator | oidc', function (hooks) {
       sinon.assert.calledWith(window.fetch, 'http://localhost:3000/api/oidc/users', { ...request, body });
       assert.deepEqual(token, {
         access_token: accessToken,
+        user_id: userId,
+        expiresAt: 4702193958000,
         logoutUrlUuid,
         source,
         shouldCloseSession,
-        user_id: userId,
         identityProviderCode,
       });
     });
@@ -117,10 +118,11 @@ module('Unit | Authenticator | oidc', function (hooks) {
       sinon.assert.calledWith(window.fetch, 'http://localhost:3000/api/oidc/token', { ...request, body });
       assert.deepEqual(token, {
         access_token: accessToken,
+        user_id: userId,
+        expiresAt: 4702193958000,
         logoutUrlUuid,
         source,
         shouldCloseSession,
-        user_id: userId,
         identityProviderCode,
       });
     });
