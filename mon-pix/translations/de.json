@@ -2222,11 +2222,29 @@
       },
       "not-finished": "Du kannst deine Ergebnisse noch nicht einsenden, wir haben noch einige Fragen an dich.",
       "recommended-engine": {
+        "modal": {
+          "actions": {
+            "discover-module": "Modul starten",
+            "discover-program": "Dieses Programm entdecken"
+          },
+          "duration": "Dauer",
+          "editor-name": "Vorgeschlagen von : ",
+          "localisation": "Standort",
+          "objectives": "Ziele",
+          "program": "Programm"
+        },
         "training-card": {
+          "aria-label": "Trainingsdetails öffnen",
           "delivery-mode": {
             "hybrid": "Hybrid",
             "on-site": "Vor Ort",
             "remote": "Fernkurs"
+          },
+          "duration": {
+            "and": "und",
+            "days": "{ count, plural, =1 {Tag} other {Tage} }",
+            "hours": "Std",
+            "minutes": "Min"
           },
           "registration-required": {
             "no": "Sofortiger freier Zugang",

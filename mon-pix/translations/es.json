@@ -2222,11 +2222,29 @@
       },
       "not-finished": "Todavía no puedes enviar tus resultados, aún tenemos algunas preguntas para ti.",
       "recommended-engine": {
+        "modal": {
+          "actions": {
+            "discover-module": "Iniciar el módulo",
+            "discover-program": "Descubrir este programa"
+          },
+          "duration": "Duración",
+          "editor-name": "Propuesto por: ",
+          "localisation": "Localización",
+          "objectives": "Objetivos",
+          "program": "Programa"
+        },
         "training-card": {
+          "aria-label": "Abrir los detalles de la formación",
           "delivery-mode": {
             "hybrid": "Híbrido",
             "on-site": "Presencial",
             "remote": "A distancia"
+          },
+          "duration": {
+            "and": "y",
+            "days": "{ count, plural, =1 {día} other {días} }",
+            "hours": "h",
+            "minutes": "min"
           },
           "registration-required": {
             "no": "Acceso libre inmediato",

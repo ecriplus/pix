@@ -2222,11 +2222,29 @@
       },
       "not-finished": "Je kunt je resultaten nog niet opsturen, dus we hebben nog een paar vragen voor je.",
       "recommended-engine": {
+        "modal": {
+          "actions": {
+            "discover-module": "Module starten",
+            "discover-program": "Dit programma ontdekken"
+          },
+          "duration": "Duur",
+          "editor-name": "Voorgesteld door : ",
+          "localisation": "Locatie",
+          "objectives": "Doelstellingen",
+          "program": "Programma"
+        },
         "training-card": {
+          "aria-label": "Trainingsdetails openen",
           "delivery-mode": {
             "hybrid": "Hybride",
             "on-site": "Ter plaatse",
             "remote": "Op afstand"
+          },
+          "duration": {
+            "and": "en",
+            "days": "{ count, plural, =1 {dag} other {dagen} }",
+            "hours": "u",
+            "minutes": "min"
           },
           "registration-required": {
             "no": "Onmiddellijke vrije toegang",
