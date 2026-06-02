@@ -162,6 +162,14 @@ export class Candidate {
     return this.subscriptions.some((subscription) => subscription.isComplementary());
   }
 
+  hasCoreFrameworkSubscription() {
+    return this.subscription === Frameworks.CORE;
+  }
+
+  hasCoreScopeSubscription() {
+    return this.subscription === Frameworks.CORE || this.subscription === Frameworks.CLEA;
+  }
+
   getComplementarySubscription() {
     return this.subscriptions.find((subscription) => subscription.type === SUBSCRIPTION_TYPES.COMPLEMENTARY);
   }
@@ -172,6 +180,6 @@ export class Candidate {
   }
 
   isRegisteredToDoubleCertification() {
-    return this.subscriptions.length === 2;
+    return this.subscription === Frameworks.CLEA;
   }
 }
