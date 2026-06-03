@@ -1,6 +1,6 @@
 import sinon from 'sinon';
 
-import { Success } from '../../../../../src/quest/domain/models/Success.js';
+import { Success } from '../../../../../src/quest/domain/models/quest/Success.js';
 import * as successRepository from '../../../../../src/quest/infrastructure/repositories/success-repository.js';
 import { expect } from '../../../../test-helper.js';
 import { preventStubsToBeCalledUnexpectedly } from '../../../../tooling/test-utils/error.js';

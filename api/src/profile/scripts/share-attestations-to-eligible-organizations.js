@@ -4,8 +4,8 @@ import * as campaignsApi from '../../prescription/campaign/application/api/campa
 import * as organizationLearnerWithParticipationApi from '../../prescription/organization-learner/application/api/organization-learners-with-participations-api.js';
 import { CampaignParticipationStatuses } from '../../prescription/shared/domain/constants.js';
 import * as targetProfilesApi from '../../prescription/target-profile/application/api/target-profile-api.js';
-import { DataForQuest } from '../../quest/domain/models/DataForQuest.js';
-import { Eligibility } from '../../quest/domain/models/Eligibility.js';
+import { DataForQuest } from '../../quest/domain/models/quest/DataForQuest.js';
+import { Eligibility } from '../../quest/domain/models/quest/Eligibility.js';
 import * as questRepository from '../../quest/infrastructure/repositories/quest-repository.js';
 import { find } from '../../quest/infrastructure/repositories/success-repository.js';
 import { isoDateParser } from '../../shared/application/scripts/parsers.js';

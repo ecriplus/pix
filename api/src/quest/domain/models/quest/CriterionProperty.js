@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
-import { logger } from '../../../shared/infrastructure/utils/logger.js';
-import { InvalidComparisonError } from '../errors.js';
+import { logger } from '../../../../shared/infrastructure/utils/logger.js';
+import { InvalidComparisonError } from '../../errors.js';
 
 export const COMPARISONS = {
   EQUAL: 'equal',

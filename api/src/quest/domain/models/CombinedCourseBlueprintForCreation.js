@@ -1,4 +1,4 @@
-import { REQUIREMENT_TYPES } from './Quest.js';
+import { REQUIREMENT_TYPES } from './quest/Quest.js';
 
 export class CombinedCourseBlueprintForCreation {
   constructor({

@@ -8,7 +8,7 @@ import {
   CRITERION_COMPARISONS,
   REQUIREMENT_COMPARISONS,
   REQUIREMENT_TYPES,
-} from '../../../../src/quest/domain/models/Quest.js';
+} from '../../../../src/quest/domain/models/quest/Quest.js';
 import { Assessment } from '../../../../src/shared/domain/models/Assessment.js';
 import { Membership } from '../../../../src/shared/domain/models/Membership.js';
 import { temporaryStorage } from '../../../../src/shared/infrastructure/key-value-storages/index.js';

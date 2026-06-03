@@ -6,9 +6,9 @@ import { config } from '../../../../shared/config.js';
 import { cryptoService as injectedCryptoService } from '../../../../shared/domain/services/crypto-service.js';
 import { CombinedCourse } from '../combined-course/CombinedCourse.js';
 import { CombinedCourseParticipationDetails } from '../combined-course-participation/CombinedCourseParticipationDetails.js';
-import { DataForQuest } from '../DataForQuest.js';
-import { Eligibility } from '../Eligibility.js';
-import { TYPES } from '../Requirement.js';
+import { DataForQuest } from '../quest/DataForQuest.js';
+import { Eligibility } from '../quest/Eligibility.js';
+import { TYPES } from '../quest/Requirement.js';
 import { COMBINED_COURSE_ITEM_TYPES, CombinedCourseItem } from './CombinedCourseItem.js';
 import { CombinedCourseReward } from './CombinedCourseReward.js';
 

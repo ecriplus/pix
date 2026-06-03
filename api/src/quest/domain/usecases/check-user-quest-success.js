@@ -1,5 +1,5 @@
 import { NotFoundError } from '../../../shared/domain/errors.js';
-import { DataForQuest } from '../models/DataForQuest.js';
+import { DataForQuest } from '../models/quest/DataForQuest.js';
 
 export const checkUserQuest = async ({
   userId,

@@ -8,7 +8,7 @@ import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { CsvParser } from '../../../shared/infrastructure/serializers/csv/csv-parser.js';
 import { QUEST_HEADER } from '../constants.js';
-import { Quest } from '../models/Quest.js';
+import { Quest } from '../models/quest/Quest.js';
 
 export const createOrUpdateQuestsInBatch = withTransaction(
   /**

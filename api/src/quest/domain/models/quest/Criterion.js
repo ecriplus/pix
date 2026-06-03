@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-import { EntityValidationError } from '../../../shared/domain/errors.js';
+import { EntityValidationError } from '../../../../shared/domain/errors.js';
 import { CriterionProperty, CriterionPropertyError } from './CriterionProperty.js';
 
 const schema = Joi.object({ data: Joi.object().pattern(Joi.string(), Joi.object()).required() });

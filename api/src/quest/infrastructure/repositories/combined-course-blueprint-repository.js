@@ -3,7 +3,7 @@ import difference from 'lodash/difference.js';
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { CombinedCourseBlueprint } from '../../domain/models/CombinedCourseBlueprint.js';
-import { Quest } from '../../domain/models/Quest.js';
+import { Quest } from '../../domain/models/quest/Quest.js';
 import * as questRepository from './quest-repository.js';
 
 /**

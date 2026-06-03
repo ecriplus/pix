@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
-import { EntityValidationError } from '../../../shared/domain/errors.js';
-import { logger } from '../../../shared/infrastructure/utils/logger.js';
+import { EntityValidationError } from '../../../../shared/domain/errors.js';
+import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import { Criterion } from './Criterion.js';
 
 export const COMPARISONS = {
