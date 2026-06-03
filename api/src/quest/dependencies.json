@@ -15,5 +15,5 @@
     "profile",
     "shared"
   ],
-  "circular": "temporary-allowed"
+  "circular": "forbidden"
 }
