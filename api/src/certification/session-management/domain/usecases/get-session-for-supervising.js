@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 import { CONCURRENCY_HEAVY_OPERATIONS } from '../../../../shared/infrastructure/constants.js';
 import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
 import { DEFAULT_SESSION_DURATION_MINUTES } from '../../../shared/domain/constants.js';
+import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
 
 /**
  * @typedef {import('./index.js').SessionForSupervisingRepository} SessionForSupervisingRepository
@@ -41,7 +42,7 @@ export { getSessionForSupervising };
  */
 function _computeDoubleCertificationEligibility(certificationBadgesService) {
   return async (candidate) => {
-    if (candidate.enrolledDoubleCertification?.key) {
+    if (candidate.subscription && candidate.subscription !== Frameworks.CORE) {
       candidate.stillValidBadgeAcquisitions = await certificationBadgesService.findStillValidBadgeAcquisitions({
         userId: candidate.userId,
       });
@@ -55,12 +56,5 @@ function _computeTheoricalEndDateTime(candidate) {
     return;
   }
 
-  let theoricalEndDateTime = startDateTime.add(DEFAULT_SESSION_DURATION_MINUTES, 'minute');
-
-  if (candidate.isStillEligibleToDoubleCertification) {
-    const extraMinutes = candidate.enrolledDoubleCertification.certificationExtraTime ?? 0;
-    theoricalEndDateTime = theoricalEndDateTime.add(extraMinutes, 'minute');
-  }
-
-  candidate.theoricalEndDateTime = theoricalEndDateTime.toDate();
+  candidate.theoricalEndDateTime = startDateTime.add(DEFAULT_SESSION_DURATION_MINUTES, 'minute').toDate();
 }
