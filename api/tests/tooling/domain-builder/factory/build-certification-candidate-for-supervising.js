@@ -11,8 +11,7 @@ const buildCertificationCandidateForSupervising = function ({
   assessmentStatus = null,
   startDateTime = new Date('2022-10-01T12:00:00Z'),
   theoricalEndDateTime,
-  enrolledComplementaryCertification,
-  enrolledDoubleCertification,
+  subscription = 'CORE',
   stillValidBadgeAcquisitions = [],
   accessibilityAdjustmentNeeded = false,
 } = {}) {
@@ -27,8 +26,7 @@ const buildCertificationCandidateForSupervising = function ({
     assessmentStatus,
     startDateTime,
     theoricalEndDateTime,
-    enrolledComplementaryCertification,
-    enrolledDoubleCertification,
+    subscription,
     stillValidBadgeAcquisitions,
     accessibilityAdjustmentNeeded,
   });

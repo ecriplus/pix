@@ -1,3 +1,5 @@
+import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
+
 export class CertificationCandidateForSupervising {
   constructor({
     id,
@@ -10,8 +12,7 @@ export class CertificationCandidateForSupervising {
     assessmentStatus,
     startDateTime,
     theoricalEndDateTime,
-    enrolledComplementaryCertification,
-    enrolledDoubleCertification,
+    subscription,
     stillValidBadgeAcquisitions = [],
     accessibilityAdjustmentNeeded,
     challengeLiveAlert,
@@ -27,8 +28,7 @@ export class CertificationCandidateForSupervising {
     this.assessmentStatus = assessmentStatus;
     this.startDateTime = startDateTime;
     this.theoricalEndDateTime = theoricalEndDateTime;
-    this.enrolledComplementaryCertification = enrolledComplementaryCertification;
-    this.enrolledDoubleCertification = enrolledDoubleCertification;
+    this.subscription = subscription;
     this.stillValidBadgeAcquisitions = stillValidBadgeAcquisitions;
     this.accessibilityAdjustmentNeeded = accessibilityAdjustmentNeeded;
     this.challengeLiveAlert = challengeLiveAlert?.status ? challengeLiveAlert : null;
@@ -40,9 +40,11 @@ export class CertificationCandidateForSupervising {
   }
 
   get isStillEligibleToDoubleCertification() {
-    return this.stillValidBadgeAcquisitions.some(
-      (stillValidBadgeAcquisition) =>
-        stillValidBadgeAcquisition.complementaryCertificationKey === this.enrolledDoubleCertification?.key,
+    return (
+      this.subscription === Frameworks.CLEA &&
+      this.stillValidBadgeAcquisitions.some(
+        (stillValidBadgeAcquisition) => stillValidBadgeAcquisition.complementaryCertificationKey === Frameworks.CLEA,
+      )
     );
   }
 }
