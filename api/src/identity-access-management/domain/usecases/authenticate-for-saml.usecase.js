@@ -51,8 +51,7 @@ async function authenticateForSaml({
     });
 
     if (userFromCredentials.id !== expectedUserId) {
-      const expectedUser = await userRepository.getForObfuscation(expectedUserId);
-      const authenticationMethod = await obfuscationService.getUserAuthenticationMethodWithObfuscation(expectedUser);
+      const authenticationMethod = await obfuscationService.getUserAuthenticationMethodWithObfuscation(expectedUserId);
 
       throw new UnexpectedUserAccountError({ message: undefined, meta: { value: authenticationMethod.value } });
     }

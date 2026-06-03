@@ -172,10 +172,8 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-fo
       const expectedUserId = user.id + 1;
       const expectedUser = domainBuilder.buildUser({ id: expectedUserId });
       obfuscationService.getUserAuthenticationMethodWithObfuscation
-        .withArgs(expectedUser)
+        .withArgs(expectedUser.id)
         .resolves(authenticatedByAndValue);
-
-      userRepository.getForObfuscation.withArgs(expectedUserId).resolves(expectedUser);
 
       // when
       const error = await catchErr(authenticateForSaml)({

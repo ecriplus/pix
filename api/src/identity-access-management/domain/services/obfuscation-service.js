@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import * as authenticationMethodRepository from '../../infrastructure/repositories/authentication-method.repository.js';
+import * as userRepository from '../../infrastructure/repositories/user.repository.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../constants/identity-providers.js';
 
 const CONNEXION_TYPES = { username: 'username', email: 'email', samlId: 'samlId' };
@@ -11,9 +12,11 @@ const EMAIL_SEPARATOR = '@';
 const TWO_PARTS = 2;
 
 export async function getUserAuthenticationMethodWithObfuscation(
-  user,
-  dependencies = { authenticationMethodRepository },
+  userId,
+  dependencies = { userRepository, authenticationMethodRepository },
 ) {
+  const user = await dependencies.userRepository.getForObfuscation(userId);
+
   const garAuthenticationMethod = await dependencies.authenticationMethodRepository.findOneByUserIdAndIdentityProvider({
     userId: user.id,
     identityProvider: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,

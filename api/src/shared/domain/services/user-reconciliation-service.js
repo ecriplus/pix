@@ -85,29 +85,18 @@ export async function findMatchingOrganizationLearnerForGivenOrganizationIdAndRe
 
 export async function assertStudentHasAnAlreadyReconciledAccount(
   organizationLearner,
-  userRepository,
   obfuscationService,
   studentRepository,
 ) {
   if (organizationLearner.userId != null) {
-    await _buildStudentReconciliationError(
-      organizationLearner.userId,
-      'IN_SAME_ORGANIZATION',
-      userRepository,
-      obfuscationService,
-    );
+    await _buildStudentReconciliationError(organizationLearner.userId, 'IN_SAME_ORGANIZATION', obfuscationService);
   }
 
   const student = await studentRepository.getReconciledStudentByNationalStudentId(
     organizationLearner.nationalStudentId,
   );
   if (lodash.get(student, 'account')) {
-    await _buildStudentReconciliationError(
-      student.account.userId,
-      'IN_OTHER_ORGANIZATION',
-      userRepository,
-      obfuscationService,
-    );
+    await _buildStudentReconciliationError(student.account.userId, 'IN_OTHER_ORGANIZATION', obfuscationService);
   }
 }
 
@@ -146,11 +135,10 @@ async function generateUsernameUntilAvailable({ firstPart, secondPart, userRepos
   return username;
 }
 
-async function _buildStudentReconciliationError(userId, errorContext, userRepository, obfuscationService) {
-  const user = await userRepository.getForObfuscation(userId);
+async function _buildStudentReconciliationError(userId, errorContext, obfuscationService) {
   let authenticationMethod;
   try {
-    authenticationMethod = await obfuscationService.getUserAuthenticationMethodWithObfuscation(user);
+    authenticationMethod = await obfuscationService.getUserAuthenticationMethodWithObfuscation(userId);
   } catch {
     throw new OrganizationLearnerAlreadyLinkedToInvalidUserError();
   }
