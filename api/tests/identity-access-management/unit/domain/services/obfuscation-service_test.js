@@ -2,7 +2,7 @@ import sinon from 'sinon';
 
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
-import { getUserAuthenticationMethodWithObfuscation } from '../../../../../src/identity-access-management/domain/services/obfuscation-service.js';
+import { getObfuscatedAuthenticationMethod } from '../../../../../src/identity-access-management/domain/services/obfuscation-service.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
 import { expect } from '../../../../test-helper.js';
 import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
@@ -32,7 +32,7 @@ describe('Identity Access Management | Unit | Service | user-authentication-meth
       authenticationMethodRepository.findOneByUserIdAndIdentityProvider.resolves(authenticationMethod);
 
       // when
-      const value = await getUserAuthenticationMethodWithObfuscation(user.id, {
+      const value = await getObfuscatedAuthenticationMethod(user.id, {
         userRepository,
         authenticationMethodRepository,
       });
@@ -57,7 +57,7 @@ describe('Identity Access Management | Unit | Service | user-authentication-meth
       authenticationMethodRepository.findOneByUserIdAndIdentityProvider.resolves(authenticationMethod);
 
       // when
-      const value = await getUserAuthenticationMethodWithObfuscation(user.id, {
+      const value = await getObfuscatedAuthenticationMethod(user.id, {
         userRepository,
         authenticationMethodRepository,
       });
@@ -82,7 +82,7 @@ describe('Identity Access Management | Unit | Service | user-authentication-meth
       authenticationMethodRepository.findOneByUserIdAndIdentityProvider.resolves(authenticationMethod);
 
       // when
-      const value = await getUserAuthenticationMethodWithObfuscation(user.id, {
+      const value = await getObfuscatedAuthenticationMethod(user.id, {
         userRepository,
         authenticationMethodRepository,
       });
@@ -102,7 +102,7 @@ describe('Identity Access Management | Unit | Service | user-authentication-meth
       userRepository.getForObfuscation.resolves(user);
 
       // when
-      const value = await getUserAuthenticationMethodWithObfuscation(user.id, {
+      const value = await getObfuscatedAuthenticationMethod(user.id, {
         userRepository,
         authenticationMethodRepository,
       });
@@ -122,7 +122,7 @@ describe('Identity Access Management | Unit | Service | user-authentication-meth
       userRepository.getForObfuscation.resolves(user);
 
       // when
-      const value = await getUserAuthenticationMethodWithObfuscation(user.id, {
+      const value = await getObfuscatedAuthenticationMethod(user.id, {
         userRepository,
         authenticationMethodRepository,
       });
@@ -142,7 +142,7 @@ describe('Identity Access Management | Unit | Service | user-authentication-meth
       userRepository.getForObfuscation.resolves(user);
 
       // when
-      const value = await getUserAuthenticationMethodWithObfuscation(user.id, {
+      const value = await getObfuscatedAuthenticationMethod(user.id, {
         userRepository,
         authenticationMethodRepository,
       });
@@ -161,7 +161,7 @@ describe('Identity Access Management | Unit | Service | user-authentication-meth
       userRepository.getForObfuscation.resolves(user);
 
       // when
-      const error = await catchErr(getUserAuthenticationMethodWithObfuscation)(user.id, {
+      const error = await catchErr(getObfuscatedAuthenticationMethod)(user.id, {
         userRepository,
         authenticationMethodRepository,
       });

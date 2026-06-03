@@ -36,7 +36,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-fo
       getUserByUsernameAndPassword: sinon.stub(),
     };
     obfuscationService = {
-      getUserAuthenticationMethodWithObfuscation: sinon.stub(),
+      getObfuscatedAuthenticationMethod: sinon.stub(),
     };
     lastUserApplicationConnectionsRepository = {
       upsert: sinon.stub(),
@@ -171,9 +171,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | authenticate-fo
 
       const expectedUserId = user.id + 1;
       const expectedUser = domainBuilder.buildUser({ id: expectedUserId });
-      obfuscationService.getUserAuthenticationMethodWithObfuscation
-        .withArgs(expectedUser.id)
-        .resolves(authenticatedByAndValue);
+      obfuscationService.getObfuscatedAuthenticationMethod.withArgs(expectedUser.id).resolves(authenticatedByAndValue);
 
       // when
       const error = await catchErr(authenticateForSaml)({

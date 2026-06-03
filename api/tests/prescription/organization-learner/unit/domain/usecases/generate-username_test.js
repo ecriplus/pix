@@ -42,7 +42,7 @@ describe('Unit | UseCase | generate-username', function () {
       getReconciledStudentByNationalStudentId: sinon.stub(),
     };
     obfuscationService = {
-      getUserAuthenticationMethodWithObfuscation: sinon.stub(),
+      getObfuscatedAuthenticationMethod: sinon.stub(),
     };
     userReconciliationService = {
       findMatchingCandidateIdForGivenUser: sinon.stub(),
@@ -106,7 +106,7 @@ describe('Unit | UseCase | generate-username', function () {
         organizationLearner.lastName = studentInformation.lastName;
         organizationLearnerRepository.findByOrganizationIdAndBirthdate.resolves([organizationLearner]);
         userReconciliationService.findMatchingCandidateIdForGivenUser.resolves(organizationLearner.id);
-        obfuscationService.getUserAuthenticationMethodWithObfuscation.resolves({
+        obfuscationService.getObfuscatedAuthenticationMethod.resolves({
           authenticatedBy: 'email',
           value: 'e***@example.net',
         });
@@ -138,7 +138,7 @@ describe('Unit | UseCase | generate-username', function () {
         organizationLearner.lastName = studentInformation.lastName;
         organizationLearnerRepository.findByOrganizationIdAndBirthdate.resolves([organizationLearner]);
         userReconciliationService.findMatchingCandidateIdForGivenUser.resolves(organizationLearner.id);
-        obfuscationService.getUserAuthenticationMethodWithObfuscation.resolves({
+        obfuscationService.getObfuscatedAuthenticationMethod.resolves({
           authenticatedBy: 'username',
           value: 'j***.h***2',
         });
@@ -170,7 +170,7 @@ describe('Unit | UseCase | generate-username', function () {
         organizationLearner.lastName = studentInformation.lastName;
         organizationLearnerRepository.findByOrganizationIdAndBirthdate.resolves([organizationLearner]);
         userReconciliationService.findMatchingCandidateIdForGivenUser.resolves(organizationLearner.id);
-        obfuscationService.getUserAuthenticationMethodWithObfuscation.resolves({
+        obfuscationService.getObfuscatedAuthenticationMethod.resolves({
           authenticatedBy: 'samlId',
           value: null,
         });
@@ -205,7 +205,7 @@ describe('Unit | UseCase | generate-username', function () {
         userReconciliationService.findMatchingCandidateIdForGivenUser.resolves(organizationLearner.id);
         const student = new Student({ account: { userId: studentInformation.id } });
         studentRepository.getReconciledStudentByNationalStudentId.resolves(student);
-        obfuscationService.getUserAuthenticationMethodWithObfuscation.resolves({
+        obfuscationService.getObfuscatedAuthenticationMethod.resolves({
           authenticatedBy: 'email',
           value: 'e***@example.net',
         });
@@ -238,7 +238,7 @@ describe('Unit | UseCase | generate-username', function () {
         userReconciliationService.findMatchingCandidateIdForGivenUser.resolves(organizationLearner.id);
         const student = new Student({ account: { userId: studentInformation.id } });
         studentRepository.getReconciledStudentByNationalStudentId.resolves(student);
-        obfuscationService.getUserAuthenticationMethodWithObfuscation.resolves({
+        obfuscationService.getObfuscatedAuthenticationMethod.resolves({
           authenticatedBy: 'username',
           value: 'j***.h***2',
         });
@@ -271,7 +271,7 @@ describe('Unit | UseCase | generate-username', function () {
         userReconciliationService.findMatchingCandidateIdForGivenUser.resolves(organizationLearner.id);
         const student = new Student({ account: { userId: studentInformation.id } });
         studentRepository.getReconciledStudentByNationalStudentId.resolves(student);
-        obfuscationService.getUserAuthenticationMethodWithObfuscation.resolves({
+        obfuscationService.getObfuscatedAuthenticationMethod.resolves({
           authenticatedBy: 'samlId',
           value: null,
         });

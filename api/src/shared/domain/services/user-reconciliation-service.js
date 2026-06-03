@@ -138,7 +138,7 @@ async function generateUsernameUntilAvailable({ firstPart, secondPart, userRepos
 async function _buildStudentReconciliationError(userId, errorContext, obfuscationService) {
   let authenticationMethod;
   try {
-    authenticationMethod = await obfuscationService.getUserAuthenticationMethodWithObfuscation(userId);
+    authenticationMethod = await obfuscationService.getObfuscatedAuthenticationMethod(userId);
   } catch {
     throw new OrganizationLearnerAlreadyLinkedToInvalidUserError();
   }

@@ -630,7 +630,7 @@ describe('Unit | Service | user-reconciliation-service', function () {
 
     beforeEach(function () {
       obfuscationServiceStub = {
-        getUserAuthenticationMethodWithObfuscation: sinon.stub(),
+        getObfuscatedAuthenticationMethod: sinon.stub(),
       };
       studentRepositoryStub = {
         getReconciledStudentByNationalStudentId: sinon.stub(),
@@ -645,7 +645,7 @@ describe('Unit | Service | user-reconciliation-service', function () {
           const user = domainBuilder.buildUser({ email: 'test@example.net' });
           organizationLearner.userId = user.id;
 
-          obfuscationServiceStub.getUserAuthenticationMethodWithObfuscation.withArgs(user.id).returns({
+          obfuscationServiceStub.getObfuscatedAuthenticationMethod.withArgs(user.id).returns({
             authenticatedBy: 'email',
             value: 't***@example.net',
           });
@@ -674,7 +674,7 @@ describe('Unit | Service | user-reconciliation-service', function () {
           const user = domainBuilder.buildUser({ username: 'john.doe0101' });
           organizationLearner.userId = user.id;
 
-          obfuscationServiceStub.getUserAuthenticationMethodWithObfuscation.withArgs(user.id).returns({
+          obfuscationServiceStub.getObfuscatedAuthenticationMethod.withArgs(user.id).returns({
             authenticatedBy: 'username',
             value: 'j***.d***0101',
           });
@@ -703,7 +703,7 @@ describe('Unit | Service | user-reconciliation-service', function () {
           const user = domainBuilder.buildUser({ samlId: 'samlId' });
           organizationLearner.userId = user.id;
 
-          obfuscationServiceStub.getUserAuthenticationMethodWithObfuscation.withArgs(user.id).returns({
+          obfuscationServiceStub.getObfuscatedAuthenticationMethod.withArgs(user.id).returns({
             authenticatedBy: 'samlId',
             value: null,
           });
@@ -737,7 +737,7 @@ describe('Unit | Service | user-reconciliation-service', function () {
           studentRepositoryStub.getReconciledStudentByNationalStudentId
             .withArgs(nationalStudentId)
             .resolves({ account: { userId: user.id } });
-          obfuscationServiceStub.getUserAuthenticationMethodWithObfuscation.withArgs(user.id).returns({
+          obfuscationServiceStub.getObfuscatedAuthenticationMethod.withArgs(user.id).returns({
             authenticatedBy: 'email',
             value: 't***@example.net',
           });
@@ -769,7 +769,7 @@ describe('Unit | Service | user-reconciliation-service', function () {
           studentRepositoryStub.getReconciledStudentByNationalStudentId
             .withArgs(nationalStudentId)
             .resolves({ account: { userId: user.id } });
-          obfuscationServiceStub.getUserAuthenticationMethodWithObfuscation.withArgs(user.id).returns({
+          obfuscationServiceStub.getObfuscatedAuthenticationMethod.withArgs(user.id).returns({
             authenticatedBy: 'username',
             value: 'j***.d***0101',
           });
@@ -801,7 +801,7 @@ describe('Unit | Service | user-reconciliation-service', function () {
           studentRepositoryStub.getReconciledStudentByNationalStudentId
             .withArgs(nationalStudentId)
             .resolves({ account: { userId: user.id } });
-          obfuscationServiceStub.getUserAuthenticationMethodWithObfuscation.withArgs(user.id).returns({
+          obfuscationServiceStub.getObfuscatedAuthenticationMethod.withArgs(user.id).returns({
             authenticatedBy: 'samlId',
             value: null,
           });
@@ -838,9 +838,7 @@ describe('Unit | Service | user-reconciliation-service', function () {
         studentRepositoryStub.getReconciledStudentByNationalStudentId
           .withArgs(nationalStudentId)
           .resolves({ account: { userId: user.id } });
-        obfuscationServiceStub.getUserAuthenticationMethodWithObfuscation
-          .withArgs(user.id)
-          .rejects(new NotFoundError());
+        obfuscationServiceStub.getObfuscatedAuthenticationMethod.withArgs(user.id).rejects(new NotFoundError());
 
         // when
         const error = await catchErr(userReconciliationService.assertStudentHasAnAlreadyReconciledAccount)(

@@ -11,7 +11,7 @@ const USERNAME_SEPARATOR = '.';
 const EMAIL_SEPARATOR = '@';
 const TWO_PARTS = 2;
 
-export async function getUserAuthenticationMethodWithObfuscation(
+export async function getObfuscatedAuthenticationMethod(
   userId,
   dependencies = { userRepository, authenticationMethodRepository },
 ) {
