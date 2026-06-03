@@ -1,3 +1,4 @@
+import * as obfuscationService from '../../../../identity-access-management/domain/services/obfuscation-service.js';
 import * as passwordGenerator from '../../../../identity-access-management/domain/services/password-generator.service.js';
 import * as userService from '../../../../identity-access-management/domain/services/user-service.js';
 import * as authenticationMethodRepository from '../../../../identity-access-management/infrastructure/repositories/authentication-method.repository.js';
@@ -13,7 +14,6 @@ import * as libOrganizationLearnerRepository from '../../../../prescription/orga
 import * as combinedCourseRepository from '../../../../quest/infrastructure/repositories/combined-course-repository.js';
 import * as questRepository from '../../../../quest/infrastructure/repositories/quest-repository.js';
 import { cryptoService } from '../../../../shared/domain/services/crypto-service.js';
-import * as obfuscationService from '../../../../shared/domain/services/obfuscation-service.js';
 import { tokenService } from '../../../../shared/domain/services/token-service.js';
 import * as userReconciliationService from '../../../../shared/domain/services/user-reconciliation-service.js';
 /** TODO

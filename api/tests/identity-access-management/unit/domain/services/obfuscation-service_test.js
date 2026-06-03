@@ -2,13 +2,13 @@ import sinon from 'sinon';
 
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
+import * as obfuscationService from '../../../../../src/identity-access-management/domain/services/obfuscation-service.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';
-import * as obfuscationService from '../../../../../src/shared/domain/services/obfuscation-service.js';
 import { expect } from '../../../../test-helper.js';
 import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 import { catchErr } from '../../../../tooling/test-utils/error.js';
 
-describe('Unit | Service | user-authentication-method-obfuscation-service', function () {
+describe('Identity Access Management | Unit | Service | user-authentication-method-obfuscation-service', function () {
   let authenticationMethodRepository;
 
   beforeEach(function () {

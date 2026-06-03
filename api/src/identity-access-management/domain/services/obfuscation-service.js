@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
-import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../identity-access-management/domain/constants/identity-providers.js';
-import * as authenticationMethodRepository from '../../../identity-access-management/infrastructure/repositories/authentication-method.repository.js';
-import { NotFoundError } from '../../domain/errors.js';
+import { NotFoundError } from '../../../shared/domain/errors.js';
+import * as authenticationMethodRepository from '../../infrastructure/repositories/authentication-method.repository.js';
+import { NON_OIDC_IDENTITY_PROVIDERS } from '../constants/identity-providers.js';
 
 const CONNEXION_TYPES = { username: 'username', email: 'email', samlId: 'samlId' };
 const ASTERISK_OBFUSCATION = '***';
