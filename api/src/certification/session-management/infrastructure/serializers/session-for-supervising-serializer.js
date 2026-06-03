@@ -4,14 +4,6 @@ const { Serializer } = jsonapiSerializer;
 
 const serialize = function (sessions) {
   return new Serializer('sessionForSupervising', {
-    transform(currentSessionForSupervising) {
-      currentSessionForSupervising.certificationCandidates.forEach((candidate) => {
-        candidate.enrolledComplementaryCertificationLabel = candidate.enrolledComplementaryCertification?.label ?? null;
-        candidate.enrolledDoubleCertificationLabel = candidate.enrolledDoubleCertification?.label ?? null;
-      });
-
-      return currentSessionForSupervising;
-    },
     attributes: ['room', 'examiner', 'accessCode', 'date', 'time', 'certificationCandidates', 'address'],
     typeForAttribute: (attribute) =>
       attribute === 'certificationCandidates' ? 'certification-candidate-for-supervising' : attribute,
@@ -29,8 +21,7 @@ const serialize = function (sessions) {
         'assessmentStatus',
         'startDateTime',
         'theoricalEndDateTime',
-        'enrolledComplementaryCertificationLabel',
-        'enrolledDoubleCertificationLabel',
+        'subscription',
         'isStillEligibleToDoubleCertification',
         'challengeLiveAlert',
         'companionLiveAlert',
