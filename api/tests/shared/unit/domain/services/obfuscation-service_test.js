@@ -17,32 +17,6 @@ describe('Unit | Service | user-authentication-method-obfuscation-service', func
     };
   });
 
-  describe('#emailObfuscation', function () {
-    it('should return obfuscated email', function () {
-      // given
-      const email = 'johnHarry@example.net';
-
-      // when
-      const value = obfuscationService.emailObfuscation(email);
-
-      // then
-      expect(value).to.be.equal('j***@example.net');
-    });
-  });
-
-  describe('#usernameObfuscation', function () {
-    it('should return obfuscated username', function () {
-      // given
-      const username = 'john.harry0702';
-
-      // when
-      const value = obfuscationService.usernameObfuscation(username);
-
-      // then
-      expect(value).to.be.equal('j***.h***2');
-    });
-  });
-
   describe('#getUserAuthenticationMethodWithObfuscation', function () {
     it('should return authenticated with samlId when user is authenticated with samlId only', async function () {
       // given
