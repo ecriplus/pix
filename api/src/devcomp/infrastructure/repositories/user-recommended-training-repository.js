@@ -2,23 +2,38 @@ import { USER_RECOMMENDED_TRAININGS_TABLE_NAME } from '../../../../db/migrations
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { UserRecommendedTraining } from '../../domain/read-models/UserRecommendedTraining.js';
 
-const save = function ({ userId, trainingId, campaignParticipationId }) {
+const save = function ({ userId, trainingId, campaignParticipationId, isRelevant }) {
   const knexConn = DomainTransaction.getConnection();
   return knexConn(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
-    .insert({ userId, trainingId, campaignParticipationId })
+    .insert({ userId, trainingId, campaignParticipationId, isRelevant, updatedAt: knexConn.fn.now() })
     .onConflict(['userId', 'trainingId', 'campaignParticipationId'])
-    .merge({ updatedAt: knexConn.fn.now() });
+    .merge(['isRelevant', 'updatedAt']);
 };
 
 const findByCampaignParticipationId = async function ({ campaignParticipationId, locale }) {
   const knexConn = DomainTransaction.getConnection();
   const trainings = await knexConn(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
-    .select('trainings.*')
+    .select('trainings.*', 'isRelevant')
     .innerJoin('trainings', 'trainings.id', `${USER_RECOMMENDED_TRAININGS_TABLE_NAME}.trainingId`)
     .where({ campaignParticipationId, isDisabled: false })
     .whereRaw('? = ANY(locales)', locale)
     .orderBy('id', 'asc');
   return trainings.map(_toDomain);
+};
+
+const findByCampaignParticipationIdAndTrainingIdAndUserId = async function ({
+  campaignParticipationId,
+  trainingId,
+  userId,
+}) {
+  const knexConn = DomainTransaction.getConnection();
+  const result = await knexConn(USER_RECOMMENDED_TRAININGS_TABLE_NAME)
+    .select('trainings.*', 'isRelevant')
+    .innerJoin('trainings', 'trainings.id', `${USER_RECOMMENDED_TRAININGS_TABLE_NAME}.trainingId`)
+    .where({ campaignParticipationId, trainingId, userId, isDisabled: false })
+    .first();
+
+  return result ? _toDomain(result) : null;
 };
 
 const findModulesByCampaignParticipationIds = async function ({ campaignParticipationIds }) {
@@ -57,6 +72,7 @@ const deleteCampaignParticipationIds = async ({ campaignParticipationIds }) => {
 export {
   deleteCampaignParticipationIds,
   findByCampaignParticipationId,
+  findByCampaignParticipationIdAndTrainingIdAndUserId,
   findModulesByCampaignParticipationIds,
   hasRecommendedTrainings,
   save,

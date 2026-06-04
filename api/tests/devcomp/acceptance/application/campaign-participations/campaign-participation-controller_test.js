@@ -47,10 +47,93 @@ describe('Acceptance | API | Campaign Participations', function () {
         'editor-logo-url': training.editorLogoUrl,
         'delivery-mode': Training.modes.HYBRID,
         'registration-required': false,
+        'is-relevant': null,
         program: 'Programme du contenu formatif',
         objectives: [],
         description: "<p>Voici la description d'un contenu formatif</p>",
       });
+    });
+  });
+
+  describe('PATCH /api/campaign-participations/{campaignParticipationId}/trainings/{trainingId}', function () {
+    it('should return 204 when the userRecommendedTraining exists', async function () {
+      // given
+      const user = databaseBuilder.factory.buildUser();
+      const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({ userId: user.id });
+      const training = databaseBuilder.factory.buildTraining();
+      databaseBuilder.factory.buildUserRecommendedTraining({
+        userId: user.id,
+        trainingId: training.id,
+        campaignParticipationId: campaignParticipation.id,
+      });
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'PATCH',
+        url: `/api/campaign-participations/${campaignParticipation.id}/trainings/${training.id}`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
+        payload: {
+          data: {
+            attributes: {
+              'is-relevant': true,
+            },
+          },
+        },
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(204);
+    });
+
+    it('should return 404 when the userRecommendedTraining does not exist', async function () {
+      // given
+      const user = databaseBuilder.factory.buildUser();
+      const campaignParticipation = databaseBuilder.factory.buildCampaignParticipation({ userId: user.id });
+      const training = databaseBuilder.factory.buildTraining();
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'PATCH',
+        url: `/api/campaign-participations/${campaignParticipation.id}/trainings/${training.id}`,
+        headers: generateAuthenticatedUserRequestHeaders({ userId: user.id }),
+        payload: {
+          data: {
+            attributes: {
+              'is-relevant': false,
+            },
+          },
+        },
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(404);
+    });
+
+    it('should return 401 when the user is not authenticated', async function () {
+      // given
+      const options = {
+        method: 'PATCH',
+        url: `/api/campaign-participations/1/trainings/1`,
+        payload: {
+          data: {
+            attributes: {
+              'is-relevant': true,
+            },
+          },
+        },
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(401);
     });
   });
 });
