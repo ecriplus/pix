@@ -73,7 +73,7 @@ describe('Integration | Infrastructure | Repository | membership-repository', fu
 
   describe('#findByUserIdAndOrganizationId', function () {
     context('When organization is not required', function () {
-      it('retrieves membership with given useId and OrganizationId', async function () {
+      it('retrieves membership with given userId and OrganizationId', async function () {
         // given
         const organization = databaseBuilder.factory.buildOrganization();
         const user1 = databaseBuilder.factory.buildUser();
