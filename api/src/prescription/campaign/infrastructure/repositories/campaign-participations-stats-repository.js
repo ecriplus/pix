@@ -83,21 +83,31 @@ const countParticipationsByStatus = async (campaignId) => {
 const countParticipantsByOrganizationId = async (organizationId) => {
   const knexConn = DomainTransaction.getConnection();
 
-  const [{ count }] = await knexConn
-    .count('* as count')
-    .from(
-      knexConn('campaign-participations')
-        .select('campaign-participations.organizationLearnerId')
-        .join('campaigns', 'campaigns.id', 'campaign-participations.campaignId')
-        .where('campaigns.organizationId', organizationId)
-        .groupBy('campaign-participations.organizationLearnerId'),
-    );
+  const [{ count }] = await knexConn('campaign-participations')
+    .countDistinct('campaign-participations.organizationLearnerId as count')
+    .join('campaigns', 'campaigns.id', 'campaign-participations.campaignId')
+    .where('campaigns.organizationId', organizationId);
 
   return count;
 };
 
+const countParticipantsByOrganizationIdGroupedByYear = async (organizationId) => {
+  const knexConn = DomainTransaction.getConnection();
+
+  const result = await knexConn('campaign-participations')
+    .select(knexConn.raw('EXTRACT(YEAR FROM "campaign-participations"."createdAt")::int AS year'))
+    .countDistinct('campaign-participations.organizationLearnerId AS count')
+    .join('campaigns', 'campaigns.id', 'campaign-participations.campaignId')
+    .where('campaigns.organizationId', organizationId)
+    .groupBy('year')
+    .orderBy('year', 'asc');
+
+  return result;
+};
+
 export {
   countParticipantsByOrganizationId,
+  countParticipantsByOrganizationIdGroupedByYear,
   countParticipationsByMasteryRate,
   countParticipationsByStatus,
   getAllParticipationsByCampaignId,
