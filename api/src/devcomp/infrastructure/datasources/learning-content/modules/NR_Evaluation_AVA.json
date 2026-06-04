@@ -330,7 +330,7 @@
                       "id": "7342c038-5818-4eef-ae13-94ca1f99e496",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p> <br></p><table>    <thead>        <tr>            <th scope=\"\" style=\"width: 36.9427%;\">Type d’effet</th>            <th scope=\"\\&quot;col\\&quot;\" style=\"width: 18.4713%;\">Description</th>            <th scope=\"\\&quot;col\\&quot;\">Exemples pour un smartphone</th>        </tr>    </thead>    <tbody>        <tr>            <th>Effet direct</th>            <td>Impact de la fabrication et de l’utilisation des appareils numériques<br></td>            <td>                <ul>                    <li>Consommation d’énergie pour recharger le smartphone<br></li>                    <li>Consommation de métaux pour fabriquer le smartphone</li>                    <li> Déchets électroniques en fin de vie du smartphone<br></li>                </ul>            </td>        </tr>        <tr>            <th>Effet indirect</th>            <td>Changements de comportements des utilisateurs ayants des effets sur l’environnement<br></td>            <td>                <ul>                    <li>&nbsp;L’utilisateur du smartphone n’achète pas de radio (effet de substitution)</li>                    <li>Grâce à un compteur connecté, un utilisateur fait des économies d’énergie (effet d’efficacité ou d’optimisation)</li>                </ul>            </td>        </tr>    </tbody></table>"
+                      "content": "<p> <br></p><table>    <thead>        <tr>            <th scope=\"\" style=\"width:15%;\">Type d’effet</th>            <th scope=\"\\&quot;col\\&quot;\" style=\"width: 18.4713%;\">Description</th>            <th scope=\"\\&quot;col\\&quot;\">Exemples pour un smartphone</th>        </tr>    </thead>    <tbody>        <tr>            <th>Effet direct</th>            <td>Impact de la fabrication et de l’utilisation des appareils numériques<br></td>            <td>                <ul>                    <li>Consommation d’énergie pour recharger le smartphone<br></li>                    <li>Consommation de métaux pour fabriquer le smartphone</li>                    <li> Déchets électroniques en fin de vie du smartphone<br></li>                </ul>            </td>        </tr>        <tr>            <th>Effet indirect</th>            <td>Changements de comportements des utilisateurs ayant des effets sur l’environnement<br></td>            <td>                <ul>                    <li>&nbsp;L’utilisateur du smartphone n’achète pas de radio (effet de substitution)</li>                    <li>Grâce à un compteur connecté, un utilisateur fait des économies d’énergie (effet d’efficacité ou d’optimisation)</li>                </ul>            </td>        </tr>    </tbody></table>"
                     },
                     {
                       "id": "368c6e0a-fa53-4ac5-a0b0-0e2972da90ff",
@@ -404,21 +404,21 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>160 kW, soit environ 2 500 fois plus qu’un PC portable actuel</p>",
+                          "content": "<p>160 kilowatts (kW), soit environ 2 500 fois plus qu’un PC portable actuel</p>",
                           "feedback": {
                             "diagnosis": "<p>C’est exact !&nbsp;</p><p>Impressionnant, non ?</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>6&nbsp;kW, soit environ 100 fois plus qu’un PC actuel.</p>",
+                          "content": "<p>6&nbsp;kilowatts (kW), soit environ 100 fois plus qu’un PC actuel.</p>",
                           "feedback": {
                             "diagnosis": "<p>Eh non !</p><p>Cet ordinateur avait une puissance de 160 kW, soit environ 2 500 fois plus qu’un PC portable actuel.</p><p>Impressionnant, non ?</p>"
                           }
                         },
                         {
                           "id": "3",
-                          "content": "<p>60 W, soit environ autant qu’un PC actuel</p>",
+                          "content": "<p>60 watts (W), soit environ autant qu’un PC actuel</p>",
                           "feedback": {
                             "diagnosis": "<p>Eh non ! Cet ordinateur avait une puissance de 160 kW, soit environ 2 500 fois plus qu’un PC portable actuel.</p><p>Impressionnant, non ?</p>"
                           }
@@ -441,7 +441,7 @@
                       "id": "0f220daf-360e-48ff-961a-dc5f56e78374",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Les chercheurs et les ingénieurs améliorent en continu les performances des ordinateurs.</p><p>Dans les années 70, les «&nbsp;mini-ordinateurs&nbsp;» sont populaires. </p><p>Par exemple, le Data General Nova a une puissance de 1kW, soit 160 fois moins que l’ENIAC.</p>"
+                      "content": "<p>Les chercheurs et les ingénieurs améliorent en continu les performances des ordinateurs.</p><p>Dans les années 70, les «&nbsp;mini-ordinateurs&nbsp;» sont populaires. </p><p>Par exemple, le Data General Nova a une puissance de 1&nbsp;kW, soit 160 fois moins que l’ENIAC.</p>"
                     },
                     {
                       "id": "ad1954e0-6dc0-484a-ad04-4744a5f31305",
@@ -455,7 +455,7 @@
                     {
                       "id": "1cc1aae7-4f83-4a4d-a53c-e2799a9a079b",
                       "type": "qcu-discovery",
-                      "instruction": "<p>A votre avis, à combien d’exemplaires a été vendu le Data General Nova ?</p>",
+                      "instruction": "<p>À votre avis, à combien d’exemplaires a été vendu le Data General Nova ?</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
@@ -654,7 +654,7 @@
                         },
                         "invalid": {
                           "state": "<p>Eh non&nbsp; !<br></p>",
-                          "diagnosis": "<p>Au global, la consommation d’énergie par les ordinateurs a explosé.</p><p>Autrement dit, alors q’un ordinateur consomme moins d’énergie, la somme de tous les ordinateurs en consomme beaucoup plus.</p>"
+                          "diagnosis": "<p>Au global, la consommation d’énergie par les ordinateurs a explosé.</p><p>Autrement dit, alors qu’un ordinateur consomme moins d’énergie, la somme de tous les ordinateurs en consomme beaucoup plus.</p>"
                         }
                       }
                     }
@@ -764,14 +764,14 @@
                     "id": "1",
                     "content": "<p>L’impact est positif.<br></p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>C’est possible, mais ce n’est pas sûr.&nbsp;</strong></p><p>Même si ce système optimise et réduit la consommation électrique, il utilise du matériel électronique polluant et des logiciels qui nécessitent beaucoup de calculs, donc la production de matériel et d’électricité … </p><p>Sans une étude scientifique rigoureuse, on ne peut pas savoir si son impact total sur l’environnement est positif.</p>"
+                      "diagnosis": "<p><strong>C’est possible, mais ce n’est pas sûr.&nbsp;</strong></p><p>Même si ce système optimise et réduit la consommation électrique, il utilise du matériel électronique et des logiciels nécessitant d’importantes ressources de calcul, donc de l’électricité et des infrastructures numériques. </p><p>Sans une étude scientifique rigoureuse, on ne peut pas savoir si son impact total sur l’environnement est positif.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>L’impact est négatif.<br></p>",
                     "feedback": {
-                      "diagnosis": "<p><strong>C’est possible, mais ce n’est pas sûr.&nbsp;</strong></p><p>Même si ce système optimise et réduit la consommation électrique, il utilise du matériel électronique polluant et des logiciels qui nécessitent beaucoup de calculs, donc de matériel et d’électricité … </p><p>Sans une étude scientifique rigoureuse, on ne peut pas savoir si son impact total sur l’environnement est positif.</p>"
+                      "diagnosis": "<p><strong>C’est possible, mais ce n’est pas sûr.&nbsp;</strong></p><p>Même si ce système optimise et réduit la consommation électrique, il utilise du matériel électronique et des logiciels nécessitant d’importantes ressources de calcul, donc de l’électricité et des infrastructures numériques.</p><p>Sans une étude scientifique rigoureuse, on ne peut pas savoir si son impact total sur l’environnement est positif.</p>"
                     }
                   },
                   {
@@ -847,7 +847,7 @@
                 "id": "8f7d6c5f-a651-4800-82ff-1f5943d291f8",
                 "type": "text",
                 "tag": " ",
-                "content": "<ul>    <li>🤨Le numérique a des effets directs sur l’environnement, mais aussi des <strong>effets indirects</strong> provoqués par l’usage du numérique dans la société. Ces effets indirects peuvent être positifs ou négatifs pour l’environnement. </li>    <li>🏀L’amélioration de l’efficience énergétique d’une technologie amène parfois une <strong>augmentation de son usage</strong>, ce qui peut annuler les bénéfices pour l’environnement. C’est l’<strong>effet rebond</strong>. </li>    <li> 🌼Certains industriels communiquent uniquement sur les effets positifs de leurs produits pour se donner une bonne image et passent sous silence les effets négatifs sur l’environnement&nbsp;: c’est du <strong>greenwashing</strong>. </li>    <li> 🔎Il faut donc garder un <strong>regard critique</strong> sur les technologies et leurs améliorations, et s’appuyer sur des <strong>études scientifiques qui prennent en compte les effets indirects</strong>&nbsp;négatifs pour pouvoir les limiter. </li>    <li> ↘️Adopter une démarche de <strong>sobriété</strong>, en réduisant les usages du numérique, permet de réduire efficacement les effets négatifs sur l’environnement. </li></ul>"
+                "content": "<ul>    <li>Le numérique a des effets directs sur l’environnement, mais aussi des <strong>effets indirects</strong> provoqués par l’usage du numérique dans la société. Ces effets indirects peuvent être positifs ou négatifs pour l’environnement.&nbsp;🤨</li>    <li>L’amélioration de l’efficience énergétique d’une technologie amène parfois une <strong>augmentation de son usage</strong>, ce qui peut annuler les bénéfices pour l’environnement. C’est l’<strong>effet rebond</strong>.&nbsp;🏀</li>    <li> Certains industriels communiquent uniquement sur les effets positifs de leurs produits pour se donner une bonne image et passent sous silence les effets négatifs sur l’environnement&nbsp;: c’est du <strong>greenwashing</strong>.&nbsp;🌼</li>    <li> Il faut donc garder un <strong>regard critique</strong> sur les améliorations technologiques et s’appuyer sur des <strong>études scientifiques qui prennent en compte les effets indirects</strong>&nbsp;négatifs pour pouvoir les limiter.&nbsp;🔍</li>    <li> Adopter une démarche de <strong>sobriété</strong>, en réduisant les usages du numérique, permet de réduire efficacement les effets négatifs sur l’environnement.&nbsp;↘️</li></ul>"
               }
             }
           ]
@@ -910,7 +910,7 @@
                   },
                   {
                     "id": "ae24ed0e-6901-4e27-a814-d6694e65bf81",
-                    "text": "Les centres de données consomment de l’eau douce pour refroidir les serveurs",
+                    "text": "Les centres de données consomment de l’eau douce pour refroidir les serveurs.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -1211,7 +1211,7 @@
               "element": {
                 "id": "0af3aa8d-4e6e-47eb-9892-ac43febde2bb",
                 "type": "qcm",
-                "instruction": "<p>Parmi ces publicités, lesquelles font de l’éco-blanchiment ou greenswashing ?<br></p>",
+                "instruction": "<p>Parmi ces publicités, lesquelles font de l’éco-blanchiment ou greenwashing&nbsp;?</p>",
                 "hasShortProposals": false,
                 "proposals": [
                   {
@@ -1283,7 +1283,7 @@
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "<p>l’évolution de la distance parcourus pour les trajets domicile- travail</p>"
+                    "content": "<p>l’évolution de la distance parcourue pour les trajets domicile- travail</p>"
                   },
                   {
                     "id": "2",
