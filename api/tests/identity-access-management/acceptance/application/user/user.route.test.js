@@ -3,7 +3,6 @@ import sinon from 'sinon';
 
 import { createServer } from '../../../../../server.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
-import { anonymousUserTokenRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/anonymous-user-token.repository.js';
 import * as authenticationMethodRepository from '../../../../../src/identity-access-management/infrastructure/repositories/authentication-method.repository.js';
 import { emailValidationDemandRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/email-validation-demand.repository.js';
 import * as userRepository from '../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
@@ -145,16 +144,14 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
     const password = 'P@ssW0rd';
 
     let userId;
-    let anonymousToken;
-    let requestPayload;
+    let payload;
 
     beforeEach(async function () {
       const user = databaseBuilder.factory.buildUser.anonymous();
       userId = user.id;
-      anonymousToken = await anonymousUserTokenRepository.save(userId);
       await databaseBuilder.commit();
 
-      requestPayload = {
+      payload = {
         data: {
           type: 'users',
           id: userId,
@@ -164,7 +161,6 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
             email,
             password,
             cgu: true,
-            'anonymous-user-token': anonymousToken,
           },
         },
       };
@@ -176,7 +172,7 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
         method: 'PATCH',
         url: `/api/users/${userId}`,
         headers: generateAuthenticatedUserRequestHeaders({ userId }),
-        payload: requestPayload,
+        payload,
       });
 
       // then
@@ -193,16 +189,23 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
       expect(attributes['is-anonymous']).to.be.false;
     });
 
-    it('fails with 401 if user is not authenticated', async function () {
-      // when
-      const response = await server.inject({
-        method: 'PATCH',
-        url: `/api/users/${userId}`,
-        payload: requestPayload,
-      });
+    context('when requested user is not the same as authenticated user', function () {
+      it('responds with 403 HTTP status code', async function () {
+        // given
+        const someOtherUser = databaseBuilder.factory.buildUser.anonymous();
+        await databaseBuilder.commit();
 
-      // then
-      expect(response.statusCode).to.equal(401);
+        // when
+        const response = await server.inject({
+          method: 'PATCH',
+          url: `/api/users/${userId}`,
+          headers: generateAuthenticatedUserRequestHeaders({ userId: someOtherUser.id }),
+          payload,
+        });
+
+        // then
+        expect(response.statusCode).to.equal(403);
+      });
     });
   });
 
@@ -264,7 +267,6 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
             cgu: user.cgu,
             lang: 'fr',
             'is-anonymous': false,
-            'anonymous-user-token': null,
             'last-terms-of-service-validated-at': user.lastTermsOfServiceValidatedAt,
             'must-validate-terms-of-service': user.mustValidateTermsOfService,
             'has-seen-assessment-instructions': user.hasSeenAssessmentInstructions,
