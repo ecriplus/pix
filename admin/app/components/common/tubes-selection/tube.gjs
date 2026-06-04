@@ -1,6 +1,7 @@
 import PixCheckbox from '@1024pix/pix-ui/components/pix-checkbox';
 import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
+import PixTooltip from '@1024pix/pix-ui/components/pix-tooltip';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
@@ -112,10 +113,32 @@ export default class Tube extends Component {
     {{#if @displayDeviceCompatibility}}
       <td class="table__column--center">
         <div class="icon-container" aria-label="{{if @tube.mobile 'compatible mobile' 'incompatible mobile'}}">
-          <PixIcon @name={{this.mobileIcon}} @plainIcon={{true}} class="{{if @tube.mobile 'is-responsive'}}" />
+          <PixTooltip @position="bottom" @isInline={{true}}>
+            <:triggerElement>
+              <PixIcon @name={{this.mobileIcon}} class="{{if @tube.mobile 'is-responsive' 'not-responsive'}}" />
+            </:triggerElement>
+            <:tooltip>
+              {{#if @tube.mobile}}
+                Compatible avec smartphone
+              {{else}}
+                Non compatible avec smartphone
+              {{/if}}
+            </:tooltip>
+          </PixTooltip>
         </div>
         <div class="icon-container" aria-label="{{if @tube.tablet 'compatible tablette' 'incompatible tablette'}}">
-          <PixIcon @name={{this.tabletIcon}} @plainIcon={{true}} class="{{if @tube.tablet 'is-responsive'}}" />
+          <PixTooltip @position="bottom" @isInline={{true}}>
+            <:triggerElement>
+              <PixIcon @name={{this.tabletIcon}} class="{{if @tube.tablet 'is-responsive' 'not-responsive'}}" />
+            </:triggerElement>
+            <:tooltip>
+              {{#if @tube.tablet}}
+                Compatible avec tablette
+              {{else}}
+                Non compatible avec tablette
+              {{/if}}
+            </:tooltip>
+          </PixTooltip>
         </div>
       </td>
     {{/if}}

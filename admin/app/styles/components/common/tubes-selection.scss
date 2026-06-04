@@ -52,7 +52,11 @@
   }
 
   .is-responsive {
-    color: var(--pix-success-700);
+    fill: var(--pix-primary-500);
+  }
+
+  .not-responsive {
+    fill: var(--pix-neutral-100);
   }
 
   table {
@@ -182,15 +186,18 @@
 
   .skill-square {
     padding: 0 4px;
-    color: var(--pix-neutral-0);
     border-radius: 4px;
 
     &__active {
-      background-color: var(--pix-success-700);
+      color: var(--pix-neutral-0);
+      font-weight: bold;
+      background-color: var(--pix-primary-500);
     }
 
     &__missing {
-      background-color: var(--pix-error-700);
+      color: var(--pix-neutral-300);
+      font-weight: normal;
+      background-color: var(--pix-neutral-20);
     }
   }
 }
