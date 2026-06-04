@@ -41,7 +41,7 @@ export class CertificationResultsLinkByEmailToken {
         scope: CERTIFICATION_RESULTS_BY_RECIPIENT_EMAIL_LINK_SCOPE,
       },
       config.authentication.secret,
-      { expiresIn: `${daysBeforeExpiration}d` },
+      `${daysBeforeExpiration}d`,
     );
   }
 }

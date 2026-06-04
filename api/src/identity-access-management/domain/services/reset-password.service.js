@@ -6,9 +6,11 @@ import { tokenService } from '../../../shared/domain/services/token-service.js';
 const generateTemporaryKey = async function () {
   const randomBytesBuffer = await cryptoService.randomBytes(16);
   const base64RandomBytes = randomBytesBuffer.toString('base64');
-  return tokenService.encodeToken({ data: base64RandomBytes }, config.temporaryKey.secret, {
-    expiresIn: config.temporaryKey.tokenLifespan,
-  });
+  return tokenService.encodeToken(
+    { data: base64RandomBytes },
+    config.temporaryKey.secret,
+    config.temporaryKey.tokenLifespan,
+  );
 };
 
 const assertTemporaryKey = function (token) {

@@ -34,8 +34,10 @@ export class UserAccessToken {
   }
 
   static generate({ userId, source, audience, expirationDelaySeconds }) {
-    return tokenService.encodeToken({ user_id: userId, source, aud: audience }, config.authentication.secret, {
-      expiresIn: expirationDelaySeconds,
-    });
+    return tokenService.encodeToken(
+      { user_id: userId, source, aud: audience },
+      config.authentication.secret,
+      expirationDelaySeconds,
+    );
   }
 }

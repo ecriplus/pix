@@ -14,8 +14,10 @@ export class PasswordExpirationToken {
   }
 
   static generate({ userId }) {
-    return tokenService.encodeToken({ user_id: userId }, config.authentication.secret, {
-      expiresIn: config.authentication.passwordResetTokenLifespan,
-    });
+    return tokenService.encodeToken(
+      { user_id: userId },
+      config.authentication.secret,
+      config.authentication.passwordResetTokenLifespan,
+    );
   }
 }

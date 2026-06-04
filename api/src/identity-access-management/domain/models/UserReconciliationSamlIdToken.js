@@ -33,7 +33,7 @@ export class UserReconciliationSamlIdToken {
         saml_id: samlId,
       },
       config.authentication.secret,
-      { expiresIn: config.authentication.tokenForStudentReconciliationLifespan },
+      config.authentication.tokenForStudentReconciliationLifespan,
     );
   }
 }

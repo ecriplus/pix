@@ -33,9 +33,11 @@ describe('Unit | Certification | Results | Domain | Model | CertificationResults
 
     it('throws error if session_id is missing', function () {
       // given
-      const token = tokenService.encodeToken({ scope: 'certification-scope' }, config.authentication.secret, {
-        expiresIn: `${config.jwtConfig.certificationResults.tokenLifespan}`,
-      });
+      const token = tokenService.encodeToken(
+        { scope: 'certification-scope' },
+        config.authentication.secret,
+        config.jwtConfig.certificationResults.tokenLifespan,
+      );
 
       // when / then
       expect(() => CertificationResultsLinkToken.decode(token)).to.throw(InvalidSessionResultTokenError);
@@ -46,9 +48,7 @@ describe('Unit | Certification | Results | Domain | Model | CertificationResults
       const token = tokenService.encodeToken(
         { session_id: 'sessionId!', scope: 'wrong-scope' },
         config.authentication.secret,
-        {
-          expiresIn: `${config.jwtConfig.certificationResults.tokenLifespan}`,
-        },
+        config.jwtConfig.certificationResults.tokenLifespan,
       );
 
       // when / then
