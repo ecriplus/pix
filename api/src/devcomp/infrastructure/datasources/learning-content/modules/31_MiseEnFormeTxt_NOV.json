@@ -103,7 +103,7 @@
               "element": {
                 "id": "e15c4222-c710-4e57-a50c-d7178437ccbf",
                 "type": "text",
-                "tag": "",
+                "tag": " ",
                 "content": "<p>Naya souhaite proposer des ateliers d’écriture.<br>Elle a déjà découpé le texte de son annonce en paragraphes. Elle ne sait pas comment ajouter de la mise en forme à son texte.</p>\n<br>\n<p><strong>Observez l’interface de son traitement de texte ci-dessous puis répondez à la question qui suit.</strong></p>"
               }
             },
@@ -215,7 +215,7 @@
               "element": {
                 "id": "3bff4cd6-6a66-47ba-84d7-fa500fb09b44",
                 "type": "text",
-                "tag": "",
+                "tag": " ",
                 "content": "<p>Naya souhaite mettre en avant le mot «&nbsp;jeudis&nbsp;» dans son annonce.</p>"
               }
             },
@@ -315,7 +315,7 @@
               "element": {
                 "id": "ac0dd66b-e480-48a3-86f9-0d429fa4fb19",
                 "type": "text",
-                "tag": "",
+                "tag": " ",
                 "content": "<p>Naya souhaite utiliser&nbsp;«&nbsp;Ateliers d’écriture&nbsp;» comme titre pour son article. Elle veut donc que «&nbsp;Ateliers d’écriture&nbsp;» soit écrit en plus grand.</p>"
               }
             },
