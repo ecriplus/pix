@@ -336,6 +336,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repositories 
         .where({ organization_id: childOrganization.id })
         .first();
       expect(updatedFactStructure).to.deep.equal({
+        certification_center_id: null,
         organization_id: childOrganization.id,
         structure_id: childStructure.id,
         network_id: network.id,

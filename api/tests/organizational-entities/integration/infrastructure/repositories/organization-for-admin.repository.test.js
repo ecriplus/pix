@@ -1319,6 +1319,7 @@ describe('Integration | Organizational Entities | Infrastructure | Repository | 
       const fct_structure = await knex('fct_structures').where({ organization_id: savedOrganization.id }).first();
       const structure = await knex('structures').where({ id: fct_structure.structure_id }).first();
       expect(fct_structure).to.deep.equal({
+        certification_center_id: null,
         child_structure_id: null,
         network_id: null,
         organization_id: savedOrganization.id,
