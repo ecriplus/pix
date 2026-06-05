@@ -1,6 +1,7 @@
 import { createServer } from '../../../../server.js';
 import {
   checkAuthorizationToAccessCombinedCourse,
+  checkCombinedCourseBlueprintBelongsToOrganization,
   checkCombinedCoursesFeatureIsEnabled,
   checkParticipationBelongsToCombinedCourse,
 } from '../../../../src/quest/application/security-pre-handlers.js';
@@ -16,7 +17,13 @@ import { generateAuthenticatedUserRequestHeaders } from '../../../tooling/test-u
 
 describe('Quest | Acceptance | Application | SecurityPreHandlers', function () {
   const jsonApiError403 = {
-    errors: [{ code: 403, title: 'Forbidden access', detail: 'Missing or insufficient permissions.' }],
+    errors: [
+      {
+        code: 403,
+        title: 'Forbidden access',
+        detail: 'Missing or insufficient permissions.',
+      },
+    ],
   };
 
   let server;
@@ -56,7 +63,10 @@ describe('Quest | Acceptance | Application | SecurityPreHandlers', function () {
 
     it('returns true if connected user is allowed to access given combined course', async function () {
       // given
-      databaseBuilder.factory.buildOrganizationLearner({ organizationId, userId });
+      databaseBuilder.factory.buildOrganizationLearner({
+        organizationId,
+        userId,
+      });
 
       await databaseBuilder.commit();
 
@@ -188,6 +198,67 @@ describe('Quest | Acceptance | Application | SecurityPreHandlers', function () {
 
       expect(response.statusCode).to.equal(422);
       expect(response.payload).to.equal('Combined courses feature is disabled');
+    });
+  });
+
+  describe('#checkCombinedCourseBlueprintBelongsToOrganization', function () {
+    let combinedCourseBlueprintId, organizationId;
+
+    beforeEach(async function () {
+      const combinedCourseBlueprintShare = databaseBuilder.factory.buildCombinedCourseBlueprintShare();
+
+      combinedCourseBlueprintId = combinedCourseBlueprintShare.combinedCourseBlueprintId;
+      organizationId = combinedCourseBlueprintShare.organizationId;
+
+      server.route({
+        method: 'GET',
+        path: '/api/organization/{organizationId}/combined-course-blueprint/{combinedCourseBlueprintId}',
+        handler: (r, h) => h.response({}).code(200),
+        config: {
+          auth: false,
+          pre: [{ method: checkCombinedCourseBlueprintBelongsToOrganization }],
+        },
+      });
+
+      await databaseBuilder.commit();
+    });
+
+    it('returns 200 OK if combined course blueprint belongs to organization', async function () {
+      // given
+      const options = {
+        method: 'GET',
+        url: `/api/organization/${organizationId}/combined-course-blueprint/${combinedCourseBlueprintId}`,
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+    });
+
+    it('returns an error if combined course blueprint does not belong to organization', async function () {
+      // given
+      const otherOrganizationId = databaseBuilder.factory.buildOrganization().id;
+
+      const { combinedCourseBlueprintId: otherCombinedCourseBlueprintId } =
+        databaseBuilder.factory.buildCombinedCourseBlueprintShare({
+          organizationId: otherOrganizationId,
+        });
+
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'GET',
+        url: `/api/organization/${organizationId}/combined-course-blueprint/${otherCombinedCourseBlueprintId}`,
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(403);
+      expect(response.result).to.deep.equal(jsonApiError403);
     });
   });
 });
