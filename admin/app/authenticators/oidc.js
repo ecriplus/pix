@@ -53,6 +53,7 @@ export default class OidcAuthenticator extends BaseAuthenticator {
     return {
       access_token: data.access_token,
       user_id: decodedAccessToken.user_id,
+      expiresAt: decodedAccessToken.exp * 1000,
       source: identityProvider.source,
       identityProviderCode: identityProvider.code,
     };

@@ -88,8 +88,9 @@ module('Unit | Authenticator | oidc', function (hooks) {
       sinon.assert.calledWith(window.fetch, `http://localhost:3000/api/admin/oidc/user/reconcile`, request);
       assert.deepEqual(token, {
         access_token: accessToken,
-        source,
         user_id: userId,
+        expiresAt: 4702193958000,
+        source,
         identityProviderCode,
       });
       assert.ok(true);
@@ -111,8 +112,9 @@ module('Unit | Authenticator | oidc', function (hooks) {
       sinon.assert.calledWith(window.fetch, 'http://localhost:3000/api/oidc/token', request);
       assert.deepEqual(token, {
         access_token: accessToken,
-        source,
         user_id: userId,
+        expiresAt: 4702193958000,
+        source,
         identityProviderCode,
       });
       assert.ok(true);
