@@ -47,6 +47,7 @@ const dependencies = {
   courseRepository: repositories.courseRepository,
   campaignParticipationRepository: repositories.campaignParticipationRepository,
   profileRewardRepository: repositories.profileRewardRepository,
+  combinedCourseBlueprintShareRepository: repositories.combinedCourseBlueprintShareRepository,
   codeGenerator,
   logger,
 };
@@ -78,6 +79,7 @@ import { getOrganizationAttestations } from './get-organization-attestations.js'
 import { getQuestResultsForCampaignParticipation } from './get-quest-results-for-campaign-participation.js';
 import { getVerifiedCode } from './get-verified-code.js';
 import { hasAccessToCombinedCourse } from './has-access-to-combined-course.js';
+import { isCombinedCourseBlueprintInOrganization } from './is-combined-course-blueprint-in-organization.js';
 import { isParticipationOnCombinedCourse } from './is-participation-on-combined-course.js';
 import { rewardUser } from './reward-user.js';
 import { startCombinedCourse } from './start-combined-course.js';
@@ -119,6 +121,7 @@ const usecasesWithoutInjectedDependencies = {
   getOrganizationAttestations,
   getCourseByOrganizationId,
   isParticipationOnCombinedCourse,
+  isCombinedCourseBlueprintInOrganization,
 };
 
 const usecases = injectDependencies(usecasesWithoutInjectedDependencies, dependencies);
