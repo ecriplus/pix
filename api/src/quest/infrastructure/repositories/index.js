@@ -17,6 +17,7 @@ import { AttestationStorage } from '../storage/attestation-storage.js';
 import * as attestationRepository from './attestation-repository.js';
 import * as campaignParticipationRepository from './campaign-participation-repository.js';
 import * as campaignRepository from './campaign-repository.js';
+import * as combinedCourseBlueprintShareRepository from './combined-course-blueprint-share-repository.js';
 import * as combinedCourseDetailsRepository from './combined-course-details-repository.js';
 import * as combinedCourseParticipantRepository from './combined-course-participant-repository.js';
 import * as combinedCourseParticipationRepository from './combined-course-participation-repository.js';
@@ -46,6 +47,7 @@ const repositoriesWithoutInjectedDependencies = {
   campaignRepository,
   combinedCourseRepository,
   courseRepository,
+  combinedCourseBlueprintShareRepository,
   combinedCourseDetailsRepository,
   combinedCourseParticipantRepository,
   combinedCourseParticipationRepository,
