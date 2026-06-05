@@ -42,10 +42,14 @@ export default class AnonymousAuthenticator extends BaseAuthenticator {
 
   restore(data) {
     return new Promise((resolve, reject) => {
-      if (!isEmpty(data['access_token'])) {
-        resolve(data);
+      if (isEmpty(data['access_token'])) {
+        reject();
       }
-      reject();
+      if (data.expiresAt <= new Date().getTime()) {
+        reject();
+      }
+
+      resolve(data);
     });
   }
 }
