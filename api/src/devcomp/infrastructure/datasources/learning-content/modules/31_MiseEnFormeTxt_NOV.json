@@ -103,7 +103,7 @@
               "element": {
                 "id": "e15c4222-c710-4e57-a50c-d7178437ccbf",
                 "type": "text",
-                "tag": "context",
+                "tag": "",
                 "content": "<p>Naya souhaite proposer des ateliers d’écriture.<br>Elle a déjà découpé le texte de son annonce en paragraphes. Elle ne sait pas comment ajouter de la mise en forme à son texte.</p>\n<br>\n<p><strong>Observez l’interface de son traitement de texte ci-dessous puis répondez à la question qui suit.</strong></p>"
               }
             },
@@ -122,7 +122,7 @@
             {
               "type": "element",
               "element": {
-                "id": "a39452af-cae4-494a-9b01-3d50a2808e87",
+                "id": "b1e427ab-d8fc-47da-94bd-8b06eebdd714",
                 "type": "qcu-discovery",
                 "instruction": "<p>À votre avis, dans quelle zone se trouvent les options pour mettre en forme son texte ?</p>",
                 "hasShortProposals": false,
@@ -215,7 +215,7 @@
               "element": {
                 "id": "3bff4cd6-6a66-47ba-84d7-fa500fb09b44",
                 "type": "text",
-                "tag": "context",
+                "tag": "",
                 "content": "<p>Naya souhaite mettre en avant le mot «&nbsp;jeudis&nbsp;» dans son annonce.</p>"
               }
             },
@@ -315,7 +315,7 @@
               "element": {
                 "id": "ac0dd66b-e480-48a3-86f9-0d429fa4fb19",
                 "type": "text",
-                "tag": "context",
+                "tag": "",
                 "content": "<p>Naya souhaite utiliser&nbsp;«&nbsp;Ateliers d’écriture&nbsp;» comme titre pour son article. Elle veut donc que «&nbsp;Ateliers d’écriture&nbsp;» soit écrit en plus grand.</p>"
               }
             },
