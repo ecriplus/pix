@@ -113,6 +113,12 @@ function _buildScoNetwork(databaseBuilder) {
       },
     });
 
+    const certificationCenterLyceeVersailles = databaseBuilder.factory.buildCertificationCenter({
+      name: "Lycée 1 de l'Académie de Versailles",
+      type: 'SCO',
+      createdAt: new Date('2026-09-03'),
+    });
+
     databaseBuilder.factory.buildOrganizationInNetwork({
       networkId: network.id,
       parentStructureId: academieVersaillesStructure.id,
@@ -124,10 +130,16 @@ function _buildScoNetwork(databaseBuilder) {
         isManagingStudents: true,
         createdAt: new Date('2026-09-03'),
         updatedAt: new Date('2026-09-03'),
-
         administrationTeamId: ADMINISTRATION_TEAM_ALPHA_ID,
         organizationLearnerTypeId: ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
       },
+      certificationCenterId: certificationCenterLyceeVersailles.id,
+    });
+
+    const certificationCenterCollegeVersailles = databaseBuilder.factory.buildCertificationCenter({
+      name: "Collège 1 de l'Académie de Versailles",
+      type: 'SCO',
+      createdAt: new Date('2026-09-03'),
     });
 
     databaseBuilder.factory.buildOrganizationInNetwork({
@@ -141,10 +153,10 @@ function _buildScoNetwork(databaseBuilder) {
         isManagingStudents: true,
         createdAt: new Date('2026-09-03'),
         updatedAt: new Date('2026-09-03'),
-
         administrationTeamId: ADMINISTRATION_TEAM_ALPHA_ID,
         organizationLearnerTypeId: ORGANIZATION_LEARNER_TYPE_STUDENT_ID,
       },
+      certificationCenterId: certificationCenterCollegeVersailles.id,
     });
   }
 
