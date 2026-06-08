@@ -44,6 +44,7 @@ export function getElements(modules) {
     'image',
     'qab',
     'qcm',
+    'qcm-declarative',
     'qcu',
     'qcu-declarative',
     'qcu-discovery',
