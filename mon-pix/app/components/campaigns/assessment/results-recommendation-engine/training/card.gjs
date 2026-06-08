@@ -28,6 +28,7 @@ export default class Card extends Component {
 
   @action
   showModal() {
+    this.args.onCardClick({ trainingId: this.args.training.id });
     this.modalIsOpen = true;
   }
 

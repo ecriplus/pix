@@ -3,6 +3,7 @@ import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import TrainingCard from 'mon-pix/components/campaigns/assessment/results-recommendation-engine/training/card';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import setupIntlRenderingTest from '../../../../../../helpers/setup-intl-rendering';
 
@@ -196,9 +197,12 @@ module(
           'training',
           _buildTraining({ type: 'modulix', duration: { days: 1, hours: 2, minutes: 10 } }),
         );
+        const onCardClickStub = sinon.stub();
 
         // when
-        const screen = await render(<template><TrainingCard @training={{training}} /></template>);
+        const screen = await render(
+          <template><TrainingCard @training={{training}} @onCardClick={{onCardClickStub}} /></template>,
+        );
         await click(
           screen.getByRole('button', { name: t('pages.skill-review.recommended-engine.training-card.aria-label') }),
         );
@@ -232,9 +236,12 @@ module(
           // given
           const store = this.owner.lookup('service:store');
           const training = store.createRecord('training', _buildTraining({ type: 'modulix' }));
+          const onCardClickStub = sinon.stub();
 
           // when
-          const screen = await render(<template><TrainingCard @training={{training}} /></template>);
+          const screen = await render(
+            <template><TrainingCard @training={{training}} @onCardClick={{onCardClickStub}} /></template>,
+          );
           await click(
             screen.getByRole('button', { name: t('pages.skill-review.recommended-engine.training-card.aria-label') }),
           );
@@ -256,9 +263,12 @@ module(
           // given
           const store = this.owner.lookup('service:store');
           const training = store.createRecord('training', _buildTraining({ type: 'webinaire' }));
+          const onCardClickStub = sinon.stub();
 
           // when
-          const screen = await render(<template><TrainingCard @training={{training}} /></template>);
+          const screen = await render(
+            <template><TrainingCard @training={{training}} @onCardClick={{onCardClickStub}} /></template>,
+          );
           await click(
             screen.getByRole('button', { name: t('pages.skill-review.recommended-engine.training-card.aria-label') }),
           );
@@ -279,9 +289,12 @@ module(
         // given
         const store = this.owner.lookup('service:store');
         const training = store.createRecord('training', _buildTraining({}));
+        const onCardClickStub = sinon.stub();
 
         // when
-        const screen = await render(<template><TrainingCard @training={{training}} /></template>);
+        const screen = await render(
+          <template><TrainingCard @training={{training}} @onCardClick={{onCardClickStub}} /></template>,
+        );
         await click(
           screen.getByRole('button', { name: t('pages.skill-review.recommended-engine.training-card.aria-label') }),
         );
@@ -293,6 +306,25 @@ module(
         assert
           .dom(within(modal).getByText(t('pages.skill-review.recommended-engine.modal.feedback.question')))
           .exists();
+      });
+
+      test('should call onCardClick function', async function (assert) {
+        // given
+        const store = this.owner.lookup('service:store');
+        const training = store.createRecord('training', _buildTraining({}));
+        const onCardClickStub = sinon.stub();
+
+        // when
+        const screen = await render(
+          <template><TrainingCard @training={{training}} @onCardClick={{onCardClickStub}} /></template>,
+        );
+        await click(
+          screen.getByRole('button', { name: t('pages.skill-review.recommended-engine.training-card.aria-label') }),
+        );
+
+        // then
+        sinon.assert.calledOnceWithExactly(onCardClickStub, { trainingId: training.id });
+        assert.ok(true);
       });
     });
 
