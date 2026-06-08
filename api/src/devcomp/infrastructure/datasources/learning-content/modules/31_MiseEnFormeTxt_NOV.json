@@ -7,7 +7,7 @@
   "visibility": "public",
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
-    "description": "<p>Un texte sans mise en forme peut vite devenir difficile à lire… même s’il est bien écrit. Comment faire ressortir les informations importantes et rendre votre texte plus clair ?<br>Découvrez comment utiliser les outils simples de mise en forme de votre traitement de texte.</p>",
+    "description": "<p>Un texte sans mise en forme peut vite devenir difficile à lire… même s’il est bien écrit. Comment faire ressortir les informations importantes et rendre votre texte plus clair ?<br>Découvrez comment utiliser les outils simples de mise en forme d’un logiciel de traitement de texte.</p>",
     "duration": 10,
     "level": "novice",
     "objectives": [
@@ -33,7 +33,7 @@
                 "id": "0b01a30b-508d-4f7c-b3bd-f9bbf732070c",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Voici deux versions d’un même texte. 🤨<br>Lisez-les puis répondez à la question.</p><br>\n<p><strong>[élément interactif à venir]</strong></p>\n<p><br>Texte A&nbsp;:&nbsp;</p>\n<p>Réunion d’équipe. Demain, une réunion est prévue à 10h dans la salle principale pour présenter le nouveau projet. Tous les membres de l’équipe sont invités à y participer. La réunion durera environ une heure. Merci d’arriver quelques minutes en avance pour faciliter l’organisation.</p>\n<p><br>Texte B&nbsp;: </p>\n<h5>Réunion d’équipe </h5>\n<p>Demain, une réunion est prévue à <strong>10h</strong> dans la<strong> salle principale</strong> pour présenter le nouveau projet. Tous les membres de l’équipe sont invités à y participer.<br>La réunion durera environ <strong>une heure</strong>. </p>\n<p>Merci d’arriver quelques minutes en avance pour faciliter l’organisation.<br><br></p>"
+                "content": "<p><strong>Lisez les deux versions du même texte ci-dessous, puis répondez à la question</strong>.</p><br>\n<p><strong>[élément interactif à venir]</strong></p>\n<p><br>Texte A&nbsp;:&nbsp;</p>\n<p>Réunion d’équipe. Demain, une réunion est prévue à 10 h dans la salle principale pour présenter le nouveau projet. Tous les membres de l’équipe sont invités à y participer. La réunion durera environ une heure. Merci d’arriver quelques minutes en avance pour faciliter l’organisation.</p>\n<p><br>Texte B&nbsp;: </p>\n<h5>Réunion d’équipe </h5>\n<p>Demain, une réunion est prévue à <strong>10 h</strong> dans la<strong> salle principale</strong> pour présenter le nouveau projet. Tous les membres de l’équipe sont invités à y participer.<br>La réunion durera environ <strong>une heure</strong>. </p>\n<p>Merci d’arriver quelques minutes en avance pour faciliter l’organisation.<br><br></p>"
               }
             },
             {
@@ -48,7 +48,7 @@
                     "id": "1",
                     "content": "Texte A",
                     "feedback": {
-                      "diagnosis": "<p>Pour la plupart des lecteurs, le texte B est plus facile à lire et à comprendre&nbsp;:</p>\n<ul>\n    <li><strong>Les idées sont séparées en paragraphes</strong>. L’ajout de sauts de ligne permet de <strong>structurer son texte</strong> en paragraphes.</li>\n    <li><strong>Le texte est mis en forme</strong>. La mise en forme permet de <strong>mettre en évidence les informations importantes</strong> d’un texte.</li>\n</ul>"
+                      "diagnosis": "<p>Pour vous, peut-être, mais pour la plupart des lecteurs, le texte B est plus facile à lire et à comprendre&nbsp;:</p>\n<ul>\n    <li><strong>Les idées sont séparées en paragraphes</strong>. L’ajout de sauts de ligne permet de <strong>structurer son texte</strong> en paragraphes.</li>\n    <li><strong>Le texte est mis en forme</strong>. La mise en forme permet de <strong>mettre en évidence les informations importantes</strong> d’un texte.</li>\n</ul>"
                     }
                   },
                   {
@@ -200,7 +200,7 @@
                 "id": "5940f7ba-6fa5-41b7-9cad-e4147fe65d61",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Naya voudrait maintenant mettre en avant une information dans son texte.</p>"
+                "content": "<p>Naya veut maintenant mettre en avant une information dans son texte.</p>"
               }
             }
           ]
@@ -227,7 +227,7 @@
                 "isCompletionRequired": true,
                 "title": "Mise en forme 1",
                 "url": "https://epreuves-pr3164.review.pix.fr/pixwriter-mise-en-forme/pixwriter-mise-en-forme.html?lang=fr&mode=module-mef-txt-dec2#5a55634559434044544479074442554549715020545d",
-                "instruction": "<p>Dans l’interface ci-dessous&nbsp;: </p><ul><li>sélectionnez le mot «&nbsp;jeudis&nbsp;»,&nbsp;</li><li>puis mettez-le en gras.</li></ul>",
+                "instruction": "<p>Dans l’interface ci-dessous&nbsp;: </p><ul><li>Sélectionnez le mot «&nbsp;jeudis&nbsp;».,&nbsp;</li><li>Puis mettez-le en gras.</li></ul>",
                 "solution": "pix1erdegr9",
                 "height": 550
               }
@@ -237,7 +237,7 @@
               "element": {
                 "id": "008f9d74-8d51-4d6f-81b3-610dc9c8f9c7",
                 "type": "expand",
-                "title": "🗝️ Indice 1 :",
+                "title": "💡 Indice 1 :",
                 "content": "<p>Pour sélectionner le mot, vous pouvez&nbsp;:&nbsp; </p><ul><li>cliquer au début du mot puis faire glisser la souris jusqu’à la fin du mot,</li><li>ou double cliquer sur le mot.</li></ul>"
               }
             },
@@ -246,7 +246,7 @@
               "element": {
                 "id": "b19ad0fa-0980-4011-9bb9-e036474ae263",
                 "type": "expand",
-                "title": "🗝️ Indice 2 :",
+                "title": "💡 Indice 2 :",
                 "content": "<p>Après avoir sélectionné le mot, cliquez sur le bouton «&nbsp;Gras&nbsp;» dans la barre d’outils pour mettre le mot en gras.</p><p>Pour afficher le nom des boutons, passez votre souris sur les différentes icônes de la barre d’outils.</p>"
               }
             }
@@ -263,7 +263,7 @@
                 "id": "cb93b8ed-7a1c-448b-be67-bae4b7e66567",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Pour <strong>modifier l’apparence d’un mot</strong>, il faut toujours suivre deux étapes&nbsp;: </p><ol><li><strong>Sélectionner </strong>le mot de votre choix</li><li><strong>Choisir une option </strong>dans la barre d’outils</li></ol><p>Ces options permettent de <strong>mettre en valeur une information</strong>&nbsp;:</p>"
+                "content": "<p>Pour <strong>modifier l’apparence d’un mot</strong>, il faut toujours suivre deux étapes&nbsp;: </p><ol><li><strong>Sélectionner </strong>le mot de son choix.</li><li><strong>Choisir une option </strong>dans la barre d’outils.</li></ol><p>Ces options permettent de <strong>mettre en valeur une information</strong>.</p>"
               }
             },
             {
@@ -300,7 +300,7 @@
                 "id": "1f605b02-27bf-4776-a224-118c85f63099",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Naya voudrait désormais mettre en avant le titre de son texte.<br>Pour cela, il est possible de modifier plusieurs mots en même temps, comme une phrase ou un paragraphe.</p>"
+                "content": "<p>Naya veut à présent mettre en avant le titre de son texte.<br>Pour cela, il est possible de modifier plusieurs mots en même temps, comme une phrase ou un paragraphe.</p>"
               }
             }
           ]
@@ -316,7 +316,7 @@
                 "id": "ac0dd66b-e480-48a3-86f9-0d429fa4fb19",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Naya souhaite utiliser&nbsp;«&nbsp;Ateliers d’écriture&nbsp;» comme titre pour son article. Elle veut donc que «&nbsp;Ateliers d’écriture&nbsp;» soit écrit en plus grand.</p>"
+                "content": "<p>Naya souhaite utiliser&nbsp;«&nbsp;Ateliers d’écriture&nbsp;» comme titre pour son annonce. Elle veut donc que le texte «&nbsp;Ateliers d’écriture&nbsp;» soit écrit en plus grand.</p>"
               }
             },
             {
@@ -327,7 +327,7 @@
                 "isCompletionRequired": true,
                 "title": "Mise en forme 2",
                 "url": "https://epreuves-pr3164.review.pix.fr/pixwriter-mise-en-forme/pixwriter-mise-en-forme.html?lang=fr&mode=module-mef-txt-dec3#5a55634559434044544479074442554549715020545d",
-                "instruction": "<p>Dans l’interface ci-dessous&nbsp;:&nbsp; </p><ul><li>sélectionnez «&nbsp;Ateliers d’écriture&nbsp;»,</li><li>puis changez la taille de police en taille 14.</li></ul>",
+                "instruction": "<p>Dans l’interface ci-dessous&nbsp;:&nbsp; </p><ul><li>Sélectionnez «&nbsp;Ateliers d’écriture&nbsp;».</li><li>Puis changez la taille de police en taille 14.</li></ul>",
                 "solution": "pix1erdegr9",
                 "height": 550
               }
@@ -337,7 +337,7 @@
               "element": {
                 "id": "67af2c7e-a9d1-475c-afc7-0019147a4a09",
                 "type": "expand",
-                "title": "🗝️ Indice 1",
+                "title": "💡 Indice 1",
                 "content": "<p>Pour sélectionner une phrase ou un paragraphe, vous pouvez&nbsp;: </p><ul><li>cliquer au début de la phrase puis faire glisser la souris jusqu’à la fin de la phrase, </li><li>ou triple cliquer sur un mot de la phrase.</li></ul>"
               }
             },
@@ -346,8 +346,8 @@
               "element": {
                 "id": "6221ea8c-378e-438a-883b-aeb7c47984a1",
                 "type": "expand",
-                "title": "🗝️ Indice 2",
-                "content": "<p>Après avoir sélectionné la phrase, choisir l’option «&nbsp;Tailles de police » dans la barre d’outils pour agrandir la phrase.</p><p>Pour afficher le nom des boutons, passez votre souris sur les différentes icônes de la barre d’outils.</p>"
+                "title": "💡 Indice 2",
+                "content": "<p>Après avoir sélectionné la phrase, choisissez l’option «&nbsp;Tailles de police » dans la barre d’outils pour agrandir la phrase.</p><p>Pour afficher le nom des boutons, passez votre souris sur les différentes icônes de la barre d’outils.</p>"
               }
             }
           ]
@@ -363,7 +363,7 @@
                 "id": "7fcfe364-354c-4288-a331-32e229fc71ac",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>La mise en forme ne concerne pas seulement les mots&nbsp;: elle peut aussi s’appliquer à une phrase ou à un<strong> paragraphe entier</strong>.</p><p><br>Vous pouvez&nbsp;:&nbsp;</p><ul>    <li>Modifier la <strong>police d’écriture</strong> (c’est-à-dire la forme des lettres et caractères). 🔡</li>    <li>Changer la<strong> taille de la police</strong>. ↕️</li></ul>"
+                "content": "<p>La mise en forme ne concerne pas seulement un mot&nbsp;: elle peut aussi s’appliquer à une phrase ou à un<strong> paragraphe entier</strong>.</p><p><br>Vous pouvez&nbsp;:&nbsp;</p><ul>    <li>Modifier la <strong>police d’écriture</strong> (c’est-à-dire la forme des lettres et caractères). 🔡</li>    <li>Changer la<strong> taille de la police</strong>. ↕️</li></ul>"
               }
             },
             {
@@ -384,7 +384,7 @@
                 "id": "ef9edbbb-dabe-4837-aa48-543ad4e7de09",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Ces modifications permettent de&nbsp;: </p><ul>    <li>Rendre un texte <strong>plus facile à lire</strong>.</li><li>Faire ressortir un <strong>titre </strong>ou une <strong>partie importante </strong>du texte.</li></ul>"
+                "content": "<p>Les modifications de taille et police d'écriture permettent de&nbsp;: </p><ul>    <li>Rendre un texte <strong>plus facile à lire</strong>.</li><li>Faire ressortir un <strong>titre </strong>ou une <strong>partie importante </strong>du texte.</li></ul>"
               }
             }
           ]
@@ -400,7 +400,7 @@
                 "id": "9b1da107-3d1a-4a3a-8a67-cbdb6ab0d5b5",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Le texte de Naya est à présent plus facile à lire et les informations importantes sont mises en avant.<br>Mais attention, la mise en forme, ça s’utilise avec modération et en suivant quelques règles&nbsp;!</p>"
+                "content": "<p>Le texte de Naya est à présent plus facile à lire et les informations importantes sont mises en avant.<br>Mais attention, pour utiliser la mise en forme, il faut suivre quelques règles&nbsp;!</p>"
               }
             }
           ]
@@ -476,7 +476,7 @@
                       "id": "e3d31027-657e-4823-be10-adf1c3bedc69",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Vous écrivez un texte et vous utilisez <strong>un mot en anglais</strong>&nbsp;: deadline.</p>"
+                      "content": "<p>Vous écrivez un texte et vous utilisez <strong>un mot en anglais</strong>&nbsp;: « En anglais, le mot ordinateur se dit <em>computer</em>. ».</p>"
                     },
                     {
                       "id": "cc1a7d74-e78e-4a22-9cb1-309176c308f2",
@@ -597,7 +597,7 @@
                 "id": "5f9689d8-45ba-416a-b6d1-fe4c5a9c2cd4",
                 "type": "text",
                 "tag": "did-you-know",
-                "content": "<p>Ces usages existent depuis longtemps, notamment dans l’imprimerie. On les retrouve aujourd’hui dans les documents, les sites web et les emails.</p>"
+                "content": "<p>Ces usages existent depuis longtemps, notamment dans l’imprimerie. On les retrouve aujourd’hui dans les documents, les sites web et les mails.</p>"
               }
             }
           ]
@@ -619,7 +619,7 @@
                 "id": "2b73b2d9-a836-4f3a-aa3a-fc532395a2c3",
                 "type": "text",
                 "tag": " ",
-                "content": "<ul><li>La mise en forme permet de rendre un texte <strong>plus facile à lire</strong> et de <strong>mettre en avant les informations importantes</strong>. 👀 </li><li>Pour mettre en forme un texte, il faut toujours <strong>sélectionner</strong>, puis <strong>choisir une option dans la barre d’outils</strong>. 🖱️ </li><li>La mise en forme&nbsp;(taille, police…) peut s’appliquer à un <strong>mot </strong>ou à un <strong>paragraphe</strong>. ↔️ </li><li>La mise en forme suit des <strong>règles </strong>simples&nbsp;: utilisez-la pour mettre en avant les informations importantes, sans en abuser. ✨</li></ul>"
+                "content": "<ul><li>La mise en forme permet de rendre un texte <strong>plus facile à lire</strong> et de <strong>mettre en avant les informations importantes</strong>. 👀 </li><li>Dans un logiciel de traitement de texte, pour mettre en forme un texte, il faut toujours <strong>sélectionner</strong>, puis <strong>choisir une option dans la barre d’outils</strong>. 🖱️ </li><li>La mise en forme&nbsp;(taille, police…) peut s’appliquer à un <strong>mot </strong>, une <strong>phrase </strong>ou un <strong>paragraphe</strong>. ↔️ </li><li>La mise en forme suit des <strong>règles </strong>simples&nbsp;: utilisez-la pour mettre en avant les informations importantes, sans en abuser. ✨<br>Trop de mise en forme rend le texte plus difficile à lire et à comprendre.</li></ul>"
               }
             }
           ]
@@ -656,7 +656,7 @@
               "element": {
                 "id": "3d414841-40dc-49f1-b95f-949a85417700",
                 "type": "qab",
-                "instruction": "<p>Quelles actions sont possibles avec la barre d’outils ?</p>",
+                "instruction": "<p>Parmi les actions suivantes, lesquelles sont possibles avec la barre d’outils ?</p>",
                 "cards": [
                   {
                     "id": "17bde533-9872-4fbd-9a8b-08094d1915ba",
@@ -665,8 +665,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Vrai",
-                    "proposalB": "Faux",
+                    "proposalA": "Possible",
+                    "proposalB": "Impossible",
                     "solution": "A"
                   },
                   {
@@ -676,8 +676,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Vrai",
-                    "proposalB": "Faux",
+                    "proposalA": "Possible",
+                    "proposalB": "Impossible",
                     "solution": "A"
                   },
                   {
@@ -687,8 +687,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Vrai",
-                    "proposalB": "Faux",
+                    "proposalA": "Possible",
+                    "proposalB": "Impossible",
                     "solution": "B"
                   },
                   {
@@ -698,8 +698,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Vrai",
-                    "proposalB": "Faux",
+                    "proposalA": "Possible",
+                    "proposalB": "Impossible",
                     "solution": "B"
                   },
                   {
@@ -709,8 +709,8 @@
                       "url": "",
                       "altText": ""
                     },
-                    "proposalA": "Vrai",
-                    "proposalB": "Faux",
+                    "proposalA": "Possible",
+                    "proposalB": "Impossible",
                     "solution": "A"
                   }
                 ],
@@ -755,14 +755,14 @@
                 "proposals": [
                   {
                     "type": "text",
-                    "content": "<p>Annie veut mettre en avant un mot dans son texte.<br><strong>Qu’est-ce qu’Annie doit faire&nbsp;?</strong></p>"
+                    "content": "<p>Annie veut mettre en avant un mot dans son texte.<br><strong>Que doit faire Annie ?</strong></p>"
                   },
                   {
                     "type": "select",
                     "input": "1",
                     "display": "block",
-                    "placeholder": "Sélectionnez l’option la plus adaptée",
-                    "ariaLabel": "Sélectionnez l’option la plus adaptée",
+                    "placeholder": "- Sélectionner -",
+                    "ariaLabel": "- Sélectionner -",
                     "tolerances": [],
                     "options": [
                       {
@@ -784,7 +784,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<p><br>Idriss trouve que son texte est écrit trop petit.<br><strong>Qu’est-ce qu’Idriss doit faire&nbsp;?</strong></p>"
+                    "content": "<p><br>Idriss trouve que son texte est écrit trop petit.<br><strong>Que doit faire Idriss ?</strong></p>"
                   },
                   {
                     "type": "select",
@@ -813,7 +813,7 @@
                   },
                   {
                     "type": "text",
-                    "content": "<br><p>Jan écrit un article avec des mots en anglais dedans. Il veut signaler qu’il s’agit de mots dans une autre langue.<br><strong>Qu’est-ce que Jan doit faire&nbsp;?</strong></p>"
+                    "content": "<br><p>Jan écrit un article avec des mots en anglais dedans. Il veut signaler qu’il s’agit de mots dans une autre langue.<br><strong>Que doit faire Jan ?</strong></p>"
                   },
                   {
                     "type": "select",
@@ -844,7 +844,7 @@
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Bonne réponse ! 🎉</p>",
-                    "diagnosis": "<p>Chaque mise en forme correspond à un usage précis. Les utiliser correctement rend le texte plus clair.</p>"
+                    "diagnosis": "<p>Chaque mise en forme correspond à un usage précis. Utiliser les options de mise en forme correctement rend le texte plus clair.</p>"
                   },
                   "invalid": {
                     "state": "<p>Mauvaise réponse.<br></p>",
@@ -898,11 +898,11 @@
                 "feedbacks": {
                   "valid": {
                     "state": "<p>Effectivement !&nbsp;<br></p>",
-                    "diagnosis": "<p>Ces options sont aussi présentes dans les autres logiciels de bureautique (tableurs, logiciels de présentation, logiciels de mail, etc).</p>"
+                    "diagnosis": "<p>Ces options sont aussi présentes dans les autres logiciels de bureautique (tableurs, logiciels de présentation, logiciels de mail, etc.).</p>"
                   },
                   "invalid": {
                     "state": "<p>Eh non !&nbsp;<br></p>",
-                    "diagnosis": "<p>Ces options sont aussi présentes dans les autres logiciels de bureautique (tableurs, logiciels de présentation, logiciels de mail, etc).</p>"
+                    "diagnosis": "<p>Ces options sont aussi présentes dans les autres logiciels de bureautique (tableurs, logiciels de présentation, logiciels de mail, etc.).</p>"
                   }
                 },
                 "solutions": [
