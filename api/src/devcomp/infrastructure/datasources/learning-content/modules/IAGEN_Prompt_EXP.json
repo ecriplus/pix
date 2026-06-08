@@ -126,14 +126,14 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Oui</p>",
+                          "content": "Oui",
                           "feedback": {
                             "diagnosis": "<p>Pas exactement.</p><p>Sans accès au règlement interne ou à la procédure officielle, l’IA peut proposer une réponse générale, mais elle ne peut pas garantir qu’elle correspond aux règles de votre organisation.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Non</p>",
+                          "content": "Non",
                           "feedback": {
                             "diagnosis": "<p>Bien vu.</p><p>Sans accès au règlement interne ou à la procédure officielle, l’IA peut proposer une réponse générale, mais elle ne peut pas garantir qu’elle correspond aux règles de votre organisation.</p>"
                           }
@@ -153,14 +153,14 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Oui</p>",
+                          "content": "Oui",
                           "feedback": {
                             "diagnosis": "<p>Pas exactement.</p><p>L’IA peut proposer un plan standard, mais elle ne connaît pas vos objectifs, vos performances, votre passé sportif ou d’éventuelles blessures. Sa réponse ne peut donc pas être vraiment personnalisée et fiable.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Non</p>",
+                          "content": "Non",
                           "feedback": {
                             "diagnosis": "<p>Bien vu.</p><p>L’IA peut proposer un plan standard, mais elle ne connaît pas vos objectifs, vos performances, votre passé sportif ou d’éventuelles blessures. Sa réponse ne peut donc pas être vraiment personnalisée et fiable.</p>"
                           }
@@ -180,14 +180,14 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Oui</p>",
+                          "content": "Oui",
                           "feedback": {
                             "diagnosis": "<p>Pas exactement.</p><p>Sans connaître le type de véhicule, le carburant utilisé, la consommation moyenne ou le nombre de kilomètres parcourus, l’IA ne peut fournir qu’une estimation très générale.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Non</p>",
+                          "content": "Non",
                           "feedback": {
                             "diagnosis": "<p>Bien vu.</p><p>Sans connaître le type de véhicule, le carburant utilisé, la consommation moyenne ou le nombre de kilomètres parcourus, l’IA ne peut fournir qu’une estimation fiable.</p>"
                           }
@@ -207,14 +207,14 @@
                       "proposals": [
                         {
                           "id": "1",
-                          "content": "<p>Oui</p>",
+                          "content": "Oui",
                           "feedback": {
                             "diagnosis": "<p>Pas exactement.</p><p>Demander une citation exacte suppose que l’IA ait accès au texte de référence. Sans ce texte, elle peut formuler une réponse crédible, mais elle ne peut pas garantir l’exactitude de la citation.</p>"
                           }
                         },
                         {
                           "id": "2",
-                          "content": "<p>Non</p>",
+                          "content": "Non",
                           "feedback": {
                             "diagnosis": "<p>Bien vu.</p><p>Demander une citation exacte suppose que l’IA ait accès au texte de référence. Sans ce texte, elle peut formuler une réponse crédible, mais elle ne peut pas garantir l’exactitude de la citation. Pour ce type de demande, la source documentaire est indispensable.</p>"
                           }
@@ -240,15 +240,6 @@
                 "type": "text",
                 "tag": " ",
                 "content": "<p>Pour produire une réponse, une <strong>IA générative</strong> s’appuie principalement sur deux éléments&nbsp;:</p><ul>  <li>les <strong>connaissances apprises pendant son entraînement</strong>&nbsp;;</li>  <li>les <strong>informations données par l’utilisateur</strong> dans la discussion.</li></ul><p>Par défaut, elle ne connaît donc pas les informations qui ne lui ont pas été fournies. C’est le cas, par exemple, des <strong>documents internes</strong>, des <strong>procédures propres à une organisation</strong>, des <strong>connaissances métiers spécifiques</strong>, des <strong>données confidentielles</strong>, ou encore des <strong>informations très récentes ou peu diffusées</strong>.</p><p>C’est pourquoi une IA peut produire une réponse <strong>claire et convaincante</strong>, mais malgré tout <strong>incomplète</strong>, <strong>obsolète</strong> ou <strong>déconnectée du contexte réel</strong>.</p>"
-              }
-            },
-            {
-              "type": "element",
-              "element": {
-                "id": "005e056b-0125-4b09-ad36-6e168e09507b",
-                "type": "text",
-                "tag": "further-information",
-                "content": "<p>Certaines informations utiles ne doivent pas forcément être transmises à une IA grand public&nbsp;: données confidentielles, documents stratégiques, informations protégées, secrets métiers ou contenus sensibles.</p>"
               }
             },
             {
