@@ -342,16 +342,6 @@ const updateHasSeenChallengeTooltip = async function ({ userId, challengeType })
   return new User(user);
 };
 
-const acceptPixLastTermsOfService = async function (id) {
-  const knexConn = DomainTransaction.getConnection();
-  const [user] = await knexConn('users')
-    .where({ id })
-    .update({ lastTermsOfServiceValidatedAt: new Date(), mustValidateTermsOfService: false, updatedAt: new Date() })
-    .returning('*');
-
-  return new User(user);
-};
-
 const updatePixCertifTermsOfServiceAcceptedToTrue = async function (id) {
   const knexConn = DomainTransaction.getConnection();
   const now = new Date();
@@ -443,7 +433,6 @@ const updateLastDataProtectionPolicySeenAt = async function ({ userId }) {
 
 /**
  * @typedef {Object} UserRepository
- * @property {function} acceptPixLastTermsOfService
  * @property {function} checkIfEmailIsAvailable
  * @property {function} findAnotherUserByEmail
  * @property {function} findAnotherUserByUsername
@@ -476,7 +465,6 @@ const updateLastDataProtectionPolicySeenAt = async function ({ userId }) {
  */
 
 export {
-  acceptPixLastTermsOfService,
   checkIfEmailIsAvailable,
   findAnotherUserByEmail,
   findAnotherUserByUsername,
