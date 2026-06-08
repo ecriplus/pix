@@ -5,27 +5,27 @@ import { InvalidOrAlreadyUsedEmailError } from '../errors.js';
 
 /**
  * @param {Object} params
- * @property {string} campaignCode
- * @property {string} locale
- * @property {string} password
- * @property {string} user
- * @property {import('../../infrastructure/repositories/authentication-method.repository.js').AuthenticationMethodRepository} authenticationMethodRepository
- * @property {Object} campaignRepository
- * @property {import('../../../shared/infrastructure/repositories').UserRepository} userRepository
- * @property {import('../../../shared/infrastructure/repositories').UserToCreateRepository} userToCreateRepository
- * @property {import('../../../shared/domain/services').CryptoService} cryptoService
- * @property {Object} mailService
- * @property {import('../../../shared/domain/services/user-service.js').UserService} userService
- * @property {import('../../../shared/domain/validators').UserValidator} userValidator
- * @property {import('../../../shared/domain/validators').PasswordValidator} passwordValidator
+ * @param {string} params.locale
+ * @param {string} params.password
+ * @param {string} params.user
+ * @param {string} params.redirectionUrl
+ * @param {import('../../infrastructure/repositories/authentication-method.repository.js').AuthenticationMethodRepository} params.authenticationMethodRepository
+ * @param {Object} params.campaignRepository
+ * @param {import('../../infrastructure/repositories/user.repository.js')} params.userRepository
+ * @param {import('../../infrastructure/repositories/user-to-create.repository.js')} params.userToCreateRepository
+ * @param {import('../../../shared/domain/services/crypto-service.js')} params.cryptoService
+ * @param {Object} params.mailService
+ * @param {import('../services/user-service.js')} params.userService
+ * @param {import('../../../shared/domain/validators/user-validator.js')} params.userValidator
+ * @param {import('../../../shared/domain/validators/password-validator.js')} params.passwordValidator
  * @return {Promise<User|undefined>}
  */
 const createUser = async function ({
   locale,
   password,
   user,
-  authenticationMethodRepository,
   redirectionUrl,
+  authenticationMethodRepository,
   emailRepository,
   emailValidationDemandRepository,
   userRepository,
@@ -106,7 +106,7 @@ function _manageError(error, errorType, attribute, message) {
 
 /**
  * @param password
- * @param passwordValidator
+ * @param {import('../../../shared/domain/validators/password-validator.js')} passwordValidator
  * @return {Error|undefined}
  * @private
  */
@@ -121,12 +121,12 @@ function _validatePassword(password, passwordValidator) {
 }
 
 /**
- * @param {Object} dataToValidate
- * @property {string} password
- * @property {string} user
- * @property {import('../../infrastructure/repositories/user.repository.js').UserRepository} userRepository
- * @property {import('../../../shared/domain/validators/user-validator.js').UserValidator} userValidator
- * @property {import('../../../shared/domain/validators/password-validator.js').PasswordValidator} passwordValidator
+ * @param {Object} params
+ * @param {string} params.password
+ * @param {string} params.user
+ * @param {import('../../infrastructure/repositories/user.repository.js')} params.userRepository
+ * @param {import('../../../shared/domain/validators/user-validator.js')} params.userValidator
+ * @param {import('../../../shared/domain/validators/password-validator.js')} params.passwordValidator
  * @return {Promise<boolean>}
  * @private
  */

@@ -1,7 +1,7 @@
 /**
  * @typedef {import('../../../session-management/domain/models/SessionManagement.js').SessionManagement} SessionManagement
  * @typedef {import('../../domain/read-models/EnrolledCandidate.js').EnrolledCandidate} EnrolledCandidate
- * @typedef {import('../../../session-management/domain/models/ComplementaryCertification.js').ComplementaryCertification} ComplementaryCertification
+ * @typedef {import('../../../shared/domain/models/ComplementaryCertification.js').ComplementaryCertification} ComplementaryCertification
  */
 
 import * as url from 'node:url';

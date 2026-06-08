@@ -1,8 +1,3 @@
-/**
- * @typedef {import('../../../../shared/domain/models/Frameworks.js').Frameworks} Frameworks
- * @typedef {import('../../../domain/read-models/EnrolledCandidate.js').EnrolledCandidate} EnrolledCandidate
- * @typedef {import('i18n')} i18n
- */
 import dayjs from 'dayjs';
 
 import { CertificationCandidate } from '../../../shared/domain/models/CertificationCandidate.js';

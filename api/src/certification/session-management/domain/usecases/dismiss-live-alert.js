@@ -1,5 +1,5 @@
 /**
- * @typedef {import('../../../shared/domain/usecases/index.js').CertificationChallengeLiveAlertRepository} CertificationChallengeLiveAlertRepository
+ * @typedef {import('../../../shared/infrastructure/repositories/certification-challenge-live-alert-repository.js')} CertificationChallengeLiveAlertRepository
  */
 
 import { NotFoundError } from '../../../../shared/domain/errors.js';
