@@ -125,7 +125,7 @@ test.describe('Happy paths on all certifications, 32 wrong answers', () => {
               expect(certificationDetails.nbQuestionsAband).toBe(0);
               expect(certificationDetails.nbValidatedTechnicalIssues).toBe(0);
               snapshotHandler.push('adminCertificationDetails_status', certificationDetails.status ?? null);
-              snapshotHandler.push('adminCertificationDetails_status', certificationDetails.result ?? null);
+              snapshotHandler.push('adminCertificationDetails_result', certificationDetails.result ?? null);
             });
           });
         });

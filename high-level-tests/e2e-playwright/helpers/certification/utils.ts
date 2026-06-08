@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import path from 'path';
 
-import { CertificationInformationPage, CertificationSessionPage } from '../../pages/pix-admin/index.ts';
+import { CertificationSessionPage } from '../../pages/pix-admin/index.ts';
 
 export async function checkSessionInformationAndExpectSuccess(
   certificationSessionPage: CertificationSessionPage,
@@ -26,56 +26,6 @@ export async function checkSessionInformationAndExpectSuccess(
   expect(data.nbIssueReportsUnsolved).toBe(sessionInfo.nbIssueReportsUnsolved);
   expect(data.nbIssueReports).toBe(sessionInfo.nbIssueReports);
   expect(data.nbCertificationsInError).toBe(sessionInfo.nbCertificationsInError);
-}
-
-export async function checkCertificationGeneralInformationAndExpectSuccess(
-  certificationInformationPage: CertificationInformationPage,
-  data: {
-    sessionNumber: string;
-    status: string;
-    result: string;
-  },
-) {
-  const certificationGeneralInfo = await certificationInformationPage.getGeneralInfo();
-
-  expect(data.sessionNumber).toBe(certificationGeneralInfo.sessionNumber);
-  expect(data.status).toBe(certificationGeneralInfo.status);
-  expect(data.result).toBe(certificationGeneralInfo.result);
-}
-
-export async function checkCertificationDetailsAndExpectSuccess(
-  certificationInformationPage: CertificationInformationPage,
-  data: {
-    status: string;
-    nbAnsweredQuestionsOverTotal: string;
-    nbQuestionsOK: number;
-    nbQuestionsKO: number;
-    nbQuestionsAband: number;
-    nbValidatedTechnicalIssues: number;
-    result: string;
-    testEndedBy?: string;
-    abortReason?: string;
-  },
-) {
-  const certificationDetails = await certificationInformationPage.getDetails();
-
-  expect(data.status).toBe(certificationDetails.status);
-  expect(data.result).toBe(certificationDetails.result);
-  expect(data.nbAnsweredQuestionsOverTotal).toBe(certificationDetails.nbAnsweredQuestionsOverTotal);
-  expect(data.nbQuestionsOK).toBe(certificationDetails.nbQuestionsOK);
-  expect(data.nbQuestionsKO).toBe(certificationDetails.nbQuestionsKO);
-  expect(data.nbQuestionsAband).toBe(certificationDetails.nbQuestionsAband);
-  expect(data.nbValidatedTechnicalIssues).toBe(certificationDetails.nbValidatedTechnicalIssues);
-  if (data.testEndedBy) {
-    expect(data.testEndedBy).toBe(certificationDetails.testEndedBy);
-  } else {
-    expect(certificationDetails.testEndedBy).not.toBeDefined();
-  }
-  if (data.abortReason) {
-    expect(data.abortReason).toBe(certificationDetails.abortReason);
-  } else {
-    expect(certificationDetails.abortReason).not.toBeDefined();
-  }
 }
 
 export function getTestRef(filePath: string) {

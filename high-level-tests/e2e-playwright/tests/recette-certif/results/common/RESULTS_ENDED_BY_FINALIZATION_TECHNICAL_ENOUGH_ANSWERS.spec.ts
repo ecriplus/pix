@@ -86,23 +86,21 @@ test(
         expect(certificationData[0]).toMatchObject({
           Prénom: certifiableUserData.firstName,
           Nom: certifiableUserData.lastName,
-          Statut: 'Validée',
-          Résultats: 'Expert 1 (895 Pix)',
           'Signalements impactants non résolus': '',
           'Certification passée': 'Pix Cœur',
         });
+        snapshotHandler.push('adminCertificationListInfo_status', certificationData[0]['Statut']);
+        snapshotHandler.push('adminCertificationListInfo_results', certificationData[0]['Résultats']);
 
         const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
           certifiableUserData.firstName,
         );
         const certificationGeneralInfo = await certificationInformationPage.getGeneralInfo();
         expect(certificationGeneralInfo.sessionNumber).toBe(sessionNumber);
-        expect(certificationGeneralInfo.status).toBe('Validée');
-        expect(certificationGeneralInfo.result).toBe('Expert 1 (895 Pix)');
+        snapshotHandler.push('adminCertificationInfo_status', certificationGeneralInfo.status ?? null);
+        snapshotHandler.push('adminCertificationInfo_results', certificationGeneralInfo.result ?? null);
 
         const certificationDetails = await certificationInformationPage.getDetails();
-        expect(certificationDetails.status).toBe('Validée');
-        expect(certificationDetails.result).toBe('Expert 1 (895 Pix)');
         expect(certificationDetails.nbAnsweredQuestionsOverTotal).toBe('24/32');
         expect(certificationDetails.nbQuestionsOK).toBe(24);
         expect(certificationDetails.nbQuestionsKO).toBe(0);
@@ -110,6 +108,8 @@ test(
         expect(certificationDetails.nbValidatedTechnicalIssues).toBe(0);
         expect(certificationDetails.testEndedBy).toBe('Finalisation session');
         expect(certificationDetails.abortReason).toBe('Problème technique');
+        snapshotHandler.push('adminCertificationDetails_result', certificationDetails.result ?? null);
+        snapshotHandler.push('adminCertificationDetails_status', certificationDetails.status ?? null);
       });
     });
 
@@ -122,20 +122,34 @@ test(
       await pixAppCertifiablePage.goto(process.env.PIX_APP_URL as string);
       const homePage = new HomePage(pixAppCertifiablePage);
       const certificateListPage = await homePage.goToMyCertificates();
-      const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment, hasBadge } =
-        await certificateListPage.getCertificateData(certificationNumber);
+      const {
+        mainStatus,
+        extraStatus,
+        detailsFramework,
+        certificationCenter,
+        examDate,
+        result,
+        comment,
+        hasBadge: hasBadgeInList,
+        badgeSrc: badgeSrcInList,
+      } = await certificateListPage.getCertificateData(certificationNumber);
       expect(mainStatus).toBe('Certification Pix : Obtenue');
       expect(extraStatus).toBe(null);
       expect(detailsFramework).toBe(null);
       expect(certificationCenter).toBe('Centre de certification : ' + certificationCenterName);
       expect(examDate).toBe('Date de passage : ' + getNowAsDDMMYYYY());
-      expect(result).toBe('895 PIX');
-      expect(hasBadge).toBe(false);
       expect(comment).toBe(null);
+      snapshotHandler.push('appCertificationListInfo_result', result);
+      snapshotHandler.push('appCertificationListInfo_hasBadge', `${hasBadgeInList}`);
+      snapshotHandler.push('appCertificationListInfo_badgeSrc', badgeSrcInList);
+
       const certificationResultPage = await certificateListPage.goToCertificateDetails(certificationNumber);
-      const { pixScoreObtained, pixLevelReached } = await certificationResultPage.getResultInfo();
-      expect(pixScoreObtained).toEqual('PIX 895 CERTIFIÉS');
-      expect(pixLevelReached).toEqual('Vous avez atteint le niveau Expert 1 de la Certification Pix !');
+      const { pixScoreObtained, pixLevelReached, hasBadge, badgeSrc } = await certificationResultPage.getResultInfo();
+      snapshotHandler.push('appCertificationDetails_pixScoreObtained', pixScoreObtained);
+      snapshotHandler.push('appCertificationDetails_pixLevelReached', pixLevelReached);
+      snapshotHandler.push('appCertificationDetails_hasBadge', `${hasBadge}`);
+      snapshotHandler.push('appCertificationDetails_badgeSrc', badgeSrc);
+
       const certificatePdfBuffer = await certificationResultPage.downloadCertificate();
 
       await snapshotHandler.comparePdfOrRecord(certificatePdfBuffer, certificateBasePath);
