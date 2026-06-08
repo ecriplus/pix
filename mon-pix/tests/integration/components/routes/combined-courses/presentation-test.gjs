@@ -2,7 +2,6 @@ import { render } from '@1024pix/ember-testing-library';
 import { click } from '@ember/test-helpers';
 import { t } from 'ember-intl/test-support';
 import CombinedCoursesPresentation from 'mon-pix/components/routes/combined-courses/presentation';
-import ENV from 'mon-pix/config/environment';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
@@ -422,7 +421,7 @@ module('Integration | Component | Combined Courses | Presentation', function (ho
       assert.ok(screen.getByRole('heading', { name: t('pages.combined-courses.completed.title') }));
       assert.notOk(screen.queryByText(t('pages.combined-courses.items.tagText')));
     });
-    test('should display survey cta', async function (assert) {
+    test('should display survey cta if available', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
       const featureToggles = this.owner.lookup('service:featureToggles');
@@ -432,6 +431,7 @@ module('Integration | Component | Combined Courses | Presentation', function (ho
         status: CombinedCourseStatuses.COMPLETED,
         code: 'COMBINIX9',
         organizationId: 123,
+        surveyUrl: 'combinix.survey.link',
       });
 
       // when
@@ -446,40 +446,11 @@ module('Integration | Component | Combined Courses | Presentation', function (ho
       assert.dom(link).hasAttribute('rel', 'noopener noreferrer');
     });
 
-    test('should display France Travail survey cta in all cases', async function (assert) {
-      // given
-      const FRANCE_TRAVAIL_ORGANIZATION_ID = 456;
-      const store = this.owner.lookup('service:store');
-      const featureToggles = this.owner.lookup('service:featureToggles');
-      sinon.stub(featureToggles, 'featureToggles').value({ isSurveyEnabledForCombinedCourses: false });
-      const combinedCourse = store.createRecord('combined-course', {
-        id: 1,
-        status: CombinedCourseStatuses.COMPLETED,
-        code: 'COMBINIX9',
-        organizationId: FRANCE_TRAVAIL_ORGANIZATION_ID,
-      });
-
-      // when
-      const screen = await render(
-        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
-      );
-
-      // then
-      const link = screen.getByRole('link', { name: t('pages.combined-courses.completed.survey-button') });
-      assert.dom(link).hasAttribute('href', 'combinix.france-travail.survey.link');
-      assert.dom(link).hasAttribute('target', '_blank');
-      assert.dom(link).hasAttribute('rel', 'noopener noreferrer');
-    });
-
-    test('should not display survey cta when organization is in the exclusion list', async function (assert) {
+    test('should not display survey cta if no link for combined course', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
       const featureToggles = this.owner.lookup('service:featureToggles');
       sinon.stub(featureToggles, 'featureToggles').value({ isSurveyEnabledForCombinedCourses: true });
-
-      const originalExcluded = ENV.APP.ORGANIZATIONS_COMBINIX_SURVEY_EXCLUSION_LIST;
-      ENV.APP.ORGANIZATIONS_COMBINIX_SURVEY_EXCLUSION_LIST = '123,456';
-
       const combinedCourse = store.createRecord('combined-course', {
         id: 1,
         status: CombinedCourseStatuses.COMPLETED,
@@ -494,24 +465,19 @@ module('Integration | Component | Combined Courses | Presentation', function (ho
 
       // then
       assert.notOk(screen.queryByRole('link', { name: t('pages.combined-courses.completed.survey-button') }));
-
-      ENV.APP.ORGANIZATIONS_COMBINIX_SURVEY_EXCLUSION_LIST = originalExcluded;
     });
 
-    test('should display survey cta when organization is not in the exclusion list', async function (assert) {
+    test('should not display survey cta if feature toggle is disabled', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');
       const featureToggles = this.owner.lookup('service:featureToggles');
-      sinon.stub(featureToggles, 'featureToggles').value({ isSurveyEnabledForCombinedCourses: true });
-
-      const originalExcluded = ENV.APP.ORGANIZATIONS_COMBINIX_SURVEY_EXCLUSION_LIST;
-      ENV.APP.ORGANIZATIONS_COMBINIX_SURVEY_EXCLUSION_LIST = '456,789';
-
+      sinon.stub(featureToggles, 'featureToggles').value({ isSurveyEnabledForCombinedCourses: false });
       const combinedCourse = store.createRecord('combined-course', {
         id: 1,
         status: CombinedCourseStatuses.COMPLETED,
         code: 'COMBINIX9',
         organizationId: 123,
+        surveyUrl: 'combinix.survey.link',
       });
 
       // when
@@ -520,10 +486,35 @@ module('Integration | Component | Combined Courses | Presentation', function (ho
       );
 
       // then
-      assert.ok(screen.queryByRole('link', { name: t('pages.combined-courses.completed.survey-button') }));
-
-      ENV.APP.ORGANIZATIONS_COMBINIX_SURVEY_EXCLUSION_LIST = originalExcluded;
+      assert.notOk(screen.queryByRole('link', { name: t('pages.combined-courses.completed.survey-button') }));
     });
+
+    test('should display France Travail survey cta in all cases', async function (assert) {
+      // given
+      const FRANCE_TRAVAIL_ORGANIZATION_ID = 456;
+      const store = this.owner.lookup('service:store');
+      const featureToggles = this.owner.lookup('service:featureToggles');
+      sinon.stub(featureToggles, 'featureToggles').value({ isSurveyEnabledForCombinedCourses: false });
+      const combinedCourse = store.createRecord('combined-course', {
+        id: 1,
+        status: CombinedCourseStatuses.COMPLETED,
+        code: 'COMBINIX9',
+        organizationId: FRANCE_TRAVAIL_ORGANIZATION_ID,
+        surveyUrl: 'combinix.france-travail.survey.link',
+      });
+
+      // when
+      const screen = await render(
+        <template><CombinedCoursesPresentation @combinedCourse={{combinedCourse}} /></template>,
+      );
+
+      // then
+      const link = screen.getByRole('link', { name: t('pages.combined-courses.completed.survey-button') });
+      assert.dom(link).hasAttribute('href', 'combinix.france-travail.survey.link');
+      assert.dom(link).hasAttribute('target', '_blank');
+      assert.dom(link).hasAttribute('rel', 'noopener noreferrer');
+    });
+
     test('should display retry text for modules if there are any in the course', async function (assert) {
       // given
       const store = this.owner.lookup('service:store');

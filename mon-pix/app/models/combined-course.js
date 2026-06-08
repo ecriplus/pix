@@ -16,6 +16,7 @@ export default class CombinedCourse extends Model {
   @attr('string') status;
   @attr('string') description;
   @attr('string') illustration;
+  @attr('string') surveyUrl;
 
   @hasMany('combined-course-item', { async: false, inverse: 'combinedCourse' }) items;
   @belongsTo('combined-course-reward', { async: false, inverse: null }) reward;
