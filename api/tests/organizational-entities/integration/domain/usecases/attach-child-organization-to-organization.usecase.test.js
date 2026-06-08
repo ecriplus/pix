@@ -38,6 +38,7 @@ describe('Integration | Organizational Entities | Domain | UseCase | attach-chil
       ]);
       expect(childrenOrganizationFactStructures).to.have.deep.members([
         {
+          certification_center_id: null,
           organization_id: firstChildOrganization.id,
           structure_id: firstChildStructure.id,
           network_id: network.id,
@@ -45,6 +46,7 @@ describe('Integration | Organizational Entities | Domain | UseCase | attach-chil
           child_structure_id: null,
         },
         {
+          certification_center_id: null,
           organization_id: secondChildOrganization.id,
           structure_id: secondChildStructure.id,
           parent_structure_id: parentStructure.id,
@@ -89,6 +91,7 @@ describe('Integration | Organizational Entities | Domain | UseCase | attach-chil
       ]);
       expect(childrenOrganizationFactStructures).to.have.deep.members([
         {
+          certification_center_id: null,
           organization_id: level1ChildOrganization.id,
           structure_id: level1ChildStructure.id,
           network_id: network.id,
@@ -96,6 +99,7 @@ describe('Integration | Organizational Entities | Domain | UseCase | attach-chil
           child_structure_id: null,
         },
         {
+          certification_center_id: null,
           organization_id: level2ChildOrganization.id,
           structure_id: level2ChildStructure.id,
           parent_structure_id: level1ChildStructure.id,

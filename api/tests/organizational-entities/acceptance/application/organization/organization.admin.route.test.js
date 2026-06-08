@@ -1269,6 +1269,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
 
           expect(childrenOrganizationFactStructures).to.have.deep.members([
             {
+              certification_center_id: null,
               organization_id: firstChildOrganization.id,
               structure_id: firstChildStructure.id,
               network_id: network.id,
@@ -1276,6 +1277,7 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
               child_structure_id: null,
             },
             {
+              certification_center_id: null,
               organization_id: secondChildOrganization.id,
               structure_id: secondChildStructure.id,
               parent_structure_id: parentStructure.id,

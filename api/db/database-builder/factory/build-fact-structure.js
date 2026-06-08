@@ -6,6 +6,7 @@ const buildFactStructure = function ({
   parentStructureId,
   childStructureId,
   organizationId,
+  certificationCenterId,
 } = {}) {
   const values = {
     structure_id: structureId,
@@ -13,6 +14,7 @@ const buildFactStructure = function ({
     parent_structure_id: parentStructureId,
     child_structure_id: childStructureId,
     organization_id: organizationId,
+    certification_center_id: certificationCenterId,
   };
   return databaseBuffer.pushInsertable({
     tableName: 'fct_structures',
