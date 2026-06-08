@@ -238,7 +238,7 @@
                 "id": "008f9d74-8d51-4d6f-81b3-610dc9c8f9c7",
                 "type": "expand",
                 "title": "💡 Indice 1 :",
-                "content": "<p>Pour sélectionner le mot, vous pouvez&nbsp;:&nbsp; </p><ul><li>cliquer au début du mot puis faire glisser la souris jusqu’à la fin du mot,</li><li>ou double cliquer sur le mot.</li></ul>"
+                "content": "<p>Pour sélectionner le mot&nbsp;:&nbsp; </p><ul><li>Cliquez au début du mot puis faites glisser la souris jusqu’à la fin du mot.</li><li>Ou double cliquez sur le mot.</li></ul>"
               }
             },
             {
@@ -338,7 +338,7 @@
                 "id": "67af2c7e-a9d1-475c-afc7-0019147a4a09",
                 "type": "expand",
                 "title": "💡 Indice 1",
-                "content": "<p>Pour sélectionner une phrase ou un paragraphe, vous pouvez&nbsp;: </p><ul><li>cliquer au début de la phrase puis faire glisser la souris jusqu’à la fin de la phrase, </li><li>ou triple cliquer sur un mot de la phrase.</li></ul>"
+                "content": "<p>Pour sélectionner une phrase ou un paragraphe&nbsp;: </p><ul><li>Cliquez au début de la phrase puis faites glisser la souris jusqu’à la fin de la phrase, </li><li>Ou triple cliquez sur un mot de la phrase.</li></ul>"
               }
             },
             {
