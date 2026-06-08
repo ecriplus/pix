@@ -1,7 +1,7 @@
 /**
  * @typedef {import('../models/CenterForAdmin.js').CenterForAdmin} CenterForAdmin
- * @typedef {import('../repositories/CertificationCenterRepository.js').CertificationCenterRepository} CertificationCenterRepository
- * @typedef {import('../../../shared/infrastructure/repositories/AdminMemberRepository.js').AdminMemberRepository} AdminMemberRepository
+ * @typedef {import('../../infrastructure/repositories/certification-center.repository.js')} CertificationCenterRepository
+ * @typedef {import('../../../shared/infrastructure/repositories/admin-member.repository.js')} AdminMemberRepository
  */
 
 import { CenterForAdminFactory } from '../models/factories/CenterForAdminFactory.js';

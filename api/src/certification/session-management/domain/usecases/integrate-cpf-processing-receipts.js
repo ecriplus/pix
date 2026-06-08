@@ -1,7 +1,7 @@
 /**
  * @typedef {import('./index.js').CpfReceiptsStorage} CpfReceiptsStorage
  *
- * @typedef {import('../../../shared/domain/usecases/index.js').CpfCertificationResultRepository} CpfCertificationResultRepository
+ * @typedef {import('../../infrastructure/repositories/cpf-certification-result-repository.js')} CpfCertificationResultRepository
  */
 import { CONCURRENCY_HEAVY_OPERATIONS } from '../../../../shared/infrastructure/constants.js';
 import { logger } from '../../../../shared/infrastructure/utils/logger.js';

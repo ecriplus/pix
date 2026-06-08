@@ -64,7 +64,7 @@ import * as sessionPublicationService from '../services/session-publication-serv
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationEvaluationRepository} CertificationEvaluationRepository
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationCandidateForSupervisingRepository} CertificationCandidateForSupervisingRepository
  * @typedef {import('../../infrastructure/repositories/index.js').CertificationCenterAccessRepository} CertificationCenterAccessRepository
- * @typedef {import('../../../../identity-access-management/infrastructure/repositories/user.respository.js').UserRepository} UserRepository
+ * @typedef {import('../../../../identity-access-management/infrastructure/repositories/user.repository.js')} UserRepository
  **/
 
 /**
