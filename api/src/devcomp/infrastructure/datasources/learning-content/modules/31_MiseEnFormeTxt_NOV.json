@@ -227,7 +227,7 @@
                 "isCompletionRequired": true,
                 "title": "Mise en forme 1",
                 "url": "https://epreuves-pr3164.review.pix.fr/pixwriter-mise-en-forme/pixwriter-mise-en-forme.html?lang=fr&mode=module-mef-txt-dec2#5a55634559434044544479074442554549715020545d",
-                "instruction": "<p>Dans l’interface ci-dessous&nbsp;: </p><ul><li>Sélectionnez le mot «&nbsp;jeudis&nbsp;».,&nbsp;</li><li>Puis mettez-le en gras.</li></ul>",
+                "instruction": "<p>Dans l’interface ci-dessous&nbsp;: </p><ul><li>Sélectionnez le mot «&nbsp;jeudis&nbsp;».</li><li>Puis mettez-le en gras.</li></ul>",
                 "solution": "pix1erdegr9",
                 "height": 550
               }
