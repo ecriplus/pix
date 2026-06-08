@@ -1,17 +1,12 @@
 import { expect, test } from '../../../fixtures/certification/index.ts';
-import {
-  checkCertificationDetailsAndExpectSuccess,
-  checkCertificationGeneralInformationAndExpectSuccess,
-  checkSessionInformationAndExpectSuccess,
-  getTestRef,
-} from '../../../helpers/certification/utils.ts';
+import { checkSessionInformationAndExpectSuccess, getTestRef } from '../../../helpers/certification/utils.ts';
 import { HomePage as AdminHomePage } from '../../../pages/pix-admin/index.ts';
 import { SessionManagementPage } from '../../../pages/pix-certif/index.ts';
 
 test(
   `${getTestRef(import.meta.url)}`,
   {
-    tag: ['@evaluation'],
+    tag: ['@evaluation', '@snapshot'],
     annotation: [
       {
         type: 'scenario',
@@ -29,6 +24,8 @@ test(
     pixAdminRoleCertifPage,
     pixAppCertifiableUserPage,
     getCertifiableUserData,
+    snapshotHandler,
+    snapshotPath,
     testRef,
   }) => {
     const certifiableUserData = await getCertifiableUserData('buffy.summers@example.net');
@@ -96,31 +93,33 @@ test(
         expect(certificationData[0]).toMatchObject({
           Prénom: certifiableUserData.firstName,
           Nom: certifiableUserData.lastName,
-          Statut: 'Terminée par le surveillant',
-          Résultats: 'Expert 1 (895 Pix)',
           'Signalements impactants non résolus': '',
           'Certification passée': 'Pix Cœur',
         });
+        snapshotHandler.push('adminCertificationListInfo_status', certificationData[0]['Statut']);
+        snapshotHandler.push('adminCertificationListInfo_results', certificationData[0]['Résultats']);
+
         const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
           certifiableUserData.firstName,
         );
-        await checkCertificationGeneralInformationAndExpectSuccess(certificationInformationPage, {
-          sessionNumber,
-          status: 'Validée',
-          result: 'Expert 1 (895 Pix)',
-        });
-        await checkCertificationDetailsAndExpectSuccess(certificationInformationPage, {
-          status: 'Validée',
-          nbAnsweredQuestionsOverTotal: '24/32',
-          nbQuestionsOK: 24,
-          nbQuestionsKO: 0,
-          nbQuestionsAband: 0,
-          nbValidatedTechnicalIssues: 0,
-          testEndedBy: 'Le surveillant',
-          abortReason: 'Problème technique',
-          result: 'Expert 1 (895 Pix)',
-        });
+        const certificationGeneralInfo = await certificationInformationPage.getGeneralInfo();
+        expect(sessionNumber).toBe(certificationGeneralInfo.sessionNumber);
+        snapshotHandler.push('adminCertificationInfo_status', certificationGeneralInfo.status ?? null);
+        snapshotHandler.push('adminCertificationInfo_results', certificationGeneralInfo.result ?? null);
+
+        const certificationDetails = await certificationInformationPage.getDetails();
+        expect(certificationDetails.nbAnsweredQuestionsOverTotal).toBe('24/32');
+        expect(certificationDetails.nbQuestionsOK).toBe(24);
+        expect(certificationDetails.nbQuestionsKO).toBe(0);
+        expect(certificationDetails.nbQuestionsAband).toBe(0);
+        expect(certificationDetails.nbValidatedTechnicalIssues).toBe(0);
+        expect(certificationDetails.testEndedBy).toBe('Le surveillant');
+        expect(certificationDetails.abortReason).toBe('Problème technique');
+        snapshotHandler.push('adminCertificationDetails_result', certificationDetails.result ?? null);
+        snapshotHandler.push('adminCertificationDetails_status', certificationDetails.status ?? null);
       });
     });
+
+    await snapshotHandler.expectOrRecord(snapshotPath);
   },
 );

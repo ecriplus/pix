@@ -85,23 +85,21 @@ test(
         expect(certificationData[0]).toMatchObject({
           Prénom: certifiableUserData.firstName,
           Nom: certifiableUserData.lastName,
-          Statut: 'Annulée',
-          Résultats: 'Pix',
           'Signalements impactants non résolus': '',
           'Certification passée': 'Pix Cœur',
         });
+        snapshotHandler.push('adminCertificationListInfo_status', certificationData[0]['Statut']);
+        snapshotHandler.push('adminCertificationListInfo_results', certificationData[0]['Résultats']);
 
         const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
           certifiableUserData.firstName,
         );
         const certificationGeneralInfo = await certificationInformationPage.getGeneralInfo();
         expect(certificationGeneralInfo.sessionNumber).toBe(sessionNumber);
-        expect(certificationGeneralInfo.status).toBe('Annulée');
-        expect(certificationGeneralInfo.result).toBe('Pix');
+        snapshotHandler.push('adminCertificationInfo_status', certificationGeneralInfo.status ?? null);
+        snapshotHandler.push('adminCertificationInfo_results', certificationGeneralInfo.result ?? null);
 
         const certificationDetails = await certificationInformationPage.getDetails();
-        expect(certificationDetails.status).toBe('Annulée');
-        expect(certificationDetails.result).toBe('Pix');
         expect(certificationDetails.nbAnsweredQuestionsOverTotal).toBe('1/32');
         expect(certificationDetails.nbQuestionsOK).toBe(1);
         expect(certificationDetails.nbQuestionsKO).toBe(0);
@@ -109,6 +107,8 @@ test(
         expect(certificationDetails.nbValidatedTechnicalIssues).toBe(0);
         expect(certificationDetails.testEndedBy).toBe('Finalisation session');
         expect(certificationDetails.abortReason).toBe('Problème technique');
+        snapshotHandler.push('adminCertificationDetails_result', certificationDetails.result ?? null);
+        snapshotHandler.push('adminCertificationDetails_status', certificationDetails.status ?? null);
       });
     });
 
@@ -121,18 +121,28 @@ test(
       await pixAppCertifiablePage.goto(process.env.PIX_APP_URL as string);
       const homePage = new HomePage(pixAppCertifiablePage);
       const certificateListPage = await homePage.goToMyCertificates();
-      const { mainStatus, extraStatus, detailsFramework, certificationCenter, examDate, result, comment, hasBadge } =
-        await certificateListPage.getCertificateData(certificationNumber);
+      const {
+        mainStatus,
+        extraStatus,
+        detailsFramework,
+        certificationCenter,
+        examDate,
+        result,
+        comment,
+        hasBadge: hasBadgeInList,
+        badgeSrc: badgeSrcInList,
+      } = await certificateListPage.getCertificateData(certificationNumber);
       expect(mainStatus).toBe('Annulée');
       expect(extraStatus).toBe(null);
       expect(detailsFramework).toBe('Certification Pix');
       expect(certificationCenter).toBe('Centre de certification : ' + certificationCenterName);
       expect(examDate).toBe('Date de passage : ' + getNowAsDDMMYYYY());
-      expect(result).toBe('- PIX');
-      expect(hasBadge).toBe(false);
       expect(comment).toBe(
         "Commentaire : Un ou plusieurs problème(s) technique(s), signalé(s) à votre surveillant pendant la session de certification, a/ont affecté la qualité du test de certification. En raison du trop grand nombre de questions auxquelles vous n'avez pas pu répondre dans de bonnes conditions, nous ne sommes malheureusement pas en mesure de calculer un score fiable et de fournir un certificat. La certification est annulée, le prescripteur de votre certification (le cas échéant), en est informé.",
       );
+      snapshotHandler.push('appCertificationListInfo_result', result);
+      snapshotHandler.push('appCertificationListInfo_hasBadge', `${hasBadgeInList}`);
+      snapshotHandler.push('appCertificationListInfo_badgeSrc', badgeSrcInList);
     });
 
     await test.step('Checking CSV result file content', async () => {

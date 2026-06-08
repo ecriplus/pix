@@ -93,28 +93,28 @@ test(
         expect(certificationData[0]).toMatchObject({
           Prénom: certifiableUserData.firstName,
           Nom: certifiableUserData.lastName,
-          Statut: 'Validée',
-          Résultats: 'Expert 1 (895 Pix)',
           'Signalements impactants non résolus': '',
           'Certification passée': 'Pix Cœur',
         });
+        snapshotHandler.push('adminCertificationListInfo_status', certificationData[0]['Statut']);
+        snapshotHandler.push('adminCertificationListInfo_results', certificationData[0]['Résultats']);
 
         const certificationInformationPage = await certificationListPage.goToCertificationInfoPage(
           certifiableUserData.firstName,
         );
         const certificationGeneralInfo = await certificationInformationPage.getGeneralInfo();
         expect(certificationGeneralInfo.sessionNumber).toBe(sessionNumber);
-        expect(certificationGeneralInfo.status).toBe('Validée');
-        expect(certificationGeneralInfo.result).toBe('Expert 1 (895 Pix)');
+        snapshotHandler.push('adminCertificationInfo_status', certificationGeneralInfo.status ?? null);
+        snapshotHandler.push('adminCertificationInfo_results', certificationGeneralInfo.result ?? null);
 
         const certificationDetails = await certificationInformationPage.getDetails();
-        expect(certificationDetails.status).toBe('Validée');
-        expect(certificationDetails.result).toBe('Expert 1 (895 Pix)');
         expect(certificationDetails.nbAnsweredQuestionsOverTotal).toBe('32/32');
         expect(certificationDetails.nbQuestionsOK).toBe(32);
         expect(certificationDetails.nbQuestionsKO).toBe(0);
         expect(certificationDetails.nbQuestionsAband).toBe(0);
         expect(certificationDetails.nbValidatedTechnicalIssues).toBe(0);
+        snapshotHandler.push('adminCertificationDetails_result', certificationDetails.result ?? null);
+        snapshotHandler.push('adminCertificationDetails_status', certificationDetails.status ?? null);
         return certificationInformationPage;
       });
 
@@ -131,8 +131,8 @@ test(
           await certificationInformationPage.unrejectCertification();
           const certificationGeneralInfo = await certificationInformationPage.getGeneralInfo();
           expect(certificationGeneralInfo.sessionNumber).toBe(sessionNumber);
-          expect(certificationGeneralInfo.status).toBe('Validée');
-          expect(certificationGeneralInfo.result).toBe('Expert 1 (895 Pix)');
+          snapshotHandler.push('adminCertificationInfo_status_unreject', certificationGeneralInfo.status ?? null);
+          snapshotHandler.push('adminCertificationInfo_results_unreject', certificationGeneralInfo.result ?? null);
         });
 
         await test.step('Reject again certification', async () => {
