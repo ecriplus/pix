@@ -5,6 +5,7 @@ import { setupMirage } from 'ember-cli-mirage/test-support';
 import { t } from 'ember-intl/test-support';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
+import sinon from 'sinon';
 
 import { authenticate } from '../../helpers/authentication';
 import setupIntl from '../../helpers/setup-intl';
@@ -67,8 +68,10 @@ module('Acceptance | Campaigns | Results | Recommendation Engine', function (hoo
     });
 
     module('when campaign has trainings', function (hooks) {
+      let training;
+
       hooks.beforeEach(function () {
-        server.create('training', {
+        training = server.create('training', {
           campaignParticipation,
           title: 'Formation test',
           link: 'https://example.net/',
@@ -115,6 +118,37 @@ module('Acceptance | Campaigns | Results | Recommendation Engine', function (hoo
         const reopenedModal = await screen.findByRole('dialog');
         assert.dom(within(reopenedModal).getByRole('button', { name: t('common.yes') })).doesNotHaveClass('selected');
         assert.dom(within(reopenedModal).getByRole('button', { name: t('common.no') })).hasClass('selected');
+      });
+
+      test('should track page and card information', async function (assert) {
+        // given
+        const trackEventStub = sinon.stub();
+        const trackPageStub = sinon.stub();
+        class MetricsStubService extends Service {
+          trackPage = trackPageStub;
+          trackEvent = trackEventStub;
+        }
+        this.owner.register('service:pix-metrics', MetricsStubService);
+
+        // when
+        const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
+        const metricsService = this.owner.lookup('service:metrics');
+
+        // then
+        sinon.assert.calledOnceWith(trackPageStub);
+        assert.strictEqual(metricsService.context.code, campaign.code);
+
+        // when
+        await click(
+          screen.getByRole('button', {
+            name: t('pages.skill-review.recommended-engine.training-card.aria-label'),
+          }),
+        );
+
+        // then
+        sinon.assert.calledWithExactly(trackEventStub, 'Moteur de reco - Clic sur la carte du contenu formatif', {
+          trainingId: training.id,
+        });
       });
     });
 

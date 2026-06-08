@@ -1,3 +1,4 @@
+import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { t } from 'ember-intl';
@@ -10,6 +11,13 @@ import Trainings from '../../../campaigns/assessment/results-recommendation-engi
 
 export default class EvaluationResultsRecommendationEngine extends Component {
   @service media;
+  @service pixMetrics;
+
+  @action onCardClick({ trainingId }) {
+    this.pixMetrics.trackEvent('Moteur de reco - Clic sur la carte du contenu formatif', {
+      trainingId,
+    });
+  }
 
   get hasTrainings() {
     return Boolean(this.trainings.length);
@@ -48,7 +56,7 @@ export default class EvaluationResultsRecommendationEngine extends Component {
       />
 
       {{#if this.hasTrainings}}
-        <Trainings @trainings={{this.trainings}} />
+        <Trainings @trainings={{this.trainings}} @onCardClick={{this.onCardClick}} />
       {{/if}}
 
       <ResultsDetails
