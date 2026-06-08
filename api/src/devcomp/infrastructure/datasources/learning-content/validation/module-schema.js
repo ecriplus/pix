@@ -9,6 +9,7 @@ import { expandElementSchema } from './element/expand-schema.js';
 import { flashcardsElementSchema } from './element/flashcards-schema.js';
 import { imageElementSchema } from './element/image-schema.js';
 import { qabElementSchema } from './element/qab-schema.js';
+import { qcmDeclarativeElementSchema } from './element/qcm-declarative-schema.js';
 import { qcmElementSchema } from './element/qcm-schema.js';
 import { qcuDeclarativeElementSchema } from './element/qcu-declarative-schema.js';
 import { qcuDiscoveryElementSchema } from './element/qcu-discovery-schema.js';
@@ -34,6 +35,7 @@ const ALLOWED_ELEMENTS_SCHEMA = [
   { is: 'qcu-declarative', then: qcuDeclarativeElementSchema },
   { is: 'qcu-discovery', then: qcuDiscoveryElementSchema },
   { is: 'qcm', then: qcmElementSchema },
+  { is: 'qcm-declarative', then: qcmDeclarativeElementSchema },
   { is: 'qrocm', then: qrocmElementSchema },
   { is: 'separator', then: separatorElementSchema },
   { is: 'short-video', then: shortVideoElementSchema },
