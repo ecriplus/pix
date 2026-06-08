@@ -71,15 +71,21 @@ const _baseQuery = (knexConn) => {
       'combined_courses.updatedAt',
       'combined_courses.deletedAt',
       'combined_courses.deletedBy',
-      'questId',
+      'combined_courses.questId',
       'quests.createdAt as questCreatedAt',
       'quests.updatedAt as questUpdatedAt',
       'quests.rewardType as questRewardType',
       'quests.eligibilityRequirements as questEligibilityRequirements',
       'quests.successRequirements as questSuccessRequirements',
       'quests.rewardId as questRewardId',
+      'combined_course_blueprints.surveyUrl as surveyUrl',
     )
     .join('quests', 'quests.id', 'combined_courses.questId')
+    .leftJoin(
+      'combined_course_blueprints',
+      'combined_course_blueprints.id',
+      'combined_courses.combinedCourseBlueprintId',
+    )
     .whereNull('combined_courses.deletedAt');
 };
 
@@ -168,6 +174,7 @@ const _toDomain = ({
   questEligibilityRequirements,
   questSuccessRequirements,
   questRewardId,
+  surveyUrl,
 }) => {
   return new CombinedCourse(
     {
@@ -179,6 +186,7 @@ const _toDomain = ({
       illustration,
       questId,
       blueprintId: combinedCourseBlueprintId,
+      surveyUrl,
       deletedAt,
       deletedBy,
     },
