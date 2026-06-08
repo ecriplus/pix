@@ -384,7 +384,7 @@
                 "id": "ef9edbbb-dabe-4837-aa48-543ad4e7de09",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Les modifications de taille et police d'écriture permettent de&nbsp;: </p><ul>    <li>Rendre un texte <strong>plus facile à lire</strong>.</li><li>Faire ressortir un <strong>titre </strong>ou une <strong>partie importante </strong>du texte.</li></ul>"
+                "content": "<p>Les modifications de taille et de police d'écriture permettent de&nbsp;: </p><ul>    <li>Rendre un texte <strong>plus facile à lire</strong>.</li><li>Faire ressortir un <strong>titre </strong>ou une <strong>partie importante </strong>du texte.</li></ul>"
               }
             }
           ]
