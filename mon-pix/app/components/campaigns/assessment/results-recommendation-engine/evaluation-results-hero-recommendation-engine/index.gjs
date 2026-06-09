@@ -12,7 +12,6 @@ import AcquiredBadgesCompact from './acquired-badges-compact';
 
 export default class EvaluationResultsHeroRecommendationEngine extends Component {
   @service currentUser;
-  @service pixMetrics;
   @service media;
 
   @tracked stagedMessageContentShowMoreEnabled = false;
@@ -57,25 +56,6 @@ export default class EvaluationResultsHeroRecommendationEngine extends Component
 
   @action toggleStagedMessage() {
     this.stagedMessageContentShowMoreEnabled = !this.stagedMessageContentShowMoreEnabled;
-  }
-
-  @action handleBackToHomepageDisplay() {
-    this.pixMetrics.trackEvent(
-      "Affichage du bouton 'Revenir à la page d'accueil dans le cadre du moteur de recommandation'",
-      {
-        disabled: true,
-        category: 'Fin de parcours',
-        action: 'Sortie de parcours',
-      },
-    );
-  }
-
-  @action handleBackToHomepageClick() {
-    this.pixMetrics.trackEvent("Clic sur le bouton 'Revenir à la page d'accueil'", {
-      disabled: true,
-      category: 'Fin de parcours',
-      action: 'Sortie de parcours',
-    });
   }
 
   <template>
@@ -125,13 +105,7 @@ export default class EvaluationResultsHeroRecommendationEngine extends Component
         {{/if}}
 
         <div class="evaluation-results-hero-recommendation-engine__actions">
-          {{this.handleBackToHomepageDisplay}}
-          <PixButtonLink
-            @route="authentication.login"
-            @size="small"
-            @variant="secondary-white"
-            onclick={{this.handleBackToHomepageClick}}
-          >
+          <PixButtonLink @route="authentication.login" @size="small" @variant="secondary-white">
             {{t "pages.skill-review.actions.back-to-pix"}}
           </PixButtonLink>
         </div>
