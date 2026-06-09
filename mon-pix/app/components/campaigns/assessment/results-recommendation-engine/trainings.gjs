@@ -16,6 +16,7 @@ import TrainingCard from './training/card';
           @training={{training}}
           @onCardClick={{@onCardClick}}
           @onModalButtonClick={{@onModalButtonClick}}
+          @onModalAccordionClick={{@onModalAccordionClick}}
         /></li>
     {{/each}}
   </ul>

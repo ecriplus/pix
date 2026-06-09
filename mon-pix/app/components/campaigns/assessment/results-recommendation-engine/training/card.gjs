@@ -70,6 +70,7 @@ export default class Card extends Component {
       @isOpen={{this.modalIsOpen}}
       @onClose={{this.closeModal}}
       @onModalButtonClick={{@onModalButtonClick}}
+      @onModalAccordionClick={{@onModalAccordionClick}}
     />
   </template>
 }
