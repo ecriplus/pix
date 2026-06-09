@@ -54,6 +54,25 @@ export async function checkParticipationBelongsToCombinedCourse(request, h) {
   }
 }
 
+export async function checkCombinedCourseBlueprintBelongsToOrganization(request, h) {
+  const { organizationId, combinedCourseBlueprintId } = request.params;
+  try {
+    const isCombinedCourseBlueprintInOrganization = await usecases.isCombinedCourseBlueprintInOrganization({
+      combinedCourseBlueprintId,
+      organizationId,
+    });
+    if (isCombinedCourseBlueprintInOrganization) {
+      return h.response(true);
+    }
+    return _replyForbiddenError(h);
+  } catch (error) {
+    if (error instanceof NotFoundError) {
+      return _replyForbiddenError(h);
+    }
+    throw error;
+  }
+}
+
 function _replyForbiddenError(h) {
   const errorHttpStatusCode = 403;
   const jsonApiError = new JSONApi.Error({
