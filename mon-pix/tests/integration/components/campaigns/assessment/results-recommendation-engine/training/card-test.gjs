@@ -326,6 +326,40 @@ module(
         sinon.assert.calledOnceWithExactly(onCardClickStub, { trainingId: training.id });
         assert.ok(true);
       });
+
+      module('when user clicks on button to start the training', function () {
+        test('should call onModalButtonClick function', async function (assert) {
+          // given
+          const store = this.owner.lookup('service:store');
+          const training = store.createRecord('training', _buildTraining({}));
+          const onModalButtonClickStub = sinon.stub();
+          const onCardClickStub = sinon.stub();
+
+          // when
+          const screen = await render(
+            <template>
+              <TrainingCard
+                @training={{training}}
+                @onCardClick={{onCardClickStub}}
+                @onModalButtonClick={{onModalButtonClickStub}}
+              />
+            </template>,
+          );
+          await click(
+            screen.getByRole('button', { name: t('pages.skill-review.recommended-engine.training-card.aria-label') }),
+          );
+          await screen.findByRole('dialog');
+          await click(
+            screen.getByRole('link', {
+              name: `${t('pages.skill-review.recommended-engine.modal.actions.discover-program')} ${t('navigation.external-link-title')}`,
+            }),
+          );
+
+          // then
+          sinon.assert.calledOnceWithExactly(onModalButtonClickStub, { trainingId: training.id });
+          assert.ok(true);
+        });
+      });
     });
 
     function _buildTraining({
