@@ -12,7 +12,7 @@ import TrainingCard from './training/card';
 
   <ul class="results-recommendation-engine-training__list">
     {{#each @trainings as |training|}}
-      <li><TrainingCard @training={{training}} /></li>
+      <li><TrainingCard @training={{training}} @onCardClick={{@onCardClick}} /></li>
     {{/each}}
   </ul>
 </template>
