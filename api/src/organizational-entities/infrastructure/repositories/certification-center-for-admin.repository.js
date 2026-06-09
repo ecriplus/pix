@@ -1,5 +1,6 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { NotFoundError } from '../../../shared/domain/errors.js';
+import { AttachedCertificationCenter } from '../../domain/models/AttachedCertificationCenter.js';
 import { CenterForAdmin } from '../../domain/models/CenterForAdmin.js';
 
 const save = async function (certificationCenter) {
@@ -10,7 +11,7 @@ const save = async function (certificationCenter) {
     externalId: certificationCenter.externalId,
     createdBy: certificationCenter.createdBy,
   });
-  return _toDomain(certificationCenterCreated);
+  return _toDomainCenterForAdmin(certificationCenterCreated);
 };
 
 const update = async function (certificationCenter) {
@@ -45,9 +46,35 @@ const archive = async function ({ certificationCenterId, archivedBy, archiveDate
     .update({ archivedBy, archivedAt: archiveDate });
 };
 
-export { archive, save, update };
+/**
+ * @type {function}
+ * @param {number} organizationId
+ * @returns {Promise<AttachedCertificationCenter[]>}
+ */
+const findAttachedByOrganizationId = async (organizationId) => {
+  const knexConn = DomainTransaction.getConnection();
+  const certificationCenters = await knexConn('fct_structures')
+    .select({
+      id: 'certification-centers.id',
+      name: 'certification-centers.name',
+      externalId: 'certification-centers.externalId',
+    })
+    .rightJoin('certification-centers', 'certification-centers.id', 'fct_structures.certification_center_id')
+    .where({ organization_id: organizationId });
 
-function _toDomain(certificationCenterDTO) {
+  return certificationCenters.map(
+    (certificationCenter) =>
+      new AttachedCertificationCenter({
+        id: certificationCenter.id,
+        name: certificationCenter.name,
+        externalId: certificationCenter.externalId,
+      }),
+  );
+};
+
+export { archive, findAttachedByOrganizationId, save, update };
+
+function _toDomainCenterForAdmin(certificationCenterDTO) {
   return new CenterForAdmin({
     center: {
       id: certificationCenterDTO.id,

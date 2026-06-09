@@ -103,12 +103,13 @@ const buildOrganizationInNetwork = function ({
  *
  * @param {object} options
  * @param {object} [options.organizationData] - Any parameter accepted by buildOrganization
+ * @param {number} [options.certificationCenterId] - optional certification center id to link to the organization
  * @returns {{ organization: object, structure: object }}
  */
-const buildOrganizationWithStructure = function ({ organizationData } = {}) {
+const buildOrganizationWithStructure = function ({ organizationData, certificationCenterId } = {}) {
   const organization = buildOrganization(organizationData);
   const structure = buildStructure();
-  buildFactStructure({ structureId: structure.id, organizationId: organization.id });
+  buildFactStructure({ structureId: structure.id, organizationId: organization.id, certificationCenterId });
   return { organization, structure };
 };
 
