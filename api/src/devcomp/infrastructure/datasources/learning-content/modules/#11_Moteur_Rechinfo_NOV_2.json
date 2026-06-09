@@ -41,7 +41,7 @@
               "element": {
                 "id": "e041f233-dc18-46bc-91f4-ddc1d3f5573c",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_1.png",
+                "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/moteur_rechinfo_nov-2_accroche.jpg",
                 "alt": "",
                 "alternativeText": "",
                 "legend": "Image provisoire",
@@ -74,7 +74,7 @@
                   },
                   {
                     "id": "2",
-                    "content": "<p>Choisir au hasard, touts les résultats se valent.</p>",
+                    "content": "<p>Choisir au hasard, tous les résultats se valent.</p>",
                     "feedback": {
                       "diagnosis": "<p>Eh non ! Face à une liste de résultats de recherche, il faut regarder avant de cliquer. Tous les résultats ne se valent pas toujours.</p>"
                     }
@@ -140,7 +140,7 @@
               "element": {
                 "id": "3469a8ff-a411-4db4-be95-e7be5802c782",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/chat-gpt-image-28-avr-2026-14_58_02.png",
+                "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/moteur_rechinfo_nov-2_d1.jpg",
                 "alt": "",
                 "alternativeText": "",
                 "legend": "Image provisoire",
@@ -350,7 +350,7 @@
               "element": {
                 "id": "ae0a0076-1b6f-48f7-95d7-4c356362abc4",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_2_triche.png",
+                "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/moteur_rechinfo_nov-2_d3.jpg",
                 "alt": "",
                 "alternativeText": "",
                 "legend": "Image provisoire",
@@ -480,7 +480,7 @@
               "element": {
                 "id": "7a31243d-0b62-4fd4-b498-8179024fc39d",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_3.png",
+                "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/moteur_rechinfo_nov-2_a1.jpg",
                 "alt": "",
                 "alternativeText": "",
                 "legend": "Image provisoire",
@@ -552,11 +552,11 @@
                   "type": "image",
                   "slides": [
                     {
-                      "title": "Une page du site DW.com",
+                      "title": "Une page du site Astronomix.com",
                       "description": "",
                       "displayWidth": 500,
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_4.png",
+                        "src": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/moteur_rechinfo_nov-2_a2_1.jpg",
                         "alt": ""
                       },
                       "license": {
@@ -570,7 +570,7 @@
                       "description": "",
                       "displayWidth": 500,
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_6.png",
+                        "src": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/moteur_rechinfo_nov-2_a2_2.jpg",
                         "alt": ""
                       },
                       "license": {
@@ -584,7 +584,7 @@
                       "description": "",
                       "displayWidth": 500,
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_7.png",
+                        "src": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/moteur_rechinfo_nov-2_a2_3.jpg",
                         "alt": ""
                       },
                       "license": {
@@ -613,7 +613,7 @@
                 "proposals": [
                   {
                     "id": "0",
-                    "content": "<p>Le site DW.com</p>",
+                    "content": "<p>Le site Astronomix.com</p>",
                     "feedback": {
                       "state": "<p>Mauvaise réponse.</p>",
                       "diagnosis": "<p>Ce contenu est ancien. Les moteurs de recherche privilégient souvent des informations plus récentes.</p>"
@@ -657,7 +657,7 @@
                     "id": "d048204e-82f0-4f43-b2bd-7b5a85a040d3",
                     "text": "",
                     "image": {
-                      "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_qab1.png",
+                      "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/moteur_rechinfo_nov-2_a3_1.jpg",
                       "altText": ""
                     },
                     "proposalA": "Résultat sponsorisé",
@@ -668,7 +668,7 @@
                     "id": "025f653d-0a10-452d-a622-99f8317cf4f3",
                     "text": "",
                     "image": {
-                      "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_qab2.png",
+                      "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/moteur_rechinfo_nov-2_a3_2.jpg",
                       "altText": ""
                     },
                     "proposalA": "Résultat sponsorisé",
@@ -679,7 +679,7 @@
                     "id": "d57a9450-4775-4a46-9bbc-b80c5cf87f55",
                     "text": "",
                     "image": {
-                      "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_qab3_pixbanque.png",
+                      "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/moteur_rechinfo_nov-2_a3_3.jpg",
                       "altText": ""
                     },
                     "proposalA": "Résultat sponsorisé",
@@ -690,7 +690,7 @@
                     "id": "244e07e6-d625-4d65-bf6f-55741fc8e892",
                     "text": "",
                     "image": {
-                      "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_qab4.png",
+                      "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/moteur_rechinfo_nov-2_a3_4.jpg",
                       "altText": ""
                     },
                     "proposalA": "Résultat sponsorisé",
@@ -701,7 +701,7 @@
                     "id": "bdfc6dfe-09e8-4c64-aefd-3250dc11d3a0",
                     "text": "",
                     "image": {
-                      "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/motrech2_qab5.png",
+                      "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/moteur_rechinfo_nov-2_a3_5.jpg",
                       "altText": ""
                     },
                     "proposalA": "Résultat sponsorisé",
@@ -741,7 +741,7 @@
               "element": {
                 "id": "afd50f1a-062d-4c83-a95b-e7dd152c9b25",
                 "type": "image",
-                "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/image-rechnov2.png",
+                "url": "https://assets.pix.org/draft/modules/11_Moteur_Rechinfo_NOV_2/moteur_rechinfo_nov-2_transfert.jpg",
                 "alt": "",
                 "alternativeText": "",
                 "legend": "",
