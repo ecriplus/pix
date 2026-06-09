@@ -33,7 +33,7 @@
                 "id": "1f2da8d0-e896-40a2-bb8d-8df954ff20b5",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Kevin fait une recherche en ligne.</p>\n<p>Il veut savoir quand il est possible de visiter le musée du Louvre de nuit.&nbsp;🌙<br>Il tape les mots clés suivants dans son moteur de recherche&nbsp;: «&nbsp;<strong>louvre visite de nuit date</strong>&nbsp;».</p>\n<p>Une liste de résultats s’affiche.</p>"
+                "content": "<p>Kevin fait une recherche en ligne.</p><p>Il veut savoir quand il est possible de visiter le musée du Louvre de nuit.&nbsp;🌙<br>Il tape les mots clés suivants dans son moteur de recherche&nbsp;: «&nbsp;<strong>louvre visite de nuit date</strong>&nbsp;».</p><p>Une liste de résultats s’affiche.</p>"
               }
             },
             {
@@ -159,35 +159,35 @@
                     "id": "1",
                     "content": "<p>Uniquement le nom du site web</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas seulement&nbsp;! Avant de cliquer sur un résultat, vous pouvez déjà lire plusieurs informations&nbsp;:</p>\n<ul>\n    <li>Le <strong>nom du site web</strong> et son <strong>icône</strong> peuvent vous aider à savoir d’où vient la page web.</li>\n    <li>Le <strong>titre du résultat</strong>.</li>\n    <li>L’<strong>extrait</strong> ou la <strong>description de la page web</strong>&nbsp;vous aident à comprendre de quoi parle la page web. </li>\n</ul>\n<p>Tous ces éléments peuvent vous aider à choisir une page web.</p>"
+                      "diagnosis": "<p>Pas seulement&nbsp;! Avant de cliquer sur un résultat, vous pouvez déjà lire plusieurs informations&nbsp;:</p><ul>    <li>Le <strong>nom du site web</strong> et son <strong>icône</strong> peuvent vous aider à savoir d’où vient la page web.</li>    <li>Le <strong>titre du résultat</strong>.</li>    <li>L’<strong>extrait</strong> ou la <strong>description de la page web</strong>&nbsp;vous aident à comprendre de quoi parle la page web. </li></ul><p>Tous ces éléments peuvent vous aider à choisir une page web.</p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "<p>Uniquement le titre du résultat</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas seulement&nbsp;! Avant de cliquer sur un résultat, vous pouvez déjà lire plusieurs informations&nbsp;:</p>\n<ul>\n    <li>Le <strong>nom du site web</strong> et son <strong>icône</strong> peuvent vous aider à savoir d’où vient la page web.</li>\n    <li>Le <strong>titre du résultat</strong>.</li>\n    <li>L’<strong>extrait</strong> ou la <strong>description de la page web</strong>&nbsp;vous aident à comprendre de quoi parle la page web. </li>\n</ul>\n<p>Tous ces éléments peuvent vous aider à choisir une page web.</p>"
+                      "diagnosis": "<p>Pas seulement&nbsp;! Avant de cliquer sur un résultat, vous pouvez déjà lire plusieurs informations&nbsp;:</p><ul>    <li>Le <strong>nom du site web</strong> et son <strong>icône</strong> peuvent vous aider à savoir d’où vient la page web.</li>    <li>Le <strong>titre du résultat</strong>.</li>    <li>L’<strong>extrait</strong> ou la <strong>description de la page web</strong>&nbsp;vous aident à comprendre de quoi parle la page web. </li></ul><p>Tous ces éléments peuvent vous aider à choisir une page web.</p>"
                     }
                   },
                   {
                     "id": "3",
                     "content": "<p>Uniquement l’extrait de la page web</p>",
                     "feedback": {
-                      "diagnosis": "<p>Pas seulement&nbsp;! Avant de cliquer sur un résultat, vous pouvez déjà lire plusieurs informations&nbsp;:</p>\n<ul>\n    <li>Le <strong>nom du site web</strong> et son <strong>icône</strong> peuvent vous aider à savoir d’où vient la page web.</li>\n    <li>Le <strong>titre du résultat</strong>.</li>\n    <li>L’<strong>extrait</strong> ou la <strong>description de la page web</strong>&nbsp;vous aident à comprendre de quoi parle la page web. </li>\n</ul>\n<p>Tous ces éléments peuvent vous aider à choisir une page web.</p>"
+                      "diagnosis": "<p>Pas seulement&nbsp;! Avant de cliquer sur un résultat, vous pouvez déjà lire plusieurs informations&nbsp;:</p><ul>    <li>Le <strong>nom du site web</strong> et son <strong>icône</strong> peuvent vous aider à savoir d’où vient la page web.</li>    <li>Le <strong>titre du résultat</strong>.</li>    <li>L’<strong>extrait</strong> ou la <strong>description de la page web</strong>&nbsp;vous aident à comprendre de quoi parle la page web. </li></ul><p>Tous ces éléments peuvent vous aider à choisir une page web.</p>"
                     }
                   },
                   {
                     "id": "4",
                     "content": "<p>Tous ces éléments.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Effectivement. Avant de cliquer sur un résultat, vous pouvez déjà lire plusieurs informations&nbsp;:</p>\n<ul>\n    <li>Le <strong>nom du site web</strong> et son <strong>icône</strong> peuvent vous aider à savoir d’où vient la page web.</li>\n    <li>Le <strong>titre du résultat</strong>.</li>\n    <li>L’<strong>extrait</strong> ou la <strong>description de la page web</strong>&nbsp;vous aident à comprendre de quoi parle la page web. </li>\n</ul>\n<p>Tous ces éléments peuvent vous aider à choisir une page web.</p>"
+                      "diagnosis": "<p>Effectivement. Avant de cliquer sur un résultat, vous pouvez déjà lire plusieurs informations&nbsp;:</p><ul>    <li>Le <strong>nom du site web</strong> et son <strong>icône</strong> peuvent vous aider à savoir d’où vient la page web.</li>    <li>Le <strong>titre du résultat</strong>.</li>    <li>L’<strong>extrait</strong> ou la <strong>description de la page web</strong>&nbsp;vous aident à comprendre de quoi parle la page web. </li></ul><p>Tous ces éléments peuvent vous aider à choisir une page web.</p>"
                     }
                   },
                   {
                     "id": "5",
                     "content": "<p>Je ne sais pas.</p>",
                     "feedback": {
-                      "diagnosis": "<p>Avant de cliquer sur un résultat, vous pouvez déjà lire plusieurs informations&nbsp;:</p>\n<ul>\n    <li>Le <strong>nom du site web</strong> et son <strong>icône</strong> peuvent vous aider à savoir d’où vient la page web.</li>\n    <li>Le <strong>titre du résultat</strong>.</li>\n    <li>L’<strong>extrait</strong> ou la <strong>description de la page web</strong>&nbsp;vous aident à comprendre de quoi parle la page web. </li>\n</ul>\n<p>Tous ces éléments peuvent vous aider à choisir une page web.</p>"
+                      "diagnosis": "<p>Avant de cliquer sur un résultat, vous pouvez déjà lire plusieurs informations&nbsp;:</p><ul>    <li>Le <strong>nom du site web</strong> et son <strong>icône</strong> peuvent vous aider à savoir d’où vient la page web.</li>    <li>Le <strong>titre du résultat</strong>.</li>    <li>L’<strong>extrait</strong> ou la <strong>description de la page web</strong>&nbsp;vous aident à comprendre de quoi parle la page web. </li></ul><p>Tous ces éléments peuvent vous aider à choisir une page web.</p>"
                     }
                   }
                 ],
@@ -301,7 +301,7 @@
                 "id": "69a9c46e-904c-4d5c-99f8-9fa227d2894d",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Dans les <strong>résultats d’une recherche</strong>, l’<strong>ordre </strong>d'affichage n’est pas fait au hasard. Les résultats sont classés selon plusieurs <strong>critères</strong>.</p>\n<p>Un résultat peut apparaître plus haut dans la liste si la page web à laquelle il renvoie est jugée&nbsp;:</p>\n<ul>\n    <li><strong>pertinente</strong>&nbsp;: la page correspond à votre recherche et les <strong>mots clés</strong> de votre recherche sont présents.</li>\n    <li><strong>populaire</strong>&nbsp;: d’autres sites contiennent des <strong>liens cliquables</strong> qui mènent <strong>vers cette page web</strong>. Plus il y a de liens qui mènent vers une page web, plus le moteur de recherche  considère qu’elle est <strong>importante</strong> ou <strong>reconnue</strong>.</li>\n    <li><strong>récente</strong>&nbsp;: elle a été <strong>publiée ou mise à jour récemment</strong>.</li>\n</ul>"
+                "content": "<p>Dans les <strong>résultats d’une recherche</strong>, l’<strong>ordre </strong>d’affichage n’est pas fait au hasard. Les résultats sont classés selon plusieurs <strong>critères</strong>.</p><p>Un résultat peut apparaître plus haut dans la liste si la page web à laquelle il renvoie est jugée&nbsp;:</p><ul>    <li><strong>pertinente</strong>&nbsp;: la page correspond à votre recherche et les <strong>mots clés</strong> de votre recherche sont présents.</li>    <li><strong>populaire</strong>&nbsp;: d’autres sites contiennent des <strong>liens cliquables</strong> qui mènent <strong>vers cette page web</strong>. Plus il y a de liens qui mènent vers une page web, plus le moteur de recherche  considère qu’elle est <strong>importante</strong> ou <strong>reconnue</strong>.</li>    <li><strong>récente</strong>&nbsp;: elle a été <strong>publiée ou mise à jour récemment</strong>.</li></ul>"
               }
             },
             {
@@ -403,7 +403,7 @@
                 "id": "46c04a44-e878-457f-8c1f-d9067d61e766",
                 "type": "text",
                 "tag": " ",
-                "content": "<p>Parfois, des <strong>pages web</strong> apparaissent <strong>en haut de la liste de résultats</strong> parce que des entreprises <strong>paient le moteur de recherche</strong>. Elles <strong>achètent des mots clés</strong> pour apparaître en tête de liste lorsque ces mots sont recherchés.&nbsp;🪙</p>\n<p>On les appelle des <strong>annonces publicitaires</strong> ou des <strong>résultats sponsorisés</strong>.</p>\n<p>C’est la <strong>principale source de revenus</strong> des moteurs de recherche.</p>\n<br>\n<p>Lors d’une recherche, faites attention avant de cliquer sur les premiers résultats qui apparaissent&nbsp;: correspondent-ils bien à votre recherche ?</p>"
+                "content": "<p>Parfois, des <strong>pages web</strong> apparaissent <strong>en haut de la liste de résultats</strong> parce que des entreprises <strong>paient le moteur de recherche</strong>. Elles <strong>achètent des mots clés</strong> pour apparaître en tête de liste lorsque ces mots sont recherchés.&nbsp;🪙</p><p>On les appelle des <strong>annonces publicitaires</strong> ou des <strong>résultats sponsorisés</strong>.</p><p>C’est la <strong>principale source de revenus</strong> des moteurs de recherche.</p><br><p>Lors d’une recherche, faites attention avant de cliquer sur les premiers résultats qui apparaissent&nbsp;: correspondent-ils bien à votre recherche ?</p>"
               }
             },
             {
