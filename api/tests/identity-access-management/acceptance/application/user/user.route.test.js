@@ -7,6 +7,8 @@ import * as authenticationMethodRepository from '../../../../../src/identity-acc
 import { emailValidationDemandRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/email-validation-demand.repository.js';
 import * as userRepository from '../../../../../src/identity-access-management/infrastructure/repositories/user.repository.js';
 import { userEmailRepository } from '../../../../../src/identity-access-management/infrastructure/repositories/user-email.repository.js';
+import { LegalDocumentService } from '../../../../../src/legal-documents/domain/models/LegalDocumentService.js';
+import { LegalDocumentType } from '../../../../../src/legal-documents/domain/models/LegalDocumentType.js';
 import { constants } from '../../../../../src/shared/domain/constants.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { featureToggles } from '../../../../../src/shared/infrastructure/feature-toggles/index.js';
@@ -19,6 +21,8 @@ import {
 } from '../../../../tooling/test-utils/http-server.js';
 
 const { pick } = lodash;
+const { PIX_APP } = LegalDocumentService.VALUES;
+const { TOS } = LegalDocumentType.VALUES;
 
 describe('Acceptance | Identity Access Management | Application | Route | User', function () {
   let server;
@@ -492,14 +496,16 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
     });
 
     describe('Success case', function () {
-      it('returns the user with pixTermsOfServiceAccepted', async function () {
+      it('replies with 204 status code', async function () {
+        // given
+        databaseBuilder.factory.buildLegalDocumentVersion({ service: PIX_APP, type: TOS });
+        databaseBuilder.commit();
+
         // when
         const response = await server.inject(options);
 
         // then
-        expect(response.statusCode).to.equal(200);
-        expect(response.result.data.attributes['must-validate-terms-of-service']).to.be.false;
-        expect(response.result.data.attributes['last-terms-of-service-validated-at']).to.exist;
+        expect(response.statusCode).to.equal(204);
       });
     });
   });

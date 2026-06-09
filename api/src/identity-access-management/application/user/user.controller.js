@@ -23,27 +23,21 @@ const acceptPixCertifTermsOfService = async function (request, h) {
 /**
  * @param request
  * @param h
- * @param {{
- *   userSerializer: UserSerializer
- * }} dependencies
  * @return {Promise<*>}
  */
-const acceptPixLastTermsOfService = async function (request, h, dependencies = { userSerializer }) {
+const acceptPixAppTermsOfService = async function (request, h) {
   const authenticatedUserId = request.auth.credentials.userId;
 
-  const updatedUser = await usecases.acceptPixLastTermsOfService({
+  await usecases.acceptPixAppTermsOfService({
     userId: authenticatedUserId,
   });
 
-  return dependencies.userSerializer.serialize(updatedUser);
+  return h.response().code(204);
 };
 
 /**
  * @param request
  * @param h
- * @param {{
- *   userSerializer: UserSerializer
- * }} dependencies
  * @return {Promise<*>}
  */
 const acceptPixOrgaTermsOfService = async function (request, h) {
@@ -289,7 +283,7 @@ const upgradeToRealUser = async function (request, h, dependencies = { userSeria
 
 export const userController = {
   acceptPixCertifTermsOfService,
-  acceptPixLastTermsOfService,
+  acceptPixAppTermsOfService,
   acceptPixOrgaTermsOfService,
   changeUserLocale,
   getCertificationPointOfContact,

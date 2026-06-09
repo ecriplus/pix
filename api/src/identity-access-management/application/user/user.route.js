@@ -258,7 +258,7 @@ export const userRoutes = [
           id: identifiersType.userId,
         }),
       },
-      handler: (request, h) => userController.acceptPixLastTermsOfService(request, h),
+      handler: (request, h) => userController.acceptPixAppTermsOfService(request, h),
       notes: [
         '- **Cette route est restreinte aux utilisateurs authentifiés**\n' +
           "- Sauvegarde le fait que l'utilisateur a accepté les dernières Conditions Générales d'Utilisation de Pix App\n" +
