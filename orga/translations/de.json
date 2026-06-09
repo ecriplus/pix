@@ -196,6 +196,7 @@
       "cancel": "Abbrechen",
       "close": "Schließen",
       "confirm": "Bestätigen",
+      "exit": "Beenden",
       "global": "Aktionen",
       "link-to-participant": "Alle Aktivitäten des Teilnehmers anzeigen",
       "save": "Registrieren"
@@ -1051,6 +1052,10 @@
           "placeholder": "Nach Titel suchen"
         },
         "nb-result": "{count, plural, =0 {Kein Kurs} =1 {{count} Kurs} other {{count} Kurse}}"
+      },
+      "modal": {
+        "associated-badges": "Zugehörige Abzeichen",
+        "open-modal": "Details zum Kurs anzeigen"
       },
       "tab-filters": {
         "all": "Alle",

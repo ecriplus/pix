@@ -10,5 +10,6 @@ import List from 'pix-orga/components/catalogue/list';
     @category={{@controller.category}}
     @areas={{@controller.areas}}
     @competences={{@controller.competences}}
+    @currentCourse={{@model.currentCourse}}
   />
 </template>
