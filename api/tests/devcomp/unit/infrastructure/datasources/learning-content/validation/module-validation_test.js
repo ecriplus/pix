@@ -8,6 +8,7 @@ import { embedElementSchema } from '../../../../../../../src/devcomp/infrastruct
 import { flashcardsElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/flashcards-schema.js';
 import { imageElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/image-schema.js';
 import { qabElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/qab-schema.js';
+import { qcmDeclarativeElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/qcm-declarative-schema.js';
 import { qcmElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/qcm-schema.js';
 import { qcuDiscoveryElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/qcu-discovery-schema.js';
 import { qcuElementSchema } from '../../../../../../../src/devcomp/infrastructure/datasources/learning-content/validation/element/qcu-schema.js';
@@ -313,6 +314,31 @@ describe('Unit | Infrastructure | Datasources | Learning Content | Module Dataso
         };
 
         await qcmElementSchema.validateAsync(sample, {
+          abortEarly: false,
+        });
+      } catch (joiError) {
+        const formattedError = joiErrorParser.format(joiError);
+        expect(joiError).to.equal(undefined, formattedError);
+      }
+    });
+
+    it('should validate sample qcm declarative structure', async function () {
+      try {
+        const sample = {
+          id: randomUUID(),
+          type: 'qcm-declarative',
+          instruction: '<p>Une question à choix multiples de type déclaratif ?</p>',
+          proposals: Array.from(Array(3)).map((_, i) => ({
+            id: `${i + 1}`,
+            content: `Proposition ${i + 1}`,
+          })),
+          feedback: {
+            diagnosis: '<p>Un exemple de diagnostic...</p>',
+          },
+          hasShortProposals: false,
+        };
+
+        await qcmDeclarativeElementSchema.validateAsync(sample, {
           abortEarly: false,
         });
       } catch (joiError) {

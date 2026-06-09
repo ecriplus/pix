@@ -21,8 +21,38 @@
         {
           "id": "9de10c46-df0e-41f5-a709-81637f0d5cc3",
           "type": "challenge",
-          "title": "Element text avec tags",
+          "title": "Premier grain du bac-a-sable",
           "components": [
+            {
+              "type": "element",
+              "element": {
+                "id": "d95aff0f-e120-4bd6-9566-7d72a11f4f40",
+                "type": "qcm-declarative",
+                "instruction": "<p>Quelles sont tes séries favorites ?</p>",
+                "hasShortProposals": false,
+                "proposals": [
+                  {
+                    "id": "1",
+                    "content": "The X-Files"
+                  },
+                  {
+                    "id": "2",
+                    "content": "Friends"
+                  },
+                  {
+                    "id": "3",
+                    "content": "The Wire"
+                  },
+                  {
+                    "id": "4",
+                    "content": "Downton Abbey"
+                  }
+                ],
+                "feedback": {
+                  "diagnosis": "<p>Ça va, tu as bon goût.</p>"
+                }
+              }
+            },
             {
               "type": "element",
               "element": {

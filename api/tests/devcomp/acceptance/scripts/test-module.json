@@ -11,7 +11,10 @@
     "duration": 5,
     "level": "Débutant",
     "tabletSupport": "inconvenient",
-    "objectives": ["Naviguer dans Modulix", "Découvrir les leçons et les activités"]
+    "objectives": [
+      "Naviguer dans Modulix",
+      "Découvrir les leçons et les activités"
+    ]
   },
   "sections": [
     {
@@ -280,6 +283,33 @@
                           "feedback": { "diagnosis": "Mauvaise réponse !" }
                         }
                       ]
+                    },
+                    {
+                      "id": "6328a322-259c-4641-b708-1b603b8d5952",
+                      "type": "qcm-declarative",
+                      "instruction": "<p>Quelles sont tes séries favorites ?</p>",
+                      "hasShortProposals": false,
+                      "proposals": [
+                        {
+                          "id": "1",
+                          "content": "The X-Files"
+                        },
+                        {
+                          "id": "2",
+                          "content": "Friends"
+                        },
+                        {
+                          "id": "3",
+                          "content": "The Wire"
+                        },
+                        {
+                          "id": "4",
+                          "content": "Downton Abbey"
+                        }
+                      ],
+                      "feedback": {
+                        "diagnosis": "<p>Ça va, tu as bon goût.</p>"
+                      }
                     }
                   ]
                 }
