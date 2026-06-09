@@ -1044,28 +1044,35 @@
               "element": {
                 "id": "efb0ac7c-5c9c-4a52-882f-15dfccec89ae",
                 "type": "qcu-declarative",
-                "instruction": "Ce matin, vous avez fait tomber votre smartphone. L’écran est cassé. Que faites-vous ?",
+                "instruction": "Avec ce que vous avez appris dans ce module, avez-vous envie de changer quelque chose dans vos habitudes pour prolonger la durée de vie de votre smartphone&nbsp;?",
                 "hasShortProposals": false,
                 "proposals": [
                   {
                     "id": "1",
-                    "content": "Je contacte un réparateur de smartphone pour savoir s’il est possible de remplacer l’écran.",
+                    "content": "Je vais acheter une coque et un écran de protection pour mon smartphone.",
                     "feedback": {
-                      "diagnosis": "C’est la meilleure solution ! Réparer un appareil permet de prolonger sa durée de vie, et donc de ne pas provoquer la fabrication d’un nouvel appareil."
+                      "diagnosis": "C'est une très bonne idée&nbsp;! Les coques et les écrans de protection sont de bons moyens de protéger un smartphone pour prolonger sa durée de vie."
                     }
                   },
                   {
                     "id": "2",
-                    "content": "J’achète un nouveau smartphone d’occasion.",
+                    "content": "La prochaine fois que mon smartphone aura un problème, j'essaierai de le réparer plutôt qu'en acheter un nouveau.",
                     "feedback": {
-                      "diagnosis": "Effectivement, c’est une bonne solution si on ne peut pas le réparer."
+                      "diagnosis": "Très bien&nbsp;! Réparer un smartphone défecteux est le meilleur moyen de prolonger sa durée de vie."
                     }
                   },
                   {
                     "id": "3",
-                    "content": "À l’avenir, je protégerai tout le temps mon smartphone avec une coque et un écran de protection.",
+                    "content": "Si jamais je dois changer de smartphone, je choisirais un smartphone d'occasion plutôt qu'un neuf.",
                     "feedback": {
-                      "diagnosis": "Bien vu ! Protéger son appareil permet d’allonger sa durée de vie, et donc de ne pas provoquer la fabrication d’un nouveau."
+                      "diagnosis": "Bien vu&nbsp;! Si vous êtes obligés de changer de smartphone, en acheter un d'occasion est la solution qui a le moins d'impact négatif sur l'environnement."
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "content": "Je fais dej́à tout ça.",
+                    "feedback": {
+                      "diagnosis": "Bravo&nbsp;! Tous ces gestes permettent de limiter l'impact négatif des smartphones sur l'environnement."
                     }
                   }
                 ]
