@@ -86,6 +86,7 @@ const buildCombinixQuest = (databaseBuilder, combinedCourseData) => {
     description: combinedCourseData.blueprint.description,
     illustration: combinedCourseData.blueprint.illustration,
     questId: blueprintQuestId,
+    surveyUrl: combinedCourseData.blueprint.surveyUrl,
   });
 
   let campaignId;

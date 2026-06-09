@@ -20,7 +20,14 @@ describe('Quest | Integration | Repository | combined-course', function () {
       // given
       const code = 'SOMETHING';
       const { id: organizationId } = databaseBuilder.factory.buildOrganization();
-      const combinedCourse = databaseBuilder.factory.buildCombinedCourse({ code, organizationId });
+      const combinedCourseBlueprint = databaseBuilder.factory.buildCombinedCourseBlueprint({
+        surveyUrl: 'http://link.to/survey',
+      });
+      const combinedCourse = databaseBuilder.factory.buildCombinedCourse({
+        code,
+        organizationId,
+        combinedCourseBlueprintId: combinedCourseBlueprint.id,
+      });
       await databaseBuilder.commit();
 
       // when
@@ -28,7 +35,13 @@ describe('Quest | Integration | Repository | combined-course', function () {
 
       // then
       expect(combinedCourseResult).to.be.an.instanceof(CombinedCourse);
-      expect(combinedCourseResult).to.deep.equal(new CombinedCourse(combinedCourse));
+      expect(combinedCourseResult).to.deep.equal(
+        new CombinedCourse({
+          ...combinedCourse,
+          blueprintId: combinedCourseBlueprint.id,
+          surveyUrl: combinedCourseBlueprint.surveyUrl,
+        }),
+      );
     });
 
     it('should throw NotFoundError if combined course does not exist', async function () {
@@ -627,6 +640,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
           illustration: combinedCourseWithModule.illustration,
           participations: [],
           questId: combinedCourseWithModule.questId,
+          surveyUrl: null,
           blueprintId: null,
           deletedAt: null,
           deletedBy: null,
@@ -640,6 +654,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
           illustration: otherCombinedCourseWithModule.illustration,
           participations: [],
           questId: otherCombinedCourseWithModule.questId,
+          surveyUrl: null,
           blueprintId: null,
           deletedAt: null,
           deletedBy: null,
@@ -668,6 +683,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
           illustration: combinedCourseWithModule.illustration,
           participations: [],
           questId: combinedCourseWithModule.questId,
+          surveyUrl: null,
           blueprintId: null,
           deletedAt: null,
           deletedBy: null,
@@ -681,6 +697,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
           illustration: combinedCourseWithModuleAndOtherOrga.illustration,
           participations: [],
           questId: combinedCourseWithModuleAndOtherOrga.questId,
+          surveyUrl: null,
           blueprintId: null,
           deletedAt: null,
           deletedBy: null,

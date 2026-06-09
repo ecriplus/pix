@@ -137,27 +137,18 @@ export default class CombinedCoursePresentation extends Component {
     });
   }
 
-  get isSurveyEnabled() {
-    const surveyEnabledForCombinedCourses = this.featureToggles.featureToggles?.isSurveyEnabledForCombinedCourses;
+  get surveyLink() {
+    return this.args.combinedCourse.organizationId === ENV.APP.FRANCE_TRAVAIL_ORGANIZATION_ID
+      ? ENV.APP.COMBINIX_FRANCE_TRAVAIL_SURVEY_LINK
+      : this.args.combinedCourse.surveyUrl;
+  }
 
+  get isSurveyEnabled() {
     if (this.args.combinedCourse.organizationId === ENV.APP.FRANCE_TRAVAIL_ORGANIZATION_ID) {
       return true;
     }
 
-    if (!ENV.APP.ORGANIZATIONS_COMBINIX_SURVEY_EXCLUSION_LIST) return surveyEnabledForCombinedCourses;
-
-    const organizationsToExclude = ENV.APP.ORGANIZATIONS_COMBINIX_SURVEY_EXCLUSION_LIST.split(',');
-
-    return (
-      surveyEnabledForCombinedCourses &&
-      !organizationsToExclude.includes(this.args.combinedCourse.organizationId.toString())
-    );
-  }
-
-  get surveyLink() {
-    return this.args.combinedCourse.organizationId === ENV.APP.FRANCE_TRAVAIL_ORGANIZATION_ID
-      ? ENV.APP.COMBINIX_FRANCE_TRAVAIL_SURVEY_LINK
-      : ENV.APP.COMBINIX_SURVEY_LINK;
+    return this.featureToggles.featureToggles?.isSurveyEnabledForCombinedCourses && this.args.combinedCourse.surveyUrl;
   }
 
   get shouldDisplayRetryModulesText() {

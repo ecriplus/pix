@@ -10,16 +10,18 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
     const organizationId = 1;
     const name = 'name';
     const code = 'code';
+    const surveyUrl = 'http://survey-link.com';
 
     // when
-    const combinedCourseDetails = new CombinedCourse({ id, organizationId, name, code, questId: 2 });
+    const combinedCourse = new CombinedCourse({ id, organizationId, name, code, questId: 2, surveyUrl });
 
     // then
-    expect(combinedCourseDetails.code).to.deep.equal(code);
-    expect(combinedCourseDetails.name).to.deep.equal(name);
-    expect(combinedCourseDetails.organizationId).to.deep.equal(organizationId);
-    expect(combinedCourseDetails.id).to.deep.equal(id);
-    expect(combinedCourseDetails.questId).to.deep.equal(2);
+    expect(combinedCourse.code).to.deep.equal(code);
+    expect(combinedCourse.name).to.deep.equal(name);
+    expect(combinedCourse.organizationId).to.deep.equal(organizationId);
+    expect(combinedCourse.id).to.deep.equal(id);
+    expect(combinedCourse.questId).to.deep.equal(2);
+    expect(combinedCourse.surveyUrl).to.deep.equal(surveyUrl);
   });
 
   it('should throw when combined course model does not pass validation', function () {

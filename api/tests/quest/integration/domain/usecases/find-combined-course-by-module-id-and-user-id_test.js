@@ -85,6 +85,7 @@ describe('Integration | Quest | Domain | UseCases | find-combined-course-by-modu
         blueprintId: null,
         deletedAt: null,
         deletedBy: null,
+        surveyUrl: null,
       },
       {
         id: combinedCourse2.id,
@@ -98,6 +99,7 @@ describe('Integration | Quest | Domain | UseCases | find-combined-course-by-modu
         blueprintId: null,
         deletedAt: null,
         deletedBy: null,
+        surveyUrl: null,
       },
     ]);
   });

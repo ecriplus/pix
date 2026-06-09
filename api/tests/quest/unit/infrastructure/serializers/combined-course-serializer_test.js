@@ -18,6 +18,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
       combinedCourseItems: [{ campaignId: 1 }, { moduleId: 7 }],
       rewardId: 456,
       rewardType: REWARD_TYPES.ATTESTATION,
+      surveyUrl: 'http://link.to/survey',
     });
     await combinedCourseDetails.setEncryptedUrl();
     const obtainedAt = new Date();
@@ -93,6 +94,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
           status: CombinedCourseStatuses.NOT_STARTED,
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
           illustration: '/illustrations/image.svg',
+          'survey-url': 'http://link.to/survey',
         },
         relationships: {
           items: {
