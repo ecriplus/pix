@@ -1034,7 +1034,7 @@
                           "id": "0",
                           "content": "Répondre",
                           "feedback": {
-                            "state": "<p>Bonne réponse&nbsp;🎉!&nbsp;🎉</p>",
+                            "state": "<p>Bonne réponse&nbsp;!&nbsp;🎉</p>",
                             "diagnosis": "<p>Même si le mail est envoyé à plusieurs destinataires, la demande est individuelle et la réponse n’intéresse pas les autres personnes. Il suffit donc de <strong>répondre directement à l’expéditeur</strong>.</p>"
                           }
                         },
@@ -1113,7 +1113,7 @@
                           "id": "2",
                           "content": "Ne pas répondre",
                           "feedback": {
-                            "state": "<p>Bonne réponse&nbsp;🎉!&nbsp;🎉</p>",
+                            "state": "<p>Bonne réponse&nbsp;!&nbsp;🎉</p>",
                             "diagnosis": "<p>Il s’agit d’un mail d’information qui <strong>n’attend pas de réponse</strong>. L’adresse de l’expéditeur indique que celui-ci n’accepte pas les réponses car elle contient «&nbsp;ne-pas-répondre&nbsp;».</p>"
                           }
                         }
@@ -1168,7 +1168,7 @@
                           "id": "1",
                           "content": "Répondre à tous",
                           "feedback": {
-                            "state": "<p>Bonne réponse&nbsp;🎉!&nbsp;🎉</p>",
+                            "state": "<p>Bonne réponse&nbsp;!&nbsp;🎉</p>",
                             "diagnosis": "<p>La réponse de Soumaya concerne tous les invités. Utiliser «&nbsp;Répondre à tous&nbsp;» permet à chacun d’avoir l’information.</p>"
                           }
                         },
