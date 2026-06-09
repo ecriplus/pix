@@ -17,8 +17,7 @@ export default class CertificationCandidateForSupervising extends Model {
   @attr('string') assessmentStatus;
   @attr('date') startDateTime;
   @attr('date') theoricalEndDateTime;
-  @attr('string') enrolledComplementaryCertificationLabel;
-  @attr('string') enrolledDoubleCertificationLabel;
+  @attr('string') subscription;
   @attr('string') userId;
   @attr('boolean') isStillEligibleToDoubleCertification;
   @attr() challengeLiveAlert;
@@ -46,6 +45,10 @@ export default class CertificationCandidateForSupervising extends Model {
 
   get currentLiveAlert() {
     return this.companionLiveAlert ?? this.challengeLiveAlert;
+  }
+
+  get isEnrolledToDoubleCertification() {
+    return this.subscription === 'CLEA';
   }
 
   updateAuthorizedToStart = memberAction({

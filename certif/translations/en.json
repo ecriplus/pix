@@ -522,6 +522,15 @@
           "success": "Success ! {firstName} {lastName} can resume his/her Pix certification exam."
         },
         "start-date-time": "Starting time : ",
+        "subscriptions": {
+          "CLEA": "CLéA Numérique",
+          "CORE": "Pix certification",
+          "DROIT": "Pix+ Law",
+          "EDU_1ER_DEGRE": "Pix+ Édu 1st degree",
+          "EDU_2ND_DEGRE": "Pix+ Édu 2nd degree",
+          "EDU_CPE": "Pix+ Édu CPE",
+          "PRO_SANTE": "Pix+ Health Professionals"
+        },
         "test-end-modal": {
           "description": "Warning, this action triggers the end of their Pix certification exam and is irreversible.",
           "end-assessment": "End the exam",

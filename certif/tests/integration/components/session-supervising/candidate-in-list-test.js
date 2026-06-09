@@ -17,30 +17,46 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
     store = this.owner.lookup('service:store');
   });
 
-  test('renders the enrolled complementary certification name of the candidate if he passes one', async function (assert) {
+  test('renders the enrolled non-core certification name of the candidate if he passes one', async function (assert) {
     this.candidate = store.createRecord('certification-candidate-for-supervising', {
       id: '123',
-      enrolledComplementaryCertificationLabel: 'Super Certification Complémentaire',
+      subscription: 'DROIT',
     });
 
     // when
     const screen = await renderScreen(hbs`<SessionSupervising::CandidateInList @candidate={{this.candidate}} />`);
 
     // then
-    assert.dom(screen.getByText('Inscription à Super Certification Complémentaire')).exists();
+    assert
+      .dom(
+        screen.getByText(
+          t('pages.session-supervising.candidate-in-list.complementary-certification-enrolment', {
+            complementaryCertification: t('pages.session-supervising.candidate-in-list.subscriptions.DROIT'),
+          }),
+        ),
+      )
+      .exists();
   });
 
   test('renders the double certification name of the candidate if he passes one', async function (assert) {
     this.candidate = store.createRecord('certification-candidate-for-supervising', {
       id: '123',
-      enrolledDoubleCertificationLabel: 'Super Certification Complémentaire',
+      subscription: 'CLEA',
     });
 
     // when
     const screen = await renderScreen(hbs`<SessionSupervising::CandidateInList @candidate={{this.candidate}} />`);
 
     // then
-    assert.dom(screen.getByText('Inscription à Super Certification Complémentaire')).exists();
+    assert
+      .dom(
+        screen.getByText(
+          t('pages.session-supervising.candidate-in-list.complementary-certification-enrolment', {
+            complementaryCertification: t('pages.session-supervising.candidate-in-list.subscriptions.CLEA'),
+          }),
+        ),
+      )
+      .exists();
   });
 
   test('it renders the candidates information with a confirmation button', async function (assert) {
@@ -53,7 +69,6 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
       extraTimePercentage: 0.08,
       authorizedToStart: false,
       assessmentStatus: null,
-      complementaryCertification: null,
     });
 
     // when
@@ -218,7 +233,7 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
         // given
         this.candidate = store.createRecord('certification-candidate-for-supervising', {
           id: '123',
-          enrolledComplementaryCertificationLabel: 'Super Certification Complémentaire',
+          subscription: 'DROIT',
           userId: 678,
           isStillEligibleToDoubleCertification: false,
         });
@@ -242,7 +257,7 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
         // given
         this.candidate = store.createRecord('certification-candidate-for-supervising', {
           id: '123',
-          enrolledDoubleCertificationLabel: 'Super Certification Complémentaire',
+          subscription: 'CLEA',
           userId: 678,
           isStillEligibleToDoubleCertification: false,
         });
@@ -266,7 +281,7 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
         // given
         this.candidate = store.createRecord('certification-candidate-for-supervising', {
           id: '123',
-          enrolledDoubleCertificationLabel: 'Super Certification Complémentaire',
+          subscription: 'CLEA',
           userId: 678,
           isStillEligibleToDoubleCertification: true,
         });
@@ -291,7 +306,7 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
       // given
       this.candidate = store.createRecord('certification-candidate-for-supervising', {
         id: '123',
-        enrolledCertificationLabel: 'Super Certification Complémentaire',
+        subscription: 'DROIT',
         isStillEligibleToDoubleCertification: false,
       });
 
@@ -719,7 +734,7 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
           lastName: 'Dupont',
           startDateTime: startTime,
           theoricalEndDateTime: new Date('2022-10-19T16:15:00Z'),
-          enrolledComplementaryCertificationLabel: 'Pix+ Droit',
+          subscription: 'DROIT',
           assessmentStatus: 'started',
         });
 
@@ -743,7 +758,7 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
           lastName: 'Martin',
           startDateTime: startTime,
           theoricalEndDateTime: new Date('2022-10-19T11:45:00Z'),
-          enrolledComplementaryCertificationLabel: 'Pix+ Pro Santé',
+          subscription: 'PRO_SANTE',
           assessmentStatus: 'started',
         });
 
@@ -767,7 +782,7 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
           lastName: 'Durand',
           startDateTime: startTime,
           theoricalEndDateTime: new Date('2022-10-19T10:45:00Z'),
-          enrolledComplementaryCertificationLabel: 'Pix+ Édu 1er Degré',
+          subscription: 'EDU_1ER_DEGRE',
           assessmentStatus: 'started',
         });
 
@@ -789,7 +804,7 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
           lastName: 'Bernard',
           startDateTime: startTime,
           theoricalEndDateTime: new Date('2022-10-19T16:00:00Z'),
-          enrolledComplementaryCertificationLabel: 'Pix+ Édu 2nd Degré',
+          subscription: 'EDU_2ND_DEGRE',
           assessmentStatus: 'started',
         });
 
@@ -811,7 +826,7 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
           lastName: 'Moreau',
           startDateTime: startTime,
           theoricalEndDateTime: new Date('2022-10-19T18:15:00Z'),
-          enrolledComplementaryCertificationLabel: 'Pix+ Édu CPE',
+          subscription: 'EDU_CPE',
           assessmentStatus: 'started',
         });
 
@@ -858,7 +873,7 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
           lastName: 'Petit',
           startDateTime: new Date('2022-10-19T13:00:00Z'),
           theoricalEndDateTime: backendEndTime,
-          enrolledComplementaryCertificationLabel: 'CléA',
+          subscription: 'CLEA',
           assessmentStatus: 'started',
         });
 
@@ -882,7 +897,7 @@ module('Integration | Component | SessionSupervising::CandidateInList', function
           lastName: 'Leroy',
           startDateTime: new Date('2022-10-19T11:00:00Z'),
           theoricalEndDateTime: backendEndTime,
-          enrolledComplementaryCertificationLabel: 'Certification Inconnue',
+          subscription: 'UNKNOWN',
           assessmentStatus: 'started',
         });
 
