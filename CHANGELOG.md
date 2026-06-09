@@ -1,5 +1,33 @@
 # Pix Changelog
 
+# [5.427.0](https://github.com/1024pix/pix/compare/v5.426.0...v5.427.0) (2026-06-09)
+
+### :rocket: Amélioration
+
+- [#16465](https://github.com/1024pix/pix/pull/16465) Affiche le lien de questionnaire en fin de parcours selon l'url défini pour le schéma de parcours (PIX-22937) 
+- [#16442](https://github.com/1024pix/pix/pull/16442) Ajouter un prehandler permettant de vérifiant l'appartenance d'un blueprint à une organisation (PIX-23017) 
+- [#16448](https://github.com/1024pix/pix/pull/16448) retours eval modulix miseenformetxt nov 
+- [#16462](https://github.com/1024pix/pix/pull/16462) Tracker le clic sur la card de CF sur la page de résultats (PIX-22947) 
+- [#16421](https://github.com/1024pix/pix/pull/16421) Uniformiser le design de la sélection de sujets dans Pix Admin 
+- [#16459](https://github.com/1024pix/pix/pull/16459) Update IAGenFonction_Ava.json - ajout picto 
+
+### :building_construction: Tech
+
+- [#16464](https://github.com/1024pix/pix/pull/16464) Ajouter des seeds pour lier un centre de certification à une organisation (PIX-22627) 
+- [#16446](https://github.com/1024pix/pix/pull/16446) Ajouter le certificationCenterId dans fct_structures (PIX-22683) 
+- [#16445](https://github.com/1024pix/pix/pull/16445) Ajouter un index sur userId dans la table 'certification-center-memberships' (PIX-23044) 
+- [#16461](https://github.com/1024pix/pix/pull/16461) Prendre des snapshots sur toutes les assertions dont la valeur dépend de la release choisie pour les tests E2E de la recette-certif 
+- [#16460](https://github.com/1024pix/pix/pull/16460) Suppression de code non utilisé 
+
+### :arrow_up: Montée de version
+
+- [#16458](https://github.com/1024pix/pix/pull/16458) Update dependency pdfjs-dist to v6 (api) 
+- [#16453](https://github.com/1024pix/pix/pull/16453) Update pix-ui to ^60.14.0 (admin) 
+- [#16454](https://github.com/1024pix/pix/pull/16454) Update pix-ui to ^60.14.0 (certif) 
+- [#16455](https://github.com/1024pix/pix/pull/16455) Update pix-ui to ^60.14.0 (junior) 
+- [#16456](https://github.com/1024pix/pix/pull/16456) Update pix-ui to ^60.14.0 (mon-pix) 
+- [#16457](https://github.com/1024pix/pix/pull/16457) Update pix-ui to v60.14.0 (orga)
+
 # [5.426.0](https://github.com/1024pix/pix/compare/v5.425.0...v5.426.0) (2026-06-08)
 
 ### :rocket: Amélioration
