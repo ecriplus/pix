@@ -69,6 +69,7 @@ export default class Card extends Component {
       @formattedTime={{@training.formattedTime}}
       @isOpen={{this.modalIsOpen}}
       @onClose={{this.closeModal}}
+      @onModalButtonClick={{@onModalButtonClick}}
     />
   </template>
 }

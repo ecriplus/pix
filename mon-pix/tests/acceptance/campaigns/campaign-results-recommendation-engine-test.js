@@ -144,11 +144,28 @@ module('Acceptance | Campaigns | Results | Recommendation Engine', function (hoo
             name: t('pages.skill-review.recommended-engine.training-card.aria-label'),
           }),
         );
+        await screen.findByRole('dialog');
 
         // then
         sinon.assert.calledWithExactly(trackEventStub, 'Moteur de reco - Clic sur la carte du contenu formatif', {
           trainingId: training.id,
         });
+
+        // when
+        await click(
+          screen.getByRole('link', {
+            name: `${t('pages.skill-review.recommended-engine.modal.actions.discover-program')} ${t('navigation.external-link-title')}`,
+          }),
+        );
+
+        // then
+        sinon.assert.calledWithExactly(
+          trackEventStub,
+          'Moteur de reco - Clic sur le bouton "Découvrir le programme/module"',
+          {
+            trainingId: training.id,
+          },
+        );
       });
     });
 

@@ -206,11 +206,12 @@
   display: flex;
   gap: var(--pix-spacing-2x);
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
 
   @include breakpoints.device-is('mobile') {
     flex-direction: column;
     justify-content: center;
-    width: 100%
   }
 
   &__feedback {
@@ -235,8 +236,6 @@
   &__action-buttons {
     display: flex;
     gap: var(--pix-spacing-2x);
-    align-items: center;
-    justify-content: flex-end;
 
     @include breakpoints.device-is('mobile') {
       flex-direction: column;

@@ -5,6 +5,7 @@ import PixIcon from '@1024pix/pix-ui/components/pix-icon';
 import PixIconButton from '@1024pix/pix-ui/components/pix-icon-button';
 import PixModal from '@1024pix/pix-ui/components/pix-modal';
 import { fn } from '@ember/helper';
+import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
@@ -42,6 +43,11 @@ export default class CardModal extends Component {
       trainingId: this.args.training.id,
       isRelevant: feedbackResponse,
     });
+  }
+
+  @action
+  onModalButtonClick() {
+    this.args.onModalButtonClick({ trainingId: this.args.training.id });
   }
 
   <template>
@@ -142,6 +148,7 @@ export default class CardModal extends Component {
             </li>
             <li>
               <PixButtonLink
+                {{on "click" this.onModalButtonClick}}
                 @href={{@training.link}}
                 target="_blank"
                 rel="noreferrer"

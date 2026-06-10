@@ -19,6 +19,12 @@ export default class EvaluationResultsRecommendationEngine extends Component {
     });
   }
 
+  @action onModalButtonClick({ trainingId }) {
+    this.pixMetrics.trackEvent('Moteur de reco - Clic sur le bouton "Découvrir le programme/module"', {
+      trainingId,
+    });
+  }
+
   get hasTrainings() {
     return Boolean(this.trainings.length);
   }
@@ -56,7 +62,11 @@ export default class EvaluationResultsRecommendationEngine extends Component {
       />
 
       {{#if this.hasTrainings}}
-        <Trainings @trainings={{this.trainings}} @onCardClick={{this.onCardClick}} />
+        <Trainings
+          @trainings={{this.trainings}}
+          @onCardClick={{this.onCardClick}}
+          @onModalButtonClick={{this.onModalButtonClick}}
+        />
       {{/if}}
 
       <ResultsDetails
