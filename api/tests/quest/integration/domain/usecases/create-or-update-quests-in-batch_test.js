@@ -1,6 +1,6 @@
 import sinon from 'sinon';
 
-import { Quest } from '../../../../../src/quest/domain/models/quest/Quest.js';
+import { Quest } from '../../../../../src/quest/domain/models/quests/Quest.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { repositories } from '../../../../../src/quest/infrastructure/repositories/index.js';
 import { expect } from '../../../../test-helper.js';

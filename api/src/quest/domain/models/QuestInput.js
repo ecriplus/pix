@@ -3,7 +3,7 @@ import Joi from 'joi';
 import { EntityValidationError } from '../../../shared/domain/errors.js';
 import { COMBINED_COURSE_ITEM_TYPES } from '../constants.js';
 import { CombinedCourseBlueprint } from './CombinedCourseBlueprint.js';
-import { Quest, REQUIREMENT_TYPES } from './quest/Quest.js';
+import { Quest, REQUIREMENT_TYPES } from './quests/Quest.js';
 
 const itemsSchema = Joi.array()
   .items(

@@ -1,4 +1,4 @@
-import { Success } from '../../domain/models/quest/Success.js';
+import { Success } from '../../domain/models/quests/Success.js';
 
 export const find = async ({
   userId,

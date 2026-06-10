@@ -4,12 +4,12 @@ import {
 } from '../../../../prescription/shared/domain/constants.js';
 import { config } from '../../../../shared/config.js';
 import { cryptoService as injectedCryptoService } from '../../../../shared/domain/services/crypto-service.js';
-import { CombinedCourse } from '../combined-course/CombinedCourse.js';
-import { CombinedCourseParticipationDetails } from '../combined-course-participation/CombinedCourseParticipationDetails.js';
+import { CombinedCourse } from '../combined-courses/CombinedCourse.js';
 import { DataForQuest } from '../quest/DataForQuest.js';
-import { Eligibility } from '../quest/Eligibility.js';
-import { TYPES } from '../quest/Requirement.js';
-import { COMBINED_COURSE_ITEM_TYPES, CombinedCourseItem } from './CombinedCourseItem.js';
+import { Eligibility } from '.../quests/DataForQuest.js
+import { TYPES } from '../que../quests/Eligibility.js
+import { COMBINED_COURS../quests/Requirement.jsourseItem } from './CombinedCourseItem.js';
+import { CombinedCourseParticipationDetails } from './CombinedCourseParticipationDetails.js';
 import { CombinedCourseReward } from './CombinedCourseReward.js';
 
 export class CombinedCourseDetails extends CombinedCourse {

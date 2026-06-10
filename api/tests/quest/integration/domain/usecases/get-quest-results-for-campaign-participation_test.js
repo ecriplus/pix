@@ -2,7 +2,7 @@ import {
   CRITERION_COMPARISONS,
   REQUIREMENT_COMPARISONS,
   REQUIREMENT_TYPES,
-} from '../../../../../src/quest/domain/models/quest/Quest.js';
+} from '../../../../../src/quest/domain/models/quests/Quest.js';
 import { QuestResult } from '../../../../../src/quest/domain/models/QuestResult.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
 import { expect } from '../../../../test-helper.js';

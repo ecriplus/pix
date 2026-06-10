@@ -1,4 +1,4 @@
-import { COMPARISONS, CriterionProperty } from '../../../../../src/quest/domain/models/quest/CriterionProperty.js';
+import { COMPARISONS, CriterionProperty } from '../../../../../src/quest/domain/models/quests/CriterionProperty.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Domain | Models | CriterionProperty', function () {

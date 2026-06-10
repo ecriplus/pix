@@ -1,11 +1,11 @@
 import { Campaign } from '../../../../src/quest/domain/models/Campaign.js';
-import { CombinedCourse } from '../../../../src/quest/domain/models/combined-course/CombinedCourse.js';
-import { CombinedCourseDetails } from '../../../../src/quest/domain/models/combined-course-participation/CombinedCourseDetails.js';
+import { CombinedCourseDetails } from '../../../../src/quest/domain/models/combined-course-participations/CombinedCourseDetails.js';
+import { CombinedCourse } from '../../../../src/quest/domain/models/combined-courses/CombinedCourse.js';
 import { CombinedCourseBlueprint } from '../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { Module } from '../../../../src/quest/domain/models/Module.js';
-import { DataForQuest } from '../../../../src/quest/domain/models/quest/DataForQuest.js';
-import { Eligibility } from '../../../../src/quest/domain/models/quest/Eligibility.js';
-import { Quest } from '../../../../src/quest/domain/models/quest/Quest.js';
+import { DataForQuest } from '../../../../src/quest/domain/models/quests/DataForQuest.js';
+import { Eligibility } from '../../../../src/quest/domain/models/quests/Eligibility.js';
+import { Quest } from '../../../../src/quest/domain/models/quests/Quest.js';
 
 function buildCombinedCourse({ name, code, organizationId, questId, baseSurveyUrl } = {}) {
   return new CombinedCourse({

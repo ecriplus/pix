@@ -1,6 +1,6 @@
 import { CombinedCourseParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
-import { CombinedCourse } from '../../../../../../src/quest/domain/models/combined-course/CombinedCourse.js';
-import { CombinedCourseParticipation } from '../../../../../../src/quest/domain/models/combined-course-participation/CombinedCourseParticipation.js';
+import { CombinedCourseParticipation } from '../../../../../../src/quest/domain/models/combined-course-participations/CombinedCourseParticipation.js';
+import { CombinedCourse } from '../../../../../../src/quest/domain/models/combined-courses/CombinedCourse.js';
 import { expect } from '../../../../../test-helper.js';
 
 describe('Quest | Unit | Domain | Models | CombinedCourse', function () {

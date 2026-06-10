@@ -1,12 +1,12 @@
 import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { CombinedCourseBlueprintForCreation } from '../../../../../src/quest/domain/models/CombinedCourseBlueprintForCreation.js';
+import { QuestInput } from '../../../../../src/quest/domain/models/QuestInput.js';
 import {
   CRITERION_COMPARISONS,
   REQUIREMENT_COMPARISONS,
   REQUIREMENT_TYPES,
-} from '../../../../../src/quest/domain/models/quest/Quest.js';
-import { QuestInput } from '../../../../../src/quest/domain/models/QuestInput.js';
+} from '../../../../../src/quest/domain/models/quests/Quest.js';
 import * as combinedCourseBluePrintRepository from '../../../../../src/quest/infrastructure/repositories/combined-course-blueprint-repository.js';
 import { expect } from '../../../../test-helper.js';
 import { databaseBuilder } from '../../../../tooling/databases.js';
