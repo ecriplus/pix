@@ -25,11 +25,11 @@ export class CombinedCourseDetails extends CombinedCourse {
   reward = null;
 
   constructor(
-    { id, code, organizationId, name, description, illustration, questId, surveyUrl },
+    { id, code, organizationId, name, description, illustration, questId, baseSurveyUrl },
     quest,
     cryptoService = injectedCryptoService,
   ) {
-    super({ id, code, organizationId, name, description, illustration, questId, surveyUrl }, quest);
+    super({ id, code, organizationId, name, description, illustration, questId, baseSurveyUrl }, quest);
     this.cryptoService = cryptoService;
   }
 
@@ -293,5 +293,9 @@ export class CombinedCourseDetails extends CombinedCourse {
 
   isSuccessful() {
     return this.quest.isSuccessful(this.dataForQuest);
+  }
+
+  get surveyUrl() {
+    return this.#participation ? `${this.baseSurveyUrl}?participationId=${this.#participation.id}` : this.baseSurveyUrl;
   }
 }

@@ -305,6 +305,7 @@ describe('Quest | Unit | Domain | Models | CombinedCourseDetails', function () {
           questId,
           combinedCourseItems: [{ moduleId: 'abcdefgh1' }],
           cryptoService,
+          baseSurveyUrl: 'http://survey.fr',
         });
 
         const dataForQuest = domainBuilder.buildCombinedCourseDataForQuest({
@@ -997,6 +998,26 @@ describe('Quest | Unit | Domain | Models | CombinedCourseDetails', function () {
         // then
         expect(combinedCourseDetails.status).to.deep.equal(CombinedCourseStatuses.NOT_STARTED);
       });
+      it('should return surveyUrl without any params', async function () {
+        // given & when
+        const combinedCourseDetails = domainBuilder.buildCombinedCourseDetails({
+          name,
+          code,
+          organizationId,
+          questId,
+          combinedCourseItems: [{ campaignId: 3, targetProfileId: 999 }, { moduleId: 'abcde1' }],
+          cryptoService,
+          baseSurveyUrl: 'https://link.to/survey',
+        });
+
+        await combinedCourseDetails.setEncryptedUrl();
+
+        combinedCourseDetails.setDataAndGenerateItems();
+
+        // then
+        expect(combinedCourseDetails.status).to.deep.equal(CombinedCourseStatuses.NOT_STARTED);
+        expect(combinedCourseDetails.surveyUrl).to.equal('https://link.to/survey');
+      });
     });
 
     describe('when there is a participation', function () {
@@ -1042,6 +1063,30 @@ describe('Quest | Unit | Domain | Models | CombinedCourseDetails', function () {
 
         // then
         expect(combinedCourseDetails.status).to.deep.equal(CombinedCourseStatuses.COMPLETED);
+      });
+
+      it('should return surveyUrl with participation id as queryParams', async function () {
+        // given & when
+        const combinedCourseParticipation = {
+          status: CombinedCourseParticipationStatuses.COMPLETED,
+          id: 1,
+        };
+        const combinedCourseDetails = domainBuilder.buildCombinedCourseDetails({
+          name,
+          code,
+          organizationId,
+          questId,
+          combinedCourseItems: [{ campaignId: 3, targetProfileId: 999 }, { moduleId: 'abcde1' }],
+          cryptoService,
+          baseSurveyUrl: 'https://link.to/survey',
+        });
+
+        await combinedCourseDetails.setEncryptedUrl();
+
+        combinedCourseDetails.setDataAndGenerateItems({ participation: combinedCourseParticipation });
+
+        // then
+        expect(combinedCourseDetails.surveyUrl).to.deep.equal('https://link.to/survey?participationId=1');
       });
     });
   });

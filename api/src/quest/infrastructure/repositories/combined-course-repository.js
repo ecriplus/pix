@@ -78,7 +78,7 @@ const _baseQuery = (knexConn) => {
       'quests.eligibilityRequirements as questEligibilityRequirements',
       'quests.successRequirements as questSuccessRequirements',
       'quests.rewardId as questRewardId',
-      'combined_course_blueprints.surveyUrl as surveyUrl',
+      'combined_course_blueprints.surveyUrl as baseSurveyUrl',
     )
     .join('quests', 'quests.id', 'combined_courses.questId')
     .leftJoin(
@@ -174,7 +174,7 @@ const _toDomain = ({
   questEligibilityRequirements,
   questSuccessRequirements,
   questRewardId,
-  surveyUrl,
+  baseSurveyUrl,
 }) => {
   return new CombinedCourse(
     {
@@ -186,7 +186,7 @@ const _toDomain = ({
       illustration,
       questId,
       blueprintId: combinedCourseBlueprintId,
-      surveyUrl,
+      baseSurveyUrl,
       deletedAt,
       deletedBy,
     },

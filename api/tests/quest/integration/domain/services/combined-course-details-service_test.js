@@ -283,6 +283,7 @@ describe('Integration | Quest | Domain | Services | CombinedCourseDetailsService
       expect(result.items[0]).instanceOf(CombinedCourseItem);
       expect(result.items[1]).instanceOf(CombinedCourseItem);
       expect(result.items[2]).instanceOf(CombinedCourseItem);
+      expect(result.surveyLink).to.equal();
     });
 
     it('should return independent states for each learner when processing multiple learners', async function () {
