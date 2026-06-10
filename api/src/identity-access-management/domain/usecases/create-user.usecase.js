@@ -30,6 +30,7 @@ const createUser = async function ({
   emailValidationDemandRepository,
   userRepository,
   userToCreateRepository,
+  legalDocumentApiRepository,
   cryptoService,
   userService,
   userValidator,
@@ -42,6 +43,7 @@ const createUser = async function ({
     userValidator,
     passwordValidator,
   });
+
   const userHasValidatedPixTermsOfService = user.cgu === true;
   if (userHasValidatedPixTermsOfService) {
     user.lastTermsOfServiceValidatedAt = new Date();
@@ -57,6 +59,8 @@ const createUser = async function ({
       userToCreateRepository,
       authenticationMethodRepository,
     });
+
+    await legalDocumentApiRepository.acceptPixAppTos({ userId: savedUser.id });
 
     const token = await emailValidationDemandRepository.save(savedUser.id);
 
