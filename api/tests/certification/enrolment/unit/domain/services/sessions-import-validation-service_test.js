@@ -25,7 +25,7 @@ describe('Unit | Service | sessions import validation Service', function () {
       });
       sessionRepository = {
         isSessionExistingByCertificationCenterId: sinon.stub(),
-        isSessionExistingBySessionAndCertificationCenterIds: sinon.stub(),
+        get: sinon.stub(),
       };
       sessionManagementRepository = { hasNoStartedCertification: sinon.stub() };
     });
@@ -93,7 +93,7 @@ describe('Unit | Service | sessions import validation Service', function () {
               const sessionId = 1;
               const session = _buildValidSessionWithId(sessionId);
               sessionManagementRepository.hasNoStartedCertification.resolves(true);
-              sessionRepository.isSessionExistingBySessionAndCertificationCenterIds.resolves(true);
+              sessionRepository.get.withArgs({ id: sessionId }).resolves(session);
 
               // when
               const sessionErrors = await sessionsImportValidationService.validateSession({
@@ -116,7 +116,7 @@ describe('Unit | Service | sessions import validation Service', function () {
       it('should return an errorReport that contains an already started error', async function () {
         const session = _buildValidSessionWithId(1234);
         sessionManagementRepository.hasNoStartedCertification.withArgs({ id: 1234 }).resolves(false);
-        sessionRepository.isSessionExistingBySessionAndCertificationCenterIds.resolves(true);
+        sessionRepository.get.withArgs({ id: 1234 }).resolves(session);
 
         // when
         const sessionErrors = await sessionsImportValidationService.validateSession({
@@ -175,7 +175,7 @@ describe('Unit | Service | sessions import validation Service', function () {
               const session = _buildValidSessionWithoutId();
               session.id = 1234;
               sessionManagementRepository.hasNoStartedCertification.withArgs({ id: 1234 }).resolves(true);
-              sessionRepository.isSessionExistingBySessionAndCertificationCenterIds.resolves(true);
+              sessionRepository.get.withArgs({ id: 1234 }).resolves(session);
 
               // when
               const sessionErrors = await sessionsImportValidationService.validateSession({
@@ -214,9 +214,12 @@ describe('Unit | Service | sessions import validation Service', function () {
             certificationCenterId: certificationCenter.id,
             certificationCandidates: [],
           });
-          sessionRepository.isSessionExistingBySessionAndCertificationCenterIds
-            .withArgs({ sessionId: 5678, certificationCenterId: certificationCenter.id, sessionRepository })
-            .resolves(false);
+          sessionRepository.get.withArgs({ id: 1234 }).resolves(
+            domainBuilder.certification.enrolment.buildSession({
+              id: 1234,
+              certificationCenterId: certificationCenter.id + 1,
+            }),
+          );
 
           // when
           const sessionErrors = await sessionsImportValidationService.validateSession({
