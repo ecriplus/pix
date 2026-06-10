@@ -11,10 +11,7 @@
     "duration": 5,
     "level": "Débutant",
     "tabletSupport": "inconvenient",
-    "objectives": [
-      "Naviguer dans Modulix",
-      "Découvrir les leçons et les activités"
-    ]
+    "objectives": ["Naviguer dans Modulix", "Découvrir les leçons et les activités"]
   },
   "sections": [
     {
