@@ -124,7 +124,7 @@ describe('Certification | Enrolment | Unit | Serializer | candidate', function (
   describe('#serializeForParticipation()', function () {
     it('should convert a EnrolledCandidate model object into JSON API data', function () {
       // given
-      const candidate = domainBuilder.certification.enrolment.buildEnrolledCandidate({
+      const candidate = domainBuilder.certification.enrolment.buildCandidate({
         id: 123,
         firstName: 'Michel',
         lastName: 'Jacques',
@@ -159,6 +159,7 @@ describe('Certification | Enrolment | Unit | Serializer | candidate', function (
             'has-seen-certification-instructions': true,
             'session-id': candidate.sessionId,
             'has-started-test': false,
+            'complementary-certification-key': null,
           },
         },
       };

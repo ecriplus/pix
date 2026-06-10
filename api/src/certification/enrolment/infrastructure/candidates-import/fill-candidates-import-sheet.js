@@ -1,6 +1,6 @@
 /**
  * @typedef {import('../../../session-management/domain/models/SessionManagement.js').SessionManagement} SessionManagement
- * @typedef {import('../../domain/read-models/EnrolledCandidate.js').EnrolledCandidate} EnrolledCandidate
+ * @typedef {import('../../domain/models/Candidate.js').Candidate} Candidate
  * @typedef {import('../../../shared/domain/models/ComplementaryCertification.js').ComplementaryCertification} ComplementaryCertification
  */
 
@@ -31,7 +31,7 @@ const CANDIDATE_TABLE_FIRST_ROW = 12;
 /**
  * @param {object} params
  * @param {SessionManagement} params.session
- * @param {Array<EnrolledCandidate>} params.enrolledCandidates
+ * @param {Array<Candidate>} params.enrolledCandidates
  * @param {Array<ComplementaryCertification>} params.certificationCenterHabilitations
  * @param {Boolean} params.isScoCertificationCenter
  * @param params.i18n
