@@ -1210,37 +1210,30 @@
                 "proposals": [
                   {
                     "id": "0",
-                    "content": "<p>Lire seulement le dernier mail du fil de discussion.</p>",
+                    "content": "<p>Lire seulement le dernier mail du fil de discussion et y répondre.</p>",
                     "feedback": {
                       "diagnosis": "<p>Il est préférable de lire tout le fil de discussion pour comprendre le contexte de l’échange.</p><p>Pensez aussi à vérifier&nbsp;:</p><ul>    <li>si une information n’a pas déjà été donnée dans les mails précédents,</li>    <li>qui est concerné par votre réponse afin de choisir entre «&nbsp;Répondre&nbsp;» et «&nbsp;Répondre à tous&nbsp;».</li></ul>"
                     }
                   },
                   {
                     "id": "1",
-                    "content": "<p>Lire tout le fil de discussion.</p>",
+                    "content": "<p>Lire tout le fil de discussion pour vérifier qui est concerné par votre réponse.</p>",
                     "feedback": {
                       "diagnosis": "<p>C’est une bonne idée&nbsp;! Lire tout le fil de discussion permet de comprendre le contexte de l’échange.</p><p>Pensez aussi à vérifier&nbsp;:</p><ul>    <li>si une information n’a pas déjà été donnée dans les mails précédents,</li>    <li>qui est concerné par votre réponse afin de choisir entre «&nbsp;Répondre&nbsp;» et «&nbsp;Répondre à tous&nbsp;».</li></ul>"
                     }
                   },
                   {
                     "id": "2",
-                    "content": "<p>Répondre à tous immédiatement.</p>",
+                    "content": "<p>Répondre à tous immédiatement sans avoir lu tout le fil de discussion.</p>",
                     "feedback": {
                       "diagnosis": "<p>Ce n’est pas recommandé. Il est préférable de lire tout le fil de discussion pour comprendre le contexte de l’échange.</p><p>Pensez aussi à vérifier&nbsp;:</p><ul>    <li>si une information n’a pas déjà été donnée dans les mails précédents,</li>    <li>qui est concerné par votre réponse afin de choisir entre «&nbsp;Répondre&nbsp;» et «&nbsp;Répondre à tous&nbsp;».</li></ul>"
                     }
                   },
                   {
                     "id": "3",
-                    "content": "<p>Vérifier qui est concerné par ma réponse.</p>",
+                    "content": "<p>Lire seulement l’objet du mail avant de répondre.</p>",
                     "feedback": {
-                      "diagnosis": "<p>C’est une bonne idée&nbsp;! Avant de répondre, il est utile de vérifier qui est concerné par votre réponse afin de choisir entre entre «&nbsp;Répondre&nbsp;» et «&nbsp;Répondre à tous&nbsp;».</p><p>Pensez aussi à&nbsp;:</p><ul>    <li>lire tout le fil de discussion pour comprendre le contexte de l’échange,</li>    <li>vérifier si une information n’a pas déjà été donnée dans les mails précédents.</li></ul>"
-                    }
-                  },
-                  {
-                    "id": "4",
-                    "content": "<p>Rien de spécial.</p>",
-                    "feedback": {
-                      "diagnosis": "<p>En réalité, quelques vérifications sont utiles pour envoyer une réponse adaptée&nbsp;:</p><ul>    <li>lire tout le fil de discussion pour bien comprendre la situation et ne pas manquer une information,</li>    <li>vérifier les destinataires pour envoyer une réponse adaptée aux personnes concernées.</li></ul>"
+                      "diagnosis": "<p>Ce n’est pas recommandé. Il est préférable de lire tout le fil de discussion pour comprendre le contexte de l’échange.</p><p>Pensez aussi à vérifier&nbsp;:</p><ul>    <li>si une information n’a pas déjà été donnée dans les mails précédents,</li>    <li>qui est concerné par votre réponse afin de choisir entre «&nbsp;Répondre&nbsp;» et «&nbsp;Répondre à tous&nbsp;».</li></ul>"
                     }
                   }
                 ],
