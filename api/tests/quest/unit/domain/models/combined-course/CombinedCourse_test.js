@@ -21,7 +21,6 @@ describe('Quest | Unit | Domain | Models | CombinedCourse', function () {
     expect(combinedCourse.organizationId).to.deep.equal(organizationId);
     expect(combinedCourse.id).to.deep.equal(id);
     expect(combinedCourse.questId).to.deep.equal(2);
-    expect(combinedCourse.surveyUrl).to.deep.equal(surveyUrl);
   });
 
   it('should throw when combined course model does not pass validation', function () {

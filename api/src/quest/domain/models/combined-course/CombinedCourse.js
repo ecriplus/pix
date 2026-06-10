@@ -12,10 +12,10 @@ const schema = Joi.object({
   illustration: Joi.string().allow(null),
   participations: Joi.array().items(Joi.object().instance(CombinedCourseParticipation)),
   questId: Joi.number(),
-  surveyUrl: Joi.string().uri().allow(null),
   blueprintId: Joi.number().allow(null),
   deletedAt: Joi.date().allow(null),
   deletedBy: Joi.number().allow(null),
+  baseSurveyUrl: Joi.string().uri().allow(null),
 });
 export class CombinedCourse {
   #quest;
@@ -30,10 +30,10 @@ export class CombinedCourse {
       illustration,
       participations = [],
       questId,
-      surveyUrl = null,
       blueprintId = null,
       deletedAt = null,
       deletedBy = null,
+      baseSurveyUrl = null,
     } = {},
     quest,
   ) {
@@ -45,10 +45,10 @@ export class CombinedCourse {
     this.illustration = illustration;
     this.participations = participations;
     this.questId = questId;
-    this.surveyUrl = surveyUrl;
     this.blueprintId = blueprintId;
     this.deletedAt = deletedAt;
     this.deletedBy = deletedBy;
+    this.baseSurveyUrl = baseSurveyUrl;
 
     this.#validate();
 
