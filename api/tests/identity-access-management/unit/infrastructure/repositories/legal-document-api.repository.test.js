@@ -26,4 +26,26 @@ describe('Unit | Identity Access Management | Infrastructure | Repositories | le
       });
     });
   });
+  describe('#getPixAppTosStatus', function () {
+    it('returns the TOS status', async function () {
+      // given
+      const dependencies = {
+        legalDocumentApi: {
+          getLegalDocumentStatusByUserId: sinon.stub().resolves(),
+        },
+      };
+
+      const userId = Symbol('userId');
+
+      // when
+      await legalDocumentApiRepository.getPixAppTosStatus({ userId, dependencies });
+
+      // then
+      expect(dependencies.legalDocumentApi.getLegalDocumentStatusByUserId).to.have.been.calledWithExactly({
+        userId,
+        service: 'pix-app',
+        type: 'TOS',
+      });
+    });
+  });
 });
