@@ -25,6 +25,13 @@ export default class EvaluationResultsRecommendationEngine extends Component {
     });
   }
 
+  @action onModalAccordionClick({ trainingId, accordionName }) {
+    this.pixMetrics.trackEvent("Moteur de reco - Clic sur l'accordéon de la modale du contenu formatif", {
+      trainingId,
+      accordionName,
+    });
+  }
+
   get hasTrainings() {
     return Boolean(this.trainings.length);
   }
@@ -66,6 +73,7 @@ export default class EvaluationResultsRecommendationEngine extends Component {
           @trainings={{this.trainings}}
           @onCardClick={{this.onCardClick}}
           @onModalButtonClick={{this.onModalButtonClick}}
+          @onModalAccordionClick={{this.onModalAccordionClick}}
         />
       {{/if}}
 

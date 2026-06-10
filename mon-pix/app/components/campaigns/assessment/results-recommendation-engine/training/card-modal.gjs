@@ -20,6 +20,8 @@ export default class CardModal extends Component {
 
   @tracked isTrainingRecommendationRelevant = null;
 
+  firedAccordions = new Set();
+
   constructor(...args) {
     super(...args);
     this.isTrainingRecommendationRelevant = this.args.training.isRelevant ?? null;
@@ -33,8 +35,7 @@ export default class CardModal extends Component {
     return this.isTrainingRecommendationRelevant === false;
   }
 
-  @action
-  async submitFeedback(feedbackResponse) {
+  @action async submitFeedback(feedbackResponse) {
     this.isTrainingRecommendationRelevant = feedbackResponse;
     const campaignParticipationId = this.args.training.belongsTo('campaignParticipation').id();
     const adapter = this.store.adapterFor('training');
@@ -45,9 +46,14 @@ export default class CardModal extends Component {
     });
   }
 
-  @action
-  onModalButtonClick() {
+  @action onModalButtonClick() {
     this.args.onModalButtonClick({ trainingId: this.args.training.id });
+  }
+
+  @action onModalAccordionClick(accordionName) {
+    if (this.firedAccordions.has(accordionName)) return;
+    this.firedAccordions.add(accordionName);
+    this.args.onModalAccordionClick({ trainingId: this.args.training.id, accordionName });
   }
 
   <template>
@@ -86,7 +92,7 @@ export default class CardModal extends Component {
           </div>
         </div>
 
-        <PixAccordions>
+        <PixAccordions {{on "click" (fn this.onModalAccordionClick "OBJECTIVES")}}>
           <:title>
             <h2>{{t "pages.skill-review.recommended-engine.modal.objectives"}}</h2>
           </:title>
@@ -106,7 +112,7 @@ export default class CardModal extends Component {
             </ul>
           </:content>
         </PixAccordions>
-        <PixAccordions>
+        <PixAccordions {{on "click" (fn this.onModalAccordionClick "PROGRAM")}}>
           <:title>
             <h2>{{t "pages.skill-review.recommended-engine.modal.program"}}</h2>
           </:title>

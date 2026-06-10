@@ -124,10 +124,12 @@ module('Acceptance | Campaigns | Results | Recommendation Engine', function (hoo
         // given
         const trackEventStub = sinon.stub();
         const trackPageStub = sinon.stub();
+
         class MetricsStubService extends Service {
           trackPage = trackPageStub;
           trackEvent = trackEventStub;
         }
+
         this.owner.register('service:pix-metrics', MetricsStubService);
 
         // when
@@ -150,6 +152,46 @@ module('Acceptance | Campaigns | Results | Recommendation Engine', function (hoo
         sinon.assert.calledWithExactly(trackEventStub, 'Moteur de reco - Clic sur la carte du contenu formatif', {
           trainingId: training.id,
         });
+
+        // when
+        await click(screen.getByRole('button', { name: t('pages.skill-review.recommended-engine.modal.objectives') }));
+
+        // then
+        sinon.assert.calledWithExactly(
+          trackEventStub,
+          "Moteur de reco - Clic sur l'accordéon de la modale du contenu formatif",
+          {
+            trainingId: training.id,
+            accordionName: 'OBJECTIVES',
+          },
+        );
+
+        // when
+        await click(screen.getByRole('button', { name: t('pages.skill-review.recommended-engine.modal.objectives') }));
+        await click(screen.getByRole('button', { name: t('pages.skill-review.recommended-engine.modal.objectives') }));
+
+        // then
+        sinon.assert.callCount(trackEventStub, 3);
+
+        // when
+        await click(screen.getByRole('button', { name: t('pages.skill-review.recommended-engine.modal.program') }));
+
+        // then
+        sinon.assert.calledWithExactly(
+          trackEventStub,
+          "Moteur de reco - Clic sur l'accordéon de la modale du contenu formatif",
+          {
+            trainingId: training.id,
+            accordionName: 'PROGRAM',
+          },
+        );
+
+        // when
+        await click(screen.getByRole('button', { name: t('pages.skill-review.recommended-engine.modal.program') }));
+        await click(screen.getByRole('button', { name: t('pages.skill-review.recommended-engine.modal.program') }));
+
+        // then
+        sinon.assert.callCount(trackEventStub, 4);
 
         // when
         await click(
