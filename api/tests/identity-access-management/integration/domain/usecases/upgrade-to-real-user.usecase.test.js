@@ -1,5 +1,3 @@
-import sinon from 'sinon';
-
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../../src/identity-access-management/domain/constants/identity-providers.js';
 import { User } from '../../../../../src/identity-access-management/domain/models/User.js';
 import { usecases } from '../../../../../src/identity-access-management/domain/usecases/index.js';
@@ -9,19 +7,9 @@ import { expect } from '../../../../test-helper.js';
 import { databaseBuilder, knex } from '../../../../tooling/databases.js';
 
 describe('Integration | Identity Access Management | Domain | UseCase | upgradeToRealUser', function () {
-  let clock;
-
-  beforeEach(function () {
-    const now = new Date('2024-12-25');
-    clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
-  });
-
-  afterEach(function () {
-    clock.restore();
-  });
-
   it('upgrades an anonymous user to a real user', async function () {
     // given
+    const pixAppTos = databaseBuilder.factory.buildPixAppTos();
     const anonymousUser = databaseBuilder.factory.buildUser.anonymous();
     await databaseBuilder.commit();
 
@@ -52,6 +40,11 @@ describe('Integration | Identity Access Management | Domain | UseCase | upgradeT
 
     const authenticationMethod = await knex('authentication-methods').where({ userId: realUser.id }).first();
     expect(authenticationMethod.identityProvider).to.equal(NON_OIDC_IDENTITY_PROVIDERS.PIX.code);
+
+    const legalDocumentAcceptation = await knex('legal-document-version-user-acceptances')
+      .where({ userId: realUser.id })
+      .first();
+    expect(legalDocumentAcceptation.legalDocumentVersionId).to.equal(pixAppTos.id);
 
     await expect('SendEmailJob').to.have.been.performed.withJobsCount(1);
   });
