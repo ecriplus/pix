@@ -1,4 +1,9 @@
-import { LEGAL_DOCUMENT_PIX_ORGA_TOS_ID_V1, LEGAL_DOCUMENT_PIX_ORGA_TOS_ID_V2 } from '../constants.js';
+import {
+  LEGAL_DOCUMENT_PIX_APP_TOS_ID_V1,
+  LEGAL_DOCUMENT_PIX_APP_TOS_ID_V2,
+  LEGAL_DOCUMENT_PIX_ORGA_TOS_ID_V1,
+  LEGAL_DOCUMENT_PIX_ORGA_TOS_ID_V2,
+} from '../constants.js';
 
 export function createPixOrgaTermsOfService(databaseBuilder) {
   databaseBuilder.factory.buildLegalDocumentVersion({
@@ -28,4 +33,19 @@ export function acceptPixOrgaTermsOfService(databaseBuilder, userId, cguVersion 
       userId,
     });
   }
+}
+
+export function createPixAppTermsOfService(databaseBuilder) {
+  databaseBuilder.factory.buildLegalDocumentVersion({
+    id: LEGAL_DOCUMENT_PIX_APP_TOS_ID_V1,
+    type: 'TOS',
+    service: 'pix-app',
+    versionAt: '2019-01-01',
+  });
+  databaseBuilder.factory.buildLegalDocumentVersion({
+    id: LEGAL_DOCUMENT_PIX_APP_TOS_ID_V2,
+    type: 'TOS',
+    service: 'pix-app',
+    versionAt: '2022-01-01',
+  });
 }
