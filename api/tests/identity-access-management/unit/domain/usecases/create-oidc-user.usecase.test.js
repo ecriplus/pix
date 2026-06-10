@@ -9,6 +9,7 @@ import { catchErr } from '../../../../tooling/test-utils/error.js';
 describe('Unit | Identity Access Management | Domain | UseCase | create-oidc-user', function () {
   let authenticationMethodRepository;
   let userToCreateRepository;
+  let legalDocumentApiRepository;
   let authenticationSessionService;
   let oidcAuthenticationService;
   let oidcAuthenticationServiceRegistry;
@@ -17,6 +18,10 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-oidc-use
     authenticationMethodRepository = {
       findOneByExternalIdentifierAndIdentityProvider: sinon.stub(),
       updateLastLoggedAtByIdentityProvider: sinon.stub(),
+    };
+
+    legalDocumentApiRepository = {
+      acceptPixAppTos: sinon.stub(),
     };
 
     authenticationSessionService = {
@@ -30,6 +35,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-oidc-use
       createAccessToken: sinon.stub(),
       saveIdToken: sinon.stub(),
     };
+
     oidcAuthenticationServiceRegistry = {
       getOidcProviderServiceByCode: sinon.stub().returns(oidcAuthenticationService),
     };
@@ -46,6 +52,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-oidc-use
         authenticationKey,
         authenticationMethodRepository,
         userToCreateRepository,
+        legalDocumentApiRepository,
         authenticationSessionService,
       });
 
@@ -74,6 +81,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-oidc-use
         oidcAuthenticationServiceRegistry,
         authenticationMethodRepository,
         userToCreateRepository,
+        legalDocumentApiRepository,
       });
 
       // then

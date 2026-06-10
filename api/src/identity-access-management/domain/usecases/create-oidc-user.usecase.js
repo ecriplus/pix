@@ -26,6 +26,7 @@ async function createOidcUser({
   audience,
   authenticationSessionService,
   oidcAuthenticationServiceRegistry,
+  legalDocumentApiRepository,
   authenticationMethodRepository,
   userToCreateRepository,
   userLoginRepository,
@@ -73,6 +74,8 @@ async function createOidcUser({
     userToCreateRepository,
     authenticationMethodRepository,
   });
+
+  await legalDocumentApiRepository.acceptPixAppTos({ userId });
 
   await _updateUserLastConnection({
     userId,
