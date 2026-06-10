@@ -1,21 +1,22 @@
 import _ from 'lodash';
 
-import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../identity-access-management/domain/constants/identity-providers.js';
-import * as authenticationMethodRepository from '../../../identity-access-management/infrastructure/repositories/authentication-method.repository.js';
-import { NotFoundError } from '../../domain/errors.js';
+import { NotFoundError } from '../../../shared/domain/errors.js';
+import * as authenticationMethodRepository from '../../infrastructure/repositories/authentication-method.repository.js';
+import * as userRepository from '../../infrastructure/repositories/user.repository.js';
+import { NON_OIDC_IDENTITY_PROVIDERS } from '../constants/identity-providers.js';
 
-const CONNEXION_TYPES = {
-  username: 'username',
-  email: 'email',
-  samlId: 'samlId',
-};
+const CONNEXION_TYPES = { username: 'username', email: 'email', samlId: 'samlId' };
 const ASTERISK_OBFUSCATION = '***';
 const USERNAME_SEPARATOR = '.';
 const EMAIL_SEPARATOR = '@';
-
 const TWO_PARTS = 2;
 
-async function getUserAuthenticationMethodWithObfuscation(user, dependencies = { authenticationMethodRepository }) {
+export async function getObfuscatedAuthenticationMethod(
+  userId,
+  dependencies = { userRepository, authenticationMethodRepository },
+) {
+  const user = await dependencies.userRepository.getForObfuscation(userId);
+
   const garAuthenticationMethod = await dependencies.authenticationMethodRepository.findOneByUserIdAndIdentityProvider({
     userId: user.id,
     identityProvider: NON_OIDC_IDENTITY_PROVIDERS.GAR.code,
@@ -26,6 +27,7 @@ async function getUserAuthenticationMethodWithObfuscation(user, dependencies = {
     const username = usernameObfuscation(user.username);
     return { authenticatedBy: CONNEXION_TYPES.username, value: username };
   }
+
   if (user.email) {
     const email = emailObfuscation(user.email);
     return { authenticatedBy: CONNEXION_TYPES.email, value: email };
@@ -46,5 +48,3 @@ function usernameObfuscation(username) {
     name,
   )}${ASTERISK_OBFUSCATION}${_.last(name)}`;
 }
-
-export { emailObfuscation, getUserAuthenticationMethodWithObfuscation, usernameObfuscation };

@@ -625,16 +625,12 @@ describe('Unit | Service | user-reconciliation-service', function () {
   });
 
   describe('#assertStudentHasAnAlreadyReconciledAccount', function () {
-    let userRepositoryStub;
     let obfuscationServiceStub;
     let studentRepositoryStub;
 
     beforeEach(function () {
-      userRepositoryStub = {
-        getForObfuscation: sinon.stub(),
-      };
       obfuscationServiceStub = {
-        getUserAuthenticationMethodWithObfuscation: sinon.stub(),
+        getObfuscatedAuthenticationMethod: sinon.stub(),
       };
       studentRepositoryStub = {
         getReconciledStudentByNationalStudentId: sinon.stub(),
@@ -649,8 +645,7 @@ describe('Unit | Service | user-reconciliation-service', function () {
           const user = domainBuilder.buildUser({ email: 'test@example.net' });
           organizationLearner.userId = user.id;
 
-          userRepositoryStub.getForObfuscation.withArgs(user.id).resolves(user);
-          obfuscationServiceStub.getUserAuthenticationMethodWithObfuscation.withArgs(user).returns({
+          obfuscationServiceStub.getObfuscatedAuthenticationMethod.withArgs(user.id).returns({
             authenticatedBy: 'email',
             value: 't***@example.net',
           });
@@ -658,7 +653,6 @@ describe('Unit | Service | user-reconciliation-service', function () {
           // when
           const error = await catchErr(userReconciliationService.assertStudentHasAnAlreadyReconciledAccount)(
             organizationLearner,
-            userRepositoryStub,
             obfuscationServiceStub,
             studentRepositoryStub,
           );
@@ -680,8 +674,7 @@ describe('Unit | Service | user-reconciliation-service', function () {
           const user = domainBuilder.buildUser({ username: 'john.doe0101' });
           organizationLearner.userId = user.id;
 
-          userRepositoryStub.getForObfuscation.withArgs(user.id).resolves(user);
-          obfuscationServiceStub.getUserAuthenticationMethodWithObfuscation.withArgs(user).returns({
+          obfuscationServiceStub.getObfuscatedAuthenticationMethod.withArgs(user.id).returns({
             authenticatedBy: 'username',
             value: 'j***.d***0101',
           });
@@ -689,14 +682,12 @@ describe('Unit | Service | user-reconciliation-service', function () {
           // when
           const error = await catchErr(userReconciliationService.assertStudentHasAnAlreadyReconciledAccount)(
             organizationLearner,
-            userRepositoryStub,
             obfuscationServiceStub,
             studentRepositoryStub,
           );
 
           // then
           expect(error).to.be.instanceof(OrganizationLearnerAlreadyLinkedToUserError);
-          expect(userRepositoryStub.getForObfuscation).to.have.been.calledWithExactly(user.id);
           expect(error.message).to.equal('Un compte existe déjà pour l‘élève dans le même établissement.');
           expect(error.code).to.equal('ACCOUNT_WITH_USERNAME_ALREADY_EXIST_FOR_THE_SAME_ORGANIZATION');
           expect(error.meta.shortCode).to.equal('R32');
@@ -712,8 +703,7 @@ describe('Unit | Service | user-reconciliation-service', function () {
           const user = domainBuilder.buildUser({ samlId: 'samlId' });
           organizationLearner.userId = user.id;
 
-          userRepositoryStub.getForObfuscation.withArgs(user.id).resolves(user);
-          obfuscationServiceStub.getUserAuthenticationMethodWithObfuscation.withArgs(user).returns({
+          obfuscationServiceStub.getObfuscatedAuthenticationMethod.withArgs(user.id).returns({
             authenticatedBy: 'samlId',
             value: null,
           });
@@ -721,14 +711,12 @@ describe('Unit | Service | user-reconciliation-service', function () {
           // when
           const error = await catchErr(userReconciliationService.assertStudentHasAnAlreadyReconciledAccount)(
             organizationLearner,
-            userRepositoryStub,
             obfuscationServiceStub,
             studentRepositoryStub,
           );
 
           // then
           expect(error).to.be.instanceof(OrganizationLearnerAlreadyLinkedToUserError);
-          expect(userRepositoryStub.getForObfuscation).to.have.been.calledWithExactly(user.id);
           expect(error.message).to.equal('Un compte existe déjà pour l‘élève dans le même établissement.');
           expect(error.code).to.equal('ACCOUNT_WITH_GAR_ALREADY_EXIST_FOR_THE_SAME_ORGANIZATION');
           expect(error.meta.shortCode).to.equal('R33');
@@ -749,8 +737,7 @@ describe('Unit | Service | user-reconciliation-service', function () {
           studentRepositoryStub.getReconciledStudentByNationalStudentId
             .withArgs(nationalStudentId)
             .resolves({ account: { userId: user.id } });
-          userRepositoryStub.getForObfuscation.withArgs(user.id).resolves(user);
-          obfuscationServiceStub.getUserAuthenticationMethodWithObfuscation.withArgs(user).returns({
+          obfuscationServiceStub.getObfuscatedAuthenticationMethod.withArgs(user.id).returns({
             authenticatedBy: 'email',
             value: 't***@example.net',
           });
@@ -758,7 +745,6 @@ describe('Unit | Service | user-reconciliation-service', function () {
           // when
           const error = await catchErr(userReconciliationService.assertStudentHasAnAlreadyReconciledAccount)(
             organizationLearner,
-            userRepositoryStub,
             obfuscationServiceStub,
             studentRepositoryStub,
           );
@@ -783,8 +769,7 @@ describe('Unit | Service | user-reconciliation-service', function () {
           studentRepositoryStub.getReconciledStudentByNationalStudentId
             .withArgs(nationalStudentId)
             .resolves({ account: { userId: user.id } });
-          userRepositoryStub.getForObfuscation.withArgs(user.id).resolves(user);
-          obfuscationServiceStub.getUserAuthenticationMethodWithObfuscation.withArgs(user).returns({
+          obfuscationServiceStub.getObfuscatedAuthenticationMethod.withArgs(user.id).returns({
             authenticatedBy: 'username',
             value: 'j***.d***0101',
           });
@@ -792,14 +777,12 @@ describe('Unit | Service | user-reconciliation-service', function () {
           // when
           const error = await catchErr(userReconciliationService.assertStudentHasAnAlreadyReconciledAccount)(
             organizationLearner,
-            userRepositoryStub,
             obfuscationServiceStub,
             studentRepositoryStub,
           );
 
           // then
           expect(error).to.be.instanceof(OrganizationLearnerAlreadyLinkedToUserError);
-          expect(userRepositoryStub.getForObfuscation).to.have.been.calledWithExactly(user.id);
           expect(error.message).to.equal('Un compte existe déjà pour l‘élève dans un autre établissement.');
           expect(error.code).to.equal('ACCOUNT_WITH_USERNAME_ALREADY_EXIST_FOR_ANOTHER_ORGANIZATION');
           expect(error.meta.shortCode).to.equal('R12');
@@ -818,8 +801,7 @@ describe('Unit | Service | user-reconciliation-service', function () {
           studentRepositoryStub.getReconciledStudentByNationalStudentId
             .withArgs(nationalStudentId)
             .resolves({ account: { userId: user.id } });
-          userRepositoryStub.getForObfuscation.withArgs(user.id).resolves(user);
-          obfuscationServiceStub.getUserAuthenticationMethodWithObfuscation.withArgs(user).returns({
+          obfuscationServiceStub.getObfuscatedAuthenticationMethod.withArgs(user.id).returns({
             authenticatedBy: 'samlId',
             value: null,
           });
@@ -827,14 +809,12 @@ describe('Unit | Service | user-reconciliation-service', function () {
           // when
           const error = await catchErr(userReconciliationService.assertStudentHasAnAlreadyReconciledAccount)(
             organizationLearner,
-            userRepositoryStub,
             obfuscationServiceStub,
             studentRepositoryStub,
           );
 
           // then
           expect(error).to.be.instanceof(OrganizationLearnerAlreadyLinkedToUserError);
-          expect(userRepositoryStub.getForObfuscation).to.have.been.calledWithExactly(user.id);
           expect(error.message).to.equal('Un compte existe déjà pour l‘élève dans un autre établissement.');
           expect(error.code).to.equal('ACCOUNT_WITH_GAR_ALREADY_EXIST_FOR_ANOTHER_ORGANIZATION');
           expect(error.meta.shortCode).to.equal('R13');
@@ -858,13 +838,11 @@ describe('Unit | Service | user-reconciliation-service', function () {
         studentRepositoryStub.getReconciledStudentByNationalStudentId
           .withArgs(nationalStudentId)
           .resolves({ account: { userId: user.id } });
-        userRepositoryStub.getForObfuscation.withArgs(user.id).resolves(user);
-        obfuscationServiceStub.getUserAuthenticationMethodWithObfuscation.withArgs(user).rejects(new NotFoundError());
+        obfuscationServiceStub.getObfuscatedAuthenticationMethod.withArgs(user.id).rejects(new NotFoundError());
 
         // when
         const error = await catchErr(userReconciliationService.assertStudentHasAnAlreadyReconciledAccount)(
           organizationLearner,
-          userRepositoryStub,
           obfuscationServiceStub,
           studentRepositoryStub,
         );

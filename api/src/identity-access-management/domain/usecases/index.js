@@ -11,7 +11,7 @@ import * as organizationLearnerRepository from '../../../prescription/organizati
 import { config } from '../../../shared/config.js';
 import { cryptoService } from '../../../shared/domain/services/crypto-service.js';
 import { mailService } from '../../../shared/domain/services/mail-service.js';
-import * as obfuscationService from '../../../shared/domain/services/obfuscation-service.js';
+import * as obfuscationService from '../services/obfuscation-service.js';
 import { tokenService } from '../../../shared/domain/services/token-service.js';
 import * as userReconciliationService from '../../../shared/domain/services/user-reconciliation-service.js';
 import * as userService from '../services/user-service.js';

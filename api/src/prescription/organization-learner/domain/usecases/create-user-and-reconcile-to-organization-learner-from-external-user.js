@@ -57,7 +57,6 @@ const createUserAndReconcileToOrganizationLearnerFromExternalUser = async functi
 
     await userReconciliationService.assertStudentHasAnAlreadyReconciledAccount(
       matchedOrganizationLearner,
-      userRepository,
       obfuscationService,
       studentRepository,
     );

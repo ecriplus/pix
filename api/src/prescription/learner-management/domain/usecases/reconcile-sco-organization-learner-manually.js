@@ -16,7 +16,6 @@ const reconcileScoOrganizationLearnerManually = async function ({
   organizationLearnerRepository,
   registrationOrganizationLearnerRepository,
   studentRepository,
-  userRepository,
   obfuscationService,
   userReconciliationService,
 }) {
@@ -29,7 +28,6 @@ const reconcileScoOrganizationLearnerManually = async function ({
 
   await userReconciliationService.assertStudentHasAnAlreadyReconciledAccount(
     organizationLearnerOfUserAccessingCampaign,
-    userRepository,
     obfuscationService,
     studentRepository,
   );
