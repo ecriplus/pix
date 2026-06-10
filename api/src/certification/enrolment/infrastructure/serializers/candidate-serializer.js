@@ -2,6 +2,7 @@ import jsonapiSerializer from 'jsonapi-serializer';
 const { Deserializer, Serializer } = jsonapiSerializer;
 
 import { Candidate } from '../../domain/models/Candidate.js';
+import { EditedCandidate } from '../../domain/models/EditedCandidate.js';
 import { Subscription } from '../../domain/models/Subscription.js';
 
 export async function deserialize(json) {
@@ -28,6 +29,13 @@ export async function deserialize(json) {
   });
 }
 
+export function deserializeForEdition({ candidateId, candidateData }) {
+  return new EditedCandidate({
+    id: candidateId,
+    accessibilityAdjustmentNeeded: candidateData['accessibility-adjustment-needed'],
+  });
+}
+
 export const serializeForParticipation = function (candidate) {
   return new Serializer('certification-candidate', {
     attributes: [
@@ -44,4 +52,38 @@ export const serializeForParticipation = function (candidate) {
 
 export function serializeId(candidateId) {
   return new Serializer('certification-candidate', {}).serialize({ id: candidateId });
+}
+
+export function serialize(candidates) {
+  return new Serializer('certification-candidate', {
+    attributes: [
+      'firstName',
+      'lastName',
+      'birthdate',
+      'birthProvinceCode',
+      'birthCity',
+      'birthCountry',
+      'email',
+      'resultRecipientEmail',
+      'externalId',
+      'extraTimePercentage',
+      'isLinked',
+      'organizationLearnerId',
+      'sex',
+      'birthINSEECode',
+      'birthPostalCode',
+      'complementaryCertification',
+      'subscription',
+      'billingMode',
+      'prepaymentCode',
+      'hasSeenCertificationInstructions',
+      'accessibilityAdjustmentNeeded',
+    ],
+  }).serialize(candidates);
+}
+
+export function serializeForSession(candidates) {
+  return new Serializer('certification-candidate', {
+    attributes: ['firstName', 'lastName', 'birthdate', 'subscription'],
+  }).serialize(candidates);
 }

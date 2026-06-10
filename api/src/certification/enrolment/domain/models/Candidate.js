@@ -67,6 +67,7 @@ export class Candidate {
     this.accessibilityAdjustmentNeeded = accessibilityAdjustmentNeeded;
     this.reconciledAt = reconciledAt;
     this.hasStartedTest = hasStartedTest;
+    this.isLinked = Boolean(userId);
   }
 
   static create(candidateDTO) {

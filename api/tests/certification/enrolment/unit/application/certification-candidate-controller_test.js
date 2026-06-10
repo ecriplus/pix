@@ -91,14 +91,14 @@ describe('Unit | Controller | certification-candidate-controller', function () {
           sessionId,
         })
         .resolves(enrolledCandidates);
-      const enrolledCandidateSerializer = {
+      const candidateSerializer = {
         serialize: sinon.stub(),
       };
-      enrolledCandidateSerializer.serialize.resolves(enrolledCandidatesJsonAPI);
+      candidateSerializer.serialize.resolves(enrolledCandidatesJsonAPI);
 
       // when
       const response = await certificationCandidateController.getEnrolledCandidates(request, hFake, {
-        enrolledCandidateSerializer,
+        candidateSerializer,
       });
 
       // then
@@ -121,14 +121,14 @@ describe('Unit | Controller | certification-candidate-controller', function () {
           sessionId,
         })
         .resolves(sessionCandidates);
-      const enrolledCandidateSerializer = {
+      const candidateSerializer = {
         serialize: sinon.stub(),
       };
-      enrolledCandidateSerializer.serialize.resolves(sessionCandidatesJsonAPI);
+      candidateSerializer.serialize.resolves(sessionCandidatesJsonAPI);
 
       // when
       const response = await certificationCandidateController.getEnrolledCandidates(request, hFake, {
-        enrolledCandidateSerializer,
+        candidateSerializer,
       });
 
       // then

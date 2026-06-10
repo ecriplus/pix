@@ -28,9 +28,9 @@ describe('Certification | Enrolment | Unit | Controller | enrolment-controller',
       };
       sinon.stub(usecases, 'enrolStudentsToSession');
       sinon.stub(usecases, 'getEnrolledCandidatesInSession');
-      const enrolledCandidateSerializer = { serialize: sinon.stub() };
+      const candidateSerializer = { serialize: sinon.stub() };
       dependencies = {
-        enrolledCandidateSerializer,
+        candidateSerializer,
       };
     });
 
@@ -38,9 +38,7 @@ describe('Certification | Enrolment | Unit | Controller | enrolment-controller',
       beforeEach(function () {
         usecases.enrolStudentsToSession.withArgs({ sessionId, studentIds }).resolves();
         usecases.getEnrolledCandidatesInSession.withArgs({ sessionId }).resolves(studentList);
-        dependencies.enrolledCandidateSerializer.serialize
-          .withArgs(studentList)
-          .returns(serializedCertificationCandidate);
+        dependencies.candidateSerializer.serialize.withArgs(studentList).returns(serializedCertificationCandidate);
       });
 
       it('should return certificationCandidates', async function () {

@@ -2,13 +2,9 @@ import { Serializer } from 'jsonapi-serializer';
 
 import { EditedCandidate } from '../../domain/models/EditedCandidate.js';
 
-const deserialize = function ({ candidateId, candidateData }) {
-  return new EditedCandidate({
-    id: candidateId,
-    accessibilityAdjustmentNeeded: candidateData['accessibility-adjustment-needed'],
-  });
-};
+// todo move me
 
+// todo delete me
 const serialize = function (enrolledCandidates) {
   return new Serializer('certification-candidate', {
     attributes: [
