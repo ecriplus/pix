@@ -18,7 +18,7 @@ describe('Quest | Unit | Infrastructure | Serializers | combined-course', functi
       combinedCourseItems: [{ campaignId: 1 }, { moduleId: 7 }],
       rewardId: 456,
       rewardType: REWARD_TYPES.ATTESTATION,
-      surveyUrl: 'http://link.to/survey',
+      baseSurveyUrl: 'http://link.to/survey',
     });
     await combinedCourseDetails.setEncryptedUrl();
     const obtainedAt = new Date();

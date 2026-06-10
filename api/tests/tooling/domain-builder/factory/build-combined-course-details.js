@@ -7,7 +7,7 @@ import { Eligibility } from '../../../../src/quest/domain/models/Eligibility.js'
 import { Module } from '../../../../src/quest/domain/models/Module.js';
 import { Quest } from '../../../../src/quest/domain/models/Quest.js';
 
-function buildCombinedCourse({ name, code, organizationId, questId, surveyUrl } = {}) {
+function buildCombinedCourse({ name, code, organizationId, questId, baseSurveyUrl } = {}) {
   return new CombinedCourse({
     id: 1,
     code: code ?? 'COMBINIX1',
@@ -16,7 +16,7 @@ function buildCombinedCourse({ name, code, organizationId, questId, surveyUrl } 
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     illustration: '/illustrations/image.svg',
     questId: questId ?? 777,
-    surveyUrl,
+    baseSurveyUrl,
   });
 }
 
@@ -29,9 +29,9 @@ function buildCombinedCourseDetails({
   cryptoService,
   rewardId = null,
   rewardType = null,
-  surveyUrl,
+  baseSurveyUrl,
 } = {}) {
-  const combinedCourse = buildCombinedCourse({ name, code, organizationId, questId, surveyUrl });
+  const combinedCourse = buildCombinedCourse({ name, code, organizationId, questId, baseSurveyUrl });
 
   const campaigns = [];
   const modules = [];
