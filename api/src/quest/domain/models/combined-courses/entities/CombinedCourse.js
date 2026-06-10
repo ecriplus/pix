@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
-import { EntityValidationError } from '../../../../shared/domain/errors.js';
-import { CombinedCourseParticipation } from '../combined-course-participation/CombinedCourseParticipation.js';
+import { EntityValidationError } from '../../../../../shared/domain/errors.js';
+import { CombinedCourseParticipation } from '../../combined-course-participations/entities/CombinedCourseParticipation.js';
 
 const schema = Joi.object({
   id: Joi.number().allow(null),

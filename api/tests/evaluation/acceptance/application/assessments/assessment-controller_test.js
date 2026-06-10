@@ -17,7 +17,7 @@ import {
   CRITERION_COMPARISONS,
   REQUIREMENT_COMPARISONS,
   REQUIREMENT_TYPES,
-} from '../../../../../src/quest/domain/models/quests/Quest.js';
+} from '../../../../../src/quest/domain/models/quests/entities/Quest.js';
 import { Assessment } from '../../../../../src/shared/domain/models/Assessment.js';
 import { FRENCH_FRANCE } from '../../../../../src/shared/domain/services/locale-service.js';
 import { CORRELATION_METADATA } from '../../../../../src/shared/infrastructure/execution-context-manager.js';

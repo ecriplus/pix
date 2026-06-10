@@ -1,6 +1,6 @@
 import { DomainTransaction } from '../../../shared/domain/DomainTransaction.js';
-import { CombinedCourseDetails } from '../../domain/models/combined-course-participations/CombinedCourseDetails.js';
-import { Quest } from '../../domain/models/quests/Quest.js';
+import { CombinedCourseDetails } from '../../domain/models/combined-course-participations/aggregates/CombinedCourseDetails.js';
+import { Quest } from '../../domain/models/quests/entities/Quest.js';
 
 const findByOrganizationId = async ({ organizationId }) => {
   const knexConn = DomainTransaction.getConnection();

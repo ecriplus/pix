@@ -1,4 +1,4 @@
-import { Success } from '../../../../../src/quest/domain/models/quests/Success.js';
+import { Success } from '../../../../../src/quest/domain/models/quests/aggregates/Success.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { expect } from '../../../../test-helper.js';
 

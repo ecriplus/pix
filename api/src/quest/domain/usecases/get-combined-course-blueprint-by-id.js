@@ -1,6 +1,6 @@
 import { NotFoundError } from '../../../shared/domain/errors.js';
 import { AdminCombinedCourseBlueprintDetails } from '../models/AdminCombinedCourseBlueprintDetails.js';
-import { REQUIREMENT_TYPES } from '../models/quests/Quest.js';
+import { REQUIREMENT_TYPES } from '../models/quests/entities/Quest.js';
 
 export const getCombinedCourseBlueprintById = async ({
   id,

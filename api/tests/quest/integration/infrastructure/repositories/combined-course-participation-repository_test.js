@@ -1,7 +1,7 @@
 import sinon from 'sinon';
 
 import { CombinedCourseParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
-import { CombinedCourseParticipation } from '../../../../../src/quest/domain/models/combined-course-participations/CombinedCourseParticipation.js';
+import { CombinedCourseParticipation } from '../../../../../src/quest/domain/models/combined-course-participations/entities/CombinedCourseParticipation.js';
 import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,

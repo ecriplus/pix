@@ -1,5 +1,5 @@
-import { CombinedCourse } from '../../../../../src/quest/domain/models/combined-courses/CombinedCourse.js';
-import { CombinedCourseParticipation } from '../../../../../src/quest/domain/models/combined-course-participations/CombinedCourseParticipation.js';
+import { CombinedCourseParticipation } from '../../../../../src/quest/domain/models/combined-course-participations/entities/CombinedCourseParticipation.js';
+import { CombinedCourse } from '../../../../../src/quest/domain/models/combined-courses/entities/CombinedCourse.js';
 import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,

@@ -1,12 +1,12 @@
-import { DataForQuest } from '../../../../../src/quest/domain/models/quests/DataForQuest.js';
-import { Eligibility } from '../../../../../src/quest/domain/models/quests/Eligibility.js';
+import { DataForQuest } from '../../../../../src/quest/domain/models/quests/aggregates/DataForQuest.js';
+import { Eligibility } from '../../../../../src/quest/domain/models/quests/aggregates/Eligibility.js';
+import { Success } from '../../../../../src/quest/domain/models/quests/aggregates/Success.js';
 import {
   CRITERION_COMPARISONS,
   Quest,
   REQUIREMENT_COMPARISONS,
   REQUIREMENT_TYPES,
-} from '../../../../../src/quest/domain/models/quests/Quest.js';
-import { Success } from '../../../../../src/quest/domain/models/quests/Success.js';
+} from '../../../../../src/quest/domain/models/quests/entities/Quest.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { expect } from '../../../../test-helper.js';
 

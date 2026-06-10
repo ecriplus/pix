@@ -1,7 +1,7 @@
 import {
   COMBINED_COURSE_ITEM_TYPES,
   CombinedCourseItem,
-} from '../../../../../src/quest/domain/models/combined-course-participations/CombinedCourseItem.js';
+} from '../../../../../src/quest/domain/models/combined-course-participations/value-objects/CombinedCourseItem.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Domain | Models | CombinedCourseItem', function () {

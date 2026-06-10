@@ -7,7 +7,7 @@ import {
   CRITERION_COMPARISONS,
   REQUIREMENT_COMPARISONS,
   REQUIREMENT_TYPES,
-} from '../../../../src/quest/domain/models/quests/Quest.js';
+} from '../../../../src/quest/domain/models/quests/entities/Quest.js';
 import { expect } from '../../../test-helper.js';
 import { databaseBuilder, knex } from '../../../tooling/databases.js';
 

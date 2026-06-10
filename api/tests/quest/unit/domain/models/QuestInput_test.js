@@ -1,12 +1,12 @@
 import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
 import { REWARD_TYPES } from '../../../../../src/quest/domain/constants.js';
+import { QuestInput } from '../../../../../src/quest/domain/models/QuestInput.js';
 import {
   CRITERION_COMPARISONS,
   Quest,
   REQUIREMENT_COMPARISONS,
   REQUIREMENT_TYPES,
-} from '../../../../../src/quest/domain/models/quests/Quest.js';
-import { QuestInput } from '../../../../../src/quest/domain/models/QuestInput.js';
+} from '../../../../../src/quest/domain/models/quests/entities/Quest.js';
 import { EntityValidationError } from '../../../../../src/shared/domain/errors.js';
 import { expect } from '../../../../test-helper.js';
 

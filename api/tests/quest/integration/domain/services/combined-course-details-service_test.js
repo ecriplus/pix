@@ -5,8 +5,8 @@ import { CampaignParticipationStatuses } from '../../../../../src/prescription/s
 import {
   COMBINED_COURSE_ITEM_TYPES,
   CombinedCourseItem,
-} from '../../../../../src/quest/domain/models/combined-course-participations/CombinedCourseItem.js';
-import { CombinedCourse } from '../../../../../src/quest/domain/models/combined-courses/CombinedCourse.js';
+} from '../../../../../src/quest/domain/models/combined-course-participations/value-objects/CombinedCourseItem.js';
+import { CombinedCourse } from '../../../../../src/quest/domain/models/combined-courses/entities/CombinedCourse.js';
 import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { OrganizationLearnerParticipationStatuses } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import combinedCourseDetailsService from '../../../../../src/quest/domain/services/combined-course-details-service.js';

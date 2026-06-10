@@ -1,5 +1,5 @@
 import { CombinedCourseParticipationStatuses } from '../../../../../../src/prescription/shared/domain/constants.js';
-import { CombinedCourseParticipationDetails } from '../../../../../../src/quest/domain/models/combined-course-participations/CombinedCourseParticipationDetails.js';
+import { CombinedCourseParticipationDetails } from '../../../../../../src/quest/domain/models/combined-course-participations/aggregates/CombinedCourseParticipationDetails.js';
 import { expect } from '../../../../../test-helper.js';
 
 describe('Quest | Unit | Domain | Models | CombinedCourseParticipationDetails ', function () {

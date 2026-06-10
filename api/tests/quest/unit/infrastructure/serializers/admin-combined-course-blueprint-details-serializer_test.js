@@ -1,6 +1,6 @@
 import { COMBINED_COURSE_ITEM_TYPES } from '../../../../../src/quest/domain/constants.js';
 import { AdminCombinedCourseBlueprintDetails } from '../../../../../src/quest/domain/models/AdminCombinedCourseBlueprintDetails.js';
-import { Quest } from '../../../../../src/quest/domain/models/quests/Quest.js';
+import { Quest } from '../../../../../src/quest/domain/models/quests/entities/Quest.js';
 import * as adminCombinedCourseBlueprintDetailsSerializer from '../../../../../src/quest/infrastructure/serializers/admin-combined-course-blueprint-details-serializer.js';
 import { expect } from '../../../../test-helper.js';
 
