@@ -24,15 +24,14 @@ async function shareProfileRewardWithOrganization(campaignParticipationId, userI
     campaignParticipationId,
   });
 
-  const lastResult = questResults.at(-1);
-  const profileRewardId = lastResult?.profileRewardId;
-
-  if (profileRewardId) {
-    await profileUsecases.shareProfileReward({
-      userId,
-      profileRewardId,
-      campaignParticipationId,
-    });
+  for (const questResult of questResults) {
+    if (questResult.profileRewardId) {
+      await profileUsecases.shareProfileReward({
+        userId,
+        profileRewardId: questResult.profileRewardId,
+        campaignParticipationId,
+      });
+    }
   }
 }
 

@@ -238,6 +238,44 @@ describe('Evaluation | Unit | Application | assessment-controller', function () 
         expect(questUsecases.getQuestResultsForCampaignParticipation).to.have.been.called;
         expect(profileUsecases.shareProfileReward).to.not.have.been.called;
       });
+
+      it('should share a profile rewards for each quest results', async function () {
+        // given
+        const userId = 12;
+        const campaignParticipationId = 456;
+        const profileRewardId = 789;
+        const secondProfileRewardId = 987;
+        assessment.userId = userId;
+        assessment.campaignParticipationId = campaignParticipationId;
+        assessment.isCampaignParticipationAvailable.returns(true);
+        featureToggles.get.resolves(true);
+        questUsecases.getQuestResultsForCampaignParticipation.resolves([
+          { profileRewardId },
+          { profileRewardId: secondProfileRewardId },
+        ]);
+        evaluationUsecases.completeAssessment.resolves(assessment);
+
+        // when
+        await assessmentController.completeAssessment({ params: { id: assessmentId } });
+
+        // then
+        expect(questUsecases.getQuestResultsForCampaignParticipation).to.have.been.calledWithExactly({
+          userId,
+          campaignParticipationId,
+        });
+
+        expect(profileUsecases.shareProfileReward).calledTwice;
+        expect(profileUsecases.shareProfileReward.getCall(0)).to.have.been.calledWithExactly({
+          userId,
+          profileRewardId,
+          campaignParticipationId,
+        });
+        expect(profileUsecases.shareProfileReward.getCall(1)).to.have.been.calledWithExactly({
+          userId,
+          profileRewardId: secondProfileRewardId,
+          campaignParticipationId,
+        });
+      });
     });
   });
 
