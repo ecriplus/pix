@@ -992,4 +992,41 @@ describe('Certification | Enrolment | Unit | Domain | Models | Candidate', funct
       expect(candidate.isRegisteredToDoubleCertification()).to.be.false;
     });
   });
+
+  describe('#static sortByLastNameAndFirstName', function () {
+    it('sorts candidates alphabetically by last name then first name', function () {
+      const michelJacques = domainBuilder.certification.enrolment.buildCandidate({
+        firstName: 'Michel',
+        lastName: 'Jacques',
+      });
+      const jeannetteJacques = domainBuilder.certification.enrolment.buildCandidate({
+        firstName: 'Jeanette',
+        lastName: 'Jacques',
+      });
+      const fredericMercure = domainBuilder.certification.enrolment.buildCandidate({
+        firstName: 'Frédéric',
+        lastName: 'Mercure',
+      });
+      const francoisMercure = domainBuilder.certification.enrolment.buildCandidate({
+        firstName: 'François',
+        lastName: 'Mercure',
+      });
+      const fridaMercure = domainBuilder.certification.enrolment.buildCandidate({
+        firstName: 'Frida',
+        lastName: 'Mercure',
+      });
+
+      const sortedCandidates = [michelJacques, jeannetteJacques, fredericMercure, francoisMercure, fridaMercure].sort(
+        Candidate.sortByLastNameAndFirstName,
+      );
+
+      expect(sortedCandidates).to.deepEqualArray([
+        jeannetteJacques,
+        michelJacques,
+        francoisMercure,
+        fredericMercure,
+        fridaMercure,
+      ]);
+    });
+  });
 });

@@ -81,6 +81,12 @@ export class Candidate {
     });
   }
 
+  static sortByLastNameAndFirstName(candidateA, candidateB) {
+    let compareRes = candidateA.lastName.localeCompare(candidateB.lastName);
+    if (compareRes === 0) compareRes = candidateA.firstName.localeCompare(candidateB.firstName);
+    return compareRes;
+  }
+
   isReconciled() {
     return !!this.userId && !!this.reconciledAt;
   }
