@@ -6,7 +6,7 @@ import {
   Quest,
   REQUIREMENT_COMPARISONS,
   REQUIREMENT_TYPES,
-} from '../../../../../src/quest/domain/models/Quest.js';
+} from '../../../../../src/quest/domain/models/quest/Quest.js';
 import * as combinedCourseRepository from '../../../../../src/quest/infrastructure/repositories/combined-course-repository.js';
 import * as questRepository from '../../../../../src/quest/infrastructure/repositories/quest-repository.js';
 import { NotFoundError } from '../../../../../src/shared/domain/errors.js';

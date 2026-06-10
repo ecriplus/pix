@@ -1,5 +1,5 @@
-import { Eligibility } from '../../../../../src/quest/domain/models/Eligibility.js';
 import { OrganizationLearnerParticipationStatuses } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
+import { Eligibility } from '../../../../../src/quest/domain/models/quest/Eligibility.js';
 import { expect } from '../../../../test-helper.js';
 
 describe('Quest | Unit | Domain | Models | Eligibility ', function () {

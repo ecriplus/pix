@@ -1,5 +1,5 @@
-import { COMPARISONS as CRITERION_PROPERTY_COMPARISONS } from '../../../../../src/quest/domain/models/CriterionProperty.js';
-import { Eligibility } from '../../../../../src/quest/domain/models/Eligibility.js';
+import { COMPARISONS as CRITERION_PROPERTY_COMPARISONS } from '../../../../../src/quest/domain/models/quest/CriterionProperty.js';
+import { Eligibility } from '../../../../../src/quest/domain/models/quest/Eligibility.js';
 import {
   buildRequirement,
   CappedTubesRequirement,
@@ -7,8 +7,8 @@ import {
   ComposedRequirement,
   ObjectRequirement,
   TYPES,
-} from '../../../../../src/quest/domain/models/Requirement.js';
-import { Success } from '../../../../../src/quest/domain/models/Success.js';
+} from '../../../../../src/quest/domain/models/quest/Requirement.js';
+import { Success } from '../../../../../src/quest/domain/models/quest/Success.js';
 import { KnowledgeElement } from '../../../../../src/shared/domain/models/KnowledgeElement.js';
 import { expect } from '../../../../test-helper.js';
 

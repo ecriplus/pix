@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
-import { EntityValidationError } from '../../../shared/domain/errors.js';
-import { logger } from '../../../shared/infrastructure/utils/logger.js';
+import { EntityValidationError } from '../../../../shared/domain/errors.js';
+import { logger } from '../../../../shared/infrastructure/utils/logger.js';
 import { COMPARISONS as _CRITERION_COMPARISONS } from './CriterionProperty.js';
 import {
   COMPARISONS as _REQUIREMENT_COMPARISONS,
@@ -9,7 +9,7 @@ import {
   TYPES as _REQUIREMENT_TYPES,
 } from './Requirement.js';
 /**
- * @typedef {import ('./DataForQuest.js').DataForQuest} DataForQuest
+ * @typedef {import ('../DataForQuest.js').DataForQuest} DataForQuest
  */
 
 export const REQUIREMENT_COMPARISONS = _REQUIREMENT_COMPARISONS;

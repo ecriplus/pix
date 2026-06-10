@@ -1,7 +1,7 @@
 import sinon from 'sinon';
 
-import { Eligibility } from '../../../../../src/quest/domain/models/Eligibility.js';
 import { OrganizationLearnerParticipationStatuses } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
+import { Eligibility } from '../../../../../src/quest/domain/models/quest/Eligibility.js';
 import * as eligibilityRepository from '../../../../../src/quest/infrastructure/repositories/eligibility-repository.js';
 import { expect } from '../../../../test-helper.js';
 

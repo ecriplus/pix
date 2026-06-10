@@ -1,5 +1,5 @@
 import { REWARD_TYPES } from '../../../../src/quest/domain/constants.js';
-import { Quest } from '../../../../src/quest/domain/models/Quest.js';
+import { Quest } from '../../../../src/quest/domain/models/quest/Quest.js';
 
 function buildQuest({
   id = 1,

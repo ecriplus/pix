@@ -1,4 +1,4 @@
-import { DataForQuest } from '../models/DataForQuest.js';
+import { DataForQuest } from '../models/quest/DataForQuest.js';
 
 export const getQuestResultsForCampaignParticipation = async ({
   userId,
