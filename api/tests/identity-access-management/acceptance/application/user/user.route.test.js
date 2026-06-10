@@ -282,6 +282,8 @@ describe('Acceptance | Identity Access Management | Application | Route | User',
             'has-recommended-trainings': true,
             'should-see-data-protection-policy-information-banner': true,
             'last-data-protection-policy-seen-at': null,
+            'pix-app-terms-of-service-status': 'accepted',
+            'pix-app-terms-of-service-document-path': null,
           },
           relationships: {
             'account-info': {

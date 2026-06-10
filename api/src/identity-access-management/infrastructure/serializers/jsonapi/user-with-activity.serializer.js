@@ -14,6 +14,8 @@ const serialize = function (users, meta) {
       'lastTermsOfServiceValidatedAt',
       'lastDataProtectionPolicySeenAt',
       'mustValidateTermsOfService',
+      'pixAppTermsOfServiceStatus',
+      'pixAppTermsOfServiceDocumentPath',
       'lang',
       'isAnonymous',
       'accountInfo',
