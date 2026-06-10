@@ -23,6 +23,11 @@ module('Acceptance | Certifications | Information', function (hooks) {
   module('when certification candidate participates in a V3 session', function () {
     test('should display the certification instructions page', async function (assert) {
       // given
+      server.create('certification-candidate', {
+        id: '2',
+        sessionId: 123,
+        subscription: 'CORE',
+      });
       server.create('certification-candidate-subscription', {
         id: '2',
         sessionId: 123,
