@@ -1,5 +1,7 @@
 # Pix Changelog
 
+# [5.428.0](https://github.com/1024pix/pix/compare/v5.427.0...v5.428.0) (2026-06-10)
+
 # [5.427.0](https://github.com/1024pix/pix/compare/v5.426.0...v5.427.0) (2026-06-09)
 
 ### :rocket: Amélioration
