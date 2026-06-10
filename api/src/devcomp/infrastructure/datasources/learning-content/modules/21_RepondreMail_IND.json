@@ -937,7 +937,7 @@
                 "cards": [
                   {
                     "id": "62976900-593b-49d9-a5d7-f9b2a0db7688",
-                    "text": "Djibril a utilisé « Répondre à tous »",
+                    "text": "Djibril a utilisé « Répondre à tous ».",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -948,7 +948,7 @@
                   },
                   {
                     "id": "edc765f2-9a20-48ad-b7ca-b7a9191c89da",
-                    "text": "Albertine a envoyé le premier mail",
+                    "text": "Albertine a envoyé le premier mail.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -959,7 +959,7 @@
                   },
                   {
                     "id": "fd0f68cd-4801-4755-8977-18cd12eff791",
-                    "text": "Djibril n’est pas disponible à la date proposée par Robert",
+                    "text": "Djibril n’est pas disponible à la date proposée par Robert.",
                     "image": {
                       "url": "",
                       "altText": ""
@@ -970,7 +970,7 @@
                   },
                   {
                     "id": "a76b1b0e-9c49-4496-90b0-b47c0b0f529a",
-                    "text": "Rosita est la dernière à avoir répondu dans cet échange",
+                    "text": "Rosita est la dernière à avoir répondu dans cet échange.",
                     "image": {
                       "url": "",
                       "altText": ""
