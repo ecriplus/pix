@@ -7,6 +7,7 @@ import { DomainTransaction } from '../../shared/domain/DomainTransaction.js';
 import { cryptoService } from '../../shared/domain/services/crypto-service.js';
 import * as userService from '../domain/services/user-service.js';
 import * as authenticationMethodRepository from '../infrastructure/repositories/authentication-method.repository.js';
+import { legalDocumentApiRepository } from '../infrastructure/repositories/legal-document-api.repository.js';
 import { userToCreateRepository } from '../infrastructure/repositories/user-to-create.repository.js';
 
 export const csvSchemas = [
@@ -50,12 +51,14 @@ export class MassCreateUserAccountsScript extends Script {
         };
         const hashedPassword = await cryptoService.hashPassword(userDTO.password);
 
-        await userService.createUserWithPassword({
+        const savedUser = await userService.createUserWithPassword({
           user: userToCreate,
           hashedPassword,
           userToCreateRepository,
           authenticationMethodRepository,
         });
+
+        await legalDocumentApiRepository.acceptPixAppTos({ userId: savedUser.id });
       }
     });
   }
