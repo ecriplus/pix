@@ -4,6 +4,10 @@ const acceptPixOrgaTos = async ({ userId, dependencies = { legalDocumentApi } })
   return dependencies.legalDocumentApi.acceptLegalDocumentByUserId({ userId, service: 'pix-orga', type: 'TOS' });
 };
 
-const legalDocumentApiRepository = { acceptPixOrgaTos };
+const acceptPixAppTos = async ({ userId, dependencies = { legalDocumentApi } }) => {
+  return dependencies.legalDocumentApi.acceptLegalDocumentByUserId({ userId, service: 'pix-app', type: 'TOS' });
+};
+
+const legalDocumentApiRepository = { acceptPixAppTos, acceptPixOrgaTos };
 
 export { legalDocumentApiRepository };

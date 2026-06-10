@@ -2,6 +2,9 @@ import { withTransaction } from '../../../shared/domain/DomainTransaction.js';
 import { LegalDocumentService } from '../models/LegalDocumentService.js';
 import { LegalDocumentType } from '../models/LegalDocumentType.js';
 
+const { TOS } = LegalDocumentType.VALUES;
+const { PIX_APP } = LegalDocumentService.VALUES;
+
 /**
  * Accepts a legal document by user ID.
  *
@@ -12,9 +15,14 @@ import { LegalDocumentType } from '../models/LegalDocumentType.js';
  * @returns {Promise<void>} A promise that resolves when the operation is complete.
  */
 const acceptLegalDocumentByUserId = withTransaction(
-  async ({ userId, service, type, legalDocumentRepository, userAcceptanceRepository, logger }) => {
+  async ({ userId, service, type, legalDocumentRepository, userAcceptanceRepository, userRepository, logger }) => {
     LegalDocumentType.assert(type);
     LegalDocumentService.assert(service);
+
+    // legacy document acceptance
+    if (type === TOS && service === PIX_APP) {
+      await userRepository.acceptLegacyPixAppTermsOfService(userId);
+    }
 
     const legalDocument = await legalDocumentRepository.findLastVersionByTypeAndService({ service, type });
     if (!legalDocument) {

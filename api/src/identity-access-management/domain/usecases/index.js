@@ -110,8 +110,8 @@ const utils = {
 
 const dependencies = Object.assign({ config, codeUtils }, repositories, services, validators, utils);
 
+import { acceptPixAppTermsOfService } from './accept-pix-app-terms-of-service.usecase.js';
 import { acceptPixCertifTermsOfService } from './accept-pix-certif-terms-of-service.usecase.js';
-import { acceptPixLastTermsOfService } from './accept-pix-last-terms-of-service.usecase.js';
 import { acceptPixOrgaTermsOfService } from './accept-pix-orga-terms-of-service.usecase.js';
 import { addOidcProvider } from './add-oidc-provider.js';
 import { addPixAuthenticationMethod } from './add-pix-authentication-method.usecase.js';
@@ -173,7 +173,7 @@ import { validateUserAccountEmail } from './validate-user-account-email.usecase.
 
 const usecasesWithoutInjectedDependencies = {
   acceptPixCertifTermsOfService,
-  acceptPixLastTermsOfService,
+  acceptPixAppTermsOfService,
   acceptPixOrgaTermsOfService,
   addOidcProvider,
   addPixAuthenticationMethod,

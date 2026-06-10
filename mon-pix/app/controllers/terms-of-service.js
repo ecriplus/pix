@@ -21,6 +21,8 @@ export default class TermsOfServiceController extends Controller {
     if (this.isTermsOfServiceValidated) {
       this.showErrorTermsOfServiceNotSelected = false;
       await this.currentUser.user.save({ adapterOptions: { acceptPixTermsOfService: true } });
+      this.currentUser.user.mustValidateTermsOfService = false;
+      this.currentUser.user.cgu = true;
 
       if (this.session.attemptedTransition) {
         this.session.attemptedTransition.retry();

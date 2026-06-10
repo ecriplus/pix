@@ -1832,26 +1832,6 @@ describe('Integration | Identity Access Management | Infrastructure | Repository
     });
   });
 
-  describe('#acceptPixLastTermsOfService', function () {
-    it('validates the last terms of service and save the date of acceptance ', async function () {
-      // given
-      const userId = databaseBuilder.factory.buildUser({
-        mustValidateTermsOfService: true,
-        lastTermsOfServiceValidatedAt: null,
-      }).id;
-      await databaseBuilder.commit();
-
-      // when
-      const actualUser = await userRepository.acceptPixLastTermsOfService(userId);
-
-      // then
-      expect(actualUser.lastTermsOfServiceValidatedAt).to.be.exist;
-      expect(actualUser.lastTermsOfServiceValidatedAt).to.be.a('Date');
-      expect(actualUser.mustValidateTermsOfService).to.be.false;
-      expect(actualUser.updatedAt).to.deep.equal(now);
-    });
-  });
-
   describe('#isUsernameAvailable', function () {
     const username = 'abc.def0101';
 

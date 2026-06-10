@@ -11,4 +11,14 @@ const getPixAppLegacyCguByUserId = async (userId) => {
   return user;
 };
 
-export { getPixAppLegacyCguByUserId };
+const acceptLegacyPixAppTermsOfService = async function (id) {
+  const knexConn = DomainTransaction.getConnection();
+  await knexConn('users').where({ id }).update({
+    lastTermsOfServiceValidatedAt: new Date(),
+    mustValidateTermsOfService: false,
+    updatedAt: new Date(),
+    cgu: true,
+  });
+};
+
+export { acceptLegacyPixAppTermsOfService, getPixAppLegacyCguByUserId };
