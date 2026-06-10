@@ -1,3 +1,5 @@
+import { LegalDocumentService } from '../../../src/legal-documents/domain/models/LegalDocumentService.js';
+import { LegalDocumentType } from '../../../src/legal-documents/domain/models/LegalDocumentType.js';
 import { databaseBuffer } from '../database-buffer.js';
 
 const buildLegalDocumentVersion = function ({
@@ -12,4 +14,11 @@ const buildLegalDocumentVersion = function ({
   });
 };
 
-export { buildLegalDocumentVersion };
+const buildPixAppTos = function () {
+  return buildLegalDocumentVersion({
+    service: LegalDocumentService.VALUES.PIX_APP,
+    type: LegalDocumentType.VALUES.TOS,
+  });
+};
+
+export { buildLegalDocumentVersion, buildPixAppTos };
