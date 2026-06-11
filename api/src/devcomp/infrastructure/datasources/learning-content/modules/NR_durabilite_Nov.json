@@ -124,7 +124,7 @@
                     "id": "0",
                     "content": "Moins de dix",
                     "feedback": {
-                      "diagnosis": "<p>Eh non&nbsp;!Il y en a beaucoup plus ! Un smartphone contient plusieurs dizaines de matériaux différents.</p>"
+                      "diagnosis": "<p>Eh non&nbsp;! Il y en a beaucoup plus ! Un smartphone contient plusieurs dizaines de matériaux différents.</p>"
                     }
                   },
                   {
@@ -336,7 +336,7 @@
                         },
                         {
                           "id": "2",
-                          "content": "L'aluminium",
+                          "content": "L’aluminium",
                           "feedback": {
                             "diagnosis": "<p>Eh non ! Il s’agit de <strong>l’or</strong>.</p>"
                           }
@@ -491,28 +491,28 @@
               "element": {
                 "id": "e9aa0bd3-a7f4-4945-9c5d-80f11588a5a1",
                 "type": "qcu-discovery",
-                "instruction": "<p>Vrai ou faux&nbsp;: la fabrication des principaux composants d'un smartphone a lieu en Europe.</p>",
+                "instruction": "<p>Vrai ou faux&nbsp;: la fabrication des principaux composants d’un smartphone a lieu en Europe.</p>",
                 "hasShortProposals": true,
                 "proposals": [
                   {
                     "id": "0",
                     "content": "Vrai",
                     "feedback": {
-                      "diagnosis": "<p>Eh non ! La fabrication des principaux composants d'un smartphone a lieu en <strong>Asie<strong>.</strong></strong></p>"
+                      "diagnosis": "<p>Eh non ! La fabrication des principaux composants d’un smartphone a lieu en <strong>Asie<strong>.</strong></strong></p>"
                     }
                   },
                   {
                     "id": "1",
                     "content": "Faux",
                     "feedback": {
-                      "diagnosis": "<p>Eh oui ! La fabrication des principaux composants d'un smartphone a lieu en <strong>Asie<strong>.</strong></strong></p>"
+                      "diagnosis": "<p>Eh oui ! La fabrication des principaux composants d’un smartphone a lieu en <strong>Asie<strong>.</strong></strong></p>"
                     }
                   },
                   {
                     "id": "2",
                     "content": "Je ne sais pas.",
                     "feedback": {
-                      "diagnosis": "<p>La fabrication des principaux composants d'un smartphone a lieu en <strong>Asie<strong>.</strong></strong></p>"
+                      "diagnosis": "<p>La fabrication des principaux composants d’un smartphone a lieu en <strong>Asie<strong>.</strong></strong></p>"
                     }
                   }
                 ],
@@ -699,7 +699,7 @@
             },
             {
               "type": "stepper",
-              "instruction": "Jane a le même téléphone depuis 5&nbsp;ans. Elle décide d’acheter le nouveau smartphone Univers 13. Elle se demande ce qu'elle doit faire de son ancien smartphone.",
+              "instruction": "Jane a le même téléphone depuis 5&nbsp;ans. Elle décide d’acheter le nouveau smartphone Univers 13. Elle se demande ce qu’elle doit faire de son ancien smartphone.",
               "steps": [
                 {
                   "elements": [
@@ -733,7 +733,7 @@
                     {
                       "id": "d58d9cb1-edc3-400f-9201-ec5faa67c2c6",
                       "type": "qcu-discovery",
-                      "instruction": "<p>Quelle est la meilleure option si le smartphone ne marche plus ?</p>",
+                      "instruction": "<p>Quelle est la meilleure option si le smartphone ne fonctionne plus ?</p>",
                       "hasShortProposals": false,
                       "proposals": [
                         {
@@ -774,7 +774,7 @@
                       "id": "da5b7905-7192-43d5-a7e5-7a196ea69a48",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>Parfois, vous devez changer de smartphone car il ne permet plus de faire ce que vous voulez, ou qu’il est cassé mais impossible à réparer. Dans ce cas, 2 possibilités : </p><ul><li>Si votre ancien smartphone <strong>fonctionne encore</strong>, il pourait servir à quelqu'un d'autre. Pensez donc à <strong>le donner</strong> ou <strong>le vendre</strong>, ne le gardez pas dans un tiroir</li><li>Si votre ancien smartphone <strong>ne fonctionne plus</strong>, alors ne le jetez pas dans n'importe quelle poubelle&nbsp;!</li></ul><p></p>"
+                      "content": "<p>Parfois, vous devez changer de smartphone car il ne permet plus de faire ce que vous voulez, ou qu’il est cassé mais impossible à réparer. Dans ce cas, 2 possibilités : </p><ul><li>Si votre ancien smartphone <strong>fonctionne encore</strong>, il pourait servir à quelqu’un d’autre. Pensez donc à <strong>le donner</strong> ou <strong>le vendre</strong>, ne le gardez pas dans un tiroir&nbsp;!</li><li>Si votre ancien smartphone <strong>ne fonctionne plus</strong>, alors ne le jetez pas dans n’importe quelle poubelle&nbsp;!</li></ul><p></p>"
                     }
                   ]
                 },
@@ -799,7 +799,7 @@
                       "id": "fd8a4f31-9ef9-4695-93b3-ffb9ecaf27a0",
                       "type": "text",
                       "tag": " ",
-                      "content": "<p>En effet, certains composants des appareils électroniques dégagent des fumées toxiques s'ils sont incinérés de la même manière que les déchets classiques.<br>La bonne chose à faire est donc de <strong>déposer votre smartphone dans un point de collecte spécialisé</strong> pour que les composants soient récupérés ou recyclés. Vous pouvez trouver des points de collecte dans les magasins d'électroménager, par exemple.</p>"
+                      "content": "<p>En effet, certains composants des appareils électroniques dégagent des fumées toxiques s’ils sont incinérés de la même manière que les déchets classiques.<br>La bonne chose à faire est donc de <strong>déposer votre smartphone dans un point de collecte spécialisé</strong> pour que les composants soient récupérés ou recyclés. Vous pouvez trouver des points de collecte dans les magasins d’électroménager, par exemple.</p>"
                     }
                   ]
                 }
@@ -921,15 +921,15 @@
                           "content": "<p>Essayer de le conserver le plus longtemps possible.</p>",
                           "feedback": {
                             "state": "<p>Bonne réponse !</p>",
-                            "diagnosis": "<p>Pour limiter l'impact environnemental d'un smartphone il faut essayer de le conserver le plus longtemps possible.</p>"
+                            "diagnosis": "<p>Pour limiter l’impact environnemental d’un smartphone il faut essayer de le conserver le plus longtemps possible.</p>"
                           }
                         },
                         {
                           "id": "1",
-                          "content": "<p>En changer tous les deux ans, car les smartphones plus récents consomment moins d'électricité.</p>",
+                          "content": "<p>En changer tous les deux ans, car les smartphones plus récents consomment moins d’électricité.</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse !</p>",
-                            "diagnosis": "<p>Pour limiter l'impact environnemental d'un smartphone il faut essayer de le conserver le plus longtemps possible.</p>"
+                            "diagnosis": "<p>Pour limiter l’impact environnemental d’un smartphone il faut essayer de le conserver le plus longtemps possible.</p>"
                           }
                         }
                       ],
@@ -950,7 +950,7 @@
                           "content": "<p>Le jeter dès qu’il a un problème.</p>",
                           "feedback": {
                             "state": "<p>Mauvaise réponse !<br></p>",
-                            "diagnosis": "<p>Pour conserver son smartphone le plus longtemps possible, il faut le protéger et le réparer.</p><p><br></p>"
+                            "diagnosis": "<p>Pour conserver son smartphone le plus longtemps possible, il faut le protéger et le réparer.</p>"
                           }
                         },
                         {
@@ -1051,28 +1051,28 @@
                     "id": "1",
                     "content": "Je vais acheter une coque et un écran de protection pour mon smartphone.",
                     "feedback": {
-                      "diagnosis": "C'est une très bonne idée&nbsp;! Les coques et les écrans de protection sont de bons moyens de protéger un smartphone pour prolonger sa durée de vie."
+                      "diagnosis": "C’est une très bonne idée&nbsp;! Les coques et les écrans de protection sont de bons moyens de protéger un smartphone pour prolonger sa durée de vie."
                     }
                   },
                   {
                     "id": "2",
-                    "content": "La prochaine fois que mon smartphone aura un problème, j'essaierai de le réparer plutôt qu'en acheter un nouveau.",
+                    "content": "La prochaine fois que mon smartphone aura un problème, j’essaierai de le réparer plutôt qu’en acheter un nouveau.",
                     "feedback": {
                       "diagnosis": "Très bien&nbsp;! Réparer un smartphone défecteux est le meilleur moyen de prolonger sa durée de vie."
                     }
                   },
                   {
                     "id": "3",
-                    "content": "Si jamais je dois changer de smartphone, je choisirais un smartphone d'occasion plutôt qu'un neuf.",
+                    "content": "Si jamais je dois changer de smartphone, je choisirais un smartphone d’occasion plutôt qu’un neuf.",
                     "feedback": {
-                      "diagnosis": "Bien vu&nbsp;! Si vous êtes obligés de changer de smartphone, en acheter un d'occasion est la solution qui a le moins d'impact négatif sur l'environnement."
+                      "diagnosis": "Bien vu&nbsp;! Si vous êtes obligés de changer de smartphone, en acheter un d’occasion est la solution qui a le moins d’impact négatif sur l’environnement."
                     }
                   },
                   {
                     "id": "4",
-                    "content": "Je fais dej́à tout ça.",
+                    "content": "Je fais déjà tout ça.",
                     "feedback": {
-                      "diagnosis": "Bravo&nbsp;! Tous ces gestes permettent de limiter l'impact négatif des smartphones sur l'environnement."
+                      "diagnosis": "Bravo&nbsp;! Tous ces gestes permettent de limiter l’impact négatif des smartphones sur l’environnement."
                     }
                   }
                 ]
