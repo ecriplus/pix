@@ -29,14 +29,11 @@ export const getCurrentUser = async function ({
   const user = await userRepository.get(authenticatedUserId);
   const tosStatus = await legalDocumentApiRepository.getPixAppTosStatus({ userId: authenticatedUserId });
 
-  const shouldSeeDataProtectionPolicyInformationBanner = user.shouldSeeDataProtectionPolicyInformationBanner;
-
   return new UserWithActivity({
     user,
     tosStatus,
     hasAssessmentParticipations,
     codeForLastProfileToShare,
     hasRecommendedTrainings,
-    shouldSeeDataProtectionPolicyInformationBanner,
   });
 };

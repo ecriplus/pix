@@ -1,5 +1,8 @@
+import sinon from 'sinon';
+
 import { UserWithActivity } from '../../../../src/identity-access-management/domain/read-models/UserWithActivity.js';
 import { STATUS } from '../../../../src/legal-documents/domain/models/LegalDocumentStatus.js';
+import { config } from '../../../../src/shared/config.js';
 import { expect } from '../../../test-helper.js';
 import { domainBuilder } from '../../../tooling/domain-builder/domain-builder.js';
 
@@ -106,6 +109,202 @@ describe('Unit | Domain | Read-Models | UserWithActivity', function () {
         expect(userWithActivity.cgu).to.be.false;
         expect(userWithActivity.mustValidateTermsOfService).to.be.false;
         expect(userWithActivity.pixAppTermsOfServiceStatus).to.equal(STATUS.NOT_APPLICABLE);
+      });
+    });
+  });
+  describe('#shouldSeeDataProtectionPolicyInformationBanner', function () {
+    context('when user has not seen data protection policy but data protection date is not settled', function () {
+      it('should return false', function () {
+        // given
+        const acceptedAt = new Date('2025-01-15');
+        const user = domainBuilder.buildUser({ lastDataProtectionPolicySeenAt: null });
+        const tosStatus = { status: STATUS.ACCEPTED, documentPath: '/tos/v2.pdf', acceptedAt: acceptedAt };
+        sinon.stub(config.dataProtectionPolicy, 'updateDate').value(null);
+        const userWithActivity = new UserWithActivity({
+          user,
+          tosStatus,
+          hasAssessmentParticipations: false,
+          codeForLastProfileToShare: null,
+          hasRecommendedTrainings: false,
+        });
+
+        // when
+        const result = userWithActivity.shouldSeeDataProtectionPolicyInformationBanner;
+
+        // then
+        expect(result).to.be.false;
+      });
+    });
+
+    context('when user has not seen data protection policy and data protection has been updated', function () {
+      it('should return true', function () {
+        // given
+        const acceptedAt = new Date('2025-01-15');
+        const user = domainBuilder.buildUser({ lastDataProtectionPolicySeenAt: null });
+        const tosStatus = { status: STATUS.ACCEPTED, documentPath: '/tos/v2.pdf', acceptedAt: acceptedAt };
+        sinon.stub(config.dataProtectionPolicy, 'updateDate').value(new Date());
+        const userWithActivity = new UserWithActivity({
+          user,
+          tosStatus,
+          hasAssessmentParticipations: false,
+          codeForLastProfileToShare: null,
+          hasRecommendedTrainings: false,
+        });
+
+        // when
+        const result = userWithActivity.shouldSeeDataProtectionPolicyInformationBanner;
+
+        // then
+        expect(result).to.be.true;
+      });
+
+      it('should return false for an organization learner', function () {
+        // given
+        const user = domainBuilder.buildUser({ lastDataProtectionPolicySeenAt: null });
+        const tosStatus = { status: STATUS.NOT_APPLICABLE, documentPath: null, acceptedAt: null };
+        sinon.stub(config.dataProtectionPolicy, 'updateDate').value(new Date());
+        const userWithActivity = new UserWithActivity({
+          user,
+          tosStatus,
+          hasAssessmentParticipations: false,
+          codeForLastProfileToShare: null,
+          hasRecommendedTrainings: false,
+        });
+
+        // when
+        const result = userWithActivity.shouldSeeDataProtectionPolicyInformationBanner;
+
+        // then
+        expect(result).to.be.false;
+      });
+    });
+
+    context('when user has seen data protection policy but data protection date is not settled', function () {
+      it('should return false', function () {
+        // given
+        const acceptedAt = new Date('2025-01-15');
+        const user = domainBuilder.buildUser({ lastDataProtectionPolicySeenAt: new Date() });
+        const tosStatus = { status: STATUS.ACCEPTED, documentPath: '/tos/v2.pdf', acceptedAt: acceptedAt };
+        sinon.stub(config.dataProtectionPolicy, 'updateDate').value(null);
+        const userWithActivity = new UserWithActivity({
+          user,
+          tosStatus,
+          hasAssessmentParticipations: false,
+          codeForLastProfileToShare: null,
+          hasRecommendedTrainings: false,
+        });
+
+        // when
+        const result = userWithActivity.shouldSeeDataProtectionPolicyInformationBanner;
+
+        // then
+        expect(result).to.be.false;
+      });
+
+      it('should return false for an organization learner', function () {
+        // given
+        const user = domainBuilder.buildUser({ lastDataProtectionPolicySeenAt: new Date() });
+        const tosStatus = { status: STATUS.NOT_APPLICABLE, documentPath: null, acceptedAt: null };
+        sinon.stub(config.dataProtectionPolicy, 'updateDate').value(null);
+        const userWithActivity = new UserWithActivity({
+          user,
+          tosStatus,
+          hasAssessmentParticipations: false,
+          codeForLastProfileToShare: null,
+          hasRecommendedTrainings: false,
+        });
+
+        // when
+        const result = userWithActivity.shouldSeeDataProtectionPolicyInformationBanner;
+
+        // then
+        expect(result).to.be.false;
+      });
+    });
+
+    context('when user has seen data protection policy but data protection has not been updated since', function () {
+      it('should return false', function () {
+        // given
+        const acceptedAt = new Date('2025-01-15');
+        const user = domainBuilder.buildUser({ lastDataProtectionPolicySeenAt: new Date(Date.now() + 3600 * 1000) });
+        const tosStatus = { status: STATUS.ACCEPTED, documentPath: '/tos/v2.pdf', acceptedAt: acceptedAt };
+        sinon.stub(config.dataProtectionPolicy, 'updateDate').value(new Date());
+        const userWithActivity = new UserWithActivity({
+          user,
+          tosStatus,
+          hasAssessmentParticipations: false,
+          codeForLastProfileToShare: null,
+          hasRecommendedTrainings: false,
+        });
+
+        // when
+        const result = userWithActivity.shouldSeeDataProtectionPolicyInformationBanner;
+
+        // then
+        expect(result).to.be.false;
+      });
+
+      it('should return false for an organization learner', function () {
+        // given
+        const user = domainBuilder.buildUser({ lastDataProtectionPolicySeenAt: new Date(Date.now() + 3600 * 1000) });
+        const tosStatus = { status: STATUS.NOT_APPLICABLE, documentPath: null, acceptedAt: null };
+        sinon.stub(config.dataProtectionPolicy, 'updateDate').value(new Date());
+        const userWithActivity = new UserWithActivity({
+          user,
+          tosStatus,
+          hasAssessmentParticipations: false,
+          codeForLastProfileToShare: null,
+          hasRecommendedTrainings: false,
+        });
+
+        // when
+        const result = userWithActivity.shouldSeeDataProtectionPolicyInformationBanner;
+
+        // then
+        expect(result).to.be.false;
+      });
+    });
+
+    context('when user has seen data protection policy but data protection has been updated', function () {
+      it('should return true', function () {
+        // given
+        const acceptedAt = new Date('2025-01-15');
+        const user = domainBuilder.buildUser({ lastDataProtectionPolicySeenAt: new Date() });
+        const tosStatus = { status: STATUS.ACCEPTED, documentPath: '/tos/v2.pdf', acceptedAt: acceptedAt };
+        sinon.stub(config.dataProtectionPolicy, 'updateDate').value(new Date(Date.now() + 3600 * 1000));
+        const userWithActivity = new UserWithActivity({
+          user,
+          tosStatus,
+          hasAssessmentParticipations: false,
+          codeForLastProfileToShare: null,
+          hasRecommendedTrainings: false,
+        });
+
+        // when
+        const result = userWithActivity.shouldSeeDataProtectionPolicyInformationBanner;
+
+        // then
+        expect(result).to.be.true;
+      });
+
+      it('should return false for an organization learner', function () {
+        // given
+        const user = domainBuilder.buildUser({ lastDataProtectionPolicySeenAt: new Date() });
+        const tosStatus = { status: STATUS.NOT_APPLICABLE, documentPath: null, acceptedAt: null };
+        sinon.stub(config.dataProtectionPolicy, 'updateDate').value(new Date(Date.now() + 3600 * 1000));
+        const userWithActivity = new UserWithActivity({
+          user,
+          tosStatus,
+          hasAssessmentParticipations: false,
+          codeForLastProfileToShare: null,
+          hasRecommendedTrainings: false,
+        });
+
+        // when
+        const result = userWithActivity.shouldSeeDataProtectionPolicyInformationBanner;
+
+        // then
+        expect(result).to.be.false;
       });
     });
   });
