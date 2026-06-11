@@ -112,6 +112,29 @@ describe('Integration | Legal documents | Domain | Use case | get-legal-document
           expect(result).to.deep.equal({ status: STATUS.UPDATE_REQUESTED, acceptedAt: null, documentPath: null });
         });
       });
+
+      context('when user is a SCO student (cgu=false)', function () {
+        it('returns not-applicable status', async function () {
+          // given
+          const user = databaseBuilder.factory.buildUser({
+            cgu: false,
+            mustValidateTermsOfService: false,
+            lastTermsOfServiceValidatedAt: null,
+          });
+          await databaseBuilder.commit();
+
+          // when
+          const result = await usecases.getLegalDocumentStatusByUserId({
+            userId: user.id,
+            service: PIX_APP,
+            type: TOS,
+          });
+
+          // then
+          expect(result).to.be.an.instanceOf(LegalDocumentStatus);
+          expect(result).to.deep.equal({ status: STATUS.NOT_APPLICABLE, acceptedAt: null, documentPath: null });
+        });
+      });
     });
 
     context('when feature toggle is enabled', function () {

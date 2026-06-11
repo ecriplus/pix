@@ -85,10 +85,30 @@ describe('Unit | Legal documents | Domain | Model | LegalDocumentStatus', functi
   });
 
   describe('#LegalDocumentStatus.buildForLegacyPixAppCgu', function () {
+    context('when the user is a SCO student (cgu=false)', function () {
+      it('returns a "not-applicable" legal document status', function () {
+        // given / when
+        const legalDocumentStatus = LegalDocumentStatus.buildForLegacyPixAppCgu({
+          cgu: false,
+          mustValidateTermsOfService: false,
+          lastTermsOfServiceValidatedAt: null,
+        });
+
+        // then
+        expect(legalDocumentStatus).to.be.instanceof(LegalDocumentStatus);
+        expect(legalDocumentStatus).to.deep.equal({
+          status: STATUS.NOT_APPLICABLE,
+          acceptedAt: null,
+          documentPath: null,
+        });
+      });
+    });
+
     context('when the user has accepted CGU and must validate terms of service', function () {
       it('returns an "update-requested" legal document status', function () {
         // given / when
         const legalDocumentStatus = LegalDocumentStatus.buildForLegacyPixAppCgu({
+          cgu: true,
           mustValidateTermsOfService: true,
           lastTermsOfServiceValidatedAt: new Date('2024-01-01'),
         });
@@ -110,6 +130,7 @@ describe('Unit | Legal documents | Domain | Model | LegalDocumentStatus', functi
 
         // when
         const legalDocumentStatus = LegalDocumentStatus.buildForLegacyPixAppCgu({
+          cgu: true,
           mustValidateTermsOfService: false,
           lastTermsOfServiceValidatedAt,
         });

@@ -36,6 +36,7 @@ const getLegalDocumentStatusByUserId = async ({
   if (!isNewVersioningEnabled && isPixAppTos) {
     const user = await userRepository.getPixAppLegacyCguByUserId(userId);
     const legalDocumentStatus = LegalDocumentStatus.buildForLegacyPixAppCgu({
+      cgu: user.cgu,
       mustValidateTermsOfService: user.mustValidateTermsOfService,
       lastTermsOfServiceValidatedAt: user.lastTermsOfServiceValidatedAt,
     });
