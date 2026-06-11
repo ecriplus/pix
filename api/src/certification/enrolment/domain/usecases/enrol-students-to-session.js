@@ -4,7 +4,6 @@
  * @typedef {import('./index.js').CandidateRepository} CandidateRepository
  * @typedef {import('./index.js').CountryRepository} CountryRepository
  * @typedef {import('./index.js').SessionRepository} SessionRepository
- * @typedef {import('../models/SCOCertificationCandidate.js').SCOCertificationCandidate} SCOCertificationCandidate
  */
 import { ForbiddenAccess } from '../../../../shared/domain/errors.js';
 import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';

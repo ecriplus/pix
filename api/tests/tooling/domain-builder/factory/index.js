@@ -124,7 +124,6 @@ import { buildQuest } from './build-quest.js';
 import { buildReproducibilityRate } from './build-reproducibility-rate.js';
 import { buildResultCompetenceTree } from './build-result-competence-tree.js';
 import { buildSchoolAssessment } from './build-school-assessment.js';
-import { buildSCOCertificationCandidate } from './build-sco-certification-candidate.js';
 import { buildScoringAndCapacitySimulatorReport } from './build-scoring-and-capacity-simulator-report.js';
 import { buildSessionForAttendanceSheet } from './build-session-for-attendance-sheet.js';
 import { buildSessionForInvigilatorKit } from './build-session-for-invigilator-kit.js';
@@ -494,7 +493,6 @@ export {
   buildReproducibilityRate,
   buildResultCompetenceTree,
   buildSchoolAssessment,
-  buildSCOCertificationCandidate,
   buildScoringAndCapacitySimulatorReport,
   buildSessionForAttendanceSheet,
   buildSessionForInvigilatorKit,
