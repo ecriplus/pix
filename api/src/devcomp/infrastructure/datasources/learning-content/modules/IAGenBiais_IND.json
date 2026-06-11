@@ -45,7 +45,7 @@
                       "type": "Texte + Image",
                       "content": "Ça m’énerve, je veux une image de juge mais l’IA me sort toujours la même chose : un homme blanc, âgé, avec une cravate, un vrai stéréotype. Regarde !",
                       "image": {
-                        "src": "https://assets.pix.org/draft/modules/ia-biais-independant/juge1et2.jpg",
+                        "src": "https://assets.pix.org/modules/IAGenBiais_IND/juge1et2.jpg",
                         "alt": "images de juges créés par IA générative"
                       }
                     },
