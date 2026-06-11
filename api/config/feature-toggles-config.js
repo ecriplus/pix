@@ -130,4 +130,11 @@ export default {
     devDefaultValues: { test: true, reviewApp: true },
     tags: ['team-combinix', 'pix-api', 'frontend'],
   },
+  isSessionLogoutEnabled: {
+    type: 'boolean',
+    description: 'Enable session logout',
+    defaultValue: false,
+    devDefaultValues: { test: false, reviewApp: false },
+    tags: ['team-acces', 'frontend', 'backend', 'pix-api', 'mon-pix', 'pix-orga', 'pix-certif', 'pix-admin'],
+  },
 };
