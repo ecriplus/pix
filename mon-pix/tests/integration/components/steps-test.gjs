@@ -13,7 +13,7 @@ module('Integration | Component | steps', function (hooks) {
     module('on first page', function () {
       test('should display instructions', async function (assert) {
         // given
-        const candidate = { complementaryCertificationKey: null };
+        const candidate = { subscription: 'CORE' };
 
         // when
         const screen = await render(<template><Steps @candidate={{candidate}} /></template>);
@@ -42,7 +42,7 @@ module('Integration | Component | steps', function (hooks) {
 
       test('should not display the previous button', async function (assert) {
         // given
-        const candidate = { complementaryCertificationKey: null };
+        const candidate = { subscription: 'CORE' };
 
         // when
         const screen = await render(<template><Steps @candidate={{candidate}} /></template>);
@@ -59,7 +59,7 @@ module('Integration | Component | steps', function (hooks) {
     module('on second page', function () {
       test('should display instructions', async function (assert) {
         // given
-        const candidate = { complementaryCertificationKey: null };
+        const candidate = { subscription: 'CORE' };
 
         // when
         const screen = await render(<template><Steps @candidate={{candidate}} /></template>);
@@ -90,7 +90,7 @@ module('Integration | Component | steps', function (hooks) {
     module('on third page', function () {
       test('should display instructions', async function (assert) {
         // given
-        const candidate = { complementaryCertificationKey: null };
+        const candidate = { subscription: 'CORE' };
 
         // when
         const screen = await render(<template><Steps @candidate={{candidate}} /></template>);
@@ -131,7 +131,7 @@ module('Integration | Component | steps', function (hooks) {
     module('on fourth page', function () {
       test('should display instructions', async function (assert) {
         // given
-        const candidate = { complementaryCertificationKey: null };
+        const candidate = { subscription: 'CORE' };
 
         // when
         const screen = await render(<template><Steps @candidate={{candidate}} /></template>);
@@ -160,7 +160,7 @@ module('Integration | Component | steps', function (hooks) {
     module('on the last page', function () {
       test('should display information', async function (assert) {
         // given
-        const candidate = { complementaryCertificationKey: null };
+        const candidate = { subscription: 'CORE' };
 
         // when
         const screen = await render(<template><Steps @candidate={{candidate}} /></template>);
@@ -190,7 +190,7 @@ module('Integration | Component | steps', function (hooks) {
 
       test('should change the continue aria label button', async function (assert) {
         // given
-        const candidate = { complementaryCertificationKey: null };
+        const candidate = { subscription: 'CORE' };
         const screen = await render(<template><Steps @candidate={{candidate}} /></template>);
 
         // when
@@ -208,7 +208,7 @@ module('Integration | Component | steps', function (hooks) {
 
       test('should disable the continue button', async function (assert) {
         // given
-        const candidate = { complementaryCertificationKey: null };
+        const candidate = { subscription: 'CORE' };
         const screen = await render(<template><Steps @candidate={{candidate}} /></template>);
 
         // when
@@ -227,7 +227,7 @@ module('Integration | Component | steps', function (hooks) {
       module('when the checkbox is checked', function () {
         test('should enable the continue button', async function (assert) {
           // given
-          const candidate = { complementaryCertificationKey: null };
+          const candidate = { subscription: 'CORE' };
           const screen = await render(<template><Steps @candidate={{candidate}} /></template>);
           await _goToLastPage(screen);
 
@@ -253,7 +253,7 @@ module('Integration | Component | steps', function (hooks) {
     module('on all pages except the first', function () {
       test('should display the previous button', async function (assert) {
         // given
-        const candidate = { complementaryCertificationKey: null };
+        const candidate = { subscription: 'CORE' };
         const screen = await render(<template><Steps @candidate={{candidate}} /></template>);
 
         // when

@@ -1,9 +1,10 @@
 import jsonapiSerializer from 'jsonapi-serializer';
-const { Deserializer, Serializer } = jsonapiSerializer;
 
 import { Candidate } from '../../domain/models/Candidate.js';
 import { EditedCandidate } from '../../domain/models/EditedCandidate.js';
 import { Subscription } from '../../domain/models/Subscription.js';
+
+const { Deserializer, Serializer } = jsonapiSerializer;
 
 export async function deserialize(json) {
   const deserializer = new Deserializer({ keyForAttribute: 'camelCase' });
@@ -44,7 +45,7 @@ export const serializeForParticipation = function (candidate) {
       'birthdate',
       'sessionId',
       'hasSeenCertificationInstructions',
-      'complementaryCertificationKey',
+      'subscription',
       'hasStartedTest',
     ],
   }).serialize(candidate);

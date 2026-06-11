@@ -144,7 +144,8 @@ describe('Certification | Enrolment | Unit | Serializer | candidate', function (
         organizationLearnerId: null,
         billingMode: CertificationCandidate.BILLING_MODES.PAID,
         prepaymentCode: 'somePrepaymentCode1',
-        subscriptions: [domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: 123 })],
+        subscriptions: [],
+        subscription: Frameworks.PRO_SANTE,
         hasSeenCertificationInstructions: true,
         hasStartedTest: false,
       });
@@ -159,7 +160,7 @@ describe('Certification | Enrolment | Unit | Serializer | candidate', function (
             'has-seen-certification-instructions': true,
             'session-id': candidate.sessionId,
             'has-started-test': false,
-            'complementary-certification-key': null,
+            subscription: candidate.subscription,
           },
         },
       };

@@ -36,14 +36,6 @@ export default class Steps extends Component {
     return classOfPages;
   }
 
-  _isPixPlus() {
-    const complementaryKey = this.args.candidate?.complementaryCertificationKey;
-    if (complementaryKey && complementaryKey !== 'CLEA') {
-      return true;
-    }
-    return false;
-  }
-
   _formatDuration(minutes) {
     return {
       hours: Math.floor(minutes / 60),
@@ -52,15 +44,14 @@ export default class Steps extends Component {
   }
 
   get certificationName() {
-    const complementaryKey = this.args.candidate?.complementaryCertificationKey;
-    if (this._isPixPlus()) {
-      return this.intl.t(`pages.certification-frameworks.${complementaryKey}`);
+    if (this.args.candidate.subscription === 'CORE' || this.args.candidate.subscription === 'CLEA') {
+      return 'Pix';
     }
-    return 'Pix';
+    return this.intl.t(`pages.certification-frameworks.${this.args.candidate.subscription}`);
   }
 
   get certificationInstructionStep1Paragraph1() {
-    if (this._isPixPlus()) {
+    if (this.args.candidate.hasNonCoreScopeSubscription) {
       return this.intl.t('pages.certification-instructions.steps.1.paragraphs.pix-plus-1', {
         certificationName: this.certificationName,
         htmlSafe: true,
@@ -103,13 +94,9 @@ export default class Steps extends Component {
   }
 
   get certificationDurationInMinutes() {
-    const complementaryKey = this.args.candidate.complementaryCertificationKey;
+    const subscription = this.args.candidate.subscription;
 
-    if (!complementaryKey) {
-      return PIX_STANDARD_DURATION;
-    }
-
-    switch (complementaryKey) {
+    switch (subscription) {
       case 'DROIT':
         return PIX_PLUS_DURATIONS.DROIT;
       case 'PRO_SANTE':

@@ -216,9 +216,6 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | certif
         userId: candidateUserId,
         hasSeenCertificationInstructions: false,
       }).id;
-      databaseBuilder.factory.buildCoreSubscription({
-        certificationCandidateId: candidateId,
-      });
 
       await databaseBuilder.commit();
 
@@ -239,7 +236,7 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | certif
         data: {
           attributes: {
             birthdate: '2000-01-04',
-            'complementary-certification-key': null,
+            subscription: 'CORE',
             'first-name': 'first-name',
             'has-seen-certification-instructions': true,
             'has-started-test': false,
@@ -268,9 +265,6 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | certif
         birthdate: '1945-12-24',
         hasSeenCertificationInstructions: true,
       }).id;
-      databaseBuilder.factory.buildCoreSubscription({
-        certificationCandidateId: candidateId,
-      });
 
       await databaseBuilder.commit();
 
@@ -291,7 +285,7 @@ describe('Certification | Enrolment | Acceptance | Application | Routes | certif
         data: {
           attributes: {
             birthdate: '1945-12-24',
-            'complementary-certification-key': null,
+            subscription: 'CORE',
             'first-name': 'Lemmy',
             'has-seen-certification-instructions': true,
             'has-started-test': false,

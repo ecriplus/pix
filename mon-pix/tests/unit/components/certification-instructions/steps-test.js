@@ -13,7 +13,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
         // given
         const component = createGlimmerComponent('certification-instructions/steps');
         component.args.candidate = {
-          complementaryCertificationKey: null,
+          subscription: null,
         };
 
         component.pageId = 1;
@@ -63,7 +63,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
-        complementaryCertificationKey: null,
+        subscription: 'CORE',
       };
 
       // then
@@ -74,7 +74,8 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
-        complementaryCertificationKey: 'DROIT',
+        subscription: 'DROIT',
+        hasNonCoreScopeSubscription: true,
       };
 
       // then
@@ -85,7 +86,8 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
-        complementaryCertificationKey: 'CLEA',
+        subscription: 'CLEA',
+        hasNonCoreScopeSubscription: false,
       };
 
       // then
@@ -98,7 +100,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
-        complementaryCertificationKey: 'CLEA',
+        subscription: 'CLEA',
       };
       component.pageId = 1;
 
@@ -112,7 +114,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
-        complementaryCertificationKey: null,
+        subscription: null,
       };
 
       // then
@@ -127,7 +129,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
-        complementaryCertificationKey: 'CLEA',
+        subscription: 'CLEA',
       };
 
       // then
@@ -142,7 +144,8 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
-        complementaryCertificationKey: 'DROIT',
+        subscription: 'DROIT',
+        hasNonCoreScopeSubscription: true,
       };
 
       // then
@@ -159,7 +162,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
-        complementaryCertificationKey: null,
+        subscription: null,
       };
 
       // then
@@ -170,7 +173,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
-        complementaryCertificationKey: 'CLEA',
+        subscription: 'CLEA',
       };
 
       // then
@@ -181,7 +184,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
-        complementaryCertificationKey: 'DROIT',
+        subscription: 'DROIT',
       };
 
       // then
@@ -192,7 +195,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
-        complementaryCertificationKey: 'PRO_SANTE',
+        subscription: 'PRO_SANTE',
       };
 
       // then
@@ -203,7 +206,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
-        complementaryCertificationKey: 'EDU_1ER_DEGRE',
+        subscription: 'EDU_1ER_DEGRE',
       };
 
       // then
@@ -214,7 +217,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
-        complementaryCertificationKey: 'EDU_2ND_DEGRE',
+        subscription: 'EDU_2ND_DEGRE',
       };
 
       // then
@@ -225,7 +228,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
-        complementaryCertificationKey: 'EDU_CPE',
+        subscription: 'EDU_CPE',
       };
 
       // then
@@ -238,7 +241,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
-        complementaryCertificationKey: null,
+        subscription: null,
       };
 
       // then
@@ -249,7 +252,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
-        complementaryCertificationKey: 'DROIT',
+        subscription: 'DROIT',
       };
 
       // then
@@ -260,7 +263,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
-        complementaryCertificationKey: 'EDU_1ER_DEGRE',
+        subscription: 'EDU_1ER_DEGRE',
       };
 
       // then
@@ -273,7 +276,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
-        complementaryCertificationKey: null,
+        subscription: null,
       };
 
       // then
@@ -284,7 +287,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
-        complementaryCertificationKey: 'DROIT',
+        subscription: 'DROIT',
       };
 
       // then
@@ -295,7 +298,7 @@ module('Unit | Component | certification-instruction | steps', function (hooks) 
       // given
       const component = createGlimmerComponent('certification-instructions/steps');
       component.args.candidate = {
-        complementaryCertificationKey: 'EDU_2ND_DEGRE',
+        subscription: 'EDU_2ND_DEGRE',
       };
 
       // then
