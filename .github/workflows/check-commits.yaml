@@ -1,7 +1,10 @@
 name: commits check
+
 on:
-  # eslint-disable-next-line yml/no-empty-mapping-value
   pull_request:
+  merge_group:
+    types: [checks_requested]
+
 jobs:
   block-autosquash-commits:
     runs-on: ubuntu-latest
