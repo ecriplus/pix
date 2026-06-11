@@ -93,6 +93,38 @@ module('Integration | Component | Login session invigilator | Form', function (h
       });
     });
 
+    module('when the session is finalized', function () {
+      test('it should display a session finalized error', async function (assert) {
+        // given
+        const authenticateInvigilator = sinon.stub().rejects({ errors: [{ code: 'SESSION_FINALIZED' }] });
+
+        // when
+        const screen = await render(
+          <template><LoginSessionInvigilatorForm @authenticateInvigilator={{authenticateInvigilator}} /></template>,
+        );
+
+        await fillIn(
+          screen.getByLabelText(t('pages.session-supervising.login.form.session-number'), { exact: false }),
+          222,
+        );
+        await fillIn(
+          screen.getByLabelText(t('pages.session-supervising.login.form.session-password.label'), { exact: false }),
+          222,
+        );
+        await click(screen.getByRole('button', { name: t('pages.session-supervising.login.form.actions.invigilate') }));
+
+        // then
+        assert.ok(authenticateInvigilator.called);
+        assert
+          .dom(
+            within(screen.getByRole('alert')).getByText(
+              t('pages.session-supervising.login.form.errors.session-finalized'),
+            ),
+          )
+          .exists();
+      });
+    });
+
     module('when the session is not accessible', function () {
       test('it should display an error with the blocked access date', async function (assert) {
         // given

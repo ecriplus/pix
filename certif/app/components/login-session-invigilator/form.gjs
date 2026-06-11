@@ -48,6 +48,9 @@ export default class LoginSessionInvigilator extends Component {
         case 'CERTIFICATION_CENTER_IS_ARCHIVED':
           this.formError = this.intl.t('pages.session-supervising.login.form.errors.certification-center-archived');
           break;
+        case 'SESSION_FINALIZED':
+          this.formError = this.intl.t('pages.session-supervising.login.form.errors.session-finalized');
+          break;
         case 'SESSION_NOT_ACCESSIBLE':
           this.formError = this.intl.t('pages.session-supervising.login.form.errors.session-not-accessible', {
             date: dayjsUtcFormat([error.meta?.blockedAccessDate, 'DD/MM/YYYY'], {}),

@@ -75,6 +75,12 @@ class SessionNotAccessible extends DomainError {
   }
 }
 
+class SessionFinalized extends DomainError {
+  constructor() {
+    super('Certification session is finalized', 'SESSION_FINALIZED');
+  }
+}
+
 class CertificationIssueReportAutomaticallyResolvedShouldNotBeUpdatedManually extends DomainError {
   constructor(message = 'Le signalement ne peut pas être modifié manuellement') {
     super(message);
@@ -105,6 +111,7 @@ export {
   SendingEmailToResultRecipientError,
   SessionAlreadyFinalizedError,
   SessionAlreadyPublishedError,
+  SessionFinalized,
   SessionNotAccessible,
   SessionWithMissingAbortReasonError,
   SessionWithoutStartedCertificationError,

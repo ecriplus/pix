@@ -8,6 +8,7 @@ import {
   SendingEmailToResultRecipientError,
   SessionAlreadyFinalizedError,
   SessionAlreadyPublishedError,
+  SessionFinalized,
   SessionNotAccessible,
   SessionWithMissingAbortReasonError,
   SessionWithoutStartedCertificationError,
@@ -41,6 +42,10 @@ const sessionDomainErrorMappingConfiguration = [
   {
     name: SessionNotAccessible.name,
     httpErrorFn: (error) => new HttpErrors.PreconditionFailedError(error.message, error.code, error.meta),
+  },
+  {
+    name: SessionFinalized.name,
+    httpErrorFn: (error) => new HttpErrors.PreconditionFailedError(error.message, error.code),
   },
   {
     name: InvalidSessionSupervisingLoginError.name,

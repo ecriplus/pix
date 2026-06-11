@@ -10,6 +10,7 @@ import { withTransaction } from '../../../../shared/domain/DomainTransaction.js'
 import {
   CertificationCenterIsArchivedError,
   InvalidSessionSupervisingLoginError,
+  SessionFinalized,
   SessionNotAccessible,
 } from '../errors.js';
 
@@ -38,7 +39,7 @@ export const superviseSession = withTransaction(
     const certificationCenter = await certificationCenterRepository.getBySessionId({ sessionId });
 
     if (session.isNotAccessible) {
-      throw new SessionNotAccessible();
+      throw new SessionFinalized();
     }
 
     const certificationCenterAccess = await certificationCenterAccessRepository.getCertificationCenterAccess({

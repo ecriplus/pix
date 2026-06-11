@@ -3,6 +3,7 @@ import sinon from 'sinon';
 import {
   CertificationCenterIsArchivedError,
   InvalidSessionSupervisingLoginError,
+  SessionFinalized,
   SessionNotAccessible,
 } from '../../../../../../src/certification/session-management/domain/errors.js';
 import { InvigilatorSession } from '../../../../../../src/certification/session-management/domain/read-models/InvigilatorSession.js';
@@ -69,7 +70,7 @@ describe('Unit | UseCase | supervise-session', function () {
     expect(error.message).to.equal('Le numéro de session et/ou le mot de passe saisis sont incorrects.');
   });
 
-  it('should throw a SessionNotAccessible when the session is not accessible', async function () {
+  it('should throw a SessionFinalized when the session is finalized', async function () {
     // given
     const sessionId = 123;
     const certificationCenter = domainBuilder.buildCertificationCenter();
@@ -97,7 +98,7 @@ describe('Unit | UseCase | supervise-session', function () {
     });
 
     // then
-    expect(error).to.be.an.instanceOf(SessionNotAccessible);
+    expect(error).to.be.an.instanceOf(SessionFinalized);
   });
 
   it('should a Certification center is archived error when certification center is archived', async function () {
