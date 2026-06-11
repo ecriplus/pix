@@ -12,6 +12,11 @@ class TrainingForAdmin {
     editorLogoUrl,
     trainingTriggers,
     isDisabled,
+    deliveryMode,
+    registrationRequired,
+    program,
+    objectives,
+    description,
   } = {}) {
     this.id = id;
     this.title = title;
@@ -25,6 +30,11 @@ class TrainingForAdmin {
     this.editorLogoUrl = editorLogoUrl;
     this.trainingTriggers = trainingTriggers;
     this.isDisabled = isDisabled;
+    this.deliveryMode = deliveryMode;
+    this.registrationRequired = registrationRequired;
+    this.program = program;
+    this.objectives = objectives;
+    this.description = description;
   }
 
   get isRecommendable() {

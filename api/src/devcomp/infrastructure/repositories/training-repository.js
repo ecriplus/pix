@@ -151,6 +151,11 @@ async function create({ training }) {
     'locales',
     'editorName',
     'editorLogoUrl',
+    'deliveryMode',
+    'registrationRequired',
+    'program',
+    'objectives',
+    'description',
   ]);
   const [createdTraining] = await knexConn(TABLE_NAME).insert(pickedAttributes).returning('*');
   return new TrainingForAdmin(createdTraining);

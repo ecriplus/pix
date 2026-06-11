@@ -599,6 +599,11 @@ describe('Integration | Repository | training-repository', function () {
         locales: ['fr'],
         editorName: 'Un ministère',
         editorLogoUrl: 'https://mon-logo.svg',
+        deliveryMode: Training.modes.REMOTE,
+        registrationRequired: true,
+        program: 'Le programme',
+        objectives: ['Objectif 1', 'Objectif 2', 'Objectif 3'],
+        description: 'La plus belle des descriptions',
       };
 
       // when
