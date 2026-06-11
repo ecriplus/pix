@@ -11,7 +11,11 @@ export default class CertificationCandidatesRoute extends Route {
 
   async model() {
     const details = await this.modelFor('authenticated.sessions.details');
-    const countries = await this.store.findAll('country');
+
+    let countries = this.store.peekAll('country');
+    if (countries.length === 0) {
+      countries = await this.store.findAll('country');
+    }
 
     details.set('countries', countries);
     return details;

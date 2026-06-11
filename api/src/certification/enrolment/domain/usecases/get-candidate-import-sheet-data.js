@@ -1,23 +1,24 @@
 /**
  * @typedef {import('./index.js').SessionRepository} SessionRepository
- * @typedef {import('./index.js').EnrolledCandidateRepository} EnrolledCandidateRepository
+ * @typedef {import('./index.js').CandidateRepository} CandidateRepository
  * @typedef {import('./index.js').CenterRepository} CenterRepository
  */
-
+import { Candidate } from '../models/Candidate.js';
 /**
  * @param {object} params
  * @param {SessionRepository} params.sessionRepository
- * @param {EnrolledCandidateRepository} params.enrolledCandidateRepository
+ * @param {CandidateRepository} params.candidateRepository
  * @param {CenterRepository} params.centerRepository
  */
-const getCandidateImportSheetData = async function ({
+export async function getCandidateImportSheetData({
   sessionId,
   sessionRepository,
-  enrolledCandidateRepository,
+  candidateRepository,
   centerRepository,
 }) {
   const session = await sessionRepository.get({ id: sessionId });
-  const enrolledCandidates = await enrolledCandidateRepository.findBySessionId({ sessionId });
+  let enrolledCandidates = await candidateRepository.findBySessionId({ sessionId });
+  enrolledCandidates = enrolledCandidates.sort(Candidate.sortByLastNameAndFirstName);
   const center = await centerRepository.getById({ id: session.certificationCenterId });
   return {
     session,
@@ -25,6 +26,4 @@ const getCandidateImportSheetData = async function ({
     certificationCenterHabilitations: center.habilitations,
     isScoCertificationCenter: center.isSco,
   };
-};
-
-export { getCandidateImportSheetData };
+}

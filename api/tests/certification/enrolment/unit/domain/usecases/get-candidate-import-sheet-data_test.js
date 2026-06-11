@@ -8,14 +8,14 @@ import { domainBuilder } from '../../../../../tooling/domain-builder/domain-buil
 
 describe('Certification | Enrolment | Unit | UseCase | get-candidate-import-sheet-data', function () {
   let sessionRepository;
-  let enrolledCandidateRepository;
+  let candidateRepository;
   let centerRepository;
 
   beforeEach(function () {
     sessionRepository = {
       get: sinon.stub(),
     };
-    enrolledCandidateRepository = {
+    candidateRepository = {
       findBySessionId: sinon.stub(),
     };
     centerRepository = {
@@ -33,29 +33,32 @@ describe('Certification | Enrolment | Unit | UseCase | get-candidate-import-shee
       certificationCandidates: [],
     });
     sessionRepository.get.withArgs({ id: sessionId }).resolves(session);
-    const enrolledCandidates = [
-      domainBuilder.certification.enrolment.buildEnrolledCandidate({
-        subscriptions: [
-          {
-            type: SUBSCRIPTION_TYPES.CORE,
-            complementaryCertificationId: null,
-            complementaryCertificationLabel: null,
-            complementaryCertificationKey: null,
-          },
-        ],
-      }),
-      domainBuilder.certification.enrolment.buildEnrolledCandidate({
-        subscriptions: [
-          {
-            type: SUBSCRIPTION_TYPES.CORE,
-            complementaryCertificationId: null,
-            complementaryCertificationLabel: null,
-            complementaryCertificationKey: null,
-          },
-        ],
-      }),
-    ];
-    enrolledCandidateRepository.findBySessionId.withArgs({ sessionId }).resolves(enrolledCandidates);
+    const michelCandidate = domainBuilder.certification.enrolment.buildCandidate({
+      firstName: 'Michel',
+      lastName: 'Jacques',
+      subscriptions: [
+        {
+          type: SUBSCRIPTION_TYPES.CORE,
+          complementaryCertificationId: null,
+          complementaryCertificationLabel: null,
+          complementaryCertificationKey: null,
+        },
+      ],
+    });
+    const jeannetteCandidate = domainBuilder.certification.enrolment.buildCandidate({
+      firstName: 'Jeannette',
+      lastName: 'Jacques',
+      subscriptions: [
+        {
+          type: SUBSCRIPTION_TYPES.CORE,
+          complementaryCertificationId: null,
+          complementaryCertificationLabel: null,
+          complementaryCertificationKey: null,
+        },
+      ],
+    });
+    const enrolledCandidates = [michelCandidate, jeannetteCandidate];
+    candidateRepository.findBySessionId.withArgs({ sessionId }).resolves(enrolledCandidates);
     const habilitation1 = domainBuilder.certification.enrolment.buildHabilitation({ label: 'Pix+Droit' });
     const habilitation2 = domainBuilder.certification.enrolment.buildHabilitation({ label: 'Pix+Penché' });
     const center = domainBuilder.certification.enrolment.buildCenter({
@@ -69,14 +72,14 @@ describe('Certification | Enrolment | Unit | UseCase | get-candidate-import-shee
       userId,
       sessionId,
       sessionRepository,
-      enrolledCandidateRepository,
+      candidateRepository,
       centerRepository,
     });
 
     // then
     expect(result).to.deepEqualInstance({
       session,
-      enrolledCandidates,
+      enrolledCandidates: [jeannetteCandidate, michelCandidate],
       certificationCenterHabilitations: [habilitation1, habilitation2],
       isScoCertificationCenter: true,
     });

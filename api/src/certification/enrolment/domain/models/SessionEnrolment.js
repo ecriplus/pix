@@ -82,7 +82,7 @@ export class SessionEnrolment {
   /**
    * @param {object} params
    * @param {Array<Candidate>} params.candidates
-   * @param {number} params.user
+   * @param {number} params.userId
    */
   hasReconciledCandidateTo({ candidates, userId }) {
     return candidates.some((candidate) => candidate.isReconciledTo(userId));

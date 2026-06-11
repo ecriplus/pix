@@ -67,6 +67,7 @@ export class Candidate {
     this.accessibilityAdjustmentNeeded = accessibilityAdjustmentNeeded;
     this.reconciledAt = reconciledAt;
     this.hasStartedTest = hasStartedTest;
+    this.isLinked = Boolean(userId);
   }
 
   static create(candidateDTO) {
@@ -79,6 +80,12 @@ export class Candidate {
       ...candidateDTO,
       subscription: mainSubscription,
     });
+  }
+
+  static sortByLastNameAndFirstName(candidateA, candidateB) {
+    let compareRes = candidateA.lastName.localeCompare(candidateB.lastName);
+    if (compareRes === 0) compareRes = candidateA.firstName.localeCompare(candidateB.firstName);
+    return compareRes;
   }
 
   isReconciled() {

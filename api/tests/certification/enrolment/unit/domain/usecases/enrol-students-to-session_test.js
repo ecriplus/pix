@@ -1,395 +1,344 @@
 import sinon from 'sinon';
 
 import { UnknownCountryForStudentEnrolmentError } from '../../../../../../src/certification/enrolment/domain/errors.js';
-import { SCOCertificationCandidate } from '../../../../../../src/certification/enrolment/domain/models/SCOCertificationCandidate.js';
+import { Candidate } from '../../../../../../src/certification/enrolment/domain/models/Candidate.js';
 import { enrolStudentsToSession } from '../../../../../../src/certification/enrolment/domain/usecases/enrol-students-to-session.js';
+import { SUBSCRIPTION_TYPES } from '../../../../../../src/certification/shared/domain/constants.js';
 import { ForbiddenAccess } from '../../../../../../src/shared/domain/errors.js';
 import { expect } from '../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 import { catchErr } from '../../../../../tooling/test-utils/error.js';
 
 describe('Certification | Enrolment | Unit | UseCase | enrol-students-to-session', function () {
-  context('when referent is allowed to Pix Certif', function () {
-    it('enrols n students to a session', async function () {
+  let organizationLearnerRepository;
+  let centerRepository;
+  let countryRepository;
+  let sessionRepository;
+  let candidateRepository;
+  const certificationCpfCityRepository = Symbol('certificationCpfCityRepository');
+  const certificationCpfCountryRepository = Symbol('certificationCpfCountryRepository');
+  let certificationCpfService;
+  let dependencies;
+  const sessionId = 123,
+    certificationCenterId = 456,
+    organizationId = 789;
+  const michelStudentData = {
+    id: 1,
+    firstName: 'Michel ',
+    lastName: 'Jacques',
+    birthdate: '1990-01-04',
+    sex: 'M',
+    birthCityCode: 'CITYCODEMICHEL',
+    birthCity: 'Michelopolis',
+    birthCountryCode: '100',
+  };
+  const jeannetteStudentData = {
+    id: 2,
+    firstName: 'Jeannette',
+    lastName: 'Leto ',
+    birthdate: '1989-02-18',
+    sex: 'F',
+    birthCityCode: 'CITYCODEJEANNETTE',
+    birthCity: 'Jeanettopolis',
+    birthCountryCode: '100',
+  };
+
+  beforeEach(function () {
+    organizationLearnerRepository = {
+      findByIds: sinon.stub(),
+    };
+    centerRepository = {
+      getById: sinon.stub(),
+    };
+    sessionRepository = {
+      get: sinon.stub(),
+    };
+    candidateRepository = {
+      findBySessionId: sinon.stub(),
+      save: sinon.stub(),
+    };
+    countryRepository = {
+      findAll: sinon.stub(),
+    };
+    certificationCpfService = {
+      getBirthInformation: sinon.stub(),
+    };
+
+    sessionRepository.get
+      .withArgs({ id: sessionId })
+      .resolves(domainBuilder.certification.enrolment.buildSession({ id: sessionId, certificationCenterId }));
+    centerRepository.getById.withArgs({ id: certificationCenterId }).resolves(
+      domainBuilder.certification.enrolment.buildCenter({
+        matchingOrganization: domainBuilder.certification.enrolment.buildMatchingOrganization({
+          id: organizationId,
+        }),
+      }),
+    );
+    const country = domainBuilder.buildCountry({
+      code: '99100',
+      name: 'FRANCE',
+    });
+    countryRepository.findAll.resolves([country]);
+
+    dependencies = {
+      organizationLearnerRepository,
+      centerRepository,
+      sessionRepository,
+      candidateRepository,
+      countryRepository,
+      certificationCpfCityRepository,
+      certificationCpfCountryRepository,
+      certificationCpfService,
+    };
+  });
+
+  context('success case', function () {
+    it('does nothing if no student ids is given as input', async function () {
+      await enrolStudentsToSession({
+        ...dependencies,
+        sessionId,
+        studentIds: [],
+      });
+
+      // then
+      expect(candidateRepository.save).to.not.have.been.called;
+    });
+
+    it('enrols students to the session', async function () {
       // given
-      const session = domainBuilder.certification.enrolment.buildSession();
-      const sessionId = session.id;
-      const anotherSessionId = sessionId + 1;
-
-      const studentIds = [1, 2, 3];
-      const { organizationForReferent, organizationLearners } =
-        _buildMatchingReferentOrganisationAndOrganizationLearners(studentIds);
-
-      const country = domainBuilder.buildCountry({
-        code: '99100',
-        name: 'FRANCE',
-      });
-
-      const expectedCertificationCandidates = organizationLearners.map((sr) => {
-        return new SCOCertificationCandidate({
-          firstName: sr.firstName,
-          lastName: sr.lastName,
-          birthdate: sr.birthdate,
-          birthINSEECode: sr.birthCityCode,
-          birthCountry: 'FRANCE',
-          birthCity: sr.birthCity,
-          sex: sr.sex,
-          sessionId: sessionId,
-          organizationLearnerId: sr.id,
-          subscriptions: [
-            domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
-          ],
-        });
-      });
-
-      const scoCertificationCandidateRepository = new InMemorySCOCertificationCandidateRepository();
-      const organizationLearnerRepository = { findByIds: sinon.stub() };
-      const countryRepository = { findAll: sinon.stub() };
-      countryRepository.findAll.resolves([country]);
-      organizationLearnerRepository.findByIds.withArgs({ ids: studentIds }).resolves(organizationLearners);
-      const sessionRepository = { get: sinon.stub() };
-      sessionRepository.get.withArgs({ id: sessionId }).resolves(session);
-      const centerRepository = { getById: sinon.stub() };
-      centerRepository.getById.withArgs({ id: session.certificationCenterId }).resolves(
-        domainBuilder.certification.enrolment.buildCenter({
-          matchingOrganization: domainBuilder.certification.enrolment.buildMatchingOrganization({
-            id: organizationForReferent.id,
+      const studentIds = [michelStudentData.id, jeannetteStudentData.id];
+      candidateRepository.findBySessionId.withArgs({ sessionId }).resolves([]);
+      const organizationLearners = [michelStudentData, jeannetteStudentData].map((studentData) =>
+        domainBuilder.buildOrganizationLearner({
+          ...studentData,
+          organization: domainBuilder.certification.enrolment.buildMatchingOrganization({
+            id: organizationId,
           }),
         }),
       );
+      organizationLearnerRepository.findByIds.withArgs({ ids: studentIds }).resolves(organizationLearners);
 
       // when
       await enrolStudentsToSession({
+        ...dependencies,
         sessionId,
         studentIds,
-        scoCertificationCandidateRepository,
-        organizationLearnerRepository,
-        sessionRepository,
-        countryRepository,
-        centerRepository,
       });
 
       // then
-      expect(scoCertificationCandidateRepository.findBySessionId(sessionId)).to.deep.equal(
-        expectedCertificationCandidates,
-      );
-      expect(scoCertificationCandidateRepository.findBySessionId(anotherSessionId)).to.deep.equal(undefined);
-    });
-
-    it('enrols a student by trimming his first name and last name', async function () {
-      // given
-      const session = domainBuilder.certification.enrolment.buildSession();
-      const sessionId = session.id;
-
-      const organizationForReferent = domainBuilder.buildOrganization();
-      const country = domainBuilder.buildCountry({
-        code: '99100',
-        name: 'FRANCE',
-      });
-
-      const organizationLearner = domainBuilder.buildOrganizationLearner({
-        id: 1,
-        firstName: 'Sarah Michelle ',
-        lastName: ' Gellar',
-        birthdate: '2020-01-01',
-        sex: 'F',
-        birthCityCode: '48512',
-        organization: organizationForReferent,
-      });
-
-      const expectedCertificationCandidate = new SCOCertificationCandidate({
-        firstName: 'Sarah Michelle',
-        lastName: 'Gellar',
-        birthdate: organizationLearner.birthdate,
-        sex: organizationLearner.sex,
-        birthINSEECode: organizationLearner.birthCityCode,
-        birthCountry: country.name,
-        birthCity: organizationLearner.birthCity,
-        sessionId: sessionId,
-        organizationLearnerId: 1,
-        subscriptions: [
-          domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
+      expect(candidateRepository.save).to.have.been.calledWithExactly({
+        candidates: [
+          new Candidate({
+            firstName: 'Michel',
+            lastName: 'Jacques',
+            birthdate: '1990-01-04',
+            sex: 'M',
+            birthINSEECode: 'CITYCODEMICHEL',
+            birthCity: 'Michelopolis',
+            birthCountry: 'FRANCE',
+            sessionId,
+            organizationLearnerId: 1,
+            subscription: SUBSCRIPTION_TYPES.CORE,
+          }),
+          new Candidate({
+            firstName: 'Jeannette',
+            lastName: 'Leto',
+            birthdate: '1989-02-18',
+            sex: 'F',
+            birthINSEECode: 'CITYCODEJEANNETTE',
+            birthCity: 'Jeanettopolis',
+            birthCountry: 'FRANCE',
+            sessionId,
+            organizationLearnerId: 2,
+            subscription: SUBSCRIPTION_TYPES.CORE,
+          }),
         ],
       });
+    });
 
-      const scoCertificationCandidateRepository = new InMemorySCOCertificationCandidateRepository();
-      const organizationLearnerRepository = { findByIds: sinon.stub() };
-      const countryRepository = { findAll: sinon.stub() };
-      countryRepository.findAll.resolves([country]);
-      organizationLearnerRepository.findByIds.withArgs({ ids: [1] }).resolves([organizationLearner]);
-      const sessionRepository = { get: sinon.stub() };
-      sessionRepository.get.withArgs({ id: sessionId }).resolves(session);
-      const centerRepository = { getById: sinon.stub() };
-      centerRepository.getById.withArgs({ id: session.certificationCenterId }).resolves(
-        domainBuilder.certification.enrolment.buildCenter({
-          matchingOrganization: domainBuilder.certification.enrolment.buildMatchingOrganization({
-            id: organizationForReferent.id,
-          }),
+    it('prevents from enrolling twice the same student if a student is already enrolled', async function () {
+      // given
+      const studentIds = [michelStudentData.id, jeannetteStudentData.id];
+      candidateRepository.findBySessionId.withArgs({ sessionId }).resolves([
+        domainBuilder.certification.enrolment.buildCandidate({
+          organizationLearnerId: 1,
         }),
-      );
+      ]);
+      const jeanetteLearner = domainBuilder.buildOrganizationLearner({
+        ...jeannetteStudentData,
+        organization: domainBuilder.certification.enrolment.buildMatchingOrganization({
+          id: organizationId,
+        }),
+      });
+      organizationLearnerRepository.findByIds.withArgs({ ids: [2] }).resolves([jeanetteLearner]);
 
       // when
       await enrolStudentsToSession({
+        ...dependencies,
         sessionId,
-        studentIds: [1],
-        scoCertificationCandidateRepository,
-        organizationLearnerRepository,
-        sessionRepository,
-        countryRepository,
-        centerRepository,
+        studentIds,
       });
 
       // then
-      expect(scoCertificationCandidateRepository.findBySessionId(sessionId)).to.deep.equal([
-        expectedCertificationCandidate,
-      ]);
-    });
-
-    it('rejects enrolment if students do not belong to same organization as referent', async function () {
-      // given
-      const session = domainBuilder.certification.enrolment.buildSession();
-
-      const studentIds = [1, 2, 3];
-      const { organizationForReferent, organizationLearners } =
-        _buildNonMatchingReferentOrganisationAndOrganizationLearners(studentIds);
-
-      const organizationLearnerRepository = { findByIds: sinon.stub() };
-      organizationLearnerRepository.findByIds.withArgs({ ids: studentIds }).resolves(organizationLearners);
-      const sessionRepository = { get: sinon.stub() };
-      sessionRepository.get.withArgs({ id: session.id }).resolves(session);
-      const centerRepository = { getById: sinon.stub() };
-      centerRepository.getById.withArgs({ id: session.certificationCenterId }).resolves(
-        domainBuilder.certification.enrolment.buildCenter({
-          matchingOrganization: domainBuilder.certification.enrolment.buildMatchingOrganization({
-            id: organizationForReferent.id,
+      expect(candidateRepository.save).to.have.been.calledWithExactly({
+        candidates: [
+          new Candidate({
+            firstName: 'Jeannette',
+            lastName: 'Leto',
+            birthdate: '1989-02-18',
+            sex: 'F',
+            birthINSEECode: 'CITYCODEJEANNETTE',
+            birthCity: 'Jeanettopolis',
+            birthCountry: 'FRANCE',
+            sessionId,
+            organizationLearnerId: 2,
+            subscription: SUBSCRIPTION_TYPES.CORE,
           }),
+        ],
+      });
+    });
+  });
+
+  context('when some students to enroll do not belong to organization', function () {
+    it('rejects enrolment', async function () {
+      // given
+      const studentIds = [michelStudentData.id, jeannetteStudentData.id];
+      candidateRepository.findBySessionId.withArgs({ sessionId }).resolves([]);
+      const michelLearner = domainBuilder.buildOrganizationLearner({
+        ...michelStudentData,
+        organization: domainBuilder.certification.enrolment.buildMatchingOrganization({
+          id: organizationId,
         }),
-      );
+      });
+      const jeanetteLearner = domainBuilder.buildOrganizationLearner({
+        ...jeannetteStudentData,
+        organization: domainBuilder.certification.enrolment.buildMatchingOrganization({
+          id: organizationId + 1,
+        }),
+      });
+      organizationLearnerRepository.findByIds.withArgs({ ids: studentIds }).resolves([michelLearner, jeanetteLearner]);
 
       // when
       const error = await catchErr(enrolStudentsToSession)({
-        sessionId: session.id,
+        ...dependencies,
+        sessionId,
         studentIds,
-        organizationLearnerRepository,
-        centerRepository,
-        sessionRepository,
       });
 
       // then
       expect(error).to.be.instanceof(ForbiddenAccess);
+      expect(candidateRepository.save).to.not.have.been.called;
     });
+  });
 
-    it('rejects enrolment if a student birth country is not found', async function () {
-      // given
-      const session = domainBuilder.certification.enrolment.buildSession();
-      const sessionId = session.id;
-
-      const studentIds = [1, 2, 3];
-      const { organizationForReferent, organizationLearners } =
-        _buildMatchingReferentOrganisationAndOrganizationLearners(studentIds);
-
-      const country = domainBuilder.buildCountry({
-        code: '99A07',
-        name: 'COUBA',
-      });
-
-      const scoCertificationCandidateRepository = new InMemorySCOCertificationCandidateRepository();
-      const organizationLearnerRepository = { findByIds: sinon.stub() };
-      organizationLearnerRepository.findByIds.withArgs({ ids: studentIds }).resolves(organizationLearners);
-      const countryRepository = { findAll: sinon.stub() };
-      countryRepository.findAll.resolves([country]);
-      const sessionRepository = { get: sinon.stub() };
-      sessionRepository.get.withArgs({ id: sessionId }).resolves(session);
-      const centerRepository = { getById: sinon.stub() };
-      centerRepository.getById.withArgs({ id: session.certificationCenterId }).resolves(
-        domainBuilder.certification.enrolment.buildCenter({
-          matchingOrganization: domainBuilder.certification.enrolment.buildMatchingOrganization({
-            id: organizationForReferent.id,
-          }),
-        }),
-      );
-
-      // when
-      const error = await catchErr(enrolStudentsToSession)({
-        sessionId,
-        studentIds,
-        scoCertificationCandidateRepository,
-        organizationLearnerRepository,
-        sessionRepository,
-        countryRepository,
-        centerRepository,
-      });
-
-      // then
-      expect(error).to.be.an.instanceOf(UnknownCountryForStudentEnrolmentError);
-      expect(error.message).to.contains(`${organizationLearners[0].firstName} ${organizationLearners[0].lastName}`);
-    });
-
-    context('when student birth city is missing', function () {
-      it('should get birth city from the student birth city code', async function () {
+  context('birth place data check', function () {
+    context('when student birth country is not found', function () {
+      it('rejects enrolment', async function () {
         // given
-        const session = domainBuilder.certification.enrolment.buildSession();
-        const sessionId = session.id;
-
-        const organizationForReferent = domainBuilder.buildOrganization();
-        const country = domainBuilder.buildCountry({
-          code: '99100',
-          name: 'FRANCE',
-        });
-
-        const organizationLearner = domainBuilder.buildOrganizationLearner({
-          id: 1,
-          firstName: 'Sarah Michelle ',
-          lastName: ' Gellar',
-          birthdate: '2020-01-01',
-          sex: 'F',
-          birthCity: null,
-          birthCityCode: '75115',
-          organization: organizationForReferent,
-        });
-
-        const expectedCertificationCandidate = new SCOCertificationCandidate({
-          firstName: 'Sarah Michelle',
-          lastName: 'Gellar',
-          birthdate: organizationLearner.birthdate,
-          sex: organizationLearner.sex,
-          birthINSEECode: organizationLearner.birthCityCode,
-          birthCountry: country.name,
-          birthCity: 'expected city',
-          sessionId: sessionId,
-          organizationLearnerId: 1,
-          subscriptions: [
-            domainBuilder.certification.enrolment.buildCoreSubscription({ certificationCandidateId: null }),
-          ],
-        });
-
-        const scoCertificationCandidateRepository = new InMemorySCOCertificationCandidateRepository();
-        const organizationLearnerRepository = { findByIds: sinon.stub() };
-        const countryRepository = { findAll: sinon.stub() };
-        countryRepository.findAll.resolves([country]);
-        organizationLearnerRepository.findByIds.withArgs({ ids: [1] }).resolves([organizationLearner]);
-        const sessionRepository = { get: sinon.stub() };
-        sessionRepository.get.withArgs({ id: sessionId }).resolves(session);
-        const centerRepository = { getById: sinon.stub() };
-        centerRepository.getById.withArgs({ id: session.certificationCenterId }).resolves(
-          domainBuilder.certification.enrolment.buildCenter({
-            matchingOrganization: domainBuilder.certification.enrolment.buildMatchingOrganization({
-              id: organizationForReferent.id,
-            }),
+        const studentIds = [michelStudentData.id, jeannetteStudentData.id];
+        candidateRepository.findBySessionId.withArgs({ sessionId }).resolves([]);
+        const michelLearner = domainBuilder.buildOrganizationLearner({
+          ...michelStudentData,
+          organization: domainBuilder.certification.enrolment.buildMatchingOrganization({
+            id: organizationId,
           }),
-        );
-        const certificationCpfService = { getBirthInformation: sinon.stub() };
-        const certificationCpfCountryRepository = {};
-        const certificationCpfCityRepository = {};
-
-        certificationCpfService.getBirthInformation.resolves({ birthCity: expectedCertificationCandidate.birthCity });
+        });
+        const jeanetteLearner = domainBuilder.buildOrganizationLearner({
+          ...jeannetteStudentData,
+          birthCountryCode: '99',
+          organization: domainBuilder.certification.enrolment.buildMatchingOrganization({
+            id: organizationId,
+          }),
+        });
+        organizationLearnerRepository.findByIds
+          .withArgs({ ids: studentIds })
+          .resolves([michelLearner, jeanetteLearner]);
 
         // when
-        await enrolStudentsToSession({
+        const error = await catchErr(enrolStudentsToSession)({
+          ...dependencies,
           sessionId,
-          studentIds: [1],
-          scoCertificationCandidateRepository,
-          organizationLearnerRepository,
-          sessionRepository,
-          countryRepository,
-          centerRepository,
-          certificationCpfCountryRepository,
-          certificationCpfCityRepository,
-          certificationCpfService,
+          studentIds,
         });
 
         // then
-        expect(certificationCpfService.getBirthInformation).to.have.been.calledOnceWithExactly({
-          birthCountry: country.name,
-          birthINSEECode: organizationLearner.birthCityCode,
-          birthCity: null,
-          birthPostalCode: null,
-          certificationCpfCountryRepository,
-          certificationCpfCityRepository,
-        });
-        expect(scoCertificationCandidateRepository.findBySessionId(sessionId)).to.deep.equal([
-          expectedCertificationCandidate,
-        ]);
+        expect(error).to.be.an.instanceOf(UnknownCountryForStudentEnrolmentError);
+        expect(error.message).to.equal(
+          "L'élève Jeannette Leto a été inscrit avec un code pays de naissance invalide. Veuillez corriger ses informations sur l'espace PixOrga de l'établissement ou contacter le support Pix",
+        );
+        expect(candidateRepository.save).to.not.have.been.called;
       });
     });
 
-    it('does nothing if no student ids is given as input', async function () {
-      // given
-      const session = domainBuilder.certification.enrolment.buildSession();
-      const sessionId = session.id;
-      const studentIds = [];
-      const { organizationForReferent, organizationLearners } =
-        _buildMatchingReferentOrganisationAndOrganizationLearners(studentIds);
-      const country = domainBuilder.buildCountry({
-        code: '99100',
-        name: 'FRANCE',
-      });
-
-      const scoCertificationCandidateRepository = new InMemorySCOCertificationCandidateRepository();
-      const organizationLearnerRepository = { findByIds: sinon.stub() };
-      const countryRepository = { findAll: sinon.stub() };
-      countryRepository.findAll.resolves([country]);
-      organizationLearnerRepository.findByIds.withArgs({ ids: studentIds }).resolves(organizationLearners);
-      const sessionRepository = { get: sinon.stub() };
-      sessionRepository.get.withArgs({ id: sessionId }).resolves(session);
-      const centerRepository = { getById: sinon.stub() };
-      centerRepository.getById.withArgs({ id: session.certificationCenterId }).resolves(
-        domainBuilder.certification.enrolment.buildCenter({
-          matchingOrganization: domainBuilder.certification.enrolment.buildMatchingOrganization({
-            id: organizationForReferent.id,
+    context('when student birth city is missing', function () {
+      it('computes the birth city from the student birth city code', async function () {
+        // given
+        const studentIds = [michelStudentData.id, jeannetteStudentData.id];
+        candidateRepository.findBySessionId.withArgs({ sessionId }).resolves([]);
+        const michelLearner = domainBuilder.buildOrganizationLearner({
+          ...michelStudentData,
+          organization: domainBuilder.certification.enrolment.buildMatchingOrganization({
+            id: organizationId,
           }),
-        }),
-      );
+        });
+        const jeanetteLearner = domainBuilder.buildOrganizationLearner({
+          ...jeannetteStudentData,
+          birthCity: null,
+          organization: domainBuilder.certification.enrolment.buildMatchingOrganization({
+            id: organizationId,
+          }),
+        });
+        organizationLearnerRepository.findByIds
+          .withArgs({ ids: studentIds })
+          .resolves([michelLearner, jeanetteLearner]);
+        certificationCpfService.getBirthInformation
+          .withArgs({
+            birthCountry: 'FRANCE',
+            birthINSEECode: 'CITYCODEJEANNETTE',
+            birthCity: null,
+            birthPostalCode: null,
+            certificationCpfCountryRepository,
+            certificationCpfCityRepository,
+          })
+          .resolves({ birthCity: 'Computed City' });
 
-      // when
-      await enrolStudentsToSession({
-        sessionId,
-        studentIds,
-        scoCertificationCandidateRepository,
-        centerRepository,
-        organizationLearnerRepository,
-        countryRepository,
-        sessionRepository,
+        // when
+        await enrolStudentsToSession({
+          ...dependencies,
+          sessionId,
+          studentIds,
+        });
+
+        // then
+        expect(candidateRepository.save).to.have.been.calledWithExactly({
+          candidates: [
+            new Candidate({
+              firstName: 'Michel',
+              lastName: 'Jacques',
+              birthdate: '1990-01-04',
+              sex: 'M',
+              birthINSEECode: 'CITYCODEMICHEL',
+              birthCity: 'Michelopolis',
+              birthCountry: 'FRANCE',
+              sessionId,
+              organizationLearnerId: 1,
+              subscription: SUBSCRIPTION_TYPES.CORE,
+            }),
+            new Candidate({
+              firstName: 'Jeannette',
+              lastName: 'Leto',
+              birthdate: '1989-02-18',
+              sex: 'F',
+              birthINSEECode: 'CITYCODEJEANNETTE',
+              birthCity: 'Computed City',
+              birthCountry: 'FRANCE',
+              sessionId,
+              organizationLearnerId: 2,
+              subscription: SUBSCRIPTION_TYPES.CORE,
+            }),
+          ],
+        });
       });
-
-      // then
-      expect(scoCertificationCandidateRepository.findBySessionId(sessionId)).to.deep.equal([]);
     });
   });
 });
-
-function _buildMatchingReferentOrganisationAndOrganizationLearners(studentIds) {
-  const organizationForReferent = domainBuilder.buildOrganization();
-  const organizationLearners = studentIds.map((id) => {
-    return domainBuilder.buildOrganizationLearner({
-      id,
-      organization: organizationForReferent,
-    });
-  });
-
-  return { organizationForReferent, organizationLearners };
-}
-
-function _buildNonMatchingReferentOrganisationAndOrganizationLearners(studentIds) {
-  const organizationForStudents = domainBuilder.buildOrganization({ id: 123 });
-  const organizationLearners = studentIds.map((id) => {
-    return domainBuilder.buildOrganizationLearner({ id, organization: organizationForStudents });
-  });
-
-  const organizationForReferent = domainBuilder.buildOrganization({ id: 456 });
-  return { organizationForReferent, organizationLearners };
-}
-
-class InMemorySCOCertificationCandidateRepository {
-  constructor() {
-    this.addedCandidates = {};
-  }
-
-  addNonEnrolledCandidatesToSession({ sessionId, scoCertificationCandidates }) {
-    this.addedCandidates[sessionId] = scoCertificationCandidates;
-  }
-
-  findBySessionId(sessionId) {
-    return this.addedCandidates[sessionId];
-  }
-}

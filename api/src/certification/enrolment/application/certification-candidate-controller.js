@@ -1,8 +1,6 @@
 import { normalize } from '../../../shared/infrastructure/utils/string-utils.js';
 import { usecases } from '../domain/usecases/index.js';
 import * as candidateSerializer from '../infrastructure/serializers/candidate-serializer.js';
-import * as enrolledCandidateSerializer from '../infrastructure/serializers/enrolled-candidate-serializer.js';
-import * as sessionCandidateSerializer from '../infrastructure/serializers/session-candidate-serializer.js';
 import * as timelineSerializer from '../infrastructure/serializers/timeline-serializer.js';
 
 const addCandidate = async function (request, h, dependencies = { candidateSerializer }) {
@@ -18,16 +16,16 @@ const addCandidate = async function (request, h, dependencies = { candidateSeria
   return h.response(serializedId).created();
 };
 
-const getEnrolledCandidates = async function (request, h, dependencies = { enrolledCandidateSerializer }) {
+const getEnrolledCandidates = async function (request, h, dependencies = { candidateSerializer }) {
   const sessionId = request.params.sessionId;
   const enrolledCandidates = await usecases.getEnrolledCandidatesInSession({ sessionId });
-  return dependencies.enrolledCandidateSerializer.serialize(enrolledCandidates);
+  return dependencies.candidateSerializer.serialize(enrolledCandidates);
 };
 
-const getSessionCandidates = async function (request, h, dependencies = { sessionCandidateSerializer }) {
+const getSessionCandidates = async function (request, h, dependencies = { candidateSerializer }) {
   const sessionId = request.params.sessionId;
   const enrolledCandidates = await usecases.getEnrolledCandidatesInSession({ sessionId });
-  return dependencies.sessionCandidateSerializer.serialize(enrolledCandidates);
+  return dependencies.candidateSerializer.serializeForSession(enrolledCandidates);
 };
 
 const deleteCandidate = async function (request, h) {
@@ -38,10 +36,10 @@ const deleteCandidate = async function (request, h) {
   return h.response().code(204);
 };
 
-const updateEnrolledCandidate = async function (request, h, dependencies = { enrolledCandidateSerializer }) {
+const updateEnrolledCandidate = async function (request, h, dependencies = { candidateSerializer }) {
   const candidateId = request.params.certificationCandidateId;
   const enrolledCandidateData = request.payload.data.attributes;
-  const editedCandidate = dependencies.enrolledCandidateSerializer.deserialize({
+  const editedCandidate = dependencies.candidateSerializer.deserializeForEdition({
     candidateId,
     candidateData: enrolledCandidateData,
   });

@@ -5,11 +5,10 @@ import { SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
 import { CERTIFICATION_CANDIDATES_ERRORS } from '../../../shared/domain/constants/certification-candidates-errors.js';
 import { CERTIFICATION_SESSIONS_ERRORS } from '../../../shared/domain/constants/sessions-errors.js';
 import { Frameworks } from '../../../shared/domain/models/Frameworks.js';
-//  should be injected
 import * as certificationCpfService from '../../../shared/domain/services/certification-cpf-service.js';
 import * as sessionValidator from '../../../shared/domain/validators/session-validator.js';
 
-const validateSession = async function ({
+export async function validateSession({
   session,
   candidatesData,
   line,
@@ -89,9 +88,9 @@ const validateSession = async function ({
   }
 
   return sessionErrors;
-};
+}
 
-const getUniqueCandidates = function (candidates) {
+export function getUniqueCandidates(candidates) {
   const duplicateCandidateErrors = [];
 
   const uniqueCandidates = candidates.filter((candidate, index) => {
@@ -117,9 +116,9 @@ const getUniqueCandidates = function (candidates) {
   });
 
   return { uniqueCandidates, duplicateCandidateErrors };
-};
+}
 
-const getValidatedSubscriptionsForMassImport = async function ({ subscriptionKeys = [], line }) {
+export async function getValidatedSubscriptionsForMassImport({ subscriptionKeys = [], line }) {
   const certificationCandidateComplementaryErrors = [];
 
   if (subscriptionKeys.length > 1) {
@@ -136,9 +135,9 @@ const getValidatedSubscriptionsForMassImport = async function ({ subscriptionKey
   const subscription = complementaryKey ?? Frameworks.CORE;
 
   return { certificationCandidateComplementaryErrors, subscription };
-};
+}
 
-const getValidatedCandidateInformation = async function ({
+export async function getValidatedCandidateInformation({
   candidate,
   isSco,
   line,
@@ -197,9 +196,9 @@ const getValidatedCandidateInformation = async function ({
       birthINSEECode: cpfBirthInformation.birthINSEECode,
     },
   };
-};
+}
 
-const validateCandidateEmails = async function ({ candidate, line, dependencies = { mailCheck } }) {
+export async function validateCandidateEmails({ candidate, line, dependencies = { mailCheck } }) {
   const certificationCandidateErrors = [];
   await _validateEmail({
     email: candidate.resultRecipientEmail,
@@ -217,15 +216,7 @@ const validateCandidateEmails = async function ({ candidate, line, dependencies 
   });
 
   return certificationCandidateErrors;
-};
-
-export {
-  getUniqueCandidates,
-  getValidatedCandidateInformation,
-  getValidatedSubscriptionsForMassImport,
-  validateCandidateEmails,
-  validateSession,
-};
+}
 
 function _isDateAndTimeValid(session) {
   return dayjs(`${session.date} ${session.time}`, 'YYYY-MM-DD HH:mm', true).isValid();
@@ -236,10 +227,8 @@ function _isSessionIdFormatValid(sessionId) {
 }
 
 async function _isSessionExistingInCertificationCenter({ sessionId, certificationCenterId, sessionRepository }) {
-  return await sessionRepository.isSessionExistingBySessionAndCertificationCenterIds({
-    sessionId,
-    certificationCenterId,
-  });
+  const session = await sessionRepository.get({ id: sessionId });
+  return session.certificationCenterId === certificationCenterId;
 }
 
 function _isErrorNotDuplicated({ certificationCandidateErrors, errorCode }) {

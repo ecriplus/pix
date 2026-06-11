@@ -124,7 +124,7 @@ describe('Certification | Enrolment | Unit | Serializer | candidate', function (
   describe('#serializeForParticipation()', function () {
     it('should convert a EnrolledCandidate model object into JSON API data', function () {
       // given
-      const enrolledCandidate = domainBuilder.certification.enrolment.buildEnrolledCandidate({
+      const candidate = domainBuilder.certification.enrolment.buildCandidate({
         id: 123,
         firstName: 'Michel',
         lastName: 'Jacques',
@@ -151,20 +151,131 @@ describe('Certification | Enrolment | Unit | Serializer | candidate', function (
       const expectedJsonApiData = {
         data: {
           type: 'certification-candidates',
-          id: enrolledCandidate.id.toString(),
+          id: candidate.id.toString(),
           attributes: {
-            'first-name': enrolledCandidate.firstName,
-            'last-name': enrolledCandidate.lastName,
-            birthdate: enrolledCandidate.birthdate,
+            'first-name': candidate.firstName,
+            'last-name': candidate.lastName,
+            birthdate: candidate.birthdate,
             'has-seen-certification-instructions': true,
-            'session-id': enrolledCandidate.sessionId,
+            'session-id': candidate.sessionId,
             'has-started-test': false,
+            'complementary-certification-key': null,
           },
         },
       };
 
       // when
-      const jsonApi = serializer.serializeForParticipation(enrolledCandidate);
+      const jsonApi = serializer.serializeForParticipation(candidate);
+
+      // then
+      expect(jsonApi).to.deep.equal(expectedJsonApiData);
+    });
+  });
+
+  describe('#serialize()', function () {
+    it('should convert a Candidate model object without subscriptions into JSON API data', function () {
+      // given
+      const candidate = domainBuilder.certification.enrolment.buildCandidate({
+        id: 123,
+        firstName: 'Michel',
+        lastName: 'Jacques',
+        sex: 'M',
+        birthPostalCode: 'somePostalCode1',
+        birthINSEECode: 'someInseeCode1',
+        birthCity: 'someBirthCity1',
+        birthProvinceCode: 'someProvinceCode1',
+        birthCountry: 'someBirthCountry1',
+        email: 'michel.jacques@example.net',
+        resultRecipientEmail: 'jeanette.jacques@example.net',
+        externalId: 'MICHELJACQUES',
+        birthdate: '1990-01-01',
+        extraTimePercentage: null,
+        userId: null,
+        organizationLearnerId: null,
+        billingMode: CertificationCandidate.BILLING_MODES.PAID,
+        prepaymentCode: 'somePrepaymentCode1',
+        subscription: Frameworks.PRO_SANTE,
+        hasSeenCertificationInstructions: true,
+        accessibilityAdjustmentNeeded: true,
+      });
+      const expectedJsonApiData = {
+        data: {
+          type: 'certification-candidates',
+          id: candidate.id.toString(),
+          attributes: {
+            'first-name': candidate.firstName,
+            'last-name': candidate.lastName,
+            'billing-mode': candidate.billingMode,
+            'prepayment-code': candidate.prepaymentCode,
+            'birth-city': candidate.birthCity,
+            'birth-province-code': candidate.birthProvinceCode,
+            'birth-insee-code': candidate.birthINSEECode,
+            'birth-postal-code': candidate.birthPostalCode,
+            'birth-country': candidate.birthCountry,
+            birthdate: candidate.birthdate,
+            email: candidate.email,
+            'result-recipient-email': candidate.resultRecipientEmail,
+            'external-id': candidate.externalId,
+            'extra-time-percentage': candidate.extraTimePercentage,
+            'is-linked': candidate.isLinked,
+            'organization-learner-id': candidate.organizationLearnerId,
+            sex: candidate.sex,
+            subscription: candidate.subscription,
+            'has-seen-certification-instructions': true,
+            'accessibility-adjustment-needed': true,
+          },
+        },
+      };
+
+      // when
+      const jsonApi = serializer.serialize(candidate);
+
+      // then
+      expect(jsonApi).to.deep.equal(expectedJsonApiData);
+    });
+  });
+
+  describe('#serializeForSession()', function () {
+    it('should convert a Candidate model object with subscriptions into JSON API data', function () {
+      // given
+      const sessionCandidate = domainBuilder.certification.enrolment.buildCandidate({
+        id: 123,
+        firstName: 'Michel',
+        lastName: 'Jacques',
+        sex: 'M',
+        birthPostalCode: 'somePostalCode1',
+        birthINSEECode: 'someInseeCode1',
+        birthCity: 'someBirthCity1',
+        birthProvinceCode: 'someProvinceCode1',
+        birthCountry: 'someBirthCountry1',
+        email: 'michel.jacques@example.net',
+        resultRecipientEmail: 'jeanette.jacques@example.net',
+        externalId: 'MICHELJACQUES',
+        birthdate: '1990-01-01',
+        extraTimePercentage: null,
+        userId: 159,
+        organizationLearnerId: null,
+        billingMode: CertificationCandidate.BILLING_MODES.PAID,
+        prepaymentCode: 'somePrepaymentCode1',
+        hasSeenCertificationInstructions: true,
+        subscription: Frameworks.DROIT,
+        accessibilityAdjustmentNeeded: true,
+      });
+      const expectedJsonApiData = {
+        data: {
+          type: 'certification-candidates',
+          id: sessionCandidate.id.toString(),
+          attributes: {
+            'first-name': sessionCandidate.firstName,
+            'last-name': sessionCandidate.lastName,
+            birthdate: sessionCandidate.birthdate,
+            subscription: sessionCandidate.subscription,
+          },
+        },
+      };
+
+      // when
+      const jsonApi = serializer.serializeForSession(sessionCandidate);
 
       // then
       expect(jsonApi).to.deep.equal(expectedJsonApiData);

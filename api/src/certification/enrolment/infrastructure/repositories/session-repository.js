@@ -83,19 +83,6 @@ export async function isSessionExistingByCertificationCenterId({
 
 /**
  * @function
- * @param {object} params
- * @param {number} params.sessionId
- * @param {number} params.certificationCenterId
- * @returns {Promise<boolean>}
- */
-export async function isSessionExistingBySessionAndCertificationCenterIds({ sessionId, certificationCenterId }) {
-  const knexConn = DomainTransaction.getConnection();
-  const [session] = await knexConn('sessions').where({ id: sessionId, certificationCenterId });
-  return Boolean(session);
-}
-
-/**
- * @function
  * @param {SessionEnrolment} session
  * @returns {Promise<void>}
  */

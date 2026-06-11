@@ -1,46 +1,52 @@
 /**
- * @typedef {import('./index.js').ScoCertificationCandidateRepository} ScoCertificationCandidateRepository
  * @typedef {import('./index.js').OrganizationLearnerRepository} OrganizationLearnerRepository
  * @typedef {import('./index.js').CenterRepository} CenterRepository
+ * @typedef {import('./index.js').CandidateRepository} CandidateRepository
  * @typedef {import('./index.js').CountryRepository} CountryRepository
  * @typedef {import('./index.js').SessionRepository} SessionRepository
- * @typedef {import('../models/SCOCertificationCandidate.js').SCOCertificationCandidate} SCOCertificationCandidate
  */
 import { ForbiddenAccess } from '../../../../shared/domain/errors.js';
 import { PromiseUtils } from '../../../../shared/infrastructure/utils/promise-utils.js';
+import { SUBSCRIPTION_TYPES } from '../../../shared/domain/constants.js';
 import { UnknownCountryForStudentEnrolmentError } from '../errors.js';
-import { SCOCertificationCandidate } from '../models/SCOCertificationCandidate.js';
+import { Candidate } from '../models/Candidate.js';
 
 const INSEE_PREFIX_CODE = '99';
 
 /**
  * @param {object} params
- * @param {ScoCertificationCandidateRepository} params.scoCertificationCandidateRepository
  * @param {OrganizationLearnerRepository} params.organizationLearnerRepository
+ * @param {CandidateRepository} params.candidateRepository
  * @param {CenterRepository} params.centerRepository
  * @param {CountryRepository} params.countryRepository
  * @param {SessionRepository} params.sessionRepository
  */
-const enrolStudentsToSession = async function ({
+export async function enrolStudentsToSession({
   sessionId,
   studentIds,
-  scoCertificationCandidateRepository,
   organizationLearnerRepository,
   centerRepository,
   countryRepository,
   sessionRepository,
+  candidateRepository,
   certificationCpfCityRepository,
   certificationCpfCountryRepository,
   certificationCpfService,
-} = {}) {
+}) {
+  if (studentIds.length === 0) {
+    return;
+  }
   const session = await sessionRepository.get({ id: sessionId });
   const center = await centerRepository.getById({ id: session.certificationCenterId });
+  const enrolledCandidates = await candidateRepository.findBySessionId({ sessionId });
+  const alreadyEnrolledStudentIds = enrolledCandidates.map((candidate) => candidate.organizationLearnerId);
+  const studentIdsNotYetEnrolled = studentIds.filter((studentId) => !alreadyEnrolledStudentIds.includes(studentId));
+  const students = await organizationLearnerRepository.findByIds({ ids: studentIdsNotYetEnrolled });
 
-  const students = await organizationLearnerRepository.findByIds({ ids: studentIds });
-
-  const doAllStudentsBelongToSameCertificationCenterAsSession =
-    await _doAllStudentsBelongToSameCertificationCenterAsSession({ students, center });
-  if (!doAllStudentsBelongToSameCertificationCenterAsSession) {
+  const doStudentsBelongToCenter = students.every(
+    (student) => center.matchingOrganizationId === student.organizationId,
+  );
+  if (!doStudentsBelongToCenter) {
     throw new ForbiddenAccess("Impossible d'inscrire un élève ne faisant pas partie de votre établissement");
   }
 
@@ -72,7 +78,7 @@ const enrolStudentsToSession = async function ({
       birthCity = birthInformation.birthCity;
     }
 
-    return new SCOCertificationCandidate({
+    return new Candidate({
       firstName: student.firstName.trim(),
       lastName: student.lastName.trim(),
       birthdate: student.birthdate,
@@ -82,17 +88,9 @@ const enrolStudentsToSession = async function ({
       sex: student.sex,
       sessionId,
       organizationLearnerId: student.id,
+      subscription: SUBSCRIPTION_TYPES.CORE,
     });
   });
 
-  await scoCertificationCandidateRepository.addNonEnrolledCandidatesToSession({
-    sessionId,
-    scoCertificationCandidates,
-  });
-};
-
-export { enrolStudentsToSession };
-
-async function _doAllStudentsBelongToSameCertificationCenterAsSession({ students, center }) {
-  return students.every((student) => center.matchingOrganizationId === student.organizationId);
+  await candidateRepository.save({ candidates: scoCertificationCandidates });
 }

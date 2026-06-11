@@ -1,14 +1,16 @@
 /**
- * @typedef {import("./index.js").EnrolledCandidateRepository} EnrolledCandidateRepository
- * @typedef {import("../read-models/EnrolledCandidate.js").EnrolledCandidate} EnrolledCandidate
+ * @typedef {import("./index.js").CandidateRepository} CandidateRepository
+ * @typedef {import("../models/Candidate.js").Candidate} Candidate
  */
+import { Candidate } from '../models/Candidate.js';
 
 /**
  * @function
  * @param {object} params
- * @param {EnrolledCandidateRepository} params.enrolledCandidateRepository
- * @returns {Promise<Array<EnrolledCandidate>>}
+ * @param {CandidateRepository} params.candidateRepository
+ * @returns {Promise<Array<Candidate>>}
  */
-export async function getEnrolledCandidatesInSession({ sessionId, enrolledCandidateRepository }) {
-  return enrolledCandidateRepository.findBySessionId({ sessionId });
+export async function getEnrolledCandidatesInSession({ sessionId, candidateRepository }) {
+  const candidates = await candidateRepository.findBySessionId({ sessionId });
+  return candidates.sort(Candidate.sortByLastNameAndFirstName);
 }

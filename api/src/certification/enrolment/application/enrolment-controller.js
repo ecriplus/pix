@@ -1,15 +1,15 @@
 import { getI18nFromRequest } from '../../../shared/infrastructure/i18n/i18n.js';
 import { usecases } from '../domain/usecases/index.js';
 import { fillCandidatesImportSheet } from '../infrastructure/candidates-import/fill-candidates-import-sheet.js';
-import * as enrolledCandidateSerializer from '../infrastructure/serializers/enrolled-candidate-serializer.js';
+import * as candidateSerializer from '../infrastructure/serializers/candidate-serializer.js';
 
-const enrolStudentsToSession = async function (request, h, dependencies = { enrolledCandidateSerializer }) {
+const enrolStudentsToSession = async function (request, h, dependencies = { candidateSerializer }) {
   const sessionId = request.params.sessionId;
   const studentIds = request.deserializedPayload.organizationLearnerIds;
 
   await usecases.enrolStudentsToSession({ sessionId, studentIds });
   const enrolledCandidates = await usecases.getEnrolledCandidatesInSession({ sessionId });
-  const enrolledCandidatesSerialized = dependencies.enrolledCandidateSerializer.serialize(enrolledCandidates);
+  const enrolledCandidatesSerialized = dependencies.candidateSerializer.serialize(enrolledCandidates);
   return h.response(enrolledCandidatesSerialized).created();
 };
 
