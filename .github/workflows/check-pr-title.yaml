@@ -1,7 +1,11 @@
 name: pr title check
+
 on:
   pull_request:
     types: [opened, edited, ready_for_review, reopened]
+  merge_group:
+    types: [checks_requested]
+
 jobs:
   lint-pr-title:
     runs-on: ubuntu-latest

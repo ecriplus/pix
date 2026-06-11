@@ -4,7 +4,10 @@ on:
   pull_request:
     types: [opened, reopened, synchronize, ready_for_review, unlabeled]
   push:
-    branches: dev
+    branches:
+      - dev
+  merge_group:
+    types: [checks_requested]
 
 jobs:
   trigger-ci:
