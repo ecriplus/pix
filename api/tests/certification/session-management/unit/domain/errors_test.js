@@ -26,6 +26,10 @@ describe('Certification | session-management | Unit | Domain | Errors', function
     expect(errors.SessionNotAccessible).to.exist;
   });
 
+  it('should export a SessionFinalized error', function () {
+    expect(errors.SessionFinalized).to.exist;
+  });
+
   it('should export a certificationCenterIsArchived error', function () {
     expect(errors.CertificationCenterIsArchivedError).to.exist;
   });
