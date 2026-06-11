@@ -92,8 +92,9 @@ module('Integration | Component | SessionSupervising::CandidateList', function (
         assert
           .dom(
             screen.getByText(
-              t('pages.session-supervising.candidate-list.authorized-to-start-candidates', {
-                authorizedToStartCandidates: 0,
+              t('pages.session-supervising.candidate-list.active-candidates', {
+                activeCandidates: 0,
+                startedCandidates: 0,
                 totalCandidates: this.certificationCandidates.length,
               }),
             ),
@@ -159,8 +160,8 @@ module('Integration | Component | SessionSupervising::CandidateList', function (
       });
     });
 
-    module('when some candidates are authorized to start', function () {
-      test('it renders the number of authorized to start candidates', async function (assert) {
+    module('when some candidates are active', function () {
+      test('it renders the number of active and started candidates', async function (assert) {
         // given
         this.certificationCandidates = [
           store.createRecord('certification-candidate-for-supervising', {
@@ -172,6 +173,25 @@ module('Integration | Component | SessionSupervising::CandidateList', function (
             firstName: 'Star',
             lastName: 'Lord',
             authorizedToStart: true,
+            assessmentStatus: 'started',
+          }),
+          store.createRecord('certification-candidate-for-supervising', {
+            firstName: 'Completed',
+            lastName: 'Lord',
+            authorizedToStart: true,
+            assessmentStatus: 'completed',
+          }),
+          store.createRecord('certification-candidate-for-supervising', {
+            firstName: 'Ended',
+            lastName: 'Lord',
+            authorizedToStart: true,
+            assessmentStatus: 'endedByInvigilator',
+          }),
+          store.createRecord('certification-candidate-for-supervising', {
+            firstName: 'Aborted',
+            lastName: 'Lord',
+            authorizedToStart: true,
+            assessmentStatus: 'aborted',
           }),
           store.createRecord('certification-candidate-for-supervising', {
             firstName: 'Gammvert',
@@ -189,8 +209,9 @@ module('Integration | Component | SessionSupervising::CandidateList', function (
         assert
           .dom(
             screen.getByText(
-              t('pages.session-supervising.candidate-list.authorized-to-start-candidates', {
-                authorizedToStartCandidates: 2,
+              t('pages.session-supervising.candidate-list.active-candidates', {
+                activeCandidates: 2,
+                startedCandidates: 1,
                 totalCandidates: this.certificationCandidates.length,
               }),
             ),
