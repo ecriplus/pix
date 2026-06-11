@@ -1,7 +1,6 @@
 import dayjs from 'dayjs';
 import lodash from 'lodash';
 
-import { config } from '../../../../src/shared/config.js';
 import * as localeService from '../../../shared/domain/services/locale-service.js';
 import { anonymizeGeneralizeDate } from '../../../shared/infrastructure/utils/date-utils.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../constants/identity-providers.js';
@@ -93,12 +92,6 @@ class User {
     );
 
     return pixAuthenticationMethod ? pixAuthenticationMethod.authenticationComplement?.password : null;
-  }
-
-  get shouldSeeDataProtectionPolicyInformationBanner() {
-    const isNotOrganizationLearner = this.cgu === true;
-    const parsedDate = new Date(this.lastDataProtectionPolicySeenAt);
-    return dayjs(parsedDate).isBefore(dayjs(config.dataProtectionPolicy.updateDate)) && isNotOrganizationLearner;
   }
 
   changeLocale(newLocale, dependencies = { localeService }) {

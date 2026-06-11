@@ -1,5 +1,6 @@
 import sinon from 'sinon';
 
+import { User } from '../../../../src/identity-access-management/domain/models/User.js';
 import { UserWithActivity } from '../../../../src/identity-access-management/domain/read-models/UserWithActivity.js';
 import { STATUS } from '../../../../src/legal-documents/domain/models/LegalDocumentStatus.js';
 import { config } from '../../../../src/shared/config.js';
@@ -117,7 +118,7 @@ describe('Unit | Domain | Read-Models | UserWithActivity', function () {
       it('should return false', function () {
         // given
         const acceptedAt = new Date('2025-01-15');
-        const user = domainBuilder.buildUser({ lastDataProtectionPolicySeenAt: null });
+        const user = new User({ lastDataProtectionPolicySeenAt: null });
         const tosStatus = { status: STATUS.ACCEPTED, documentPath: '/tos/v2.pdf', acceptedAt: acceptedAt };
         sinon.stub(config.dataProtectionPolicy, 'updateDate').value(null);
         const userWithActivity = new UserWithActivity({
@@ -140,9 +141,9 @@ describe('Unit | Domain | Read-Models | UserWithActivity', function () {
       it('should return true', function () {
         // given
         const acceptedAt = new Date('2025-01-15');
-        const user = domainBuilder.buildUser({ lastDataProtectionPolicySeenAt: null });
+        const user = new User({ lastDataProtectionPolicySeenAt: null });
         const tosStatus = { status: STATUS.ACCEPTED, documentPath: '/tos/v2.pdf', acceptedAt: acceptedAt };
-        sinon.stub(config.dataProtectionPolicy, 'updateDate').value(new Date());
+        sinon.stub(config.dataProtectionPolicy, 'updateDate').value(new Date()); //data protection has been updated
         const userWithActivity = new UserWithActivity({
           user,
           tosStatus,
@@ -160,7 +161,7 @@ describe('Unit | Domain | Read-Models | UserWithActivity', function () {
 
       it('should return false for an organization learner', function () {
         // given
-        const user = domainBuilder.buildUser({ lastDataProtectionPolicySeenAt: null });
+        const user = new User({ lastDataProtectionPolicySeenAt: null });
         const tosStatus = { status: STATUS.NOT_APPLICABLE, documentPath: null, acceptedAt: null };
         sinon.stub(config.dataProtectionPolicy, 'updateDate').value(new Date());
         const userWithActivity = new UserWithActivity({
@@ -183,7 +184,7 @@ describe('Unit | Domain | Read-Models | UserWithActivity', function () {
       it('should return false', function () {
         // given
         const acceptedAt = new Date('2025-01-15');
-        const user = domainBuilder.buildUser({ lastDataProtectionPolicySeenAt: new Date() });
+        const user = new User({ lastDataProtectionPolicySeenAt: new Date() });
         const tosStatus = { status: STATUS.ACCEPTED, documentPath: '/tos/v2.pdf', acceptedAt: acceptedAt };
         sinon.stub(config.dataProtectionPolicy, 'updateDate').value(null);
         const userWithActivity = new UserWithActivity({
@@ -203,7 +204,7 @@ describe('Unit | Domain | Read-Models | UserWithActivity', function () {
 
       it('should return false for an organization learner', function () {
         // given
-        const user = domainBuilder.buildUser({ lastDataProtectionPolicySeenAt: new Date() });
+        const user = new User({ lastDataProtectionPolicySeenAt: new Date() });
         const tosStatus = { status: STATUS.NOT_APPLICABLE, documentPath: null, acceptedAt: null };
         sinon.stub(config.dataProtectionPolicy, 'updateDate').value(null);
         const userWithActivity = new UserWithActivity({
@@ -226,7 +227,7 @@ describe('Unit | Domain | Read-Models | UserWithActivity', function () {
       it('should return false', function () {
         // given
         const acceptedAt = new Date('2025-01-15');
-        const user = domainBuilder.buildUser({ lastDataProtectionPolicySeenAt: new Date(Date.now() + 3600 * 1000) });
+        const user = new User({ lastDataProtectionPolicySeenAt: new Date(Date.now() + 3600 * 1000) });
         const tosStatus = { status: STATUS.ACCEPTED, documentPath: '/tos/v2.pdf', acceptedAt: acceptedAt };
         sinon.stub(config.dataProtectionPolicy, 'updateDate').value(new Date());
         const userWithActivity = new UserWithActivity({
@@ -246,7 +247,7 @@ describe('Unit | Domain | Read-Models | UserWithActivity', function () {
 
       it('should return false for an organization learner', function () {
         // given
-        const user = domainBuilder.buildUser({ lastDataProtectionPolicySeenAt: new Date(Date.now() + 3600 * 1000) });
+        const user = new User({ lastDataProtectionPolicySeenAt: new Date(Date.now() + 3600 * 1000) });
         const tosStatus = { status: STATUS.NOT_APPLICABLE, documentPath: null, acceptedAt: null };
         sinon.stub(config.dataProtectionPolicy, 'updateDate').value(new Date());
         const userWithActivity = new UserWithActivity({
@@ -269,7 +270,7 @@ describe('Unit | Domain | Read-Models | UserWithActivity', function () {
       it('should return true', function () {
         // given
         const acceptedAt = new Date('2025-01-15');
-        const user = domainBuilder.buildUser({ lastDataProtectionPolicySeenAt: new Date() });
+        const user = new User({ lastDataProtectionPolicySeenAt: new Date() });
         const tosStatus = { status: STATUS.ACCEPTED, documentPath: '/tos/v2.pdf', acceptedAt: acceptedAt };
         sinon.stub(config.dataProtectionPolicy, 'updateDate').value(new Date(Date.now() + 3600 * 1000));
         const userWithActivity = new UserWithActivity({
@@ -289,7 +290,7 @@ describe('Unit | Domain | Read-Models | UserWithActivity', function () {
 
       it('should return false for an organization learner', function () {
         // given
-        const user = domainBuilder.buildUser({ lastDataProtectionPolicySeenAt: new Date() });
+        const user = new User({ lastDataProtectionPolicySeenAt: new Date() });
         const tosStatus = { status: STATUS.NOT_APPLICABLE, documentPath: null, acceptedAt: null };
         sinon.stub(config.dataProtectionPolicy, 'updateDate').value(new Date(Date.now() + 3600 * 1000));
         const userWithActivity = new UserWithActivity({
