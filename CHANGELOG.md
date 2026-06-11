@@ -1,5 +1,25 @@
 # Pix Changelog
 
+# [5.429.0](https://github.com/1024pix/pix/compare/v5.428.0...v5.429.0) (2026-06-11)
+
+### :rocket: Amélioration
+
+- [#16475](https://github.com/1024pix/pix/pull/16475) Ajouter le tracking sur les accordéons de la modale (PIX-23074) 
+- [#16469](https://github.com/1024pix/pix/pull/16469) MDX-121 RepondreMail_IND Corrections suite à la relecture édito et experts 
+- [#16466](https://github.com/1024pix/pix/pull/16466) MDX-232 MoteurRech_NOV2 Corrections suite à la relecture édito 
+- [#16473](https://github.com/1024pix/pix/pull/16473) MDX-32 modification illu accroche NR_Datacenter_NOV 
+
+### :bug: Correction
+
+- [#16467](https://github.com/1024pix/pix/pull/16467) Partager les resultats de toutes les quêtes obtenues (PIX-23051) 
+
+### :building_construction: Tech
+
+- [#16405](https://github.com/1024pix/pix/pull/16405) Déplace des models du scope quest dans un sous-dossier quest 
+- [#16409](https://github.com/1024pix/pix/pull/16409) Déplacer ObfuscationService dans le contexte IAM 
+- [#16478](https://github.com/1024pix/pix/pull/16478) Enlève des variables d'environnement plus utiles de la config front de Pix App (PIX-22942) 
+- [#16476](https://github.com/1024pix/pix/pull/16476) Rend silencieuses les dépréciations ember de Pix Orga.
+
 # [5.428.0](https://github.com/1024pix/pix/compare/v5.427.0...v5.428.0) (2026-06-10)
 
 # [5.427.0](https://github.com/1024pix/pix/compare/v5.426.0...v5.427.0) (2026-06-09)
