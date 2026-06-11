@@ -11,11 +11,12 @@ import CandidateInList from 'pix-certif/components/session-supervising/candidate
 export default class CandidateList extends Component {
   @tracked filter = '';
 
-  get authorizedToStartCandidates() {
-    return this.args.candidates.reduce((authorizedToStartCandidates, candidate) => {
-      if (candidate.authorizedToStart) return authorizedToStartCandidates + 1;
-      return authorizedToStartCandidates;
-    }, 0);
+  get startedCandidatesCount() {
+    return this.args.candidates.filter((c) => c.hasStarted).length;
+  }
+
+  get activeCandidatesCount() {
+    return this.args.candidates.filter((c) => (c.authorizedToStart && !c.assessmentStatus) || c.hasStarted).length;
   }
 
   get filteredCandidates() {
@@ -90,11 +91,14 @@ export default class CandidateList extends Component {
               @size={{true}}
             />
           </div>
-          <p class='session-supervising-candidate-list__candidates-count'>{{t
-              'pages.session-supervising.candidate-list.authorized-to-start-candidates'
-              authorizedToStartCandidates=this.authorizedToStartCandidates
+          <p class='session-supervising-candidate-list__candidates-count'>
+            {{t
+              'pages.session-supervising.candidate-list.active-candidates'
+              activeCandidates=this.activeCandidatesCount
+              startedCandidates=this.startedCandidatesCount
               totalCandidates=@candidates.length
-            }}</p>
+            }}
+          </p>
           <ul class='session-supervising-candidate-list__candidates'>
             {{#each this.filteredCandidates as |candidate|}}
               <CandidateInList
