@@ -1017,7 +1017,7 @@
                         "mailAddress": "jean.lotus@pixmail.org",
                         "avatarColor": "#79F8F8",
                         "expeditor": "Jean Lotus",
-                        "content": "<p>Bonjour,</p>  <p>Afin d’organiser les entretiens individuels de suivi de la formation, merci de m’envoyer <strong>votre préférence de créneau horaire</strong> (lundi ou mardi).<br>Vous pouvez me répondre directement par retour de mail. </p>  <p>Cordialement,</p>  <p>M. Lotus, responsable de formation</p>",
+                        "content": "<p>Bonjour,</p>  <p>Afin d’organiser les entretiens individuels de suivi de la formation, merci de m’envoyer <strong>votre préférence de créneau horaire</strong> (lundi ou mardi).<br>Vous pouvez me répondre directement par retour de mail. </p>  <p>Cordialement,</p>  <p>M. Lotus, Responsable de formation</p>",
                         "time": {
                           "days": -14,
                           "minutes": -66
