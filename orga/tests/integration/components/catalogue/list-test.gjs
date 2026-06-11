@@ -11,43 +11,47 @@ import setupIntlRenderingTest from '../../../helpers/setup-intl-rendering';
 module('Integration | Component | Catalogue::List', function (hooks) {
   setupIntlRenderingTest(hooks);
   let store;
+
   hooks.beforeEach(function () {
-    const router = this.owner.lookup('service:router');
     store = this.owner.lookup('service:store');
-    router.transitionTo = () => {};
   });
 
-  module('when there are no items', function () {
-    test('it displays an empty state', async function (assert) {
-      // given
-      const courses = [];
-      const updateFilter = sinon.stub();
+  test('it displays an empty state when there are no items', async function (assert) {
+    // given
+    const courses = [];
+    const updateFilter = sinon.stub();
 
-      // when
-      const screen = await render(<template><List @courses={{courses}} @updateFilter={{updateFilter}} /></template>);
+    // when
+    const screen = await render(<template><List @courses={{courses}} @updateFilter={{updateFilter}} /></template>);
 
-      // then
-      assert.dom(screen.getByText(t('pages.catalogue.empty-state'))).exists();
-    });
+    // then
+    assert.dom(screen.getByText(t('pages.catalogue.empty-state'))).exists();
   });
 
-  module('when there are course items', function () {
-    test('it shows all items', async function (assert) {
-      // given
-      const courses = [
-        { name: 'Ma super formation', type: 'targetProfile', nbTubes: 5, category: 'PREDEFINED' },
-        { name: 'Mon parcours combiné', type: 'blueprint', nbModules: 2 },
-      ];
-      const updateFilter = sinon.stub();
+  test('it shows all items', async function (assert) {
+    // given
+    const courses = [
+      { name: 'Ma super formation', type: 'targetProfile', nbTubes: 5, category: 'PREDEFINED' },
+      { name: 'Mon parcours combiné', type: 'blueprint', nbModules: 2 },
+    ];
+    const updateFilter = sinon.stub();
 
-      // when
-      const screen = await render(
-        <template><List @updateFilter={{updateFilter}} @courses={{courses}} @type="all" /></template>,
-      );
+    // when
+    const screen = await render(
+      <template><List @updateFilter={{updateFilter}} @courses={{courses}} @type="all" /></template>,
+    );
 
-      // then
-      assert.dom(screen.getByRole('heading', { level: 3, name: 'Ma super formation' })).exists();
-      assert.dom(screen.getByRole('heading', { level: 3, name: 'Mon parcours combiné' })).exists();
+    // then
+    assert.dom(screen.getByRole('heading', { level: 3, name: 'Ma super formation' })).exists();
+    assert.dom(screen.getByRole('heading', { level: 3, name: 'Mon parcours combiné' })).exists();
+  });
+
+  module('filters', function (hooks) {
+    let router;
+
+    hooks.beforeEach(function () {
+      router = this.owner.lookup('service:router');
+      sinon.stub(router, 'transitionTo');
     });
 
     module('type filters', function () {
@@ -477,6 +481,72 @@ module('Integration | Component | Catalogue::List', function (hooks) {
         // then
         assert.ok(resetFilters.calledOnce);
       });
+    });
+  });
+
+  module('modal', function () {
+    test('it shows the modal if a currentCourse has been fetched', async function (assert) {
+      // given
+      const updateFilter = sinon.stub();
+      const courses = [{ name: 'Ma super formation', type: 'targetProfile' }];
+      const currentCourse = store.createRecord('target-profile-overview', {
+        name: 'Ma super formation',
+        description: 'description',
+      });
+
+      // when
+      const screen = await render(
+        <template>
+          <List @courses={{courses}} @updateFilter={{updateFilter}} @type="all" @currentCourse={{currentCourse}} />
+        </template>,
+      );
+
+      assert.dom(await screen.findByRole('dialog', { name: currentCourse.name })).exists();
+    });
+
+    test('it does not show the modal if no currentCourse has been fetched', async function (assert) {
+      // given
+      const updateFilter = sinon.stub();
+      const courses = [{ name: 'Ma super formation', type: 'targetProfile' }];
+
+      // when
+      const screen = await render(
+        <template>
+          <List @courses={{courses}} @updateFilter={{updateFilter}} @type="all" @currentCourse={{null}} />
+        </template>,
+      );
+
+      assert.dom(screen.queryByRole('dialog')).doesNotExist();
+    });
+
+    test('it redirects to close the modal with empty query params on exit button click', async function (assert) {
+      // given
+      const router = this.owner.lookup('service:router');
+      const updateFilter = sinon.stub();
+
+      const type = 'all';
+      const transitionToStub = sinon.stub(router, 'transitionTo').withArgs('authenticated.catalogue.list', type, {
+        queryParams: { targetProfileId: null, blueprintId: null },
+      });
+
+      const courses = [{ name: 'Ma super formation', type: 'targetProfile' }];
+      const currentCourse = store.createRecord('target-profile-overview', {
+        name: 'Ma super formation',
+        description: 'description',
+      });
+
+      // when
+      const screen = await render(
+        <template>
+          <List @courses={{courses}} @updateFilter={{updateFilter}} @type={{type}} @currentCourse={{currentCourse}} />
+        </template>,
+      );
+
+      await click(screen.getByRole('button', { name: t('common.actions.exit') }));
+
+      // then
+      sinon.assert.calledOnce(transitionToStub);
+      assert.ok(true);
     });
   });
 });

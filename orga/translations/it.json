@@ -197,6 +197,7 @@
       "cancel": "Annullamento",
       "close": "Chiudere",
       "confirm": "Confermare",
+      "exit": "Esci",
       "global": "Azioni",
       "link-to-participant": "Visualizza tutte le attività dei partecipanti",
       "save": "Registro"
@@ -1052,6 +1053,10 @@
           "placeholder": "Cerca per titolo"
         },
         "nb-result": "{count, plural, =0 {Nessun percorso} =1 {{count} percorso} other {{count} percorsi}}"
+      },
+      "modal": {
+        "associated-badges": "Badge associati",
+        "open-modal": "Visualizza i dettagli del percorso"
       },
       "tab-filters": {
         "all": "Tutti",

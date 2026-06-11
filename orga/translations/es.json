@@ -197,6 +197,7 @@
       "cancel": "Cancelar",
       "close": "Cerrar",
       "confirm": "Confirme",
+      "exit": "Salir",
       "global": "Acciones",
       "link-to-participant": "Ver toda la actividad de los participantes",
       "save": "Regístrese en"
@@ -1055,6 +1056,10 @@
           "placeholder": "Buscar por título"
         },
         "nb-result": "{count, plural, =0 {Ningún curso} =1 {{count} curso} other {{count} cursos}}"
+      },
+      "modal": {
+        "associated-badges": "Insignias relacionadas",
+        "open-modal": "Ver detalles del cursos"
       },
       "tab-filters": {
         "all": "Todos",

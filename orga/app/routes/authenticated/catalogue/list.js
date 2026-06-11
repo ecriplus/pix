@@ -8,15 +8,21 @@ export default class AuthenticatedCatalogueFilter extends Route {
 
   #currentOrgaId = null;
 
+  queryParams = {
+    targetProfileId: { refreshModel: true },
+    blueprintId: { refreshModel: true },
+  };
+
   beforeModel(transition) {
     if (!['all', 'blueprint', 'targetProfile'].includes(transition.to.params?.type)) {
       return this.router.replaceWith('authenticated.catalogue.list', 'all');
     }
   }
 
-  async model({ type }) {
+  async model({ type, targetProfileId, blueprintId }) {
     this.handleCache();
     let courses = this.store.peekAll('course');
+    let currentCourse;
 
     if (courses.length === 0) {
       courses = await this.store.findAll('course', {
@@ -25,7 +31,17 @@ export default class AuthenticatedCatalogueFilter extends Route {
       });
     }
 
-    return { courses, type };
+    if (targetProfileId) {
+      currentCourse = await this.store.findRecord('target-profile-overview', targetProfileId, {
+        adapterOptions: { organizationId: this.currentUser.organization.id },
+      });
+    }
+
+    if (blueprintId) {
+      // TODO use blueprint findRecord
+    }
+
+    return { courses, currentCourse, type };
   }
 
   handleCache() {

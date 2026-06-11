@@ -191,6 +191,7 @@
       "cancel": "Cancel",
       "close": "Close",
       "confirm": "Confirm",
+      "exit": "Exit",
       "global": "Actions",
       "link-to-participant": "See whole participant's activity",
       "save": "Save"
@@ -1061,6 +1062,10 @@
           "placeholder": "Search by title"
         },
         "nb-result": "{count, plural, =0 {No course} =1 {{count} course} other {{count} courses}}"
+      },
+      "modal": {
+        "associated-badges": "Related badges",
+        "open-modal": "View course details"
       },
       "tab-filters": {
         "all": "All",

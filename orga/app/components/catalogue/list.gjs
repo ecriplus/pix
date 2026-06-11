@@ -4,18 +4,46 @@ import PixSearchInput from '@1024pix/pix-ui/components/pix-search-input';
 import PixSelect from '@1024pix/pix-ui/components/pix-select';
 import PixTabs from '@1024pix/pix-ui/components/pix-tabs';
 import { fn } from '@ember/helper';
+import { action } from '@ember/object';
 import { LinkTo } from '@ember/routing';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { t } from 'ember-intl';
 import { eq } from 'ember-truth-helpers';
 import CourseCard from 'pix-orga/components/catalogue/course-card';
 import EmptyState from 'pix-orga/components/ui/empty-state';
 import ENV from 'pix-orga/config/environment';
 
+import CourseModal from './course-modal.gjs';
+
 export default class List extends Component {
   @service locale;
   @service intl;
+  @service router;
+
+  @tracked isModalOpen = false;
+
+  constructor() {
+    super(...arguments);
+
+    if (this.args.currentCourse) {
+      this.isModalOpen = true;
+    }
+  }
+
+  @action
+  selectCourse() {
+    this.isModalOpen = true;
+  }
+
+  @action
+  closeModal() {
+    this.router.transitionTo('authenticated.catalogue.list', this.args.type, {
+      queryParams: { targetProfileId: null, blueprintId: null },
+    });
+    this.isModalOpen = false;
+  }
 
   get isClearFiltersButtonDisabled() {
     const { search = '', category, areas, competences } = this.args;
@@ -163,11 +191,19 @@ export default class List extends Component {
       {{#if this.filteredItems}}
         <div class="catalogue__list">
           {{#each this.filteredItems as |course|}}
-            <CourseCard @course={{course}} />
+            <CourseCard @course={{course}} @type={{@type}} @selectCourse={{this.selectCourse}} />
           {{/each}}
         </div>
       {{else}}
         <EmptyState @infoText={{t "pages.catalogue.empty-state"}} />
+      {{/if}}
+
+      {{#if @currentCourse}}
+        <CourseModal
+          @currentCourse={{@currentCourse}}
+          @closeModal={{this.closeModal}}
+          @isModalOpen={{this.isModalOpen}}
+        />
       {{/if}}
     </div>
   </template>

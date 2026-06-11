@@ -191,6 +191,7 @@
       "cancel": "Annuler",
       "close": "Fermer",
       "confirm": "Confirmer",
+      "exit": "Quitter",
       "global": "Actions",
       "link-to-participant": "Voir toute l'activité du participant",
       "save": "Enregistrer"
@@ -1049,6 +1050,10 @@
           "placeholder": "Rechercher par titre"
         },
         "nb-result": "{count, plural, =0 {Aucun parcours} =1 {{count} parcours} other {{count} parcours}}"
+      },
+      "modal": {
+        "associated-badges": "Badges associés",
+        "open-modal": "Voir le détail du parcours"
       },
       "tab-filters": {
         "all": "Tous",

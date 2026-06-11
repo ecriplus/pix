@@ -1,4 +1,5 @@
 import { render } from '@1024pix/ember-testing-library';
+import { t } from 'ember-intl/test-support';
 import Badges from 'pix-orga/components/campaign/badges';
 import { module, test } from 'qunit';
 
@@ -35,8 +36,9 @@ module('Integration | Component | Campaign | Badges', function (hooks) {
     const screen = await render(<template><Badges @badges={{badges}} @acquiredBadges={{acquiredBadges}} /></template>);
 
     // then
-    assert.ok(screen.getByText(/badge1 - Non acquis/i));
+    assert.ok(screen.getByText(`badge1 - ${t('pages.campaign-results.table.badge-tooltip.unacquired')}`));
   });
+
   test('should render acquired in the title', async function (assert) {
     // given
     const badges = [{ title: 'badge1', imageUrl: 'img1', altMessage: 'alt-img1' }];
@@ -46,6 +48,42 @@ module('Integration | Component | Campaign | Badges', function (hooks) {
     const screen = await render(<template><Badges @badges={{badges}} @acquiredBadges={{acquiredBadges}} /></template>);
 
     // then
-    assert.ok(screen.getByText(/badge1 - Acquis/i));
+    assert.ok(screen.getByText(`badge1 - ${t('pages.campaign-results.table.badge-tooltip.acquired')}`));
+  });
+
+  module('if badge acquisition is hidden', function () {
+    test('should only render badge name without "unacquired"', async function (assert) {
+      // given
+      const badges = [{ title: 'badge1', imageUrl: 'img1', altMessage: 'alt-img1' }];
+      const acquiredBadges = [];
+
+      // when
+      const screen = await render(
+        <template>
+          <Badges @badges={{badges}} @acquiredBadges={{acquiredBadges}} @hideBadgesAcquisition={{true}} />
+        </template>,
+      );
+
+      // then
+      assert.ok(screen.getByText('badge1'));
+      assert.notOk(screen.queryByText(`badge1 - ${t('pages.campaign-results.table.badge-tooltip.unacquired')}`));
+    });
+
+    test('should only render badge name without "acquired"', async function (assert) {
+      // given
+      const badges = [{ title: 'badge1', imageUrl: 'img1', altMessage: 'alt-img1' }];
+      const acquiredBadges = [badges[0]];
+
+      // when
+      const screen = await render(
+        <template>
+          <Badges @badges={{badges}} @acquiredBadges={{acquiredBadges}} @hideBadgesAcquisition={{true}} />
+        </template>,
+      );
+
+      // then
+      assert.ok(screen.getByText('badge1'));
+      assert.notOk(screen.queryByText(`badge1 - ${t('pages.campaign-results.table.badge-tooltip.acquired')}`));
+    });
   });
 });

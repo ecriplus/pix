@@ -196,6 +196,7 @@
       "cancel": "Annuleren",
       "close": "Sluiten",
       "confirm": "Bevestigen",
+      "exit": "Afsluiten",
       "global": "Acties",
       "link-to-participant": "Alle activiteiten van de deelnemer bekijken",
       "save": "Opslaan"
@@ -1048,6 +1049,10 @@
           "placeholder": "Zoeken op titel"
         },
         "nb-result": "{count, plural, =0 {Geen traject} =1 {{count} traject} other {{count} trajecten}}"
+      },
+      "modal": {
+        "associated-badges": "Gerelateerde badges",
+        "open-modal": "Bekijk de details van het traject"
       },
       "tab-filters": {
         "all": "Alle",
