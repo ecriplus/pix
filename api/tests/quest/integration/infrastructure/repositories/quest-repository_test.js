@@ -124,7 +124,7 @@ describe('Quest | Integration | Repository | quest', function () {
   });
 
   describe('#findAllWithReward', function () {
-    it('should return all quests with reward', async function () {
+    it('it should return all quests with reward including those linked to combined courses', async function () {
       // given
       databaseBuilder.factory.buildQuest({
         id: 1,
@@ -133,6 +133,45 @@ describe('Quest | Integration | Repository | quest', function () {
         eligibilityRequirements: [],
         successRequirements: [],
       });
+      databaseBuilder.factory.buildQuest({
+        id: 2,
+        rewardType: REWARD_TYPES.ATTESTATION,
+        rewardId: 2,
+        eligibilityRequirements: [],
+        successRequirements: [],
+      });
+      const questToExclude = databaseBuilder.factory.buildQuest({
+        id: 3,
+        rewardType: null,
+        rewardId: null,
+        eligibilityRequirements: [],
+        successRequirements: [],
+      });
+
+      databaseBuilder.factory.buildCombinedCourseBlueprint({ questId: 1 });
+
+      await databaseBuilder.commit();
+
+      // when
+      const quests = await questRepository.findAllWithReward({ includeCombinedCourses: true });
+      const questIds = quests.map((quest) => quest.id);
+
+      // then
+      expect(quests[0]).to.be.an.instanceof(Quest);
+      expect(quests).to.have.lengthOf(2);
+      expect(questIds).to.not.include(questToExclude.id);
+    });
+    it('should return the quests with reward id, not linked to combined courses, when param includeCombinedCourses is false', async function () {
+      // given
+      databaseBuilder.factory.buildQuest({
+        id: 1,
+        rewardType: REWARD_TYPES.ATTESTATION,
+        rewardId: 2,
+        eligibilityRequirements: [],
+        successRequirements: [],
+      });
+      databaseBuilder.factory.buildCombinedCourseBlueprint({ questId: 1 });
+
       databaseBuilder.factory.buildQuest({
         id: 2,
         rewardType: REWARD_TYPES.ATTESTATION,
@@ -150,11 +189,12 @@ describe('Quest | Integration | Repository | quest', function () {
       await databaseBuilder.commit();
 
       // when
-      const quests = await questRepository.findAllWithReward();
+      const quests = await questRepository.findAllWithReward({ includeCombinedCourses: false });
 
       // then
       expect(quests[0]).to.be.an.instanceof(Quest);
-      expect(quests).to.have.lengthOf(2);
+      expect(quests).to.have.lengthOf(1);
+      expect(quests[0].id).to.equal(2);
     });
   });
 
@@ -215,7 +255,7 @@ describe('Quest | Integration | Repository | quest', function () {
       // when
       await questRepository.deleteByIds({ questIds: ['1', 3] });
 
-      const quests = await questRepository.findAllWithReward();
+      const quests = await questRepository.findAllWithReward({ includeCombinedCourses: true });
 
       // then
       expect(quests).to.have.lengthOf(1);
