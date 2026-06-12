@@ -51,7 +51,7 @@ export class ShareAttestationsToEligibleOrganizationsScript extends Script {
       logger.info(`BEGIN: ShareAttestationsToEligibleOrganizationsScript`);
       const profileRewards = await this.fetchProfileRewardNotShared(options.startDate, options.endDate);
 
-      const quests = await questRepository.findAllWithReward();
+      const quests = await questRepository.findAllWithReward({ includeCombinedCourses: true });
 
       if (quests.length === 0) {
         return;

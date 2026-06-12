@@ -5,11 +5,16 @@ import { Quest } from '../../domain/models/quests/entities/Quest.js';
 
 const toDomain = (quests) => quests.map((quest) => new Quest(quest));
 
-const findAllWithReward = async () => {
+const findAllWithReward = async ({ includeCombinedCourses }) => {
   const knexConn = DomainTransaction.getConnection();
+  let query = knexConn('quests').select('quests.*').whereNotNull('rewardId');
 
-  const quests = await knexConn('quests').whereNotNull('rewardId');
-
+  if (!includeCombinedCourses) {
+    query = query
+      .leftJoin('combined_course_blueprints', 'quests.id', 'combined_course_blueprints.questId')
+      .whereNull('combined_course_blueprints.id');
+  }
+  const quests = await query;
   return toDomain(quests);
 };
 
