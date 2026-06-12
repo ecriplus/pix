@@ -92,6 +92,37 @@ describe('Quest | Integration | Repository | combined-course-blueprint', functio
       expect(result.organizationIds).deep.equal([combinedCourseBlueprintShare2.organizationId]);
     });
 
+    it('should only delete the given blueprint shared with the organization, not other blueprints for the same organization', async function () {
+      // given
+      const organization = databaseBuilder.factory.buildOrganization();
+      const combinedCourseBlueprintShareToDetach = databaseBuilder.factory.buildCombinedCourseBlueprintShare({
+        organizationId: organization.id,
+      });
+      const combinedCourseBlueprintShareToKeep = databaseBuilder.factory.buildCombinedCourseBlueprintShare({
+        organizationId: organization.id,
+      });
+      await databaseBuilder.commit();
+
+      const combinedCourseBlueprintToDetach = await combinedCourseBluePrintRepository.findById({
+        id: combinedCourseBlueprintShareToDetach.combinedCourseBlueprintId,
+      });
+      combinedCourseBlueprintToDetach.detachOrganization({ organizationId: organization.id });
+
+      // when
+      await combinedCourseBluePrintRepository.save({ combinedCourseBlueprint: combinedCourseBlueprintToDetach });
+
+      // then
+      const resultForKeptShare = await combinedCourseBluePrintRepository.findById({
+        id: combinedCourseBlueprintShareToKeep.combinedCourseBlueprintId,
+      });
+      expect(resultForKeptShare.organizationIds).to.deep.equal([organization.id]);
+
+      const resultForDetachedShare = await combinedCourseBluePrintRepository.findById({
+        id: combinedCourseBlueprintShareToDetach.combinedCourseBlueprintId,
+      });
+      expect(resultForDetachedShare.organizationIds).to.deep.equal([]);
+    });
+
     it('should add combined course blueprint share for a given organizationId', async function () {
       // given
       const organization1 = databaseBuilder.factory.buildOrganization();
