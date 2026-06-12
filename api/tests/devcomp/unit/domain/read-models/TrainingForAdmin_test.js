@@ -1,3 +1,4 @@
+import { Training } from '../../../../../src/devcomp/domain/models/Training.js';
 import { expect } from '../../../../test-helper.js';
 import { domainBuilder } from '../../../../tooling/domain-builder/domain-builder.js';
 
@@ -17,6 +18,11 @@ describe('Unit | Domain | Read-Models | TrainingForAdmin', function () {
         targetProfileIds: [1, 2, 3],
         editorName: 'Editor name',
         editorLogoUrl: 'https://editor.logo.url',
+        deliveryMode: Training.modes.REMOTE,
+        registrationRequired: false,
+        program: 'Nom du programme',
+        objectives: ['Objectif 1', 'Objectif 2', 'Objectif 3', 'Objectif 4'],
+        description: 'Une jolie description',
         trainingTriggers: [trainingTrigger],
       });
 
@@ -31,6 +37,11 @@ describe('Unit | Domain | Read-Models | TrainingForAdmin', function () {
       expect(training.targetProfileIds).to.deep.equal([1, 2, 3]);
       expect(training.editorName).to.equal('Editor name');
       expect(training.editorLogoUrl).to.equal('https://editor.logo.url');
+      expect(training.deliveryMode).to.equal('remote');
+      expect(training.registrationRequired).to.equal(false);
+      expect(training.program).to.equal('Nom du programme');
+      expect(training.objectives).to.deep.equal(['Objectif 1', 'Objectif 2', 'Objectif 3', 'Objectif 4']);
+      expect(training.description).to.equal('Une jolie description');
       expect(training.trainingTriggers).to.deep.equal([trainingTrigger]);
     });
   });
