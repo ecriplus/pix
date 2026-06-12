@@ -1,12 +1,12 @@
 import sinon from 'sinon';
 
-import { Eligibility } from '../../../../../src/quest/domain/models/quest/Eligibility.js';
+import { Eligibility } from '../../../../../src/quest/domain/models/quests/aggregates/Eligibility.js';
 import {
   CRITERION_COMPARISONS,
   Quest,
   REQUIREMENT_COMPARISONS,
   REQUIREMENT_TYPES,
-} from '../../../../../src/quest/domain/models/quest/Quest.js';
+} from '../../../../../src/quest/domain/models/quests/entities/Quest.js';
 import { getQuestResultsForCampaignParticipation } from '../../../../../src/quest/domain/usecases/get-quest-results-for-campaign-participation.js';
 import { expect } from '../../../../test-helper.js';
 

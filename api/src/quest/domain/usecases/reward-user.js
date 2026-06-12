@@ -1,4 +1,4 @@
-import { DataForQuest } from '../models/quest/DataForQuest.js';
+import { DataForQuest } from '../models/quests/aggregates/DataForQuest.js';
 
 export const rewardUser = async ({
   userId,

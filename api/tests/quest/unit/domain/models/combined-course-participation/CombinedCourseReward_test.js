@@ -1,7 +1,7 @@
 import {
   CombinedCourseReward,
   CombinedCourseRewardStatuses,
-} from '../../../../../../src/quest/domain/models/combined-course-participation/CombinedCourseReward.js';
+} from '../../../../../../src/quest/domain/models/combined-course-participations/aggregates/CombinedCourseReward.js';
 import {
   OrganizationLearnerParticipationStatuses,
   OrganizationLearnerParticipationTypes,

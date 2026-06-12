@@ -1,4 +1,4 @@
-import { Eligibility } from '../../domain/models/quest/Eligibility.js';
+import { Eligibility } from '../../domain/models/quests/aggregates/Eligibility.js';
 // We import this repository here to avoid calling it in both dependencies and repositories in ./index.js
 import * as questOrganizationLearnerParticipationRepository from './organization-learner-participation-repository.js';
 export const find = async ({ userId, organizationLearnerWithParticipationApi }) => {

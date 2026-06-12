@@ -2,13 +2,13 @@ import nock from 'nock';
 import sinon from 'sinon';
 
 import { CampaignParticipationStatuses } from '../../../../../src/prescription/shared/domain/constants.js';
-import { CombinedCourse } from '../../../../../src/quest/domain/models/combined-course/CombinedCourse.js';
-import { CombinedCourseDetails } from '../../../../../src/quest/domain/models/combined-course-participation/CombinedCourseDetails.js';
+import { CombinedCourseDetails } from '../../../../../src/quest/domain/models/combined-course-participations/aggregates/CombinedCourseDetails.js';
+import { CombinedCourseReward } from '../../../../../src/quest/domain/models/combined-course-participations/aggregates/CombinedCourseReward.js';
 import {
   COMBINED_COURSE_ITEM_TYPES,
   CombinedCourseItem,
-} from '../../../../../src/quest/domain/models/combined-course-participation/CombinedCourseItem.js';
-import { CombinedCourseReward } from '../../../../../src/quest/domain/models/combined-course-participation/CombinedCourseReward.js';
+} from '../../../../../src/quest/domain/models/combined-course-participations/value-objects/CombinedCourseItem.js';
+import { CombinedCourse } from '../../../../../src/quest/domain/models/combined-courses/entities/CombinedCourse.js';
 import { CombinedCourseBlueprint } from '../../../../../src/quest/domain/models/CombinedCourseBlueprint.js';
 import { OrganizationLearnerParticipationStatuses } from '../../../../../src/quest/domain/models/OrganizationLearnerParticipation.js';
 import { usecases } from '../../../../../src/quest/domain/usecases/index.js';
