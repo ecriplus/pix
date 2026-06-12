@@ -89,6 +89,8 @@ function _buildScoOrganizationLearnerWithUsernameAndMediacentre(databaseBuilder)
     lastName: 'Leponge',
     email: null,
     username: 'bob.leponge.0202',
+    cgu: false,
+    lastTermsOfServiceValidatedAt: null,
   });
 
   const scoNoGarUser = databaseBuilder.factory.buildUser.withRawPassword({
