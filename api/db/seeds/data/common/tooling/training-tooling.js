@@ -49,6 +49,11 @@ async function createTraining({
   locales,
   editorName,
   editorLogoUrl,
+  deliveryMode,
+  registrationRequired,
+  program,
+  objectives,
+  description,
   attachedTargetProfileIds = [],
   configTriggers,
 }) {
@@ -78,6 +83,11 @@ async function createTraining({
     locales,
     editorName,
     editorLogoUrl,
+    deliveryMode,
+    registrationRequired,
+    program,
+    objectives,
+    description,
   });
   attachedTargetProfileIds.map((targetProfileId) =>
     databaseBuilder.factory.buildTargetProfileTraining({

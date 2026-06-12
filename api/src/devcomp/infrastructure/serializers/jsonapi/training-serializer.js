@@ -126,15 +126,15 @@ const deserialize = function (payload) {
   return new Deserializer({
     keyForAttribute: 'camelCase',
     transform(deserializedTraining) {
+      const objectives = deserializedTraining.objectives?.split(';').map((objective) => objective.trim());
       const duration = deserializedTraining.duration;
-      if (!duration) return deserializedTraining;
+      if (!duration) return { ...deserializedTraining, objectives };
 
       const { days, hours, minutes } = duration;
-      const formattedDuration = `${days}d${hours}h${minutes}m`;
-
       return {
         ...deserializedTraining,
-        duration: formattedDuration,
+        objectives,
+        duration: `${days}d${hours}h${minutes}m`,
       };
     },
   }).deserialize(payload);

@@ -4,6 +4,7 @@ import { BadRequestError, NotFoundError, sendJsonApiError } from '../../../share
 import { securityPreHandlers } from '../../../shared/application/security-pre-handlers.js';
 import { getSupportedLocales } from '../../../shared/domain/services/locale-service.js';
 import { editorLogoUrlValidation, identifiersType } from '../../../shared/domain/types/identifiers-type.js';
+import { Training } from '../../domain/models/Training.js';
 import { trainingController as trainingsController } from './training-controller.js';
 
 const lowerCaseSupportedLocales = getSupportedLocales().map((supportedLocale) => supportedLocale.toLowerCase());
@@ -153,6 +154,13 @@ const register = async function (server) {
                   .default([]),
                 'editor-name': Joi.string().required(),
                 'editor-logo-url': Joi.string().regex(editorLogoUrlValidation).required(),
+                'delivery-mode': Joi.string()
+                  .valid(...Object.values(Training.modes))
+                  .optional(),
+                description: Joi.string().optional(),
+                program: Joi.string().optional(),
+                'registration-required': Joi.boolean().optional(),
+                objectives: Joi.string().optional(),
               }),
               type: Joi.string().valid('trainings'),
             }).required(),
