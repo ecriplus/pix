@@ -1,4 +1,4 @@
-import { ComplementaryCertificationKeys } from '../../../../../../src/certification/shared/domain/models/ComplementaryCertificationKeys.js';
+import { Frameworks } from '../../../../../../src/certification/shared/domain/models/Frameworks.js';
 import { expect } from '../../../../../test-helper.js';
 import { domainBuilder } from '../../../../../tooling/domain-builder/domain-builder.js';
 
@@ -19,18 +19,14 @@ describe('Unit | Domain | Models | Certification Candidate for supervising', fun
   });
 
   describe('#isStillEligibleToDoubleCertification', function () {
-    context('when candidate has a valid double certification badge acquisition', function () {
+    context('when candidate is enrolled for CLEA and has a valid badge', function () {
       it('returns true', function () {
         // given
-        const complementaryCertification = domainBuilder.buildComplementaryCertificationForSupervising({
-          key: ComplementaryCertificationKeys.CLEA,
-        });
-
         const certificationCandidateForSupervising = domainBuilder.buildCertificationCandidateForSupervising({
-          enrolledDoubleCertification: complementaryCertification,
+          subscription: Frameworks.CLEA,
           stillValidBadgeAcquisitions: [
             domainBuilder.buildCertifiableBadgeAcquisition({
-              complementaryCertificationKey: ComplementaryCertificationKeys.CLEA,
+              complementaryCertificationKey: Frameworks.CLEA,
             }),
           ],
         });
@@ -44,11 +40,11 @@ describe('Unit | Domain | Models | Certification Candidate for supervising', fun
       });
     });
 
-    context('when candidate has no double certification badge acquisition', function () {
+    context('when candidate is not enrolled for CLEA', function () {
       it('returns false', function () {
         // given
         const certificationCandidateForSupervising = domainBuilder.buildCertificationCandidateForSupervising({
-          enrolledDoubleCertification: null,
+          subscription: Frameworks.CORE,
           stillValidBadgeAcquisitions: [],
         });
 

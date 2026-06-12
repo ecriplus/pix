@@ -172,7 +172,6 @@ describe('Certification | Enrolment | Unit | Serializer | candidate', function (
       expect(jsonApi).to.deep.equal(expectedJsonApiData);
     });
   });
-
   describe('#serialize()', function () {
     it('should convert a Candidate model object without subscriptions into JSON API data', function () {
       // given

@@ -8,13 +8,6 @@
  */
 
 /**
- * @typedef {object} ComplementaryCertification
- * @property {string} key
- * @property {string} label
- * @property {number} certificationExtraTime
- */
-
-/**
  * @typedef {object} CertificationCandidateForSupervising
  * @property {number} id
  * @property {number} userId
@@ -25,7 +18,6 @@
  * @property {boolean} authorizedToStart
  * @property {date} startDateTime
  * @property {LiveAlert} liveAlert
- * @property {ComplementaryCertification} complementaryCertification
  */
 
 class SessionForSupervising {

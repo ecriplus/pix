@@ -45,8 +45,7 @@ describe('Unit | Serializer | JSONAPI | session-for-supervising-serializer', fun
               'assessment-status': Assessment.states.STARTED,
               'start-date-time': new Date('2022-10-01T13:37:00Z'),
               'theorical-end-date-time': new Date('2022-10-01T16:01:00Z'),
-              'enrolled-complementary-certification-label': null,
-              'enrolled-double-certification-label': 'Super Certification Complémentaire',
+              subscription: 'CLEA',
               'is-still-eligible-to-double-certification': true,
               'user-id': 6789,
               'challenge-live-alert': {
@@ -88,15 +87,10 @@ describe('Unit | Serializer | JSONAPI | session-for-supervising-serializer', fun
             assessmentStatus: Assessment.states.STARTED,
             startDateTime: new Date('2022-10-01T13:37:00Z'),
             theoricalEndDateTime: new Date('2022-10-01T16:01:00Z'),
-            enrolledComplementaryCertification: null,
-            enrolledDoubleCertification: domainBuilder.buildComplementaryCertificationForSupervising({
-              key: 'aKey',
-              label: 'Super Certification Complémentaire',
-            }),
+            subscription: 'CLEA',
             stillValidBadgeAcquisitions: [
               domainBuilder.buildCertifiableBadgeAcquisition({
-                complementaryCertificationKey: 'aKey',
-                complementaryCertificationBadgeLabel: 'Super Certification Complémentaire',
+                complementaryCertificationKey: 'CLEA',
               }),
             ],
             challengeLiveAlert: {

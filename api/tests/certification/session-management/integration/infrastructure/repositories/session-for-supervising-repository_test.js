@@ -61,42 +61,38 @@ describe('Integration | Repository | SessionForSupervising', function () {
       });
 
       databaseBuilder.factory.buildUser({ id: 11111 });
-      const candidateA = databaseBuilder.factory.buildCertificationCandidate({
+      databaseBuilder.factory.buildCertificationCandidate({
         userId: 11111,
         lastName: 'Jackson',
         firstName: 'Michael',
         sessionId: session.id,
         authorizedToStart: true,
       });
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidateA.id });
 
       databaseBuilder.factory.buildUser({ id: 22222 });
-      const candidateB = databaseBuilder.factory.buildCertificationCandidate({
+      databaseBuilder.factory.buildCertificationCandidate({
         userId: 22222,
         lastName: 'Stardust',
         firstName: 'Ziggy',
         sessionId: session.id,
       });
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidateB.id });
 
       databaseBuilder.factory.buildUser({ id: 33333 });
-      const candidateC = databaseBuilder.factory.buildCertificationCandidate({
+      databaseBuilder.factory.buildCertificationCandidate({
         userId: 33333,
         lastName: 'Jackson',
         firstName: 'Janet',
         sessionId: session.id,
       });
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidateC.id });
 
       databaseBuilder.factory.buildUser({ id: 12345 });
-      const candidateD = databaseBuilder.factory.buildCertificationCandidate({
+      databaseBuilder.factory.buildCertificationCandidate({
         lastName: 'Joplin',
         firstName: 'Janis',
         sessionId: session.id,
         userId: 12345,
         authorizedToStart: true,
       });
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidateD.id });
 
       const certificationCourse = databaseBuilder.factory.buildCertificationCourse({
         userId: 12345,
@@ -163,7 +159,7 @@ describe('Integration | Repository | SessionForSupervising', function () {
       ]);
     });
 
-    it('should return certifications candidates with subscribed complementary certifications', async function () {
+    it('should return certifications candidates with their subscription key', async function () {
       // given
       databaseBuilder.factory.buildCertificationCenter({ name: 'Toto', id: 1234 });
       const session = databaseBuilder.factory.buildSession({
@@ -176,32 +172,21 @@ describe('Integration | Repository | SessionForSupervising', function () {
       });
 
       databaseBuilder.factory.buildUser({ id: 11111 });
-      const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate({
+      databaseBuilder.factory.buildCertificationCandidate({
         userId: 11111,
         lastName: 'Jackson',
         firstName: 'Janet',
         sessionId: session.id,
+        subscription: ComplementaryCertificationKeys.CLEA,
       });
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: certificationCandidate.id });
 
       databaseBuilder.factory.buildUser({ id: 22222 });
-      const candidateB = databaseBuilder.factory.buildCertificationCandidate({
+      databaseBuilder.factory.buildCertificationCandidate({
         userId: 22222,
         lastName: 'Joplin',
         firstName: 'Janis',
         sessionId: session.id,
-      });
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidateB.id });
-
-      const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
-        label: 'Pix+ Édu 1er degré',
-        key: 'EDU_1ER_DEGRE',
-        certificationExtraTime: 45,
-      });
-
-      databaseBuilder.factory.buildComplementaryCertificationSubscription({
-        certificationCandidateId: certificationCandidate.id,
-        complementaryCertificationId: complementaryCertification.id,
+        subscription: ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE,
       });
 
       await databaseBuilder.commit();
@@ -211,114 +196,16 @@ describe('Integration | Repository | SessionForSupervising', function () {
 
       // then
       const actualCandidates = _.map(actualSession.certificationCandidates, (item) =>
-        _.pick(item, [
-          'userId',
-          'sessionId',
-          'lastName',
-          'firstName',
-          'enrolledComplementaryCertification',
-          'enrolledDoubleCertification',
-        ]),
+        _.pick(item, ['userId', 'lastName', 'firstName', 'subscription']),
       );
 
       expect(actualCandidates).to.have.deep.ordered.members([
-        {
-          userId: 11111,
-          lastName: 'Jackson',
-          firstName: 'Janet',
-          enrolledComplementaryCertification: {
-            key: complementaryCertification.key,
-            label: complementaryCertification.label,
-            certificationExtraTime: complementaryCertification.certificationExtraTime,
-          },
-          enrolledDoubleCertification: null,
-        },
+        { userId: 11111, lastName: 'Jackson', firstName: 'Janet', subscription: ComplementaryCertificationKeys.CLEA },
         {
           userId: 22222,
           lastName: 'Joplin',
           firstName: 'Janis',
-          enrolledComplementaryCertification: null,
-          enrolledDoubleCertification: null,
-        },
-      ]);
-    });
-
-    it('should return certifications candidates with subscribed double certifications', async function () {
-      // given
-      databaseBuilder.factory.buildCertificationCenter({ name: 'Toto', id: 1234 });
-      const session = databaseBuilder.factory.buildSession({
-        certificationCenter: 'Tour Gamma',
-        room: 'Salle A',
-        examiner: 'Monsieur Examinateur',
-        date: '2018-02-23',
-        time: '12:00:00',
-        certificationCenterId: 1234,
-      });
-
-      databaseBuilder.factory.buildUser({ id: 11111 });
-      const certificationCandidate = databaseBuilder.factory.buildCertificationCandidate({
-        userId: 11111,
-        lastName: 'Jackson',
-        firstName: 'Janet',
-        sessionId: session.id,
-      });
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: certificationCandidate.id });
-
-      databaseBuilder.factory.buildUser({ id: 22222 });
-      const candidateB = databaseBuilder.factory.buildCertificationCandidate({
-        userId: 22222,
-        lastName: 'Joplin',
-        firstName: 'Janis',
-        sessionId: session.id,
-      });
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidateB.id });
-
-      const complementaryCertification = databaseBuilder.factory.buildComplementaryCertification({
-        label: 'Pix+ Édu 1er degré',
-        key: ComplementaryCertificationKeys.CLEA,
-        certificationExtraTime: 45,
-      });
-
-      databaseBuilder.factory.buildComplementaryCertificationSubscription({
-        certificationCandidateId: certificationCandidate.id,
-        complementaryCertificationId: complementaryCertification.id,
-      });
-
-      await databaseBuilder.commit();
-
-      // when
-      const actualSession = await sessionForSupervisingRepository.get({ id: session.id });
-
-      // then
-      const actualCandidates = _.map(actualSession.certificationCandidates, (item) =>
-        _.pick(item, [
-          'userId',
-          'sessionId',
-          'lastName',
-          'firstName',
-          'enrolledComplementaryCertification',
-          'enrolledDoubleCertification',
-        ]),
-      );
-
-      expect(actualCandidates).to.have.deep.ordered.members([
-        {
-          userId: 11111,
-          lastName: 'Jackson',
-          firstName: 'Janet',
-          enrolledDoubleCertification: {
-            key: complementaryCertification.key,
-            label: complementaryCertification.label,
-            certificationExtraTime: complementaryCertification.certificationExtraTime,
-          },
-          enrolledComplementaryCertification: null,
-        },
-        {
-          userId: 22222,
-          lastName: 'Joplin',
-          firstName: 'Janis',
-          enrolledComplementaryCertification: null,
-          enrolledDoubleCertification: null,
+          subscription: ComplementaryCertificationKeys.PIX_PLUS_EDU_1ER_DEGRE,
         },
       ]);
     });
@@ -347,42 +234,38 @@ describe('Integration | Repository | SessionForSupervising', function () {
       });
 
       databaseBuilder.factory.buildUser({ id: 11111 });
-      const candidateA = databaseBuilder.factory.buildCertificationCandidate({
+      databaseBuilder.factory.buildCertificationCandidate({
         userId: 11111,
         lastName: 'Jackson',
         firstName: 'Michael',
         sessionId: session.id,
         authorizedToStart: true,
       });
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidateA.id });
 
       databaseBuilder.factory.buildUser({ id: 22222 });
-      const candidateB = databaseBuilder.factory.buildCertificationCandidate({
+      databaseBuilder.factory.buildCertificationCandidate({
         userId: 22222,
         lastName: 'Stardust',
         firstName: 'Ziggy',
         sessionId: session.id,
       });
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidateB.id });
 
       databaseBuilder.factory.buildUser({ id: 33333 });
-      const candidateC = databaseBuilder.factory.buildCertificationCandidate({
+      databaseBuilder.factory.buildCertificationCandidate({
         userId: 33333,
         lastName: 'Jackson',
         firstName: 'Janet',
         sessionId: session.id,
       });
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidateC.id });
 
       databaseBuilder.factory.buildUser({ id: 12345 });
-      const candidateD = databaseBuilder.factory.buildCertificationCandidate({
+      databaseBuilder.factory.buildCertificationCandidate({
         lastName: 'Joplin',
         firstName: 'Janis',
         sessionId: session.id,
         userId: 12345,
         authorizedToStart: true,
       });
-      databaseBuilder.factory.buildCoreSubscription({ certificationCandidateId: candidateD.id });
 
       const certificationCourseWithBothLiveAlerts = databaseBuilder.factory.buildCertificationCourse({
         version: AlgorithmEngineVersion.V3,

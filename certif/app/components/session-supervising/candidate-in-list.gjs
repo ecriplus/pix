@@ -18,8 +18,7 @@ import HandleLiveAlertModal from 'pix-certif/components/session-supervising/hand
 import LiveAlertHandledModal from 'pix-certif/components/session-supervising/live-alert-handled-modal';
 import formatPercentage from 'pix-certif/helpers/format-percentage';
 
-import dayjsUtcFormatHelper from '../../helpers/dayjs-utc-format';
-import { dayjsUtcFormat } from '../../helpers/dayjs-utc-format';
+import dayjsUtcFormatHelper, { dayjsUtcFormat } from '../../helpers/dayjs-utc-format';
 
 const Modals = {
   Confirmation: 'Confirmation',
@@ -65,18 +64,15 @@ export default class CandidateInList extends Component {
   }
 
   get shouldDisplayEnrolledComplementaryCertification() {
-    return Boolean(this.enrolledCertificationLabel);
+    return this.args.candidate.subscription !== 'CORE';
   }
 
   get shouldDisplayNonEligibilityWarning() {
     return this._isReconciliated() && this._isNotEligibleToEnrolledDoubleCertification();
   }
 
-  get enrolledCertificationLabel() {
-    return (
-      this.args.candidate.enrolledComplementaryCertificationLabel ??
-      this.args.candidate.enrolledDoubleCertificationLabel
-    );
+  get subscriptionLabel() {
+    return this.intl.t(`pages.session-supervising.candidate-in-list.subscriptions.${this.args.candidate.subscription}`);
   }
 
   get authorizationButtonLabel() {
@@ -150,7 +146,7 @@ export default class CandidateInList extends Component {
 
   _isNotEligibleToEnrolledDoubleCertification() {
     return (
-      !this.args.candidate.isStillEligibleToDoubleCertification && this.args.candidate.enrolledDoubleCertificationLabel
+      !this.args.candidate.isStillEligibleToDoubleCertification && this.args.candidate.isEnrolledToDoubleCertification
     );
   }
 
@@ -159,14 +155,14 @@ export default class CandidateInList extends Component {
   }
 
   _getPixPlusDurationInMinutes() {
-    const label = this.enrolledCertificationLabel?.toLowerCase() || '';
-
-    switch (true) {
-      case label.includes('droit'):
+    switch (this.args.candidate.subscription) {
+      case 'DROIT':
         return PIX_PLUS_DURATIONS.DROIT;
-      case label.includes('pro') && label.includes('santé'):
+      case 'PRO_SANTE':
         return PIX_PLUS_DURATIONS.PRO_SANTE;
-      case label.includes('édu'):
+      case 'EDU_1ER_DEGRE':
+      case 'EDU_2ND_DEGRE':
+      case 'EDU_CPE':
         return PIX_PLUS_DURATIONS.EDU;
       default:
         return null;
@@ -408,7 +404,7 @@ export default class CandidateInList extends Component {
                 />
                 {{t
                   'pages.session-supervising.candidate-in-list.complementary-certification-enrolment'
-                  complementaryCertification=this.enrolledCertificationLabel
+                  complementaryCertification=this.subscriptionLabel
                 }}
               </p>
             {{/if}}

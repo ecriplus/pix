@@ -2,9 +2,7 @@ import { DomainTransaction } from '../../../../shared/domain/DomainTransaction.j
 import { NotFoundError } from '../../../../shared/domain/errors.js';
 import { CertificationChallengeLiveAlertStatus } from '../../../shared/domain/models/CertificationChallengeLiveAlert.js';
 import { CertificationCompanionLiveAlertStatus } from '../../../shared/domain/models/CertificationCompanionLiveAlert.js';
-import { ComplementaryCertificationKeys } from '../../../shared/domain/models/ComplementaryCertificationKeys.js';
 import { CertificationCandidateForSupervising } from '../../domain/models/CertificationCandidateForSupervising.js';
-import { ComplementaryCertificationForSupervising } from '../../domain/models/ComplementaryCertificationForSupervising.js';
 import { SessionForSupervising } from '../../domain/read-models/SessionForSupervising.js';
 
 const get = async function ({ id }) {
@@ -41,11 +39,7 @@ const get = async function ({ id }) {
             'type', 'companion',
             'status', "certification-companion-live-alerts".status
           ),
-          'complementaryCertification', json_build_object(
-            'key', "complementary-certifications"."key",
-            'label', "complementary-certifications"."label",
-            'certificationExtraTime', "complementary-certifications"."certificationExtraTime"
-          )
+          'subscription', "certification-candidates"."subscription"
         ) order by "certification-companion-live-alerts".status, "certification-challenge-live-alerts".status, lower("certification-candidates"."lastName"), lower("certification-candidates"."firstName"))
     `),
     })
@@ -56,16 +50,6 @@ const get = async function ({ id }) {
       this.on('certification-courses.userId', '=', 'certification-candidates.userId');
     })
     .leftJoin('assessments', 'assessments.certificationCourseId', 'certification-courses.id')
-    .leftJoin('certification-subscriptions', (builder) =>
-      builder
-        .on('certification-candidates.id', '=', 'certification-subscriptions.certificationCandidateId')
-        .onNotNull('certification-subscriptions.complementaryCertificationId'),
-    )
-    .leftJoin(
-      'complementary-certifications',
-      'complementary-certifications.id',
-      'certification-subscriptions.complementaryCertificationId',
-    )
     .leftJoin('certification-challenge-live-alerts', function () {
       this.on('certification-challenge-live-alerts.assessmentId', '=', 'assessments.id').andOnVal(
         'certification-challenge-live-alerts.status',
@@ -91,33 +75,10 @@ const get = async function ({ id }) {
 
 export { get };
 
-function _toDomainComplementaryCertification(complementaryCertification) {
-  if (complementaryCertification?.key) {
-    return new ComplementaryCertificationForSupervising(complementaryCertification);
-  }
-  return null;
-}
-
-function _buildCertificationCandidateForSupervising(candidateDto) {
-  if (candidateDto.complementaryCertification?.key === ComplementaryCertificationKeys.CLEA) {
-    return new CertificationCandidateForSupervising({
-      ...candidateDto,
-      enrolledDoubleCertification: _toDomainComplementaryCertification(candidateDto.complementaryCertification),
-      enrolledComplementaryCertification: null,
-    });
-  }
-
-  return new CertificationCandidateForSupervising({
-    ...candidateDto,
-    enrolledComplementaryCertification: _toDomainComplementaryCertification(candidateDto.complementaryCertification),
-    enrolledDoubleCertification: null,
-  });
-}
-
 function _toDomain(results) {
   const certificationCandidates = results.certificationCandidates
     .filter((candidate) => candidate?.id !== null)
-    .map((candidate) => _buildCertificationCandidateForSupervising(candidate));
+    .map((candidate) => new CertificationCandidateForSupervising(candidate));
 
   return new SessionForSupervising({
     ...results,

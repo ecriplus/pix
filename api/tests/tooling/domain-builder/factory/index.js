@@ -82,7 +82,6 @@ import { buildComplementaryCertificationBadgeForAdmin } from './build-complement
 import { buildComplementaryCertificationCourseResult } from './build-complementary-certification-course-result.js';
 import { buildComplementaryCertificationCourseResultForJuryCertification } from './build-complementary-certification-course-result-for-certification.js';
 import { buildComplementaryCertificationCourseResultForJuryCertificationWithExternal } from './build-complementary-certification-course-result-for-certification-with-external.js';
-import { buildComplementaryCertificationForSupervising } from './build-complementary-certification-for-supervising.js';
 import { buildComplementaryCertificationForTargetProfileAttachment } from './build-complementary-certification-for-target-profile-attachment.js';
 import { buildComplementaryCertificationHabilitation } from './build-complementary-certification-habilitation.js';
 import { buildComplementaryCertificationTargetProfileHistory } from './build-complementary-certification-target-profile-history-for-admin.js';
@@ -448,7 +447,6 @@ export {
   buildComplementaryCertificationCourseResult,
   buildComplementaryCertificationCourseResultForJuryCertification,
   buildComplementaryCertificationCourseResultForJuryCertificationWithExternal,
-  buildComplementaryCertificationForSupervising,
   buildComplementaryCertificationForTargetProfileAttachment,
   buildComplementaryCertificationHabilitation,
   buildComplementaryCertificationTargetProfileHistory,

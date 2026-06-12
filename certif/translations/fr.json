@@ -522,6 +522,15 @@
           "success": "Succès ! {firstName} {lastName} peut reprendre son test de certification."
         },
         "start-date-time": "Début : ",
+        "subscriptions": {
+          "CLEA": "CLéA Numérique",
+          "CORE": "Certification Pix",
+          "DROIT": "Pix+ Droit",
+          "EDU_1ER_DEGRE": "Pix+ Édu 1er degré",
+          "EDU_2ND_DEGRE": "Pix+ Édu 2nd degré",
+          "EDU_CPE": "Pix+ Édu CPE",
+          "PRO_SANTE": "Pix+ Professionnels de Santé"
+        },
         "test-end-modal": {
           "description": "Attention : cette action entraîne la fin de son test de certification et est irréversible.",
           "end-assessment": "Terminer le test",
