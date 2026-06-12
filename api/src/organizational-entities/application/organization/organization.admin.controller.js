@@ -11,6 +11,7 @@ import {
   deserializeForOrganizationsImport,
   requiredFieldNamesForOrganizationsImport,
 } from '../../infrastructure/serializers/csv/organizations-csv-serializer.js';
+import * as certificationCenterSerializer from '../../infrastructure/serializers/jsonapi/certification-center/certification-center.serializer.js';
 import * as organizationSerializer from '../../infrastructure/serializers/jsonapi/organization-serializer.js';
 import { organizationForAdminSerializer } from '../../infrastructure/serializers/jsonapi/organizations-administration/organization-for-admin.serializer.js';
 import * as organizationPlacesStatisticsSerializer from '../../infrastructure/serializers/jsonapi/organizations-administration/organization-places-statistics.serializer.js';
@@ -196,6 +197,15 @@ const getOrganizationStatistics = async function (request, h, dependencies = { o
   const statistics = await usecases.getOrganizationStatistics({ organizationId });
   return dependencies.organizationStatisticsSerializer.serialize(statistics);
 };
+
+const findAttachedCertificationCenterForAdmin = async function (request) {
+  const organizationId = request.params.organizationId;
+
+  const certificationCenter = await usecases.findAttachedCertificationCenterForAdmin({ organizationId });
+
+  return certificationCenterSerializer.serialize(certificationCenter);
+};
+
 const organizationAdminController = {
   getTemplateForAddTagsToOrganizations,
   addTagsToOrganizations,
@@ -217,6 +227,7 @@ const organizationAdminController = {
   findPaginatedFilteredOrganizations,
   findChildrenOrganizations,
   getOrganizationStatistics,
+  findAttachedCertificationCenterForAdmin,
 };
 
 export { organizationAdminController };
