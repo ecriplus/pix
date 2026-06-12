@@ -382,6 +382,9 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
 
     it('returns an accessToken with a 200 HTTP status code', async function () {
       // given
+      const pixAppTos = databaseBuilder.factory.buildPixAppTos();
+      await databaseBuilder.commit();
+
       const start = new Date();
       const firstName = 'Brice';
       const lastName = 'Glace';
@@ -448,6 +451,9 @@ describe('Acceptance | Identity Access Management | Application | Route | oidc-p
       const lastUserApplicationConnection = await knex('last-user-application-connections').first();
       expect(lastUserApplicationConnection.application).to.equal('app');
       expect(lastUserApplicationConnection.lastLoggedAt).to.be.greaterThanOrEqual(start);
+
+      const legalDocumentAcceptation = await knex('legal-document-version-user-acceptances').first();
+      expect(legalDocumentAcceptation.legalDocumentVersionId).to.equal(pixAppTos.id);
     });
 
     context('when authentication key has expired', function () {

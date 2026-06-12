@@ -29,6 +29,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
   let passwordValidator;
   let userValidator;
   let emailValidationDemandRepository;
+  let legalDocumentApiRepository;
   let token;
 
   beforeEach(function () {
@@ -42,6 +43,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
     userToCreateRepository = { create: sinon.stub() };
     emailRepository = { sendEmailAsync: sinon.stub() };
     campaignRepository = { getByCode: sinon.stub() };
+    legalDocumentApiRepository = { acceptPixAppTos: sinon.stub() };
 
     cryptoService = { hashPassword: sinon.stub() };
     userService = { createUserWithPassword: sinon.stub() };
@@ -83,6 +85,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
         emailValidationDemandRepository,
         userRepository,
         userToCreateRepository,
+        legalDocumentApiRepository,
         cryptoService,
         userService,
         userValidator,
@@ -106,6 +109,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
         emailValidationDemandRepository,
         userRepository,
         userToCreateRepository,
+        legalDocumentApiRepository,
         cryptoService,
         userService,
         userValidator,
@@ -129,6 +133,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
         emailValidationDemandRepository,
         userRepository,
         userToCreateRepository,
+        legalDocumentApiRepository,
         cryptoService,
         userService,
         userValidator,
@@ -166,6 +171,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
           emailValidationDemandRepository,
           userRepository,
           userToCreateRepository,
+          legalDocumentApiRepository,
           cryptoService,
           userService,
           userValidator,
@@ -208,6 +214,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
           emailValidationDemandRepository,
           userRepository,
           userToCreateRepository,
+          legalDocumentApiRepository,
           cryptoService,
           userService,
           userValidator,
@@ -252,6 +259,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
           emailValidationDemandRepository,
           userRepository,
           userToCreateRepository,
+          legalDocumentApiRepository,
           cryptoService,
           userService,
           userValidator,
@@ -261,68 +269,6 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
         // then
         expect(error).to.be.instanceOf(EntityValidationError);
         expect(error.invalidAttributes).to.have.lengthOf(3);
-      });
-    });
-
-    context('when user has accepted terms of service', function () {
-      it('should update the validation date', async function () {
-        // given
-        const user = new User({
-          email: userEmail,
-          cgu: true,
-        });
-
-        // when
-        await createUser({
-          user,
-          locale,
-          password,
-          campaignCode,
-          authenticationMethodRepository,
-          campaignRepository,
-          emailRepository,
-          emailValidationDemandRepository,
-          userRepository,
-          userToCreateRepository,
-          cryptoService,
-          userService,
-          userValidator,
-          passwordValidator,
-        });
-
-        // then
-        expect(user.lastTermsOfServiceValidatedAt).to.be.an.instanceOf(Date);
-      });
-    });
-
-    context('when user has not accepted terms of service', function () {
-      it('should not update the validation date', async function () {
-        // given
-        const user = new User({
-          email: userEmail,
-          cgu: false,
-        });
-
-        // when
-        await createUser({
-          user,
-          locale,
-          password,
-          campaignCode,
-          authenticationMethodRepository,
-          campaignRepository,
-          emailRepository,
-          emailValidationDemandRepository,
-          userRepository,
-          userToCreateRepository,
-          cryptoService,
-          userService,
-          userValidator,
-          passwordValidator,
-        });
-
-        // then
-        expect(user.lastTermsOfServiceValidatedAt).not.to.be.an.instanceOf(Date);
       });
     });
   });
@@ -342,6 +288,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
         campaignRepository,
         emailRepository,
         emailValidationDemandRepository,
+        legalDocumentApiRepository,
         userRepository,
         cryptoService,
         userService,
@@ -369,6 +316,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
           emailValidationDemandRepository,
           userRepository,
           userToCreateRepository,
+          legalDocumentApiRepository,
           cryptoService,
           userService,
           userValidator,
@@ -395,6 +343,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
           emailValidationDemandRepository,
           userRepository,
           userToCreateRepository,
+          legalDocumentApiRepository,
           cryptoService,
           userService,
         });
@@ -416,6 +365,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
           emailValidationDemandRepository,
           userRepository,
           userToCreateRepository,
+          legalDocumentApiRepository,
           cryptoService,
           userService,
           userValidator,
@@ -463,6 +413,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
           emailValidationDemandRepository,
           userRepository,
           userToCreateRepository,
+          legalDocumentApiRepository,
           cryptoService,
           userService,
           userValidator,
@@ -498,6 +449,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
             emailValidationDemandRepository,
             userRepository,
             userToCreateRepository,
+            legalDocumentApiRepository,
             cryptoService,
             userService,
             userValidator,
@@ -535,6 +487,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
             emailValidationDemandRepository,
             userRepository,
             userToCreateRepository,
+            legalDocumentApiRepository,
             cryptoService,
             userService,
             userValidator,
@@ -572,6 +525,7 @@ describe('Unit | Identity Access Management | Domain | UseCase | create-user', f
         emailValidationDemandRepository,
         userRepository,
         userToCreateRepository,
+        legalDocumentApiRepository,
         cryptoService,
         userService,
         userValidator,

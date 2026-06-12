@@ -14,6 +14,7 @@ const upgradeToRealUser = async function ({
   authenticationMethodRepository,
   emailValidationDemandRepository,
   emailRepository,
+  legalDocumentApiRepository,
   cryptoService,
 }) {
   const user = await userRepository.getFullById(userId);
@@ -40,6 +41,8 @@ const upgradeToRealUser = async function ({
       }),
     });
     await authenticationMethodRepository.create({ authenticationMethod });
+
+    await legalDocumentApiRepository.acceptPixAppTos({ userId });
 
     const token = await emailValidationDemandRepository.save(realUser.id);
 

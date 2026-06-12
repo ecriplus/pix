@@ -4,7 +4,7 @@ import sinon from 'sinon';
 
 import { MassCreateUserAccountsScript } from '../../../../src/identity-access-management/scripts/mass-create-user-accounts.js';
 import { expect } from '../../../test-helper.js';
-import { knex } from '../../../tooling/databases.js';
+import { databaseBuilder, knex } from '../../../tooling/databases.js';
 
 const currentDirectory = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -44,19 +44,17 @@ describe('Integration | Identity Access Management | Scripts | mass-create-user-
   });
 
   describe('#handle', function () {
-    const now = new Date();
-    let clock;
+    const now = new Date('2026-06-01');
 
     beforeEach(async function () {
-      clock = sinon.useFakeTimers({ now, toFake: ['Date'] });
-    });
-
-    afterEach(async function () {
-      clock.restore();
+      sinon.useFakeTimers({ now, toFake: ['Date'] });
     });
 
     it('should insert users', async function () {
       // given
+      const pixAppTos = databaseBuilder.factory.buildPixAppTos();
+      await databaseBuilder.commit();
+
       const usersInRaw = [
         {
           firstName: 'Sandy',
@@ -78,16 +76,16 @@ describe('Integration | Identity Access Management | Scripts | mass-create-user-
 
       // then
       const firstUserFound = await knex('users').where({ lastName: 'Kilo' }).first();
-      expect(firstUserFound).to.contains({
+      expect(firstUserFound).to.deep.contains({
         firstName: 'Sandy',
         lastName: 'Kilo',
         email: 'sandy-kilo@example.net',
         cgu: true,
+        lastTermsOfServiceValidatedAt: now,
+        mustValidateTermsOfService: false,
         pixCertifTermsOfServiceAccepted: false,
         hasSeenAssessmentInstructions: false,
         username: null,
-        mustValidateTermsOfService: false,
-        lastTermsOfServiceValidatedAt: null,
         lang: 'fr',
         hasSeenNewDashboardInfo: false,
         isAnonymous: false,
@@ -95,9 +93,14 @@ describe('Integration | Identity Access Management | Scripts | mass-create-user-
         hasSeenFocusedChallengeTooltip: false,
         hasSeenOtherChallengesTooltip: false,
         lastPixCertifTermsOfServiceValidatedAt: null,
+        createdAt: now,
+        updatedAt: now,
       });
-      expect(firstUserFound.createdAt).to.deep.equal(now);
-      expect(firstUserFound.updatedAt).to.deep.equal(now);
+
+      const legalDocumentAcceptation = await knex('legal-document-version-user-acceptances')
+        .where({ userId: firstUserFound.id })
+        .first();
+      expect(legalDocumentAcceptation.legalDocumentVersionId).to.equal(pixAppTos.id);
 
       const secondUserFound = await knex('users').where({ lastName: 'Desavoie' }).first();
       expect(secondUserFound).to.contains({
