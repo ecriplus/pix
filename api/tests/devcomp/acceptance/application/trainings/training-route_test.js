@@ -1,4 +1,5 @@
 import { createServer } from '../../../../../server.js';
+import { Training } from '../../../../../src/devcomp/domain/models/Training.js';
 import { expect } from '../../../../test-helper.js';
 import { databaseBuilder, knex } from '../../../../tooling/databases.js';
 import { buildLearningContent as learningContentBuilder } from '../../../../tooling/learning-content-builder/index.js';
@@ -163,6 +164,11 @@ describe('Acceptance | Controller | training-controller', function () {
           locales: ['fr', 'fr-fr'],
           'editor-name': 'Un ministère',
           'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/mon-logo.svg',
+          'delivery-mode': 'remote',
+          description: 'Une sommaire description',
+          program: 'un programme bien détaillé',
+          'registration-required': true,
+          objectives: ['Objectif 1', 'Objectif 2', 'Objectif 3', 'Objectif 4'],
         },
       };
 
@@ -184,6 +190,11 @@ describe('Acceptance | Controller | training-controller', function () {
               locales: ['fr', 'fr-fr'],
               'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/mon-logo.svg',
               'editor-name': 'Un ministère',
+              'delivery-mode': Training.modes.REMOTE,
+              description: 'Une sommaire description',
+              program: 'un programme bien détaillé',
+              'registration-required': true,
+              objectives: ['Objectif 1', 'Objectif 2', 'Objectif 3', 'Objectif 4'],
             },
           },
         },
