@@ -15,13 +15,21 @@ export default class CampaignsRoute extends Route {
     }
   }
 
-  activate() {
-    this.metrics.context.code = this.paramsFor('campaigns').code;
+  async activate() {
+    const campaignCode = this.paramsFor('campaigns').code;
+    const campaign = await this.store.queryRecord('campaign', { filter: { code: campaignCode } });
+
+    this.metrics.context.code = campaignCode;
     this.metrics.context.type = 'campaigns';
+
+    if (campaign.recommendationEngine) {
+      this.metrics.context.feature = 'RECOMMENDATION_ENGINE';
+    }
   }
 
   deactivate() {
     delete this.metrics.context.code;
     delete this.metrics.context.type;
+    delete this.metrics.context.feature;
   }
 }
