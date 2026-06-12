@@ -194,7 +194,7 @@ describe('Acceptance | Controller | training-controller', function () {
               description: 'Une sommaire description',
               program: 'un programme bien détaillé',
               'registration-required': true,
-              objectives: ['Objectif 1', 'Objectif 2', 'Objectif 3', 'Objectif 4'],
+              objectives: 'Objectif 1;Objectif 2;Objectif 3;Objectif 4',
             },
           },
         },

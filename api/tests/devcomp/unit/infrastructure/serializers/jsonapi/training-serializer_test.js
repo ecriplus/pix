@@ -439,6 +439,10 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | training-ser
             'editor-logo-url': 'https://assets.pix.org/contenu-formatif/editeur/editor_logo_url.svg',
             'is-disabled': true,
             description: "<p>Voici la description d'un contenu formatif pour le ministère</p>",
+            'delivery-mode': Training.modes.REMOTE,
+            program: 'Programme',
+            'registration-required': false,
+            objectives: 'Objectif 1          ;  Objectif 2',
           },
         },
       };
@@ -456,6 +460,10 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | training-ser
         editorName: 'Ministère education nationale',
         isDisabled: true,
         description: "<p>Voici la description d'un contenu formatif pour le ministère</p>",
+        deliveryMode: Training.modes.REMOTE,
+        registrationRequired: false,
+        program: 'Programme',
+        objectives: ['Objectif 1', 'Objectif 2'],
       });
     });
 
