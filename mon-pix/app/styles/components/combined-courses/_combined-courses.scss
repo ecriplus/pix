@@ -167,6 +167,12 @@
     align-items: center;
     justify-content: center;
 
+    img {
+      width: auto;
+      min-width: var(--pix-spacing-8x);
+      height: 42px;
+    }
+
     svg {
       width: 100%;
       height: 100%;
