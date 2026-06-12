@@ -1643,6 +1643,34 @@ describe('Acceptance | Organizational Entities | Application | Route | Admin | O
       expect(response.result.data.id).to.equal(`${organizationId}_organization_statistics`);
     });
   });
+
+  describe('GET /api/organizations/{id}/certification-centers', function () {
+    it('should return certification-center attached to a given organization and http code 200', async function () {
+      // given
+      const server = await createServer();
+
+      const certificationCenter = databaseBuilder.factory.buildCertificationCenter();
+      const { organization } = databaseBuilder.factory.buildOrganizationWithStructure({
+        certificationCenterId: certificationCenter.id,
+      });
+      await databaseBuilder.commit();
+
+      const options = {
+        method: 'GET',
+        url: `/api/admin/organizations/${organization.id}/certification-centers`,
+        headers: generateAuthenticatedUserRequestHeaders({
+          userId: superAdmin.id,
+        }),
+      };
+
+      // when
+      const response = await server.inject(options);
+
+      // then
+      expect(response.statusCode).to.equal(200);
+      expect(response.result.data[0].type).to.equal('certification-centers');
+    });
+  });
 });
 
 function _createMultipartPayload({ boundary, filename, fieldName, contentType, content }) {
