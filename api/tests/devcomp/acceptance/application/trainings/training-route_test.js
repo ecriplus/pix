@@ -71,7 +71,9 @@ describe('Acceptance | Controller | training-controller', function () {
       // given
       const superAdmin = databaseBuilder.factory.buildUser.withRoleSuperAdmin();
       databaseBuilder.factory.buildTraining();
-      const { id: trainingId, ...trainingAttributes } = databaseBuilder.factory.buildTraining();
+      const { id: trainingId, ...trainingAttributes } = databaseBuilder.factory.buildTraining({
+        objectives: ['Objectif 1', 'Objectif 2', 'Objectif 3'],
+      });
       const trainingTrigger = databaseBuilder.factory.buildTrainingTrigger({ trainingId });
       const trainingTriggerTube = databaseBuilder.factory.buildTrainingTriggerTube({
         trainingTriggerId: trainingTrigger.id,
@@ -98,6 +100,11 @@ describe('Acceptance | Controller | training-controller', function () {
           'editor-logo-url': trainingAttributes.editorLogoUrl,
           'editor-name': trainingAttributes.editorName,
           'is-disabled': false,
+          'delivery-mode': Training.modes.HYBRID,
+          'registration-required': false,
+          program: 'Programme du contenu formatif',
+          description: "<p>Voici la description d'un contenu formatif</p>",
+          objectives: ['Objectif 1', 'Objectif 2', 'Objectif 3'],
         },
       };
 

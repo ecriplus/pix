@@ -26,6 +26,11 @@ const serializeForAdmin = function (training = {}, meta) {
       'targetProfileSummaries',
       'isRecommendable',
       'isDisabled',
+      'deliveryMode',
+      'registrationRequired',
+      'program',
+      'objectives',
+      'description',
     ],
     trainingTriggers: {
       ref: 'id',
