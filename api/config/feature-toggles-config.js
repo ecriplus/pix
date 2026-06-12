@@ -62,13 +62,6 @@ export default {
     devDefaultValues: { test: true, reviewApp: true },
     tags: ['frontend', 'team-prescription'],
   },
-  usePixOrgaNewAuthDesign: {
-    type: 'boolean',
-    description: 'Displays the new design of authentication pages',
-    defaultValue: false,
-    devDefaultValues: { test: false, reviewApp: true },
-    tags: ['frontend', 'team-acces', 'pix-orga'],
-  },
   isPixPlusCandidateA11yEnabled: {
     type: 'boolean',
     description: 'Enable candidate accessibility adjustment for Pix+ certifications',
@@ -129,5 +122,12 @@ export default {
     defaultValue: true,
     devDefaultValues: { test: true, reviewApp: true },
     tags: ['team-combinix', 'pix-api', 'frontend'],
+  },
+  isSessionLogoutEnabled: {
+    type: 'boolean',
+    description: 'Enable session logout',
+    defaultValue: false,
+    devDefaultValues: { test: false, reviewApp: false },
+    tags: ['team-acces', 'frontend', 'backend', 'pix-api', 'mon-pix', 'pix-orga', 'pix-certif', 'pix-admin'],
   },
 };
