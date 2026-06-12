@@ -10,6 +10,7 @@ describe('Unit | Organizational Entities | Application | route | Admin | organiz
   let httpTestServer;
 
   beforeEach(async function () {
+    sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf');
     httpTestServer = new HttpTestServer();
     await httpTestServer.register(moduleUnderTest);
   });
@@ -63,12 +64,7 @@ describe('Unit | Organizational Entities | Application | route | Admin | organiz
     describe('when the user authenticated has no role', function () {
       it('returns a 403 HTTP status code', async function () {
         // given
-        sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin').callsFake((request, h) =>
-          h
-            .response({ errors: new Error('forbidden') })
-            .code(403)
-            .takeover(),
-        );
+        securityPreHandlers.hasAtLeastOneAccessOf.returns((request, h) => h.response().code(403).takeover());
         sinon.stub(organizationAdminController, 'getOrganizationPlacesStatistics');
 
         // when
@@ -92,7 +88,7 @@ describe('Unit | Organizational Entities | Application | route | Admin | organiz
         it('returns a 200 HTTP status code', async function () {
           // given
           sinon.stub(securityPreHandlers, stub).callsFake((request, h) => h.response(true));
-          sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').callsFake((_handlers) => {
+          securityPreHandlers.hasAtLeastOneAccessOf.callsFake((_handlers) => {
             return () => true;
           });
           sinon.stub(organizationAdminController, 'getOrganizationPlacesStatistics').returns('ok');
@@ -112,12 +108,7 @@ describe('Unit | Organizational Entities | Application | route | Admin | organiz
     describe('when the user authenticated has no role', function () {
       it('returns a 403 HTTP status code', async function () {
         // given
-        sinon.stub(securityPreHandlers, 'checkAdminMemberHasRoleSuperAdmin').callsFake((request, h) =>
-          h
-            .response({ errors: new Error('forbidden') })
-            .code(403)
-            .takeover(),
-        );
+        securityPreHandlers.hasAtLeastOneAccessOf.returns((request, h) => h.response().code(403).takeover());
         sinon.stub(organizationAdminController, 'getOrganizationStatistics');
 
         // when
@@ -141,7 +132,7 @@ describe('Unit | Organizational Entities | Application | route | Admin | organiz
         it('returns a 200 HTTP status code', async function () {
           // given
           sinon.stub(securityPreHandlers, stub).callsFake((request, h) => h.response(true));
-          sinon.stub(securityPreHandlers, 'hasAtLeastOneAccessOf').callsFake((_handlers) => {
+          securityPreHandlers.hasAtLeastOneAccessOf.callsFake((_handlers) => {
             return () => true;
           });
           sinon.stub(organizationAdminController, 'getOrganizationStatistics').returns('ok');
@@ -152,6 +143,51 @@ describe('Unit | Organizational Entities | Application | route | Admin | organiz
           // then
           expect(response.statusCode).to.equal(200);
           sinon.assert.calledOnce(organizationAdminController.getOrganizationStatistics);
+        });
+      });
+    });
+  });
+
+  describe('GET /api/admin/organizations/{id}/certification-centers', function () {
+    describe('when the user authenticated has no role', function () {
+      it('returns a 403 HTTP status code', async function () {
+        // given
+        securityPreHandlers.hasAtLeastOneAccessOf.returns((request, h) => h.response().code(403).takeover());
+
+        sinon.stub(organizationAdminController, 'findAttachedCertificationCenterForAdmin');
+
+        // when
+        const response = await httpTestServer.request('GET', '/api/admin/organizations/1/certification-centers');
+
+        // then
+        expect(response.statusCode).to.equal(403);
+        sinon.assert.notCalled(organizationAdminController.findAttachedCertificationCenterForAdmin);
+      });
+    });
+
+    const authorizedRoles = [
+      { role: 'SuperAdmin', stub: 'checkAdminMemberHasRoleSuperAdmin' },
+      { role: 'Support', stub: 'checkAdminMemberHasRoleSupport' },
+      { role: 'Certif', stub: 'checkAdminMemberHasRoleCertif' },
+      { role: 'Metier', stub: 'checkAdminMemberHasRoleMetier' },
+    ];
+
+    authorizedRoles.forEach(({ role, stub }) => {
+      describe(`when the user has ${role} role`, function () {
+        it('returns a 200 HTTP status code', async function () {
+          // given
+          sinon.stub(securityPreHandlers, stub).callsFake((request, h) => h.response(true));
+          securityPreHandlers.hasAtLeastOneAccessOf.callsFake((_handlers) => {
+            return () => true;
+          });
+          sinon.stub(organizationAdminController, 'findAttachedCertificationCenterForAdmin').returns('ok');
+
+          // when
+          const response = await httpTestServer.request('GET', '/api/admin/organizations/1/certification-centers');
+
+          // then
+          expect(response.statusCode).to.equal(200);
+          sinon.assert.calledOnce(organizationAdminController.findAttachedCertificationCenterForAdmin);
         });
       });
     });

@@ -97,6 +97,7 @@ import { detachParentOrganizationFromOrganization } from './detach-parent-organi
 import { findAllAdministrationTeams } from './find-all-administration-teams.usecase.js';
 import { findAllOrganizationLearnerTypes } from './find-all-organization-learner-types.refactor.js';
 import { findAllTags } from './find-all-tags.usecase.js';
+import { findAttachedCertificationCenterForAdmin } from './find-attached-certification-center-for-admin.usecase.js';
 import { findChildrenOrganizations } from './find-children-organizations.usecase.js';
 import { findOrganizationFeatures } from './find-organization-features.js';
 import { findPaginatedFilteredCertificationCenters } from './find-paginated-filtered-certification-centers.usecase.js';
@@ -131,6 +132,7 @@ const usecasesWithoutInjectedDependencies = {
   detachParentOrganizationFromOrganization,
   findPaginatedFilteredNetworks,
   findAllTags,
+  findAttachedCertificationCenterForAdmin,
   findChildrenOrganizations,
   findOrganizationFeatures,
   findPaginatedFilteredCertificationCenters,
