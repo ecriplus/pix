@@ -62,13 +62,6 @@ export default {
     devDefaultValues: { test: true, reviewApp: true },
     tags: ['frontend', 'team-prescription'],
   },
-  usePixOrgaNewAuthDesign: {
-    type: 'boolean',
-    description: 'Displays the new design of authentication pages',
-    defaultValue: false,
-    devDefaultValues: { test: false, reviewApp: true },
-    tags: ['frontend', 'team-acces', 'pix-orga'],
-  },
   isPixPlusCandidateA11yEnabled: {
     type: 'boolean',
     description: 'Enable candidate accessibility adjustment for Pix+ certifications',
