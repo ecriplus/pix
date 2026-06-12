@@ -14,6 +14,7 @@ export const getCurrentUser = async function ({
   userRepository,
   campaignParticipationRepository,
   userRecommendedTrainingRepository,
+  legalDocumentApiRepository,
 }) {
   const hasAssessmentParticipations =
     await campaignParticipationRepository.hasAssessmentParticipations(authenticatedUserId);
@@ -26,13 +27,13 @@ export const getCurrentUser = async function ({
   });
 
   const user = await userRepository.get(authenticatedUserId);
-  const shouldSeeDataProtectionPolicyInformationBanner = user.shouldSeeDataProtectionPolicyInformationBanner;
+  const tosStatus = await legalDocumentApiRepository.getPixAppTosStatus({ userId: authenticatedUserId });
 
   return new UserWithActivity({
     user,
+    tosStatus,
     hasAssessmentParticipations,
     codeForLastProfileToShare,
     hasRecommendedTrainings,
-    shouldSeeDataProtectionPolicyInformationBanner,
   });
 };

@@ -20,7 +20,11 @@ import {
   PIX_PUBLIC_TARGET_PROFILE_ID,
   REAL_PIX_SUPER_ADMIN_ID,
 } from './constants.js';
-import { acceptPixOrgaTermsOfService, createPixOrgaTermsOfService } from './tooling/legal-documents.js';
+import {
+  acceptPixOrgaTermsOfService,
+  createPixAppTermsOfService,
+  createPixOrgaTermsOfService,
+} from './tooling/legal-documents.js';
 import { createTargetProfile } from './tooling/target-profile-tooling.js';
 
 const { ROLES } = PIX_ADMIN;
@@ -31,6 +35,7 @@ export const commonBuilder = async function ({ databaseBuilder }) {
 
   // legal-document
   createPixOrgaTermsOfService(databaseBuilder);
+  createPixAppTermsOfService(databaseBuilder);
 
   // administration teams
   _createAdministrationTeams(databaseBuilder);

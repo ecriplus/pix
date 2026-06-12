@@ -37,7 +37,10 @@ export class LegalDocumentStatus {
     return new LegalDocumentStatus({ status: STATUS.UPDATE_REQUESTED, acceptedAt: null, documentPath });
   }
 
-  static buildForLegacyPixAppCgu({ mustValidateTermsOfService, lastTermsOfServiceValidatedAt }) {
+  static buildForLegacyPixAppCgu({ cgu, mustValidateTermsOfService, lastTermsOfServiceValidatedAt }) {
+    if (!cgu) {
+      return new LegalDocumentStatus({ status: STATUS.NOT_APPLICABLE, acceptedAt: null, documentPath: null });
+    }
     if (mustValidateTermsOfService) {
       return new LegalDocumentStatus({ status: STATUS.UPDATE_REQUESTED, acceptedAt: null, documentPath: null });
     }

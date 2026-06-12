@@ -27,7 +27,6 @@ const serialize = function (users, meta) {
       'hasSeenOtherChallengesTooltip',
       'trainings',
       'lastDataProtectionPolicySeenAt',
-      'shouldSeeDataProtectionPolicyInformationBanner',
     ],
     profile: {
       ref: 'id',

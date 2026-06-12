@@ -52,8 +52,6 @@ describe('Unit | Shared | Infrastructure | Serializer | JSONAPI | user-serialize
               'has-seen-focused-challenge-tooltip': userModelObject.hasSeenFocusedChallengeTooltip,
               'has-seen-other-challenges-tooltip': userModelObject.hasSeenOtherChallengesTooltip,
               'last-data-protection-policy-seen-at': userModelObject.lastDataProtectionPolicySeenAt,
-              'should-see-data-protection-policy-information-banner':
-                userModelObject.shouldSeeDataProtectionPolicyInformationBanner,
             },
             relationships: {
               profile: {
