@@ -1,5 +1,27 @@
 # Pix Changelog
 
+# [5.430.0](https://github.com/1024pix/pix/compare/v5.429.0...v5.430.0) (2026-06-12)
+
+### :rocket: Amélioration
+
+- [#16482](https://github.com/1024pix/pix/pull/16482) Accepter les CGU Pix App avec le nouveau modèle (PIX-21743)  
+- [#16406](https://github.com/1024pix/pix/pull/16406) Créer le composant modal du catalogue (panneau droit de détails d'un parcours) (PIX-22675) 
+- [#16472](https://github.com/1024pix/pix/pull/16472) MDX-43 Intégration relectures édito + marine + conseils novice 
+- [#16398](https://github.com/1024pix/pix/pull/16398) Modifier l'appel api/users/me pour qu'il fonctionne avec le nouveau modèle (PIX-22584) 
+- [#16496](https://github.com/1024pix/pix/pull/16496) Modifs relecture MGO visio NOV 
+- [#16392](https://github.com/1024pix/pix/pull/16392) Rendre l’expiration des tokens obligatoire et améliorer les méthodes restore des authenticators des applications Front (PIX-22655) 
+
+### :bug: Correction
+
+- [#16489](https://github.com/1024pix/pix/pull/16489) Corriger le compteur de candidats de l'espace surveillant (PIX-23040). 
+- [#16481](https://github.com/1024pix/pix/pull/16481) Faire apparaître le nom de la certification et la durée correcte sur les écrans d'entrée en certif (PIX-23111) 
+- [#16487](https://github.com/1024pix/pix/pull/16487) Message d'erreur erroné lors d'une tentative d'accès à une session déjà finalisée (PIX-23027) 
+
+### :building_construction: Tech
+
+- [#16494](https://github.com/1024pix/pix/pull/16494) Préparer le GitHub Actions pour la merge queue 
+- [#16485](https://github.com/1024pix/pix/pull/16485) Refactoring variés dans le bounded-context d'inscription (PIX-23069)
+
 # [5.429.0](https://github.com/1024pix/pix/compare/v5.428.0...v5.429.0) (2026-06-11)
 
 ### :rocket: Amélioration
