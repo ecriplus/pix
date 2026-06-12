@@ -53,6 +53,7 @@ export default class OidcAuthenticator extends BaseAuthenticator {
     return {
       access_token: data.access_token,
       user_id: decodedAccessToken.user_id,
+      expiresAt: decodedAccessToken.exp * 1000,
       source: identityProvider.source,
       identityProviderCode: identityProvider.code,
     };
@@ -60,10 +61,14 @@ export default class OidcAuthenticator extends BaseAuthenticator {
 
   restore(data) {
     return new Promise((resolve, reject) => {
-      if (!isEmpty(data['access_token'])) {
-        resolve(data);
+      if (isEmpty(data['access_token'])) {
+        reject();
       }
-      reject();
+      if (data.expiresAt <= new Date().getTime()) {
+        reject();
+      }
+
+      resolve(data);
     });
   }
 }

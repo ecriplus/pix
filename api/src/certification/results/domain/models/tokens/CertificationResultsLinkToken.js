@@ -33,7 +33,7 @@ export class CertificationResultsLinkToken {
         scope: config.jwtConfig.certificationResults.scope,
       },
       config.authentication.secret,
-      { expiresIn: `${config.jwtConfig.certificationResults.tokenLifespan}` },
+      config.jwtConfig.certificationResults.tokenLifespan,
     );
   }
 }

@@ -88,8 +88,9 @@ module('Unit | Authenticator | oidc', function (hooks) {
       sinon.assert.calledWith(window.fetch, `http://localhost:3000/api/admin/oidc/user/reconcile`, request);
       assert.deepEqual(token, {
         access_token: accessToken,
-        source,
         user_id: userId,
+        expiresAt: 4702193958000,
+        source,
         identityProviderCode,
       });
       assert.ok(true);
@@ -111,8 +112,9 @@ module('Unit | Authenticator | oidc', function (hooks) {
       sinon.assert.calledWith(window.fetch, 'http://localhost:3000/api/oidc/token', request);
       assert.deepEqual(token, {
         access_token: accessToken,
-        source,
         user_id: userId,
+        expiresAt: 4702193958000,
+        source,
         identityProviderCode,
       });
       assert.ok(true);
@@ -142,6 +144,46 @@ module('Unit | Authenticator | oidc', function (hooks) {
         sinon.assert.calledWith(window.fetch, `http://localhost:3000/api/oidc/token`, request);
         sinon.assert.calledOnce(sessionStub.invalidate);
         assert.ok(true);
+      });
+    });
+  });
+
+  module('restore', function () {
+    module('when there is no access_token', function () {
+      test('it rejects', async function (assert) {
+        // given
+        const authenticator = this.owner.lookup('authenticator:oidc');
+        const data = {};
+
+        // when & then
+        await assert.rejects(authenticator.restore(data));
+      });
+    });
+
+    module('when there is an access_token', function () {
+      module('when the access_token is expired', function () {
+        test('it rejects', async function (assert) {
+          // given
+          const authenticator = this.owner.lookup('authenticator:oidc');
+          const data = { expiresAt: new Date().getTime(), access_token: 'accessTokenData' };
+
+          // when & then
+          await assert.rejects(authenticator.restore(data));
+        });
+      });
+
+      module('when the access_token is not expired', function () {
+        test('it returns the still valid data', async function (assert) {
+          // given
+          const authenticator = this.owner.lookup('authenticator:oidc');
+          const data = { expiresAt: new Date().getTime() + 60000, access_token: 'accessTokenData' };
+
+          // when
+          const result = await authenticator.restore(data);
+
+          // then
+          assert.strictEqual(result, data);
+        });
       });
     });
   });

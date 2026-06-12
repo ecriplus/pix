@@ -42,7 +42,7 @@ describe('Unit | Certification | Results | Domain | Model | CertificationResults
       const token = tokenService.encodeToken(
         { result_recipient_email: 'recipient@example.com', scope: 'certificationResultsByRecipientEmailLink' },
         config.authentication.secret,
-        { expiresIn: '1d' },
+        '1d',
       );
       expect(() => CertificationResultsLinkByEmailToken.decode(token)).to.throw(InvalidResultRecipientTokenError);
     });
@@ -51,7 +51,7 @@ describe('Unit | Certification | Results | Domain | Model | CertificationResults
       const token = tokenService.encodeToken(
         { session_id: 'sessionId!', scope: 'certificationResultsByRecipientEmailLink' },
         config.authentication.secret,
-        { expiresIn: '1d' },
+        '1d',
       );
       expect(() => CertificationResultsLinkByEmailToken.decode(token)).to.throw(InvalidResultRecipientTokenError);
     });
@@ -60,7 +60,7 @@ describe('Unit | Certification | Results | Domain | Model | CertificationResults
       const token = tokenService.encodeToken(
         { session_id: 'sessionId!', result_recipient_email: 'recipient@example.com', scope: 'wrong-scope' },
         config.authentication.secret,
-        { expiresIn: '1d' },
+        '1d',
       );
       expect(() => CertificationResultsLinkByEmailToken.decode(token)).to.throw(InvalidResultRecipientTokenError);
     });

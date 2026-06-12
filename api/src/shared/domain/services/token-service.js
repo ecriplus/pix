@@ -1,17 +1,21 @@
+import Joi from 'joi';
 import jsonwebtoken from 'jsonwebtoken';
 
 import { config } from '../../../../src/shared/config.js';
 import { InvalidTemporaryKeyError } from '../errors.js';
 
 /**
- * Encode and sign a payload into a JWT token (using jsonwebtoken library)
+ * Encodes and signs a payload into a JWT token with a time-limited validity
+ *
  * @param {Record<string, any>} payload Token payload
  * @param {string} secret Secret for the signature
- * @param {Record<string, any>} options Sign options (ex: { expiresIn })
+ * @param {number} expiresIn expressed in seconds or a string describing a time span, 60, ex. "2 days", "10h", "7d"
  * @returns The encoded and signed token
  */
-function encodeToken(payload, secret, options) {
-  return jsonwebtoken.sign(payload, secret, options);
+function encodeToken(payload, secret, expiresIn) {
+  Joi.assert(expiresIn, Joi.required());
+
+  return jsonwebtoken.sign(payload, secret, { expiresIn });
 }
 
 /**

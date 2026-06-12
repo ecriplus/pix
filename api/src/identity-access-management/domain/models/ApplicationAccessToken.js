@@ -23,7 +23,7 @@ export class ApplicationAccessToken {
         scope: Array.isArray(scope) ? scope.join(' ') : scope,
       },
       config.authentication.secret,
-      { expiresIn: config.authentication.accessTokenLifespanMs },
+      config.authentication.accessTokenLifespanMs,
     );
   }
 }
