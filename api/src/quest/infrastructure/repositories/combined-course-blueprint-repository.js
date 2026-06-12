@@ -72,7 +72,10 @@ async function updateShares({ combinedCourseBlueprint, knexConn }) {
   );
 
   if (organizationIdsToRemove.length > 0) {
-    await knexConn('combined_course_blueprint_shares').delete().whereIn('organizationId', organizationIdsToRemove);
+    await knexConn('combined_course_blueprint_shares')
+      .delete()
+      .where('combinedCourseBlueprintId', currentCombinedCourseBlueprint.id)
+      .whereIn('organizationId', organizationIdsToRemove);
   }
 
   if (organizationIdsToAdd.length > 0) {
