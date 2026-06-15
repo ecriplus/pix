@@ -1,5 +1,35 @@
 # Pix Changelog
 
+# [5.431.0](https://github.com/1024pix/pix/compare/v5.430.0...v5.431.0) (2026-06-15)
+
+### :rocket: Amélioration
+
+- [#16499](https://github.com/1024pix/pix/pull/16499) Ajouter les nouvelles données dans la création d'un contenu formatif (PIX-23020) 
+- [#16479](https://github.com/1024pix/pix/pull/16479) Créer une route qui remonte un centre de certif associé à une organisation (PIX-22628) 
+- [#16492](https://github.com/1024pix/pix/pull/16492) Envoyer une propriété feature sur les campagnes de type moteur de reco (PIX-23083) 
+- [#16493](https://github.com/1024pix/pix/pull/16493) Exclure les parcours combinés de la requête sur les quêtes dans le completeAssessment() (PIX-23095) 
+- [#16508](https://github.com/1024pix/pix/pull/16508) MDX-121 RepondreMail_IND Corrections suite à la relecture finale 
+- [#16449](https://github.com/1024pix/pix/pull/16449) MDX-140 RAG première inte 
+- [#16504](https://github.com/1024pix/pix/pull/16504) Récupérer les nouvelles infos des contenus formatifs (PIX-23020) 
+- [#16501](https://github.com/1024pix/pix/pull/16501) Supprime la table organization_learner_passage_participations (PIX-22558) 
+- [#16491](https://github.com/1024pix/pix/pull/16491) Update IAGenBiais_IND.json - image pas dans dossier draft 
+
+### :bug: Correction
+
+- [#16500](https://github.com/1024pix/pix/pull/16500) Ne pas détacher tous les blueprints d'une organisation quand on en détache une (PIX-23122) 
+- [#16497](https://github.com/1024pix/pix/pull/16497) problème de responsive sur l'icône des items des parcours combinés (PIX-22903) 
+
+### :building_construction: Tech
+
+- [#16452](https://github.com/1024pix/pix/pull/16452)  Ne plus lire depuis la table certification-subscriptions dans le contexte de session-for-supervising (PIX-22974) 
+- [#16484](https://github.com/1024pix/pix/pull/16484) Créer des dossiers pour différencier les types d'objet du domaine au sein du BC quest (PIX-23148) 
+- [#16488](https://github.com/1024pix/pix/pull/16488) Mettre en place le FT isSessionLogoutEnabled (PIX-23084) 
+- [#16502](https://github.com/1024pix/pix/pull/16502) Supprime un script à usage unique 
+
+### :arrow_up: Montée de version
+
+- [#16511](https://github.com/1024pix/pix/pull/16511) Update pix-ui to v60.15.0 (orga)
+
 # [5.430.0](https://github.com/1024pix/pix/compare/v5.429.0...v5.430.0) (2026-06-12)
 
 ### :rocket: Amélioration
