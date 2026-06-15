@@ -20,7 +20,7 @@ const Content = <template>
     <div class="combined-course-item__content">
       <div class="combined-course-item__icon">
         {{#if @iconUrl}}
-          <img role="presentation" src={{@iconUrl}} alt="" height="42" />
+          <img role="presentation" src={{@iconUrl}} alt="" />
         {{/if}}
       </div>
       <div class="combined-course-item__text">
@@ -34,8 +34,8 @@ const Content = <template>
           </div>
         {{/if}}
       </div>
-
     </div>
+
     {{#if @isLocked}}
       <div class="combined-course-item__indicator--locked">
         <PixIcon @name="lock" @plainIcon={{true}} @ariaHidden={{true}} />
