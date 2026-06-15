@@ -83,6 +83,11 @@ describe('Unit | DevComp | Infrastructure | Serializers | Jsonapi | training-ser
             locales: ['fr-fr'],
             title: 'Training 1',
             type: 'webinar',
+            'delivery-mode': Training.modes.REMOTE,
+            'registration-required': false,
+            program: 'Program name',
+            objectives: ['Objectif 1', 'Objectif 2', 'Objectif 3', 'Objectif 4'],
+            description: 'une jolie description',
           },
           id: `${trainingId}`,
           relationships: {
