@@ -8,7 +8,7 @@
   "details": {
     "image": "https://assets.pix.org/modules/placeholder-details.svg",
     "description": "<p>Les IA génératives produisent leurs réponses à partir de connaissances apprises lors de l’entraînement et du contexte fourni dans la demande. Ce module analyse leurs limites face aux informations récentes, internes ou métier, puis présente l’enrichissement de contexte et le RAG (à définir), qui permet de récupérer des extraits pertinents dans une base documentaire avant de générer une réponse.</p>",
-    "duration": 0,
+    "duration": 10,
     "level": "novice",
     "objectives": [
       "<p>Identifier les limites des connaissances d’une IA générative</p>",
