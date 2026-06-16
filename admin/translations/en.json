@@ -149,6 +149,7 @@
       "send-new-confirm": "An email has been sent to {invitationEmail}",
       "send-new-label": "Resend the invitation to {invitationEmail}"
     },
+    "loading": "Loading...",
     "not-specified": "Not specified",
     "notifications": {
       "close-button": {
@@ -1104,6 +1105,10 @@
         }
       },
       "statistics": {
+        "missing-data": {
+          "content": "An error has occurred whilst calculating the statistics; please do not try again. The team responsible has already been notified.",
+          "title": "No statistics available"
+        },
         "total-participants-count": {
           "info": "The total number of unique participants from the organisation who have started at least one campaign participation since the organisation was created (regardless of the status of the campaigns, participations or participants, whether deleted or not)",
           "title": "Total number of participants"
