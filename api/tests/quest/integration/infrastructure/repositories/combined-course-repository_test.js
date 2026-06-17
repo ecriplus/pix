@@ -371,6 +371,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
           },
         },
       ];
+      const combinedCourseBlueprint = databaseBuilder.factory.buildCombinedCourseBlueprint();
       await databaseBuilder.commit();
 
       const quest = new Quest({
@@ -384,6 +385,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
           organizationId: firstOrganizationId,
           illustration: 'mon_illu.svg',
           description: 'ma description',
+          blueprintId: combinedCourseBlueprint.id,
         },
         quest,
       );
@@ -392,6 +394,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
           name: 'secondCombinedCourse',
           code: 'secondCode',
           organizationId: secondOrganizationId,
+          blueprintId: combinedCourseBlueprint.id,
         },
         quest,
       );
@@ -438,7 +441,8 @@ describe('Quest | Integration | Repository | combined-course', function () {
           },
         },
       ];
-      const combinedCourseBlueprint = databaseBuilder.factory.buildCombinedCourseBlueprint({ content: [] });
+      const firstCombinedCourseBlueprint = databaseBuilder.factory.buildCombinedCourseBlueprint({ content: [] });
+      const secondCombinedCourseBlueprint = databaseBuilder.factory.buildCombinedCourseBlueprint({ content: [] });
       await databaseBuilder.commit();
 
       const quest = new Quest({
@@ -452,6 +456,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
           organizationId: firstOrganizationId,
           illustration: 'mon_illu.svg',
           description: 'ma description',
+          blueprintId: firstCombinedCourseBlueprint.id,
         },
         quest,
       );
@@ -460,7 +465,7 @@ describe('Quest | Integration | Repository | combined-course', function () {
           name: 'secondCombinedCourse',
           code: 'secondCode',
           organizationId: secondOrganizationId,
-          blueprintId: combinedCourseBlueprint.id,
+          blueprintId: secondCombinedCourseBlueprint.id,
         },
         quest,
       );
@@ -479,13 +484,13 @@ describe('Quest | Integration | Repository | combined-course', function () {
         .where('combined_courses.organizationId', secondOrganizationId)
         .first();
 
-      expect(firstSavedCombinedCourse.combinedCourseBlueprintId).to.be.null;
+      expect(firstSavedCombinedCourse.combinedCourseBlueprintId).to.equal(firstCombinedCourseBlueprint.id);
       expect(firstSavedCombinedCourse.name).to.equal('firstCombinedCourse');
       expect(firstSavedCombinedCourse.description).equal('ma description');
       expect(firstSavedCombinedCourse.illustration).equal('mon_illu.svg');
       expect(firstSavedCombinedCourse.code).equal('firstCode');
 
-      expect(secondSavedCombinedCourse.combinedCourseBlueprintId).to.equal(combinedCourseBlueprint.id);
+      expect(secondSavedCombinedCourse.combinedCourseBlueprintId).to.equal(secondCombinedCourseBlueprint.id);
       expect(secondSavedCombinedCourse.name).to.equal('secondCombinedCourse');
       expect(secondSavedCombinedCourse.description).null;
       expect(secondSavedCombinedCourse.illustration).null;
