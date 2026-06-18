@@ -1,5 +1,7 @@
 # Pix Changelog
 
+# [5.434.0](https://github.com/1024pix/pix/compare/v5.433.0...v5.434.0) (2026-06-18)
+
 # [5.433.0](https://github.com/1024pix/pix/compare/v5.432.0...v5.433.0) (2026-06-17)
 
 # [5.432.0](https://github.com/1024pix/pix/compare/v5.431.0...v5.432.0) (2026-06-16)
