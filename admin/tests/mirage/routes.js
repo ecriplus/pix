@@ -586,10 +586,6 @@ export default function routes() {
     return new Response(204);
   });
 
-  this.get('admin/certification-frameworks/:scope/active-consolidated-framework', (schema, request) => {
-    return schema.certificationConsolidatedFrameworks.find(request.params.scope);
-  });
-
   this.get('admin/certification-frameworks/:scope/target-profiles', (schema, request) => {
     const framework = schema.certificationFrameworks.findBy({ name: request.params.scope });
     return {
@@ -604,16 +600,8 @@ export default function routes() {
     };
   });
 
-  this.get('admin/certification-frameworks/:scope/framework-history', (_, request) => {
-    return {
-      data: {
-        id: request.params.scope,
-        type: 'framework-histories',
-        attributes: {
-          history: [],
-        },
-      },
-    };
+  this.get('admin/certification-frameworks/:scope/framework-history', (schema) => {
+    return schema.frameworkHistories.first();
   });
 
   this.put('/admin/sessions/:id/comment', (schema, request) => {

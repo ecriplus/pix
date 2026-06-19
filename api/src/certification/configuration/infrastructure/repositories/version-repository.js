@@ -41,32 +41,21 @@ export async function getById({ id }) {
 /**
  * @param {object} params
  * @param {SCOPES} params.scope
- * @returns {Promise<Version|null>}
+ * @returns {Promise<Version[]>}
  */
-export async function findActiveByScope({ scope }) {
+export async function findAllByScope({ scope }) {
   const knexConn = DomainTransaction.getConnection();
 
-  const versionData = await knexConn('certification_versions')
-    .select('*')
-    .where({ scope })
-    .whereNull('expirationDate')
-    .whereNotNull('startDate')
-    .first();
+  const dtosVersion = await knexConn('certification_versions').select('*').where({ scope }).orderBy('id');
 
-  if (!versionData) {
-    return null;
-  }
-
-  return _toDomain(versionData);
+  return dtosVersion.map(_toDomain);
 }
 
 /**
- * @param {object} params
- * @param {Version} params.version
- * @param {Array<Challenge>} params.challenges
+ * @param {Version} version
  * @returns {Promise<number>} versionId
  */
-export async function create({ version, challenges }) {
+export async function create(version) {
   const knexConn = DomainTransaction.getConnection();
 
   const [{ id }] = await knexConn('certification_versions')
@@ -85,15 +74,6 @@ export async function create({ version, challenges }) {
       challengesConfiguration: JSON.stringify(version.challengesConfiguration),
     })
     .returning('id');
-
-  const challengesDTO = challenges.map((challenge) => ({
-    challengeId: challenge.id,
-    versionId: id,
-  }));
-
-  await knexConn
-    .batchInsert('certification-frameworks-challenges', challengesDTO)
-    .transacting(knexConn.isTransaction ? knexConn : null);
 
   return id;
 }

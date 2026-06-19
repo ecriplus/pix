@@ -2,11 +2,17 @@ import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import RSVP from 'rsvp';
 
-export default class FrameworkRoute extends Route {
+export default class FrameworkNewRoute extends Route {
   queryParams = {
     activeVersionId: { refreshModel: true },
   };
   @service store;
+  @service router;
+  @service accessControl;
+
+  beforeModel() {
+    this.accessControl.restrictAccessTo(['isSuperAdmin'], 'authenticated.certification-frameworks.item.frameworks');
+  }
 
   async model(params) {
     let activeVersion;
