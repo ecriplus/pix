@@ -1,8 +1,8 @@
-import { glob } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { glob } from "node:fs/promises";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
-import { PgBoss } from 'pg-boss';
+import { PgBoss } from "pg-boss";
 
 import { config } from '../../config.js';
 import { executeInContext, EXECUTORS } from '../execution-context-manager.js';
@@ -11,22 +11,36 @@ import { importNamedExportFromFile } from '../utils/import-named-exports-from-di
 import { child } from '../utils/logger.js';
 import { MonitoredJobHandler } from './MonitoredJobHandler.js';
 
-const workerDirPath = resolve(dirname(fileURLToPath(import.meta.url)), '../../../..');
+const workerDirPath = resolve(
+  dirname(fileURLToPath(import.meta.url)),
+  '../../../..',
+);
 const logger = child('worker', { event: 'worker' });
 const metrics = new DatadogMetrics({ config });
 
 export class JobClient {
   /** @type JobClient */
   static #jobClient;
+  static #constructorToken = Symbol();
 
   /** @type {PgBoss} */
   #pgBoss = null;
   #isTestOnly = false;
   #isInitialized = false;
 
+  constructor(token) {
+    if (token !== JobClient.#constructorToken) {
+      throw new Error('Use JobClient.instance instead of new JobClient()');
+    }
+  }
+
+  get jobGlobPatterns() {
+    return [`${workerDirPath}/src/**/application/**/*job-controller.js`];
+  }
+
   static get instance() {
     if (!JobClient.#jobClient) {
-      JobClient.#jobClient = new JobClient();
+      JobClient.#jobClient = new this(JobClient.#constructorToken);
     }
     return JobClient.#jobClient;
   }
@@ -80,15 +94,29 @@ export class JobClient {
 
   #assertIsInitialized() {
     if (!this.#isInitialized) {
-      throw new Error('JobClient has not been initialized before use');
+      throw new Error("JobClient has not been initialized before use");
     }
   }
 
   async #registerJobs(jobGroups = []) {
-    const globPattern = `${workerDirPath}/src/**/application/**/*job-controller.js`;
 
+    const globPatternList = await this.jobGlobPatterns;
+
+    for (const globPattern of globPatternList) {
+      logger.info(
+        `Register jobs for groups "${jobGroups}" from glob pattern "${globPattern}".`,
+      );
+      await this.#registerJobsFromGlobPattern(globPattern, jobGroups);
+    }
+  }
+
+  async #registerJobsFromGlobPattern(globPattern, jobGroups) {
     logger.info(`Search for job handlers in ${globPattern}`);
-    const jobFiles = await Array.fromAsync(glob(globPattern, { exclude: ['**/job-controller.js'] }));
+    const jobFiles = await Array.fromAsync(
+      glob(globPattern, {
+        exclude: ["**/job-controller.js", "**/job-controller.ts"],
+      }),
+    );
     logger.info(`${jobFiles.length} job handlers files found.`);
 
     let jobModules = {};
@@ -117,9 +145,11 @@ export class JobClient {
           await this.scheduleCronJob({
             name: job.jobName,
             cron: job.jobCron,
-            options: { tz: 'Europe/Paris', expireInSeconds: job.expireIn },
+            options: { tz: "Europe/Paris", expireInSeconds: job.expireIn },
           });
-          logger.info(`Cron for job "${job.jobName}" scheduled "${job.jobCron}"`);
+          logger.info(
+            `Cron for job "${job.jobName}" scheduled "${job.jobCron}"`,
+          );
 
           // For cronJob we need to unschedule older cron
           if (job.legacyName) {
@@ -140,8 +170,12 @@ export class JobClient {
         }
       }
     }
-    logger.info(`${jobRegisteredCount} jobs registered for groups "${jobGroups}".`);
-    logger.info(`${cronJobCount} cron jobs scheduled for groups "${jobGroups}".`);
+    logger.info(
+      `${jobRegisteredCount} jobs registered for groups "${jobGroups}".`,
+    );
+    logger.info(
+      `${cronJobCount} cron jobs scheduled for groups "${jobGroups}".`,
+    );
   }
 
   async registerJob(name, handlerClass) {
@@ -240,4 +274,9 @@ export class JobClient {
     }
     return stats;
   }
+
+  static _resetForTesting() {
+    JobClient.#jobClient = null;
+  }
+
 }
