@@ -1,5 +1,22 @@
 # Pix Changelog
 
+# [5.435.0](https://github.com/1024pix/pix/compare/v5.434.0...v5.435.0) (2026-06-19)
+
+### :rocket: Amélioration
+
+- [#16556](https://github.com/1024pix/pix/pull/16556) Permettre la création et la mise à jour d'un contenu formatif pour le moteur de recommandations (PIX-23118)
+
+### :bug: Correction
+
+- [#16570](https://github.com/1024pix/pix/pull/16570) Ajustement des textes dans les PDF de certif (PIX-23195)
+- [#16567](https://github.com/1024pix/pix/pull/16567) Corriger le fait de pouvoir récupérer l'historique de la certification CléA dans le menu des référentiels de certification sur PixAdmin (PIX-23229)
+- [#16573](https://github.com/1024pix/pix/pull/16573) Ne pas construire une url de questionnaire de fin de parcours si on n'a pas d'url de base pour le blueprint (PIX-23233)
+
+### :building_construction: Tech
+
+- [#16544](https://github.com/1024pix/pix/pull/16544) :recycle: Utilise une déclaration de fonction plutôt qu'assigner une fonction a une constante
+- [#16580](https://github.com/1024pix/pix/pull/16580) Changement dans les seeds de l'utilisation de usecase pour des factory (PIX-23235)
+
 # [5.434.0](https://github.com/1024pix/pix/compare/v5.433.0...v5.434.0) (2026-06-18)
 
 # [5.433.0](https://github.com/1024pix/pix/compare/v5.432.0...v5.433.0) (2026-06-17)
