@@ -1,5 +1,25 @@
 # Pix Changelog
 
+# [5.436.0](https://github.com/1024pix/pix/compare/v5.435.0...v5.436.0) (2026-06-22)
+
+### :rocket: Amélioration
+
+- [#16592](https://github.com/1024pix/pix/pull/16592) Afficher une illustration spécifique par format de contenu formatif (PIX-22792)
+- [#16589](https://github.com/1024pix/pix/pull/16589) Ajouter l'illustration de trophée dans le header de la page de resultat (PIX-23236).
+- [#16534](https://github.com/1024pix/pix/pull/16534) Ajouter un endpoint permettant de récupérer le détail d'un blueprint appartenant à une organisation (PIX-23018)
+- [#16562](https://github.com/1024pix/pix/pull/16562) IA-RAG-modif
+- [#16575](https://github.com/1024pix/pix/pull/16575) Permettre au super admin de créer une version draft d'une certification (PIX-23002)
+- [#16571](https://github.com/1024pix/pix/pull/16571) QCM déclaratif : Mettre à jour Pix-Checkbox (PIX-23189)
+
+### :building_construction: Tech
+
+- [#16569](https://github.com/1024pix/pix/pull/16569) Corriger les erreurs remontées par knip
+- [#16577](https://github.com/1024pix/pix/pull/16577) Exporter les routes avec des exports nommés
+- [#16572](https://github.com/1024pix/pix/pull/16572) Filtrer les knowledge elements sur les skills du profil cible lors de l'export CSV des résultats de campagne (PIX-XXXX)
+- [#16590](https://github.com/1024pix/pix/pull/16590) Mise à jour de la liste des versions lors de l'ajout d'un draft (PIX-23256)
+- [#16595](https://github.com/1024pix/pix/pull/16595) Ne pas exécuter la CI à tous les changements de label
+- [#16576](https://github.com/1024pix/pix/pull/16576) Supprimer la dépendance tracked-build-ins sur Pix App (PIX-23243)
+
 # [5.435.0](https://github.com/1024pix/pix/compare/v5.434.0...v5.435.0) (2026-06-19)
 
 ### :rocket: Amélioration
