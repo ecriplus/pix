@@ -39,6 +39,7 @@ export class Candidate {
     subscriptions = [],
     accessibilityAdjustmentNeeded,
     hasStartedTest = false,
+    doubleCertificationEligibility = false,
   }) {
     this.id = id;
     this.firstName = firstName;
@@ -67,6 +68,7 @@ export class Candidate {
     this.accessibilityAdjustmentNeeded = accessibilityAdjustmentNeeded;
     this.reconciledAt = reconciledAt;
     this.hasStartedTest = hasStartedTest;
+    this.doubleCertificationEligibility = doubleCertificationEligibility;
     this.isLinked = Boolean(userId);
   }
 
@@ -163,10 +165,6 @@ export class Candidate {
 
   convertExtraTimePercentageToDecimal() {
     this.extraTimePercentage = this.extraTimePercentage / 100;
-  }
-
-  hasComplementarySubscription() {
-    return this.subscriptions.some((subscription) => subscription.isComplementary());
   }
 
   hasCoreFrameworkSubscription() {
