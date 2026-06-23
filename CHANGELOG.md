@@ -1,5 +1,32 @@
 # Pix Changelog
 
+# [5.437.0](https://github.com/1024pix/pix/compare/v5.436.0...v5.437.0) (2026-06-23)
+
+### :rocket: Amélioration
+
+- [#16564](https://github.com/1024pix/pix/pull/16564) Afficher les informations du moteur de reco (PIX-23119).
+- [#16578](https://github.com/1024pix/pix/pull/16578) Ajout d'un statut d'annulation manuelle de certification (PIX-23188).
+- [#16610](https://github.com/1024pix/pix/pull/16610) Bloquer le passage des certifs en EN (PIX-23288).
+- [#16505](https://github.com/1024pix/pix/pull/16505) MDX-17 Biais_AVA integration retours JRO
+- [#16596](https://github.com/1024pix/pix/pull/16596) Ne pas proposer de transcription pour les short vidéo qui n'en ont pas (PIX-23184)
+- [#16602](https://github.com/1024pix/pix/pull/16602) Permettre de patcher les modules contenus dans la release (PIX-23286) 
+- [#16553](https://github.com/1024pix/pix/pull/16553) Récupérer les CGU de l'utilisateur sur Pix Admin en passant par le nouveau modèle (PIX-21747)
+- [#16584](https://github.com/1024pix/pix/pull/16584) Utiliser le nouveau modèle des CGU quand un utilisateur récupère son compte (sortie du SCO) (PIX-23228)
+
+### :bug: Correction
+
+- [#16579](https://github.com/1024pix/pix/pull/16579) Corriger les accents mal encodés dans les prénoms des tables certification-courses/candidates (PIX-23223).
+- [#16609](https://github.com/1024pix/pix/pull/16609) Écouter les erreurs pg-boss côté client pour éviter le crash du web
+
+### :building_construction: Tech
+
+- [#16599](https://github.com/1024pix/pix/pull/16599) Ajouter un test pour vérifier que le feedback est bien envoyé pour un QCM declaratif (PIX-23194).
+- [#16560](https://github.com/1024pix/pix/pull/16560) Retirer les lectures vers la table depuis le repo partagé certification-candidate (PIX-22975)
+- [#16591](https://github.com/1024pix/pix/pull/16591) Suppression de security pre-handlers non utilisés
+- [#16582](https://github.com/1024pix/pix/pull/16582) Supprimer le taux de couverture de organizations/{id}/campaigns (PIX-23241)
+- [#16588](https://github.com/1024pix/pix/pull/16588) Toujours utiliser les imports nommés pour le locale service
+- [#16586](https://github.com/1024pix/pix/pull/16586) Traduire le format des tutoriels (PIX-22431)
+
 # [5.436.0](https://github.com/1024pix/pix/compare/v5.435.0...v5.436.0) (2026-06-22)
 
 ### :rocket: Amélioration
