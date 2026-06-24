@@ -1,5 +1,13 @@
 # Pix Changelog
 
+# [5.439.0](https://github.com/1024pix/pix/compare/v5.438.0...v5.439.0) (2026-06-24)
+
+### :rocket: Amélioration
+
+- [#16566](https://github.com/1024pix/pix/pull/16566) Créer une route pour récupérer l'organisation liée à un centre de certification (PIX-22630)
+- [#16618](https://github.com/1024pix/pix/pull/16618) RangerFichiersIND - relecture edito 1
+- [#16620](https://github.com/1024pix/pix/pull/16620) Récompense l'utilisateur qui a rempli l'exigence de sujets cappés dans un Parcours Combinés (PIX-21718).
+
 # [5.438.0](https://github.com/1024pix/pix/compare/v5.437.0...v5.438.0) (2026-06-24)
 
 ### :rocket: Amélioration
