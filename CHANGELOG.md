@@ -1,5 +1,24 @@
 # Pix Changelog
 
+# [5.438.0](https://github.com/1024pix/pix/compare/v5.437.0...v5.438.0) (2026-06-24)
+
+### :rocket: Amélioration
+
+- [#16593](https://github.com/1024pix/pix/pull/16593) Ajout des wordings sur les certificats Pix+ ProSanté (PIX-22934)
+- [#16607](https://github.com/1024pix/pix/pull/16607) Créa module Virus_AVA
+- [#16606](https://github.com/1024pix/pix/pull/16606) Harmoniser les appels à l'api legalDocuments depuis la route api/admin/users/{id} (PIX-23262)
+- [#16583](https://github.com/1024pix/pix/pull/16583) MDX-123 MoteurRechInfo_NOV1 Corrections suite à la relecture équipe
+- [#16612](https://github.com/1024pix/pix/pull/16612) Modifs suite aux panels interne et externe du module CYPhishing_NOV
+- [#16587](https://github.com/1024pix/pix/pull/16587) Pouvoir sélectionner des critères de sujets cappés à la création d'un blueprint (PIX-21717)
+- [#16597](https://github.com/1024pix/pix/pull/16597) Tmp ia gen fonction ava jro panels
+
+### :building_construction: Tech
+
+- [#16601](https://github.com/1024pix/pix/pull/16601) Ajout de la propriété `competenceId` aux configurations de niveau par compétence (PIX-21753).
+- [#16594](https://github.com/1024pix/pix/pull/16594) Optimiser les performances de la route des parcours autonomes (PIX-XXXX)
+- [#16611](https://github.com/1024pix/pix/pull/16611) Refactor remove useless preinstall
+- [#16600](https://github.com/1024pix/pix/pull/16600) Suppression de fonctions et de repositories non utilisés
+
 # [5.437.0](https://github.com/1024pix/pix/compare/v5.436.0...v5.437.0) (2026-06-23)
 
 ### :rocket: Amélioration
