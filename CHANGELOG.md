@@ -1,5 +1,33 @@
 # Pix Changelog
 
+# [5.440.0](https://github.com/1024pix/pix/compare/v5.439.0...v5.440.0) (2026-06-25)
+
+### :rocket: Amélioration
+
+- [#16581](https://github.com/1024pix/pix/pull/16581) Afficher le centre de certification rattaché à une organisation (PIX-22629)
+- [#16603](https://github.com/1024pix/pix/pull/16603) Bloquer le bouton de création de version d'une certification si un brouillon est déjà en cours d'élaboration (PIX-23273)
+- [#16623](https://github.com/1024pix/pix/pull/16623) Créer la table user-campaign-surveys pour stocker le NPS (PIX-23301).
+- [#16608](https://github.com/1024pix/pix/pull/16608) Permettre de réinitialiser les résultats d'une campagne de type moteur de recommandation (PIX-23021)
+
+### :bug: Correction
+
+- [#16629](https://github.com/1024pix/pix/pull/16629) Afficher l'ID de l'organisation en erreur lors du rattachement à un réseau (PIX-23130)
+- [#16632](https://github.com/1024pix/pix/pull/16632) Utiliser la bonne version de node dans security.yml
+
+### :building_construction: Tech
+
+- [#16635](https://github.com/1024pix/pix/pull/16635) Corriger les erreur d'export knip
+- [#16628](https://github.com/1024pix/pix/pull/16628) Ne pas faire les clics sur la liste déroulante du choix de langue en entrée de certif tant que la liste est désactivée pendant le rétablissement de la certification anglaise
+- [#16627](https://github.com/1024pix/pix/pull/16627) Ranger le reste des models du domain quest, suite et fin
+- [#16621](https://github.com/1024pix/pix/pull/16621) Récupération des challenges anglais non joués en certif coeur (PIX-23293).
+- [#16637](https://github.com/1024pix/pix/pull/16637) Supprime le code lié à la gestion des accusés de traitement du CPF.
+- [#16630](https://github.com/1024pix/pix/pull/16630) Supprime les chargements de attestations depuis le service currentUser
+- [#16574](https://github.com/1024pix/pix/pull/16574) Supprimer des modèles et repositories de certification/shared (PIX-23231)
+
+### :arrow_up: Montée de version
+
+- [#16633](https://github.com/1024pix/pix/pull/16633) Update pix-ui (mon-pix)
+
 # [5.439.0](https://github.com/1024pix/pix/compare/v5.438.0...v5.439.0) (2026-06-24)
 
 ### :rocket: Amélioration
