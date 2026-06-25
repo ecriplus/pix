@@ -45,6 +45,14 @@
     min-width: 280px;
   }
 
+  &:active {
+    @extend %pix-shadow-default-pressed;
+  }
+
+  &:hover {
+    @extend %pix-shadow-default-hover;
+  }
+
   &__tag {
     @extend %pix-body-xs;
 
@@ -150,6 +158,7 @@
 
   &__program {
     color: var(--pix-neutral-800);
+    white-space: pre-line;
   }
 
   .pix-modal__footer {
@@ -162,6 +171,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--pix-spacing-2x);
+    white-space: pre-line;
 
     span {
       font-weight: var(--pix-font-bold);
@@ -202,6 +212,7 @@
 
 .results-recommendation-engine-training-card-modal-objectives {
   &__icon {
+    flex-shrink: 0;
     color: var(--pix-primary-300);
   }
 }
