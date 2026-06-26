@@ -1,5 +1,21 @@
 # Pix Changelog
 
+# [5.442.0](https://github.com/1024pix/pix/compare/v5.441.0...v5.442.0) (2026-06-26)
+
+### :rocket: Amélioration
+
+- [#16642](https://github.com/1024pix/pix/pull/16642) Ajouter une route pour vérifier si un utilisateur a répondu au questionnaire NPS d'une campagne (PIX-23304)
+- [#16614](https://github.com/1024pix/pix/pull/16614) Création de la route pour récupérer les prescrits dans Pix Admin (PIX-23150)
+- [#16658](https://github.com/1024pix/pix/pull/16658) Partager les attestations des parcours combinés avec les organisations (PIX-21895)
+
+### :bug: Correction
+
+- [#16651](https://github.com/1024pix/pix/pull/16651) Répare un bug sur les labels d'attestations dans PixApp (PIX-23353)
+
+### :building_construction: Tech
+
+- [#16654](https://github.com/1024pix/pix/pull/16654) Déplacer les tests unitaires dans leurs contextes respectifs
+
 # [5.441.0](https://github.com/1024pix/pix/compare/v5.440.0...v5.441.0) (2026-06-26)
 
 ### :rocket: Amélioration
