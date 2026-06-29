@@ -1,5 +1,27 @@
 # Pix Changelog
 
+# [5.443.0](https://github.com/1024pix/pix/compare/v5.442.0...v5.443.0) (2026-06-29)
+
+### :rocket: Amélioration
+
+- [#16625](https://github.com/1024pix/pix/pull/16625) Afficher l'organisation lié à un centre de certification (PIX-22631)
+- [#16663](https://github.com/1024pix/pix/pull/16663) Ajout des visuels pour l'attestation NR (PIX-23365)
+- [#16646](https://github.com/1024pix/pix/pull/16646) Ajouter un feature-toggle pour l'activation de la certif en anglais (PIX-23361)
+- [#16668](https://github.com/1024pix/pix/pull/16668) MDX-142 IA_Infox_IND Corrections suite à la relecture expert
+- [#16563](https://github.com/1024pix/pix/pull/16563) MDX-238 CY_Antivirus_AVA 1er inte
+- [#16661](https://github.com/1024pix/pix/pull/16661) Mise à jour des wordings d'attestation des parcours combinés (PIX-23359)
+- [#16643](https://github.com/1024pix/pix/pull/16643) Se servir de la durée d'examen associé au millésime pour calculer la date de fin théorique de la fin du test du candidat sur l'espace Surveillant (PIX-23332)
+
+### :bug: Correction
+
+- [#16662](https://github.com/1024pix/pix/pull/16662) Ne pas essayer de créer des campagnes ou de recommander des modules si le parcours combiné n'a que des modules (PIX-23324)
+
+### :building_construction: Tech
+
+- [#16657](https://github.com/1024pix/pix/pull/16657) Aligner les fichiers de traductions (PIX-23348)
+- [#16670](https://github.com/1024pix/pix/pull/16670) Ne pas faire les clics sur la liste déroulante du choix de langue en entrée de certif tant que la liste est désactivée pendant le rétablissement de la certification anglaise
+- [#16647](https://github.com/1024pix/pix/pull/16647) Récupération des compétences par ID pour le scoring des certifications (PIX-23280).
+
 # [5.442.0](https://github.com/1024pix/pix/compare/v5.441.0...v5.442.0) (2026-06-26)
 
 ### :rocket: Amélioration
