@@ -1,5 +1,17 @@
 # Pix Changelog
 
+# [5.444.0](https://github.com/1024pix/pix/compare/v5.443.0...v5.444.0) (2026-06-29)
+
+### :rocket: Amélioration
+
+- [#16660](https://github.com/1024pix/pix/pull/16660) Créa Cyber Généralités Novice
+- [#16639](https://github.com/1024pix/pix/pull/16639) Permettre la création d'une campagne à partir d'un parcours du catalogue (PIX-22919)
+
+### :building_construction: Tech
+
+- [#16653](https://github.com/1024pix/pix/pull/16653) Ajoute un healtcheck avec les informations de l'OS
+- [#16664](https://github.com/1024pix/pix/pull/16664) Déplacer les tests d'acceptance dans leurs contextes
+
 # [5.443.0](https://github.com/1024pix/pix/compare/v5.442.0...v5.443.0) (2026-06-29)
 
 ### :rocket: Amélioration
