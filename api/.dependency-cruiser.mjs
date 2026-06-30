@@ -18,6 +18,12 @@ export default {
       from: { path: '^(.*)' },
       to: { path: '^db/migrations/(.*)' },
     },
+    {
+      name: 'do-not-import-hapi-or-server-in-integration-tests',
+      severity: 'error',
+      from: { path: '^tests/.*integration/(.*)' },
+      to: { path: ['@hapi/hapi', '^server\\.js$'] },
+    },
   ],
   options: {
     doNotFollow: { path: 'node_modules' },
