@@ -1,5 +1,28 @@
 # Pix Changelog
 
+# [5.445.0](https://github.com/1024pix/pix/compare/v5.444.0...v5.445.0) (2026-06-30)
+
+### :rocket: Amélioration
+
+- [#16585](https://github.com/1024pix/pix/pull/16585) Afficher la nouvelle page d'acceptation des CGU
+- [#16669](https://github.com/1024pix/pix/pull/16669) Ajout d'une colonne rewardRequirementsDescription dans la table quests
+- [#16665](https://github.com/1024pix/pix/pull/16665) Ajouter un endpoint pour rattacher un centre de certification à une organisation (PIX-22632)
+- [#16677](https://github.com/1024pix/pix/pull/16677) MDX-238 CY_Antivirus_AVA correction orthotypo
+
+### :bug: Correction
+
+- [#16655](https://github.com/1024pix/pix/pull/16655) Afficher les informations correctes de certification sur les pages d'information avant d'entrer en certification (durée d'examen, nombre de questions, etc...) (PIX-21304)
+
+### :building_construction: Tech
+
+- [#16604](https://github.com/1024pix/pix/pull/16604) :recycle: Exploration d'une règle pour forcer la forme de déclaration de function (pix-23385)
+- [#16682](https://github.com/1024pix/pix/pull/16682) Afficher le chemin relative au fichier de test dans la CI
+- [#16683](https://github.com/1024pix/pix/pull/16683) Ajout de deux index, les deux sur "LOWER(externalId)" des tables "certification-centers" et "organizations"
+- [#16674](https://github.com/1024pix/pix/pull/16674) Déplacer les tests d'integration dans leurs contextes
+- [#16678](https://github.com/1024pix/pix/pull/16678) Pouvoir exécuter les tests dans un ordre aléatoire
+- [#16671](https://github.com/1024pix/pix/pull/16671) Remplace les règles no-restricted-import d'ESLint par des règles de dependency cruiser.
+- [#16659](https://github.com/1024pix/pix/pull/16659) Supprimer les test unitaires des composants PixApp (PIX-23371).
+
 # [5.444.0](https://github.com/1024pix/pix/compare/v5.443.0...v5.444.0) (2026-06-29)
 
 ### :rocket: Amélioration
