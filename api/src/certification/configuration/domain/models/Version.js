@@ -43,6 +43,7 @@ export class Version {
    * @param {number} params.assessmentDuration - Assessment duration in minutes
    * @param {number} params.minimumAnswersRequiredToValidateACertification
    * @param {string} params.comments
+   * @param {VERSION_STATUSES.DRAFT | VERSION_STATUSES.ACTIVE | VERSION_STATUSES.ARCHIVED} params.status
    * @param {Array<object>} [params.globalScoringConfiguration] - Global scoring configuration
    * @param {Array<object>} [params.competencesScoringConfiguration] - Competences scoring configuration
    * @param {FlashAssessmentAlgorithmConfiguration} params.challengesConfiguration - Challenges configuration
@@ -58,6 +59,7 @@ export class Version {
     competencesScoringConfiguration,
     challengesConfiguration,
     comments,
+    status,
   }) {
     this.id = id;
     this.scope = scope;
@@ -69,14 +71,8 @@ export class Version {
     this.competencesScoringConfiguration = competencesScoringConfiguration;
     this.challengesConfiguration = challengesConfiguration;
     this.comments = comments === '' ? null : comments;
-    this.status = this.#computeStatus();
+    this.status = status;
     this.#validate();
-  }
-
-  #computeStatus() {
-    if (this.expirationDate) return VERSION_STATUSES.ARCHIVED;
-    if (this.startDate) return VERSION_STATUSES.ACTIVE;
-    return VERSION_STATUSES.DRAFT;
   }
 
   #validate() {
@@ -98,7 +94,7 @@ export class Version {
     return this.status === VERSION_STATUSES.ACTIVE;
   }
 
-  static buildFromVersion({ scope, version }) {
+  static buildDraftFromActiveVersion({ scope, version }) {
     return new Version({
       id: null,
       scope,
@@ -120,7 +116,7 @@ export class Version {
       }),
       globalScoringConfiguration: version?.globalScoringConfiguration ?? [],
       competencesScoringConfiguration: version?.competencesScoringConfiguration ?? [],
-      status: version?.status ?? VERSION_STATUSES.DRAFT,
+      status: VERSION_STATUSES.DRAFT,
       comments: null,
     });
   }
