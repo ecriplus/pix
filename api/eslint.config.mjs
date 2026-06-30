@@ -63,6 +63,12 @@ export default defineConfig([
       ...i18nJsonPlugin.configs.recommended.rules,
     },
   },
+  {
+    files: ['src/certification/configuration/**/*.{js,mjs}'],
+    rules: {
+      'func-style': ['error', 'declaration'],
+    },
+  },
   // Ignored files
   globalIgnores(['tests/integration/tooling/db-schemalint.cjs']),
 ]);

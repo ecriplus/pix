@@ -9,7 +9,7 @@ import { certificationVersionController } from './certification-version-controll
 
 const Joi = BaseJoi.extend(JoiDate);
 
-const register = async function (server) {
+async function register(server) {
   server.route([
     {
       method: 'GET',
@@ -165,6 +165,6 @@ const register = async function (server) {
       },
     },
   ]);
-};
+}
 
 export const certificationVersionRoute = { name: 'certification/configuration/certification-versions-api', register };
