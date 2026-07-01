@@ -237,6 +237,36 @@ module('Acceptance | Campaigns | Results | Recommendation Engine', function (hoo
         assert.dom(screen.queryByText(campaign.title)).doesNotExist();
       });
     });
+
+    module('regarding the NPS drawer', function () {
+      test('should display the drawer when user has not answered the survey', async function (assert) {
+        // given
+        server.get('/campaigns/:campaignId/has-answered-survey', () => ({ hasAnswered: false }));
+
+        // when
+        const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
+
+        // then
+        assert
+          .dom(screen.getByRole('dialog', { name: t('pages.skill-review.recommended-engine.drawer.title') }))
+          .exists();
+      });
+
+      module('when user has already answered the survey', function () {
+        test('should not display the drawer', async function (assert) {
+          // given
+          server.get('/campaigns/:campaignId/has-answered-survey', () => ({ hasAnswered: true }));
+
+          // when
+          const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
+
+          // then
+          assert
+            .dom(screen.queryByRole('dialog', { name: t('pages.skill-review.recommended-engine.drawer.title') }))
+            .doesNotExist();
+        });
+      });
+    });
   });
 
   module('when campaign does not have recommendationEngine enabled', function (hooks) {
@@ -281,6 +311,18 @@ module('Acceptance | Campaigns | Results | Recommendation Engine', function (hoo
 
       // then
       assert.dom('.evaluation-results-recommendation-engine').doesNotExist();
+    });
+
+    test('should not display the NPS drawer nor call has-answered-survey', async function (assert) {
+      // when
+      const screen = await visit(`/campagnes/${campaign.code}/evaluation/resultats`);
+
+      // then
+      assert
+        .dom(screen.queryByRole('dialog', { name: t('pages.skill-review.recommended-engine.drawer.title') }))
+        .doesNotExist();
+      const requests = server.pretender.handledRequests.filter(({ url }) => url.includes('has-answered-survey'));
+      assert.strictEqual(requests.length, 0, 'Request to GET has-answered-survey should not be done');
     });
   });
 });
