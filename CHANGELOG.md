@@ -1,5 +1,29 @@
 # Pix Changelog
 
+# [5.446.0](https://github.com/1024pix/pix/compare/v5.445.0...v5.446.0) (2026-07-01)
+
+### :rocket: Amélioration
+
+- [#16684](https://github.com/1024pix/pix/pull/16684)  Suppression du status calculé pour un status static sur certification_version (PIX-23364)
+- [#16666](https://github.com/1024pix/pix/pull/16666) Ajout d'une colonne status dans la table  certification_versions (pix-23369) 
+- [#16679](https://github.com/1024pix/pix/pull/16679) MDX-104 NR_Evaluation_NOV Intégration relectures
+- [#16693](https://github.com/1024pix/pix/pull/16693) Supprime les scripts plus utilisés par prescription (PIX-23408)
+- [#16692](https://github.com/1024pix/pix/pull/16692) Vérifier l'habilitation du centre avant l'entrée en certif (PIX-23234).
+
+### :bug: Correction
+
+- [#16701](https://github.com/1024pix/pix/pull/16701) Ajout de statuts manquants dans les créations de versions dans les tests E2E (PIX-23418).
+- [#16696](https://github.com/1024pix/pix/pull/16696) Éviter les clignotements d'erreur dans la page d'entrée en session de certif (PIX-23410).
+- [#16697](https://github.com/1024pix/pix/pull/16697) Ne pas migrer les utilisateurs anonymisés dans la nouvelle table d'acceptations des CGU (PIX-21748)
+
+### :building_construction: Tech
+
+- [#16672](https://github.com/1024pix/pix/pull/16672) Corrige le OS Health Check derrière un feature toggle.
+- [#16690](https://github.com/1024pix/pix/pull/16690) Remplacer XRegex par des regex native node dans l'API
+- [#16694](https://github.com/1024pix/pix/pull/16694) Supprime le feature toggle `isAnonymizationWithDeletionEnabled` (PIX-23409)
+- [#16687](https://github.com/1024pix/pix/pull/16687) Supprime PgClient au profit de knex.
+- [#16688](https://github.com/1024pix/pix/pull/16688) Utiliser api/admin comme namespace par défaut dans les adapters de admin
+
 # [5.445.0](https://github.com/1024pix/pix/compare/v5.444.0...v5.445.0) (2026-06-30)
 
 ### :rocket: Amélioration
