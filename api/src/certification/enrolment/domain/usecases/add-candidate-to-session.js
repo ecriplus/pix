@@ -36,7 +36,6 @@ export async function addCandidateToSession({
   certificationCpfService,
   certificationCpfCountryRepository,
   certificationCpfCityRepository,
-  complementaryCertificationRepository,
   mailCheck = mailCheckImplementation,
   normalizeStringFnc,
   eventAdapter,
@@ -48,14 +47,9 @@ export async function addCandidateToSession({
     throw new CertificationCandidateOnFinalizedSessionError();
   }
 
-  const allComplementaryCertifications = await complementaryCertificationRepository.findAll();
-  const cleaCertification = allComplementaryCertifications.find(
-    (complementaryCertification) => complementaryCertification.key === ComplementaryCertificationKeys.CLEA,
-  );
   try {
     candidate.validate({
       isSco: session.isSco,
-      cleaCertificationId: cleaCertification.id,
     });
   } catch (error) {
     logger.warn(error);
