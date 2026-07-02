@@ -1,5 +1,22 @@
 # Pix Changelog
 
+# [5.447.0](https://github.com/1024pix/pix/compare/v5.446.0...v5.447.0) (2026-07-02)
+
+### :rocket: Amélioration
+
+- [#16704](https://github.com/1024pix/pix/pull/16704) Afficher la demande de feedback utilisateur (PIX-23305).
+- [#16622](https://github.com/1024pix/pix/pull/16622) Créer un encart pour avoir les retours utilisateur sur la pertinence des recommandations de contenus formatif sur Pix App (PIX-23303).
+- [#16613](https://github.com/1024pix/pix/pull/16613) MDX-138 IAGenPrompt_AVA retours JRO
+- [#16706](https://github.com/1024pix/pix/pull/16706) Modale CF - Ne pas afficher un accordéon vide (PIX-23415)
+- [#16705](https://github.com/1024pix/pix/pull/16705) Modale CF - Revoir la taille de la police du body de "Programme" (PIX-23416)
+- [#16695](https://github.com/1024pix/pix/pull/16695) Modifs Virus_IND relecture Chef de projet
+
+### :building_construction: Tech
+
+- [#16699](https://github.com/1024pix/pix/pull/16699) :sparkles: Ajout  d'un évènement sur la  réconciliation d'un candidat (pix-23414)
+- [#16700](https://github.com/1024pix/pix/pull/16700) Revoir les services de comparaison de chaines
+- [#16675](https://github.com/1024pix/pix/pull/16675) Supprimer le devDep ember-cli-htmlbars (PIX-XXXX)
+
 # [5.446.0](https://github.com/1024pix/pix/compare/v5.445.0...v5.446.0) (2026-07-01)
 
 ### :rocket: Amélioration
