@@ -1,5 +1,19 @@
 # Pix Changelog
 
+# [5.448.0](https://github.com/1024pix/pix/compare/v5.447.0...v5.448.0) (2026-07-03)
+
+### :rocket: Amélioration
+
+- [#16718](https://github.com/1024pix/pix/pull/16718) Ajoute la date de création d'un centre à la page de détails d'un centre de certification (PIX-23437).
+
+### :building_construction: Tech
+
+- [#16710](https://github.com/1024pix/pix/pull/16710) Déplacer les scripts modulix dans le contexte devcomp (PIX-23375)
+- [#16676](https://github.com/1024pix/pix/pull/16676) Ne plus utiliser les objets Subscriptions sur Pix Certif (PIX-23284)
+- [#16685](https://github.com/1024pix/pix/pull/16685) Refacto de certaines requêtes knex pour exploiter les index apposés sur la colonne "externalId" des tables "certification-centers" et "organizations"
+- [#16707](https://github.com/1024pix/pix/pull/16707) Réflexion domaine : déplacement des repositories correspondant aux entités
+- [#15711](https://github.com/1024pix/pix/pull/15711) Remplacer l'usage d'Axios par le fetch natif (PIX-22183)
+
 # [5.447.0](https://github.com/1024pix/pix/compare/v5.446.0...v5.447.0) (2026-07-02)
 
 ### :rocket: Amélioration
