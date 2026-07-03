@@ -2,7 +2,6 @@ import { visit } from '@1024pix/ember-testing-library';
 import { click, fillIn } from '@ember/test-helpers';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import { setupApplicationTest } from 'ember-qunit';
-import { COMPLEMENTARY_KEYS } from 'pix-certif/models/subscription';
 import { module, test } from 'qunit';
 
 import { authenticateSession } from '../helpers/test-init';
@@ -17,8 +16,8 @@ module('Acceptance | Session Add Candidate', function (hooks) {
     allowedCertificationCenterAccess = server.create('allowed-certification-center-access', {
       type: 'PRO',
       habilitations: [
-        { id: 1, label: 'Certif complémentaire 2', key: 'COMP_2' },
-        { id: 2, label: 'CléA Numérique', key: COMPLEMENTARY_KEYS.CLEA },
+        { id: 1, label: 'Pix+ Droit', key: 'DROIT' },
+        { id: 2, label: 'CléA Numérique', key: 'CLEA' },
       ],
     });
     const certificationPointOfContact = server.create('certification-point-of-contact', {
@@ -53,7 +52,7 @@ module('Acceptance | Session Add Candidate', function (hooks) {
     await click(screen.getByLabelText('Pays de naissance *'));
     await click(screen.getByText('Portugal'));
     await fillIn(screen.getByLabelText('Commune de naissance *'), 'Paris');
-    await click(screen.getByLabelText('Certif complémentaire 2'));
+    await click(screen.getByLabelText('Pix+ Droit'));
     await click(screen.getByLabelText('Certification Pix'));
     await click(screen.getByRole('button', { name: 'Inscrire le candidat' }));
 
@@ -77,13 +76,13 @@ module('Acceptance | Session Add Candidate', function (hooks) {
     await click(screen.getByLabelText('Pays de naissance *'));
     await click(screen.getByText('Portugal'));
     await fillIn(screen.getByLabelText('Commune de naissance *'), 'Paris');
-    await click(screen.getByLabelText('Certif complémentaire 2'));
+    await click(screen.getByLabelText('Pix+ Droit'));
     await click(screen.getByRole('button', { name: 'Inscrire le candidat' }));
 
     // then
     assert.dom(screen.getByRole('cell', { name: 'Quatorze' })).exists();
     assert.dom(screen.getByRole('cell', { name: 'Louis' })).exists();
     assert.dom(screen.getByRole('cell', { name: '01/01/2000' })).exists();
-    assert.dom(screen.getByRole('cell', { name: 'Certif complémentaire 2' })).exists();
+    assert.dom(screen.getByRole('cell', { name: 'Pix+ Droit' })).exists();
   });
 });
