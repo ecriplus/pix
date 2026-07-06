@@ -44,9 +44,7 @@ export default class CreateForm extends Component {
 
   get isMultipleSendingEnabled() {
     const isMulipleSendingsAllowed =
-      this.isMultipleSendingAssessmentEnabled &&
-      (this.isCampaignGoalAssessment || this.isCampaignGoalExam) &&
-      !this.isCombinedCourseGoal;
+      Boolean(this.args.campaign.course) && this.isMultipleSendingAssessmentEnabled && !this.isCombinedCourseGoal;
 
     return this.isCampaignGoalProfileCollection || isMulipleSendingsAllowed;
   }
@@ -65,6 +63,9 @@ export default class CreateForm extends Component {
     }
   }
 
+  get isSubmitDisabled() {
+    return !(this.isCampaignGoalProfileCollection || this.args.campaign.course);
+  }
   get isCreateCampaignOfTypeExamEnabled() {
     return this.currentUser.prescriber.enableCampaignWithoutUserProfile;
   }
@@ -93,16 +94,28 @@ export default class CreateForm extends Component {
     return this.args.campaign.externalIdType === '';
   }
 
-  get isTitleInputEnable() {
-    return (this.isCampaignGoalAssessment || this.isCampaignGoalExam) && !this.isCombinedCourseGoal;
+  get displayCampaignNameField() {
+    return Boolean(this.args.campaign.course) || this.isCampaignGoalProfileCollection;
   }
 
   get displayOwnerField() {
-    return this.isCampaignGoalAssessment || this.isCampaignGoalExam || this.isCampaignGoalProfileCollection;
+    return (Boolean(this.args.campaign.course) && !this.isCombinedCourseGoal) || this.isCampaignGoalProfileCollection;
+  }
+
+  get displayExternalUserIdField() {
+    return (Boolean(this.args.campaign.course) && !this.isCombinedCourseGoal) || this.isCampaignGoalProfileCollection;
   }
 
   get displayCourseSelection() {
     return !this.isCampaignGoalProfileCollection;
+  }
+
+  get displayTitleField() {
+    return Boolean(this.args.campaign.course) && !this.isCombinedCourseGoal;
+  }
+
+  get displayLandingPageInfo() {
+    return (Boolean(this.args.campaign.course) && !this.isCombinedCourseGoal) || this.isCampaignGoalProfileCollection;
   }
 
   get catalogueCourseSelectionTab() {
@@ -182,29 +195,6 @@ export default class CreateForm extends Component {
         <abbr title={{t "common.form.mandatory-fields-title"}} class="mandatory-mark">*</abbr>
         {{t "common.form.mandatory-fields"}}
       </p>
-
-      <FormField>
-        <PixInput
-          @id="campaign-name"
-          @name="campaign-name"
-          @requiredLabel={{t "common.form.mandatory-fields-title"}}
-          type="text"
-          class="input"
-          maxlength="255"
-          {{on "change" (fn this.onChangeCampaignValue "name")}}
-          @value={{@campaign.name}}
-          required={{true}}
-          aria-required={{true}}
-        >
-          <:label>{{t "pages.campaign-creation.name.label"}}</:label>
-        </PixInput>
-
-        {{#if @errors.name}}
-          <div class="form__error error-message">
-            {{displayCampaignErrors @errors.name}}
-          </div>
-        {{/if}}
-      </FormField>
 
       <FormField>
         <:default>
@@ -326,6 +316,31 @@ export default class CreateForm extends Component {
         </FormField>
       {{/if}}
 
+      {{#if this.displayCampaignNameField}}
+        <FormField>
+          <PixInput
+            @id="campaign-name"
+            @name="campaign-name"
+            @requiredLabel={{t "common.form.mandatory-fields-title"}}
+            type="text"
+            class="input"
+            maxlength="255"
+            {{on "change" (fn this.onChangeCampaignValue "name")}}
+            @value={{@campaign.name}}
+            required={{true}}
+            aria-required={{true}}
+          >
+            <:label>{{t "pages.campaign-creation.name.label"}}</:label>
+          </PixInput>
+
+          {{#if @errors.name}}
+            <div class="form__error error-message">
+              {{displayCampaignErrors @errors.name}}
+            </div>
+          {{/if}}
+        </FormField>
+      {{/if}}
+
       {{#if this.displayOwnerField}}
         <FormField>
           <:default>
@@ -354,9 +369,7 @@ export default class CreateForm extends Component {
             </ExplanationCard>
 
           </:information>
-
         </FormField>
-
       {{/if}}
 
       {{#if this.isMultipleSendingEnabled}}
@@ -402,7 +415,7 @@ export default class CreateForm extends Component {
         </FormField>
       {{/if}}
 
-      {{#unless this.isCombinedCourseGoal}}
+      {{#if this.displayExternalUserIdField}}
         <FormField>
           <PixFieldset aria-labelledby="external-ids-label" role="radiogroup">
             <:title>{{t "pages.campaign-creation.external-id-label.question-label"}}</:title>
@@ -426,7 +439,7 @@ export default class CreateForm extends Component {
             </:content>
           </PixFieldset>
         </FormField>
-      {{/unless}}
+      {{/if}}
 
       {{#if this.wantIdPix}}
         <FormField>
@@ -479,7 +492,7 @@ export default class CreateForm extends Component {
         </FormField>
       {{/if}}
 
-      {{#if this.isTitleInputEnable}}
+      {{#if this.displayTitleField}}
         <FormField>
           <PixInput
             @id="campaign-title"
@@ -493,7 +506,7 @@ export default class CreateForm extends Component {
         </FormField>
       {{/if}}
 
-      {{#unless this.isCombinedCourseGoal}}
+      {{#if this.displayLandingPageInfo}}
         <FormField>
           <PixTextarea
             @id="custom-landing-page-text"
@@ -506,14 +519,14 @@ export default class CreateForm extends Component {
             <:label>{{t "pages.campaign-creation.landing-page-text.label"}}</:label>
           </PixTextarea>
         </FormField>
-      {{/unless}}
+      {{/if}}
 
       <div class="form__validation">
         <PixButton @triggerAction={{@onCancel}} @variant="secondary">
           {{t "common.actions.cancel"}}
         </PixButton>
 
-        <PixButton @type="submit">
+        <PixButton @type="submit" @isDisabled={{this.isSubmitDisabled}}>
           {{t "pages.campaign-creation.actions.create"}}
         </PixButton>
       </div>
