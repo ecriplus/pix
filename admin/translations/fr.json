@@ -780,6 +780,7 @@
         },
         "logout": "Se déconnecter",
         "networks": "Réseaux",
+        "organization-learners": "Prescrits",
         "organizations": "Organisations",
         "sessions": "Sessions de certification",
         "target-profiles": "Profils cibles",
@@ -878,6 +879,25 @@
         }
       },
       "title": "Informations prescrit"
+    },
+    "organization-learners": {
+      "list-table": {
+        "caption": "Liste des apprenants des organisations. Contient prénom, nom, date de naissance, INE, classe, organisation et identifiant utilisateur associé.",
+        "headers": {
+          "active": "Actif",
+          "birthdate": "Date de naissance",
+          "division-group": "Groupe/classe",
+          "first-name": "Prénom",
+          "inactive": "Inactif",
+          "last-name": "Nom",
+          "national-student-id": "INE",
+          "organization": "Organisation",
+          "updated-at": "Date MAJ",
+          "user-id": "User ID"
+        },
+        "view-organization": "Voir l'organisation",
+        "view-user": "Voir l'utilisateur"
+      }
     },
     "organizations": {
       "all-tags": {
@@ -1666,6 +1686,10 @@
         "target-profiles": "Profils cibles",
         "team": "Équipe"
       }
+    },
+    "organization-learners-list": {
+      "main-title": "Liste des prescrits",
+      "page-title": "Prescrits"
     },
     "organization-network": {
       "notifications": {
