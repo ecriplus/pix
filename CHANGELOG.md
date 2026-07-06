@@ -1,5 +1,25 @@
 # Pix Changelog
 
+# [5.449.0](https://github.com/1024pix/pix/compare/v5.448.0...v5.449.0) (2026-07-06)
+
+### :rocket: Amélioration
+
+- [#16725](https://github.com/1024pix/pix/pull/16725) Limiter la durée maximale d'une certification à 24 heures (PIX-23422).
+- [#16649](https://github.com/1024pix/pix/pull/16649) MDX-248 Ecrans&Santé_NOV Création d'un nouveau module
+- [#16686](https://github.com/1024pix/pix/pull/16686) Renommer les onglets du catalogue (PIX-23386)
+
+### :bug: Correction
+
+- [#16721](https://github.com/1024pix/pix/pull/16721) Corriger l'affichage de la page de recommandation sur Safari (PIX-234419).
+- [#16717](https://github.com/1024pix/pix/pull/16717) Groupe la create de job pour l'audit logger (PIX-23373)
+
+### :building_construction: Tech
+
+- [#16689](https://github.com/1024pix/pix/pull/16689) Ne faire qu'une requête pour récupérer les badges et paliers des participants dans GET /api/campaigns/{campaignId}/assessment-results
+- [#16713](https://github.com/1024pix/pix/pull/16713) Remplace le package randomstring.
+- [#16712](https://github.com/1024pix/pix/pull/16712) Suppression évènement certif non utilisé (PIX-23435).
+- [#16720](https://github.com/1024pix/pix/pull/16720) Supprime le code lié à la gestion des rapports de traitement du CPF.
+
 # [5.448.0](https://github.com/1024pix/pix/compare/v5.447.0...v5.448.0) (2026-07-03)
 
 ### :rocket: Amélioration
