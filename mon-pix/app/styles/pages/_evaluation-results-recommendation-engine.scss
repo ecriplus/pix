@@ -41,7 +41,7 @@
   }
 
   &__percent {
-    @extend %pix-subtitle-s;
+    @extend %pix-subtitle-s !optional;
 
     color: var(--pix-neutral-0);
     line-height: 2rem;
