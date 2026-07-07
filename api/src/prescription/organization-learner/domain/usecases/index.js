@@ -72,7 +72,6 @@ const dependencies = {
   combinedCourseRepository,
   tagRepository,
   userService,
-  userReconciliationService,
   authenticationMethodRepository,
   userRepository,
   lastUserApplicationConnectionsRepository,
@@ -84,6 +83,7 @@ const dependencies = {
   tokenService,
   passwordValidator,
   writeCsvUtils,
+  userReconciliationService,
 };
 
 import { getCampaignParticipationStatistics } from '../../../campaign-participation/domain/usecases/get-campaign-participation-statistics.js';
