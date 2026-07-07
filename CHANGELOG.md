@@ -1,5 +1,33 @@
 # Pix Changelog
 
+# [5.450.0](https://github.com/1024pix/pix/compare/v5.449.0...v5.450.0) (2026-07-07)
+
+### :rocket: Amélioration
+
+- [#16681](https://github.com/1024pix/pix/pull/16681) Affiche l'objectif de la campagne en premier et cache les autres champs (PIX-22753)
+- [#16708](https://github.com/1024pix/pix/pull/16708) Afficher un bouton pour délier le centre de certif sur la page d'une orga (PIX-22690)
+- [#16722](https://github.com/1024pix/pix/pull/16722) Ajouter un script pour dupliquer un module (PIX-23439)
+- [#16673](https://github.com/1024pix/pix/pull/16673) Création de la vue des prescrits sans filtres dans Pix Admin (PIX-23151)
+- [#16703](https://github.com/1024pix/pix/pull/16703) Créer une route pour détacher un centre de certif d'une orga (PIX-22689)
+- [#16732](https://github.com/1024pix/pix/pull/16732) MDX-121 Visio_IND Corrections suite à la relecture finale
+- [#16719](https://github.com/1024pix/pix/pull/16719) Tracker l'affichage du NPS pour le moteur de recommandations (PIX-23307)
+
+### :bug: Correction
+
+- [#16741](https://github.com/1024pix/pix/pull/16741) Forcer la pleine largeur de la carte de parcours dans la page de création de campagne (PIX-23466)
+- [#16723](https://github.com/1024pix/pix/pull/16723) Ne pas afficher l'encart de feedback dans le cas où il n'y a pas de contenus formatifs recommandés (PIX-23443)
+
+### :building_construction: Tech
+
+- [#16728](https://github.com/1024pix/pix/pull/16728) Ajout de la colonne "rewardRequirementsDescription" dans combined_course_blueprints plutôt que dans quests
+- [#16738](https://github.com/1024pix/pix/pull/16738) Ajouter un log contenant un condensat du code de vérification à chaque appel du endpoint permettant de récupérer les infos d'une certification par code de vérification (PIX-23462)
+- [#16729](https://github.com/1024pix/pix/pull/16729) Réduire la durée de validité des demandes de réinitialisation de mot de passe et la rendre configurable + nettoyage
+- [#16730](https://github.com/1024pix/pix/pull/16730) Réduit l'utilisation de `lodash` (PIX-23455)
+- [#16733](https://github.com/1024pix/pix/pull/16733) Remplace XML buffer to string.
+- [#16740](https://github.com/1024pix/pix/pull/16740) Remplacer @json2csv/plainjs par @json2csv/node
+- [#16734](https://github.com/1024pix/pix/pull/16734) Supprime la dépendance hash-int.
+- [#16724](https://github.com/1024pix/pix/pull/16724) Supprimer micromatch et node-cache de l'API
+
 # [5.449.0](https://github.com/1024pix/pix/compare/v5.448.0...v5.449.0) (2026-07-06)
 
 ### :rocket: Amélioration
