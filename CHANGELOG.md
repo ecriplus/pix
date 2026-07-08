@@ -1,5 +1,19 @@
 # Pix Changelog
 
+# [5.451.0](https://github.com/1024pix/pix/compare/v5.450.0...v5.451.0) (2026-07-08)
+
+### :rocket: Amélioration
+
+- [#16736](https://github.com/1024pix/pix/pull/16736) Éviter à un candidat de reprendre sa certif 24h après son début (PIX-23458).
+- [#16745](https://github.com/1024pix/pix/pull/16745) FRI Module MFA IND Integration POI et QCM declaratif
+
+### :building_construction: Tech
+
+- [#16746](https://github.com/1024pix/pix/pull/16746) :broom: Supprime une fonction inutilisée `isPixPlus()` (pix-8011)
+- [#16714](https://github.com/1024pix/pix/pull/16714) Fusionne les fichiers de constantes du domain et de l'infrastructure  (PIX-11343)
+- [#16752](https://github.com/1024pix/pix/pull/16752) Retirer le FT pour gérer l'entrée en certification anglaise (PIX-23459).
+- [#16742](https://github.com/1024pix/pix/pull/16742) Utiliser FormData natif au lieu de la lib form-data
+
 # [5.450.0](https://github.com/1024pix/pix/compare/v5.449.0...v5.450.0) (2026-07-07)
 
 ### :rocket: Amélioration
