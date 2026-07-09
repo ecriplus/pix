@@ -1,5 +1,28 @@
 # Pix Changelog
 
+# [5.452.0](https://github.com/1024pix/pix/compare/v5.451.0...v5.452.0) (2026-07-09)
+
+### :rocket: Amélioration
+
+- [#16765](https://github.com/1024pix/pix/pull/16765) Changement de la condition d'exclusion pour supprimer une version non ACTIVE (PIX-23162)
+- [#16750](https://github.com/1024pix/pix/pull/16750) Creation copie du module Phishing_NOV pour contextualisation FWB  [MDX-317]
+- [#16751](https://github.com/1024pix/pix/pull/16751) MDX-138 IAGenPrompt_AVA anglisismes
+- [#16758](https://github.com/1024pix/pix/pull/16758) Modifs suite relecture experts MEF NOV 1
+- [#16715](https://github.com/1024pix/pix/pull/16715) Pouvoir rattacher un centre de certification à une organisation depuis Pix Admin (PIX-22633)
+- [#16760](https://github.com/1024pix/pix/pull/16760) relecture marine RangerFichiers_IND
+- [#16667](https://github.com/1024pix/pix/pull/16667) Restreindre l'accès aux schémas de parcours par rôle (PIX-23125)
+
+### :bug: Correction
+
+- [#16766](https://github.com/1024pix/pix/pull/16766) La souscription par défaut lors de l'inscription individuelle d'un candidat doit toujours être à la certification coeur (PIX-23512)
+
+### :building_construction: Tech
+
+- [#16754](https://github.com/1024pix/pix/pull/16754) Améliorer le temps de traitement du endpoint maddo /api/organizations/{id}/campaigns
+- [#16753](https://github.com/1024pix/pix/pull/16753) Création d'une table de jointure tubes_versions (PIX-23480).
+- [#16763](https://github.com/1024pix/pix/pull/16763) Réduire au silence les alertes de dépréciations Ember de Pix Admin (PIX-23510)
+- [#16709](https://github.com/1024pix/pix/pull/16709) Réduit les contraintes lié à la souscription pour permettre la suppression (PIX-23412)
+
 # [5.451.0](https://github.com/1024pix/pix/compare/v5.450.0...v5.451.0) (2026-07-08)
 
 ### :rocket: Amélioration
