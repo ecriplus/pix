@@ -128,8 +128,29 @@ async function findPaginatedLearnersByOrganizationId({ organizationId, page, fil
   return { learners, pagination };
 }
 
-async function findPaginatedLearnersForAdmin({ page, filter }) {
+async function findPaginatedLearnersForAdmin({ page, filter, sort }) {
   const knexConn = DomainTransaction.getConnection();
+
+  const orderByClause = [];
+
+  if (sort?.organizationSort) {
+    orderByClause.push({
+      column: 'organizationName',
+      order: sort.organizationSort,
+    });
+  }
+  if (sort?.birthdateSort) {
+    orderByClause.push({
+      column: 'birthdate',
+      order: sort.birthdateSort,
+    });
+  }
+  if (sort?.updatedAtSort) {
+    orderByClause.push({
+      column: 'updatedAt',
+      order: sort.updatedAtSort,
+    });
+  }
 
   const query = knexConn
     .select(
@@ -148,16 +169,21 @@ async function findPaginatedLearnersForAdmin({ page, filter }) {
     )
     .from('view-active-organization-learners')
     .innerJoin('organizations', 'organizations.id', 'view-active-organization-learners.organizationId')
+    .orderBy(orderByClause)
     .orderByRaw('LOWER("firstName") ASC')
     .orderByRaw('LOWER("lastName") ASC');
 
   if (filter) {
-    const { fullName, organizationId } = filter;
+    const { fullName, organizationExternalId, hideDisabled } = filter;
     if (fullName) {
       filterByFullName(query, fullName, 'firstName', 'lastName');
     }
-    if (organizationId) {
-      query.where({ organizationId });
+    if (organizationExternalId) {
+      const searchUpperCase = organizationExternalId.trim().toUpperCase();
+      query.whereRaw('UPPER(??) LIKE ?', ['externalId', `${searchUpperCase}`]);
+    }
+    if (hideDisabled) {
+      query.where({ isDisabled: false });
     }
   }
 
