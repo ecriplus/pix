@@ -1,5 +1,22 @@
 # Pix Changelog
 
+# [5.453.0](https://github.com/1024pix/pix/compare/v5.452.0...v5.453.0) (2026-07-10)
+
+### :rocket: Amélioration
+
+- [#16757](https://github.com/1024pix/pix/pull/16757) Ajouter les tooltips dans les émojis pour le feedback de fin de parcours (PIX-23457).
+- [#16771](https://github.com/1024pix/pix/pull/16771) MDX-17 Biais_AVA integration retours panels
+- [#16762](https://github.com/1024pix/pix/pull/16762) MDX-18 modification de l'illustration
+
+### :building_construction: Tech
+
+- [#16743](https://github.com/1024pix/pix/pull/16743) Ajout d'Open Telemetry à pix api
+- [#16747](https://github.com/1024pix/pix/pull/16747) Ajouter PGBOUNCER_DATABASE_URL pour brancher PGBouncer
+
+### :arrow_up: Montée de version
+
+- [#16775](https://github.com/1024pix/pix/pull/16775) Update dependency @1024pix/pix-ui to ^61.3.1 (mon-pix)
+
 # [5.452.0](https://github.com/1024pix/pix/compare/v5.451.0...v5.452.0) (2026-07-09)
 
 ### :rocket: Amélioration
