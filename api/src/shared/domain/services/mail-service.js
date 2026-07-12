@@ -1,3 +1,4 @@
+import { config } from '../../config.js';
 import { getI18n } from '../../infrastructure/i18n/i18n.js';
 import { mailer } from '../../mail/infrastructure/services/mailer.js';
 import { FRENCH_FRANCE } from '../services/locale-service.js';
@@ -10,7 +11,7 @@ import {
   getSupportUrl,
 } from './url-service.js';
 
-const EMAIL_ADDRESS_NO_RESPONSE = 'ne-pas-repondre@pix.fr';
+const EMAIL_ADDRESS_NO_RESPONSE = config.mailing.defaultFromEmail;
 const SCO_ACCOUNT_RECOVERY_TAG = 'SCO_ACCOUNT_RECOVERY';
 
 /**

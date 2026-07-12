@@ -164,6 +164,7 @@ const schema = Joi.object({
   LOG_OPS_METRICS: Joi.string().optional().valid('true', 'false'),
   MAILING_ENABLED: Joi.string().optional().valid('true', 'false'),
   MAILING_PROVIDER: Joi.string().optional().valid('brevo', 'mailpit'),
+  MAILING_DEFAULT_FROM_EMAIL: Joi.string().optional(),
   DEVCOMP_MODULE_JSON_SCHEMA_CACHE_MAX_AGE: Joi.number().optional(),
   NODE_ENV: Joi.string().optional().valid('development', 'test', 'production'),
   PGBOSS_STATES_MONITORING_JOB_CRON: Joi.string().optional(),
@@ -415,6 +416,7 @@ const configuration = (function () {
       enabled: toBoolean(process.env.MAILING_ENABLED),
       provider: process.env.MAILING_PROVIDER || 'mailpit',
       smtpUrl: process.env.MAILING_SMTP_URL || 'smtp://username:password@localhost:1025/',
+      defaultFromEmail: process.env.MAILING_DEFAULT_FROM_EMAIL || 'ne-pas-repondre@pix.fr',
       mailpit: {
         templates: {},
       },
