@@ -1,26 +1,64 @@
+import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { I18n } from 'i18n';
+import merge from 'lodash/merge.js';
 
 import { getDefaultLocale, getNearestSupportedLocale } from '../../../shared/domain/services/locale-service.js';
+import { config } from '../../config.js';
 import { logger } from '../utils/logger.js';
 import { getChallengeLocale } from '../utils/request-response-utils.js';
 
 const __dirname = import.meta.dirname;
 const translationsFolder = path.resolve(path.join(__dirname, '../../../../translations'));
 
-export const defaultSettings = {
-  locales: ['de-AT', 'en', 'fr', 'es', 'es-419', 'nl', 'it'],
-  fallbacks: { 'de-*': 'de', 'en-*': 'en', 'fr-*': 'fr', 'es-*': 'es', 'nl-*': 'nl', 'it-*': 'it' },
-  defaultLocale: 'fr', // default locale must match an existing translation file (fr => fr.json)
-  directory: translationsFolder,
-  objectNotation: true,
-  updateFiles: false,
-  mustacheConfig: {
-    tags: ['{', '}'],
-    disable: false,
-  },
+export async function buildStaticCatalog(baseFolder, overrideFolders) {
+  const files = (await readdir(baseFolder)).filter((f) => f.endsWith('.json'));
+  const catalog = {};
+
+  for (const file of files) {
+    const locale = file.replace('.json', '');
+    const base = JSON.parse(await readFile(path.join(baseFolder, file), 'utf-8'));
+
+    let merged = base;
+    for (const folder of overrideFolders) {
+      try {
+        const override = JSON.parse(await readFile(path.join(folder, file), 'utf-8'));
+        merged = merge(merged, override);
+      } catch {
+        // file doesn't exist in this override folder, skip
+      }
+    }
+
+    catalog[locale] = merged;
+  }
+
+  return catalog;
+}
+
+const _buildDefaultSettings = async () => {
+  const base = {
+    locales: ['de-AT', 'en', 'fr', 'es', 'es-419', 'nl', 'it'],
+    fallbacks: { 'de-*': 'de', 'en-*': 'en', 'fr-*': 'fr', 'es-*': 'es', 'nl-*': 'nl', 'it-*': 'it' },
+    defaultLocale: 'fr', // default locale must match an existing translation file (fr => fr.json)
+    directory: translationsFolder,
+    objectNotation: true,
+    updateFiles: false,
+    mustacheConfig: {
+      tags: ['{', '}'],
+      disable: false,
+    },
+  };
+
+  const overrideFolders = config.i18n.translationsFolders;
+  if (overrideFolders.length > 0) {
+    base.staticCatalog = await buildStaticCatalog(translationsFolder, overrideFolders);
+  }
+
+  return base;
 };
+
+export const defaultSettings = await _buildDefaultSettings();
 
 // This is an optimization to avoid settings a new instance each time
 // we need to use i18n.
