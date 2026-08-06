@@ -349,6 +349,9 @@ const configuration = (function () {
     hapi: {
       options: {},
     },
+    i18n: {
+      translationsFolders: process.env.I18N_TRANSLATIONS_FOLDERS?.split(',').map((p) => p.trim()).filter(Boolean) ?? [],
+    },
     infra: {
       appName: process.env.APP,
       containerName: process.env.CONTAINER,
