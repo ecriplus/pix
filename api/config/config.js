@@ -387,6 +387,12 @@ export const config = {
     // au-delà, une demande reçue est considérée comme périmée et ignorée
     maxRequestAge: ms(process.env.HEAP_PROFILE_MAX_REQUEST_AGE ?? '30s'),
   },
+  i18n: {
+    translationsFolders:
+      process.env.I18N_TRANSLATIONS_FOLDERS?.split(',')
+        .map((p) => p.trim())
+        .filter(Boolean) ?? [],
+  },
   infra: {
     appName: process.env.APP,
     containerName: process.env.CONTAINER,
