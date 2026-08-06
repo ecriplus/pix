@@ -1,5 +1,17 @@
-import { defaultSettings, getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
+import { mkdir, rm, writeFile } from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
+
+import { buildStaticCatalog, defaultSettings, getI18n } from '../../../../../src/shared/infrastructure/i18n/i18n.js';
 import { expect } from '../../../../test-helper.js';
+
+async function createTranslationDir(dirPath, files) {
+  await mkdir(dirPath, { recursive: true });
+  for (const [filename, content] of Object.entries(files)) {
+    await writeFile(path.join(dirPath, filename), JSON.stringify(content), 'utf-8');
+  }
+  return dirPath;
+}
 
 describe('Unit | Shared | Infrastucture | i18n', function () {
   describe('getI18n', function () {
@@ -75,6 +87,120 @@ describe('Unit | Shared | Infrastucture | i18n', function () {
         // then
         expect(result).to.equal('Hello Bob');
       });
+    });
+  });
+
+  describe('buildStaticCatalog', function () {
+    it('returns translations from the base folder when no override folders are given', async function () {
+      // given
+      const baseDir = path.join(os.tmpdir(), `pix-i18n-base-${Date.now()}`);
+      await createTranslationDir(baseDir, {
+        'fr.json': { greeting: 'Bonjour', farewell: 'Au revoir' },
+        'en.json': { greeting: 'Hello', farewell: 'Goodbye' },
+      });
+
+      // when
+      const catalog = await buildStaticCatalog(baseDir, []);
+
+      // then
+      expect(catalog).to.deep.equal({
+        fr: { greeting: 'Bonjour', farewell: 'Au revoir' },
+        en: { greeting: 'Hello', farewell: 'Goodbye' },
+      });
+
+      await rm(baseDir, { recursive: true, force: true });
+    });
+
+    it('merges override translations on top of base translations', async function () {
+      // given
+      const baseDir = path.join(os.tmpdir(), `pix-i18n-base-${Date.now()}`);
+      const overrideDir = path.join(os.tmpdir(), `pix-i18n-override-${Date.now()}`);
+      await createTranslationDir(baseDir, {
+        'fr.json': { greeting: 'Bonjour', farewell: 'Au revoir' },
+      });
+      await createTranslationDir(overrideDir, {
+        'fr.json': { greeting: 'Salut' },
+      });
+
+      // when
+      const catalog = await buildStaticCatalog(baseDir, [overrideDir]);
+
+      // then
+      expect(catalog.fr).to.deep.equal({ greeting: 'Salut', farewell: 'Au revoir' });
+
+      await rm(baseDir, { recursive: true, force: true });
+      await rm(overrideDir, { recursive: true, force: true });
+    });
+
+    it('applies multiple override folders in order, with later folders taking precedence', async function () {
+      // given
+      const baseDir = path.join(os.tmpdir(), `pix-i18n-base-${Date.now()}`);
+      const override1Dir = path.join(os.tmpdir(), `pix-i18n-override1-${Date.now()}`);
+      const override2Dir = path.join(os.tmpdir(), `pix-i18n-override2-${Date.now()}`);
+      await createTranslationDir(baseDir, {
+        'fr.json': { greeting: 'Bonjour', farewell: 'Au revoir', extra: 'Extra' },
+      });
+      await createTranslationDir(override1Dir, {
+        'fr.json': { greeting: 'Salut', farewell: 'Ciao' },
+      });
+      await createTranslationDir(override2Dir, {
+        'fr.json': { greeting: 'Yo' },
+      });
+
+      // when
+      const catalog = await buildStaticCatalog(baseDir, [override1Dir, override2Dir]);
+
+      // then
+      expect(catalog.fr).to.deep.equal({ greeting: 'Yo', farewell: 'Ciao', extra: 'Extra' });
+
+      await rm(baseDir, { recursive: true, force: true });
+      await rm(override1Dir, { recursive: true, force: true });
+      await rm(override2Dir, { recursive: true, force: true });
+    });
+
+    it('ignores override folders that do not have a file for a given locale', async function () {
+      // given
+      const baseDir = path.join(os.tmpdir(), `pix-i18n-base-${Date.now()}`);
+      const overrideDir = path.join(os.tmpdir(), `pix-i18n-override-${Date.now()}`);
+      await createTranslationDir(baseDir, {
+        'fr.json': { greeting: 'Bonjour' },
+        'en.json': { greeting: 'Hello' },
+      });
+      await createTranslationDir(overrideDir, {
+        'fr.json': { greeting: 'Salut' },
+        // no en.json in override
+      });
+
+      // when
+      const catalog = await buildStaticCatalog(baseDir, [overrideDir]);
+
+      // then
+      expect(catalog.fr).to.deep.equal({ greeting: 'Salut' });
+      expect(catalog.en).to.deep.equal({ greeting: 'Hello' });
+
+      await rm(baseDir, { recursive: true, force: true });
+      await rm(overrideDir, { recursive: true, force: true });
+    });
+
+    it('performs a deep merge of nested translation objects', async function () {
+      // given
+      const baseDir = path.join(os.tmpdir(), `pix-i18n-base-${Date.now()}`);
+      const overrideDir = path.join(os.tmpdir(), `pix-i18n-override-${Date.now()}`);
+      await createTranslationDir(baseDir, {
+        'fr.json': { emails: { welcome: { subject: 'Bienvenue', body: 'Corps du message' } } },
+      });
+      await createTranslationDir(overrideDir, {
+        'fr.json': { emails: { welcome: { subject: 'Nouveau sujet' } } },
+      });
+
+      // when
+      const catalog = await buildStaticCatalog(baseDir, [overrideDir]);
+
+      // then
+      expect(catalog.fr).to.deep.equal({ emails: { welcome: { subject: 'Nouveau sujet', body: 'Corps du message' } } });
+
+      await rm(baseDir, { recursive: true, force: true });
+      await rm(overrideDir, { recursive: true, force: true });
     });
   });
 });
