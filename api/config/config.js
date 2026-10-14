@@ -159,6 +159,7 @@ export const schema = Joi.object({
   LOG_FOR_HUMANS: Joi.string().optional().valid('true', 'false'),
   LOG_LEVEL: Joi.string().optional().valid('silent', 'fatal', 'error', 'warn', 'info', 'debug', 'trace'),
   LOG_OPS_METRICS: Joi.string().optional().valid('true', 'false'),
+  MAILING_DEFAULT_FROM_EMAIL: Joi.string().optional(),
   MAILING_ENABLED: Joi.string().optional().valid('true', 'false'),
   MAILING_PROVIDER: Joi.string().optional().valid('brevo', 'mailpit'),
   NODE_ENV: Joi.string().optional().valid('development', 'test', 'production'),
@@ -471,6 +472,7 @@ export const config = {
     enabled: toBoolean(process.env.MAILING_ENABLED),
     provider: process.env.MAILING_PROVIDER || 'mailpit',
     smtpUrl: process.env.MAILING_SMTP_URL || 'smtp://username:password@localhost:1025/',
+    defaultFromEmail: process.env.MAILING_DEFAULT_FROM_EMAIL || 'ne-pas-repondre@pix.fr',
     mailpit: {
       templates: {},
     },
