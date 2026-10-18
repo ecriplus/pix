@@ -70,6 +70,10 @@ class FakePgBoss {
 }
 
 describe('Unit | JobClient', function () {
+  afterEach(function () {
+    JobClient._resetForTesting();
+  });
+
   context('#initialize', function () {
     it('registers an error listener on the client instance to prevent process crash', async function () {
       // given
@@ -77,7 +81,7 @@ describe('Unit | JobClient', function () {
       sinon.stub(pgBossStub, 'on');
 
       // when
-      const jobClient = new JobClient();
+      const jobClient = JobClient.instance;
       await jobClient.initialize(
         {
           jobGroups: [JobGroup.DEFAULT],
@@ -99,7 +103,7 @@ describe('Unit | JobClient', function () {
       const pgBossStub = new FakePgBoss();
       sinon.stub(pgBossStub, 'work');
       // when
-      const jobClient = new JobClient();
+      const jobClient = JobClient.instance;
       await jobClient.initialize(
         {
           jobGroups: [JobGroup.DEFAULT],
@@ -121,7 +125,7 @@ describe('Unit | JobClient', function () {
       sinon.stub(config.pgBoss, 'useListenNotify').value(true);
 
       // when
-      const jobClient = new JobClient();
+      const jobClient = JobClient.instance;
       await jobClient.initialize(
         {
           jobGroups: [JobGroup.DEFAULT],
@@ -149,7 +153,7 @@ describe('Unit | JobClient', function () {
         sinon.stub(pgBossStub, 'updateQueue');
 
         // when
-        const jobClient = new JobClient();
+        const jobClient = JobClient.instance;
         await jobClient.initialize(
           {
             jobGroups: [JobGroup.DEFAULT],
@@ -176,7 +180,7 @@ describe('Unit | JobClient', function () {
         sinon.stub(config.pgBoss, 'useListenNotify').value(false);
 
         // when
-        const jobClient = new JobClient();
+        const jobClient = JobClient.instance;
         await jobClient.initialize(
           {
             jobGroups: [JobGroup.DEFAULT],
@@ -202,7 +206,7 @@ describe('Unit | JobClient', function () {
         sinon.stub(config.pgBoss, 'useListenNotify').value(false);
 
         // when
-        const jobClient = new JobClient();
+        const jobClient = JobClient.instance;
         await jobClient.initialize(
           {
             jobGroups: [JobGroup.DEFAULT],
@@ -227,7 +231,7 @@ describe('Unit | JobClient', function () {
       sinon.stub(AuditLoggingJobController.prototype, 'legacyName').get(() => 'legacyNameForAuditLoggingJobController');
 
       // when
-      const jobClient = new JobClient();
+      const jobClient = JobClient.instance;
       await jobClient.initialize(
         {
           jobGroups: [JobGroup.DEFAULT],
@@ -248,7 +252,7 @@ describe('Unit | JobClient', function () {
       sinon.stub(config.pgBoss, 'validationFileJobEnabled').value(true);
 
       // when
-      const jobClient = new JobClient();
+      const jobClient = JobClient.instance;
       await jobClient.initialize(
         {
           jobGroups: [JobGroup.DEFAULT],
@@ -269,7 +273,7 @@ describe('Unit | JobClient', function () {
       sinon.stub(config.pgBoss, 'validationFileJobEnabled').value(false);
 
       // when
-      const jobClient = new JobClient();
+      const jobClient = JobClient.instance;
       await jobClient.initialize(
         {
           jobGroups: [JobGroup.DEFAULT],
@@ -283,6 +287,30 @@ describe('Unit | JobClient', function () {
       expect(pgBossStub.work).to.not.have.been.calledWith(ValidateSiecleFileJob.name);
     });
 
+    describe('jobGlobPatterns inheritance', function () {
+      it('should use overridden jobGlobPatterns from subclass', async function () {
+        // given
+        const pgBossStub = new FakePgBoss();
+        sinon.stub(pgBossStub, 'work');
+
+        class CustomJobClient extends JobClient {
+          get jobGlobPatterns() {
+            return [];
+          }
+        }
+
+        // when
+        const jobClient = CustomJobClient.instance;
+        await jobClient.initialize(
+          { jobGroups: [JobGroup.DEFAULT], worker: true },
+          () => pgBossStub,
+        );
+
+        // then
+        expect(pgBossStub.work).to.not.have.been.called;
+      });
+    });
+
     describe('cron Job', function () {
       it('schedule TestScheduleComputeOrganizationLearnersCertificabilityJob', async function () {
         //given
@@ -291,7 +319,7 @@ describe('Unit | JobClient', function () {
         sinon.stub(config.features.scheduleComputeOrganizationLearnersCertificability, 'cron').value('0 21 * * *');
 
         // when
-        const jobClient = new JobClient();
+        const jobClient = JobClient.instance;
         await jobClient.initialize(
           {
             jobGroups: [JobGroup.DEFAULT],
@@ -317,7 +345,7 @@ describe('Unit | JobClient', function () {
         sinon.stub(config.features.scheduleComputeOrganizationLearnersCertificability, 'cron').value('0 21 * * *');
 
         // when
-        const jobClient = new JobClient();
+        const jobClient = JobClient.instance;
         await jobClient.initialize(
           {
             jobGroups: [JobGroup.DEFAULT],
@@ -340,7 +368,7 @@ describe('Unit | JobClient', function () {
           sinon.stub(config.pgBoss, 'exportSenderJobEnabled').value(false);
 
           // when
-          const jobClient = new JobClient();
+          const jobClient = JobClient.instance;
           await jobClient.initialize(
             {
               jobGroups: [JobGroup.DEFAULT],
@@ -363,7 +391,7 @@ describe('Unit | JobClient', function () {
         sinon.stub(pgBossStub, 'subscribe');
 
         // when
-        const jobClient = new JobClient();
+        const jobClient = JobClient.instance;
         await jobClient.initialize(
           {
             jobGroups: [JobGroup.DEFAULT],
@@ -383,7 +411,7 @@ describe('Unit | JobClient', function () {
         sinon.stub(pgBossStub, 'unsubscribe');
 
         // when
-        const jobClient = new JobClient();
+        const jobClient = JobClient.instance;
         await jobClient.initialize(
           {
             jobGroups: [JobGroup.DEFAULT],
@@ -405,7 +433,7 @@ describe('Unit | JobClient', function () {
         sinon.stub(pgBossStub, 'getQueueStats').resolves({ queuedCount: 1 });
 
         // when
-        const jobClient = new JobClient();
+        const jobClient = JobClient.instance;
         await jobClient.initialize(
           {
             jobGroups: [JobGroup.DEFAULT],
@@ -427,7 +455,7 @@ describe('Unit | JobClient', function () {
         sinon.stub(pgBossStub, 'getQueueStats').resolves({ queuedCount: 0 });
 
         // when
-        const jobClient = new JobClient();
+        const jobClient = JobClient.instance;
         await jobClient.initialize(
           {
             jobGroups: [JobGroup.DEFAULT],
@@ -458,7 +486,7 @@ describe('Unit | JobClient', function () {
       sinon.stub(pgBossStub, 'getDb').returns({ executeSql });
       sinon.stub(pgBossStub, 'getQueues').resolves([{ name: 'FirstJob' }, { name: 'SecondJob' }, { name: 'ThirdJob' }]);
 
-      const jobClient = new JobClient();
+      const jobClient = JobClient.instance;
       await jobClient.initialize(
         {
           jobGroups: [JobGroup.DEFAULT],
@@ -528,7 +556,7 @@ describe('Unit | JobClient', function () {
       });
       sinon.stub(pgBossStub, 'getDb').returns({ executeSql });
 
-      const jobClient = new JobClient();
+      const jobClient = JobClient.instance;
       await jobClient.initialize(
         {
           jobGroups: [JobGroup.DEFAULT],
@@ -555,7 +583,7 @@ describe('Unit | JobClient', function () {
       const pgBossStub = new FakePgBoss();
       sinon.stub(pgBossStub, 'publish');
 
-      const jobClient = new JobClient();
+      const jobClient = JobClient.instance;
       await jobClient.initialize(
         {
           jobGroups: [JobGroup.DEFAULT],
